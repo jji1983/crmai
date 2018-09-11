@@ -71,6 +71,11 @@
 		//alert("call Content_NoticeBoard!!");
 		document.getElementById("main_frame").src = "/iframe/NoticeBoard";
 	}
+	
+	function Content_Notice() {
+		//alert("call Content_NoticeBoard!!");
+		document.getElementById("main_frame").src = "/iframe/Notice";
+	}
   </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -177,7 +182,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li  class="active"><a href="javascript:Content_RunForecast();"><i class="fa fa-circle-o"></i>공지사항</a></li>
+            <li  class="active"><a href="javascript:Content_Notice();"><i class="fa fa-circle-o"></i>공지사항</a></li>
             <li  class="active"><a href="javascript:Content_RunForecast();"><i class="fa fa-circle-o"></i>사용자 계정 관리</a></li>
             <li  class="active"><a href="javascript:Content_RunForecast();"><i class="fa fa-circle-o"></i>Q&amp;A 답하기</a></li>
           </ul>

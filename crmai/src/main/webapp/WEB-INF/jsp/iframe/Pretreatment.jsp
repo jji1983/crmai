@@ -185,7 +185,7 @@
 			                  <label for="inputCamName" class="col-sm-2 control-label">캠페인명</label>
 			
 			                  <div class="col-sm-10">
-			                    <input type="text" class="form-control" id="inputCamName" placeholder="캠페인명">
+			                    <input id="inputCamName" name="inputCamName" type="text" class="form-control"  placeholder="캠페인명">
 			                  </div>
 			                </div>
 			                
@@ -193,29 +193,26 @@
 			                  <label for="inputCamDesc" class="col-sm-2 control-label">설명</label>
 			
 			                  <div class="col-sm-10">
-			                    <input type="text" class="form-control" id="inputCamDesc" placeholder="설명">
+			                    <input id="inputCamDesc" name="inputCamDesc" type="text" class="form-control" placeholder="설명">
 			                  </div>
 			                </div>
 			                
-			                <!-- form-group -->
 	   	                   <div class="form-group">
+		                	<label for="cam_type" class="col-sm-2 control-label">목적</label>
 		                	<div class="col-sm-10">
-		                		<label for="cam_type" >캠페인목적</label>
-		                		<select id="cam_type" class="form-control select2" style="width: 100%;">
-		                		<option selected="selected">ALL</option>
-		                  		<option>Acquisition</option>
+		                		<select id="cam_type" name="cam_type" class="form-control select2" style="width: 100%;">
+		                  		<option selected="selected">Acquisition</option>
 		                  		<option>Retention</option>
 		                  		<option>Cultivation</option>
 		                  		<option>KeepCare</option>
 		                  		</select>
 		                    </div>
 			              </div>
-						  <!-- /.form-group -->
 			                
 			                <div class="form-group">
 			                  <label for="InputFile" class="col-sm-2 control-label" >File input</label>
 			                  <div class="col-sm-10">
-			                  	<input type="file" id="InputFile">
+			                  	<input type="file" name="files" id="InputFile">
 			                  </div>
 			                </div>
 			                
