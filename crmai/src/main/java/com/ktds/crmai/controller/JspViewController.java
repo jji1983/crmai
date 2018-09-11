@@ -12,8 +12,13 @@ public class JspViewController {
 	}
 	
 	@RequestMapping(value="/sample/index")
-	public String index_sample() {
+	public String sample_index() {
 		return "/sample/index";
+	}
+	
+	@RequestMapping(value="/sample/file/fileTest")
+	public String sample_fileTest() {
+		return "/sample/file/fileTest";
 	}
 	
 	@RequestMapping(value="/login")
@@ -54,6 +59,11 @@ public class JspViewController {
 	@RequestMapping(value="/iframe/NoticeBoard")
 	public String NoticeBoard() {
 		return "/iframe/NoticeBoard";
+	}
+	
+	@RequestMapping(value="/iframe/Notice")
+	public String Notice() {
+		return "/iframe/Notice";
 	}
 
 }
