@@ -96,9 +96,12 @@
    	                   <div class="form-group">
 	                	<div class="col-sm-10">
 	                		<label for="cam_type" >캠페인목적</label>
-	                		<select id="cam_type" class="form-control select2" style="width: 100%;" data-placeholder="Acquisition">
+	                		<select id="cam_type" class="form-control select2" style="width: 100%;">
 	                		<option selected="selected">ALL</option>
 	                  		<option>Acquisition</option>
+	                  		<option>Retention</option>
+	                  		<option>Cultivation</option>
+	                  		<option>KeepCare</option>
 	                  		</select>
 	                    </div>
 		              </div>
@@ -111,7 +114,7 @@
 		              <div class="form-group">
 		                <div class="col-sm-10">
 		                	<label for="cam_status" >캠페인상태</label>
-			                <select id="cam_status" class="form-control select2" style="width: 100%;" data-placeholder="캠페인상태">
+			                <select id="cam_status" class="form-control select2" style="width: 100%;">
 			                  <option selected="selected">ALL</option>
 			                  <option>시작</option>
 			                  <option>종료</option>
@@ -193,6 +196,21 @@
 			                    <input type="text" class="form-control" id="inputCamDesc" placeholder="설명">
 			                  </div>
 			                </div>
+			                
+			                <!-- form-group -->
+	   	                   <div class="form-group">
+		                	<div class="col-sm-10">
+		                		<label for="cam_type" >캠페인목적</label>
+		                		<select id="cam_type" class="form-control select2" style="width: 100%;">
+		                		<option selected="selected">ALL</option>
+		                  		<option>Acquisition</option>
+		                  		<option>Retention</option>
+		                  		<option>Cultivation</option>
+		                  		<option>KeepCare</option>
+		                  		</select>
+		                    </div>
+			              </div>
+						  <!-- /.form-group -->
 			                
 			                <div class="form-group">
 			                  <label for="InputFile" class="col-sm-2 control-label" >File input</label>
