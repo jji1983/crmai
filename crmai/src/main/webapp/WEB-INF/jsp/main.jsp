@@ -66,6 +66,11 @@
 		//alert("call Content_Learning!!");
 		document.getElementById("main_frame").src = "/iframe/RunForecast";
 	}
+	
+	function Content_NoteceBoard() {
+		//alert("call Content_NoteceBoard!!");
+		document.getElementById("main_frame").src = "/iframe/NoteceBoard";
+	}
   </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -162,7 +167,7 @@
           </ul>
         </li>
         
-		<li><a href="javascript:Content_RunForecast();"><i class="fa fa-book"></i> <span>게시판(Q&amp;A)</span></a></li>
+		<li><a href="javascript:Content_NoteceBoard();"><i class="fa fa-book"></i> <span>게시판(Q&amp;A)</span></a></li>
         
         <li class="treeview">
           <a href="#">
