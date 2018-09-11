@@ -9,6 +9,8 @@
 		  cam.cam_id as "cam_id",
 		  cam.cam_name as "cam_name",
 		  cam.adm_id as "adm_id",
+		  cam.cam_type as "cam_type",
+		  cam.cam_status as "cam_status",
 		  cam.cam_itype as "cam_itype",
 		  cam.cam_ifilename as "cam_ifilename",
 		  cam.cam_iviewname as "cam_iviewname",
@@ -32,6 +34,8 @@
 		  cam.cam_id as "cam_id",
 		  cam.cam_name as "cam_name",
 		  cam.adm_id as "adm_id",
+		  cam.cam_type as "cam_type",
+		  cam.cam_status as "cam_status",
 		  cam.cam_itype as "cam_itype",
 		  cam.cam_ifilename as "cam_ifilename",
 		  cam.cam_iviewname as "cam_iviewname",
@@ -45,6 +49,14 @@
 		<where>
 			<if test="cam_name != null and cam_name != '' ">
 				cam_name like '%' || #{cam_name} || '%'
+			</if>
+			
+			<if test="cam_type != null and cam_type != '' ">
+				AND cam_type like '%' || #{cam_type} || '%'
+			</if>
+			
+			<if test="cam_status != null and cam_status != '' ">
+				AND cam_status like '%' || #{cam_status} || '%'
 			</if>
 			
 			<if test="adm_id != null and adm_id != '' ">

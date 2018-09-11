@@ -32,7 +32,11 @@ public class PretreatmentController {
     	logger.info("Request List....getCampaignList.... - {}", in_compaign);
     	List<AI_CAMPAIGN> out_campaign = null;
     	
-    	if(in_compaign.getCam_name() != null || in_compaign.getAdm_id() != null) {
+    	if(in_compaign.getCam_name() != null 
+    			|| in_compaign.getAdm_id() != null
+    			|| in_compaign.getCam_type() != null
+    			|| in_compaign.getCam_status() != null) {
+    		
     		out_campaign = pretreatmentService.selectCampaign(in_compaign);
     	}else {
     		

@@ -368,13 +368,10 @@
 	  
 	// Get form
     var form = $('#newUploadForm')[0];
-
     var data = new FormData(form);
-
     data.append("CustomField", "This is some extra data, testing");
 
     $("#bthNew").prop("disabled", true);
-	
     alert("send");
     
     $.ajax({
@@ -410,6 +407,14 @@
 	  	
 	  	var campaign = new Object();
 	  	campaign.cam_name = $('#cam_name').val();
+	  	campaign.cam_type = $('#cam_type').val();
+	  	if(campaign.cam_type == 'ALL'){
+	  		campaign.cam_type = '';
+	  	}
+	  	campaign.cam_status = $('#cam_status').val();
+	  	if(campaign.cam_status == 'ALL'){
+	  		campaign.cam_status = '';
+	  	}
 	  	campaign.adm_id = $('#adm_id').val();
 
 	    $.ajax({
@@ -440,7 +445,7 @@
       alert("grid_table_campaign :: " + obj);
 
       html = '<table class="table table-bordered table-hover">';
-      html += '<thead><tr><th>체크</th><th>캠페인이름</th><th>등록자</th><th>상태</th><th>캠페인 등록일자</th><th>설명</th><tr></thead>';
+      html += '<thead><tr><th>체크</th><th>캠페인이름</th><th>등록자</th><th>캠페인목적</th><th>캠페인상태</th><th>AI상태</th><th>캠페인 등록일자</th><th>설명</th><tr></thead>';
       html += '<tbody>';
       var json = $.parseJSON(obj);
       
@@ -455,12 +460,21 @@
    			if(k == 'adm_id'){
    				html += '<td>' + v + '</td>';	
    			}
+   			
+   			if(k == 'cam_type'){
+   				html += '<td>' + v + '</td>';	
+   			}
+   			
+   			if(k == 'cam_status'){
+   				html += '<td>' + v + '</td>';	
+   			}
+   			
    			if(k == 'cam_itype'){
    				if(v == '0'){
    					html += '<td>데이터 로딩 필요' + '<button id="itype_bt" type="button" class="btn btn-info pull-right">데이터등록</button>' +'</td>';	
    				}
    				if(v == '1'){
-   					html += '<td>데이터 전처리 시작</td>';
+   					html += '<td>데이터 전처리 시작중</td>';
    				}
    				if(v == '2'){
    					html += '<td>데이터 전처리 종료</td>';
