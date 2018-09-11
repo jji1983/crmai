@@ -55,12 +55,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        전처리수행
+          대상자 로딩
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">전처리수행이력</li>
+        <li><a href="/iframe/Dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">대상자 로딩</li>
       </ol>
     </section>
     
@@ -91,11 +91,36 @@
 		                  </div>
    	                  </div>
    	                   <!-- /.form-group -->
+   	                   
+   	                   <!-- form-group -->
+   	                   <div class="form-group">
+	                	<div class="col-sm-10">
+	                		<label for="cam_type" >캠페인목적</label>
+	                		<select id="cam_type" class="form-control select2" style="width: 100%;" data-placeholder="Acquisition">
+	                		<option selected="selected">ALL</option>
+	                  		<option>Acquisition</option>
+	                  		</select>
+	                    </div>
+		              </div>
+					  <!-- /.form-group -->
    	      			</div>
 		            <!-- /.col -->
 		            
 		            <div class="col-md-6">
+		              <!-- form-group -->
+		              <div class="form-group">
+		                <div class="col-sm-10">
+		                	<label for="cam_status" >캠페인상태</label>
+			                <select id="cam_status" class="form-control select2" style="width: 100%;" data-placeholder="캠페인상태">
+			                  <option selected="selected">ALL</option>
+			                  <option>시작</option>
+			                  <option>종료</option>
+			                </select>
+			          	</div>      
+		              </div>
 		              <!-- /.form-group -->
+		            
+		              <!-- form-group -->
 		              <div class="form-group">
 		              	<div class="col-sm-10">
                 		   <label for="adm_id" >생성자</label>
