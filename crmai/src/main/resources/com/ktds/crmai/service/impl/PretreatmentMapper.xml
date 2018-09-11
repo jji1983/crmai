@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ktds.crmai.service.impl.PretreatmentMapper">
+
+    <select id="selectAllcampaign" resultType="campaign">
+		select 
+		  cam.cam_id as "cam_id",
+		  cam.cam_name as "cam_name",
+		  cam.adm_id as "adm_id",
+		  cam.cam_itype as "cam_itype",
+		  cam.cam_ifilename as "cam_ifilename",
+		  cam.cam_iviewname as "cam_iviewname",
+		  cam.cam_idate as "cam_idate",
+		  cam.cam_otype as "cam_otype",
+		  cam.cam_otablename as "cam_otablename",
+		  cam.cam_cdate as "cam_cdate",
+		  cam.cam_desc as "cam_desc"
+		from 
+		  ai_campaign cam
+    </select>
+
+
+	<select id="selectCampaign" resultType="campaign">
+		<!-- 
+			select * from members where or email like '%%' 
+			이런식으로 where 절 다음에 or 절을 작성할경우 sql 문법에는 맞지않으나 
+			MyBatis 에서 자동으로 삭제해줌
+	    -->
+		select 
+		  cam.cam_id as "cam_id",
+		  cam.cam_name as "cam_name",
+		  cam.adm_id as "adm_id",
+		  cam.cam_itype as "cam_itype",
+		  cam.cam_ifilename as "cam_ifilename",
+		  cam.cam_iviewname as "cam_iviewname",
+		  cam.cam_idate as "cam_idate",
+		  cam.cam_otype as "cam_otype",
+		  cam.cam_otablename as "cam_otablename",
+		  cam.cam_cdate as "cam_cdate",
+		  cam.cam_desc as "cam_desc"
+		from 
+		  ai_campaign cam
+		<where>
+			<if test="cam_name != null and cam_name != '' ">
+				cam_name like '%' || #{cam_name} || '%'
+			</if>
+			
+			<if test="adm_id != null and adm_id != '' ">
+				AND adm_id like '%' || #{adm_id} || '%'
+			</if>
+		
+		</where>
+    </select>
+    
+
+</mapper>

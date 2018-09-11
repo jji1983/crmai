@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ktds.crmai.service.impl.LearningMapper">
+
+    <select id="getLearning_info" resultType="learning_info">
+		select  
+		    lena.learn_name as "learn_name",
+		    lena.desc_text as "desc_text",
+		    lena_md.model_prob as "model_prob",
+		    lena_md.succ_prob as "succ_prob",
+		    lena_md.fail_prob as "fail_prob"
+		from 
+		    ds_learning lena,
+		    ds_learn_model lena_md
+		where
+		    lena.row_id = lena_md.learn_id
+    	 <if test="row_id != null">
+		 	and lena_md.cam_id = #{row_id}
+		 </if>
+    </select>
+    
+    
+    <select id="getLearning_res" resultType="learning_res">
+		select  
+		    lena.learn_name as "learn_name",
+		    lena_md.name as "name",
+		    lena_md.created as "created",
+		    lena_md.last_upd as "last_upd",
+		    lena_md.model_dir as "model_dir"
+		from 
+		    ds_learning lena,
+		    ds_learn_model lena_md
+		where
+		    lena.row_id = lena_md.learn_id
+    	 <if test="row_id != null">
+		 	and lena_md.cam_id = #{row_id}
+		 </if>
+    </select>
+
+</mapper>
