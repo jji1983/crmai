@@ -167,7 +167,7 @@
           </ul>
         </li>
         
-		<li><a href="javascript:Content_NoteceBoard();"><i class="fa fa-book"></i> <span>게시판(Q&amp;A)</span></a></li>
+		<li><a href="javascript:Content_NoticeBoard();"><i class="fa fa-book"></i> <span>게시판(Q&amp;A)</span></a></li>
         
         <li class="treeview">
           <a href="#">
