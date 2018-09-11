@@ -67,9 +67,9 @@
 		document.getElementById("main_frame").src = "/iframe/RunForecast";
 	}
 	
-	function Content_NoteceBoard() {
-		//alert("call Content_NoteceBoard!!");
-		document.getElementById("main_frame").src = "/iframe/NoteceBoard";
+	function Content_NoticeBoard() {
+		//alert("call Content_NoticeBoard!!");
+		document.getElementById("main_frame").src = "/iframe/NoticeBoard";
 	}
   </script>
 </head>

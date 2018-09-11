@@ -51,9 +51,9 @@ public class JspViewController {
 		return "/iframe/RunForecast";
 	}
 	
-	@RequestMapping(value="/iframe/NoteceBoard")
-	public String NoteceBoard() {
-		return "/iframe/NoteceBoard";
+	@RequestMapping(value="/iframe/NoticeBoard")
+	public String NoticeBoard() {
+		return "/iframe/NoticeBoard";
 	}
 
 }
