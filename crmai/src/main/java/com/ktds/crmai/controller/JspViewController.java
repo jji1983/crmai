@@ -16,9 +16,9 @@ public class JspViewController {
 		return "/sample/index";
 	}
 	
-	@RequestMapping(value="/sample/file/fileTest")
+	@RequestMapping(value="/sample/fileTest")
 	public String sample_fileTest() {
-		return "/sample/file/fileTest";
+		return "/sample/fileTest";
 	}
 	
 	@RequestMapping(value="/login")

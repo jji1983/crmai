@@ -179,7 +179,7 @@
 				      </div>
 				      <div class="modal-body">
 		                <!-- form start -->
-			            <form class="form-horizontal">
+			            <form class="form-horizontal" id="fileForm" action="fileUpload" method="post" enctype="multipart/form-data">
 			              <div class="box-body">
 			                <div class="form-group">
 			                  <label for="inputCamName" class="col-sm-2 control-label">캠페인명</label>

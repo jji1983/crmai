@@ -28,7 +28,7 @@ public class FileController {
 	
 	@RequestMapping(value="/fileTest")
 	public String register() {
-		return "/sample/file/fileTest";
+		return "/sample/fileTest";
 	}
 	
 	
@@ -38,6 +38,11 @@ public class FileController {
 		//파일이 저장될 path 설정 
 		String path = "d://TEMP"; 
 		Map returnObject = new HashMap(); 
+		
+		
+		logger.info("ID :: ", req.getParameter("cmd"));
+		logger.info("name :: ", req.getParameter("name"));
+		
 
 		try { 
 			// MultipartHttpServletRequest 생성
