@@ -25,7 +25,6 @@ public class FileUploadController {
         // 저장 경로 설정
         String root = multi.getSession().getServletContext().getRealPath("/");
         String path = root+"resources/upload/";
-         
         
         
         
