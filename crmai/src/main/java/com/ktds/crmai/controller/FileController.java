@@ -38,6 +38,7 @@ public class FileController {
 	
 	@RequestMapping(value = "/Upload_Pretreatment") // method = RequestMethod.GET 
 	public ResponseEntity<Object> fileUpload(
+		@RequestParam("user_id") String user_id,
 		@RequestParam("inputCamName") String inputCamName,
 		@RequestParam("inputCamDesc") String inputCamDesc,
 		@RequestParam("cam_type") String cam_type,
@@ -62,6 +63,7 @@ public class FileController {
  
                 // 아래에서 출력되는 결과는 모두 database에 저장되야 한다.
                 // pk 값은 자동으로 생성되도록 한다.
+                System.out.println("user_id :" + user_id);
                 System.out.println("inputCamName :" + inputCamName);
                 System.out.println("inputCamDesc :" + inputCamDesc);
                 System.out.println("cam_type :" + cam_type);

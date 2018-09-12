@@ -181,6 +181,9 @@
 		                <!-- form start -->
 			            <form class="form-horizontal" id="newUploadForm" action="fileUpload" method="post" enctype="multipart/form-data">
 			              <div class="box-body">
+			              
+			              	<input type="hidden" id="user_id" name="user_id" value=<%=session.getAttribute("sessionID") %>>
+			              
 			                <div class="form-group">
 			                  <label for="inputCamName" class="col-sm-2 control-label">캠페인명</label>
 			
@@ -373,7 +376,7 @@
             $("#bthNew").prop("disabled", false);
             
             alert('모달 종료.');
-    	    $('#newModal').modal('dispose');
+    	    $('#newModal').modal('hide');
 
         },
         error: function (e) {
