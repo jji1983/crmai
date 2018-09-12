@@ -179,7 +179,7 @@
 				      </div>
 				      <div class="modal-body">
 		                <!-- form start -->
-			            <form class="form-horizontal" id="fileForm" action="fileUpload" method="post" enctype="multipart/form-data">
+			            <form class="form-horizontal" id="newUploadForm" action="fileUpload" method="post" enctype="multipart/form-data">
 			              <div class="box-body">
 			                <div class="form-group">
 			                  <label for="inputCamName" class="col-sm-2 control-label">캠페인명</label>
@@ -212,7 +212,7 @@
 			                <div class="form-group">
 			                  <label for="InputFile" class="col-sm-2 control-label" >File input</label>
 			                  <div class="col-sm-10">
-			                  	<input type="file" name="files" id="InputFile">
+			                  	<input type="file" name="file" id="InputFile">
 			                  </div>
 			                </div>
 			                
@@ -230,38 +230,6 @@
 				    </div>
 				  </div>
 			  </div>
-	          
-			  <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				  <div class="modal-dialog" role="document">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				          <span aria-hidden="true">&times;</span>
-				        </button>
-				      </div>
-				      <div class="modal-body">
-				       	<!-- 
-							1. 전송하고자 하는 입력 폼을 <form>과 </form>사이에 위치해놓는다. 
-							2. action 값은 데이터를 전송받아서 처리할 Controller url로 설정한다. 
-							3. method를 반드시 post로 설정해준다. get으로 설정시 parameter들이 url에 따라간다. 
-							4. enctype을 multipart/form-data로 설정한다. 
-							5. <form>과 </form>사이에 input type submit버튼을 위치시킨다. 
-						-->
-						<form action="/file/fileUpload" id="fileUpload" name="fileUpload" method="post" enctype="multipart/form-data">
-							이름 : <input type="text" name="name" id="cmd" placeholder="파일 이름"><br>
-							파일 : <input type="file" name="file"><br> 
-							<input type="submit" name="업로드" value="제출"><br>
-						</form>
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				        <button type="button" class="btn btn-primary">Save changes</button>
-				      </div>
-				    </div>
-				  </div>
-			  </div>
-	          
 	          
 	          <!--/. Modal -->
 	         
@@ -373,7 +341,6 @@
         
         submit_newCampagin();
         
-	    $('#newModal').modal('dispose')
     });
     
   });
@@ -384,7 +351,6 @@
 	// Get form
     var form = $('#newUploadForm')[0];
     var data = new FormData(form);
-    data.append("CustomField", "This is some extra data, testing");
 
     $("#bthNew").prop("disabled", true);
     alert("send");
@@ -392,7 +358,7 @@
     $.ajax({
         type: "POST",
         enctype: 'multipart/form-data',
-        url: "/api/upload/multi",
+        url: "/file/Upload_Pretreatment",
         data: data,
         //http://api.jquery.com/jQuery.ajax/
         //https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
@@ -405,6 +371,9 @@
         	alert(data);
             console.log("SUCCESS : ", data);
             $("#bthNew").prop("disabled", false);
+            
+            alert('모달 종료.');
+    	    $('#newModal').modal('dispose');
 
         },
         error: function (e) {
