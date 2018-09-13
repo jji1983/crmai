@@ -1,5 +1,7 @@
 package com.ktds.crmai.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -23,6 +25,16 @@ public class JspViewController {
 	
 	@RequestMapping(value="/login")
 	public String login() {
+		return "login";
+	}
+	
+	@RequestMapping(value="/logout")
+	public String logout(HttpSession session) {
+		
+		session.setAttribute("sessionID", null);
+		session.setAttribute("sessionNAME", null);
+		session.setAttribute("sessionROLE", null);
+		
 		return "login";
 	}
 	

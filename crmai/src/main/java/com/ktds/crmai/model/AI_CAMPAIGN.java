@@ -10,6 +10,7 @@ public class AI_CAMPAIGN{
 
 	private static final long serialVersionUID = 3947489072259877540L;
 
+	private String cam_seq;
 	private String cam_id;
 	private String cam_name;
 	private String adm_id;
@@ -31,6 +32,7 @@ public class AI_CAMPAIGN{
 	
 	
 	public AI_CAMPAIGN(
+			String cam_seq,
 			String cam_id,
 			String cam_name,
 			String adm_id,
@@ -46,6 +48,7 @@ public class AI_CAMPAIGN{
 			String cam_desc
 	    ) {
 		
+		this.cam_seq = cam_seq;
 		this.cam_id = cam_id;
 		this.cam_name = cam_name;
 		this.adm_id = adm_id;

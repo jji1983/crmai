@@ -7,6 +7,7 @@
     <select id="selectAdminById" resultType="admin">
         SELECT ADM_ID
               ,ADM_PW
+              ,ADM_ROLE
               ,ADM_NAME
               ,ADM_EMAIL
               ,ADM_CDATE
@@ -18,6 +19,7 @@
     <select id="selectAllAdmin" resultType="admin">
         SELECT ADM_ID
               ,ADM_PW
+              ,ADM_ROLE
               ,ADM_NAME
               ,ADM_EMAIL
               ,ADM_CDATE

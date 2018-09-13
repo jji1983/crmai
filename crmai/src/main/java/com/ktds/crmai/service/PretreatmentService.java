@@ -30,4 +30,18 @@ public class PretreatmentService implements PretreatmentMapper {
 	}
 
 
+	@Override
+	public String selectCampaignSeq() {
+		// TODO Auto-generated method stub
+		return pretreatmentMapper.selectCampaignSeq();
+	}
+
+
+	@Override
+	public void insertCampaign(AI_CAMPAIGN campaign) {
+		pretreatmentMapper.insertCampaign(campaign);
+		
+	}
+
+
 }

@@ -45,6 +45,7 @@ public class AdminController {
 				
 				session.setAttribute("sessionID", user.getADM_ID());
 				session.setAttribute("sessionNAME", user.getADM_NAME());
+				session.setAttribute("sessionROLE", user.getADM_ROLE());
 				
 			}else{
 				response.add("fail. PW not correct!");

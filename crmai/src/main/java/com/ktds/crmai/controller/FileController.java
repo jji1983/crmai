@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -27,14 +28,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.ktds.crmai.model.AI_CAMPAIGN;
+import com.ktds.crmai.service.PretreatmentService;
+
 
 @Controller
 @RequestMapping(value="/file")
 public class FileController {
 	private static Logger logger = LoggerFactory.getLogger(FileController.class);
-	
 	private String baseDir = "D:" + File.separator + "TEMP" + File.separator; // c:\temp 디렉토리를 미리 만들어둔다.
 	
+	@Autowired
+	PretreatmentService pretreatmentService;
 	
 	@RequestMapping(value = "/Upload_Pretreatment") // method = RequestMethod.GET 
 	public ResponseEntity<Object> fileUpload(
@@ -44,6 +49,11 @@ public class FileController {
 		@RequestParam("cam_type") String cam_type,
         @RequestParam("file") MultipartFile[] files) { 
 
+		AI_CAMPAIGN campaign = new AI_CAMPAIGN();
+		
+		campaign.setCam_seq(pretreatmentService.selectCampaignSeq());
+		
+		
         if(files != null && files.length > 0){
             // windows 사용자라면 "c:\temp\년도\월\일" 형태의 문자열을 구한다.
             String formattedDate = baseDir + new SimpleDateFormat("yyyy" + File.separator + "MM" + File.separator + "dd").format(new Date());
@@ -87,6 +97,9 @@ public class FileController {
                     ex.printStackTrace();
                 }
             } // for
+            
+            pretreatmentService.insertCampaign(campaign);
+            
         } // if
  
       //응답과 함깨 HttpStatus를 지정할 수 있습니다.

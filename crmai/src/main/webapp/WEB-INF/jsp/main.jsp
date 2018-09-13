@@ -10,6 +10,13 @@
 		// 로그인 화면으로 이동
 		response.sendRedirect("/login");
 	}
+	
+	if(session.getAttribute("sessionROLE") == null){
+		session.setAttribute("sessionROLE", "1");
+	}
+	
+	//out.println("sessionID :: " + session.getAttribute("sessionID"));
+	//out.println("sessionROLE :: " + session.getAttribute("sessionROLE"));
 %>
 
 <meta charset="UTF-8">
@@ -174,6 +181,7 @@
         
 		<li><a href="javascript:Content_NoticeBoard();"><i class="fa fa-book"></i> <span>게시판(Q&amp;A)</span></a></li>
         
+        <% if(session.getAttribute("sessionROLE").equals("0")){ %>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>관리자 기능</span>
@@ -183,9 +191,9 @@
           </a>
           <ul class="treeview-menu">
             <li  class="active"><a href="javascript:Content_Notice();"><i class="fa fa-circle-o"></i>공지사항</a></li>
-            <li  class="active"><a href="javascript:Content_RunForecast();"><i class="fa fa-circle-o"></i>사용자 계정 관리</a></li>
-            <li  class="active"><a href="javascript:Content_RunForecast();"><i class="fa fa-circle-o"></i>Q&amp;A 답하기</a></li>
+            <li  class="active"><a href="javascript:Content_RunForecast();"><i class="fa fa-circle-o"></i>계정 관리</a></li>
           </ul>
+          <%} %>
         </li>
         
         

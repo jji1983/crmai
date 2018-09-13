@@ -7,7 +7,7 @@
 <script type="text/javascript">
 	// 로그아웃 담당 JSP로 이동
 	function logoutPro() {
-		location.href = "member/pro/LogoutPro.jsp";
+		location.href = "/logout";
 	}
 </script>
 </head>
@@ -16,6 +16,7 @@
 	<br>
 	<br>
 		<%
+		
 			if (session.getAttribute("sessionID") == null) // 로그인이 안되었을 때
 			{
 				// 로그인 화면으로 이동
