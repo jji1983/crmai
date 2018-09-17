@@ -34,8 +34,6 @@ public class PretreatmentProc {
 	            	//System.out.println(data.getCam_id() + " line :: " + line);
 	            }
 			}
-			
-
 		
 		} catch (FileNotFoundException e) {
             e.printStackTrace();

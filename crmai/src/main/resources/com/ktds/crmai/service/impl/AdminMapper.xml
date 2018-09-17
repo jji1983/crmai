@@ -12,7 +12,7 @@
               ,ADM_EMAIL
               ,ADM_CDATE
               ,ADM_UDATE
-          FROM ADMIN_USER
+          FROM AI_ADMINUSER
          WHERE ADM_ID = #{ADM_ID}
     </select>
 
@@ -24,11 +24,11 @@
               ,ADM_EMAIL
               ,ADM_CDATE
               ,ADM_UDATE
-          FROM ADMIN_USER
+          FROM AI_ADMINUSER
     </select>
 
     <insert id="insertAdmin">
-      INSERT INTO ADMIN_USER (ADM_ID, ADM_PW, ADM_NAME, ADM_EMAIL, ADM_CDATE, ADM_UDATE)
+      INSERT INTO AI_ADMINUSER (ADM_ID, ADM_PW, ADM_NAME, ADM_EMAIL, ADM_CDATE, ADM_UDATE)
       VALUES (#{ADM_ID}, #{ADM_PW}, #{ADM_NAME},#{ADM_EMAIL}, sysdate, sysdate)
     </insert>
 
