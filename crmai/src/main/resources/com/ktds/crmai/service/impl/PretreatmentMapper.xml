@@ -22,6 +22,8 @@
 		  cam.cam_msg as "cam_msg"
 		from 
 		  ai_campaign cam
+		  
+		order by cam.cam_cdate desc
     </select>
 
 
@@ -64,8 +66,8 @@
 			<if test="adm_id != null and adm_id != '' ">
 				AND adm_id like '%' || #{adm_id} || '%'
 			</if>
-		
 		</where>
+		order by cam.cam_cdate desc
     </select>
     
     <select id="selectCampaignSeq" resultType="campaign">

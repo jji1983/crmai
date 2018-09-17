@@ -164,7 +164,10 @@
 			  <div class="col-lg-12" id="ex1_Result2" ></div>
 	          
 	          <!-- Button trigger modal -->
-			  <button id='newBtn' type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#newModal">신규</button>&nbsp;
+	          <div class="box-footer">
+		      	<button id='newBtn' type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#newModal">캠페인 신규등록</button>&nbsp;
+		      </div>
+			  
 	          
 	          <!-- Modal -->
 	          <div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
@@ -226,7 +229,6 @@
 			              </div>
 			              <!-- /.box-footer -->
 			            </form>		
-			
 				      </div>
 				      <div class="modal-footer">캠페인등록화면 </div>
 				    </div>
@@ -239,35 +241,6 @@
         </div>
    </div>
    <!-- /.캠페인목록 -->
-   
-   <!-- 전처리 미리 보기 -->
-	<div class="row">
-          <div class="col-xs-12">
-          <div class="box">
-			<div class="box-header">
-	          <h3 class="box-title">데이터 미리보기</h3>
-	          <div class="box-tools pull-right">
-		            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-		            <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button> -->
-		      </div>
-	        </div>
-	        <!-- /.box-header -->
-	        
-	         <!-- box-body -->
-	        <div class="box-body">
-	        	<div>
-	        	   <button id="pretreatment_tobe" type="button" class="btn btn-info pull-right">전처리후</button>&nbsp;
-	        	   <button id="pretreatment_asis" type="button" class="btn btn-info pull-right">전처리전</button>&nbsp;
-	        	</div>  
-	            <div>
-		            <table id="ai_campaign_info" class="table table-bordered table-hover text-center"></table>
-	            </div>
-	        </div>
-	         <!-- /.box-body -->
-	        </div>
-        </div>
-   </div>
-   <!-- /.전처리 미리 보기 -->
    
 </section>
 <!-- /.Main content -->
@@ -369,14 +342,16 @@
         timeout: 600000,
         success: function (data) {
 
-        	alert(data);
-            console.log("SUCCESS : ", data);
+        	//alert(data);
+            //console.log("SUCCESS : ", data);
             $("#bthNew").prop("disabled", false);
             
-            alert('모달 종료.');
-    	    $('#newModal').modal('hide');
+            //alert('모달 종료.');
+            form.reset();
+            $('#newModal').modal('hide');
+    	    
 
-    	    alert('캠페인 리프리시');
+    	   // alert('캠페인 리프리시');
     	    search_campaign();
         },
         error: function (e) {
@@ -430,16 +405,17 @@
   
   function grid_table_campaign(obj){
 	  var div = document.querySelector('#ai_campaign');
-      alert("grid_table_campaign :: " + obj);
+      //alert("grid_table_campaign :: " + obj);
 
       html = '<table class="table table-bordered table-hover">';
-      html += '<thead><tr><th>체크</th><th>캠페인이름</th><th>등록자</th><th>캠페인목적</th><th>캠페인상태</th><th>AI상태</th><th>캠페인 등록일자</th><th>설명</th><th>메시지</th><tr></thead>';
+      //html += '<thead><tr><th>체크</th><th>캠페인이름</th><th>등록자</th><th>캠페인목적</th><th>캠페인상태</th><th>AI상태</th><th>캠페인 등록일자</th><th>설명</th><th>메시지</th><tr></thead>';
+      html += '<thead><tr><th>캠페인이름</th><th>등록자</th><th>캠페인목적</th><th>캠페인상태</th><th>AI상태</th><th>캠페인 등록일자</th><th>설명</th><th>메시지</th><tr></thead>';
       html += '<tbody>';
       var json = $.parseJSON(obj);
       
    	  $(json).each(function(i,val){
    		html += '<tr>';
-   		html += '<td><input type="checkbox" name="camCheck"/></td>';
+   		//html += '<td><input type="checkbox" name="camCheck"/></td>';
    		$.each(val,function(k,v){
 
    			if(k == 'cam_name'){
@@ -459,13 +435,19 @@
    			
    			if(k == 'cam_itype'){
    				if(v == '0'){
-   					html += '<td>데이터 로딩 필요' + '<button id="itype_bt" type="button" class="btn btn-info pull-right">데이터등록</button>' +'</td>';	
+   					html += '<td>데이터 로딩 필요' + '<button id="itype_bt" type="button" class="btn btn-info pull-center">데이터등록</button>' +'</td>';	
    				}
    				if(v == '1'){
-   					html += '<td>데이터 전처리 시작중</td>';
+   					html += '<td>데이터 엑셀 로딩중</td>';
    				}
    				if(v == '2'){
-   					html += '<td>데이터 전처리 종료</td>';
+   					html += '<td>데이터 엑셀 처리중</td>';
+   				}
+   				if(v == '3'){
+   					html += '<td>데이터 엑셀 처리 오류</td>';
+   				}
+   				if(v == '4'){
+   					html += '<td>데이터 엑셀 처리 종료</td>';
    				}
    			}
    			if(k == 'cam_cdate'){
@@ -493,60 +475,8 @@
    	  html += '</tbody>';
       html += '</table>';
       
-      //alert("Table == " + html);
       div.innerHTML = html;
   }
-  
-  //상단 선택버튼 클릭시 체크된 Row의 값을 가져온다.
-  $("#selectBtn").click(function(){ 
-		
-		var rowData = new Array();
-		var tdArr = new Array();
-		var checkbox = $("input[name=camCheck]:checked");
-		
-		var row_id = '';
-		
-		// 체크된 체크박스 값을 가져온다
-		checkbox.each(function(i) {
-
-			// checkbox.parent() : checkbox의 부모는 <td>이다.
-			// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
-			var tr = checkbox.parent().parent().eq(i);
-			var td = tr.children();
-			
-			// 체크된 row의 모든 값을 배열에 담는다.
-			rowData.push(tr.text());
-			
-			row_id = td.eq(1).text();
-			
-			// td.eq(0)은 체크박스 이므로  td.eq(1)의 값부터 가져온다.
-			//var no = td.eq(1).text()+", "
-			//var userid = td.eq(2).text()+", ";
-			//var name = td.eq(3).text()+", ";
-			//var email = td.eq(4).text()+", ";
-			
-			// 가져온 값을 배열에 담는다.
-			//tdArr.push(no);
-			//tdArr.push(userid);
-			//tdArr.push(name);
-			//tdArr.push(email);
-			
-			//console.log("no : " + no);
-			//console.log("userid : " + userid);
-			//console.log("name : " + name);
-			//console.log("email : " + email);
-		});
-		
-		//$("#ex3_Result1").html(" * 체크된 Row의 모든 데이터 = "+rowData);	
-		//$("#ex3_Result2").html(tdArr);	
-		
-		//alert("rowData :: " + rowData);
-		
-		//alert("row_id :: " + row_id);
-		
-		pretreatment_asis(row_id);	
-		
-	});
   
   //상단 선택버튼 클릭시 체크된 Row의 값을 가져온다.
   $("#pretreatment_asis").click(function(){ 
@@ -569,98 +499,8 @@
 		pretreatment_asis(row_id);	
 		
 	});
-  
-  
-  function pretreatment_asis(row_id){
-	  	var campaign = new Object();
-	  	campaign.row_id = row_id;
-
-	  	if(row_id == ""){
-	  		alert("체크박스를 선택 하세요.");
-	  		return;
-	  	}
-	  	
-	    $.ajax({
-	        type    : 'GET', // method
-	        url     : '/Pretreatment/info',
-	        //url       : '/admin/login_proc?ADM_ID=XXXX&ADM_PW=XXXX', // GET 요청은 데이터가 URL 파라미터로 포함되어 전송됩니다.
-	        async   : 'true', // true
-	        data    : campaign, // GET 요청은 지원되지 않습니다.
-	        processData : true, // GET 요청은 데이터가 바디에 포함되는 것이 아니기 때문에 URL에 파라미터 형식으로 추가해서 전송해줍니다.
-	        cache: false,
-	        contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
-	        //dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
-	        success : function(data){
-	        	
-	        	var obj = JSON.stringify(data, true, 2);
-	        	//alert("search_campaign result :: " + obj);
-	        	
-	        	grid_table_pretreatment(obj);
-	        	
-	        },
-	        error : function(request,status,error){
-	        	//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	        }
-		});
-  }
-  
-  function grid_table_pretreatment(obj){
-	  var div = document.querySelector('#ai_campaign_info');
-	  
-      //alert("grid_table_pretreatment :: " + obj);
-
-      html = '<table class="table table-bordered table-hover">';
-      html += '<thead><tr><th>캠페인ID</th><th>이름</th><th>성별</th><th>나이</th><th>IPTV결합여부</th><th>미납여부</th><th>인터넷가입여부</th><th>고객등급</th><th>약정여부</th><th>반응1</th><tr></thead>';
-      html += '<tbody>';
-
-      var json = $.parseJSON(obj);
-   	  $(json).each(function(i,val){
-   		html += '<tr>';
-   		$.each(val,function(k,v){
-   			if(v == 'null' || v == ''){
-   				html += '<td></td>';
-   			}else{
-   				html += '<td>' + v + '</td>';
-   			}
-   		});
-   		
-   		html += '</tr>';
-  	  });
-   	  html += '</tbody>';
-      html += '</table>';
-      
-      //alert("Table :: " + html);
-      div.innerHTML = html;
-      
-     
-  }
-  
-  function grid_table_paging(){
-      
-	  alert("grid_table_paging ");
-	  
-      $('#ai_campaign').DataTable({
-    	  "ordering": true,
-          "bDestroy": true,
-    	  "searching": false,
-    	  "iDisplayLength": 5,
-    	  "autoWidth" : true
-    	  
-      });
-      
-      $('#ai_campaign_info').DataTable(
-  		  {
-  			 "pagingType": "simple_numbers", // "simple" option for 'Previous' and 'Next' buttons only
-  			"bDestroy": true,
-  			 "searching" : false,
-  			 "paging"    : true,
-  			 "autoWidth" : false
-  		  }	  
-      );
-  }
   search_campaign();
- 
-  //grid_table_paging();
+  
  </script>
 
 </body>

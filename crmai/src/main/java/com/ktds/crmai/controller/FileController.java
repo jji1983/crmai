@@ -55,6 +55,8 @@ public class FileController {
 		
 		AI_CAMPAIGN campaign = pretreatmentService.selectCampaignSeq();
 		
+		//logger.info("Upload_Pretreatment :: user_id ::{}, inputCamName :: {}, inputCamDesc :: {}, cam_id :: {} ",user_id, inputCamName, inputCamDesc,  campaign);
+		
 		campaign.setAdm_id(user_id);
 		campaign.setCam_name(inputCamName);
 		campaign.setCam_desc(inputCamDesc);
@@ -76,7 +78,7 @@ public class FileController {
                 long size = file.getSize();
  
                 String uuid = UUID.randomUUID().toString(); // 중복될 일이 거의 없다.
-                String saveFileName = fullPath + File.separator + uuid +"_"+name; // 실제 저장되는 파일의 절대 경로
+                String saveFileName = fullPath + File.separator + uuid +"_"+campaign.getCam_seq(); // 실제 저장되는 파일의 절대 경로
  
                 // 아래에서 출력되는 결과는 모두 database에 저장되야 한다.
                 // pk 값은 자동으로 생성되도록 한다.
@@ -115,7 +117,7 @@ public class FileController {
       //응답과 함깨 HttpStatus를 지정할 수 있습니다.
       ResponseEntity<Object> response = new ResponseEntity<Object>("success", HttpStatus.OK);
 		
-		return response; 
+	  return response; 
 	} 
 	//uuid생성 
 	public static String getUuid() { 
