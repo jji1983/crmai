@@ -26,7 +26,7 @@ public interface PretreatmentMapper {
 	/*
 	 * Name : 캠페인 SEQ 가져오기
 	 */
-	String selectCampaignSeq();
+	AI_CAMPAIGN selectCampaignSeq();
 	
 	/*
 	 * Name : 캠페인 SEQ 가져오기

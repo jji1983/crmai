@@ -36,28 +36,35 @@ import com.ktds.crmai.service.PretreatmentService;
 @RequestMapping(value="/file")
 public class FileController {
 	private static Logger logger = LoggerFactory.getLogger(FileController.class);
-	private String baseDir = "D:" + File.separator + "TEMP" + File.separator; // c:\temp 디렉토리를 미리 만들어둔다.
+	private String baseDir = "D:" + File.separator + "TEMP" + File.separator; // D:\temp 디렉토리를 미리 만들어둔다.
 	
 	@Autowired
 	PretreatmentService pretreatmentService;
 	
 	@RequestMapping(value = "/Upload_Pretreatment") // method = RequestMethod.GET 
-	public ResponseEntity<Object> fileUpload(
+	public ResponseEntity<Object> fileUpload_Pretreatment(
 		@RequestParam("user_id") String user_id,
 		@RequestParam("inputCamName") String inputCamName,
 		@RequestParam("inputCamDesc") String inputCamDesc,
 		@RequestParam("cam_type") String cam_type,
         @RequestParam("file") MultipartFile[] files) { 
 
-		AI_CAMPAIGN campaign = new AI_CAMPAIGN();
 		
-		campaign.setCam_seq(pretreatmentService.selectCampaignSeq());
+		logger.info("Upload_Pretreatment :: user_id ::{}, inputCamName :: {}, inputCamDesc :: {}",user_id, inputCamName, inputCamDesc );
+		
+		
+		AI_CAMPAIGN campaign = pretreatmentService.selectCampaignSeq();
+		
+		campaign.setAdm_id(user_id);
+		campaign.setCam_name(inputCamName);
+		campaign.setCam_desc(inputCamDesc);
+		campaign.setCam_type(cam_type);
 		
 		
         if(files != null && files.length > 0){
             // windows 사용자라면 "c:\temp\년도\월\일" 형태의 문자열을 구한다.
-            String formattedDate = baseDir + new SimpleDateFormat("yyyy" + File.separator + "MM" + File.separator + "dd").format(new Date());
-            File f = new File(formattedDate);
+            String fullPath = baseDir + user_id;
+            File f = new File(fullPath);
             if(!f.exists()){ // 파일이 존재하지 않는다면
                 f.mkdirs(); // 해당 디렉토리를 만든다. 하위폴더까지 한꺼번에 만든다.
             }
@@ -69,7 +76,7 @@ public class FileController {
                 long size = file.getSize();
  
                 String uuid = UUID.randomUUID().toString(); // 중복될 일이 거의 없다.
-                String saveFileName = formattedDate + File.separator + uuid; // 실제 저장되는 파일의 절대 경로
+                String saveFileName = fullPath + File.separator + uuid +"_"+name; // 실제 저장되는 파일의 절대 경로
  
                 // 아래에서 출력되는 결과는 모두 database에 저장되야 한다.
                 // pk 값은 자동으로 생성되도록 한다.
@@ -83,6 +90,8 @@ public class FileController {
                 System.out.println("size : " + size);
                 System.out.println("saveFileName : " + saveFileName);
  
+                campaign.setCam_ifilename(saveFileName);
+                
                 // 실제 파일을 저장함.
                 // try-with-resource 구문. close()를 할 필요가 없다. java 7 이상에서 가능
                 try(
@@ -98,6 +107,7 @@ public class FileController {
                 }
             } // for
             
+            logger.info("### Upload_Pretreatment Insert {}", campaign);
             pretreatmentService.insertCampaign(campaign);
             
         } // if

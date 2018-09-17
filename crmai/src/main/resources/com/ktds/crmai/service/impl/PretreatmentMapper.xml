@@ -18,7 +18,8 @@
 		  cam.cam_otype as "cam_otype",
 		  cam.cam_otablename as "cam_otablename",
 		  cam.cam_cdate as "cam_cdate",
-		  cam.cam_desc as "cam_desc"
+		  cam.cam_desc as "cam_desc",
+		  cam.cam_msg as "cam_msg"
 		from 
 		  ai_campaign cam
     </select>
@@ -43,7 +44,8 @@
 		  cam.cam_otype as "cam_otype",
 		  cam.cam_otablename as "cam_otablename",
 		  cam.cam_cdate as "cam_cdate",
-		  cam.cam_desc as "cam_desc"
+		  cam.cam_desc as "cam_desc",
+		  cam.cam_msg as "cam_msg"
 		from 
 		  ai_campaign cam
 		<where>

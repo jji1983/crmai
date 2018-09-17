@@ -24,6 +24,7 @@ public class AI_CAMPAIGN{
 	private String cam_otablename;
 	private String cam_cdate;
 	private String cam_desc;
+	private String cam_msg;
 	
 	
 	public AI_CAMPAIGN(){
@@ -45,7 +46,8 @@ public class AI_CAMPAIGN{
 			String cam_otype,
 			String cam_otablename,
 			String cam_cdate,
-			String cam_desc
+			String cam_desc,
+			String cam_msg
 	    ) {
 		
 		this.cam_seq = cam_seq;
@@ -62,5 +64,6 @@ public class AI_CAMPAIGN{
 		this.cam_otablename = cam_otablename;
 		this.cam_cdate = cam_cdate;
 		this.cam_desc = cam_desc;
+		this.cam_msg = cam_msg;
 	}
 }

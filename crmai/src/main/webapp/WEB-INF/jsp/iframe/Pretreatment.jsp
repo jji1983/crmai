@@ -165,7 +165,6 @@
 	          
 	          <!-- Button trigger modal -->
 			  <button id='newBtn' type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#newModal">신규</button>&nbsp;
-			  <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#basicExampleModal">TEST</button>&nbsp;
 	          
 	          <!-- Modal -->
 	          <div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
@@ -212,12 +211,12 @@
 		                    </div>
 			              </div>
 			                
-			                <div class="form-group">
-			                  <label for="InputFile" class="col-sm-2 control-label" >File input</label>
-			                  <div class="col-sm-10">
-			                  	<input type="file" name="file" id="InputFile">
-			                  </div>
-			                </div>
+ 		                 <div class="form-group">
+		                  <label for="InputFile" class="col-sm-2 control-label" >File input</label>
+		                  <div class="col-sm-10">
+		                  	<input type="file" name="file" id="InputFile" accept=".csv">
+		                  </div>
+		                 </div>
 			                
 			              </div>
 			              <!-- /.box-body -->
@@ -233,7 +232,6 @@
 				    </div>
 				  </div>
 			  </div>
-	          
 	          <!--/. Modal -->
 	         
 	        </div>
@@ -378,6 +376,8 @@
             alert('모달 종료.');
     	    $('#newModal').modal('hide');
 
+    	    alert('캠페인 리프리시');
+    	    search_campaign();
         },
         error: function (e) {
 
@@ -411,6 +411,7 @@
 	        async   : 'true', // true
 	        data    : campaign, // GET 요청은 지원되지 않습니다.
 	        processData : true, // GET 요청은 데이터가 바디에 포함되는 것이 아니기 때문에 URL에 파라미터 형식으로 추가해서 전송해줍니다.
+	        cache: false,
 	        contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
 	        //dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
 	        success : function(data){
@@ -432,7 +433,7 @@
       alert("grid_table_campaign :: " + obj);
 
       html = '<table class="table table-bordered table-hover">';
-      html += '<thead><tr><th>체크</th><th>캠페인이름</th><th>등록자</th><th>캠페인목적</th><th>캠페인상태</th><th>AI상태</th><th>캠페인 등록일자</th><th>설명</th><tr></thead>';
+      html += '<thead><tr><th>체크</th><th>캠페인이름</th><th>등록자</th><th>캠페인목적</th><th>캠페인상태</th><th>AI상태</th><th>캠페인 등록일자</th><th>설명</th><th>메시지</th><tr></thead>';
       html += '<tbody>';
       var json = $.parseJSON(obj);
       
@@ -474,6 +475,16 @@
    				html += '<td>' + v + '</td>';	
    			}
    			
+   			if(k == 'cam_msg'){
+   				
+   				if(v == '' || v == null || v == 'null' ){
+   					html += '<td></td>';
+   				}else{
+   					html += '<td>' + v + '</td>';
+   				}
+   					
+   			}
+   			
    		});
    		
    		html += '</tr>';
@@ -484,10 +495,7 @@
       
       //alert("Table == " + html);
       div.innerHTML = html;
-      //$('#ai_campaign').DataTable();
   }
-  
-
   
   //상단 선택버튼 클릭시 체크된 Row의 값을 가져온다.
   $("#selectBtn").click(function(){ 
@@ -579,6 +587,7 @@
 	        async   : 'true', // true
 	        data    : campaign, // GET 요청은 지원되지 않습니다.
 	        processData : true, // GET 요청은 데이터가 바디에 포함되는 것이 아니기 때문에 URL에 파라미터 형식으로 추가해서 전송해줍니다.
+	        cache: false,
 	        contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
 	        //dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
 	        success : function(data){
@@ -623,11 +632,22 @@
       //alert("Table :: " + html);
       div.innerHTML = html;
       
-      grid_table_paging();
+     
   }
   
   function grid_table_paging(){
-      //alert("paging :: ");
+      
+	  alert("grid_table_paging ");
+	  
+      $('#ai_campaign').DataTable({
+    	  "ordering": true,
+          "bDestroy": true,
+    	  "searching": false,
+    	  "iDisplayLength": 5,
+    	  "autoWidth" : true
+    	  
+      });
+      
       $('#ai_campaign_info').DataTable(
   		  {
   			 "pagingType": "simple_numbers", // "simple" option for 'Previous' and 'Next' buttons only
@@ -638,11 +658,9 @@
   		  }	  
       );
   }
-  
-   
   search_campaign();
-
-
+ 
+  //grid_table_paging();
  </script>
 
 </body>
