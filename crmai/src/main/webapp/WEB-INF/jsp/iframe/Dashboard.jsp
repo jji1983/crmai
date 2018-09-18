@@ -62,6 +62,12 @@
     
     <!-- Main content -->
     <section class="content">
+	   <div class="callout callout-info">
+        <h4>공지사항</h4>
+
+        <p id="noticeVal"></p>
+      </div>
+	   
 	   
     </section>
      <!-- /.Main content -->
@@ -105,6 +111,20 @@
 <script src="/resources/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/resources/dist/js/demo.js"></script>
+<script type="text/javascript">
 
+function grid_table_campaign(){
+	var div = document.querySelector('#noticeVal');
+    //alert("grid_table_campaign :: " + obj);
+
+    html = '<p>safsafsadf</p>';
+    
+    
+    div.innerHTML = html;
+}
+
+grid_table_campaign();
+
+</script>
 </body>
 </html>
