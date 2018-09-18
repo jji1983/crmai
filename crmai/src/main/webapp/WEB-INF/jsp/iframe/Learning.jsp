@@ -56,12 +56,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        학습수행
+           AI학습결과
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">학습수행이력</li>
+        <li class="active">AI학습결과</li>
       </ol>
     </section>
     

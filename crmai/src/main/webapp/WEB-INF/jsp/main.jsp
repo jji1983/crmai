@@ -64,6 +64,11 @@
 		//alert("call Content_Pretreatment!!");
 		document.getElementById("main_frame").src = "/iframe/Pretreatment";
 	}
+	
+	function Content_PretreatmentResult() {
+		//alert("call Content_PretreatmentResult!!");
+		document.getElementById("main_frame").src = "/iframe/PretreatmentResult";
+	}
 	function Content_Learning() {
 		//alert("call Content_Learning!!");
 		document.getElementById("main_frame").src = "/iframe/Learning";
@@ -149,7 +154,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li  class="active"><a href="javascript:Content_Learning();"><i class="fa fa-circle-o"></i>전처리 결과</a></li>
+            <li  class="active"><a href="javascript:Content_PretreatmentResult();"><i class="fa fa-circle-o"></i>전처리 결과</a></li>
             <li  class="active"><a href="javascript:Content_Learning();"><i class="fa fa-circle-o"></i>AI학습 결과</a></li>
           </ul>
         </li>

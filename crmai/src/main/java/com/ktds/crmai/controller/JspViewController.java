@@ -58,6 +58,11 @@ public class JspViewController {
 		return "/iframe/Pretreatment";
 	}
 	
+	@RequestMapping(value="/iframe/PretreatmentResult")
+	public String PretreatmentResult() {
+		return "/iframe/PretreatmentResult";
+	}
+	
 	@RequestMapping(value="/iframe/Learning")
 	public String Learning() {
 		return "/iframe/Learning";
