@@ -268,9 +268,9 @@ public class TableDAO {
 				
 				stmt.executeUpdate(query.toQuery());
 				
-				if(i % 1000 == 0) {
-					System.out.println(query.getCam_id() + " ing"+i+" :: " + DateTool.getTimestamp());
-				}
+//				if(i % 1000 == 0) {
+//					System.out.println(query.getCam_id() + " ing"+i+" :: " + DateTool.getTimestamp());
+//				}
 				
 			}
 						

@@ -80,7 +80,7 @@
             <!-- /.box-header -->
             <div class="box-body pad">
               <form>
-                <textarea class="textarea" placeholder="Place some text here"
+                <textarea id="textarea1"  class="textarea" placeholder="Place some text here"
                           style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
               </form>
             </div>
@@ -91,7 +91,10 @@
 	   
     </section>
      <!-- /.Main content -->
-
+	<div class="box-body">
+		<button type="button" onclick="register_notice();" class="btn btn-info pull-right">등록</button>
+		<button type="button" onclick="update_notice();" class="btn btn-info pull-right">수정</button>
+	</div>
 
 
 <!-- jQuery 3 -->
@@ -140,6 +143,63 @@
     //bootstrap WYSIHTML5 - text editor
     $('.textarea').wysihtml5()
   })
+  
+  
+function register_notice(){
+	
+	
+	//var text = $("#textarea1").val();
+	//alert(text);
+	//return;
+	
+	
+	//if($('#ADM_PW').val() != $('#ADM_PW_R').val()){
+	//	alert("비밀번호가 일치 하지 안습니다.!");
+	//	return;
+	//}
+	
+	//var admin = new Object();
+	//admin.ADM_ID = $('#ADM_ID').val();
+	//admin.ADM_NAME = $('#ADM_NAME').val();
+	//admin.ADM_EMAIL = $('#ADM_EMAIL').val();
+	//admin.ADM_PW = $('#ADM_PW').val();
+	
+	var notice = new Object();
+	notice.NOTICE_TEXT = $("#textarea1").val();
+	//notice.ADM_NAME = $('#ADM_NAME').val();
+	//notice.ADM_EMAIL = $('#ADM_EMAIL').val();
+	//notice.ADM_PW = $('#ADM_PW').val();
+
+    $.ajax({
+        type    : 'GET', // method
+        url     : '/notice/notice_reg',
+        //url       : '/admin/login_proc?ADM_ID=XXXX&ADM_PW=XXXX', // GET 요청은 데이터가 URL 파라미터로 포함되어 전송됩니다.
+        async   : 'true', // true
+        data    : notice, // GET 요청은 지원되지 않습니다.
+        processData : true, // GET 요청은 데이터가 바디에 포함되는 것이 아니기 때문에 URL에 파라미터 형식으로 추가해서 전송해줍니다.
+        contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
+        //dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
+        success : function(data, status, xhr){
+        	
+        	//alert("data :: " + data);
+        	if(data == "success"){
+        		//alert("Login1 :: " + data[0]);
+        		alert("공지사항 등록이 성공 하였습니다!");
+        		
+        		//location.href="login";
+        	}else{
+        		alert(data[0]);
+        	}
+        },
+        error   : function(request,status,error){
+        	 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        	 
+        	 responseError(error);
+        	 
+        	 $('#msg').html(error);
+        }
+	});
+}
 </script>
 
 </body>

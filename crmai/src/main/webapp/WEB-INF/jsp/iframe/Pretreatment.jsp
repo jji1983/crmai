@@ -464,11 +464,8 @@
    				}else{
    					html += '<td>' + v + '</td>';
    				}
-   					
    			}
-   			
    		});
-   		
    		html += '</tr>';
   	  });
    	  
@@ -498,8 +495,16 @@
 
 		pretreatment_asis(row_id);	
 		
-	});
+  });
+  
+  // 5초에 한번씩 서버의 정보를 받아서 화면에 출력
+  function startCallback() {
+     setTimeout("search_campaign()", 5000);
+  }
+
+  
   search_campaign();
+  startCallback();
   
  </script>
 
