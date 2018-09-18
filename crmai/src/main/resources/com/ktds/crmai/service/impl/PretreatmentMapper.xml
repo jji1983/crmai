@@ -79,7 +79,7 @@
     
     <insert id="insertCampaign">
 	    insert into ai_campaign(cam_id, adm_id, cam_name, cam_desc, cam_type, cam_ifilename, cam_itype, cam_otype, cam_cdate, cam_status) 
-		values ( #{cam_seq}, #{adm_id}, #{cam_name}, #{cam_desc}, #{cam_type}, #{cam_ifilename}, 1, 0, sysdate,'시작')
+		values ( #{cam_seq}, #{adm_id}, #{cam_name}, #{cam_desc}, #{cam_type}, #{cam_ifilename}, #{cam_itype}, 0, sysdate,'시작')
 	</insert>
     
     
