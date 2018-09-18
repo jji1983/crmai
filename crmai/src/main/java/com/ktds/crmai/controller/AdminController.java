@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ktds.crmai.model.ADMIN_USER;
+import com.ktds.crmai.model.AI_ADMINUSER;
 import com.ktds.crmai.service.AdminService;
 
 @Controller
@@ -34,7 +34,7 @@ public class AdminController {
 		logger.info("ADM_ID : "+ADM_ID + "  ADM_PW : "+ADM_PW);
 		List<String> response = new ArrayList<String>();
 		
-		ADMIN_USER user = admService.selectAdminById(ADM_ID);
+		AI_ADMINUSER user = admService.selectAdminById(ADM_ID);
 		
 		if(user == null) {
 			response.add("fail. user not found!");
@@ -59,11 +59,11 @@ public class AdminController {
 	
 	@ResponseBody
 	@RequestMapping(value="/register_check", method=RequestMethod.GET, consumes=MediaType.APPLICATION_JSON_VALUE)
-	public List<String> register_check(@ModelAttribute("admin") ADMIN_USER addAdmin){
+	public List<String> register_check(@ModelAttribute("admin") AI_ADMINUSER addAdmin){
 		logger.info("Request register_check....{}",addAdmin);
 		List<String> response = new ArrayList<String>();
 		
-		ADMIN_USER user = admService.selectAdminById(addAdmin.getADM_ID());
+		AI_ADMINUSER user = admService.selectAdminById(addAdmin.getADM_ID());
 		
 		if(user != null) {
 			response.add("fail. ID Already exists ");

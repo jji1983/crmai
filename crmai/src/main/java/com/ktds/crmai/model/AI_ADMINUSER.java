@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Alias("admin")
-public class ADMIN_USER {
+public class AI_ADMINUSER {
 
 	private String ADM_ID;
 	private String ADM_PW;
@@ -15,11 +15,11 @@ public class ADMIN_USER {
 	private String ADM_CDATE;
 	private String ADM_UDATE;
 	
-	public ADMIN_USER() {
+	public AI_ADMINUSER() {
 		
 	}
 	
-	public ADMIN_USER(String ADM_ID, String ADM_PW, String ADM_ROLE, String ADM_NAME, String ADM_EMAIL, String ADM_CDATE, String ADM_UDATE) {
+	public AI_ADMINUSER(String ADM_ID, String ADM_PW, String ADM_ROLE, String ADM_NAME, String ADM_EMAIL, String ADM_CDATE, String ADM_UDATE) {
 		this.ADM_ID = ADM_ID;
 		this.ADM_PW = ADM_PW;
 		this.ADM_ROLE = ADM_ROLE;

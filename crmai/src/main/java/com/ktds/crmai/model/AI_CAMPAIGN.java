@@ -17,6 +17,7 @@ public class AI_CAMPAIGN{
 	private String cam_type;
 	private String cam_status;
 	private String cam_itype;
+	private String cam_icnum;
 	private String cam_ifilename;
 	private String cam_iviewname;
 	private String cam_idate;
@@ -40,6 +41,7 @@ public class AI_CAMPAIGN{
 			String cam_type,
 			String cam_status,
 			String cam_itype,
+			String cam_icnum,
 			String cam_ifilename,
 			String cam_iviewname,
 			String cam_idate,
@@ -57,6 +59,7 @@ public class AI_CAMPAIGN{
 		this.cam_type = cam_type;
 		this.cam_status = cam_status;
 		this.cam_itype = cam_itype;
+		this.cam_icnum = cam_icnum;
 		this.cam_ifilename = cam_ifilename;
 		this.cam_iviewname = cam_iviewname;
 		this.cam_idate = cam_idate;
