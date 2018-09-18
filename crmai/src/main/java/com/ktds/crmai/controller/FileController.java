@@ -63,6 +63,9 @@ public class FileController {
 		campaign.setCam_type(cam_type);
 		
 		
+		logger.info("files check {}, {} ", files, files.length); 
+		
+		
         if(files != null && files.length != 0){
             // windows 사용자라면 "c:\temp\년도\월\일" 형태의 문자열을 구한다.
             String fullPath = baseDir + user_id;
@@ -93,29 +96,29 @@ public class FileController {
                 System.out.println("saveFileName : " + saveFileName);
  
                 campaign.setCam_ifilename(saveFileName);
-                campaign.setCam_itype("1");
                 
-                // 실제 파일을 저장함.
-                // try-with-resource 구문. close()를 할 필요가 없다. java 7 이상에서 가능
-                try(
-                        InputStream in = file.getInputStream();
-                        FileOutputStream fos = new FileOutputStream(saveFileName)){
-                    int readCount = 0;
-                    byte[] buffer = new byte[512];
-                    while((readCount = in.read(buffer)) != -1){
-                        fos.write(buffer,0,readCount);
+                if(originalFilename.length() == 0){
+                	campaign.setCam_itype("0");
+                }else{
+                	campaign.setCam_itype("1");
+                	
+                	// 실제 파일을 저장함.
+                    // try-with-resource 구문. close()를 할 필요가 없다. java 7 이상에서 가능
+                    try(
+                            InputStream in = file.getInputStream();
+                            FileOutputStream fos = new FileOutputStream(saveFileName)){
+                        int readCount = 0;
+                        byte[] buffer = new byte[512];
+                        while((readCount = in.read(buffer)) != -1){
+                            fos.write(buffer,0,readCount);
+                        }
+                    }catch(Exception ex){
+                        ex.printStackTrace();
                     }
-                }catch(Exception ex){
-                    ex.printStackTrace();
                 }
             } // for
-            
             logger.info("### Upload_Pretreatment Insert {}", campaign);
             pretreatmentService.insertCampaign(campaign);
-            
-        }else {
-        	campaign.setCam_itype("0");
-        	pretreatmentService.insertCampaign(campaign);
         }
  
       //응답과 함깨 HttpStatus를 지정할 수 있습니다.

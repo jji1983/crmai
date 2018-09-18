@@ -151,27 +151,11 @@
 function register_notice(){
 	
 	
-	//var text = $("#textarea1").val();
-	//alert(text);
-	//return;
-	
-	
-	//if($('#ADM_PW').val() != $('#ADM_PW_R').val()){
-	//	alert("비밀번호가 일치 하지 안습니다.!");
-	//	return;
-	//}
-	
-	//var admin = new Object();
-	//admin.ADM_ID = $('#ADM_ID').val();
-	//admin.ADM_NAME = $('#ADM_NAME').val();
-	//admin.ADM_EMAIL = $('#ADM_EMAIL').val();
-	//admin.ADM_PW = $('#ADM_PW').val();
+
 	
 	var notice = new Object();
 	notice.NOTICE_TEXT = $("#textarea1").val();
-	//notice.ADM_NAME = $('#ADM_NAME').val();
-	//notice.ADM_EMAIL = $('#ADM_EMAIL').val();
-	//notice.ADM_PW = $('#ADM_PW').val();
+
 
     $.ajax({
         type    : 'GET', // method
@@ -187,9 +171,12 @@ function register_notice(){
         	//alert("data :: " + data);
         	if(data == "success"){
         		//alert("Login1 :: " + data[0]);
-        		alert("공지사항 등록이 성공 하였습니다!");
+        		alert("공지사항 등록이 성공 하였습니다! :: " + data);
         		
-        		location.href="Notice";
+        		$("#textarea1").val("Fifth Avenue, New York City");
+        		
+        		
+        		alert("2 :: " + data);
         	}else{
         		alert(data[0]);
         	}

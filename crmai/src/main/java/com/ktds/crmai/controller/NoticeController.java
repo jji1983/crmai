@@ -43,48 +43,9 @@ public class NoticeController {
 		
 		noticeBoardService.insertNotice(notice);
 		response.add("success");
-//		ADMIN_USER user = admService.selectAdminById(ADM_ID);
-//		
-//		if(user == null) {
-//			response.add("fail. user not found!");
-//		}else {
-//		
-//			if(user.getADM_PW().equals(ADM_PW)) {
-//				response.add("success");
-//				
-//				session.setAttribute("sessionID", user.getADM_ID());
-//				session.setAttribute("sessionNAME", user.getADM_NAME());
-//				session.setAttribute("sessionROLE", user.getADM_ROLE());
-//				
-//			}else{
-//				response.add("fail. PW not correct!");
-//			}
-//		}
-		
+
 		logger.info("response : "+ response.get(0));
 		return response;
 	}
-	
-	
-//	@ResponseBody
-//	@RequestMapping(value="/register_check", method=RequestMethod.GET, consumes=MediaType.APPLICATION_JSON_VALUE)
-//	public List<String> register_check(@ModelAttribute("admin") ADMIN_USER addAdmin){
-//		logger.info("Request register_check....{}",addAdmin);
-//		List<String> response = new ArrayList<String>();
-//		
-//		ADMIN_USER user = admService.selectAdminById(addAdmin.getADM_ID());
-//		
-//		if(user != null) {
-//			response.add("fail. ID Already exists ");
-//		}else {
-//			admService.insertAdmin(addAdmin);
-//			response.add("success");
-//		}
-//		
-//		logger.info("response : "+ response.get(0));
-//		return response;
-//	}
-	
-	
 	
 }

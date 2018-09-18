@@ -327,7 +327,6 @@
     var data = new FormData(form);
 
     $("#bthNew").prop("disabled", true);
-    alert("send");
     
     $.ajax({
         type: "POST",
