@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.ktds.crmai.util.DateTool;
+import com.ktds.crmai.vo.AiStagingTrain;
 import com.ktds.crmai.vo.CampaignData;
 import com.ktds.crmai.vo.TableMake_Query;
 
@@ -199,6 +201,93 @@ public class TableDAO {
 				
 			}
 			return rs;
+		}
+	}
+	
+	
+	/*
+	 * Name : 캠페인 학습데이터 목록 가져오기
+	 * 
+	 * 
+	 */
+	public int updateCampaign_end(CampaignData campaign, int cam_itype){
+		Connection conn = null;
+		StringBuilder update_campaign =  new StringBuilder();
+		
+		int rs = 1;
+		int flag = 0;
+		
+		try {
+			conn = getConn();
+			
+			// 드라이버 연결위한 준비  conn객체 생성.
+			stmt = conn.createStatement();
+
+			update_campaign.append("update ai_campaign set ");
+			update_campaign.append("cam_itype = " + cam_itype);
+			update_campaign.append(", cam_icnum = " + campaign.getIcnum());
+			update_campaign.append(" where cam_id in ");
+			
+			update_campaign.append("(");
+			update_campaign.append(campaign.getCam_id());
+			update_campaign.append(")");
+			
+			System.out.println("update_campaign :: " + update_campaign.toString());
+			
+		    //sql문을 DB에 전송(실행)
+		    rs = stmt.executeUpdate(update_campaign.toString()); // 결과 테이블 반환
+		   
+			
+		}catch (ClassNotFoundException e) {
+			System.err.println("Oracle Driver not Found!");
+		} catch(SQLException e) {
+			System.err.println("insertData_Pretreatment SQL 오류 :: " + e.getMessage() + " :: " + select_campaign);
+		}finally {
+			try {
+				if(stmt != null) stmt.close();
+				if(conn != null) conn.close();
+			}catch(final SQLException e) {
+				
+			}
+			return rs;
+		}
+	}
+	
+	public String insertAI_STAGING_TRAIN(ArrayList<AiStagingTrain> arrayList){
+		Connection conn = null;
+		String msg = null;
+		AiStagingTrain query = null;
+		try {
+			conn = getConn();
+			
+			// 드라이버 연결위한 준비  conn객체 생성.
+			stmt = conn.createStatement();
+			for(int i = 0; i < arrayList.size(); i++) {
+				
+				query = arrayList.get(i);
+				
+				stmt.executeUpdate(query.toQuery());
+				
+				if(i % 1000 == 0) {
+					System.out.println(query.getCam_id() + " ing"+i+" :: " + DateTool.getTimestamp());
+				}
+				
+			}
+						
+		}catch (ClassNotFoundException e) {
+			System.err.println("Oracle Driver not Found!");
+		} catch(SQLException e) {
+			System.err.println("insertData_Pretreatment SQL 오류 :: " + e.getMessage() + " :: " + query.toQuery());
+			
+			msg = e.getMessage();
+		}finally {
+			try {
+				if(stmt != null) stmt.close();
+				if(conn != null) conn.close();
+			}catch(final SQLException e) {
+				
+			}
+			return msg;
 		}
 	}
 

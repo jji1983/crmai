@@ -6,6 +6,7 @@ public class CampaignData {
 	private String adm_id;
 	private String cam_itype;
 	private String cam_ifilename;
+	private int icnum;
 	
 	
 	public int getCam_id() {
@@ -33,6 +34,12 @@ public class CampaignData {
 		this.cam_ifilename = cam_ifilename;
 	}
 	
+	public int getIcnum() {
+		return icnum;
+	}
+	public void setIcnum(int icnum) {
+		this.icnum = icnum;
+	}
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		
@@ -40,6 +47,7 @@ public class CampaignData {
 		sb.append("adm_id :: " + adm_id + "\n");
 		sb.append("cam_itype :: " + cam_itype + "\n");
 		sb.append("cam_ifilename :: " + cam_ifilename + "\n");
+		sb.append("icnum :: " + icnum + "\n");
 		
 		return sb.toString();
 	}

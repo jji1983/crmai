@@ -8,7 +8,7 @@ public class AppMain {
 		 
 		 PretreatmentProc proc = new PretreatmentProc();
 		 
-		 proc.PretreatmentProc("UTF-8");
+		 proc.PretreatmentProc();
 		 
 	 }
 

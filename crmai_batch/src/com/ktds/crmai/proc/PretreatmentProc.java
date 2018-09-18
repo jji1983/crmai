@@ -8,32 +8,76 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import com.ktds.crmai.db.TableDAO;
+import com.ktds.crmai.util.DateTool;
+import com.ktds.crmai.vo.AiStagingTrain;
 import com.ktds.crmai.vo.CampaignData;
 
 public class PretreatmentProc {
 
-	public void PretreatmentProc(String encoding) {
+	public void PretreatmentProc() {
 		
 		TableDAO dao = new TableDAO();
 		BufferedReader br = null;
+		String encoding = "UTF-8";
+		String cvsSplitBy = ",";
 		String line;
 		
 		
 		try {
 			//1. 학습데이터 대상을 가져온다.
 			ArrayList<CampaignData> list = dao.selectCampaign();
+			
+			if(list == null || list.isEmpty()) {
+				System.out.println("PretreatmentProc :: 조건 대상이 없음");
+				return;
+			}
 
 			//2. Flag 변경
 			dao.updateCampaign(list, 2);
+
 			
 			//3. 데이터를 분석 DB 에 Insert
+			System.out.println("Insert start :: " + DateTool.getTimestamp());
 			for(CampaignData data : list) {
+				int feature = 0;
+				String[] columns = null;
+				ArrayList<AiStagingTrain> arrayList = new ArrayList<AiStagingTrain>();
 				System.out.println(data.toString());
 				br = new BufferedReader(new InputStreamReader(new FileInputStream(data.getCam_ifilename()), encoding));
+				System.out.println(data.getCam_id() + " start :: " + DateTool.getTimestamp());
 	            while ((line = br.readLine()) != null) {
+	            	AiStagingTrain train = new AiStagingTrain();
+	            	
 	            	//System.out.println(data.getCam_id() + " line :: " + line);
+	            	columns = line.split("\\" + cvsSplitBy);
+	            	
+	            	//3.1 스테이징DB(TRAIN) Insert
+	            	train.setCam_id(data.getCam_id());
+	            	train.setSt_itype(4);
+	            	train.setColumn(columns);
+	            	
+	            	//System.out.println(train.toQuery());
+	            	arrayList.add(train);
+	            
+	            	int nowNum = columns.length;
+	            	
+	            	if(nowNum > feature) {
+	            		feature = nowNum;
+	            		data.setIcnum(feature);
+	            	}
 	            }
+	            System.out.println(data.getCam_id() + " ing :: " + DateTool.getTimestamp());
+	            dao.insertAI_STAGING_TRAIN(arrayList);
+	            System.out.println(data.getCam_id() + " end :: " + DateTool.getTimestamp());
+	            
+	            //3.2 캠페인 정보 업데이트 피쳐 갯수
+	        	System.out.println("feature len[" + feature + "]");
+	        	
+	        	dao.updateCampaign_end(data, 4);
 			}
+			
+			System.out.println("Insert end :: " + DateTool.getTimestamp());
+			
 		
 		} catch (FileNotFoundException e) {
             e.printStackTrace();
