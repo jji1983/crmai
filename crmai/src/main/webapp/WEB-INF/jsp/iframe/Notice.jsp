@@ -52,7 +52,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        NoticeBoard
+        Notice
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
@@ -65,9 +65,9 @@
     <section class="content">
 		<div class="box">
             <div class="box-header">
-              <h3 class="box-title">Bootstrap WYSIHTML5
-                <small>Simple and fast</small>
-              </h3>
+            <!--      <h3 class="box-title">Bootstrap WYSIHTML5 -->
+            <!--      <small>Simple and fast</small> -->
+             <!--  </h3>  -->
               <!-- tools box -->
               <div class="pull-right box-tools">
                 <button type="button" class="btn btn-default btn-sm" data-widget="collapse" data-toggle="tooltip"
@@ -139,11 +139,14 @@
   $(function () {
     // Replace the <textarea id="editor1"> with a CKEditor
     // instance, using default configuration.
-    CKEDITOR.replace('editor1')
+    CKEDITOR.replace('editor1');
     //bootstrap WYSIHTML5 - text editor
-    $('.textarea').wysihtml5()
-  })
-  
+    $('.textarea').wysihtml5();
+  });
+</script>
+
+<script>
+
   
 function register_notice(){
 	
@@ -186,7 +189,7 @@ function register_notice(){
         		//alert("Login1 :: " + data[0]);
         		alert("공지사항 등록이 성공 하였습니다!");
         		
-        		//location.href="login";
+        		location.href="Notice";
         	}else{
         		alert(data[0]);
         	}
@@ -201,6 +204,5 @@ function register_notice(){
 	});
 }
 </script>
-
 </body>
 </html>
