@@ -311,7 +311,7 @@
     	//stop submit the form, we will post it manually.
         event.preventDefault();
     	
-        alert('클릭 신규~!!');
+        //alert('클릭 신규~!!');
         
         submit_newCampagin();
         
@@ -320,7 +320,7 @@
   });
   
   function submit_newCampagin(){
-	  alert('-- submit_newCampagin -- ');
+	//alert('-- submit_newCampagin -- ');
 	  
 	// Get form
     var form = $('#newUploadForm')[0];
@@ -435,7 +435,7 @@
    			
    			if(k == 'cam_itype'){
    				if(v == '0'){
-   					html += '<td>데이터 로딩 필요' + '<button id="itype_bt" type="button" class="btn btn-info pull-center">데이터등록</button>' +'</td>';	
+   					html += '<td>데이터 로딩 필요</br>' + '<button id="itype_bt" type="button" class="btn btn-info pull-center">데이터등록</button>' +'</td>';	
    				}
    				if(v == '1'){
    					html += '<td>데이터 엑셀 로딩중</td>';
@@ -497,9 +497,9 @@
 		
   });
   
-  // 5초에 한번씩 서버의 정보를 받아서 화면에 출력
+  // 60초에 한번씩 서버의 정보를 받아서 화면에 출력
   function startCallback() {
-     setTimeout("search_campaign()", 5000);
+	  setInterval("search_campaign();", 60000);
   }
 
   
