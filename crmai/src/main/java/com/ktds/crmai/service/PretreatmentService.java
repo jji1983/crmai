@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ktds.crmai.model.AI_CAMPAIGN;
+import com.ktds.crmai.model.AI_STAGING_TRAIN;
 import com.ktds.crmai.model.Pretreatment;
 import com.ktds.crmai.service.impl.PretreatmentMapper;
 
@@ -41,6 +42,20 @@ public class PretreatmentService implements PretreatmentMapper {
 	public void insertCampaign(AI_CAMPAIGN campaign) {
 		pretreatmentMapper.insertCampaign(campaign);
 		
+	}
+
+
+	@Override
+	public List<AI_STAGING_TRAIN> selectStaginTrain(AI_CAMPAIGN campaign) {
+		// TODO Auto-generated method stub
+		return pretreatmentMapper.selectStaginTrain(campaign);
+	}
+
+
+	@Override
+	public List<AI_STAGING_TRAIN> selectStaginTrainResult(AI_CAMPAIGN campaign) {
+		// TODO Auto-generated method stub
+		return pretreatmentMapper.selectStaginTrainResult(campaign);
 	}
 
 

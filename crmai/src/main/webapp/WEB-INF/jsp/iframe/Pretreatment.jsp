@@ -539,8 +539,9 @@
 	  setInterval("search_campaign();", 60000);
   }
   
-  search_campaign();
   startCallback();
+  search_campaign();
+  
   
  </script>
 

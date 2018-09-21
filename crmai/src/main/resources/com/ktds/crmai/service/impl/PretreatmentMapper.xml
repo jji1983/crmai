@@ -76,13 +76,35 @@
     	select cam_seq.nextval as "cam_seq" from dual
     </select>	
     
+    <select id="selectStaginTrain" resultType="s_train">
+		select 
+			*  
+		from 
+			ai_staging_train
+		where  
+			cam_id = #{cam_id}
+			<![CDATA[ and ROWNUM >= 1 AND ROWNUM <= 100 ]]>
+		order by st_seq 
+    </select>
+    
+    
+    <select id="selectStaginTrainResult" resultType="s_train">
+		select 
+			*  
+		from 
+			ai_staging_train_result
+		where  
+			cam_id = #{cam_id}
+			<![CDATA[ and ROWNUM >= 1 AND ROWNUM <= 100 ]]>
+		order by st_seq 
+    </select>
     
     <insert id="insertCampaign">
 	    insert into ai_campaign(cam_id, adm_id, cam_name, cam_desc, cam_type, cam_ifilename, cam_itype, cam_otype, cam_cdate, cam_status) 
 		values ( #{cam_seq}, #{adm_id}, #{cam_name}, #{cam_desc}, #{cam_type}, #{cam_ifilename}, #{cam_itype}, 0, sysdate,'시작')
 	</insert>
-    
-    
+	
+
     
 
 </mapper>
