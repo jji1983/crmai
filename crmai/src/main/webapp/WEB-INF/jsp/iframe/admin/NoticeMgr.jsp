@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>NoteceBoard</title>
+<title>공지사항 관리</title>
 
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -52,12 +52,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Notice
+         공지사항 관리
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/iframe/Dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">NoticeBoard</li>
+        <li class="active">공지사항 관리</li>
       </ol>
     </section>
     

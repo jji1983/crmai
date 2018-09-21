@@ -94,9 +94,14 @@
 		document.getElementById("main_frame").src = "/iframe/NoticeBoard";
 	}
 	
-	function Content_Notice() {
+	function Content_NoticeMgr() {
 		//alert("call Content_NoticeBoard!!");
-		document.getElementById("main_frame").src = "/iframe/Notice";
+		document.getElementById("main_frame").src = "/iframe/admin/NoticeMgr";
+	}
+	
+	function Content_UserMgr() {
+		//alert("call Content_NoticeBoard!!");
+		document.getElementById("main_frame").src = "/iframe/admin/UserMgr";
 	}
   </script>
 </head>
@@ -184,7 +189,7 @@
         
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>통계</span>
+            <i class="fa fa-pie-chart"></i> <span>통계</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -205,8 +210,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li  class="active"><a href="javascript:Content_Notice();"><i class="fa fa-circle-o"></i>공지사항 관리</a></li>
-            <li  class="active"><a href="javascript:Content_RunForecast();"><i class="fa fa-circle-o"></i>계정 관리</a></li>
+            <li  class="active"><a href="javascript:Content_NoticeMgr();"><i class="fa fa-circle-o"></i>공지사항 관리</a></li>
+            <li  class="active"><a href="javascript:Content_UserMgr();"><i class="fa fa-circle-o"></i>계정 관리</a></li>
           </ul>
           <%} %>
         </li>

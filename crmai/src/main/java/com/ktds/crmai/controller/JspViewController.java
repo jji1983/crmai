@@ -88,9 +88,14 @@ public class JspViewController {
 		return "/iframe/NoticeBoard";
 	}
 	
-	@RequestMapping(value="/iframe/Notice")
-	public String Notice() {
-		return "/iframe/Notice";
+	@RequestMapping(value="/iframe/admin/NoticeMgr")
+	public String NoticeMgr() {
+		return "/iframe/admin/NoticeMgr";
+	}
+	
+	@RequestMapping(value="/iframe/admin/UserMgr")
+	public String UserMgr() {
+		return "/iframe/admin/UserMgr";
 	}
 
 }
