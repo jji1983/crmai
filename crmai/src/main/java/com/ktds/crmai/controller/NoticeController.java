@@ -49,4 +49,19 @@ public class NoticeController {
 	}
 	
 	
+	@ResponseBody
+	@RequestMapping(value="/noticeVal", method=RequestMethod.GET, consumes=MediaType.APPLICATION_JSON_VALUE)
+	public List<String> getNotice(HttpSession session){
+		logger.info("getNotice....");
+		List<String> response = new ArrayList<String>();
+		
+		
+		List<AI_NOTICE> notice = noticeBoardService.selectNotice();
+		response.add(notice.get(0).getContents());
+
+		logger.info("response : "+ response.get(0));
+		return response;
+	}
+	
+	
 }

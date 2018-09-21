@@ -62,13 +62,195 @@
     
     <!-- Main content -->
     <section class="content">
-	   <div class="callout callout-info">
-        <h4>공지사항</h4>
+	
+	<!-- 공지사항 -->
+    <div class="row">
+      <!-- Default box -->
+      <div class="box">
+        <div class="box-header with-border">
+          <h4 class="box-title">공지사항</h4>
 
-        <p id="noticeVal"></p>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+              <i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <div class="box-body">
+          <p id="noticeVal"></p>
+        </div>
       </div>
+      <!-- /.box -->
+    </div>
+	<!-- /.row -->  
+
+	<!-- Info boxes -->
+    <div class="row">
+      <!-- Default box -->
+      <div class="box">
+          <div class="box-header with-border">
+	          <h4 class="box-title">전체 실시간 현황</h4>
+	
+	          <div class="box-tools pull-right">
+	            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+	              <i class="fa fa-minus"></i></button>
+	            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+	              <i class="fa fa-times"></i></button>
+	          </div>
+         </div>
+         <div class="box-body">
+         
+	        <div class="col-md-4 col-sm-6 col-xs-12">
+	          <div class="info-box">
+	            <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+	
+	            <div class="info-box-content">
+	              <span class="info-box-text" style="text-align:center">AI학습</span>
+	              <span class="info-box-number" style="text-align:center">90<small>%</small></span>
+	            </div>
+	            <!-- /.info-box-content -->
+	          </div>
+	          <!-- /.info-box -->
+	        </div>
+	        <!-- /.col -->
+	        <div class="col-md-4 col-sm-6 col-xs-12">
+	          <div class="info-box">
+	            <span class="info-box-icon bg-red"><i class="ion ion-ios-eye"></i></span>
+	
+	            <div class="info-box-content">
+	              <span class="info-box-text" style="text-align:center">AI예측</span>
+	              <span class="info-box-number" style="text-align:center">41,410</span>
+	            </div>
+	            <!-- /.info-box-content -->
+	          </div>
+	          <!-- /.info-box -->
+	        </div>
+	        <!-- /.col -->
+	
+	        <!-- fix for small devices only -->
+	        <div class="clearfix visible-sm-block"></div>
+	
+	        <div class="col-md-4 col-sm-6 col-xs-12">
+	          <div class="info-box">
+	            <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+	
+	            <div class="info-box-content">
+	              <span class="info-box-text" style="text-align:center">AI결과</span>
+	              <span class="info-box-number" style="text-align:center">760</span>
+	            </div>
+	            <!-- /.info-box-content -->
+	          </div>
+	          <!-- /.info-box -->
+	        </div>
+	        
+	            
+         </div>
+         <!-- /.box -->
+      </div>
+      <!-- /.box -->
+    </div>
+    <!-- /.row -->
+
+	<!-- Info boxes -->
+    <div class="row">
+    
+	    <div class="col-md-3">
+			<!-- BAR CHART -->
+		    <div class="box box-success">
+		     
+		      <div class="box-header with-border">
+		        <h3 class="box-title">캠페인 예측율 증가 학습</h3>
+		
+		        <div class="box-tools pull-right">
+		          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+		          </button>
+		          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+		        </div>
+		      </div>
+		      <div class="box-body">
+		        <div class="chart">
+		          <canvas id="chBar1" style="height:230px"></canvas>
+		        </div>
+		      </div>
+		      <!-- /.box-body -->
+		    </div>
+		    <!-- /.box -->
+	   	</div>
+	   
+	   	<div class="col-md-3">
+			<!-- BAR CHART -->
+		    <div class="box box-success">
+		     
+		      <div class="box-header with-border">
+		        <h3 class="box-title">캠페인 예측율 증가 학습</h3>
+		
+		        <div class="box-tools pull-right">
+		          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+		          </button>
+		          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+		        </div>
+		      </div>
+		      <div class="box-body">
+		        <div class="chart">
+		          <canvas id="chBar2" style="height:230px"></canvas>
+		        </div>
+		      </div>
+		      <!-- /.box-body -->
+		    </div>
+		    <!-- /.box -->
+	   	</div>
+	   
+	   	<div class="col-md-3">
+			<!-- BAR CHART -->
+		    <div class="box box-success">
+		     
+		      <div class="box-header with-border">
+		        <h3 class="box-title">캠페인 예측율 증가 학습</h3>
+		
+		        <div class="box-tools pull-right">
+		          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+		          </button>
+		          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+		        </div>
+		      </div>
+		      <div class="box-body">
+		        <div class="chart">
+		          <canvas id="chBar3" style="height:230px"></canvas>
+		        </div>
+		      </div>
+		      <!-- /.box-body -->
+		    </div>
+		    <!-- /.box -->
+	   	</div>
+	   
+	   	<div class="col-md-3">
+			<!-- BAR CHART -->
+		    <div class="box box-success">
+		     
+		      <div class="box-header with-border">
+		        <h3 class="box-title">캠페인 예측율 증가 학습</h3>
+		
+		        <div class="box-tools pull-right">
+		          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+		          </button>
+		          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+		        </div>
+		      </div>
+		      <div class="box-body">
+		        <div class="chart">
+		          <canvas id="chBar4" style="height:230px"></canvas>
+		        </div>
+		      </div>
+		      <!-- /.box-body -->
+		    </div>
+		    <!-- /.box -->
+	   </div>
 	   
 	   
+    </div>
+    <!-- /.row -->
+
     </section>
      <!-- /.Main content -->
 
@@ -84,6 +266,8 @@
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- ChartJS -->
+<!-- <script src="/resources/bower_components/Chart.js/Chart.js"></script> -->
 <!-- Morris.js charts -->
 <script src="/resources/bower_components/raphael/raphael.min.js"></script>
 <script src="/resources/bower_components/morris.js/morris.min.js"></script>
@@ -111,20 +295,196 @@
 <script src="/resources/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/resources/dist/js/demo.js"></script>
-<script type="text/javascript">
 
-function grid_table_campaign(){
-	var div = document.querySelector('#noticeVal');
-    //alert("grid_table_campaign :: " + obj);
+<!-- MDB charts ADD -->
+<script src="/resources/js/chart.js"></script>
 
-    html = '<p>safsafsadf</p>';
-    
-    
-    div.innerHTML = html;
-}
+<!-- page script -->
+<script>
+$(function () {
+	
+	var label1 = '# 예측율 증가 학습';
+	var label2 = '# 예측율 감소 학습';
+	var label3 = '# 수행율 증가 학습';
+	var label4 = '# 수행율 감소 학습';
+	
+	var label0 = ["학습전", "학습전"," ", "학습후", "학습후"]
+	
+	var data1 = [42, 59, 0, 139, 150];
+	var data2 = [91, 70, 0, 128, 84];
+	var data3 = [42, 59, 0, 139, 150];
+	var data4 = [91, 70, 0, 128, 84];
+	
+	var ctx1 = document.getElementById("chBar1").getContext('2d');
+	var ctx2 = document.getElementById("chBar2").getContext('2d');
+	var ctx3 = document.getElementById("chBar3").getContext('2d');
+	var ctx4 = document.getElementById("chBar4").getContext('2d');
+	
+	var myChart1 = new Chart(ctx1, {
+	    type: 'bar',
+	    data: {
+	        labels: label0,
+	        datasets: [{
+	            label: label1,
+	            data: data1,
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(0, 0, 0, 0)',
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)'
+	            ],
+	            borderColor: [
+	                'rgba(255,99,132,1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(0, 0, 0, 0)',
+	                'rgba(255,99,132,1)',
+	                'rgba(54, 162, 235, 1)'
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero:true
+	                }
+	            }]
+	        }
+	    }
+	});
+	
+	var myChart2 = new Chart(ctx2, {
+	    type: 'bar',
+	    data: {
+	        labels: label0,
+	        datasets: [{
+	            label: label2,
+	            data: data2,
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(0, 0, 0, 0)',
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)'
+	            ],
+	            borderColor: [
+	                'rgba(255,99,132,1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(0, 0, 0, 0)',
+	                'rgba(255,99,132,1)',
+	                'rgba(54, 162, 235, 1)'
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero:true
+	                }
+	            }]
+	        }
+	    }
+	});
+	
+	var myChart3 = new Chart(ctx3, {
+	    type: 'bar',
+	    data: {
+	        labels: label0,
+	        datasets: [{
+	            label: label3,
+	            data: data3,
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(0, 0, 0, 0)',
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)'
+	            ],
+	            borderColor: [
+	                'rgba(255,99,132,1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(0, 0, 0, 0)',
+	                'rgba(255,99,132,1)',
+	                'rgba(54, 162, 235, 1)'
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero:true
+	                }
+	            }]
+	        }
+	    }
+	});
+	
+	var myChart4 = new Chart(ctx4, {
+	    type: 'bar',
+	    data: {
+	        labels: label0,
+	        datasets: [{
+	            label: label4,
+	            data: data4,
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(0, 0, 0, 0)',
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)'
+	            ],
+	            borderColor: [
+	                'rgba(255,99,132,1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(0, 0, 0, 0)',
+	                'rgba(255,99,132,1)',
+	                'rgba(54, 162, 235, 1)'
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero:true
+	                }
+	            }]
+	        }
+	    }
+	});
+	
 
-grid_table_campaign();
+	var _response = $('#noticeVal');
+	var admin = new Object();
 
+	    $.ajax({
+	        type    : 'GET', // method
+	        url     : '/notice/noticeVal',
+	        //url       : '/admin/login_proc?ADM_ID=XXXX&ADM_PW=XXXX', // GET 요청은 데이터가 URL 파라미터로 포함되어 전송됩니다.
+	        async   : 'true', // true
+	        data    : admin, // GET 요청은 지원되지 않습니다.
+	        processData : true, // GET 요청은 데이터가 바디에 포함되는 것이 아니기 때문에 URL에 파라미터 형식으로 추가해서 전송해줍니다.
+	        contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
+	        cache: false,
+	        //dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
+	        success : function(data, status, xhr){
+	        		//alert("Login1 :: " + data);
+	        		_response.html(data)
+	        },
+	        error   : function(request,status,error){
+	        	 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	        }
+		});
+
+	
+});
 </script>
 </body>
 </html>

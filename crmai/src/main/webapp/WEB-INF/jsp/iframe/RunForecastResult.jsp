@@ -254,7 +254,6 @@
   	 }
     });
     
-    $('#ds_campaign_info').DataTable();
   });
 
   function search_campaign(){
@@ -299,32 +298,99 @@
 	  var div = document.querySelector('#ds_campaign');
       //alert("grid_table_campaign :: " + obj);
 
-      html = '<table class="table table-bordered table-hover">';
-      html += '<thead><tr><th>선택</th><th>캠페인코드</th><th>캠페인명</th><th>캠페인목적</th><th>켐페인상태</th><th>시작일자</th><th>종료일자</th><th>생성자</th><th>생성일자</th><th>수정일자</th><th>대상건수</th><th>전처리상태</th><th>전처리시작</th><th>전처리종료</th><tr></thead>';
+      html = '<table width="100%" class="table table-bordered table-hover">';
+      html += '<thead><tr>';
+      html += 	'<th>캠페인ID</th>';
+      html += 	'<th>캠페인이름</th>';
+      html += 	'<th>등록자</th>';
+      html += 	'<th>캠페인목적</th>';
+      html += 	'<th>캠페인상태</th>';
+      html += 	'<th>AI진행상태</th>';
+      html += 	'<th><center>AI버튼</center></th>';
+      html += 	'<th>캠페인 등록일자</th>';
+      html += 	'<th>설명</th>';
+      html += 	'<th>메시지</th>';
+      html += 	'<tr></thead>';
       html += '<tbody>';
-
+      
       var json = $.parseJSON(obj);
    	  $(json).each(function(i,val){
    		html += '<tr>';
-   		html += '<td><input type="checkbox" name="camCheck"/></td>';
+   		//html += '<td><input type="checkbox" name="camCheck"/></td>';
    		$.each(val,function(k,v){
+   			flag = 0;
+   			if(k == 'cam_id'){
+   				html += '<td><center>' + v + '</center></td>';	
+   			}
+   			if(k == 'cam_name'){
+   				html += '<td>' + v + '</td>';	
+   			}
+   			if(k == 'adm_id'){
+   				html += '<td>' + v + '</td>';	
+   			}
    			
-   			if(v == 'null' || v == ''){
-   				html += '<td></td>';
-   			}else{
-   				html += '<td>' + v + '</td>';
+   			if(k == 'cam_type'){
+   				html += '<td>' + v + '</td>';	
+   			}
+   			
+   			if(k == 'cam_status'){
+   				html += '<td>' + v + '</td>';	
+   			}
+   			
+   			if(k == 'cam_itype'){
+   				if(v == '0'){
+   					html += '<td><span class="label label-info">데이터 로딩 필요</span></td>';
+   					html += '<td>';
+   					html += '<button type="button" class="btn btn-info btn-xs">데이터등록</button>';
+   					html += '</td>';
+   				}
+   				if(v == '1'){
+   					html += '<td><span class="label label-warning">데이터 엑셀 로딩중</span></td>';
+   					html += '<td></td>';
+   				}
+   				if(v == '2'){
+   					html += '<td><span class="label label-warning">데이터 엑셀 처리중</span></td>';
+   					html += '<td></td>';
+   				}
+   				if(v == '3'){
+   					html += '<td><span class="label label-danger">데이터 엑셀 처리 오류</span></td>';
+   					html += '<td>';
+   					html += '<button type="button" class="btn btn-info btn-xs">데이터 재등록</button>';
+   					html += '</td>';
+   				}
+   				if(v == '4'){
+   					html += '<td><span class="label label-primary">데이터 엑셀 처리 종료</span></td>';
+   					html += '<td>';
+   					html += '<button type="button" class="btn btn-success btn-xs" onclick="search_campaignDetail();">학습데이터 보기</button>';
+   					html += '<button type="button" class="btn btn-success btn-xs">전처리시작</button>';
+   					html += '</td>';
+   				}
+   			}
+   			if(k == 'cam_cdate'){
+   				html += '<td>' + v + '</td>';	
+   			}
+   			if(k == 'cam_desc'){
+   				html += '<td>' + v + '</td>';	
+   			}
+   			
+   			if(k == 'cam_msg'){
+   				
+   				if(v == '' || v == null || v == 'null' ){
+   					html += '<td></td>';
+   				}else{
+   					html += '<td>' + v + '</td>';
+   				}
    			}
    		});
-   		
    		html += '</tr>';
   	  });
    	  
    	  html += '</tbody>';
       html += '</table>';
       
-      //alert("Table == " + html);
       div.innerHTML = html;
-      //$('#ds_campaign').DataTable();
+      
+      tableDataRe();
   }
   
   //상단 선택버튼 클릭시 체크된 Row의 값을 가져온다.
@@ -440,20 +506,27 @@
       grid_table_paging();
   }
   
-  function grid_table_paging(){
-      //alert("paging :: ");
-      $('#runForecast_info').DataTable(
-  		  {
-  			 "pagingType": "simple_numbers", // "simple" option for 'Previous' and 'Next' buttons only
-  			"bDestroy": true,
-  			 "searching" : false,
-  			 "paging"    : true,
-  			 "autoWidth" : false
-  		  }	  
-      );
+  function tableDataRe(){
+
+	  $('#ai_campaign').destroy();
+      $('#ai_campaign').DataTable({
+		      "aLengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
+		      "pageLength"  : 5,
+		      'paging'      : true,
+		      'searching'   : true,
+		      'destroy'     : true,
+		      'autoWidth'   : true
+	  });
+	  
   }
   
+  // 60초에 한번씩 서버의 정보를 받아서 화면에 출력
+  function startCallback() {
+	  //setInterval("search_campaign();", 60000);
+  }
+    
   search_campaign();
+  startCallback();
 
 
  </script>

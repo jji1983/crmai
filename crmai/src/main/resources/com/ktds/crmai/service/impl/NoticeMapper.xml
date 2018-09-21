@@ -4,32 +4,13 @@
 
 <mapper namespace="com.ktds.crmai.service.impl.NoticeMapper">
 
-    <!--  <select id="selectAdminById" resultType="admin">
-        SELECT ADM_ID
-              ,ADM_PW
-              ,ADM_ROLE
-              ,ADM_NAME
-              ,ADM_EMAIL
-              ,ADM_CDATE
-              ,ADM_UDATE
-          FROM AI_ADMINUSER
-         WHERE ADM_ID = #{ADM_ID}
-    </select>
-
-    <select id="selectAllAdmin" resultType="admin">
-        SELECT ADM_ID
-              ,ADM_PW
-              ,ADM_ROLE
-              ,ADM_NAME
-              ,ADM_EMAIL
-              ,ADM_CDATE
-              ,ADM_UDATE
-          FROM AI_ADMINUSER
-    </select>
-	-->
     <insert id="insertNotice">
       INSERT INTO AI_NOTICE (CONTENTS,WRITER,REG_DATETIME)
       VALUES (#{NOTICE_TEXT}, 'admin', sysdate)
     </insert>
+
+    <select id="selectNotice" resultType="notice">
+        SELECT contents FROM AI_NOTICE order by reg_datetime desc
+    </select>
 
 </mapper>
