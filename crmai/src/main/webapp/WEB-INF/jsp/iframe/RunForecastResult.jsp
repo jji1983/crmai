@@ -40,14 +40,6 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-   
-  <style>
-        #ds_campaign {border-collapse: collapse;}
-        #ds_campaign td, #ds_campaign th{padding:20px;}
-        #ds_campaign th{background-color: #ccc;}
-         
-        #ds_campaign tr.selected{background-color: navy;color: #fff; font-weight: bold;}
-  </style>
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
