@@ -73,6 +73,16 @@ public class JspViewController {
 		return "/iframe/RunForecast";
 	}
 	
+	@RequestMapping(value="/iframe/RunForecastResult")
+	public String RunForecastResult() {
+		return "/iframe/RunForecastResult";
+	}
+	
+	@RequestMapping(value="/iframe/Statistics_m1")
+	public String Statistics() {
+		return "/iframe/Statistics_m1";
+	}
+	
 	@RequestMapping(value="/iframe/NoticeBoard")
 	public String NoticeBoard() {
 		return "/iframe/NoticeBoard";

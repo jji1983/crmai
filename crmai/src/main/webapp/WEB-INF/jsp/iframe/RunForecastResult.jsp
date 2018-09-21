@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>대상자로딩</title>
+<title>AI선정결과</title>
 
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -56,12 +56,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-          대상자로딩
+          AI선정결과
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">대상자로딩</li>
+        <li class="active">AI선정결과</li>
       </ol>
     </section>
     
@@ -141,109 +141,56 @@
 	<!-- /.Search -->
 	
 	<!-- 캠페인목록 -->
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="box">
-					<div class="box-header">
-						<h3 class="box-title">캠페인 목록</h3>
-					</div>
-
-					<!-- /.box-header -->
-					<div class="box-body">
-						<!-- campaign table -->
-						<table id="ai_campaign" class="table table-bordered table-hover"></table>
-						
-                    	<!-- Button trigger modal -->
-						<div class="box-footer">
-							<button id='newBtn' type="button" class="btn btn-info pull-right"
-								data-toggle="modal" data-target="#newModal">데이터 등록</button>
-							&nbsp;
-						</div>	
-						
-						
-						<!-- Modal -->
-						<div class="modal fade" id="newModal" tabindex="-1" role="dialog"
-							aria-labelledby="newModalLabel" aria-hidden="true">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="newModalLabel">캠페인 신규 생성</h5>
-										<button type="button" class="close" data-dismiss="modal"
-											aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body">
-										<!-- form start -->
-										<form class="form-horizontal" id="newUploadForm"
-											action="fileUpload" method="post"
-											enctype="multipart/form-data">
-											<div class="box-body">
-
-												<input type="hidden" id="user_id" name="user_id"
-													value=<%=session.getAttribute("sessionID") %>>
-
-												<div class="form-group">
-													<label for="inputCamName" class="col-sm-2 control-label">캠페인명</label>
-
-													<div class="col-sm-10">
-														<input id="inputCamName" name="inputCamName" type="text"
-															class="form-control" placeholder="캠페인명">
-													</div>
-												</div>
-
-												<div class="form-group">
-													<label for="inputCamDesc" class="col-sm-2 control-label">설명</label>
-
-													<div class="col-sm-10">
-														<input id="inputCamDesc" name="inputCamDesc" type="text"
-															class="form-control" placeholder="설명">
-													</div>
-												</div>
-
-												<div class="form-group">
-													<label for="cam_type" class="col-sm-2 control-label">목적</label>
-													<div class="col-sm-10">
-														<select id="cam_type" name="cam_type"
-															class="form-control select2" style="width: 100%;">
-															<option selected="selected">Acquisition</option>
-															<option>Retention</option>
-															<option>Cultivation</option>
-															<option>KeepCare</option>
-														</select>
-													</div>
-												</div>
-
-												<div class="form-group">
-													<label for="InputFile" class="col-sm-2 control-label">File
-														input</label>
-													<div class="col-sm-10">
-														<input type="file" name="file" id="InputFile"
-															accept=".csv">
-													</div>
-												</div>
-
-											</div>
-											<!-- /.box-body -->
-											<div class="box-footer">
-												<button id="bthNew" type="submit" class="btn btn-primary">등록</button>
-												<button id="bthClose" type="button"	class="btn btn-secondary" data-dismiss="modal">Close</button>
-											</div>
-											<!-- /.box-footer -->
-										</form>
-									</div>
-									<div class="modal-footer">캠페인등록화면</div>
-								</div>
-							</div>
-						</div>
-						<!--/. Modal -->
-						
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- /.캠페인목록 -->
+	<div class="row">
+          <div class="col-xs-12">
+          <div class="box">
+			<div class="box-header">
+	          <h3 class="box-title">캠페인 목록</h3>
+	        </div>
+        
+	        <!-- /.box-header -->
+	        <div class="box-body">
+	          <!-- campaign table -->
+	          <table id="ds_campaign" class="table table-bordered table-hover text-center"></table>
+	          
+	          <div class="col-lg-12" id="ex1_Result1" ></div> 
+			  <div class="col-lg-12" id="ex1_Result2" ></div>
+	          
+	          <button id="selectBtn" type="button" class="btn btn-info pull-right" >예측실행</button>&nbsp;
+	        </div>
+	        </div>
+        </div>
+   </div>
+   <!-- /.캠페인목록 -->
    
+   <!-- 예측실행 -->
+	<div class="row">
+          <div class="col-xs-12">
+          <div class="box">
+			<div class="box-header">
+	          <h3 class="box-title">예측실행</h3>
+	          <div class="box-tools pull-right">
+		            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+		            <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button> -->
+		      </div>
+	        </div>
+	        <!-- /.box-header -->
+	        
+	         <!-- box-body -->
+	        <div class="box-body">
+	        	<div>
+	        	   <button id="runForecast_tobe" type="button" class="btn btn-info pull-right">예측실행후</button>&nbsp;
+	        	   <button id="runForecast_asis" type="button" class="btn btn-info pull-right">예측실행전</button>&nbsp;
+	        	</div>  
+	            <div>
+		            <table id="runForecast_info" class="table table-bordered table-hover text-center"></table>
+	            </div>
+	        </div>
+	         <!-- /.box-body -->
+	        </div>
+        </div>
+   </div>
+   <!-- /.예측 실행 -->
    
 </section>
 <!-- /.Main content -->
@@ -307,60 +254,9 @@
   	 }
     });
     
-    //모달 처리(등록).
-    $("#bthNew").click(function(event) {
-    	//stop submit the form, we will post it manually.
-        event.preventDefault();
-    	
-        //alert('클릭 신규~!!');
-        
-        submit_newCampagin();
-        
-    });
-    
+    $('#ds_campaign_info').DataTable();
   });
 
-  function submit_newCampagin(){
-		//alert('-- submit_newCampagin -- ');
-		  
-		// Get form
-	    var form = $('#newUploadForm')[0];
-	    var data = new FormData(form);
-	    $("#bthNew").prop("disabled", true);
-	    $("bthClose").prop("disabled", true);
-	    
-	    $.ajax({
-	        type: "POST",
-	        enctype: 'multipart/form-data',
-	        url: "/file/Upload_Pretreatment",
-	        data: data,
-	        //http://api.jquery.com/jQuery.ajax/
-	        //https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
-	        processData: false, //prevent jQuery from automatically transforming the data into a query string
-	        contentType: false,
-	        cache: false,
-	        timeout: 600000,
-	        success: function (data) {
-	        	//alert(data);
-	            //console.log("SUCCESS : ", data);
-	            $("#bthNew").prop("disabled", false);
-	            
-	            //alert('모달 종료.');
-	            form.reset();
-	            $('#newModal').modal('hide');
-	    	    
-	    	   // alert('캠페인 리프리시');
-	    	    search_campaign();
-	        },
-	        error: function (e) {
-	            alert("error :: " + e.responseText);
-	            console.log("ERROR : ", e);
-	            $("#bthNew").prop("disabled", false);
-	        }
-	    });
-	  
-	  }
-  
   function search_campaign(){
 	  	//alert("search value :: " + $('#inputname').val() + " :: "+ $('#select_option1').val()+ " :: "+ $('#select_option2').val()+ " :: "+ $('#input_crea_by').val());
 	  	
@@ -383,7 +279,6 @@
 	        async   : 'true', // true
 	        data    : campaign, // GET 요청은 지원되지 않습니다.
 	        processData : true, // GET 요청은 데이터가 바디에 포함되는 것이 아니기 때문에 URL에 파라미터 형식으로 추가해서 전송해줍니다.
-	        cache: false,
 	        contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
 	        //dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
 	        success : function(data){
@@ -401,102 +296,35 @@
   }
   
   function grid_table_campaign(obj){
-	  //alert("grid_table_campaign :: " + obj);
-	  var div = document.querySelector('#ai_campaign');
-      
-      html = '<table width="100%" class="table table-bordered table-hover">';
-      html += '<thead><tr>';
-      html += 	'<th>캠페인ID</th>';
-      html += 	'<th>캠페인이름</th>';
-      html += 	'<th>등록자</th>';
-      html += 	'<th>캠페인목적</th>';
-      html += 	'<th>캠페인상태</th>';
-      html += 	'<th>AI진행상태</th>';
-      html += 	'<th><center>AI버튼</center></th>';
-      html += 	'<th>캠페인 등록일자</th>';
-      html += 	'<th>설명</th>';
-      html += 	'<th>메시지</th>';
-      html += 	'<tr></thead>';
+	  var div = document.querySelector('#ds_campaign');
+      //alert("grid_table_campaign :: " + obj);
+
+      html = '<table class="table table-bordered table-hover">';
+      html += '<thead><tr><th>선택</th><th>캠페인코드</th><th>캠페인명</th><th>캠페인목적</th><th>켐페인상태</th><th>시작일자</th><th>종료일자</th><th>생성자</th><th>생성일자</th><th>수정일자</th><th>대상건수</th><th>전처리상태</th><th>전처리시작</th><th>전처리종료</th><tr></thead>';
       html += '<tbody>';
-      
+
       var json = $.parseJSON(obj);
    	  $(json).each(function(i,val){
    		html += '<tr>';
-   		//html += '<td><input type="checkbox" name="camCheck"/></td>';
+   		html += '<td><input type="checkbox" name="camCheck"/></td>';
    		$.each(val,function(k,v){
-   			flag = 0;
-   			if(k == 'cam_id'){
-   				html += '<td><center>' + v + '</center></td>';	
-   			}
-   			if(k == 'cam_name'){
-   				html += '<td>' + v + '</td>';	
-   			}
-   			if(k == 'adm_id'){
-   				html += '<td>' + v + '</td>';	
-   			}
    			
-   			if(k == 'cam_type'){
-   				html += '<td>' + v + '</td>';	
-   			}
-   			
-   			if(k == 'cam_status'){
-   				html += '<td>' + v + '</td>';	
-   			}
-   			
-   			if(k == 'cam_itype'){
-   				if(v == '0'){
-   					html += '<td><span class="label label-info">데이터 로딩 필요</span></td>';
-   					html += '<td>';
-   					html += '<button type="button" class="btn btn-info btn-xs">데이터등록</button>';
-   					html += '</td>';
-   				}
-   				if(v == '1'){
-   					html += '<td><span class="label label-warning">데이터 엑셀 로딩중</span></td>';
-   					html += '<td></td>';
-   				}
-   				if(v == '2'){
-   					html += '<td><span class="label label-warning">데이터 엑셀 처리중</span></td>';
-   					html += '<td></td>';
-   				}
-   				if(v == '3'){
-   					html += '<td><span class="label label-danger">데이터 엑셀 처리 오류</span></td>';
-   					html += '<td>';
-   					html += '<button type="button" class="btn btn-info btn-xs">데이터 재등록</button>';
-   					html += '</td>';
-   				}
-   				if(v == '4'){
-   					html += '<td><span class="label label-primary">데이터 엑셀 처리 종료</span></td>';
-   					html += '<td>';
-   					html += '<button type="button" class="btn btn-success btn-xs" onclick="search_campaignDetail();">학습데이터 보기</button>';
-   					html += '<button type="button" class="btn btn-success btn-xs">전처리시작</button>';
-   					html += '</td>';
-   				}
-   			}
-   			if(k == 'cam_cdate'){
-   				html += '<td>' + v + '</td>';	
-   			}
-   			if(k == 'cam_desc'){
-   				html += '<td>' + v + '</td>';	
-   			}
-   			
-   			if(k == 'cam_msg'){
-   				
-   				if(v == '' || v == null || v == 'null' ){
-   					html += '<td></td>';
-   				}else{
-   					html += '<td>' + v + '</td>';
-   				}
+   			if(v == 'null' || v == ''){
+   				html += '<td></td>';
+   			}else{
+   				html += '<td>' + v + '</td>';
    			}
    		});
+   		
    		html += '</tr>';
   	  });
    	  
    	  html += '</tbody>';
       html += '</table>';
       
+      //alert("Table == " + html);
       div.innerHTML = html;
-      
-      tableDataRe();
+      //$('#ds_campaign').DataTable();
   }
   
   //상단 선택버튼 클릭시 체크된 Row의 값을 가져온다.
@@ -526,27 +354,108 @@
 		runForecast_asis(row_id);
 	});
   
-  function tableDataRe(){
+  //상단 선택버튼 클릭시 체크된 Row의 값을 가져온다.
+  $("#runForecast_asis").click(function(){ 
+		var tdArr = new Array();
+		var checkbox = $("input[name=camCheck]:checked");
+		
+		var row_id = '';
+		
+		// 체크된 체크박스 값을 가져온다
+		checkbox.each(function(i) {
 
-	  $('#ai_campaign').destroy();
-      $('#ai_campaign').DataTable({
-		      "aLengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
-		      "pageLength"  : 5,
-		      'paging'      : true,
-		      'searching'   : true,
-		      'destroy'     : true,
-		      'autoWidth'   : true
-	  });
-	  
+			// checkbox.parent() : checkbox의 부모는 <td>이다.
+			// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
+			var tr = checkbox.parent().parent().eq(i);
+			var td = tr.children();
+			
+			row_id = td.eq(1).text();
+		});
+
+		//alert("row_id :: " + row_id);
+		runForecast_asis(row_id);
+	});
+  
+  
+  function runForecast_asis(row_id){
+	  	var campaign = new Object();
+	  	campaign.row_id = row_id;
+
+	  	if(row_id == ""){
+	  		alert("체크박스를 선택 하세요.");
+	  		return;
+	  	}
+	  	
+	    $.ajax({
+	        type    : 'GET', // method
+	        url     : '/Pretreatment/info',
+	        //url       : '/admin/login_proc?ADM_ID=XXXX&ADM_PW=XXXX', // GET 요청은 데이터가 URL 파라미터로 포함되어 전송됩니다.
+	        async   : 'true', // true
+	        data    : campaign, // GET 요청은 지원되지 않습니다.
+	        processData : true, // GET 요청은 데이터가 바디에 포함되는 것이 아니기 때문에 URL에 파라미터 형식으로 추가해서 전송해줍니다.
+	        contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
+	        //dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
+	        success : function(data){
+	        	
+	        	var obj = JSON.stringify(data, true, 2);
+	        	alert("search_runForecast result :: " + obj);
+	        	
+	        	grid_table_runForecast(obj);
+	        	
+	        },
+	        error : function(request,status,error){
+	        	 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	        }
+		});
   }
   
-  // 60초에 한번씩 서버의 정보를 받아서 화면에 출력
-  function startCallback() {
-	  //setInterval("search_campaign();", 60000);
+  function grid_table_runForecast(obj){
+	  var div = document.querySelector('#runForecast_info');
+	  
+      //alert("grid_table_pretreatment :: " + obj);
+
+      html = '<table class="table table-bordered table-hover">';
+      html += '<thead><tr><th>캠페인ID</th><th>이름</th><th>성별</th><th>나이</th><th>IPTV결합여부</th><th>미납여부</th><th>인터넷가입여부</th><th>고객등급</th><th>약정여부</th><th>반응1</th><tr></thead>';
+      html += '<tbody>';
+
+      var json = $.parseJSON(obj);
+   	  $(json).each(function(i,val){
+   		html += '<tr>';
+   		$.each(val,function(k,v){
+   			if(v == 'null' || v == ''){
+   				html += '<td></td>';
+   			}else{
+   				html += '<td>' + v + '</td>';
+   			}
+   		});
+   		
+   		html += '</tr>';
+  	  });
+   	  html += '</tbody>';
+      html += '</table>';
+      
+      //alert("Table :: " + html);
+      div.innerHTML = html;
+      
+      grid_table_paging();
   }
-    
+  
+  function grid_table_paging(){
+      //alert("paging :: ");
+      $('#runForecast_info').DataTable(
+  		  {
+  			 "pagingType": "simple_numbers", // "simple" option for 'Previous' and 'Next' buttons only
+  			"bDestroy": true,
+  			 "searching" : false,
+  			 "paging"    : true,
+  			 "autoWidth" : false
+  		  }	  
+      );
+  }
+  
   search_campaign();
-  startCallback();
+
+
  </script>
 
 </body>

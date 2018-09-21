@@ -79,6 +79,16 @@
 		document.getElementById("main_frame").src = "/iframe/RunForecast";
 	}
 	
+	function Content_RunForecastResult() {
+		//alert("call Content_RunForecastResult!!");
+		document.getElementById("main_frame").src = "/iframe/RunForecastResult";
+	}
+	
+	function Content_Statistics_m1() {
+		//alert("call Content_Statistics!!");
+		document.getElementById("main_frame").src = "/iframe/Statistics_m1";
+	}
+	
 	function Content_NoticeBoard() {
 		//alert("call Content_NoticeBoard!!");
 		document.getElementById("main_frame").src = "/iframe/NoticeBoard";
@@ -131,11 +141,11 @@
      <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         
-		<li><a href="javascript:Content_Dashboard();"><i class="fa fa-book"></i> <span>공지사항</span></a></li>
+		<li><a href="javascript:Content_Dashboard();"><i class="fa fa-dashboard"></i> <span>공지사항</span></a></li>
         
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>AI 캠페인 대상자  학습</span>
+            <i class="fa fa-laptop"></i> <span>AI 캠페인 대상자  학습</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -148,7 +158,7 @@
         
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>AI 학습 결과 확인</span>
+            <i class="fa fa-laptop"></i> <span>AI 학습 결과 확인</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -161,14 +171,14 @@
         
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>AI 캠페인 대상자 선정</span>
+            <i class="fa fa-laptop"></i> <span>AI 캠페인 대상자 선정</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
             <li  class="active"><a href="javascript:Content_RunForecast();"><i class="fa fa-circle-o"></i>AI 대상자 로딩</a></li>
-            <li  class="active"><a href="javascript:Content_RunForecast();"><i class="fa fa-circle-o"></i>AI 선정결과</a></li>
+            <li  class="active"><a href="javascript:Content_RunForecastResult();"><i class="fa fa-circle-o"></i>AI 선정결과</a></li>
           </ul>
         </li>
         
@@ -180,7 +190,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li  class="active"><a href="javascript:Content_RunForecast();"><i class="fa fa-circle-o"></i>선정대상에 대한 실질 반응값</a></li>
+            <li  class="active"><a href="javascript:Content_Statistics_m1();"><i class="fa fa-circle-o"></i>선정대상에 대한 실질반응</a></li>
           </ul>
         </li>
         
@@ -189,13 +199,13 @@
         <% if(session.getAttribute("sessionROLE").equals("0")){ %>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>관리자 기능</span>
+            <i class="fa fa-share"></i> <span>관리자 기능</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li  class="active"><a href="javascript:Content_Notice();"><i class="fa fa-circle-o"></i>공지사항</a></li>
+            <li  class="active"><a href="javascript:Content_Notice();"><i class="fa fa-circle-o"></i>공지사항 관리</a></li>
             <li  class="active"><a href="javascript:Content_RunForecast();"><i class="fa fa-circle-o"></i>계정 관리</a></li>
           </ul>
           <%} %>
