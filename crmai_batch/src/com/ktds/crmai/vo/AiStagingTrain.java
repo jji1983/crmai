@@ -73,7 +73,7 @@ public class AiStagingTrain {
 
 		}
 		
-		String temp = column.get("ST_C" + (cNum-1));
+		String temp = column.get("ST_C" + cNum);
 		if(temp != null) {
 			//System.out.println("######### 널이 아님 " + "ST_C" + (cNum-1) + " :: " + temp);
 			

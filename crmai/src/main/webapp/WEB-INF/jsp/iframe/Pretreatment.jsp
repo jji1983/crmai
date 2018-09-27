@@ -376,13 +376,14 @@
 
       html = '<table width="100%" class="table table-bordered table-hover">';
       html += '<thead><tr>';
+      html += 	'<th>체크</th>';
       html += 	'<th>캠페인ID</th>';
       html += 	'<th>캠페인이름</th>';
       html += 	'<th>등록자</th>';
       html += 	'<th>캠페인목적</th>';
       html += 	'<th>캠페인상태</th>';
       html += 	'<th>AI진행상태</th>';
-      /* html += 	'<th><center>AI버튼</center></th>'; */
+      
       html += 	'<th>캠페인 등록일자</th>';
       html += 	'<th>설명</th>';
       html += 	'<th>메시지</th>';
@@ -392,7 +393,7 @@
       var json = $.parseJSON(obj);
    	  $(json).each(function(i,val){
    		html += '<tr>';
-   		//html += '<td><input type="checkbox" name="camCheck"/></td>';
+   		html += '<td><input type="checkbox" name="camCheck"/></td>';
    		$.each(val,function(k,v){
    			flag = 0;
    			if(k == 'cam_id'){
@@ -499,7 +500,7 @@
   
   // 60초에 한번씩 서버의 정보를 받아서 화면에 출력
   function startCallback() {
-	  //setInterval("search_campaign();", 60000);
+	  setInterval("search_campaign();", 60000);
   }
     
   search_campaign();
