@@ -6,73 +6,30 @@
 <meta charset="UTF-8">
 <title>전처리수행</title>
 <!-- Tell the browser to be responsive to screen width -->
-<meta
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-	name="viewport">
-<!-- Bootstrap 3.3.7 -->
-<link rel="stylesheet"
-	href="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css">
-<!-- Font Awesome -->
-<link rel="stylesheet"
-	href="/resources/bower_components/font-awesome/css/font-awesome.min.css">
-<!-- Ionicons -->
-<link rel="stylesheet"
-	href="/resources/bower_components/Ionicons/css/ionicons.min.css">
-<!-- Theme style -->
-<link rel="stylesheet" href="/resources/dist/css/AdminLTE.min.css">
-<!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
-<link rel="stylesheet"
-	href="/resources/dist/css/skins/_all-skins.min.css">
-<!-- Morris chart -->
-<link rel="stylesheet"
-	href="/resources/bower_components/morris.js/morris.css">
-<!-- jvectormap -->
-<link rel="stylesheet"
-	href="/resources/bower_components/jvectormap/jquery-jvectormap.css">
-<!-- Date Picker -->
-<link rel="stylesheet"
-	href="/resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
-<!-- Daterange picker -->
-<link rel="stylesheet"
-	href="/resources/bower_components/bootstrap-daterangepicker/daterangepicker.css">
-<!-- bootstrap wysihtml5 - text editor -->
-<link rel="stylesheet"
-	href="/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/resources/bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="/resources/bower_components/Ionicons/css/ionicons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="/resources/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/resources/dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="/resources/dist/css/skins/_all-skins.min.css">
 
-<!-- Select2 -->
-<link rel="stylesheet"
-	href="/resources/bower_components/select2/dist/css/select2.min.css">
-
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-<!-- Google Font -->
-<link rel="stylesheet"	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"></link>
-
-
- <style>
-	#ai_campaign {
-		border-collapse: collapse;
-	}
-	
-	#ai_campaign td, #ai_campaign th {
-		padding: 10px;
-	}
-	
-	#ai_campaign th {
-		background-color: #ccc;
-	}
-	
-	#ai_campaign tr.selected {
-		background-color: navy;
-		color: #fff;
-		font-weight: bold;
-	}
-</style>
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -246,13 +203,23 @@
 														</select>
 													</div>
 												</div>
+												
+												<div class="form-group">
+													<label for="cam_autoyn" class="col-sm-2 control-label">AI처리</label>
+													<div class="col-sm-10">
+														<select id="cam_autoyn" name="cam_autoyn"
+															class="form-control select2" style="width: 100%;">
+															<option value="Y" selected="selected">자동</option>
+															<option value="N" >수동</option>
+														</select>
+													</div>
+												</div>												
+												
 
 												<div class="form-group">
-													<label for="InputFile" class="col-sm-2 control-label">File
-														input</label>
+													<label for="InputFile" class="col-sm-2 control-label">파일 등록(학습CSV)</label>
 													<div class="col-sm-10">
-														<input type="file" name="file" id="InputFile"
-															accept=".csv">
+														<input type="file" name="file" id="InputFile" accept=".csv">
 													</div>
 												</div>
 
@@ -279,60 +246,20 @@
 
 	</section>
 	<!-- /.Main content -->
-
-
-	<!-- jQuery UI 1.11.4 -->
-	<script src="/resources/bower_components/jquery-ui/jquery-ui.min.js"></script>
-	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-	<script>
-  $.widget.bridge('uibutton', $.ui.button);
-</script>
+	
 	<!-- jQuery 3 -->
 	<script src="/resources/bower_components/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap 3.3.7 -->
-	<script
-		src="/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	<!-- Select2 -->
-	<script
-		src="/resources/bower_components/select2/dist/js/select2.full.min.js"></script>
-	<!-- Morris.js charts -->
-	<script src="/resources/bower_components/raphael/raphael.min.js"></script>
-	<script src="/resources/bower_components/morris.js/morris.min.js"></script>
-	<!-- Sparkline -->
-	<script
-		src="/resources/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
-	<!-- jvectormap -->
-	<script
-		src="/resources/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-	<script
-		src="/resources/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-	<!-- jQuery Knob Chart -->
-	<script
-		src="/resources/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
-	<!-- daterangepicker -->
-	<script src="/resources/bower_components/moment/min/moment.min.js"></script>
-	<script
-		src="/resources/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-	<!-- datepicker -->
-	<script
-		src="/resources/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-	<!-- Bootstrap WYSIHTML5 -->
-	<script
-		src="/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+	<script src="/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<!-- DataTables -->
-	<script
-		src="/resources/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-	<script
-		src="/resources/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-	<!-- Slimscroll -->
-	<script
-		src="/resources/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="/resources/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+	<script src="/resources/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+	<!-- SlimScroll -->
+	<script src="/resources/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<!-- FastClick -->
 	<script src="/resources/bower_components/fastclick/lib/fastclick.js"></script>
 	<!-- AdminLTE App -->
 	<script src="/resources/dist/js/adminlte.min.js"></script>
-	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-	<script src="/resources/dist/js/pages/dashboard.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="/resources/dist/js/demo.js"></script>
 
@@ -374,6 +301,7 @@
     var data = new FormData(form);
     $("#bthNew").prop("disabled", true);
     $("bthClose").prop("disabled", true);
+    
     
     $.ajax({
         type: "POST",
@@ -454,7 +382,7 @@
       html += 	'<th>캠페인목적</th>';
       html += 	'<th>캠페인상태</th>';
       html += 	'<th>AI진행상태</th>';
-      html += 	'<th><center>AI버튼</center></th>';
+      /* html += 	'<th><center>AI버튼</center></th>'; */
       html += 	'<th>캠페인 등록일자</th>';
       html += 	'<th>설명</th>';
       html += 	'<th>메시지</th>';
@@ -488,30 +416,23 @@
    			if(k == 'cam_itype'){
    				if(v == '0'){
    					html += '<td><span class="label label-info">데이터 로딩 필요</span></td>';
-   					html += '<td>';
-   					html += '<button type="button" class="btn btn-info btn-xs">데이터등록</button>';
-   					html += '</td>';
+   					
    				}
    				if(v == '1'){
    					html += '<td><span class="label label-warning">데이터 엑셀 로딩중</span></td>';
-   					html += '<td></td>';
+   					
    				}
    				if(v == '2'){
    					html += '<td><span class="label label-warning">데이터 엑셀 처리중</span></td>';
-   					html += '<td></td>';
+   					
    				}
    				if(v == '3'){
    					html += '<td><span class="label label-danger">데이터 엑셀 처리 오류</span></td>';
-   					html += '<td>';
-   					html += '<button type="button" class="btn btn-info btn-xs">데이터 재등록</button>';
-   					html += '</td>';
+   					
    				}
    				if(v == '4'){
    					html += '<td><span class="label label-primary">데이터 엑셀 처리 종료</span></td>';
-   					html += '<td>';
-   					html += '<button type="button" class="btn btn-success btn-xs" onclick="search_campaignDetail();">학습데이터 보기</button>';
-   					html += '<button type="button" class="btn btn-success btn-xs">전처리시작</button>';
-   					html += '</td>';
+   					
    				}
    			}
    			if(k == 'cam_cdate'){

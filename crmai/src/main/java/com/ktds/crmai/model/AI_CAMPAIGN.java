@@ -15,6 +15,7 @@ public class AI_CAMPAIGN{
 	private String cam_name;
 	private String adm_id;
 	private String cam_type;
+	private String cam_autoyn;
 	private String cam_status;
 	private String cam_itype;
 	private String cam_icnum;
@@ -39,6 +40,7 @@ public class AI_CAMPAIGN{
 			String cam_name,
 			String adm_id,
 			String cam_type,
+			String cam_autoyn,
 			String cam_status,
 			String cam_itype,
 			String cam_icnum,
@@ -57,6 +59,7 @@ public class AI_CAMPAIGN{
 		this.cam_name = cam_name;
 		this.adm_id = adm_id;
 		this.cam_type = cam_type;
+		this.cam_autoyn = cam_autoyn;
 		this.cam_status = cam_status;
 		this.cam_itype = cam_itype;
 		this.cam_icnum = cam_icnum;

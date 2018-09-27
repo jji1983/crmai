@@ -67,13 +67,21 @@ public class PretreatmentProc {
 	            	}
 	            }
 	            System.out.println(data.getCam_id() + " ing :: " + DateTool.getTimestamp());
-	            dao.insertAI_STAGING_TRAIN(arrayList);
+	            String errorMsg = dao.insertAI_STAGING_TRAIN(data, arrayList);
 	            System.out.println(data.getCam_id() + " end :: " + DateTool.getTimestamp());
 	            
 	            //3.2 캠페인 정보 업데이트 피쳐 갯수
 	        	System.out.println("feature len[" + feature + "]");
 	        	
-	        	dao.updateCampaign_end(data, 4);
+	        	
+	        	if(errorMsg != null) {
+	        		
+	        		dao.updateCampaign_end(data, 3, errorMsg);
+	        		
+	        	}else {
+	        		dao.updateCampaign_end(data, 4, "");
+	        	}
+	        		
 			}
 			
 			System.out.println("Insert end :: " + DateTool.getTimestamp());

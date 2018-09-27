@@ -47,6 +47,7 @@ public class FileController {
 		@RequestParam("inputCamName") String inputCamName,
 		@RequestParam("inputCamDesc") String inputCamDesc,
 		@RequestParam("cam_type") String cam_type,
+		@RequestParam("cam_autoyn") String cam_autoyn,
         @RequestParam("file") MultipartFile[] files) { 
 
 		
@@ -61,6 +62,7 @@ public class FileController {
 		campaign.setCam_name(inputCamName);
 		campaign.setCam_desc(inputCamDesc);
 		campaign.setCam_type(cam_type);
+		campaign.setCam_autoyn(cam_autoyn);
 		
 		
 		logger.info("files check {}, {} ", files, files.length); 
@@ -89,6 +91,7 @@ public class FileController {
                 System.out.println("inputCamName :" + inputCamName);
                 System.out.println("inputCamDesc :" + inputCamDesc);
                 System.out.println("cam_type :" + cam_type);
+                System.out.println("cam_autoyn :" + cam_autoyn);
                 System.out.println("contentType :" + contentType);
                 System.out.println("name :" + name);
                 System.out.println("originalFilename : " + originalFilename);

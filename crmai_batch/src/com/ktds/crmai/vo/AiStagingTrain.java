@@ -45,14 +45,16 @@ public class AiStagingTrain {
 		
 		//this.column.put(key, value);
 	}
-	public String toQuery() {
+	
+	public String toQuery(int cNum, int st_itype) {
 		StringBuilder query_h = new StringBuilder();
 		StringBuilder query_b = new StringBuilder();
 		int flag = 0;
 		
-		query_h.append("insert into AI_STAGING_TRAIN(ST_SEQ, cam_id, ");
 		
-		query_b.append("values(ST_SEQ_T.NEXTVAL, '" + cam_id + "', ");
+		query_h.append("insert into AI_STAGING_TRAIN(ST_SEQ, cam_id, st_itype, ");
+		
+		query_b.append("values(ST_SEQ_T.NEXTVAL, '" + cam_id + "', " + st_itype + ", ");
 		Enumeration<String> keys = column.keys();
 		while(keys.hasMoreElements()) {
 			
@@ -68,7 +70,18 @@ public class AiStagingTrain {
 				query_h.append(", " + key);
 				query_b.append(", \'" + value + "\'");
 			}
+
 		}
+		
+		String temp = column.get("ST_C" + (cNum-1));
+		if(temp != null) {
+			//System.out.println("######### 널이 아님 " + "ST_C" + (cNum-1) + " :: " + temp);
+			
+			query_h.append(", ST_C200 ");
+			query_b.append(", '" + temp + "'");
+		}
+		
+		
 		query_h.append(") ");
 		query_b.append(") ");
 		

@@ -210,7 +210,7 @@ public class TableDAO {
 	 * 
 	 * 
 	 */
-	public int updateCampaign_end(CampaignData campaign, int cam_itype){
+	public int updateCampaign_end(CampaignData campaign, int cam_itype, String errorMsg){
 		Connection conn = null;
 		StringBuilder update_campaign =  new StringBuilder();
 		
@@ -226,6 +226,8 @@ public class TableDAO {
 			update_campaign.append("update ai_campaign set ");
 			update_campaign.append("cam_itype = " + cam_itype);
 			update_campaign.append(", cam_icnum = " + campaign.getIcnum());
+			update_campaign.append(", cam_msg = '" + errorMsg + "'");
+			
 			update_campaign.append(" where cam_id in ");
 			
 			update_campaign.append("(");
@@ -253,7 +255,7 @@ public class TableDAO {
 		}
 	}
 	
-	public String insertAI_STAGING_TRAIN(ArrayList<AiStagingTrain> arrayList){
+	public String insertAI_STAGING_TRAIN(CampaignData data, ArrayList<AiStagingTrain> arrayList){
 		Connection conn = null;
 		String msg = null;
 		AiStagingTrain query = null;
@@ -266,18 +268,18 @@ public class TableDAO {
 				
 				query = arrayList.get(i);
 				
-				stmt.executeUpdate(query.toQuery());
+				stmt.executeUpdate(query.toQuery(data.getIcnum(), 1));
 				
-//				if(i % 1000 == 0) {
-//					System.out.println(query.getCam_id() + " ing"+i+" :: " + DateTool.getTimestamp());
-//				}
+				if(i % 1000 == 0) {
+					System.out.println(query.getCam_id() + " ing"+i+" :: " + DateTool.getTimestamp());
+				}
 				
 			}
 						
 		}catch (ClassNotFoundException e) {
 			System.err.println("Oracle Driver not Found!");
 		} catch(SQLException e) {
-			System.err.println("insertData_Pretreatment SQL 오류 :: " + e.getMessage() + " :: " + query.toQuery());
+			System.err.println("insertData_Pretreatment SQL 오류 :: " + e.getMessage() + " :: " + query.toQuery(data.getIcnum(), 1));
 			
 			msg = e.getMessage();
 		}finally {

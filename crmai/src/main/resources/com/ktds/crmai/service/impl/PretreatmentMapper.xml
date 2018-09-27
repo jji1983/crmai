@@ -12,6 +12,7 @@
 		  cam.cam_type as "cam_type",
 		  cam.cam_status as "cam_status",
 		  cam.cam_itype as "cam_itype",
+		  cam.cam_autoyn as "cam_autoyn",
 		  cam.cam_icnum as "cam_icnum",
 		  cam.cam_ifilename as "cam_ifilename",
 		  cam.cam_iviewname as "cam_iviewname",
@@ -41,6 +42,7 @@
 		  cam.cam_type as "cam_type",
 		  cam.cam_status as "cam_status",
 		  cam.cam_itype as "cam_itype",
+		  cam.cam_autoyn as "cam_autoyn",
 		  cam.cam_icnum as "cam_icnum",
 		  cam.cam_ifilename as "cam_ifilename",
 		  cam.cam_iviewname as "cam_iviewname",
@@ -100,8 +102,8 @@
     </select>
     
     <insert id="insertCampaign">
-	    insert into ai_campaign(cam_id, adm_id, cam_name, cam_desc, cam_type, cam_ifilename, cam_itype, cam_otype, cam_cdate, cam_status) 
-		values ( #{cam_seq}, #{adm_id}, #{cam_name}, #{cam_desc}, #{cam_type}, #{cam_ifilename}, #{cam_itype}, 0, sysdate,'시작')
+	    insert into ai_campaign(cam_id, adm_id, cam_name, cam_desc, cam_type, cam_ifilename, cam_itype, cam_autoyn,  cam_otype,  cam_cdate, cam_status) 
+		values ( #{cam_seq}, #{adm_id}, #{cam_name}, #{cam_desc}, #{cam_type}, #{cam_ifilename}, #{cam_itype}, #{cam_autoyn}, 0, sysdate,'시작')
 	</insert>
 	
 
