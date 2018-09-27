@@ -268,6 +268,17 @@
   
   $(document).ready(function () {
     
+    //라디오 요소처럼 동작시킬 체크박스 그룹 셀렉터
+    $('input[type="checkbox"][name="camCheck"]').click(function(){
+    	alert("check!!!");
+        //클릭 이벤트 발생한 요소가 체크 상태인 경우
+        if ($(this).prop('checked')) {
+            //체크박스 그룹의 요소 전체를 체크 해제후 클릭한 요소 체크 상태지정
+            $('input[type="checkbox"][name="camCheck"]').prop('checked', false);
+            $(this).prop('checked', true);
+        }
+    });
+	  
     //모달 처리(신규).
     $("#bthNew").click(function(event) {
     	//stop submit the form, we will post it manually.
@@ -447,7 +458,7 @@
       
       div.innerHTML = html;
       
-      tableDataRe();
+      //tableDataRe();
   }
   
   //상단 선택버튼 클릭시 체크된 Row의 값을 가져온다.
@@ -474,7 +485,7 @@
   function tableDataRe(){
 	  
 	  
-	  //$('#ai_campaign').destroy();
+	  $('#ai_campaign').destroy();
       $('#ai_campaign').DataTable({
 		      "aLengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
 		      "pageLength"  : 5,
