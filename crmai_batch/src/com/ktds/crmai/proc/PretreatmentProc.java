@@ -48,7 +48,7 @@ public class PretreatmentProc {
 	            while ((line = br.readLine()) != null) {
 	            	AiStagingTrain train = new AiStagingTrain();
 	            	
-	            	System.out.println(data.getCam_id() + " line :: " + line);
+	            	//System.out.println(data.getCam_id() + " line :: " + line);
 	            	columns = line.split("\\" + cvsSplitBy);
 	            	
 	            	//3.1 스테이징DB(TRAIN) Insert

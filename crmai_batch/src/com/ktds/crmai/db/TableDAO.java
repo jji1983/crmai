@@ -271,7 +271,7 @@ public class TableDAO {
 				stmt.executeUpdate(query.toQuery(data.getIcnum(), 1));
 				
 				if(i % 1000 == 0) {
-					System.out.println(query.getCam_id() + " ing"+i+" :: " + DateTool.getTimestamp());
+					System.out.println(query.getCam_id() + " ing"+i+" :: " + DateTool.getTimestamp() +" :: " + query.toQuery(data.getIcnum(), 1));
 				}
 				
 			}

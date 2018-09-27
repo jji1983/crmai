@@ -268,18 +268,6 @@
   
   $(document).ready(function () {
     
-  	//체크 박스 체크 시.
-  	var tbl = $("#ai_campaign");
-    //radio버튼처럼 Checkbox name값 설정
-    $('input[type="checkbox"][name="camCheck"]').click(function(){
-  	 //click이벤트가 발생했는지 체크
-  	 if($(this).prop('checked')){
-  		//checkbox 전체를 checked 해제후 click한 요소만 true지정
-  		$('input[type="checkbox"][name="camCheck"]').prop('checked', false);
-  		$(this).prop('checked',true);
-  	 }
-    });
-    
     //모달 처리(신규).
     $("#bthNew").click(function(event) {
     	//stop submit the form, we will post it manually.
@@ -332,8 +320,8 @@
             $("#bthNew").prop("disabled", false);
         }
     });
-  
   }
+  
   function search_campaign(){
 	  	
 	  	var campaign = new Object();
@@ -383,7 +371,6 @@
       html += 	'<th>캠페인목적</th>';
       html += 	'<th>캠페인상태</th>';
       html += 	'<th>AI진행상태</th>';
-      
       html += 	'<th>캠페인 등록일자</th>';
       html += 	'<th>설명</th>';
       html += 	'<th>메시지</th>';
@@ -485,8 +472,9 @@
   });
   
   function tableDataRe(){
-
-	  $('#ai_campaign').destroy();
+	  
+	  
+	  //$('#ai_campaign').destroy();
       $('#ai_campaign').DataTable({
 		      "aLengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
 		      "pageLength"  : 5,

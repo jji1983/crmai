@@ -61,6 +61,10 @@ public class AiStagingTrain {
 			String key = keys.nextElement();
 			String value = column.get(key);
 		
+			if(key.equals("ST_C" + cNum)) {
+				continue;
+			}
+			
 			if(flag == 0) {
 				query_h.append(key);
 				query_b.append("\'" + value +"\'");
@@ -75,7 +79,7 @@ public class AiStagingTrain {
 		
 		String temp = column.get("ST_C" + cNum);
 		if(temp != null) {
-			//System.out.println("######### 널이 아님 " + "ST_C" + (cNum-1) + " :: " + temp);
+			//System.out.println("######### 널이 아님 " + "ST_C" + cNum + " :: " + temp);
 			
 			query_h.append(", ST_C200 ");
 			query_b.append(", '" + temp + "'");
