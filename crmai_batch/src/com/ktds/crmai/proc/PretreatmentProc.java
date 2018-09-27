@@ -67,7 +67,9 @@ public class PretreatmentProc {
 	            	}
 	            }
 	            System.out.println(data.getCam_id() + " ing :: " + DateTool.getTimestamp());
-	            String errorMsg = dao.insertAI_STAGING_TRAIN(data, arrayList);
+	            
+	            String errorMsg = dao.insertCSVtoTable(data);
+	            
 	            System.out.println(data.getCam_id() + " end :: " + DateTool.getTimestamp());
 	            
 	            //3.2 캠페인 정보 업데이트 피쳐 갯수

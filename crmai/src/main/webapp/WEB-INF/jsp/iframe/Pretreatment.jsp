@@ -285,7 +285,6 @@
         event.preventDefault();
     	
         //alert('클릭 신규~!!');
-        
         submit_newCampagin();
         
     });
@@ -473,9 +472,9 @@
 			row_id = td.eq(1).text();
 			
 			
-			alert("row_id :: " + row_id);
+			//alert("row_id :: " + row_id);
 		});
-		pretreatment_asis(row_id);	
+		//pretreatment_asis(row_id);	
 		
   });
   
@@ -495,7 +494,7 @@
   
   // 60초에 한번씩 서버의 정보를 받아서 화면에 출력
   function startCallback() {
-	  setInterval("search_campaign();", 60000);
+	  //setInterval("search_campaign();", 60000);
   }
     
   search_campaign();

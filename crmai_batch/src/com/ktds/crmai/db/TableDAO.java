@@ -292,5 +292,54 @@ public class TableDAO {
 			return msg;
 		}
 	}
+	
+	
+	public String insertCSVtoTable(CampaignData data){
+		Connection conn = null;
+		String msg = null;
+		StringBuilder query = new StringBuilder();
+		try {
+			conn = getConn();
+			
+			// 드라이버 연결위한 준비  conn객체 생성.
+			stmt = conn.createStatement();
+			
+			query.append("Load DATA ");
+			query.append("INFILE '" + data.getCam_ifilename() + "' ");
+			query.append("BADFILE '" + data.getCam_ifilename() + ".BAD' ");
+			query.append("APPEND ");
+			query.append("INTO TABLE " + "TEMP_" + data.getCam_id() + "_" + data.getIcnum() + " ");
+			query.append("fields terminated by ',' ");
+			query.append("(");
+			
+			for(int i = 1; i < data.getIcnum(); i++) {
+				
+				if(i == 1) {
+					query.append("C1");
+				}else {
+					query.append(",C" + i);
+				}
+			}
+			query.append(")");
+			
+		    System.out.println("insertCSVtoTable query :: " + query.toString());
+			
+			stmt.executeUpdate(query.toString());
+		}catch (ClassNotFoundException e) {
+			System.err.println("Oracle Driver not Found!");
+		} catch(SQLException e) {
+			System.err.println("insertData_Pretreatment SQL 오류 :: " + e.getMessage() + " :: " + query.toString());
+			
+			msg = e.getMessage();
+		}finally {
+			try {
+				if(stmt != null) stmt.close();
+				if(conn != null) conn.close();
+			}catch(final SQLException e) {
+				
+			}
+			return msg;
+		}
+	}
 
 }
