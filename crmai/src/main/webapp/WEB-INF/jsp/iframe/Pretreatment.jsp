@@ -270,7 +270,7 @@
     
     //라디오 요소처럼 동작시킬 체크박스 그룹 셀렉터
     $('input[type="checkbox"][name="camCheck"]').click(function(){
-    	alert("check!!!");
+    	//alert("check!!!");
         //클릭 이벤트 발생한 요소가 체크 상태인 경우
         if ($(this).prop('checked')) {
             //체크박스 그룹의 요소 전체를 체크 해제후 클릭한 요소 체크 상태지정
@@ -357,7 +357,6 @@
 	        contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
 	        //dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
 	        success : function(data){
-	        	
 	        	var obj = JSON.stringify(data, true, 2);
 	        	//alert("search_campaign result :: " + obj);
 	        	
@@ -415,23 +414,18 @@
    			if(k == 'cam_itype'){
    				if(v == '0'){
    					html += '<td><span class="label label-info">데이터 로딩 필요</span></td>';
-   					
    				}
    				if(v == '1'){
    					html += '<td><span class="label label-warning">데이터 엑셀 로딩중</span></td>';
-   					
    				}
    				if(v == '2'){
    					html += '<td><span class="label label-warning">데이터 엑셀 처리중</span></td>';
-   					
    				}
    				if(v == '3'){
    					html += '<td><span class="label label-danger">데이터 엑셀 처리 오류</span></td>';
-   					
    				}
    				if(v == '4'){
    					html += '<td><span class="label label-primary">데이터 엑셀 처리 종료</span></td>';
-   					
    				}
    			}
    			if(k == 'cam_cdate'){
@@ -477,13 +471,15 @@
 			var td = tr.children();
 			
 			row_id = td.eq(1).text();
+			
+			
+			alert("row_id :: " + row_id);
 		});
 		pretreatment_asis(row_id);	
 		
   });
   
   function tableDataRe(){
-	  
 	  
 	  $('#ai_campaign').destroy();
       $('#ai_campaign').DataTable({
