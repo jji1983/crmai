@@ -25,11 +25,10 @@
 				response.sendRedirect("/main");
 			}
 			%>
-
-	<h2>
-		<font color="red"><%=session.getAttribute("sessionID")%></font> 님
-		로그인되었습니다.
-	</h2>
+ 
+		<h2>
+		<font color="red"><%=session.getAttribute("sessionID")%></font> 님 로그인되었습니다.
+		</h2>
 	<br>
 	<br>
 	<input type="button" value="로그아웃" onclick="logoutPro()" />
