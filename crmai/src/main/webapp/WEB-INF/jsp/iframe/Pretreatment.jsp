@@ -170,15 +170,13 @@
 											enctype="multipart/form-data">
 											<div class="box-body">
 
-												<input type="hidden" id="user_id" name="user_id"
-													value=<%=session.getAttribute("sessionID") %>>
+												<input type="hidden" id="user_id" name="user_id" value=<%=session.getAttribute("sessionID") %>>
 
 												<div class="form-group">
 													<label for="inputCamName" class="col-sm-2 control-label">캠페인명</label>
 
 													<div class="col-sm-10">
-														<input id="inputCamName" name="inputCamName" type="text"
-															class="form-control" placeholder="캠페인명">
+														<input id="inputCamName" name="inputCamName" type="text" class="form-control" placeholder="캠페인명">
 													</div>
 												</div>
 
@@ -186,8 +184,7 @@
 													<label for="inputCamDesc" class="col-sm-2 control-label">설명</label>
 
 													<div class="col-sm-10">
-														<input id="inputCamDesc" name="inputCamDesc" type="text"
-															class="form-control" placeholder="설명">
+														<input id="inputCamDesc" name="inputCamDesc" type="text" class="form-control" placeholder="설명">
 													</div>
 												</div>
 
@@ -219,7 +216,7 @@
 												<div class="form-group">
 													<label for="InputFile" class="col-sm-2 control-label">파일 등록(학습CSV)</label>
 													<div class="col-sm-10">
-														<input type="file" name="file" id="InputFile" accept=".csv">
+														<input id="InputFile" type="file" name="file"  accept=".csv">
 													</div>
 												</div>
 

@@ -32,4 +32,10 @@ public class AdminService implements AdminMapper {
 
 	}
 
+	@Override
+	public void updateAdminById(String ADMIN_ID) {
+		adminMapper.updateAdminById(ADMIN_ID);
+		
+	}
+
 }

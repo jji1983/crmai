@@ -20,10 +20,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -31,6 +35,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.ktds.crmai.model.AI_CAMPAIGN;
 import com.ktds.crmai.service.PretreatmentService;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Controller
 @RequestMapping(value="/file")
@@ -128,7 +135,29 @@ public class FileController {
       ResponseEntity<Object> response = new ResponseEntity<Object>("success", HttpStatus.OK);
 		
 	  return response; 
-	} 
+	}
+	
+	@RequestMapping(value = "/downloadGuide", method = RequestMethod.GET)
+	public ResponseEntity<byte[]> downloadGuideFile() throws Exception {
+
+	 String GuideFile = "D:\\TEMP\\GUIDE\\가이드문서.pdf";
+	 
+	 Path path = Paths.get(GuideFile);
+		
+	 byte[] array = Files.readAllBytes(path);
+	 String fileName = "attachment; filename=가이드문서.pdf";
+
+	 HttpHeaders responseHeaders = new HttpHeaders();
+	 responseHeaders.set("charset", "utf-8");
+	 responseHeaders.setContentType(MediaType.valueOf("text/html"));
+	 responseHeaders.setContentLength(array.length);
+	 responseHeaders.set("Content-disposition", fileName);
+
+	 return new ResponseEntity<byte[]>(array, responseHeaders, HttpStatus.OK);
+	}
+	
+	
+	
 	//uuid생성 
 	public static String getUuid() { 
 		return UUID.randomUUID().toString().replaceAll("-", ""); 

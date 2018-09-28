@@ -15,12 +15,14 @@ public class AI_ADMINUSER {
 	private String ADM_EMAIL;
 	private String ADM_CDATE;
 	private String ADM_UDATE;
+	private String ADM_LOGIN;
+	private String CAM_CNT;
 	
 	public AI_ADMINUSER() {
 		
 	}
 	
-	public AI_ADMINUSER(String ADM_ID, String ADM_PW, String ADM_TYPE, String ADM_ROLE, String ADM_NAME, String ADM_EMAIL, String ADM_CDATE, String ADM_UDATE) {
+	public AI_ADMINUSER(String ADM_ID, String ADM_PW, String ADM_TYPE, String ADM_ROLE, String ADM_NAME, String ADM_EMAIL, String ADM_CDATE, String ADM_UDATE, String ADM_LOGIN, String CAM_CNT) {
 		this.ADM_ID = ADM_ID;
 		this.ADM_PW = ADM_PW;
 		this.ADM_TYPE = ADM_TYPE;
@@ -28,6 +30,8 @@ public class AI_ADMINUSER {
 		this.ADM_NAME = ADM_NAME;
 		this.ADM_EMAIL = ADM_EMAIL;
 		this.ADM_CDATE = ADM_CDATE;
-		this.ADM_UDATE = ADM_UDATE;		
+		this.ADM_UDATE = ADM_UDATE;
+		this.ADM_LOGIN = ADM_LOGIN;
+		this.CAM_CNT = CAM_CNT;
 	}
 }

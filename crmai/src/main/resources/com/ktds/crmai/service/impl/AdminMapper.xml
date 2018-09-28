@@ -5,31 +5,42 @@
 <mapper namespace="com.ktds.crmai.service.impl.AdminMapper">
 
     <select id="selectAdminById" resultType="admin">
-        SELECT ADM_ID
-              ,ADM_PW
-              ,ADM_ROLE
-              ,ADM_NAME
-              ,ADM_EMAIL
-              ,ADM_CDATE
-              ,ADM_UDATE
-          FROM AI_ADMINUSER
-         WHERE ADM_ID = #{ADM_ID}
+        SELECT 
+	        usr.ADM_ID as "ADM_ID" 
+	        ,ADM_PW as "ADM_PW"
+	        ,ADM_ROLE as "ADM_ROLE"
+	        ,ADM_NAME as "ADM_NAME"
+	        ,ADM_EMAIL as "ADM_EMAIL"
+	        ,ADM_CDATE as "ADM_CDATE"
+	        ,ADM_UDATE as "ADM_UDATE"
+	        ,ADM_LOGIN as "ADM_LOGIN"
+	        ,(select count(*) from AI_CAMPAIGN camp where camp.ADM_ID = usr.ADM_ID) as "CAM_CNT"
+          FROM AI_ADMINUSER usr
+         WHERE usr.ADM_ID = #{ADM_ID}
     </select>
 
     <select id="selectAllAdmin" resultType="admin">
-        SELECT ADM_ID
-              ,ADM_PW
-              ,ADM_ROLE
-              ,ADM_NAME
-              ,ADM_EMAIL
-              ,ADM_CDATE
-              ,ADM_UDATE
-          FROM AI_ADMINUSER
+        SELECT 
+        	usr.ADM_ID as "ADM_ID" 
+	        ,ADM_PW as "ADM_PW"
+	        ,ADM_ROLE as "ADM_ROLE"
+	        ,ADM_NAME as "ADM_NAME"
+	        ,ADM_EMAIL as "ADM_EMAIL"
+	        ,ADM_CDATE as "ADM_CDATE"
+	        ,ADM_UDATE as "ADM_UDATE"
+	        ,ADM_LOGIN as "ADM_LOGIN"
+	        ,(select count(*) from AI_CAMPAIGN camp where camp.ADM_ID = usr.ADM_ID) as "CAM_CNT"
+          FROM AI_ADMINUSER usr
     </select>
+    
+    <update id="updateAdminById">
+        UPDATE AI_ADMINUSER SET (ADM_LOGIN) = ( SELECT (ADM_LOGIN + 1) as "ADM_LOGIN" FROM AI_ADMINUSER WHERE ADM_ID = #{ADM_ID} ), ADM_UDATE = sysdate WHERE ADM_ID = #{ADM_ID}
+    </update>
+    
 
     <insert id="insertAdmin">
-      INSERT INTO AI_ADMINUSER (ADM_ID, ADM_PW, ADM_TYPE, ADM_NAME, ADM_EMAIL, ADM_CDATE, ADM_UDATE)
-      VALUES (#{ADM_ID}, #{ADM_PW}, #{ADM_TYPE}, #{ADM_NAME},#{ADM_EMAIL}, sysdate, sysdate)
+      INSERT INTO AI_ADMINUSER (ADM_ID, ADM_PW, ADM_TYPE, ADM_ROLE, ADM_NAME, ADM_EMAIL, ADM_CDATE, ADM_UDATE, ADM_LOGIN)
+      VALUES (#{ADM_ID}, #{ADM_PW}, #{ADM_TYPE}, 1, #{ADM_NAME},#{ADM_EMAIL}, sysdate, sysdate, 0)
     </insert>
 
 </mapper>

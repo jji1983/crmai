@@ -103,6 +103,7 @@
 		//alert("call Content_NoticeBoard!!");
 		document.getElementById("main_frame").src = "/iframe/admin/UserMgr";
 	}
+	
   </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -124,6 +125,19 @@
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+      	<ul class="nav navbar-nav">
+      	<!-- Tasks: style can be found in dropdown.less -->
+          <li class="dropdown tasks-menu">
+            <a onclick="getGuideFile();" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-flag-o"></i>
+              <span class="label label-danger">1</span>
+              <label>사용자 가이드</label> 
+            </a>
+          </li>
+      	</ul>
+      </div>
     </nav>
   </header>
 
@@ -293,6 +307,29 @@
 <script src="/resources/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/resources/dist/js/demo.js"></script>
+<script>
+	function getGuideFile(){
+	
+		alert("getGuideFile ~~!! ");
+		var campaign = new Object();
+	    $.ajax({
+	        type: 'GET',
+	        url: '/file/downloadGuide',
+	        dataType: 'json',
+	        contentType: 'application/json;charset=UTF-8',
+	        data: campaign,
+	        success: function (data) {
+	        	
+	        	
+	            window.open(data.fileUrl);
+	            // or window.location.href = data.fileUrl;
+	        },
+	        error:function (xhr, ajaxOptions, thrownError) {
+	            console.log("in error");
+	     } 
+		});
+	}
 
+</script>
 </body>
 </html>
