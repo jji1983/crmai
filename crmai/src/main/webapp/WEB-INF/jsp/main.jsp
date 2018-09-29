@@ -60,6 +60,12 @@
 		//alert("call Content_Dashboard!!");
 		document.getElementById("main_frame").src = "/iframe/Dashboard";
 	}
+	
+	function Content_AutoOrder() {
+		//alert("call Content_AutoOrder!!");
+		document.getElementById("main_frame").src = "/iframe/AutoOrder";
+	}
+	
 	function Content_Pretreatment() {
 		//alert("call Content_Pretreatment!!");
 		document.getElementById("main_frame").src = "/iframe/Pretreatment";
@@ -161,6 +167,9 @@
         <li class="header">MAIN NAVIGATION</li>
         
 		<li><a href="javascript:Content_Dashboard();"><i class="fa fa-dashboard"></i> <span>공지사항</span></a></li>
+        
+        <li><a href="javascript:Content_AutoOrder();"><i class="fa fa-circle-o text-aqua"></i> <span>자동수행</span></a></li>
+        
         
         <li class="treeview">
           <a href="#">

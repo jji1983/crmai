@@ -48,6 +48,11 @@ public class JspViewController {
 		return "main";
 	}
 	
+	@RequestMapping(value="/iframe/AutoOrder")
+	public String AutoOrder() {
+		return "/iframe/AutoOrder";
+	}
+	
 	@RequestMapping(value="/iframe/Dashboard")
 	public String Dashboard() {
 		return "/iframe/Dashboard";

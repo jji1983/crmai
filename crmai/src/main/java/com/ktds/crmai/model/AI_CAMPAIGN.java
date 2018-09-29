@@ -9,7 +9,9 @@ import lombok.Data;
 public class AI_CAMPAIGN{
 
 	private static final long serialVersionUID = 3947489072259877540L;
-
+	
+	private int page_st;
+	private int page_end;
 	private String cam_seq;
 	private String cam_id;
 	private String cam_name;
@@ -35,6 +37,8 @@ public class AI_CAMPAIGN{
 	
 	
 	public AI_CAMPAIGN(
+			int page_st,
+			int page_end,
 			String cam_seq,
 			String cam_id,
 			String cam_name,
@@ -53,7 +57,8 @@ public class AI_CAMPAIGN{
 			String cam_desc,
 			String cam_msg
 	    ) {
-		
+		this.page_st = page_st;
+		this.page_end = page_end;
 		this.cam_seq = cam_seq;
 		this.cam_id = cam_id;
 		this.cam_name = cam_name;
