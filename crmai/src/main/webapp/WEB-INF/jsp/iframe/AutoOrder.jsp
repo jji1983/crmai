@@ -94,7 +94,7 @@
 	        <div id='id_loading1' class="col-md-2.5 col-sm-2">
 	          <div class="box box-default box-solid">
 	            <div class="box-header with-border">
-	              <h3 class="box-title">학습데이터 로딩</h3>
+	              <h3 class="box-title">1.1 학습데이터</h3>
 	            </div>
 	            <!-- /.box-header -->
 	            <div id='id_loading1_msg' class="box-body">
@@ -108,17 +108,42 @@
 	          </div>
 	        </div>
 	        <!-- /.col -->
+	        
+	        <div id='id_loading2' class="col-md-2.5 col-sm-2">
+	          <div class="box box-default box-solid">
+	            <div class="box-header with-border">
+	              <h3 class="box-title">1.2 대상자데이터</h3>
+	            </div>
+	            <!-- /.box-header -->
+	            <div id='id_loading2_msg' class="box-body">
+	            	대상자 데이터 처리
+	            </div>
+	            <!-- /.box-body -->
+	            
+	             <!-- Loading (remove the following to stop the loading)-->
+	            <div id='id_loading2_overlay' class="overlay"><i class="fa fa-refresh fa-spin"></i></div>
+	            <!-- end loading -->
+	            
+	          </div>
+	          <!-- /.box -->
+	        </div>
+	        <!-- /.col -->
 
 	        <div id='id_pre' class="col-md-2.5 col-sm-2">
 	          <div class="box box-success box-solid">
 	            <div class="box-header with-border">
-	              <h3 class="box-title text-center">전처리 중</h3>
+	              <h3 class="box-title text-center">2. 전처리</h3>
 	            </div>
 	            <!-- /.box-header -->
-	            <div class="box-body">
-	              The body of the box
+	            <div id='id_pre_msg' class="box-body">
+	              	데이터 전처리
 	            </div>
 	            <!-- /.box-body -->
+	            
+	            <!-- Loading (remove the following to stop the loading)-->
+	            <div id='id_pre_overlay' class="overlay"><i class="fa fa-refresh fa-spin"></i></div>
+	            <!-- end loading -->
+	            
 	          </div>
 	          <!-- /.box -->
 	        </div>
@@ -127,39 +152,30 @@
 	        <div id='id_runf' class="col-md-2.5 col-sm-2">
 	          <div class="box box-warning box-solid">
 	            <div class="box-header with-border">
-	              <h3 class="box-title">AI학습중</h3>
+	              <h3 class="box-title">3. AI학습</h3>
 	            </div>
 	            <!-- /.box-header -->
-	            <div class="box-body">
-	              The body of the box
+	            <div id='id_runf_msg' class="box-body">
+	              	AI학습중
 	            </div>
 	            <!-- /.box-body -->
+	            
+	            <!-- Loading (remove the following to stop the loading)-->
+	            <div id='id_runf_overlay' class="overlay"><i class="fa fa-refresh fa-spin"></i></div>
+	            <!-- end loading -->
+	            
 	          </div>
 	          <!-- /.box -->
 	        </div>
 	        <!-- /.col -->
 
-	        <div id='id_loading2' class="col-md-2.5 col-sm-2">
-	          <div class="box box-default box-solid">
-	            <div class="box-header with-border">
-	              <h3 class="box-title">대상자데이터 로딩</h3>
-	            </div>
-	            <!-- /.box-header -->
-	            <div class="box-body">
-	            	대상자 데이터 처리
-	            </div>
-	            <!-- /.box-body -->
-	          </div>
-	          <!-- /.box -->
-	        </div>
-	        <!-- /.col -->
 	        
 	        <div id='id_predict' class="col-md-2.5 col-sm-2">
 	          <div class="box box-danger box-solid">
 	            <div class="box-header">
-	              <h3 class="box-title">예측실행</h3>
+	              <h3 class="box-title">4. 예측실행</h3>
 	            </div>
-	            <div class="box-body">
+	            <div id='id_predict_msg' class="box-body">
 	              The body of the box
 	            </div>
 	            <!-- /.box-body -->
@@ -309,7 +325,7 @@
 	  
 	  function radioInit(myRadio) {
 		  
-		  alert("radioInit :: " + myRadio);
+		  //alert("radioInit :: " + myRadio);
 		  
 		  if(myRadio != 0){
 			  $("#ai_status").show(); //현황창 보이기
@@ -529,7 +545,7 @@
         cache: false,
         timeout: 600000,
         success: function (data) {
-        	//alert("newCampagin result :: " + data );
+        	alert( data );
         	
         	//console.log("SUCCESS : ", data);
             $("#bthNew").prop("disabled", false);
@@ -558,7 +574,7 @@
   
   
   function getAIStatus(){
-		alert('-- getAIStatus -- ['+currentValue+']');
+		//alert('-- getAIStatus -- ['+currentValue+']');
 		
 		var campaign = new Object();
 	  	campaign.cam_id = currentValue;
@@ -575,15 +591,73 @@
 	        //dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
 	        success : function(data){
 	        	var obj = JSON.stringify(data, true, 2);
-	        	//alert("search_campaign result :: " + obj);
 	        	
-	        	grid_table_campaign(obj);
+	        	//alert("search_campaign result :: " + obj );
+	        	
+	        	var json = $.parseJSON(obj);
+	        	
+	        	//alert("get Value :: " + json["cam_id"] + " :: " + json["cam_itype"] + " :: " + json["cam_otype"]);
+	        	
+	        	var cam_id = json["cam_id"];
+	        	var cam_itype = json["cam_itype"];
+	        	var cam_otype = json["cam_otype"];
+	        	
+	        	setAiStatus(cam_id, cam_itype, cam_otype);
 	        	
 	        },
 	        error : function(request,status,error){
 	        	 //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 	        }
 		});
+  }
+  
+  
+  function setAiStatus(cam_id, cam_itype, cam_otype) {
+	 //alert("call setAiStatus :: " + cam_id + " :: " + cam_itype + " :: " + cam_otype);
+	 
+	 $("#ai_status").show(); //현황창 보이기
+	  
+	  var t_val0 = "학습데이터 입력전"; 
+	  var t_val1 = "학습데이터 입력후";
+	  var t_val2 = "학습데이터 처리중";
+	  var t_val3 = "학습데이터 처리 오류";
+	  var t_val4 = "학습데이터 처리 종료";
+	  
+	  //학습 데이터 처리중
+	  if(cam_itype <= 4){
+		  
+		  $("#id_runf_overlay").hide(); //학습중 단계 삭제
+		  $("#id_predict_overlay").hide(); //예측실행 단계 삭제
+		  $("#id_pre_overlay").hide(); //전처리 단계 삭제
+		  
+		  if(cam_itype == 0){
+			  $("#id_loading1_msg").text(t_val0);
+		  }else if(cam_itype == 1){
+			  $("#id_loading1_msg").text(t_val1);
+		  }else if(cam_itype == 2){
+			  $("#id_loading1_msg").text(t_val2);
+		  }else if(cam_itype == 3){
+			  $("#id_loading1_msg").text(t_val3);
+			  
+		  }else if(cam_itype == 4){
+			  $("#id_loading1_msg").text(t_val4);
+			  
+			  $("#id_loading1_overlay").hide(); //전처리 단계 삭제
+			  $("#id_pre_overlay").show(); //전처리 단계 동기
+		  }
+		  
+		  
+		  
+		  
+		  
+	  }else if(cam_itype > 4 && cam_itype < 7){ //전처리 단계
+		  
+	  }else if(cam_itype > 7 && cam_itype < 10){ //모델 생성
+		  
+	  }else{
+		  
+	  }
+	  
   }
 	
   $(document).ready(function () {

@@ -28,7 +28,15 @@
     </select>
     
     <select id="selectCampaignAiStatus" resultType="campaign">
-    	select cam_seq.nextval as "cam_seq" from dual
+    	select 
+		  cam_id as "cam_id",
+		  cam_itype as "cam_itype",
+		  cam_otype as "cam_otype",
+		  cam_msg as "cam_msg"
+		from 
+		  ai_campaign
+		where
+		  cam_id =  #{cam_id}
     </select>	
     
     <insert id="insertCampaign">

@@ -89,6 +89,8 @@ public class FileController {
         if(size_t1 == 0 || size_t2 == 0) {
     	   
     	   response = new ResponseEntity<Object>("FAIL::학습파일/대상자 파일은 필수 입니다.", HttpStatus.OK);
+    	   
+    	   logger.info("### size_t1 {}, size_t2{}", size_t1, size_t2);
        }else{
     	   String uuid = UUID.randomUUID().toString(); // 중복될 일이 거의 없다.
     	   
@@ -152,6 +154,8 @@ public class FileController {
            logger.info("### Upload_Pretreatment Insert {}", campaign);
            campaignService.insertCampaign(campaign);
        }
+       
+        logger.info("### response {}", response);
         
 	  return response; 
 	}

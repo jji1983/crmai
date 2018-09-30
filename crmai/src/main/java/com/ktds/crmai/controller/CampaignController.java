@@ -84,19 +84,12 @@ public class CampaignController {
 	@RequestMapping(value = "/aistatus", method = RequestMethod.GET, consumes=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getCampaignAiStatus(@ModelAttribute("campaign") AI_CAMPAIGN in_compaign, HttpSession session){
     	logger.info("Request List....getCampaignListPage.... - {}", in_compaign);
-    	List<AI_CAMPAIGN> out_campaign = null;
+    	AI_CAMPAIGN out_campaign = null;
     	
     	String admid= (String)session.getAttribute("sessionID");
     	in_compaign.setAdm_id(admid);
     		
-    	out_campaign = campaignService.selectCampaignPage(in_compaign);
-    	
-    	Iterator<AI_CAMPAIGN> ite = out_campaign.iterator();
-    	
-    	while(ite.hasNext()) {
-    		AI_CAMPAIGN cam = (AI_CAMPAIGN)ite.next();
-    		logger.info("AI_CAMPAIGN :: "+ cam.toString());
-    	}
+    	out_campaign = campaignService.selectCampaignAiStatus(in_compaign);
     	
     	//응답과 함깨 HttpStatus를 지정할 수 있습니다.
     	ResponseEntity<Object> response = new ResponseEntity<Object>(out_campaign, HttpStatus.OK);
