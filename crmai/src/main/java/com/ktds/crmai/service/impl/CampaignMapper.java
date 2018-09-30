@@ -22,4 +22,15 @@ public interface CampaignMapper {
 	 */
 	int selectCamPageNum(AI_CAMPAIGN campaign);
 	
+	
+	/*
+	 * Name : 캠페인 SEQ 가져오기
+	 */
+	AI_CAMPAIGN selectCampaignSeq();
+	
+	/*
+	 * Name : 캠페인 Insert
+	 */
+	void insertCampaign(AI_CAMPAIGN campaign);
+	
 }

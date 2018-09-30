@@ -26,5 +26,17 @@ public class CampaignService implements CampaignMapper {
 		// TODO Auto-generated method stub
 		return campaignMapper.selectCamPageNum(campaign);
 	}
+	
+	@Override
+	public AI_CAMPAIGN selectCampaignSeq() {
+		// TODO Auto-generated method stub
+		return campaignMapper.selectCampaignSeq();
+	}
+
+	@Override
+	public void insertCampaign(AI_CAMPAIGN campaign) {
+		campaignMapper.insertCampaign(campaign);
+		
+	}
 
 }

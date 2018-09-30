@@ -22,10 +22,9 @@ public class AI_CAMPAIGN{
 	private String cam_itype;
 	private String cam_icnum;
 	private String cam_ifilename;
-	private String cam_iviewname;
 	private String cam_idate;
 	private String cam_otype;
-	private String cam_otablename;
+	private String cam_ofilename;
 	private String cam_cdate;
 	private String cam_desc;
 	private String cam_msg;
@@ -49,10 +48,9 @@ public class AI_CAMPAIGN{
 			String cam_itype,
 			String cam_icnum,
 			String cam_ifilename,
-			String cam_iviewname,
 			String cam_idate,
 			String cam_otype,
-			String cam_otablename,
+			String cam_ofilename,
 			String cam_cdate,
 			String cam_desc,
 			String cam_msg
@@ -69,10 +67,9 @@ public class AI_CAMPAIGN{
 		this.cam_itype = cam_itype;
 		this.cam_icnum = cam_icnum;
 		this.cam_ifilename = cam_ifilename;
-		this.cam_iviewname = cam_iviewname;
 		this.cam_idate = cam_idate;
 		this.cam_otype = cam_otype;
-		this.cam_otablename = cam_otablename;
+		this.cam_ofilename = cam_ofilename;
 		this.cam_cdate = cam_cdate;
 		this.cam_desc = cam_desc;
 		this.cam_msg = cam_msg;

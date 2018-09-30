@@ -48,7 +48,7 @@ public class CampaignController {
 		int maxRowNum = campaignService.selectCamPageNum(in_compaign);
 
 		if(maxRowNum == 0) {
-			response.add("fail. user not found!");
+			response.add("0");
 		}else {
 			response.add(maxRowNum + "");
 		}

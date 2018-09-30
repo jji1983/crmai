@@ -164,12 +164,14 @@
     
      <!-- sidebar menu: : style can be found in sidebar.less -->
      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MAIN NAVIGATION</li>
         
-		<li><a href="javascript:Content_Dashboard();"><i class="fa fa-dashboard"></i> <span>공지사항</span></a></li>
+        <li class="header">MAIN</li>
+		<li><a href="javascript:Content_Dashboard();"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         
+        <li class="header">자동 수행</li>
         <li><a href="javascript:Content_AutoOrder();"><i class="fa fa-circle-o text-aqua"></i> <span>자동수행</span></a></li>
         
+        <li class="header">수동 수행</li>
         
         <li class="treeview">
           <a href="#">
@@ -206,9 +208,11 @@
           </a>
           <ul class="treeview-menu">
             <li  class="active"><a href="javascript:Content_RunForecast();"><i class="fa fa-circle-o"></i>AI 대상자 로딩</a></li>
-            <li  class="active"><a href="javascript:Content_RunForecastResult();"><i class="fa fa-circle-o"></i>AI 선정결과</a></li>
           </ul>
         </li>
+        
+        <li class="header">부가 기능</li>
+        <li><a href="javascript:Content_RunForecastResult();"><i class="fa fa-circle-o text-aqua"></i> <span>AI 선정결과</span></a></li>   
         
         <li class="treeview">
           <a href="#">

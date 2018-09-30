@@ -25,17 +25,6 @@ public interface PretreatmentMapper {
 	
 	
 	/*
-	 * Name : 캠페인 SEQ 가져오기
-	 */
-	AI_CAMPAIGN selectCampaignSeq();
-	
-	/*
-	 * Name : 캠페인 SEQ 가져오기
-	 */
-	void insertCampaign(AI_CAMPAIGN campaign);
-	
-	
-	/*
 	 * Name : 학습데이터 가져오기 (max : 100개)
 	 */
 	List<AI_STAGING_TRAIN> selectStaginTrain(AI_CAMPAIGN campaign);

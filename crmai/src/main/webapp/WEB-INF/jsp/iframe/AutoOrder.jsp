@@ -59,7 +59,7 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			대상자 로딩 <small>Control panel</small>
+			AI자동수행 <small>Control panel</small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="/iframe/Dashboard"><i class="fa fa-dashboard"></i>
@@ -83,25 +83,33 @@
           </div>
         </div>
         <div class="box-body">
- 			  
-		<div class="row">
+ 		
+		<div class="box-tools pull-center">
+			<span id='id_span_msg' class="label label-success"></span>
+		</div>
+		<br/>
+ 		
+		<div id="ai_status" class="row">
 		
-	        <div class="col-md-2.5 col-sm-2">
+	        <div id='id_loading1' class="col-md-2.5 col-sm-2">
 	          <div class="box box-default box-solid">
 	            <div class="box-header with-border">
 	              <h3 class="box-title">학습데이터 로딩</h3>
 	            </div>
 	            <!-- /.box-header -->
-	            <div class="box-body">
+	            <div id='id_loading1_msg' class="box-body">
 	            	학습 데이터 처리중
 	            </div>
 	            <!-- /.box-body -->
+	            
+	             <!-- Loading (remove the following to stop the loading)-->
+	            <div id='id_loading1_overlay' class="overlay"><i class="fa fa-refresh fa-spin"></i></div>
+	            <!-- end loading -->
 	          </div>
-	          <!-- /.box -->
 	        </div>
 	        <!-- /.col -->
 
-	        <div class="col-md-2.5 col-sm-2">
+	        <div id='id_pre' class="col-md-2.5 col-sm-2">
 	          <div class="box box-success box-solid">
 	            <div class="box-header with-border">
 	              <h3 class="box-title text-center">전처리 중</h3>
@@ -116,9 +124,7 @@
 	        </div>
 	        <!-- /.col -->
 	        
-	 
-	        
-	        <div class="col-md-2.5 col-sm-2">
+	        <div id='id_runf' class="col-md-2.5 col-sm-2">
 	          <div class="box box-warning box-solid">
 	            <div class="box-header with-border">
 	              <h3 class="box-title">AI학습중</h3>
@@ -132,9 +138,8 @@
 	          <!-- /.box -->
 	        </div>
 	        <!-- /.col -->
-	  
-	        
-	        <div class="col-md-2.5 col-sm-2">
+
+	        <div id='id_loading2' class="col-md-2.5 col-sm-2">
 	          <div class="box box-default box-solid">
 	            <div class="box-header with-border">
 	              <h3 class="box-title">대상자데이터 로딩</h3>
@@ -148,9 +153,8 @@
 	          <!-- /.box -->
 	        </div>
 	        <!-- /.col -->
-
 	        
-	        <div class="col-md-2.5 col-sm-2">
+	        <div id='id_predict' class="col-md-2.5 col-sm-2">
 	          <div class="box box-danger box-solid">
 	            <div class="box-header">
 	              <h3 class="box-title">예측실행</h3>
@@ -161,58 +165,111 @@
 	            <!-- /.box-body -->
 	            
 	            <!-- Loading (remove the following to stop the loading)-->
-	            <div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>
+	            <div id='id_predict_overlay' class="overlay"><i class="fa fa-refresh fa-spin"></i></div>
 	            <!-- end loading -->
 	            
 	          </div>
 	          <!-- /.box -->
 	        </div>
 	        <!-- /.col -->
-	        
       </div>
       <!-- /.row -->
 
+       <div class="row">
+ 			<table id="ai_campaign"	class="table table-bordered table-hover text-center"></table>
+ 			<nav aria-label="Page navigation example" style="text-align: center;">
+			<ul class="pagination-sm" id="pagination"></ul></nav>
+ 	   </div>
+
       <!-- =========================================================== -->
  			
-        </div>
-        
-         <div class="box-footer">
-         
-	       <div class="row">
-	 			<table id="ai_campaign"	class="table table-bordered table-hover text-center"></table>
-	 	   </div>
- 		 
- 		   <div class="row">
-				<nav aria-label="Page navigation example" style="text-align: center;">
-				<ul class="pagination-sm" id="pagination"></ul></nav>
- 		   </div>
- 		   
-        </div>
-        
-        <!-- /.box-body -->
       </div>
-      <!-- /.box -->
-      
-      <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
-          <h3 class="box-title">Title</h3>
+       <div class="box-footer">
+	       <button id='newBtn' type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#newModal">캠페인 신규등록</button>
+       </div>
+     		<!-- Modal -->
+			<div class="modal fade" id="newModal" tabindex="-1" role="dialog"
+				aria-labelledby="newModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="newModalLabel">캠페인 신규 생성</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<!-- form start -->
+							<form class="form-horizontal" id="newUploadForm"
+								action="fileUpload" method="post"
+								enctype="multipart/form-data">
+								<div class="box-body">
 
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-              <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fa fa-times"></i></button>
-          </div>
-        </div>
-        <div class="box-body">
-          Start creating your amazing application!
-        </div>
+									<input type="hidden" id="user_id" name="user_id" value=<%=session.getAttribute("sessionID") %>>
+
+									<div class="form-group">
+										<label for="inputCamName" class="col-sm-2 control-label">캠페인명</label>
+
+										<div class="col-sm-10">
+											<input id="inputCamName" name="inputCamName" type="text" class="form-control" placeholder="캠페인명">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="inputCamDesc" class="col-sm-2 control-label">설명</label>
+
+										<div class="col-sm-10">
+											<input id="inputCamDesc" name="inputCamDesc" type="text" class="form-control" placeholder="설명">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="cam_type" class="col-sm-2 control-label" data-toggle="tooltip" title="캠페인 목적">목적</label>
+										<div class="col-sm-10">
+											<select id="cam_type" name="cam_type"
+												class="form-control select2" style="width: 100%;">
+												<option selected="selected" >Acquisition</option>
+												<option>Retention</option>
+												<option>Cultivation</option>
+												<option>KeepCare</option>
+											</select>
+										</div>
+									</div>
+									
+									
+									<input type="hidden" id="cam_autoyn" name="cam_autoyn" value="Y">
+
+									<div class="form-group">
+										<label for="InputFile_train" class="col-sm-2 control-label">파일 등록(학습CSV)</label>
+										<div class="col-sm-10">
+											<input id="InputFile_train" type="file" name="file_train"  accept=".csv">
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<label for="InputFile_test" class="col-sm-2 control-label">파일 등록(대상CSV)</label>
+										<div class="col-sm-10">
+											<input id="InputFile_test" type="file" name="file_test"  accept=".csv">
+										</div>
+									</div>
+
+								</div>
+								<!-- /.box-body -->
+								<div class="box-footer">
+									<button id="bthNew" type="submit" class="btn btn-primary">등록</button>
+									<button id="bthClose" type="button"	class="btn btn-secondary" data-dismiss="modal">Close</button>
+								</div>
+								<!-- /.box-footer -->
+							</form>
+						</div>
+						<div class="modal-footer">캠페인등록화면</div>
+					</div>
+				</div>
+			</div>
+			<!--/. Modal -->
+        
         <!-- /.box-body -->
-        <div class="box-footer">
-          Footer
-        </div>
-        <!-- /.box-footer-->
       </div>
       <!-- /.box -->
       
@@ -231,18 +288,34 @@
 	  var selectRadio = 0;
 	  
 	  function handleClick(myRadio) {
-	      alert('Old value: ' + selectRadio);
-	      alert('New value: ' + myRadio.value);
+	      //alert('Old value: ' + selectRadio);
+	      //alert('New value: ' + myRadio.value);
 	      currentValue = myRadio.value;
+	  
+		  $("#ai_status").show(); //현황창 보이기
+		  
+		  //$("#id_msg").hide(); //숨기기
+		  
+		  $("#id_span_msg").text("캠페인ID :: " + currentValue);
+	      
+	      //처리 현황 업데이트
+	      //$("#id_predict_overlay").hide(); //숨기기
+	  }
+	  
+	  
+	  function radioInit(myRadio) {
+		  
+		  if(myRadio != 0){
+			  $("#ai_status").show(); //현황창 보이기
+			  
+			  $("#id_span_msg").text("캠페인ID :: " + myRadio); 
+		  }
 	  }
 	  
 	  function campaignPage(){
-			
-
-		  
 			var admin = new Object();
 
-			alert("campaignPage call ");
+			//alert("campaignPage call ");
 		    $.ajax({
 		        type    : 'GET', // method
 		        url     : '/campaign/totalPage',
@@ -254,16 +327,20 @@
 		        cache: false,
 		        //dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
 		        success : function(data, status, xhr){
-	        		alert( "data :: " + data[0]);
+	        		//alert( "data :: " + data[0]);
 	        		
-	        		totalPages = Math.ceil(data[0] / visiblePages);
+	        		if(data[0] != "0"){
+	        			totalPages = Math.ceil(data[0] / visiblePages);
 	        		
-	        		alert( "totalPages :: " + totalPages);
-	        		grid_pagination(totalPages, visiblePages);
-	        		
+	        			//alert( "totalPages :: " + totalPages + " :: " + visiblePages);
+	        			grid_pagination(totalPages, visiblePages);
+	        		}else{
+	        			$("#id_span_msg").text("등록된 캠페인 이 없습니다. >> \"캠페인 신규등록 \"버튼 클릭!");
+	        			$("#ai_status").hide(); //학습데이터 보이기
+	        		}
 		        },
 		        error   : function(request,status,error){
-		        	 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		        	 //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		        	 
 		        	 responseError(error);
 		        	 
@@ -273,29 +350,30 @@
 	  }
 	  
 	  function grid_pagination(totalPages, visiblePages){
-			alert("grid_pagination :: " + totalPages + " :: " + visiblePages);
-			  
-		 	$('#pagination').twbsPagination({
+			//alert("grid_pagination :: " + totalPages + " :: " + visiblePages);
+			
+			$('#pagination').twbsPagination('destroy');
+			window.pagObj = $('#pagination').twbsPagination({
 		          totalPages: totalPages,
 		          visiblePages: visiblePages,
 		          onPageClick: function (event, page) {
+		        	  //alert("on1 " + page + ' (from event listening)');
 		        	  
 		        	  page_st = ((1 * visiblePages) * page) - (visiblePages - 1);
-		        	  
 		        	  page_end = (page_st + visiblePages) - 1;
-		        	  
 		        	  
 		              search_campaign(page, page_st, page_end);
 		          }
-		    });
-		 	
+		    }).on('page', function (event, page) {
+	            //alert("on2 " + page + ' (from event listening)');
+	        });
 	  }
 	   
 	  
 	  
 	  function search_campaign(now_page, page_st, page_end){
 		  
-		  	alert("search_campaign call :: now[" + now_page + "] :: interval[" +visiblePages +"] :: st[" + page_st + "] :: end[" + page_end + "]" );
+		  	//alert("search_campaign call :: now[" + now_page + "] :: interval[" +visiblePages +"] :: st[" + page_st + "] :: end[" + page_end + "]" );
 		  	
 		  	var campaign = new Object();
 		  	campaign.page_st = page_st;
@@ -325,8 +403,9 @@
 	}
 	
 	function grid_table_campaign(obj){
-		  var div = document.querySelector('#ai_campaign');
-	
+		var div = document.querySelector('#ai_campaign');
+	    var first = 0;
+		
 	    html = '<table width="100%" class="table table-bordered table-hover">';
 	    html += '<thead><tr>';
 	    html += 	'<th>체크</th>';
@@ -347,9 +426,15 @@
 	 		html += '<tr>';
 	 		
 	 		$.each(val,function(k,v){
-	 			flag = 0;
+	 			
 	 			if(k == 'cam_id'){
-	 				html += '<td><input type="radio" name="camCheck" onclick="handleClick(this);" value="'+v+'" /></td>';
+	 				if(first == 0){
+	 					html += '<td><input type="radio" name="camCheck" checked="checked" onclick="handleClick(this);" value="'+v+'" /></td>';
+	 					radioInit(v);
+	 					first = 1;
+	 				}else{
+	 					html += '<td><input type="radio" name="camCheck" onclick="handleClick(this);" value="'+v+'" /></td>';
+	 				}
 	 				html += '<td><center>' + v + '</center></td>';	
 	 			}
 	 			if(k == 'cam_name'){
@@ -408,8 +493,69 @@
 	    div.innerHTML = html;
 	}
 	
+
+  function submit_newCampagin(){
+	//alert('-- submit_newCampagin -- ');
+	  
+	// Get form
+    var form = $('#newUploadForm')[0];
+    var data = new FormData(form);
+    $("#bthNew").prop("disabled", true);
+    $("bthClose").prop("disabled", true);
+    
+    
+    $.ajax({
+        type: "POST",
+        enctype: 'multipart/form-data',
+        url: "/file/Upload_Pretreatment",
+        data: data,
+        //http://api.jquery.com/jQuery.ajax/
+        //https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
+        processData: false, //prevent jQuery from automatically transforming the data into a query string
+        contentType: false,
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+        	//alert("newCampagin result :: " + data );
+        	
+        	//console.log("SUCCESS : ", data);
+            $("#bthNew").prop("disabled", false);
+            
+            var jbSplit = data.split('::');
+            
+            //alert("jbSplit :: " + jbSplit );
+            
+        	if(jbSplit[0] == "OK"){
+                //alert('모달 종료.');
+                form.reset();
+                $('#newModal').modal('hide');
+        	    
+        	    // alert('캠페인 리프리시');
+        	    campaignPage();
+        	}
+            
+        },
+        error: function (e) {
+            alert("error :: " + e.responseText);
+            console.log("ERROR : ", e);
+            $("#bthNew").prop("disabled", false);
+        }
+    });
+  }
+	
 	$(document).ready(function () {
 		campaignPage();
+		//radioInit();
+		
+		//모달 처리(신규).
+	    $("#bthNew").click(function(event) {
+	    	//stop submit the form, we will post it manually.
+	        event.preventDefault();
+	    	
+	        //alert('클릭 신규~!!');
+	        submit_newCampagin();
+	        
+	    });
 	});
 
   </script>
