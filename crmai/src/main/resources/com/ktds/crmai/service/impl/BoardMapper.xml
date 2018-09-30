@@ -13,6 +13,8 @@
 			REG_DATETIME AS "reg_datetime"
 		FROM  
 			AI_BOARD
+		ORDER BY 
+			reg_datetime DESC
 	</select>
 	
 	<select id="selectBoardList" resultType="board">
@@ -22,7 +24,7 @@
 			CONTENTS AS "contents",
 			WRITER AS "writer",
 			REG_DATETIME AS "reg_datetime"
-		from 
+		FROM 
 		    AI_BOARD
 		<where>
 			<if test="title != null and title != '' ">
@@ -37,11 +39,32 @@
 				AND reg_datetime like '%' || #{reg_datetime} || '%'
 			</if>
 		</where>
+		ORDER BY 
+			reg_datetime DESC
+    </select>
+    
+    <select id="selectBoardDetail" resultType="board">
+		SELECT
+		    CODE AS "code",
+			TITLE AS "title",
+			CONTENTS AS "contents",
+			WRITER AS "writer",
+			REG_DATETIME AS "reg_datetime"
+		FROM 
+		    AI_BOARD
+		WHERE
+			code =  #{code}
     </select>
     
     <insert id="insertBoard">
     	INSERT INTO AI_BOARD (CODE, TITLE, CONTENTS, WRITER, REG_DATETIME)
-      	VALUES (#{code}, #{title}, #{contents}, #{writer}, sysdate)
+      	VALUES ((SELECT MAX(code + 1) FROM AI_BOARD), #{title}, #{contents}, #{writer}, sysdate)
     </insert>
+    
+    <delete id="deleteBoard">
+    	DELETE FROM AI_BOARD 
+    	WHERE 
+    		code =  #{code}
+    </delete>
 	
 </mapper>	

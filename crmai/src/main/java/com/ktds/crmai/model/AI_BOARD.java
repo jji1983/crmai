@@ -20,7 +20,6 @@ public class AI_BOARD {
 		
 	} 
 	
-	
 	public AI_BOARD(
 			String code,
 			String title,

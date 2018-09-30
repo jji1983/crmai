@@ -23,10 +23,19 @@ public class BoardService implements BoardMapper{
 	public List<AI_BOARD> selectBoardList(AI_BOARD board) {
 		return boardmapper.selectBoardList(board);
 	}
-
+	
 	@Override
-	public void insertBoard(AI_BOARD board) {
-		boardmapper.insertBoard(board);
+	public List<AI_BOARD> selectBoardDetail(int code) {
+		return boardmapper.selectBoardDetail(code);
 	}
 
+	@Override
+	public int insertBoard(AI_BOARD board) {
+		return boardmapper.insertBoard(board);
+	}
+
+	@Override
+	public int deleteBoard(int code) {
+		return boardmapper.deleteBoard(code);
+	}
 }

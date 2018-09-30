@@ -11,6 +11,10 @@ public interface BoardMapper {
 	
 	List<AI_BOARD> selectBoardList(AI_BOARD board);
 	
-	void insertBoard(AI_BOARD board);
+	List<AI_BOARD> selectBoardDetail(int code);
+	
+	int insertBoard(AI_BOARD board);
+
+	int deleteBoard(int code);
 	
 }
