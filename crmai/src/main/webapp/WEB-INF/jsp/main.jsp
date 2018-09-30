@@ -60,6 +60,12 @@
 		//alert("call Content_Dashboard!!");
 		document.getElementById("main_frame").src = "/iframe/Dashboard";
 	}
+	
+	function Content_AutoOrder() {
+		//alert("call Content_AutoOrder!!");
+		document.getElementById("main_frame").src = "/iframe/AutoOrder";
+	}
+	
 	function Content_Pretreatment() {
 		//alert("call Content_Pretreatment!!");
 		document.getElementById("main_frame").src = "/iframe/Pretreatment";
@@ -103,6 +109,7 @@
 		//alert("call Content_NoticeBoard!!");
 		document.getElementById("main_frame").src = "/iframe/admin/UserMgr";
 	}
+	
   </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -124,6 +131,19 @@
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+      	<ul class="nav navbar-nav">
+      	<!-- Tasks: style can be found in dropdown.less -->
+          <li class="dropdown tasks-menu">
+            <a onclick="getGuideFile();" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-flag-o"></i>
+              <span class="label label-danger">1</span>
+              <label>사용자 가이드</label> 
+            </a>
+          </li>
+      	</ul>
+      </div>
     </nav>
   </header>
 
@@ -144,9 +164,14 @@
     
      <!-- sidebar menu: : style can be found in sidebar.less -->
      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MAIN NAVIGATION</li>
         
-		<li><a href="javascript:Content_Dashboard();"><i class="fa fa-dashboard"></i> <span>공지사항</span></a></li>
+        <li class="header">MAIN</li>
+		<li><a href="javascript:Content_Dashboard();"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+        
+        <li class="header">자동 수행</li>
+        <li><a href="javascript:Content_AutoOrder();"><i class="fa fa-circle-o text-aqua"></i> <span>AI 자동수행</span></a></li>
+        
+        <li class="header">수동 수행</li>
         
         <li class="treeview">
           <a href="#">
@@ -183,9 +208,11 @@
           </a>
           <ul class="treeview-menu">
             <li  class="active"><a href="javascript:Content_RunForecast();"><i class="fa fa-circle-o"></i>AI 대상자 로딩</a></li>
-            <li  class="active"><a href="javascript:Content_RunForecastResult();"><i class="fa fa-circle-o"></i>AI 선정결과</a></li>
           </ul>
         </li>
+        
+        <li class="header">부가 기능</li>
+        <li><a href="javascript:Content_RunForecastResult();"><i class="fa fa-circle-o text-aqua"></i> <span>AI 선정결과</span></a></li>   
         
         <li class="treeview">
           <a href="#">
@@ -293,6 +320,29 @@
 <script src="/resources/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/resources/dist/js/demo.js"></script>
+<script>
+	function getGuideFile(){
+	
+		alert("getGuideFile ~~!! ");
+		var campaign = new Object();
+	    $.ajax({
+	        type: 'GET',
+	        url: '/file/downloadGuide',
+	        dataType: 'json',
+	        contentType: 'application/json;charset=UTF-8',
+	        data: campaign,
+	        success: function (data) {
+	        	
+	        	
+	            window.open(data.fileUrl);
+	            // or window.location.href = data.fileUrl;
+	        },
+	        error:function (xhr, ajaxOptions, thrownError) {
+	            console.log("in error");
+	     } 
+		});
+	}
 
+</script>
 </body>
 </html>

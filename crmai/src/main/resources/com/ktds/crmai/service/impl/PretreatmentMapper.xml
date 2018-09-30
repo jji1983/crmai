@@ -15,10 +15,9 @@
 		  cam.cam_autoyn as "cam_autoyn",
 		  cam.cam_icnum as "cam_icnum",
 		  cam.cam_ifilename as "cam_ifilename",
-		  cam.cam_iviewname as "cam_iviewname",
 		  cam.cam_idate as "cam_idate",
 		  cam.cam_otype as "cam_otype",
-		  cam.cam_otablename as "cam_otablename",
+		  cam.cam_otablename as "cam_ofilename",
 		  cam.cam_cdate as "cam_cdate",
 		  cam.cam_desc as "cam_desc",
 		  cam.cam_msg as "cam_msg"
@@ -45,10 +44,9 @@
 		  cam.cam_autoyn as "cam_autoyn",
 		  cam.cam_icnum as "cam_icnum",
 		  cam.cam_ifilename as "cam_ifilename",
-		  cam.cam_iviewname as "cam_iviewname",
 		  cam.cam_idate as "cam_idate",
 		  cam.cam_otype as "cam_otype",
-		  cam.cam_otablename as "cam_otablename",
+		  cam.cam_otablename as "cam_ofilename",
 		  cam.cam_cdate as "cam_cdate",
 		  cam.cam_desc as "cam_desc",
 		  cam.cam_msg as "cam_msg"
@@ -74,10 +72,6 @@
 		order by cam.cam_cdate desc
     </select>
     
-    <select id="selectCampaignSeq" resultType="campaign">
-    	select cam_seq.nextval as "cam_seq" from dual
-    </select>	
-    
     <select id="selectStaginTrain" resultType="s_train">
 		select 
 			*  
@@ -100,13 +94,6 @@
 			<![CDATA[ and ROWNUM >= 1 AND ROWNUM <= 100 ]]>
 		order by st_seq 
     </select>
-    
-    <insert id="insertCampaign">
-	    insert into ai_campaign(cam_id, adm_id, cam_name, cam_desc, cam_type, cam_ifilename, cam_itype, cam_autoyn,  cam_otype,  cam_cdate, cam_status) 
-		values ( #{cam_seq}, #{adm_id}, #{cam_name}, #{cam_desc}, #{cam_type}, #{cam_ifilename}, #{cam_itype}, #{cam_autoyn}, 0, sysdate,'시작')
-	</insert>
-	
-
     
 
 </mapper>

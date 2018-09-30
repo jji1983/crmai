@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ktds.crmai.service.impl.CampaignMapper">
+
+     <select id="selectCampaignPage" resultType="campaign">
+		select * 
+			from (
+			    select <![CDATA[ rownum as rnum ]]> , A.cam_id, A.cam_name, A.adm_id, A.cam_type, A.cam_status, A.cam_itype, A.cam_autoyn, A.cam_icnum, A.cam_ifilename,  A.cam_idate, A.cam_otype, A.cam_ofilename, A.cam_cdate, A.cam_desc, A.cam_msg 
+			    from
+			        (
+			         select cam_id, cam_name, adm_id, cam_type, cam_status, cam_itype, cam_autoyn, cam_icnum, cam_ifilename,  cam_idate, cam_otype, cam_ofilename, cam_cdate, cam_desc, cam_msg  
+			         from ai_campaign 
+			         where adm_id = #{adm_id} order by cam_id desc 
+			         ) A
+			    where <![CDATA[ rownum <= #{page_end} ]]> 
+			    ) B
+		where b.rnum >= #{page_st}
+    </select>
+     
+    <select id="selectCamPageNum" resultType="int">
+		select count(*) as totalCount from ai_campaign where adm_id = #{adm_id}
+    </select>
+    
+    <select id="selectCampaignSeq" resultType="campaign">
+    	select cam_seq.nextval as "cam_seq" from dual
+    </select>
+    
+    <select id="selectCampaignAiStatus" resultType="campaign">
+    	select 
+		  cam_id as "cam_id",
+		  cam_itype as "cam_itype",
+		  cam_otype as "cam_otype",
+		  cam_msg as "cam_msg"
+		from 
+		  ai_campaign
+		where
+		  cam_id =  #{cam_id}
+    </select>	
+    
+    <insert id="insertCampaign">
+	    insert into ai_campaign(cam_id, adm_id, cam_name, cam_desc, cam_type, cam_ifilename, cam_itype, cam_autoyn,  cam_otype, cam_ofilename, cam_cdate, cam_status) 
+		values ( #{cam_seq}, #{adm_id}, #{cam_name}, #{cam_desc}, #{cam_type}, #{cam_ifilename}, #{cam_itype}, #{cam_autoyn}, #{cam_otype}, #{cam_ofilename}, sysdate,'시작')
+	</insert>
+    
+
+</mapper>

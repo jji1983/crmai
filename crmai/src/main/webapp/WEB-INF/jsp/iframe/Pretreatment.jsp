@@ -170,15 +170,13 @@
 											enctype="multipart/form-data">
 											<div class="box-body">
 
-												<input type="hidden" id="user_id" name="user_id"
-													value=<%=session.getAttribute("sessionID") %>>
+												<input type="hidden" id="user_id" name="user_id" value=<%=session.getAttribute("sessionID") %>>
 
 												<div class="form-group">
 													<label for="inputCamName" class="col-sm-2 control-label">캠페인명</label>
 
 													<div class="col-sm-10">
-														<input id="inputCamName" name="inputCamName" type="text"
-															class="form-control" placeholder="캠페인명">
+														<input id="inputCamName" name="inputCamName" type="text" class="form-control" placeholder="캠페인명">
 													</div>
 												</div>
 
@@ -186,8 +184,7 @@
 													<label for="inputCamDesc" class="col-sm-2 control-label">설명</label>
 
 													<div class="col-sm-10">
-														<input id="inputCamDesc" name="inputCamDesc" type="text"
-															class="form-control" placeholder="설명">
+														<input id="inputCamDesc" name="inputCamDesc" type="text" class="form-control" placeholder="설명">
 													</div>
 												</div>
 
@@ -219,7 +216,7 @@
 												<div class="form-group">
 													<label for="InputFile" class="col-sm-2 control-label">파일 등록(학습CSV)</label>
 													<div class="col-sm-10">
-														<input type="file" name="file" id="InputFile" accept=".csv">
+														<input id="InputFile" type="file" name="file"  accept=".csv">
 													</div>
 												</div>
 
@@ -267,17 +264,6 @@
   
   
   $(document).ready(function () {
-    
-    //라디오 요소처럼 동작시킬 체크박스 그룹 셀렉터
-    $('input[type="checkbox"][name="camCheck"]').click(function(){
-    	//alert("check!!!");
-        //클릭 이벤트 발생한 요소가 체크 상태인 경우
-        if ($(this).prop('checked')) {
-            //체크박스 그룹의 요소 전체를 체크 해제후 클릭한 요소 체크 상태지정
-            $('input[type="checkbox"][name="camCheck"]').prop('checked', false);
-            $(this).prop('checked', true);
-        }
-    });
 	  
     //모달 처리(신규).
     $("#bthNew").click(function(event) {
@@ -389,10 +375,11 @@
       var json = $.parseJSON(obj);
    	  $(json).each(function(i,val){
    		html += '<tr>';
-   		html += '<td><input type="checkbox" name="camCheck"/></td>';
+   		
    		$.each(val,function(k,v){
    			flag = 0;
    			if(k == 'cam_id'){
+   				html += '<td><input type="radio" name="camCheck" onclick="handleClick(this);" value="'+v+'" /></td>';
    				html += '<td><center>' + v + '</center></td>';	
    			}
    			if(k == 'cam_name'){
@@ -454,30 +441,6 @@
       //tableDataRe();
   }
   
-  //상단 선택버튼 클릭시 체크된 Row의 값을 가져온다.
-  $("#ai_campaign").click(function(){
-	  	//alert("check !!! ");
-		var tdArr = new Array();
-		var checkbox = $("input[name=camCheck]:checked");
-		
-		var row_id = '';
-		
-		// 체크된 체크박스 값을 가져온다
-		checkbox.each(function(i) {
-			// checkbox.parent() : checkbox의 부모는 <td>이다.
-			// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
-			var tr = checkbox.parent().parent().eq(i);
-			var td = tr.children();
-			
-			row_id = td.eq(1).text();
-			
-			
-			//alert("row_id :: " + row_id);
-		});
-		//pretreatment_asis(row_id);	
-		
-  });
-  
   function tableDataRe(){
 	  
 	  $('#ai_campaign').destroy();
@@ -496,6 +459,15 @@
   function startCallback() {
 	  //setInterval("search_campaign();", 60000);
   }
+  
+  
+  var currentValue = 0;
+  function handleClick(myRadio) {
+      //alert('Old value: ' + currentValue);
+      //alert('New value: ' + myRadio.value);
+      currentValue = myRadio.value;
+  }
+ 
     
   search_campaign();
   startCallback();

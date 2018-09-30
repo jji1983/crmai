@@ -42,10 +42,13 @@ public class AdminController {
 		
 			if(user.getADM_PW().equals(ADM_PW)) {
 				response.add("success");
-				
 				session.setAttribute("sessionID", user.getADM_ID());
 				session.setAttribute("sessionNAME", user.getADM_NAME());
 				session.setAttribute("sessionROLE", user.getADM_ROLE());
+				session.setAttribute("sessionLOGIN", user.getADM_LOGIN());
+				session.setAttribute("sessionCAMCNT", user.getCAM_CNT());
+				
+				admService.updateAdminById(user.getADM_ID());
 				
 			}else{
 				response.add("fail. PW not correct!");

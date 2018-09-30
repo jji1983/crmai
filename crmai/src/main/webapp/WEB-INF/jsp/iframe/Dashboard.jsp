@@ -3,6 +3,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<%
+	//out.println("sessionLOGIN :: " + session.getAttribute("sessionLOGIN"));
+	//out.println("sessionCAMCNT :: " + session.getAttribute("sessionCAMCNT"));
+%>
+
 <title>Dashboard</title>
 
   <!-- Tell the browser to be responsive to screen width -->

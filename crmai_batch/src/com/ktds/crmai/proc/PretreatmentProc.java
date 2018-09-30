@@ -68,7 +68,7 @@ public class PretreatmentProc {
 	            }
 	            System.out.println(data.getCam_id() + " ing :: " + DateTool.getTimestamp());
 	            
-	            String errorMsg = dao.insertCSVtoTable(data);
+	            String errorMsg = dao.insertAI_STAGING_TRAIN_BATCH(data, arrayList);
 	            
 	            System.out.println(data.getCam_id() + " end :: " + DateTool.getTimestamp());
 	            

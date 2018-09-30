@@ -34,7 +34,7 @@
   </div>
 
   <div class="register-box-body">
-    <p class="login-box-msg">Register a new membership</p>
+    <p class="login-box-msg">AI CAP 회원가입</p>
 
     
      <div class="form-group has-feedback">
@@ -97,8 +97,6 @@
 <script>
 
 function register_check(){
-	
-	
 	
 	if($('#ADM_PW').val() != $('#ADM_PW_R').val()){
 		alert("비밀번호가 일치 하지 안습니다.!");
