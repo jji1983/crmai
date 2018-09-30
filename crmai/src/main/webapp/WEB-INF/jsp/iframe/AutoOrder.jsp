@@ -285,31 +285,43 @@
 	  var page_st = 1;
 	  var page_end = 5;
   	  
-	  var selectRadio = 0;
+	  var currentValue = 0;
+	  
+	  // 중지를 위해 ID 보관
+	  var timerId = null;
 	  
 	  function handleClick(myRadio) {
-	      //alert('Old value: ' + selectRadio);
+	      //alert('Old value: ' + currentValue);
 	      //alert('New value: ' + myRadio.value);
 	      currentValue = myRadio.value;
 	  
 		  $("#ai_status").show(); //현황창 보이기
-		  
-		  //$("#id_msg").hide(); //숨기기
-		  
 		  $("#id_span_msg").text("캠페인ID :: " + currentValue);
 	      
-	      //처리 현황 업데이트
-	      //$("#id_predict_overlay").hide(); //숨기기
+		  getAIStatus();
+		  
+		  if(timerId != null) {
+		        clearInterval(timerId);
+		  }
+		  
+		  timerId = setInterval("getAIStatus()", 30000);
 	  }
-	  
 	  
 	  function radioInit(myRadio) {
 		  
+		  alert("radioInit :: " + myRadio);
+		  
 		  if(myRadio != 0){
 			  $("#ai_status").show(); //현황창 보이기
-			  
 			  $("#id_span_msg").text("캠페인ID :: " + myRadio); 
+			  
+			  currentValue = myRadio;
 		  }
+		  
+		  if(timerId != null) {
+		        clearInterval(timerId);
+		  }
+		  timerId = setInterval("getAIStatus()", 30000);
 	  }
 	  
 	  function campaignPage(){
@@ -336,7 +348,7 @@
 	        			grid_pagination(totalPages, visiblePages);
 	        		}else{
 	        			$("#id_span_msg").text("등록된 캠페인 이 없습니다. >> \"캠페인 신규등록 \"버튼 클릭!");
-	        			$("#ai_status").hide(); //학습데이터 보이기
+	        			$("#ai_status").hide(); //학습데이터 숨기기
 	        		}
 		        },
 		        error   : function(request,status,error){
@@ -431,6 +443,7 @@
 	 				if(first == 0){
 	 					html += '<td><input type="radio" name="camCheck" checked="checked" onclick="handleClick(this);" value="'+v+'" /></td>';
 	 					radioInit(v);
+	 					getAIStatus();
 	 					first = 1;
 	 				}else{
 	 					html += '<td><input type="radio" name="camCheck" onclick="handleClick(this);" value="'+v+'" /></td>';
@@ -542,10 +555,39 @@
         }
     });
   }
+  
+  
+  function getAIStatus(){
+		alert('-- getAIStatus -- ['+currentValue+']');
+		
+		var campaign = new Object();
+	  	campaign.cam_id = currentValue;
+	  	
+	    $.ajax({
+	        type    : 'GET', // method
+	        url     : '/campaign/aistatus',
+	        //url       : '/admin/login_proc?ADM_ID=XXXX&ADM_PW=XXXX', // GET 요청은 데이터가 URL 파라미터로 포함되어 전송됩니다.
+	        async   : 'true', // true
+	        data    : campaign, // GET 요청은 지원되지 않습니다.
+	        processData : true, // GET 요청은 데이터가 바디에 포함되는 것이 아니기 때문에 URL에 파라미터 형식으로 추가해서 전송해줍니다.
+	        cache: false,
+	        contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
+	        //dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
+	        success : function(data){
+	        	var obj = JSON.stringify(data, true, 2);
+	        	//alert("search_campaign result :: " + obj);
+	        	
+	        	grid_table_campaign(obj);
+	        	
+	        },
+	        error : function(request,status,error){
+	        	 //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	        }
+		});
+  }
 	
-	$(document).ready(function () {
+  $(document).ready(function () {
 		campaignPage();
-		//radioInit();
 		
 		//모달 처리(신규).
 	    $("#bthNew").click(function(event) {
@@ -556,9 +598,11 @@
 	        submit_newCampagin();
 	        
 	    });
-	});
+		
+	   
+  });
 
-  </script>
+ </script>
 
 </body>
 </html>

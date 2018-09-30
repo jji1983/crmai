@@ -25,6 +25,10 @@
     
     <select id="selectCampaignSeq" resultType="campaign">
     	select cam_seq.nextval as "cam_seq" from dual
+    </select>
+    
+    <select id="selectCampaignAiStatus" resultType="campaign">
+    	select cam_seq.nextval as "cam_seq" from dual
     </select>	
     
     <insert id="insertCampaign">

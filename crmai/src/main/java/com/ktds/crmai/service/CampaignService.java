@@ -34,9 +34,17 @@ public class CampaignService implements CampaignMapper {
 	}
 
 	@Override
+	public AI_CAMPAIGN selectCampaignAiStatus(AI_CAMPAIGN campaign) {
+		// TODO Auto-generated method stub
+		return campaignMapper.selectCampaignAiStatus(campaign);
+	}
+
+	
+	@Override
 	public void insertCampaign(AI_CAMPAIGN campaign) {
 		campaignMapper.insertCampaign(campaign);
 		
 	}
+
 
 }
