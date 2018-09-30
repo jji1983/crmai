@@ -98,7 +98,7 @@
 	            </div>
 	            <!-- /.box-header -->
 	            <div id='id_loading1_msg' class="box-body">
-	            	학습 데이터 처리중
+	            	학습 데이터 처리 전
 	            </div>
 	            <!-- /.box-body -->
 	            
@@ -116,7 +116,7 @@
 	            </div>
 	            <!-- /.box-header -->
 	            <div id='id_loading2_msg' class="box-body">
-	            	대상자 데이터 처리
+	            	대상자 데이터 처리 전
 	            </div>
 	            <!-- /.box-body -->
 	            
@@ -132,11 +132,11 @@
 	        <div id='id_pre' class="col-md-2.5 col-sm-2">
 	          <div class="box box-success box-solid">
 	            <div class="box-header with-border">
-	              <h3 class="box-title text-center">2. 전처리</h3>
+	              <h3 class="box-title text-center">2. AI전처리</h3>
 	            </div>
 	            <!-- /.box-header -->
 	            <div id='id_pre_msg' class="box-body">
-	              	데이터 전처리
+	              	데이터 전처리 전
 	            </div>
 	            <!-- /.box-body -->
 	            
@@ -156,7 +156,7 @@
 	            </div>
 	            <!-- /.box-header -->
 	            <div id='id_runf_msg' class="box-body">
-	              	AI학습중
+	              	AI학습 전
 	            </div>
 	            <!-- /.box-body -->
 	            
@@ -173,15 +173,34 @@
 	        <div id='id_predict' class="col-md-2.5 col-sm-2">
 	          <div class="box box-danger box-solid">
 	            <div class="box-header">
-	              <h3 class="box-title">4. 예측실행</h3>
+	              <h3 class="box-title">4. AI예측실행</h3>
 	            </div>
 	            <div id='id_predict_msg' class="box-body">
-	              The body of the box
+	              	예측실행 전
 	            </div>
 	            <!-- /.box-body -->
 	            
 	            <!-- Loading (remove the following to stop the loading)-->
 	            <div id='id_predict_overlay' class="overlay"><i class="fa fa-refresh fa-spin"></i></div>
+	            <!-- end loading -->
+	            
+	          </div>
+	          <!-- /.box -->
+	        </div>
+	        <!-- /.col -->
+	        
+	        <div id='id_real' class="col-md-2.5 col-sm-2">
+	          <div class="box box-success box-solid">
+	            <div class="box-header">
+	              <h3 class="box-title">5. AI결과</h3>
+	            </div>
+	            <div id='id_real_msg' class="box-body">
+	               	실측  해보자
+	            </div>
+	            <!-- /.box-body -->
+	            
+	            <!-- Loading (remove the following to stop the loading)-->
+	            <div id='id_real_overlay' class="overlay"><i class="fa fa-refresh fa-spin"></i></div>
 	            <!-- end loading -->
 	            
 	          </div>
@@ -441,7 +460,7 @@
 	    html += 	'<th>캠페인이름</th>';
 	    html += 	'<th>등록자</th>';
 	    html += 	'<th>캠페인목적</th>';
-	    html += 	'<th>캠페인상태</th>';
+	    /*html += 	'<th>캠페인상태</th>'; */
 	    html += 	'<th>AI진행상태</th>';
 	    html += 	'<th>캠페인 등록일자</th>';
 	    html += 	'<th>설명</th>';
@@ -480,7 +499,7 @@
 	 			if(k == 'cam_status'){
 	 				html += '<td>' + v + '</td>';	
 	 			}
-	 			
+	 			 /*
 	 			if(k == 'cam_itype'){
 	 				if(v == '0'){
 	 					html += '<td><span class="label label-info">데이터 로딩 필요</span></td>';
@@ -498,6 +517,7 @@
 	 					html += '<td><span class="label label-primary">데이터 엑셀 처리 종료</span></td>';
 	 				}
 	 			}
+	 			 */
 	 			if(k == 'cam_cdate'){
 	 				html += '<td>' + v + '</td>';	
 	 			}
@@ -629,16 +649,20 @@
 		  $("#id_runf_overlay").hide(); //학습중 단계 삭제
 		  $("#id_predict_overlay").hide(); //예측실행 단계 삭제
 		  $("#id_pre_overlay").hide(); //전처리 단계 삭제
+		  $("#id_real_overlay").hide(); //전처리 단계 삭제
 		  
 		  if(cam_itype == 0){
 			  $("#id_loading1_msg").text(t_val0);
+			  $("#id_loading1_overlay").show(); //전처리 단계 실행
 		  }else if(cam_itype == 1){
 			  $("#id_loading1_msg").text(t_val1);
+			  $("#id_loading1_overlay").show(); //전처리 단계 실행
 		  }else if(cam_itype == 2){
 			  $("#id_loading1_msg").text(t_val2);
+			  $("#id_loading1_overlay").show(); //전처리 단계 실행
 		  }else if(cam_itype == 3){
 			  $("#id_loading1_msg").text(t_val3);
-			  
+			  $("#id_loading1_overlay").show(); //전처리 단계 실행
 		  }else if(cam_itype == 4){
 			  $("#id_loading1_msg").text(t_val4);
 			  
