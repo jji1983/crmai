@@ -90,14 +90,14 @@
  		
 		<div id="ai_status" class="row">
 		
-	        <div id='id_loading1' class="col-md-2.5 col-sm-2">
+	        <div id='id_loading1' class="col-md-2.5 col-sm-2 text-center">
 	          <div class="box box-default box-solid">
 	            <div class="box-header with-border">
 	              <h3 class="box-title">1.1 학습데이터</h3>
 	            </div>
 	            <!-- /.box-header -->
-	            <div id='id_loading1_msg' class="box-body">
-	            	학습 데이터 처리 전
+	            <div class="box-body">
+	            	<button id='id_loading1_msg' type="button" class="btn btn-default" data-toggle="modal" data-target="#newModal"></button>
 	            </div>
 	            <!-- /.box-body -->
 	            
@@ -108,14 +108,14 @@
 	        </div>
 	        <!-- /.col -->
 	        
-	        <div id='id_loading2' class="col-md-2.5 col-sm-2">
+	        <div id='id_loading2' class="col-md-2.5 col-sm-2 text-center">
 	          <div class="box box-default box-solid">
 	            <div class="box-header with-border">
 	              <h3 class="box-title">1.2 대상자데이터</h3>
 	            </div>
 	            <!-- /.box-header -->
-	            <div id='id_loading2_msg' class="box-body">
-	            	대상자 데이터 처리 전
+	            <div class="box-body">
+	            	<button id='id_loading2_msg' type="button" class="btn btn-default" data-toggle="modal" data-target="#newModal"></button>
 	            </div>
 	            <!-- /.box-body -->
 	            
@@ -128,14 +128,14 @@
 	        </div>
 	        <!-- /.col -->
 
-	        <div id='id_pre' class="col-md-2.5 col-sm-2">
+	        <div id='id_pre' class="col-md-2.5 col-sm-2 text-center">
 	          <div class="box box-success box-solid">
 	            <div class="box-header with-border">
 	              <h3 class="box-title text-center">2. AI전처리</h3>
 	            </div>
 	            <!-- /.box-header -->
-	            <div id='id_pre_msg' class="box-body">
-	              	데이터 전처리 전
+	            <div class="box-body">
+	              	<button id='id_pre_msg' type="button" class="btn btn-info pull-center" data-toggle="modal" data-target="#newModal"></button>
 	            </div>
 	            <!-- /.box-body -->
 	            
@@ -148,14 +148,14 @@
 	        </div>
 	        <!-- /.col -->
 	        
-	        <div id='id_runf' class="col-md-2.5 col-sm-2">
+	        <div id='id_runf' class="col-md-2.5 col-sm-2 text-center">
 	          <div class="box box-warning box-solid">
 	            <div class="box-header with-border">
 	              <h3 class="box-title">3. AI학습</h3>
 	            </div>
 	            <!-- /.box-header -->
-	            <div id='id_runf_msg' class="box-body">
-	              	AI학습 전
+	            <div class="box-body">
+	              	<button id='id_runf_msg' type="button" class="btn btn-info pull-center" data-toggle="modal" data-target="#newModal"></button>
 	            </div>
 	            <!-- /.box-body -->
 	            
@@ -169,13 +169,13 @@
 	        <!-- /.col -->
 
 	        
-	        <div id='id_predict' class="col-md-2.5 col-sm-2">
+	        <div id='id_predict' class="col-md-2.5 col-sm-2 text-center">
 	          <div class="box box-danger box-solid">
 	            <div class="box-header">
 	              <h3 class="box-title">4. AI예측실행</h3>
 	            </div>
-	            <div id='id_predict_msg' class="box-body">
-	              	예측실행 전
+	            <div class="box-body">
+	              	<button id='id_predict_msg' type="button" class="btn btn-info pull-center" data-toggle="modal" data-target="#newModal"></button>
 	            </div>
 	            <!-- /.box-body -->
 	            
@@ -188,13 +188,13 @@
 	        </div>
 	        <!-- /.col -->
 	        
-	        <div id='id_real' class="col-md-2.5 col-sm-2">
+	        <div id='id_real' class="col-md-2.5 col-sm-2 text-center">
 	          <div class="box box-success box-solid">
 	            <div class="box-header">
 	              <h3 class="box-title">5. AI결과</h3>
 	            </div>
-	            <div id='id_real_msg' class="box-body">
-	               	실측  해보자
+	            <div class="box-body">
+	               	<button id='id_real_msg' type="button" class="btn btn-info pull-center" data-toggle="modal" data-target="#newModal"></button>
 	            </div>
 	            <!-- /.box-body -->
 	            
@@ -415,8 +415,6 @@
 	        });
 	  }
 	   
-	  
-	  
 	  function search_campaign(now_page, page_st, page_end){
 		  
 		  	//alert("search_campaign call :: now[" + now_page + "] :: interval[" +visiblePages +"] :: st[" + page_st + "] :: end[" + page_end + "]" );
@@ -633,50 +631,80 @@
   
   function setAiStatus(cam_id, cam_itype, cam_otype) {
 	 //alert("call setAiStatus :: " + cam_id + " :: " + cam_itype + " :: " + cam_otype);
+	  $("#ai_status").show(); //현황창 보이기
 	 
-	 $("#ai_status").show(); //현황창 보이기
-	  
-	  var train_text = ["학습데이터 입력전", "학습데이터 입력후", "학습데이터 처리중", "학습데이터 처리 오류", "학습데이터 처리 종료"];
-	  var test_text = ["대상자데이터 입력전", "대상자데이터 입력후", "대상자데이터 처리중", "대상자데이터 처리 오류", "대상자데이터 처리 종료"]; 
+	  var button_data1 = "<button type=\"button\">캠페인 신규등록</button>";
+	 
+	  var train_text = ["학습데이터 입력전", "학습데이터 입력후", "학습데이터 처리중", "학습데이터 처리 오류", "데이터 미리보기", "전처리 전", "전처리중", "데이터 미리보기"];
+	  var test_text = ["대상자데이터 입력전", "대상자데이터 입력후", "대상자데이터 처리중", "대상자데이터 처리 오류", "데이터 미리보기", "전처리 전", "전처리중", "데이터 미리보기"];
+	  var runf_text = ["모델생성 시작전", "모델생성중", "모델 보기"];
+	  var predict_text = ["예측전", "예측중", "예측오류", "예측데이터 보기"];
+	  var real_text = ["실측결과 입력"];
 
-	  $("#id_loading1_overlay").hide(); //학습데이터 단계 삭제
-	  $("#id_loading2_overlay").hide(); //학습데이터 단계 삭제
-	  $("#id_runf_overlay").hide(); //전처리 단계 삭제
-	  $("#id_predict_overlay").hide(); //예측실행 단계 삭제
-	  $("#id_pre_overlay").hide(); //전처리 단계 삭제
-	  $("#id_real_overlay").hide(); //AI결과 단계 삭제
+	  $("#id_loading1_msg").text(train_text[0]);
+	  $("#id_loading2_msg").text(test_text[0]);
+	  
+	  $("#id_pre_msg").text(train_text[5]);
+	  $("#id_runf_msg").text(runf_text[0]);
+	  $("#id_predict_msg").text(predict_text[0]);
+	  $("#id_real_msg").text(real_text[0]);
 	  
 	  //학습 데이터 처리 / 테스트 데이터 처리
-	  if(cam_itype <= 3 || cam_otype <= 3){
+	  if(cam_itype <= 4 || cam_otype <= 4){
 		//alert("학습 데이터 처리 :: " + cam_itype + " 대상자 데이터 처리 :: " + cam_otype);
 		  
 		  $("#id_loading1_msg").text(train_text[cam_itype]);
 		  $("#id_loading2_msg").text(test_text[cam_otype]);
 		  
-		  $("#id_loading1_overlay").show(); //전처리 단계 실행
-		  $("#id_loading2_overlay").show(); //전처리 단계 실행
+		  $("#id_loading1_overlay").show(); //전처리 단계 실행중
+		  $("#id_loading2_overlay").show(); //전처리 단계 실행중
+		  $("#id_pre_overlay").show();      //AI 전처리 단계 실행중
+		  $("#id_runf_overlay").show();     //AI 모델 생성 단계 실행중
+		  $("#id_predict_overlay").show();  //AI 예측 단계 실행중
+		  $("#id_real_overlay").show();  //AI 예측 단계 실행중
 		  
-	  }else if(cam_itype >= 4 || cam_otype >= 4 && cam_itype <= 7 || cam_otype <= 7){ //전처리 단계
-		//alert("전처리 단계 :: " + cam_itype + " :: " + cam_otype);
+	  }else if(cam_itype >= 5 || cam_otype >= 5 && cam_itype <= 7 || cam_otype <= 7){ //전처리 단계
+		  //alert("전처리 단계 :: " + cam_itype + " :: " + cam_otype);
+		
+		  $("#id_loading1_msg").text(train_text[4]);
+		  $("#id_loading2_msg").text(test_text[4]);
+		  $("#id_pre_msg").text(train_text[cam_itype]);
 	  
-	  	if(cam_itype >= 4 &&  cam_otype >= 4 ){
-	  		$("#id_loading1_msg").text(train_text[4]);
-			$("#id_loading2_msg").text(test_text[4]);
-			
-			$("#id_loading1_overlay").hide(); //전처리 단계 실행
-			$("#id_loading2_overlay").hide(); //전처리 단계 실행
-	  	}
+  		  $("#id_loading1_overlay").hide(); //전처리 단계 실행
+		  $("#id_loading2_overlay").hide(); //전처리 단계 실행
+		  
+		  $("#id_pre_overlay").show();      //AI 전처리 단계 실행중
+		  $("#id_runf_overlay").show();     //AI 모델 생성 단계 실행중
+		  $("#id_predict_overlay").show();  //AI 예측 단계 실행중
+		  $("#id_real_overlay").show();  //AI 예측 단계 실행중
+	  	
 	  
-		$("#id_pre_overlay").show(); //전처리 단계 동기
+	  	
+		
+		
 		  
 	  }else if(cam_itype >= 8 || cam_itype <= 10){ //모델 생성
-		  
 		  alert("모델 생성 :: " + cam_itype );
+	  
+		  $("#id_runf_msg").text(runf_text[(cam_itype - 7)]);
+		  $("#id_runf_overlay").show(); //모델생성 단계 동기
 		  
 	  }else if(cam_itype >= 11 || cam_itype <= 15){
 		  
+		  $("#id_predict_msg").text(predict_text[(cam_itype - 10)]);
+		  $("#id_predict_overlay").show(); //모델생성 단계 동기
+		  
 		  alert("예측 처리 :: " + cam_itype );
+		  
+		  if(cam_itype == 15){
+			
+		  	$("#id_real_overlay").hide(); //AI결과 단계 삭제
+		  }
 	  }
+	  
+	  
+	  
+	  
 	  
   }
 	
