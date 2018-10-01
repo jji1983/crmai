@@ -32,7 +32,6 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   
-  
   <!-- jQuery 3 -->
   <script src="/resources/bower_components/jquery/dist/jquery.min.js"></script>
   <!-- Bootstrap 3.3.7 -->
@@ -637,49 +636,46 @@
 	 
 	 $("#ai_status").show(); //현황창 보이기
 	  
-	  var t_val0 = "학습데이터 입력전"; 
-	  var t_val1 = "학습데이터 입력후";
-	  var t_val2 = "학습데이터 처리중";
-	  var t_val3 = "학습데이터 처리 오류";
-	  var t_val4 = "학습데이터 처리 종료";
+	  var train_text = ["학습데이터 입력전", "학습데이터 입력후", "학습데이터 처리중", "학습데이터 처리 오류", "학습데이터 처리 종료"];
+	  var test_text = ["대상자데이터 입력전", "대상자데이터 입력후", "대상자데이터 처리중", "대상자데이터 처리 오류", "대상자데이터 처리 종료"]; 
+
+	  $("#id_loading1_overlay").hide(); //학습데이터 단계 삭제
+	  $("#id_loading2_overlay").hide(); //학습데이터 단계 삭제
+	  $("#id_runf_overlay").hide(); //전처리 단계 삭제
+	  $("#id_predict_overlay").hide(); //예측실행 단계 삭제
+	  $("#id_pre_overlay").hide(); //전처리 단계 삭제
+	  $("#id_real_overlay").hide(); //AI결과 단계 삭제
 	  
-	  //학습 데이터 처리중
-	  if(cam_itype <= 4){
+	  //학습 데이터 처리 / 테스트 데이터 처리
+	  if(cam_itype <= 3 || cam_otype <= 3){
+		//alert("학습 데이터 처리 :: " + cam_itype + " 대상자 데이터 처리 :: " + cam_otype);
 		  
-		  $("#id_runf_overlay").hide(); //학습중 단계 삭제
-		  $("#id_predict_overlay").hide(); //예측실행 단계 삭제
-		  $("#id_pre_overlay").hide(); //전처리 단계 삭제
-		  $("#id_real_overlay").hide(); //전처리 단계 삭제
+		  $("#id_loading1_msg").text(train_text[cam_itype]);
+		  $("#id_loading2_msg").text(test_text[cam_otype]);
 		  
-		  if(cam_itype == 0){
-			  $("#id_loading1_msg").text(t_val0);
-			  $("#id_loading1_overlay").show(); //전처리 단계 실행
-		  }else if(cam_itype == 1){
-			  $("#id_loading1_msg").text(t_val1);
-			  $("#id_loading1_overlay").show(); //전처리 단계 실행
-		  }else if(cam_itype == 2){
-			  $("#id_loading1_msg").text(t_val2);
-			  $("#id_loading1_overlay").show(); //전처리 단계 실행
-		  }else if(cam_itype == 3){
-			  $("#id_loading1_msg").text(t_val3);
-			  $("#id_loading1_overlay").show(); //전처리 단계 실행
-		  }else if(cam_itype == 4){
-			  $("#id_loading1_msg").text(t_val4);
-			  
-			  $("#id_loading1_overlay").hide(); //전처리 단계 삭제
-			  $("#id_pre_overlay").show(); //전처리 단계 동기
-		  }
+		  $("#id_loading1_overlay").show(); //전처리 단계 실행
+		  $("#id_loading2_overlay").show(); //전처리 단계 실행
 		  
+	  }else if(cam_itype >= 4 || cam_otype >= 4 && cam_itype <= 7 || cam_otype <= 7){ //전처리 단계
+		//alert("전처리 단계 :: " + cam_itype + " :: " + cam_otype);
+	  
+	  	if(cam_itype >= 4 &&  cam_otype >= 4 ){
+	  		$("#id_loading1_msg").text(train_text[4]);
+			$("#id_loading2_msg").text(test_text[4]);
+			
+			$("#id_loading1_overlay").hide(); //전처리 단계 실행
+			$("#id_loading2_overlay").hide(); //전처리 단계 실행
+	  	}
+	  
+		$("#id_pre_overlay").show(); //전처리 단계 동기
 		  
+	  }else if(cam_itype >= 8 || cam_itype <= 10){ //모델 생성
 		  
+		  alert("모델 생성 :: " + cam_itype );
 		  
+	  }else if(cam_itype >= 11 || cam_itype <= 15){
 		  
-	  }else if(cam_itype > 4 && cam_itype < 7){ //전처리 단계
-		  
-	  }else if(cam_itype > 7 && cam_itype < 10){ //모델 생성
-		  
-	  }else{
-		  
+		  alert("예측 처리 :: " + cam_itype );
 	  }
 	  
   }
