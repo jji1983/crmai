@@ -47,7 +47,6 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 
-
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -62,16 +61,124 @@
     
     <!-- Main content -->
     <section class="content">
-	   <div class="callout callout-info">
-        <h4>통계</h4>
+	   	<div class="col-xs-12">
+			<div class="box">
+				<div class="box box-default">
+					<div class="box-header with-border">
+						<h3 class="box-title">검색창</h3>
 
-        <p id="noticeVal"></p>
-      </div>
-	   
-	   
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" data-widget="collapse">
+									<i class="fa fa-minus"></i>
+							</button>
+						<!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button> -->
+						</div>
+					</div>
+					<!-- /.box-header -->
+					
+					<div class="box-body">
+			          <div class="row">
+			            <div class="col-md-3">
+			              <div class="form-group">
+			              	<div class="col-sm-10">
+			              		<label for="cam_name">캠페인명</label> <input type="text" class="form-control" id="cam_name" placeholder="캠페인명">
+			              	</div>
+			              </div>
+			            </div>
+			            <!-- /.col -->
+			            <div class="col-md-3">
+			              <div class="form-group">
+			              	<div class="col-sm-10">
+			              		<label for="cam_type">캠페인목적</label>
+			              		<select id="cam_type" class="form-control select2" style="width: 100%;">
+									<option selected="selected">ALL</option>
+									<option>Acquisition</option>
+									<option>Retention</option>
+									<option>Cultivation</option>
+									<option>KeepCare</option>
+								</select>
+			              	</div>
+			              </div>
+			            </div>
+			            <!-- /.col -->
+			            <div class="col-md-3">
+			              <div class="form-group">
+			              	<div class="col-sm-10">
+			              		<label for="cam_status">캠페인상태</label>
+			              		<select id="cam_status" class="form-control select2" style="width: 100%;">
+									<option selected="selected">ALL</option>
+									<option>시작</option>
+									<option>종료</option>
+								</select>
+			              	</div>
+			              </div>
+			            </div>
+			            <!-- /.col -->
+			            <div class="col-md-3">
+			              <div class="form-group">
+			              	<div class="col-sm-10">
+			              		<label for="const">생성자</label> <input type="text" class="form-control" id="const" placeholder="생성자">
+			              	</div>
+			              </div>
+			            </div>
+			            <!-- /.col -->
+			          </div>
+			          <!-- /.row -->
+			          
+			          <div class="row">
+			          	<div class="col-md-4">
+			              <div class="form-group">
+			              	<div class="col-sm-10">
+			              		<label for="lv1_learn">1단계 학습 모델</label>
+			              		<select id="lv1_learn" class="form-control select2" style="width: 100%;">
+									<option selected="selected">ALL</option>
+									<option>의사결정나무</option>
+									<option>Random Forest</option>
+									<option>SVM</option>
+									<option>선형회귀</option>
+								</select>
+			              	</div>
+			              </div>
+			            </div>
+			            <!-- /.col -->
+			            <div class="col-md-4">
+			              <div class="form-group">
+			              	<div class="col-sm-10">
+			              		<label for="lv2_learn">2단계 학습 모델</label>
+			              		<select id="lv2_learn" class="form-control select2" style="width: 100%;">
+									<option selected="selected">ALL</option>
+									<option>의사결정나무</option>
+									<option>Random Forest</option>
+									<option>SVM</option>
+									<option>선형회귀</option>
+								</select>
+			              	</div>
+			              </div>
+			            </div>
+			            <!-- /.col -->
+			            <div class="col-md-4">
+			              <div class="form-group">
+			              	<div class="col-sm-10">
+			              		<label for="feature">Feature</label> <input type="text" class="form-control" id="feature" placeholder="Feature">
+			              	</div>
+			              </div>
+			            </div>
+			            <!-- /.col -->
+			          </div>
+			          <!-- /.row -->
+			        </div>
+			        <!-- /.box-body -->
+			        
+			        <div class="box-footer">
+						<button type="button" onclick="search_campaign();" class="btn btn-info pull-right">상세조회</button>
+					</div>
+					<!-- /.box-footer -->
+				</div>
+			</div>
+			<!-- /.box -->
+		</div>	   
     </section>
-     <!-- /.Main content -->
-
+     <!-- /.content -->
 
 
 <!-- jQuery 3 -->
@@ -113,17 +220,7 @@
 <script src="/resources/dist/js/demo.js"></script>
 <script type="text/javascript">
 
-function grid_table_campaign(){
-	var div = document.querySelector('#noticeVal');
-    //alert("grid_table_campaign :: " + obj);
 
-    html = '<p>선정대상에 대한 실질반응</p>';
-    
-    
-    div.innerHTML = html;
-}
-
-grid_table_campaign();
 
 </script>
 </body>
