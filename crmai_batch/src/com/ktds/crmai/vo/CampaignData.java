@@ -6,6 +6,8 @@ public class CampaignData {
 	private String adm_id;
 	private String cam_itype;
 	private String cam_ifilename;
+	private String cam_otype;
+	private String cam_ofilename;
 	private int icnum;
 	
 	
@@ -34,6 +36,18 @@ public class CampaignData {
 		this.cam_ifilename = cam_ifilename;
 	}
 	
+	public String getCam_otype() {
+		return cam_otype;
+	}
+	public void setCam_otype(String cam_otype) {
+		this.cam_otype = cam_otype;
+	}
+	public String getCam_ofilename() {
+		return cam_ofilename;
+	}
+	public void setCam_ofilename(String cam_ofilename) {
+		this.cam_ofilename = cam_ofilename;
+	}
 	public int getIcnum() {
 		return icnum;
 	}
@@ -47,6 +61,8 @@ public class CampaignData {
 		sb.append("adm_id :: " + adm_id + "\n");
 		sb.append("cam_itype :: " + cam_itype + "\n");
 		sb.append("cam_ifilename :: " + cam_ifilename + "\n");
+		sb.append("cam_otype :: " + cam_otype + "\n");
+		sb.append("cam_ofilename :: " + cam_ofilename + "\n");
 		sb.append("icnum :: " + icnum + "\n");
 		
 		return sb.toString();
