@@ -385,7 +385,7 @@ var nowPages = 1;
 		  $("#id_predict_overlay").show();  //AI 예측 단계 실행중
 		  $("#id_real_overlay").show();  //AI 예측 단계 실행중
 		  
-	  }else if(cam_itype >= 11 || cam_itype <= 15){
+	  }else if(cam_itype >= 11 || cam_itype <= 14){
 		  
 		  $("#id_loading1_msg").text(train_text[4]);
 		  $("#id_loading2_msg").text(test_text[4]);
@@ -402,7 +402,7 @@ var nowPages = 1;
 		  
 		  alert("예측 처리 :: " + cam_itype );
 		  
-		  if(cam_itype == 15){
+		  if(cam_itype == 14){
 			$("#id_predict_overlay").hide();  //AI 예측 단계 실행중
 			$("#id_real_overlay").hide();  //AI 예측 단계 실행중
 		  }else{
