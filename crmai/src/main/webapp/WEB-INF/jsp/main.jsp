@@ -228,10 +228,7 @@
           </a>
           <ul class="treeview-menu">
             <li  class="active"><a href="javascript:Content_Statistics_m1();"><i class="fa fa-circle-o"></i>선정대상에 대한 실질반응1</a></li>
-          </ul>
-          
-           <ul class="treeview-menu">
-            <li  class="active"><a href="javascript:Content_Statistics_m2();"><i class="fa fa-circle-o"></i>선정대상에 대한 실질반응2</a></li>
+          	<li  class="active"><a href="javascript:Content_Statistics_m2();"><i class="fa fa-circle-o"></i>선정대상에 대한 실질반응2</a></li>
           </ul>
         </li>
         
