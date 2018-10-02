@@ -11,27 +11,16 @@ import com.ktds.crmai.model.Pretreatment;
 
 @Mapper
 @Repository
-public interface PretreatmentMapper {
-	
-	/*
-	 * Name : 캠페인 All
-	 */
-	List<AI_CAMPAIGN> selectAllcampaign();
-	
-	/*
-	 * Name : 캠페인  검색
-	 */
-	List<AI_CAMPAIGN> selectCampaign(AI_CAMPAIGN campaign);
-	
+public interface StagingMapper {
 	
 	/*
 	 * Name : 학습데이터 가져오기 (max : 100개)
 	 */
-	List<AI_STAGING> selectStaginTrain(AI_CAMPAIGN campaign);
+	List<AI_STAGING> selectStaginTrain(AI_STAGING staingTrain);
 	
 	/*
 	 * Name : 학습전처리완료데이터 가져오기 (max : 100개)
 	 */
-	List<AI_STAGING> selectStaginTrainResult(AI_CAMPAIGN campaign);
+	List<AI_STAGING> selectStaginTrainResult(AI_STAGING staingTrain);
 	
 }

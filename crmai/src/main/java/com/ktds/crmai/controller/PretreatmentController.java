@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ktds.crmai.model.AI_CAMPAIGN;
-import com.ktds.crmai.model.AI_STAGING_TRAIN;
+import com.ktds.crmai.model.AI_STAGING;
 import com.ktds.crmai.model.Pretreatment;
 import com.ktds.crmai.service.PretreatmentService;
 
@@ -60,7 +60,7 @@ public class PretreatmentController {
 	@RequestMapping(value = "/detail", method = RequestMethod.GET, consumes=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getCampaignTrg(@ModelAttribute("campaign") AI_CAMPAIGN in_compaign){
     	logger.info("Request List....getCampaignTrg.... - {}", in_compaign.getCam_id());
-    	List<AI_STAGING_TRAIN> trainData = null;
+    	List<AI_STAGING> trainData = null;
     	
     	if(in_compaign.getCam_id() != null) {
     		trainData = pretreatmentService.selectStaginTrain(in_compaign);
@@ -72,10 +72,10 @@ public class PretreatmentController {
     	}
     	
     	
-    	Iterator<AI_STAGING_TRAIN> ite = trainData.iterator();
+    	Iterator<AI_STAGING> ite = trainData.iterator();
     	
     	while(ite.hasNext()) {
-    		AI_STAGING_TRAIN info = (AI_STAGING_TRAIN)ite.next();
+    		AI_STAGING info = (AI_STAGING)ite.next();
     		logger.info("Pretreatment :: "+ info.toString());
     	}
     	
@@ -90,7 +90,7 @@ public class PretreatmentController {
 	@RequestMapping(value = "/detailResult", method = RequestMethod.GET, consumes=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getCampaignTrgResult(@ModelAttribute("campaign") AI_CAMPAIGN in_compaign){
     	logger.info("Request List....getCampaignTrgResult.... - {}", in_compaign.getCam_id());
-    	List<AI_STAGING_TRAIN> trainData = null;
+    	List<AI_STAGING> trainData = null;
     	
     	if(in_compaign.getCam_id() != null) {
     		trainData = pretreatmentService.selectStaginTrainResult(in_compaign);
@@ -102,10 +102,10 @@ public class PretreatmentController {
     	}
     	
     	
-    	Iterator<AI_STAGING_TRAIN> ite = trainData.iterator();
+    	Iterator<AI_STAGING> ite = trainData.iterator();
     	
     	while(ite.hasNext()) {
-    		AI_STAGING_TRAIN info = (AI_STAGING_TRAIN)ite.next();
+    		AI_STAGING info = (AI_STAGING)ite.next();
     		logger.info("Pretreatment :: "+ info.toString());
     	}
     	

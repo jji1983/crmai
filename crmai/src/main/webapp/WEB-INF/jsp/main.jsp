@@ -95,6 +95,11 @@
 		document.getElementById("main_frame").src = "/iframe/Statistics_m1";
 	}
 	
+	function Content_Statistics_m2() {
+		//alert("call Content_Statistics!!");
+		document.getElementById("main_frame").src = "/iframe/Statistics_m2";
+	}
+	
 	function Content_NoticeBoard() {
 		//alert("call Content_NoticeBoard!!");
 		document.getElementById("main_frame").src = "/iframe/NoticeBoard";
@@ -222,7 +227,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li  class="active"><a href="javascript:Content_Statistics_m1();"><i class="fa fa-circle-o"></i>선정대상에 대한 실질반응</a></li>
+            <li  class="active"><a href="javascript:Content_Statistics_m1();"><i class="fa fa-circle-o"></i>선정대상에 대한 실질반응1</a></li>
+          	<li  class="active"><a href="javascript:Content_Statistics_m2();"><i class="fa fa-circle-o"></i>선정대상에 대한 실질반응2</a></li>
           </ul>
         </li>
         

@@ -1,4 +1,4 @@
-package com.ktds.crmai;
+package com.ktds.crmai.sample;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

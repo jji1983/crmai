@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ktds.crmai.service.impl.StagingMapper">
+
+    <select id="selectStaginTrain" resultType="staging">
+		select * 
+		   from (		
+		        select  <![CDATA[ rownum as rnum ]]> , A.* 
+		        from       
+		        (
+		        select 
+					*  
+				from 
+					ai_staging_train
+				where  
+					cam_id = '226' order by st_seq desc
+		        ) A
+		        where <![CDATA[ rownum <= #{page_end} ]]> 
+		    ) B
+		where b.rnum >= #{page_st}
+    </select>
+    
+    
+    <select id="selectStaginTrainResult" resultType="staging">
+		select 
+			*  
+		from 
+			ai_staging_train_result
+		where  
+			cam_id = #{cam_id}
+			<![CDATA[ and ROWNUM >= 1 AND ROWNUM <= 100 ]]>
+		order by st_seq 
+    </select>
+    
+
+</mapper>

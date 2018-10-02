@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ktds.crmai.model.AI_ADMINUSER;
 import com.ktds.crmai.model.AI_CAMPAIGN;
-import com.ktds.crmai.model.AI_STAGING_TRAIN;
 import com.ktds.crmai.model.Pretreatment;
 import com.ktds.crmai.service.CampaignService;
 import com.ktds.crmai.service.PretreatmentService;
