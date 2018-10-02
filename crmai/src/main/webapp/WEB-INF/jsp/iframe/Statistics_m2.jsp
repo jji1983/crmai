@@ -282,6 +282,19 @@
 <!-- AdminLTE for demo purposes -->
 <script src="/resources/dist/js/demo.js"></script>
 <script type="text/javascript">
+!function(a) {
+	  a.fn.datepicker.dates.kr = {
+	    days : [ "일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일" ],
+	    daysShort : [ "일", "월", "화", "수", "목", "금", "토" ],
+	    daysMin : [ "일", "월", "화", "수", "목", "금", "토" ],
+	    months : [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월",
+	        "11월", "12월" ],
+	    monthsShort : [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월",
+	        "10월", "11월", "12월" ],
+	    titleFormat : "yyyy년 MM", /* Leverages same syntax as 'format' */
+	  }
+}(jQuery);
+
 $(function() {
 	// 임시로 테이블 안 보이게 처리, 데이터 확정 시 조건에 따라 변경 예정
 	$("#div_table").css("display", "none");
@@ -290,12 +303,22 @@ $(function() {
 	$("#after_date").css("cursor", "pointer");
 	
 	$("#before_date").datepicker({
-	      autoclose: true
-	});
+		format: "yyyy-mm-dd",
+		language: "kr",
+	    autoclose : true,
+	    todayHighlight : true              
+    }).on('hide', function(e) {
+      e.stopPropagation(); // 모달 팝업도 같이 닫히는걸 막아준다.
+    });
 	
 	$("#after_date").datepicker({
-	      autoclose: true
-	});
+		format: "yyyy-mm-dd",
+		language: "kr",
+	    autoclose : true,
+	    todayHighlight : true          
+    }).on('hide', function(e) {
+      e.stopPropagation(); // 모달 팝업도 같이 닫히는걸 막아준다.
+    });
 	
 	var areaChartData = {
 			labels  : ["1월", "2월", "3월"],
