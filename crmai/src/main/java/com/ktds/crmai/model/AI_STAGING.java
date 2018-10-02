@@ -5,8 +5,8 @@ import org.apache.ibatis.type.Alias;
 import lombok.Data;
 
 @Data
-@Alias("s_train")
-public class AI_STAGING_TRAIN{
+@Alias("staging")
+public class AI_STAGING{
 
 	private static final long serialVersionUID = 3947489072259877540L;
 
@@ -216,12 +216,12 @@ public class AI_STAGING_TRAIN{
 
 	
 	
-	public AI_STAGING_TRAIN(){
+	public AI_STAGING(){
 		
 	}
 	
 	
-	public AI_STAGING_TRAIN(
+	public AI_STAGING(
 			 String st_seq,
 			 String cam_id,
 			 String st_c1,

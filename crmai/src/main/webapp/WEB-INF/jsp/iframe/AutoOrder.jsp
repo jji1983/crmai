@@ -48,8 +48,9 @@
   <!-- AdminLTE for demo purposes -->
   <script src="/resources/dist/js/demo.js"></script>
 
-  <!-- AI_CAMPAIGN JS -->
+  <!-- AI MAKE JS -->
   <script src="/resources/js/ai_campaign.js"></script>
+  <script src="/resources/js/ai_stageing.js"></script>
   
   <!-- twbsPagination :: https://github.com/josecebe/twbs-pagination -->
   <script src="/resources/js/jquery.twbsPagination.js"></script>
@@ -66,7 +67,7 @@
 		<ol class="breadcrumb">
 			<li><a href="/iframe/Dashboard"><i class="fa fa-dashboard"></i>
 					Home</a></li>
-			<li class="active">대상자 로딩</li>
+			<li class="active">AI 자동수행</li>
 		</ol>
 	</section>
 
@@ -96,7 +97,7 @@
 	            </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
-	            	<button id='id_loading1_msg' type="button" class="btn btn-default" data-toggle="modal" data-target="#newModal"></button>
+	            	<button id='id_loading1_msg' type="button" class="btn btn-default" data-toggle="modal" data-target="#trainDataModal" data-title="cam_id"></button>
 	            </div>
 	            <!-- /.box-body -->
 	            
@@ -114,7 +115,7 @@
 	            </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
-	            	<button id='id_loading2_msg' type="button" class="btn btn-default" data-toggle="modal" data-target="#newModal"></button>
+	            	<button id='id_loading2_msg' type="button" class="btn btn-default" data-toggle="modal" data-target="#testDataModal"></button>
 	            </div>
 	            <!-- /.box-body -->
 	            
@@ -301,6 +302,68 @@
 				</div>
 		</div>
 		<!--/. Modal -->
+		
+		<!-- 학습데이터 Modal -->
+	    <div class="modal fade" id="trainDataModal" tabindex="-1" role="dialog" aria-labelledby="trainModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="trainModalLabel">학습데이터 미리보기</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<!-- 캠페인상세보기 -->
+							<div id="detailView" class="row">
+								<div class="col-xs-12">
+									<div class="box">
+										<div class="box-header">
+											<h3 class="box-title">상세보기 (최대 100건 만 출력 됩니다.)</h3>
+										</div>
+					
+										<!-- /.box-header -->
+										<div class="box-body">
+											<input type="text" name="cam_id" id="cam_id" value=""/>
+										
+											<div class="col-sm-12">
+												<button id="id_getAiStaningTrain" type="button" class="btn btn-info pull-right">전처리전</button>
+											</div>
+											<!-- campaign table -->
+											<table id="ai_staging_train" class="table table-bordered table-hover"></table>
+											<nav aria-label="Page navigation example" style="text-align: center;">
+											<ul class="pagination-sm" id="id_Train_pagination"></ul></nav>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /.캠페인목록 -->							
+						</div>
+						<div class="modal-footer">학습데이터 미리보기 화면</div>
+					</div>
+				</div>
+		</div>
+		<!--/. Modal -->
+		
+		<!--대상자데이터 Modal -->
+	    <div class="modal fade" id="testDataModal" tabindex="-1" role="dialog" aria-labelledby="testModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="testModalLabel">대상자데이터 미리보기</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							대상자데이터 미리보기 화면
+						</div>
+						<div class="modal-footer">대상자데이터 미리보기 화면</div>
+					</div>
+				</div>
+		</div>
+		<!--/. Modal -->
         
         <!-- /.box-body -->
       </div>
@@ -321,6 +384,19 @@
 	        //alert('클릭 신규~!!');
 	        submit_newCampagin();
 	    });
+		
+		//모달 처리(학습데이터 미리보기)
+	    $('#trainDataModal').on('show.bs.modal', function (event) {
+	    	var button = $(event.relatedTarget);
+	    	var cam_id = currentValue;
+	    	//alert("cam_id :: " + cam_id);
+	    	
+	    	$(".modal-body #cam_id").val( cam_id );
+	    	var modal = $(this);
+	    	
+	    	aiStagingTrain()();
+    	});
+
   });
 
  </script>
