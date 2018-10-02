@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html> 
-<head>
+<head> 
 <title>계정 관리</title>
 <link rel="stylesheet" href="/css/bootstrap.css">
 <meta charset="UTF-8">
