@@ -72,7 +72,7 @@
 		order by cam.cam_cdate desc
     </select>
     
-    <select id="selectStaginTrain" resultType="s_train">
+    <select id="selectStaginTrain" resultType="staging">
 		select 
 			*  
 		from 
@@ -84,7 +84,7 @@
     </select>
     
     
-    <select id="selectStaginTrainResult" resultType="s_train">
+    <select id="selectStaginTrainResult" resultType="staging">
 		select 
 			*  
 		from 

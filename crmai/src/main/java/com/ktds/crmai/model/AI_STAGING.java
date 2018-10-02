@@ -10,6 +10,10 @@ public class AI_STAGING{
 
 	private static final long serialVersionUID = 3947489072259877540L;
 
+	private String page;
+	private String page_st;
+	private String page_end;
+	
 	private String st_seq;
 	private String cam_id;
 	
@@ -222,6 +226,10 @@ public class AI_STAGING{
 	
 	
 	public AI_STAGING(
+			String page,
+			String page_st,
+			String page_end,
+			
 			 String st_seq,
 			 String cam_id,
 			 String st_c1,
@@ -426,6 +434,10 @@ public class AI_STAGING{
 			 String st_c200
 
 	    ) {
+		
+		this.page=page;
+		this.page_st=page_st;
+		this.page_end=page_end;
 		
 		this.st_seq=st_seq;
 		this.cam_id=cam_id;
