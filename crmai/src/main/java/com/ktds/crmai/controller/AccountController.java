@@ -25,7 +25,7 @@ import com.ktds.crmai.service.BoardService;
 @RequestMapping(value="account")
 public class AccountController {
 	private static Logger logger = LoggerFactory.getLogger(AccountController.class);
-	
+	 
 	@Autowired 
     AccountService accountService;
 	

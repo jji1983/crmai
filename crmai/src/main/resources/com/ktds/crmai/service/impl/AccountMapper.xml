@@ -13,7 +13,7 @@
 
 		FROM  
 			AI_ACCOUNT
-
+ 
 	</select>
 	
 	<select id="selectAccountList" resultType="account">

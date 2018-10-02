@@ -12,7 +12,7 @@ import com.ktds.crmai.service.impl.AccountMapper;
 
 @Service("AccountService")
 public class AccountService implements AccountMapper{
-
+ 
 	@Autowired
 	AccountMapper accountmapper;
 	
