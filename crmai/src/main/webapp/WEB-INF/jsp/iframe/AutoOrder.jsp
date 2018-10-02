@@ -324,8 +324,7 @@
 					
 										<!-- /.box-header -->
 										<div class="box-body">
-											<input type="text" name="cam_id" id="cam_id" value=""/>
-										
+											
 											<div class="col-sm-12">
 												<button id="id_getAiStaningTrain" type="button" class="btn btn-info pull-right">전처리전</button>
 											</div>
@@ -386,15 +385,11 @@
 	    });
 		
 		//모달 처리(학습데이터 미리보기)
-	    $('#trainDataModal').on('show.bs.modal', function (event) {
-	    	var button = $(event.relatedTarget);
-	    	var cam_id = currentValue;
-	    	//alert("cam_id :: " + cam_id);
+	    $('#trainDataModal').click(function (event) {
+	    	//stop submit the form, we will post it manually.
+	        event.preventDefault();
 	    	
-	    	$(".modal-body #cam_id").val( cam_id );
-	    	var modal = $(this);
-	    	
-	    	aiStagingTrain()();
+	    	aiStagingTrain();
     	});
 
   });

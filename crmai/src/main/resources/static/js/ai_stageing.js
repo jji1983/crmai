@@ -6,14 +6,16 @@ var train_page_st = 1;
 var train_page_end = 10;
 
 function aiStagingTrain(){
-	 alert("call aiStagingTrain :: " + currentValue + " :: " +train_nowPages);
+	 //alert("call aiStagingTrain :: " + currentValue + " :: " +train_nowPages);
 	 
-	 grid_aiStagingTrainPage(train_totalPages, train_visiblePages);
+	 search_aiStagingTrain(currentValue, 1, train_page_st, train_page_end);
+	
+	 //grid_aiStagingTrainPage(train_totalPages, train_visiblePages);
 }
 
 
 function grid_aiStagingTrainPage(train_totalPages, train_visiblePages){
-	alert("grid_aiStagingTrainPage :: " + train_totalPages + " :: " + train_visiblePages);
+	//alert("grid_aiStagingTrainPage :: " + train_totalPages + " :: " + train_visiblePages);
 	
 	$('#id_Train_pagination').twbsPagination('destroy');
 	window.pagObj = $('#id_Train_pagination').twbsPagination({
@@ -25,9 +27,9 @@ function grid_aiStagingTrainPage(train_totalPages, train_visiblePages){
         	  train_page_st = ((1 * train_visiblePages) * page) - (train_visiblePages - 1);
         	  train_page_end = (train_page_st + train_visiblePages) - 1;
         	  
-        	  alert("grid_aiStagingTrainPage :: " + train_page_st + " :: " + train_page_end);
+        	  //alert("grid_aiStagingTrainPage :: " + train_page_st + " :: " + train_page_end);
         	  
-        	  search_aiStagingTrain(currentValue, page, page_st, page_end);
+        	  //search_aiStagingTrain(currentValue, page, train_page_st, train_page_end);
           }
     }).on('page', function (event, page) {
         //alert("on2 " + page + ' (from event listening)');
@@ -35,22 +37,24 @@ function grid_aiStagingTrainPage(train_totalPages, train_visiblePages){
 }
 
 
-function search_aiStagingTrain(currentValue, page, page_st, page_end){
+function search_aiStagingTrain(currentValue, page, train_page_st, train_page_end){
 
-	alert("search_aiStagingTrain :: " + currentValue + " :: " + page + " :: " + page_st + " :: " + page_end );
+	alert("search_aiStagingTrain :: " + currentValue + " :: " + page + " :: " + train_page_st + " :: " + train_page_end );
 	
-  	var staingTrain = new Object();
-  	staingTrain.cam_id = currentValue;
-  	staingTrain.page = page;
-  	staingTrain.page_st = page_st;
-  	staingTrain.page_end = page_end;
+  	var page = new Object();
+  	page.cam_id = currentValue;
+  	page.page = page;
+  	page.page_st = train_page_st;
+  	page.page_end = train_page_end;
+  	
+  	alert("##################################" );
   	
     $.ajax({
         type    : 'GET', // method
         url     : '/staging/train',
         //url       : '/admin/login_proc?ADM_ID=XXXX&ADM_PW=XXXX', // GET 요청은 데이터가 URL 파라미터로 포함되어 전송됩니다.
         async   : 'true', // true
-        data    : staingTrain, // GET 요청은 지원되지 않습니다.
+        data    : page, // GET 요청은 지원되지 않습니다.
         processData : true, // GET 요청은 데이터가 바디에 포함되는 것이 아니기 때문에 URL에 파라미터 형식으로 추가해서 전송해줍니다.
         cache: false,
         contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
@@ -58,14 +62,69 @@ function search_aiStagingTrain(currentValue, page, page_st, page_end){
         success : function(data){
         	
         	var obj = JSON.stringify(data, true, 2);
-        	alert("search_campaignDetail result :: " + obj);
+        	//alert("search_campaignDetail result :: " + obj);
         	
-        	grid_tableStagingTrain(obj);
+        	//grid_tableStagingTrain(obj);
         	
         },
         error : function(request,status,error){
         	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
         }
 	});
+  
+}
+
+
+function grid_tableStaging(obj, div){
+	  //alert("grid_table_campaign :: " + obj);
+    
+    html = '<table width="100%" class="table table-bordered table-hover">';
+    html += '<thead><tr>';
+    html += 	'<th>SEQ</th>';
+    html += 	'<th>캠페인ID</th>';
+    html += 	'<th>컬럼1</th>';
+    html += 	'<th>컬럼2</th>';
+    html += 	'<th>컬럼3</th>';
+    html += 	'<th>컬럼4</th>';
+    html += 	'<th>컴럼5</th>';
+    html += 	'<th>컴럼6</th>';
+    html += 	'<th>컴럼7</th>';
+    html += 	'<th>컬럼8</th>';
+    html += 	'<th>컬럼9</th>';
+    html += 	'<th>컬럼10</th>';
+    html += 	'<tr></thead>';
+    html += '<tbody>';
+    
+    var json = $.parseJSON(obj);
+ 	  $(json).each(function(i,val){
+ 		html += '<tr>';
+ 		//html += '<td><input type="checkbox" name="camCheck"/></td>';
+ 		$.each(val,function(k,v){
+ 			
+ 			if(k == 'st_seq' || k == 'cam_id') {
+ 				html += '<td>' + v + '</td>';
+ 			}
+ 			
+ 			if(k == 'st_c1' 
+ 			 || k == 'st_c2'
+ 			 || k == 'st_c3'
+ 	   		 || k == 'st_c4'
+ 	   		 || k == 'st_c5'
+ 	   		 || k == 'st_c6'
+ 	   		 || k == 'st_c7'
+ 	   		 || k == 'st_c8'
+ 	   		 || k == 'st_c9'
+ 	   		 || k == 'st_c10'
+ 			){
+ 				html += '<td>' + v + '</td>';
+ 			}
+ 		});
+ 		html += '</tr>';
+	  });
+ 	  
+ 	  html += '</tbody>';
+    html += '</table>';
+    
+    //div.innerHTML = html;
 }
   

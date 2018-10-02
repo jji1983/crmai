@@ -162,6 +162,8 @@
 	});
 	
 	function getAccountList() {
+		alert("getAccountList !!~~~");
+		
 		$.ajax({
 			type : 'GET', // method
 			url : '/account/list',
@@ -180,28 +182,39 @@
 	}
 
 	function grid_table_account(obj) {
+		alert("grid_table_account !!~~~");
 		var div = document.querySelector('#ai_account');
 
 		var html = '<tbody>';
 		var json = $.parseJSON(obj);
+		
+		alert("### json :: " + json);
+		
 		$(json).each(function(i, val) {
-			html += '<tr onClick="view_account('+val.adm_id+')">';
+			
+			//var count =0;
+			alert("typeof val :: " + val["adm_id"]);
+			html += '<tr onClick="view_account2222222222()">';		
 			$.each(val, function(k, v) {
-				if (k == 'inputAdmId') {
-					return;
+				//alert("k[" + k + "] v[" + v + "]");
+				
+				if (k == 'adm_id') {
+					html += '<td >' + v + '</td>';
 				}
 				
-				if (k == 'inputAdmCdate') {
-					v = v.substr(0, 10);
+				if (k == 'adm_name') {
+					html += '<td >' + v + '</td>';
 				}
-
-				if (v == 'null' || v == '') {
-					html += '<td></td>';
-				} else if (k == 'inputAdmName') {
-					html += '<td style="text-align: left; padding-left: 10px;">' + v + '</td>';
-				} else {
-					html += '<td>' + v + '</td>';
+				
+				if (k == 'adm_pw') {
+					html += '<td >' + v + '</td>';
 				}
+				
+				if (k == 'adm_email') {
+					html += '<td >' + v + '</td>';
+				}
+								
+				//count++;
 			});
 			html += '</tr>';
 		});
@@ -214,7 +227,7 @@
 
 	//글쓰기
 	function fn_write() {
-
+		alert("fn_write !!~~~");
 		var form = document.getElementById("AccountForm");
 
 		alert("start222~~~");
@@ -259,6 +272,13 @@
 			
 		//	alert("1111 :: " + e.responseText);
 		});
+	}
+	
+	
+	//계정 조회
+	function view_account2222222222() {
+	   alert("-- view_account2222222222 -- :: " + adm_id);
+		
 	}
 	
 	//게시글 등록
@@ -306,6 +326,7 @@
 	
 	//게시글 삭제
 	function delete_account() {
+		alert("delete_account !!~~~");
 		// Get form
 	    var form = $('#newUploadForm')[0];
 	    var data = new FormData(form);
@@ -340,7 +361,7 @@
 	}
 	
 	function showModal(type, data) {
-		//console.log('-- showModal -- ', type);
+		alert('-- showModal -- ', type);
 		if (type === 'EDIT') {
 			$('#newModalLabel').text('계정 신규 등록');
 			

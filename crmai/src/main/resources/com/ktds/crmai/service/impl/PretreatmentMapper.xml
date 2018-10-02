@@ -72,28 +72,5 @@
 		order by cam.cam_cdate desc
     </select>
     
-    <select id="selectStaginTrain" resultType="staging">
-		select 
-			*  
-		from 
-			ai_staging_train
-		where  
-			cam_id = #{cam_id}
-			<![CDATA[ and ROWNUM >= 1 AND ROWNUM <= 100 ]]>
-		order by st_seq 
-    </select>
-    
-    
-    <select id="selectStaginTrainResult" resultType="staging">
-		select 
-			*  
-		from 
-			ai_staging_train_result
-		where  
-			cam_id = #{cam_id}
-			<![CDATA[ and ROWNUM >= 1 AND ROWNUM <= 100 ]]>
-		order by st_seq 
-    </select>
-    
 
 </mapper>

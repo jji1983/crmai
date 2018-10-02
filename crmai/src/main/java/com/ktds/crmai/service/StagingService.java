@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ktds.crmai.model.AI_CAMPAIGN;
+import com.ktds.crmai.model.AI_PAGE;
 import com.ktds.crmai.model.AI_STAGING;
 import com.ktds.crmai.model.Pretreatment;
 import com.ktds.crmai.service.impl.PretreatmentMapper;
@@ -20,13 +21,13 @@ public class StagingService implements StagingMapper {
 	StagingMapper stagingMapper;
 
 	@Override
-	public List<AI_STAGING> selectStaginTrain(AI_STAGING staingTrain) {
+	public List<AI_STAGING> selectStaginTrain(AI_PAGE staingTrain) {
 		// TODO Auto-generated method stub
 		return stagingMapper.selectStaginTrain(staingTrain);
 	}
 
 	@Override
-	public List<AI_STAGING> selectStaginTrainResult(AI_STAGING staingTrain) {
+	public List<AI_STAGING> selectStaginTrainResult(AI_PAGE staingTrain) {
 		// TODO Auto-generated method stub
 		return stagingMapper.selectStaginTrainResult(staingTrain);
 	}
