@@ -93,6 +93,11 @@ public class JspViewController {
 		return "/iframe/Statistics_m2";
 	}
 	
+	@RequestMapping(value="/iframe/Statistics_m3")
+	public String Statistics3() {
+		return "/iframe/Statistics_m3";
+	}
+	
 	@RequestMapping(value="/iframe/NoticeBoard")
 	public String NoticeBoard() {
 		return "/iframe/NoticeBoard";

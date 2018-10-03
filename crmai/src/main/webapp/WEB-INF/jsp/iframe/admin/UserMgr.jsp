@@ -188,27 +188,27 @@
 			html += '<tr onClick="view_account(' + "'" +val.adm_id+"'" + ')">';
 		   //	html += '<tr onClick="view_account('1')">';
 		  //	alert.("adm_id");
-			$.each(val, function(k, v) {
+				$.each(val, function(k, v) {
 				/* if (k == 'adm_id') {
-					return ;
-				}
-				
-				if (k == 'adm_pw') {
-					return;
+					html += '<td >' + v + '</td>';
 				}
 				
 				if (k == 'adm_name') {
-					return k;
-				} */
-			
+					html += '<td >' + v + '</td>';
+				}
 				
-
+				if (k == 'adm_pw') {
+					html += '<td >' + v + '</td>';
+				}
+				
+				if (k == 'adm_email') {
+					html += '<td >' + v + '</td>';
+				} */
 				
 				if (k == 'adm_cdate') {
 					v = v.substr(0, 10);
 				}
 
-				
 				if (v == 'null' || v == '') {
 					html += '<td></td>';
 					
@@ -216,7 +216,7 @@
 					html += '<td style="text-align: left; padding-left: 10px;">' + v + '</td>';
 					//return;
 				} else {
-					html += '<td>' + v + '</td>';
+					html += '<td>' + v + '</td>'; 
 					//return;
 				}
 			});

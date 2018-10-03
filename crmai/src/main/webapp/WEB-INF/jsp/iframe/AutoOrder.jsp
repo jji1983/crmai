@@ -50,7 +50,8 @@
 
   <!-- AI MAKE JS -->
   <script src="/resources/js/ai_campaign.js"></script>
-  <script src="/resources/js/ai_stageing.js"></script>
+  <script src="/resources/js/ai_stageing_train.js"></script>
+  <script src="/resources/js/ai_stageing_test.js"></script>
   
   <!-- twbsPagination :: https://github.com/josecebe/twbs-pagination -->
   <script src="/resources/js/jquery.twbsPagination.js"></script>
@@ -135,7 +136,7 @@
 	            </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
-	              	<button id='id_pre_msg' type="button" class="btn btn-info pull-center" data-toggle="modal" data-target="#newModal"></button>
+	              	<button id='id_pre_msg' type="button" class="btn btn-info pull-center" data-toggle="modal" data-target="#ResultDataModal"></button>
 	            </div>
 	            <!-- /.box-body -->
 	            
@@ -305,7 +306,7 @@
 		
 		<!-- 학습데이터 Modal -->
 	    <div class="modal fade" id="trainDataModal" tabindex="-1" role="dialog" aria-labelledby="trainModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
+				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="trainModalLabel">학습데이터 미리보기</h5>
@@ -314,18 +315,17 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<!-- 캠페인상세보기 -->
+							<!-- 학습데이터 상세보기 -->
 							<div id="detailView" class="row">
 								<div class="col-xs-12">
 									<div class="box">
 										<div class="box-header">
-											<h3 class="box-title">상세보기 (최대 100건 만 출력 됩니다.)</h3>
+											<h3 class="box-title">학습데이터 상세보기 (최대 100건 만 출력 됩니다.)</h3>
 										</div>
 					
 										<!-- /.box-header -->
 										<div class="box-body">
-											<input type="text" name="cam_id" id="cam_id" value=""/>
-										
+											
 											<div class="col-sm-12">
 												<button id="id_getAiStaningTrain" type="button" class="btn btn-info pull-right">전처리전</button>
 											</div>
@@ -338,7 +338,7 @@
 									</div>
 								</div>
 							</div>
-							<!-- /.캠페인목록 -->							
+							<!-- /.학습데이터 상세보기 -->							
 						</div>
 						<div class="modal-footer">학습데이터 미리보기 화면</div>
 					</div>
@@ -348,7 +348,7 @@
 		
 		<!--대상자데이터 Modal -->
 	    <div class="modal fade" id="testDataModal" tabindex="-1" role="dialog" aria-labelledby="testModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
+				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="testModalLabel">대상자데이터 미리보기</h5>
@@ -357,13 +357,75 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							대상자데이터 미리보기 화면
+							<!-- 대상자데이터 상세보기 -->
+							<div id="detailView" class="row">
+								<div class="col-xs-12">
+									<div class="box">
+										<div class="box-header">
+											<h3 class="box-title">대상자데이터 상세보기 (최대 100건 만 출력 됩니다.)</h3>
+										</div>
+					
+										<!-- /.box-header -->
+										<div class="box-body">
+											<div class="col-sm-12">
+												<button id="id_getAiStaningTest" type="button" class="btn btn-info pull-right">전처리전</button>
+											</div>
+											<!-- campaign table -->
+											<table id="ai_staging_test" class="table table-bordered table-hover"></table>
+											<nav aria-label="Page navigation example" style="text-align: center;">
+											<ul class="pagination-sm" id="id_Test_pagination"></ul></nav>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /.대상자데이터 상세보기 -->	
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/. Modal -->
+		
+		
+		<!--전처리후 데이터 Modal -->
+	    <div class="modal fade" id="ResultDataModal" tabindex="-1" role="dialog" aria-labelledby="ResultDataLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="ResultDataLabel">전처리데이터 미리보기</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
 						</div>
-						<div class="modal-footer">대상자데이터 미리보기 화면</div>
+						<div class="modal-body">
+							<!-- 전처리후 상세보기 -->
+							<div id="detailView" class="row">
+								<div class="col-xs-12">
+									<div class="box">
+										<div class="box-header">
+											<h3 class="box-title">전처리데이터 상세보기 (최대 100건 만 출력 됩니다.)</h3>
+										</div>
+					
+										<!-- /.box-header -->
+										<div class="box-body">
+											<div class="col-sm-12">
+												<button id="id_getAiStaningResult" type="button" class="btn btn-info pull-right">전처리후</button>
+											</div>
+											<!-- campaign table -->
+											<table id="ai_staging_result" class="table table-bordered table-hover"></table>
+											<nav aria-label="Page navigation example" style="text-align: center;">
+											<ul class="pagination-sm" id="id_result_pagination"></ul></nav>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /.전처리후 상세보기 -->	
 					</div>
 				</div>
 		</div>
 		<!--/. Modal -->
+		
         
         <!-- /.box-body -->
       </div>
@@ -385,17 +447,41 @@
 	        submit_newCampagin();
 	    });
 		
-		//모달 처리(학습데이터 미리보기)
 	    $('#trainDataModal').on('show.bs.modal', function (event) {
-	    	var button = $(event.relatedTarget);
-	    	var cam_id = currentValue;
-	    	//alert("cam_id :: " + cam_id);
-	    	
-	    	$(".modal-body #cam_id").val( cam_id );
-	    	var modal = $(this);
-	    	
-	    	aiStagingTrain()();
-    	});
+	    	 
+	    	  //페이징을 보여준다.
+	    	 //alert("페이징을 보여준다. !!");
+	    	 var div_t_pageing = $('#id_Train_pagination');
+	    	 grid_pagingSt1(div_t_pageing);
+	    	  
+	    	  //테이블 을 그린다.
+	    	 //alert("테이블을 그린다.. !!");
+	    	 search_st1();
+	    });
+	    
+	    $('#testDataModal').on('show.bs.modal', function (event) {
+	    	 
+	    	  //페이징을 보여준다.
+	    	 //alert("페이징을 보여준다. !!");
+	    	 var div_t_pageing = $('#id_Test_pagination');
+	    	 grid_pagingSt2(div_t_pageing);
+	    	  
+	    	  //테이블 을 그린다.
+	    	 //alert("테이블을 그린다.. !!");
+	    	 search_st2();
+	    });
+	    
+	    $('#ResultDataModal').on('show.bs.modal', function (event) {
+	    	 
+	    	  //페이징을 보여준다.
+	    	 alert("페이징을 보여준다. !!");
+	    	 var div_t_pageing = $('#id_result_pagination');
+	    	 grid_pagingSt3(div_t_pageing);
+	    	  
+	    	  //테이블 을 그린다.
+	    	 //alert("테이블을 그린다.. !!");
+	    	 search_st2();
+	    });
 
   });
 

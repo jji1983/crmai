@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%
+<%  
 	//out.println("sessionLOGIN :: " + session.getAttribute("sessionLOGIN"));
 	//out.println("sessionCAMCNT :: " + session.getAttribute("sessionCAMCNT"));
 %>
