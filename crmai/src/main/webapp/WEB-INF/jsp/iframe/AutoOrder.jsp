@@ -392,8 +392,11 @@
 	    	  
 	    	  //테이블 을 그린다.
 	    	 alert("테이블을 그린다.. !!");
-	    	 search_campaignDetail();
-	    })
+	    	 
+	    	 alert("테이블을 그린다.22222. !!");
+	    	  
+	    	 search_train();
+	    });
 
   });
 
