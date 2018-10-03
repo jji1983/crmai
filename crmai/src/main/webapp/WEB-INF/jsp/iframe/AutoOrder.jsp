@@ -136,7 +136,7 @@
 	            </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
-	              	<button id='id_pre_msg' type="button" class="btn btn-info pull-center" data-toggle="modal" data-target="#newModal"></button>
+	              	<button id='id_pre_msg' type="button" class="btn btn-info pull-center" data-toggle="modal" data-target="#ResultDataModal"></button>
 	            </div>
 	            <!-- /.box-body -->
 	            
@@ -320,7 +320,7 @@
 								<div class="col-xs-12">
 									<div class="box">
 										<div class="box-header">
-											<h3 class="box-title">상세보기 (최대 100건 만 출력 됩니다.)</h3>
+											<h3 class="box-title">학습데이터 상세보기 (최대 100건 만 출력 됩니다.)</h3>
 										</div>
 					
 										<!-- /.box-header -->
@@ -362,7 +362,7 @@
 								<div class="col-xs-12">
 									<div class="box">
 										<div class="box-header">
-											<h3 class="box-title">상세보기 (최대 100건 만 출력 됩니다.)</h3>
+											<h3 class="box-title">대상자데이터 상세보기 (최대 100건 만 출력 됩니다.)</h3>
 										</div>
 					
 										<!-- /.box-header -->
@@ -387,13 +387,12 @@
 		<!--/. Modal -->
 		
 		
-		
 		<!--전처리후 데이터 Modal -->
-	    <div class="modal fade" id="ResultDataModal" tabindex="-1" role="dialog" aria-labelledby="testModalLabel" aria-hidden="true">
+	    <div class="modal fade" id="ResultDataModal" tabindex="-1" role="dialog" aria-labelledby="ResultDataLabel" aria-hidden="true">
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="testModalLabel">대상자데이터 미리보기</h5>
+							<h5 class="modal-title" id="ResultDataLabel">전처리데이터 미리보기</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -404,7 +403,7 @@
 								<div class="col-xs-12">
 									<div class="box">
 										<div class="box-header">
-											<h3 class="box-title">상세보기 (최대 100건 만 출력 됩니다.)</h3>
+											<h3 class="box-title">전처리데이터 상세보기 (최대 100건 만 출력 됩니다.)</h3>
 										</div>
 					
 										<!-- /.box-header -->
@@ -475,7 +474,7 @@
 	    $('#ResultDataModal').on('show.bs.modal', function (event) {
 	    	 
 	    	  //페이징을 보여준다.
-	    	 //alert("페이징을 보여준다. !!");
+	    	 alert("페이징을 보여준다. !!");
 	    	 var div_t_pageing = $('#id_result_pagination');
 	    	 grid_pagingSt3(div_t_pageing);
 	    	  

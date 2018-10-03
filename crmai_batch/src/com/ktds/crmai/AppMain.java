@@ -14,6 +14,10 @@ public class AppMain{
 		 //2.대상자데이터 로딩
 		 LearningProc learn_proc = new LearningProc();
 		 learn_proc.LearningProc();
+		 
+		 //3. 전처리 시작
+		 
+		 
 	 }
 
 }
