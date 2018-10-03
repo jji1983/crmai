@@ -146,7 +146,13 @@
 		html += "<th class='text-center'>생성자</th>";
 		html += "<th class='text-center'>생성일자</th>";
 		html += "<th class='text-center'>대상건수</th>";
-		html += "<th class='text-center'>정확도</th></tr></thead><tbody>";
+		html += "<th class='text-center'>정확도</th>";
+		html += "<th class='text-center'>학습모델</th>";
+		html += "<th class='text-center'>예측</th>";
+		html += "<th class='text-center'>결과</th>";
+		html += "<th class='text-center'>산업군</th>";
+		html += "<th class='text-center'>생성자ID</th>";
+		html += "<th class='text-center'>캠페인ID</th></tr></thead><tbody>";
 		
 		// 데이터 존재 미존재 여부에 따른 표 표시
 		if(arr.length != 0) {
@@ -157,10 +163,16 @@
 				html += "<td>" + arr[i]["admName"] + "</td>";
 				html += "<td>" + arr[i]["camCdate"] + "</td>";
 				html += "<td>" + arr[i]["testCnt"] + "</td>";
-				html += "<td>" + arr[i]["originalAcc"] + "</td></tr>";
+				html += "<td>" + arr[i]["originalAcc"] + "</td>";
+				html += "<td>" + arr[i]["trainMethod"] + "</td>";
+				html += "<td>" + arr[i]["soAcc"] + "</td>";
+				html += "<td>" + arr[i]["realAcc"] + "</td>";
+				html += "<td>" + arr[i]["admType"] + "</td>";
+				html += "<td>" + arr[i]["admId"] + "</td>";
+				html += "<td>" + arr[i]["camId"] + "</td></tr>";
 			}
 		} else {
-			html += "<tr><td class='text-center' colspan='7'>조회된 데이터가 없습니다.</td></tr>";
+			html += "<tr><td class='text-center' colspan='13'>조회된 데이터가 없습니다.</td></tr>";
 		}
 		
   	  	html += "</tbody></table>";
@@ -171,10 +183,16 @@
 	function createChart(arr) {
 		var camNameArr = new Array();			// 캠페인명 배열
 		var originalAccArr = new Array();		// 정확도 배열
+		var soAccArr = new Array();				// 예측 배열
+		var realAccArr = new Array();			// 결과 배열
+		var trainMethodArr = new Array();		// 학습모델 배열
 		
 		for (var i = 0; i < arr.length; i++) {
 			camNameArr[i] = arr[i]["camName"];
 			originalAccArr[i] = arr[i]["originalAcc"];
+			soAccArr[i] = arr[i]["soAcc"];
+			realAccArr[i] = arr[i]["realAcc"];
+			trainMethodArr[i] = arr[i]["trainMethod"];
 		}
 		
 		var areaChartData = {
@@ -182,14 +200,70 @@
 				datasets: [
 				    {
 				       label               : '정확도',
+				       fillColor           : 'rgba(210, 214, 222, 1)',
+				       strokeColor         : 'rgba(210, 214, 222, 1)',
+				       pointColor          : 'rgba(210, 214, 222, 1)',
+				       pointStrokeColor    : '#c1c7d1',
+				       pointHighlightFill  : '#fff',
+				       pointHighlightStroke: 'rgba(220,220,220,1)',
+				       data                : originalAccArr
+				    },
+				    {
+				       label               : '예측',
 				       fillColor           : 'rgba(60,141,188,0.9)',
 				       strokeColor         : 'rgba(60,141,188,0.8)',
 				       pointColor          : '#3b8bba',
 				       pointStrokeColor    : 'rgba(60,141,188,1)',
 				       pointHighlightFill  : '#fff',
 				       pointHighlightStroke: 'rgba(60,141,188,1)',
+				       data                : soAccArr
+				    },
+				    {
+					   label               : '결과',
+					   fillColor           : 'rgba(60,141,188,0.9)',
+					   strokeColor         : 'rgba(60,141,188,0.8)',
+					   pointColor          : '#3b8bba',
+					   pointStrokeColor    : 'rgba(60,141,188,1)',
+					   pointHighlightFill  : '#fff',
+					   pointHighlightStroke: 'rgba(60,141,188,1)',
+					   data                : realAccArr
+					}
+				]
+		};
+		
+		var radarChartData = {
+				labels : trainMethodArr,
+				datasets: [
+				    {
+				       label               : '정확도',
+				       fillColor           : 'rgba(210, 214, 222, 1)',
+				       strokeColor         : 'rgba(210, 214, 222, 1)',
+				       pointColor          : 'rgba(210, 214, 222, 1)',
+				       pointStrokeColor    : '#c1c7d1',
+				       pointHighlightFill  : '#fff',
+				       pointHighlightStroke: 'rgba(220,220,220,1)',
 				       data                : originalAccArr
-				    }
+				    },
+				    {
+				       label               : '예측',
+				       fillColor           : 'rgba(60,141,188,0.9)',
+				       strokeColor         : 'rgba(60,141,188,0.8)',
+				       pointColor          : '#3b8bba',
+				       pointStrokeColor    : 'rgba(60,141,188,1)',
+				       pointHighlightFill  : '#fff',
+				       pointHighlightStroke: 'rgba(60,141,188,1)',
+				       data                : soAccArr
+				    },
+				    {
+					   label               : '결과',
+					   fillColor           : 'rgba(60,141,188,0.9)',
+					   strokeColor         : 'rgba(60,141,188,0.8)',
+					   pointColor          : '#3b8bba',
+					   pointStrokeColor    : 'rgba(60,141,188,1)',
+					   pointHighlightFill  : '#fff',
+					   pointHighlightStroke: 'rgba(60,141,188,1)',
+					   data                : realAccArr
+					}
 				]
 		};
 			
@@ -199,7 +273,11 @@
 		var barChartCanvas                   = $('#barChart').get(0).getContext('2d');
 		var barChart                         = new Chart(barChartCanvas);
 		var barChartData                     = areaChartData;
-		        
+		    
+		barChartData.datasets[1].fillColor   = '#00a65a';
+		barChartData.datasets[1].strokeColor = '#00a65a';
+		barChartData.datasets[1].pointColor  = '#00a65a';
+		    
 		var barChartOptions                  = {
 		      //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
 		      scaleBeginAtZero        : true,
@@ -268,14 +346,12 @@
 		barChart.Bar(barChartData, barChartOptions);
 		
 		//-------------
-	    //- LINE CHART -
-	    //--------------
-	    var lineChartCanvas          = $('#lineChart').get(0).getContext('2d');
-	    var lineChart                = new Chart(lineChartCanvas);
-	    var lineChartOptions         = areaChartOptions;
-	    
-	    lineChartOptions.datasetFill = false;
-	    lineChart.Line(areaChartData, lineChartOptions);
+	    //- RADAR CHART -
+	    //-------------
+	    var radarChartCanvas = $('#radarChart').get(0).getContext('2d');
+		var radarChart = new Chart(radarChartCanvas);
+		
+		radarChart.Radar(radarChartData, barChartOptions);
 	}
   </script>
 
@@ -285,12 +361,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-       	 선정대상에 대한 실질반응1
+       	 선정대상에 대한 실질반응3
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">선정대상에 대한 실질반응1</li>
+        <li class="active">선정대상에 대한 실질반응3</li>
       </ol>
     </section>
     
@@ -407,7 +483,7 @@
 	  	  <!-- BAR CHART -->
           <div class="box box-success">
             <div class="box-header with-border">
-              <h3 class="box-title">정확도</h3>
+              <h3 class="box-title">캠페인별 정확도 예측 결과</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -430,7 +506,7 @@
 	  	<div class="col-md-6">
           <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">대상건수</h3>
+              <h3 class="box-title">학습모델별 정확도 예측 결과</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -439,7 +515,7 @@
               </div>
             </div>
             <div class="box-body">
-              <canvas id="lineChart" style="height:270px"></canvas>
+              <canvas id="radarChart" style="height:270px"></canvas>
             </div>
             <!-- /.box-body -->
           </div>

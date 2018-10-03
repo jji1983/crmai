@@ -40,6 +40,7 @@
 		    ADM_ID AS "adm_id", 
 			ADM_PW AS "adm_pw",
 			ADM_NAME AS "adm_name",
+			ADM_EMAIL as "adm_email",
 			ADM_CDATE as "adm_cdate"
 
 		FROM  
@@ -50,7 +51,7 @@
     
     <insert id="insertAccount">
     	INSERT INTO AI_ACCOUNT (ADM_ID, ADM_PW, ADM_NAME, ADM_CDATE, ADM_UDATE, ADM_EMAIL, ADM_ROLE, ADM_TYPE, ADM_LOGIN)
-      	VALUES (#{adm_id}, #{adm_pw}, #{adm_name}, sysdate, sysdate,#{adm_email},1,1,0)
+      	VALUES (#{adm_id}, #{adm_pw}, #{adm_name}, sysdate, sysdate, #{adm_email},1,1,0)
     </insert>
     
     <delete id="deleteAccount">

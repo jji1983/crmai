@@ -20,7 +20,7 @@ public interface AccountMapper {
 
 	List<AI_ACCOUNT> selectAccountDetail(String adm_id);
 
-	String deleteAccount(String adm_id);
+	void deleteAccount(String adm_id);
 
 
 	

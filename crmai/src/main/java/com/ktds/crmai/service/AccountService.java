@@ -37,8 +37,8 @@ public class AccountService implements AccountMapper{
 	}
 
 	@Override
-	public String deleteAccount(String adm_id) {
-		return accountmapper.deleteAccount(adm_id);
+	public void deleteAccount(String adm_id) {
+		accountmapper.deleteAccount(adm_id);
 	}
 
 

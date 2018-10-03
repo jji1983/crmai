@@ -226,8 +226,8 @@ function grid_table_campaign(obj){
 }
 	
 
-  function submit_newCampagin(){
-	//alert('-- submit_newCampagin -- ');
+function submit_newCampagin(){
+//alert('-- submit_newCampagin -- ');
   
 // Get form
 var form = $('#newUploadForm')[0];
@@ -337,7 +337,7 @@ $.ajax({
   
   //학습 데이터 처리 / 테스트 데이터 처리
   if(cam_itype <= 4 || cam_otype <= 4){
-	 //alert("학습 데이터 처리 :: " + cam_itype + " 대상자 데이터 처리 :: " + cam_otype);
+	  //alert("학습 데이터 처리 :: " + cam_itype + " 대상자 데이터 처리 :: " + cam_otype);
 	  $("#id_loading1_msg").text(train_text[cam_itype]);
 	  $("#id_loading2_msg").text(test_text[cam_otype]);
 	  
@@ -349,7 +349,7 @@ $.ajax({
 	  $("#id_predict_overlay").show();  //AI 예측 단계 실행중
 	  $("#id_real_overlay").show();  //AI 예측 단계 실행중
 	  
-  }else if(cam_itype >= 5 || cam_otype >= 5 && cam_itype <= 7 || cam_otype <= 7){ //전처리 단계
+  }else if(cam_itype >= 5 && cam_itype <= 7  && cam_otype >= 5 && cam_otype <= 7){ //전처리 단계
 	  //alert("전처리 단계 :: " + cam_itype + " :: " + cam_otype);
 	
 	  $("#id_loading1_msg").text(train_text[4]);
@@ -366,9 +366,9 @@ $.ajax({
 	  $("#id_predict_overlay").show();  //AI 예측 단계 실행중
 	  $("#id_real_overlay").show();  //AI 예측 단계 실행중
 	
-	  
-  }else if(cam_itype >= 8 || cam_itype <= 10){ //모델 생성
-	  alert("모델 생성 :: " + cam_itype );
+	   
+  }else if(cam_itype >= 8 && cam_itype <= 10){ //모델 생성
+	  //alert("모델 생성 :: " + cam_itype );
   
 	  $("#id_loading1_msg").text(train_text[4]);
 	  $("#id_loading2_msg").text(test_text[4]);
@@ -385,8 +385,8 @@ $.ajax({
 	  $("#id_predict_overlay").show();  //AI 예측 단계 실행중
 	  $("#id_real_overlay").show();  //AI 예측 단계 실행중
 	  
-  }else if(cam_itype >= 11 || cam_itype <= 14){
-	  
+  }else if(cam_itype >= 11 && cam_itype <= 14){//대상자 처리
+	  //alert("대상자 처리 :: " + cam_itype );
 	  $("#id_loading1_msg").text(train_text[4]);
 	  $("#id_loading2_msg").text(test_text[4]);
 	  $("#id_pre_msg").text(train_text[7]);
@@ -398,17 +398,17 @@ $.ajax({
 	  $("#id_loading2_overlay").hide(); //전처리 단계 실행
 	  $("#id_pre_overlay").hide();      //AI 전처리 단계 실행중
 	  $("#id_runf_overlay").hide();     //AI 모델 생성 단계 실행중
-	  
-	  
-	  alert("예측 처리 :: " + cam_itype );
-	  
+
 	  if(cam_itype == 14){
+  	    //alert("예측 처리 :: " + cam_itype );
 		$("#id_predict_overlay").hide();  //AI 예측 단계 실행중
 		$("#id_real_overlay").hide();  //AI 예측 단계 실행중
 	  }else{
 		//실행중
 		$("#id_predict_overlay").show();  //AI 예측 단계 실행중
 		$("#id_real_overlay").show();  //AI 예측 단계 실행중
-		  }
 	  }
+  }else{
+	  alert("미 처리 :: " + cam_itype + " :: " + cam_otype);
   }
+}

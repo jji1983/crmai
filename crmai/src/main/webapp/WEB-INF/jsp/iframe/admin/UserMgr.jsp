@@ -166,6 +166,7 @@
 			type : 'GET', // method
 			url : '/account/list',
 			async : 'true', // true
+			cache : false,
 			contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
 			//dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
 			success : function(data) {
@@ -185,22 +186,39 @@
 		var html = '<tbody>';
 		var json = $.parseJSON(obj);
 		$(json).each(function(i, val) {
-			html += '<tr onClick="view_account('+val.adm_id+')">';
-			$.each(val, function(k, v) {
-				if (k == 'inputAdmId') {
-					return;
+			html += '<tr onClick="view_account(' + "'" +val.adm_id+"'" + ')">';
+		   //	html += '<tr onClick="view_account('1')">';
+		  //	alert.("adm_id");
+				$.each(val, function(k, v) {
+				/* if (k == 'adm_id') {
+					html += '<td >' + v + '</td>';
 				}
 				
-				if (k == 'inputAdmCdate') {
+				if (k == 'adm_name') {
+					html += '<td >' + v + '</td>';
+				}
+				
+				if (k == 'adm_pw') {
+					html += '<td >' + v + '</td>';
+				}
+				
+				if (k == 'adm_email') {
+					html += '<td >' + v + '</td>';
+				} */
+				
+				if (k == 'adm_cdate') {
 					v = v.substr(0, 10);
 				}
 
 				if (v == 'null' || v == '') {
 					html += '<td></td>';
-				} else if (k == 'inputAdmName') {
+					
+				} else if (k == 'adm_id') {
 					html += '<td style="text-align: left; padding-left: 10px;">' + v + '</td>';
+					//return;
 				} else {
-					html += '<td>' + v + '</td>';
+					html += '<td>' + v + '</td>'; 
+					//return;
 				}
 			});
 			html += '</tr>';
@@ -249,7 +267,7 @@
 			timeout : 600000,
 			success : function(data) {
 				console.log("SUCCESS : ", data);
-				alert("22222:: " + e.responseText);
+			//	alert("22222:: " + e.responseText);
 				
 				showModal('READ', data);
 			},
@@ -326,9 +344,11 @@
 				var res = data.split('::');
 	        	if(res[0] == "OK"){
 					// 게시판 목록 새로고침
-					getAccountList();
+					
 					
 					$('#accountNewModal').modal('hide');
+					
+					getAccountList();
 	        	}
 			},
 			error : function(e) {
@@ -346,9 +366,14 @@
 			
 			$("#inputAdmId").attr("readonly", false);
 			
-	//		$("#inputAdmName").attr("readonly", true);
+			$("#inputAdmName").attr("readonly", false);
 			
 			$("#inputAdmPw").attr("readonly", false);
+
+			$("#inputAdmEmail").attr("readonly", false);
+			
+	//		$("#inputAdmCdate").attr(sysdate, true);
+			
 			
 		
 			$('.readBoard').hide();
@@ -365,6 +390,12 @@
 			
 			$("#inputAdmPw").attr("readonly", true);
 			$("#inputAdmPw").val(d.adm_pw);
+			
+			$("#inputAdmEmail").attr("readonly", true);
+			$("#inputAdmEmail").val(d.adm_email);
+			
+			$("#inputAdmCdate").attr("readonly", true);
+			$("#inputAdmCdate").val(d.adm_cdate);
 			
 	/* 		$("#inputAdmId").attr("readonly", true);
 			$("#inputAdmId").val(d.adm_id); */
@@ -411,9 +442,10 @@
 									class="table table-bordered table-striped table-hover text-center">
 									<thead>
 										<tr>
-											<th style="width: 70px">번호</th>
-											<th style="width: 15%">계정명</th>
+											<th style="width: 70px">계정</th>
+											<th style="width: 15%">패스워드</th>
 											<th style="width: 100px">이름</th>
+											<!--  <th style="width: 100px">e-mail</th> -->
 											<th style="width: 100px">날짜</th>
 											<!--<th>조회수</th>-->
 										</tr>

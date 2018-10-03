@@ -22,7 +22,7 @@ import com.ktds.crmai.service.AccountService;
 import com.ktds.crmai.service.BoardService;
 
 @Controller
-@RequestMapping(value="account")
+@RequestMapping(value="/account")
 public class AccountController {
 	private static Logger logger = LoggerFactory.getLogger(AccountController.class);
 	 
@@ -59,6 +59,7 @@ public class AccountController {
 			@RequestParam("inputAdmPw") String inputAdmPw,
 			@RequestParam("inputAdmName") String inputAdmName,
 			@RequestParam("inputAdmEmail") String inputAdmEmail,
+			
 			HttpSession session){
 		
 		
@@ -89,7 +90,7 @@ public class AccountController {
 			@RequestParam("inputAdmId") String adm_id,
 			HttpSession session){
 		
-		String result = accountService.deleteAccount(adm_id);
+		accountService.deleteAccount(adm_id);
 		
 		ResponseEntity<Object> response = null;
 	//	if (result > 0) {
