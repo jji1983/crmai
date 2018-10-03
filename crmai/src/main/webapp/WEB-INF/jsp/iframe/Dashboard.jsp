@@ -73,6 +73,8 @@
 		document.getElementById("main_frame").src = "/Learning/data";
 	}
 </script>
+<style>
+</style>
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -172,91 +174,91 @@
 						<div id="myTabContent" class="tab-content">
 							<div role="tabpanel" class="tab-pane fade active in"
 								id="dropdown0" aria-labelledby="dropdown0-tab">
-								<p>0번입니다</p>
+								<!-- 		<p>0번입니다</p> -->
 								<!-- Info boxes -->
 
 								<!-- BAR CHART -->
 								<div class="box box-success">
 
-									<div class="box-header with-border">
+									<div class="box-header with-border text-center">
 										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
 									</div>
 									<div class="box-body">
 										<div class="chart">
-											<canvas id="chBar0" style="height: 230px"></canvas>
+											<canvas id="chBar0" style="height: 270px"></canvas>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="dropdown1"
 								aria-labelledby="dropdown1-tab">
-								<p>1번입니다</p>
+								<!-- 	<p>1번입니다</p> -->
 								<!-- Info boxes -->
 
 								<!-- BAR CHART -->
 								<div class="box box-success">
 
-									<div class="box-header with-border">
+									<div class="box-header with-border text-center">
 										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
 
 									</div>
 									<div class="box-body">
 										<div class="chart">
-											<canvas id="chBar1" style="height: 230px"></canvas>
+											<canvas id="chBar1" style="height: 270px"></canvas>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="dropdown2"
 								aria-labelledby="dropdown2-tab">
-								<p>2번입니다</p>
+								<!-- 	<p>2번입니다</p> -->
 								<!-- Info boxes -->
 
 								<!-- BAR CHART -->
 								<div class="box box-success">
 
-									<div class="box-header with-border">
+									<div class="box-header with-border text-center">
 										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
 									</div>
 									<div class="box-body">
 										<div class="chart">
-											<canvas id="chBar2" style="height: 230px"></canvas>
+											<canvas id="chBar2" style="height: 270px"></canvas>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="dropdown3"
 								aria-labelledby="dropdown3-tab">
-								<p>3번입니다</p>
+								<!-- <p>3번입니다</p> -->
 								<!-- Info boxes -->
 
 								<!-- BAR CHART -->
 								<div class="box box-success">
 
-									<div class="box-header with-border">
+									<div class="box-header with-border text-center">
 										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
 									</div>
 									<div class="box-body">
 										<div class="chart">
-											<canvas id="chBar3" style="height: 230px"></canvas>
+											<canvas id="chBar3" style="height: 270px"></canvas>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="dropdown4"
 								aria-labelledby="dropdown4-tab">
-								<p>4번입니다</p>
+								<!-- 		<p>4번입니다</p> -->
 								<!-- Info boxes -->
 
 								<!-- BAR CHART -->
 								<div class="box box-success">
 
-									<div class="box-header with-border">
+									<div class="box-header with-border text-center">
 										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
 									</div>
 									<div class="box-body">
 										<div class="chart">
-											<canvas id="chBar4" style="height: 230px"></canvas>
+											<canvas id="chBar4" style="height: 270px"></canvas>
 										</div>
 									</div>
 								</div>
@@ -346,57 +348,13 @@
 						<div id="myTabContent" class="tab-content">
 							<div role="tabpanel" class="tab-pane fade active in"
 								id="dropdown5" aria-labelledby="dropdown5-tab">
-								<p>5번입니다</p>
+								<!-- 		<p>5번입니다</p> -->
 								<!-- Info boxes -->
 
 								<!-- BAR CHART -->
 								<div class="box box-success">
 
-									<div class="box-header with-border">
-										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
-
-										<!-- <div class="box-tools pull-right">
-										<button type="button" class="btn btn-box-tool"
-											data-widget="collapse">
-											<i class="fa fa-minus"></i>
-										</button>
-										<button type="button" class="btn btn-box-tool"
-											data-widget="remove">
-											<i class="fa fa-times"></i>
-										</button>
-									</div> -->
-									</div>
-									<div class="box-body">
-										<div id="chBar5" style="height: 400px; width: 500px;"></div>
-									</div>
-								</div>
-							</div>
-							<div role="tabpanel" class="tab-pane fade" id="dropdown6"
-								aria-labelledby="dropdown6-tab">
-								<p>6번입니다</p>
-								<!-- Info boxes -->
-
-								<!-- BAR CHART -->
-								<div class="box box-success">
-
-									<div class="box-header with-border">
-										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
-
-									</div>
-									<div class="box-body">
-										<div id="chBar6" style="height: 400px; width: 500px;"></div>
-									</div>
-								</div>
-							</div>
-							<div role="tabpanel" class="tab-pane fade" id="dropdown7"
-								aria-labelledby="dropdown7-tab">
-								<p>7번입니다</p>
-								<!-- Info boxes -->
-
-								<!-- BAR CHART -->
-								<div class="box box-success">
-
-									<div class="box-header with-border">
+									<div class="box-header with-border text-center">
 										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
 
 										<div class="box-tools pull-right">
@@ -411,58 +369,128 @@
 										</div>
 									</div>
 									<div class="box-body">
-										<div id="chBar7" style="height: 400px; width: 500px;"></div>
+										<div class="chart">
+											<canvas id="chBar5" style="height: 270px"></canvas>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane fade" id="dropdown6"
+								aria-labelledby="dropdown6-tab">
+								<!-- 	<p>6번입니다</p> -->
+								<!-- Info boxes -->
+
+								<!-- BAR CHART -->
+								<div class="box box-success">
+
+									<div class="box-header with-border text-center">
+										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
+
+										<div class="box-tools pull-right">
+											<button type="button" class="btn btn-box-tool"
+												data-widget="collapse">
+												<i class="fa fa-minus"></i>
+											</button>
+											<button type="button" class="btn btn-box-tool"
+												data-widget="remove">
+												<i class="fa fa-times"></i>
+											</button>
+										</div>
+									</div>
+									<div class="box-body">
+										<div class="chart">
+											<canvas id="chBar6" style="height: 270px"></canvas>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane fade" id="dropdown7"
+								aria-labelledby="dropdown7-tab">
+								<!-- 	<p>7번입니다</p> -->
+								<!-- Info boxes -->
+
+								<!-- BAR CHART -->
+								<div class="box box-success">
+
+									<div class="box-header with-border text-center">
+										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
+
+										<div class="box-tools pull-right">
+											<button type="button" class="btn btn-box-tool"
+												data-widget="collapse">
+												<i class="fa fa-minus"></i>
+											</button>
+											<button type="button" class="btn btn-box-tool"
+												data-widget="remove">
+												<i class="fa fa-times"></i>
+											</button>
+										</div>
+									</div>
+									<div class="box-body">
+										<div class="chart">
+											<div class="chart">
+												<canvas id="chBar7" style="height: 270px"></canvas>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="dropdown8"
 								aria-labelledby="dropdown8-tab">
-								<p>8번입니다</p>
+								<!-- 	<p>8번입니다</p> -->
 								<!-- Info boxes -->
 
 								<!-- BAR CHART -->
 								<div class="box box-success">
 
-									<div class="box-header with-border">
+									<div class="box-header with-border text-center">
 										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
 
 									</div>
 									<div class="box-body">
-										<div id="chBar8" style="height: 400px; width: 500px;"></div>
+										<div class="chart">
+											<div class="chart">
+												<canvas id="chBar8" style="height: 270px"></canvas>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="dropdown9"
 								aria-labelledby="dropdown9-tab">
-								<p>9번입니다</p>
+								<!-- 	<p>9번입니다</p> -->
 								<!-- Info boxes -->
 
 								<!-- BAR CHART -->
 								<div class="box box-success">
 
-									<div class="box-header with-border">
+									<div class="box-header with-border text-center">
 										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
 
 									</div>
 									<div class="box-body">
-										<div id="chBar9" style="height: 400px; width: 500px;"></div>
+										<div class="chart">
+											<canvas id="chBar9" style="height: 270px"></canvas>
+										</div>
 									</div>
 								</div>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="dropdown10"
 								aria-labelledby="dropdown10-tab">
-								<p>10번입니다</p>
+								<!-- 	<p>10번입니다</p> -->
 								<!-- Info boxes -->
 
 								<!-- BAR CHART -->
 								<div class="box box-success">
 
-									<div class="box-header with-border">
+									<div class="box-header with-border text-center">
 										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
 
 									</div>
 									<div class="box-body">
-										<div id="chBar10" style="height: 400px; width: 500px;"></div>
+										<div class="chart">
+											<canvas id="chBar10" style="height: 270px"></canvas>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -574,15 +602,9 @@
 			var months = [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월",
 					"9월", "10월", "11월", "12월" ];
 			var campains = [ "정확도(%)", "예측(%)", "결과(%)" ];
-
-			//datasets
-			var typeData1 = {
-				label : types[0],
-				data : [ 5427, 5243, 5514, 3933, 1326, 687, 1271, 1638 ],
-				backgroundColor : 'rgba(0, 99, 132, 0.6)',
-				borderWidth : 0,
-				yAxisID : "y-axis-density"
-			};
+			var label1 = '# 예측율 증가 학습';
+			var label2 = '# 예측율 감소 학습';
+			var label3 = '# 수행율 증가 학습';
 
 			//elements
 			var ctx0 = document.getElementById("chBar0").getContext('2d');
@@ -597,81 +619,135 @@
 			var ctx9 = document.getElementById("chBar9").getContext('2d');
 			var ctx10 = document.getElementById("chBar10").getContext('2d');
 
+			var dummy1 = [ 54, 53, 14, 33, 13, 87, 11, 63, 90, 87, 100, 21 ];
+			var dummy2 = [ 37, 89, 98, 37, 21, 90, 87, 11, 53, 14, 33, 13 ];
+			var dummy3 = [ 26, 37, 48, 37, 23, 90, 87, 100, 21, 90, 87, 11 ];
+			var dummy4 = [ 37, 21, 90, 87, 63, 90, 87, 100, 90, 87, 100, 21 ];
+			var dummy5 = [ 25, 84, 77, 25, 16, 74, 88, 90, 90, 19, 100, 100 ];
+
 			//sample
-			var densityData = {
-				label : 'Density of Planet (kg/m3)',
-				data : [ 5427, 5243, 5514, 3933, 1326, 687, 1271, 1638 ],
-				backgroundColor : 'rgba(0, 99, 132, 0.6)',
-				borderWidth : 0,
-				yAxisID : "y-axis-density"
-			};
 
-			var gravityData = {
-				label : 'Gravity of Planet (m/s2)',
-				data : [ 3.7, 8.9, 9.8, 3.7, 23.1, 9.0, 8.7, 11.0 ],
-				backgroundColor : 'rgba(99, 132, 0, 0.6)',
-				borderWidth : 0,
-				yAxisID : "y-axis-gravity"
+			var dummyData1 = {
+				labels : months,
+				datasets : [ {
+					label : '정확도(%)',
+					data : dummy1,
+					backgroundColor : 'rgba(81, 152, 255, 0.6)',
+					borderWidth : 0,
+				}, {
+					label : '예측(%)',
+					data : dummy2,
+					backgroundColor : 'rgba(99, 132, 0, 0.6)',
+					borderWidth : 0,
+				}, {
+					label : '결과(%)',
+					data : dummy3,
+					backgroundColor : 'rgba(0, 180, 175, 0.6)',
+					borderWidth : 0,
+				} ]
 			};
-
-			var planetData = {
-				labels : [ "Mercury", "Venus", "Earth", "Mars", "Jupiter",
-						"Saturn", "Uranus", "Neptune" ],
-				datasets : [ densityData, gravityData ]
+			var dummyData2 = {
+				labels : months,
+				datasets : [ {
+					label : '정확도(%)',
+					data : dummy4,
+					backgroundColor : 'rgba(81, 152, 255, 0.6)',
+					borderWidth : 0,
+				}, {
+					label : '예측(%)',
+					data : dummy5,
+					backgroundColor : 'rgba(99, 132, 0, 0.6)',
+					borderWidth : 0,
+				}, {
+					label : '결과(%)',
+					data : dummy1,
+					backgroundColor : 'rgba(0, 180, 175, 0.6)',
+					borderWidth : 0,
+				} ]
 			};
 
 			var chartOptions = {
 				scales : {
 					xAxes : [ {
-						barPercentage : 1,
-						categoryPercentage : 0.6
+						gridLines : {
+							display: false
+						}
 					} ],
 					yAxes : [ {
-						id : "y-axis-density"
-					}, {
-						id : "y-axis-gravity"
-					} ]
+						gridLines: {
+							display: false
+						},
+						ticks : {
+							beginAtZero : true
+						},
+						gridLines : {
+							display : true,
+							drawBorder : true,
+							drawOnChartArea : true,
+							drawTicks : false,
+						}
+					}, ]
+				},
+				tooltips : {
+					mode : 'index'
+				},
+				legend : {
+					position : 'bottom',
 				}
 			};
 
 			var barChart = new Chart(ctx0, {
 				type : 'bar',
-				data : planetData,
+				data : dummyData1,
+				options : chartOptions
+			});
+			var barChart = new Chart(ctx1, {
+				type : 'bar',
+				data : dummyData2,
+				options : chartOptions
+			});
+			var barChart = new Chart(ctx2, {
+				type : 'bar',
+				data : dummyData2,
+				options : chartOptions
+			});
+			var barChart = new Chart(ctx3, {
+				type : 'bar',
+				data : dummyData1,
+				options : chartOptions
+			});
+			var barChart = new Chart(ctx4, {
+				type : 'bar',
+				data : dummyData2,
+				options : chartOptions
+			});
+			var barChart = new Chart(ctx5, {
+				type : 'bar',
+				data : dummyData2,
+				options : chartOptions
+			});
+			var barChart = new Chart(ctx7, {
+				type : 'bar',
+				data : dummyData1,
+				options : chartOptions
+			});
+			var barChart = new Chart(ctx8, {
+				type : 'bar',
+				data : dummyData1,
+				options : chartOptions
+			});
+			var barChart = new Chart(ctx9, {
+				type : 'bar',
+				data : dummyData1,
+				options : chartOptions
+			});
+			var barChart = new Chart(ctx10, {
+				type : 'bar',
+				data : dummyData1,
 				options : chartOptions
 			});
 
 			//left
-			var myChart0 = new Chart(ctx0,
-					{
-						type : 'bar',
-						data : {
-							labels : label0,
-							datasets : [ {
-								label : label1,
-								data : [ data1, data2, data3 ],
-								backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-										'rgba(54, 162, 235, 0.2)',
-										'rgba(0, 0, 0, 0)',
-										'rgba(255, 99, 132, 0.2)',
-										'rgba(54, 162, 235, 0.2)' ],
-								borderColor : [ 'rgba(255,99,132,1)',
-										'rgba(54, 162, 235, 1)',
-										'rgba(0, 0, 0, 0)',
-										'rgba(255,99,132,1)',
-										'rgba(54, 162, 235, 1)' ],
-								borderWidth : 1
-							} ]
-						},
-						options : {
-							scales : {
-								yAxes : [ {
-									ticks : {
-										beginAtZero : true
-									}
-								} ]
-							}
-						}
-					});
 
 			//right
 
