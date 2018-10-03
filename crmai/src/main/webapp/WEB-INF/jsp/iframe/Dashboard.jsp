@@ -4,585 +4,965 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%
-	//out.println("sessionLOGIN :: " + session.getAttribute("sessionLOGIN"));
-	//out.println("sessionCAMCNT :: " + session.getAttribute("sessionCAMCNT"));
-%>
 
 <title>Dashboard</title>
 
-<!-- Tell the browser to be responsive to screen width -->
 <meta
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 	name="viewport">
-<!-- Bootstrap 3.3.7 -->
+<link rel="stylesheet" href="/resources/adminLTE/minty.css">
 
-<!-- /resources/bower_components/bootstrap/dist/css/bootstrap.min.css -->
-<link rel="stylesheet"
-	href="/resources/adminLTE/bootstrap/dist/css/bootstrap.min.css">
-<!-- Font Awesome -->
-<link rel="stylesheet"
-	href="/resources/adminLTE/font-awesome/css/font-awesome.min.css">
-<!-- Ionicons -->
-<link rel="stylesheet"
-	href="/resources/adminLTE/Ionicons/css/ionicons.min.css">
-<!-- Morris charts -->
-<link rel="stylesheet" href="/resources/adminLTE/morris.js/morris.css">
-<!-- Theme style -->
-<link rel="stylesheet"
-	href="/resources/adminLTE/dist/css/AdminLTE.min.css">
-<!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-<link rel="stylesheet"
-	href="/resources/adminLTE/dist/css/skins/_all-skins.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+	crossorigin="anonymous"></script>
 
-<!-- minty <link
-	href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-Qt9Hug5NfnQDGMoaQYXN1+PiQvda7poO7/5k4qAmMN6evu0oDFMJTyjqaoTGHdqf"
-	crossorigin="anonymous"> -->
-
-
-
-
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-<!-- Google Font -->
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
+<link rel="stylesheet" href="/resources/adminLTE/morris.js/morris.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
 <script>
-	$(document).ready(function() {
-		$('a[data-toggle="tab"]').on('hidden.bs.tab', function(e) {
-			alert("이벤트 실행됨");
-		});
-	});
 	function Content_Learning() {
 		//alert("call Content_Learning!!");
 		document.getElementById("main_frame").src = "/Learning/data";
 	}
 </script>
+<style>
+.fLeft {
+	float: left;
+}
 
+.multibtn {
+	margin: 15px;
+	padding: 20px;
+}
+
+.for_center {
+	margin: 0 auto;
+}
+</style>
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
-
-
-	<!-- Content Header (Page header) -->
-	<section class="content-header">
-		<h1>
-			Dashboard <small>Control panel</small>
-		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active">Dashboard</li>
-		</ol>
-	</section>
-
-	<!-- Main content -->
-	<section class="content">
-
-		<!-- 공지사항 -->
-		<div class="row">
-			<!-- Default box -->
-			<div class="box">
-				<div class="box-header with-border">
-					<h4 class="box-title">공지사항</h4>
-
-					<div class="box-tools pull-right">
-						<button type="button" class="btn btn-box-tool"
-							data-widget="collapse" data-toggle="tooltip" title="Collapse">
-							<i class="fa fa-minus"></i>
-						</button>
-						<button type="button" class="btn btn-box-tool"
-							data-widget="remove" data-toggle="tooltip" title="Remove">
-							<i class="fa fa-times"></i>
-						</button>
-					</div>
-				</div>
-				<div class="box-body">
-					<p id="noticeVal"></p>
-				</div>
-			</div>
-			<!-- /.box -->
-		</div>
-		<!-- /.row -->
-
-		<div class="container">
-		<ul id="myTab" class="nav nav-tabs" role="tablist">
-			<li role="presentation" class="active"><a data-target="#home"
-				id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
-				aria-expanded="true">나의현황</a></li>
-			<li role="presentation" class="dropdown"><a data-target="#"
-				id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown"
-				aria-controls="myTabDrop1-contents">기간별 <span class="caret"></span></a>
-				<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1"
-					id="myTabDrop1-contents">
-					<li><a data-target="#dropdown1" tabindex="-1" role="tab"
-						id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">2018년
-							1월</a></li>
-					<li><a data-target="#dropdown2" tabindex="-1" role="tab"
-						id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">2018년
-							2월</a></li>
-				</ul></li>
-			<li role="presentation" class="dropdown"><a data-target="#"
-				id="myTabDrop2" class="dropdown-toggle" data-toggle="dropdown"
-				aria-controls="myTabDrop2-contents">캠페인별 <span class="caret"></span></a>
-				<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop2"
-					id="myTabDrop2-contents">
-					<li><a data-target="#dropdown4" tabindex="-1" role="tab"
-						id="dropdown4-tab" data-toggle="tab" aria-controls="dropdown4">2018년
-							1월</a></li>
-					<li><a data-target="#dropdown5" tabindex="-1" role="tab"
-						id="dropdown5-tab" data-toggle="tab" aria-controls="dropdown5">2018년
-							2월</a></li>
-				</ul></li>
+<body>
+	<!-- Title -->
+	<div>
+		<ul class="list-group">
+			<li
+				class="list-group-item d-flex justify-content-between align-items-center"
+				style="border: none;"><h5>Dashboard</h5>
+				<!-- <span class="badge badge-primary badge-pill">사용자 가이드</span> -->
+			</li>
 		</ul>
-		<div id="myTabContent" class="tab-content">
-			<div role="tabpanel" class="tab-pane fade active in" id="home"
-				aria-labelledby="home-tab">
-				<p>Raw denim you probably haven't heard of them jean shorts
-					Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse.
-					Mustache cliche tempor, williamsburg carles vegan helvetica.
-					Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby
-					sweater eu banh mi, qui irure terry richardson ex squid. Aliquip
-					placeat salvia cillum iphone. Seitan aliquip quis cardigan american
-					apparel, butcher voluptate nisi qui.</p>
+		<!-- line -->
+
+		<hr class="my-4">
+	</div>
+
+	<!-- notice -->
+	<div>
+		<ul class="list-group">
+			<li
+				class="list-group-item d-flex justify-content-between align-items-center"
+				style="border: none;"><h5>Notice</h5></li>
+			<!-- notice content -->
+			<li
+				class="list-group-item d-flex justify-content-between align-items-center"
+				style="border: none;">
+				<table class="table table-hover text-center">
+					<thead>
+						<tr class="table-primary">
+							<th scope="col">No</th>
+							<th scope="col">제목</th>
+							<th scope="col">작성자</th>
+							<th scope="col">등록일</th>
+							<th scope="col">조회수</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">Default</th>
+							<td>Column content</td>
+							<td>Column content</td>
+							<td>Column content</td>
+							<td>Column content</td>
+						</tr>
+						<tr>
+							<th>Default</th>
+							<td>Column content</td>
+							<td>Column content</td>
+							<td>Column content</td>
+							<td>Column content</td>
+						</tr>
+						<tr>
+							<th>Default</th>
+							<td>Column content</td>
+							<td>Column content</td>
+							<td>Column content</td>
+							<td>Column content</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</li>
+		</ul>
+
+		<!-- paging -->
+		<div class="for_center">
+			<ul class="pagination pagination-sm for_center">
+				<li class="page-item disabled"><a class="page-link" href="#">&laquo;</a>
+				</li>
+				<li class="page-item active"><a class="page-link" href="#">1</a>
+				</li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item"><a class="page-link" href="#">4</a></li>
+				<li class="page-item"><a class="page-link" href="#">5</a></li>
+				<li class="page-item"><a class="page-link" href="#">&raquo;</a>
+				</li>
+			</ul>
+		</div>
+
+		<!-- line -->
+		<hr class="my-4">
+	</div>
+
+
+	<!-- stats -->
+	<div>
+		<ul class="list-group">
+			<li
+				class="list-group-item d-flex justify-content-between align-items-center"
+				style="border: none;"><h5>Stats</h5></li>
+
+		</ul>
+	</div>
+
+	<!-- stats content - left wrap 1 -->
+	<div class="fLeft" style="width: 50%">
+		<ul class="list-group">
+			<li
+				class="list-group-item d-flex justify-content-between align-items-center"
+				style="border: none; width: 50%; float: left;">
+				<div class="fLeft">
+					<button type="button" class="btn btn-primary">나의 현황</button>
+				</div>
+			</li>
+		</ul>
+
+		<!-- Tabs1 -->
+		<div style="padding: 20px;">
+			<ul id="myTab" class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="nav-item active"><a
+					class="nav-link active show" data-target="#Tab1" id="TabA1"
+					role="tab" data-toggle="tab" aria-controls="TabA1-contents"
+					aria-expanded="true">나의전체</a></li>
+				<li role="presentation" class="nav-item dropdown"><a
+					data-target="#" id="myTabDrop1" class="nav-link dropdown-toggle"
+					data-toggle="dropdown" aria-controls="myTabDrop1-contents">기간별
+						<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1"
+						id="myTabDrop1-contents">
+						<li class="dropdown-divider"></li>
+						<li><a class="dropdown-item" data-target="#dropdown1"
+							tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab"
+							aria-controls="dropdown1">2018년 1월</a></li>
+						<li><a class="dropdown-item" data-target="#dropdown2"
+							tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab"
+							aria-controls="dropdown2">2018년 2월</a></li>
+					</ul></li>
+				<li role="presentation" class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" data-target="#" id="myTabDrop2"
+					class="nav-link dropdown-toggle" data-toggle="dropdown"
+					aria-controls="myTabDrop2-contents">캠페인별 <span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop2"
+						id="myTabDrop2-contents">
+						<li><a class="dropdown-item" data-target="#dropdown3"
+							tabindex="-1" role="tab" id="dropdown4-tab" data-toggle="tab"
+							aria-controls="dropdown4">캠페인1</a></li>
+						<li><a class="dropdown-item" data-target="#dropdown4"
+							tabindex="-1" role="tab" id="dropdown5-tab" data-toggle="tab"
+							aria-controls="dropdown5">캠페인2</a></li>
+					</ul></li>
+			</ul>
+			<div id="myTabContent" class="tab-content"
+				style="width: 560px; height: 469px;">
+				<!-- content1 -->
+				<!-- simple bar chart -->
+				<div role="tabpanel" class="tab-pane fade active in" id="Tab1"
+					aria-labelledby="TabA1">
+					<div id="tabTitle1">
+						<p class="text-center">
+							<strong>(2018년 전체) 월별 통계</strong>
+						</p>
+					</div>
+					<div id="tabContent1"
+						style="height: 400px; width: 560px; float: left;"></div>
+
+				</div>
+				<!-- content2 -->
+				<!-- simple bar chart -->
+				<div role="tabpanel" class="tab-pane fade" id="dropdown1"
+					aria-labelledby="home-tab">
+					<div id="tabTitle2">
+						<p class="text-center">
+							<strong>(2018년 1월) 통계</strong>
+						</p>
+					</div>
+					<div id="tabContent2"
+						style="height: 400px; width: 560px; float: left;"></div>
+
+				</div>
+				<!-- content3 -->
+				<!-- simple bar chart -->
+				<div role="tabpanel" class="tab-pane fade" id="dropdown2"
+					aria-labelledby="home-tab">
+					<div id="tabTitle3">
+						<p class="text-center">
+							<strong>(2018년 1월) 통계</strong>
+						</p>
+					</div>
+					<div id="tabContent3"
+						style="height: 400px; width: 560px; float: left;"></div>
+
+				</div>
+
+				<div role="tabpanel" class="tab-pane fade" id="dropdown3"
+					aria-labelledby="dropdown4-tab">
+					<div id="tabTitle4">
+						<p class="text-center">
+							<strong>캠페인 1 통계</strong>
+						</p>
+					</div>
+					<div id="tabContent4"
+						style="height: 400px; width: 560px; float: left;"></div>
+
+				</div>
+				<div role="tabpanel" class="tab-pane fade" id="dropdown4"
+					aria-labelledby="dropdown5-tab">
+					<div id="tabTitle5">
+						<p class="text-center">
+							<strong>캠페인 1 통계</strong>
+						</p>
+					</div>
+					<div id="tabContent5"
+						style="height: 400px; width: 560px; float: left;"></div>
+
+				</div>
 			</div>
-			<div role="tabpanel" class="tab-pane fade" id="dropdown1"
-				aria-labelledby="dropdown1-tab">
-				<p>1번입니다</p>
-				<!-- Info boxes -->
-				<div class="row">
+			<!-- perc -->
+			<div class="for_center">
+				<div class="btn-group for_center" role="group"
+					aria-label="Basic example">
+					<button type="button" class="btn btn-outline-info multibtn">
+						<h5>학습</h5>
+						<h5>80%</h5>
+						<h6>(20건)</h6>
+					</button>
+					<button type="button" class="btn btn-outline-secondary multibtn">
+						<h5>예측</h5>
+						<h5>83%</h5>
+						<h6>(20건)</h6>
+					</button>
+					<button type="button" class="btn btn-outline-primary multibtn">
+						<h5>결과</h5>
+						<h5>84%</h5>
+						<h6>(20건)</h6>
+					</button>
+				</div>
+			</div>
 
-					<div class="col-md-3">
-						<!-- BAR CHART -->
-						<div class="box box-success">
 
-							<div class="box-header with-border">
-								<h3 class="box-title">캠페인 예측율 증가 학습</h3>
+			<!-- Tabs2 -->
+			<div style="padding: 20px;">
+				<ul id="myTab" class="nav nav-tabs" role="tablist">
 
-								<div class="box-tools pull-right">
-									<button type="button" class="btn btn-box-tool"
-										data-widget="collapse">
-										<i class="fa fa-minus"></i>
-									</button>
-									<button type="button" class="btn btn-box-tool"
-										data-widget="remove">
-										<i class="fa fa-times"></i>
-									</button>
-								</div>
-							</div>
-							<div class="box-body">
-								<div class="chart">
-									<canvas id="chBar1" style="height: 230px"></canvas>
-								</div>
-							</div>
-							<!-- /.box-body -->
+					<li role="presentation" class="nav-item dropdown"><a
+						data-target="#" id="myTabDrop1" class="nav-link dropdown-toggle"
+						data-toggle="dropdown" aria-controls="myTabDrop1-contents">산업별
+							<span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1"
+							id="myTabDrop1-contents">
+							<li class="dropdown-divider"></li>
+							<li><a class="dropdown-item" data-target="#dropdown1"
+								tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab"
+								aria-controls="dropdown1">통신분야</a></li>
+							<li><a class="dropdown-item" data-target="#dropdown2"
+								tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab"
+								aria-controls="dropdown2">게임분야</a></li>
+						</ul></li>
+
+					<li role="presentation" class="nav-item dropdown"><a
+						data-target="#" id="myTabDrop1" class="nav-link dropdown-toggle"
+						data-toggle="dropdown" aria-controls="myTabDrop1-contents">기간별
+							<span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1"
+							id="myTabDrop1-contents">
+							<li class="dropdown-divider"></li>
+							<li><a class="dropdown-item" data-target="#dropdown1"
+								tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab"
+								aria-controls="dropdown1">2018년 1월</a></li>
+							<li><a class="dropdown-item" data-target="#dropdown2"
+								tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab"
+								aria-controls="dropdown2">2018년 2월</a></li>
+						</ul></li>
+					<li role="presentation" class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" data-target="#" id="myTabDrop2"
+						class="nav-link dropdown-toggle" data-toggle="dropdown"
+						aria-controls="myTabDrop2-contents">캠페인별 <span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop2"
+							id="myTabDrop2-contents">
+							<li><a class="dropdown-item" data-target="#dropdown4"
+								tabindex="-1" role="tab" id="dropdown4-tab" data-toggle="tab"
+								aria-controls="dropdown4">캠페인1</a></li>
+							<li><a class="dropdown-item" data-target="#dropdown5"
+								tabindex="-1" role="tab" id="dropdown5-tab" data-toggle="tab"
+								aria-controls="dropdown5">캠페인2</a></li>
+						</ul></li>
+				</ul>
+				<div id="myTabContent" class="tab-content"
+					style="width: 560px; height: 469px;">
+					<!-- content1 -->
+					<!-- simple bar chart -->
+					<div role="tabpanel" class="tab-pane fade active in" id="Tab1"
+						aria-labelledby="TabA1">
+						<div id="tabTitle1">
+							<p class="text-center">
+								<strong>(2018년 전체) 월별 통계</strong>
+							</p>
 						</div>
-						<!-- /.box -->
+						<div id="tabContent1"
+							style="height: 400px; width: 560px; float: left;"></div>
+
+					</div>
+					<!-- content2 -->
+					<!-- simple bar chart -->
+					<div role="tabpanel" class="tab-pane fade" id="dropdown1"
+						aria-labelledby="home-tab">
+						<div id="tabTitle2">
+							<p class="text-center">
+								<strong>(2018년 1월) 통계</strong>
+							</p>
+						</div>
+						<div id="tabContent2"
+							style="height: 400px; width: 560px; float: left;"></div>
+
+					</div>
+					<!-- content3 -->
+					<!-- simple bar chart -->
+					<div role="tabpanel" class="tab-pane fade" id="dropdown2"
+						aria-labelledby="home-tab">
+						<div id="tabTitle3">
+							<p class="text-center">
+								<strong>(2018년 1월) 통계</strong>
+							</p>
+						</div>
+						<div id="tabContent3"
+							style="height: 400px; width: 560px; float: left;"></div>
+
+					</div>
+
+					<div role="tabpanel" class="tab-pane fade" id="dropdown4"
+						aria-labelledby="dropdown4-tab">
+						<p>4번입니다</p>
+
+					</div>
+					<div role="tabpanel" class="tab-pane fade" id="dropdown5"
+						aria-labelledby="dropdown5-tab">
+						<p>5번입니다</p>
+
 					</div>
 				</div>
 			</div>
-			<div role="tabpanel" class="tab-pane fade" id="dropdown2"
-				aria-labelledby="dropdown2-tab">
-				<p>2번입니다</p>
-				<!-- Info boxes -->
-				<div class="row">
 
-					<div class="col-md-3">
-						<!-- BAR CHART -->
-						<div class="box box-success">
-
-							<div class="box-header with-border">
-								<h3 class="box-title">캠페인 예측율 증가 학습</h3>
-
-								<div class="box-tools pull-right">
-									<button type="button" class="btn btn-box-tool"
-										data-widget="collapse">
-										<i class="fa fa-minus"></i>
-									</button>
-									<button type="button" class="btn btn-box-tool"
-										data-widget="remove">
-										<i class="fa fa-times"></i>
-									</button>
-								</div>
-							</div>
-							<div class="box-body">
-								<div class="chart">
-									<canvas id="chBar2" style="height: 230px"></canvas>
-								</div>
-							</div>
-							<!-- /.box-body -->
+			<!-- Tabs3 -->
+			<div style="padding: 20px;">
+				<ul id="myTab" class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="nav-item dropdown"><a
+						data-target="#" id="myTabDrop1" class="nav-link dropdown-toggle"
+						data-toggle="dropdown" aria-controls="myTabDrop1-contents">산업별
+							<span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1"
+							id="myTabDrop1-contents">
+							<li class="dropdown-divider"></li>
+							<li><a class="dropdown-item" data-target="#dropdown1"
+								tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab"
+								aria-controls="dropdown1">통신분야</a></li>
+							<li><a class="dropdown-item" data-target="#dropdown2"
+								tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab"
+								aria-controls="dropdown2">게임분야</a></li>
+						</ul></li>
+					<li role="presentation" class="nav-item dropdown"><a
+						data-target="#" id="myTabDrop1" class="nav-link dropdown-toggle"
+						data-toggle="dropdown" aria-controls="myTabDrop1-contents">기간별
+							<span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1"
+							id="myTabDrop1-contents">
+							<li class="dropdown-divider"></li>
+							<li><a class="dropdown-item" data-target="#dropdown1"
+								tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab"
+								aria-controls="dropdown1">2018년 1월</a></li>
+							<li><a class="dropdown-item" data-target="#dropdown2"
+								tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab"
+								aria-controls="dropdown2">2018년 2월</a></li>
+						</ul></li>
+					<li role="presentation" class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" data-target="#" id="myTabDrop2"
+						class="nav-link dropdown-toggle" data-toggle="dropdown"
+						aria-controls="myTabDrop2-contents">캠페인별 <span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop2"
+							id="myTabDrop2-contents">
+							<li><a class="dropdown-item" data-target="#dropdown4"
+								tabindex="-1" role="tab" id="dropdown4-tab" data-toggle="tab"
+								aria-controls="dropdown4">캠페인1</a></li>
+							<li><a class="dropdown-item" data-target="#dropdown5"
+								tabindex="-1" role="tab" id="dropdown5-tab" data-toggle="tab"
+								aria-controls="dropdown5">캠페인2</a></li>
+						</ul></li>
+				</ul>
+				<div id="myTabContent" class="tab-content"
+					style="width: 560px; height: 469px;">
+					<!-- content1 -->
+					<!-- simple bar chart -->
+					<div role="tabpanel" class="tab-pane fade active in" id="Tab1"
+						aria-labelledby="TabA1">
+						<div id="tabTitle1">
+							<p class="text-center">
+								<strong>(2018년 전체) 월별 통계</strong>
+							</p>
 						</div>
-						<!-- /.box -->
+						<div id="tabContent1"
+							style="height: 400px; width: 560px; float: left;"></div>
+
+					</div>
+					<!-- content2 -->
+					<!-- simple bar chart -->
+					<div role="tabpanel" class="tab-pane fade" id="dropdown1"
+						aria-labelledby="home-tab">
+						<div id="tabTitle2">
+							<p class="text-center">
+								<strong>(2018년 1월) 통계</strong>
+							</p>
+						</div>
+						<div id="tabContent2"
+							style="height: 400px; width: 560px; float: left;"></div>
+
+					</div>
+					<!-- content3 -->
+					<!-- simple bar chart -->
+					<div role="tabpanel" class="tab-pane fade" id="dropdown2"
+						aria-labelledby="home-tab">
+						<div id="tabTitle3">
+							<p class="text-center">
+								<strong>(2018년 1월) 통계</strong>
+							</p>
+						</div>
+						<div id="tabContent3"
+							style="height: 400px; width: 560px; float: left;"></div>
+
+					</div>
+
+					<div role="tabpanel" class="tab-pane fade" id="dropdown4"
+						aria-labelledby="dropdown4-tab">
+						<p>4번입니다</p>
+
+					</div>
+					<div role="tabpanel" class="tab-pane fade" id="dropdown5"
+						aria-labelledby="dropdown5-tab">
+						<p>5번입니다</p>
+
 					</div>
 				</div>
 			</div>
-			<div role="tabpanel" class="tab-pane fade" id="dropdown4"
-				aria-labelledby="dropdown4-tab">
-				<p>4번입니다</p>
-				<!-- Info boxes -->
-				<div class="row">
 
-					<div class="col-md-3">
-						<!-- BAR CHART -->
-						<div class="box box-success">
+		</div>
+	</div>
 
-							<div class="box-header with-border">
-								<h3 class="box-title">캠페인 예측율 증가 학습</h3>
+	<!-- stats content - right wrap 1 -->
+	<div class="fLeft" style="width: 50%">
+		<ul class="list-group">
+			<li
+				class="list-group-item d-flex justify-content-between align-items-center"
+				style="border: none; width: 50%; float: left;">
+				<div class="fLeft">
+					<button type="button" class="btn btn-primary">전체 현황</button>
+				</div>
+			</li>
+		</ul>
+		<!-- Tabs4 -->
+		<div style="padding: 20px;">
+			<ul id="myTab" class="nav nav-tabs" role="tablist">
 
-								<div class="box-tools pull-right">
-									<button type="button" class="btn btn-box-tool"
-										data-widget="collapse">
-										<i class="fa fa-minus"></i>
-									</button>
-									<button type="button" class="btn btn-box-tool"
-										data-widget="remove">
-										<i class="fa fa-times"></i>
-									</button>
-								</div>
-							</div>
-							<div class="box-body">
-								<div class="chart">
-									<canvas id="chBar3" style="height: 230px"></canvas>
-								</div>
-							</div>
-							<!-- /.box-body -->
+				<li role="presentation" class="nav-item dropdown"><a
+					data-target="#" id="myTabDrop1" class="nav-link dropdown-toggle"
+					data-toggle="dropdown" aria-controls="myTabDrop1-contents">산업군별
+						<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1"
+						id="myTabDrop1-contents">
+						<li class="dropdown-divider"></li>
+						<li><a class="dropdown-item" data-target="#dropdown1"
+							tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab"
+							aria-controls="dropdown1">통신분야</a></li>
+						<li><a class="dropdown-item" data-target="#dropdown2"
+							tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab"
+							aria-controls="dropdown2">게임분야</a></li>
+					</ul></li>
+				<li role="presentation" class="nav-item dropdown"><a
+					data-target="#" id="myTabDrop1" class="nav-link dropdown-toggle"
+					data-toggle="dropdown" aria-controls="myTabDrop1-contents">기간별
+						<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1"
+						id="myTabDrop1-contents">
+						<li class="dropdown-divider"></li>
+						<li><a class="dropdown-item" data-target="#dropdown1"
+							tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab"
+							aria-controls="dropdown1">2018년 1월</a></li>
+						<li><a class="dropdown-item" data-target="#dropdown2"
+							tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab"
+							aria-controls="dropdown2">2018년 2월</a></li>
+					</ul></li>
+				<li role="presentation" class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" data-target="#" id="myTabDrop2"
+					class="nav-link dropdown-toggle" data-toggle="dropdown"
+					aria-controls="myTabDrop2-contents">캠페인별 <span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop2"
+						id="myTabDrop2-contents">
+						<li><a class="dropdown-item" data-target="#dropdown4"
+							tabindex="-1" role="tab" id="dropdown4-tab" data-toggle="tab"
+							aria-controls="dropdown4">캠페인1</a></li>
+						<li><a class="dropdown-item" data-target="#dropdown5"
+							tabindex="-1" role="tab" id="dropdown5-tab" data-toggle="tab"
+							aria-controls="dropdown5">캠페인2</a></li>
+					</ul></li>
+			</ul>
+			<div id="myTabContent" class="tab-content"
+				style="width: 560px; height: 469px;">
+				<!-- content1 -->
+				<!-- simple bar chart -->
+				<div role="tabpanel" class="tab-pane fade active in" id="Tab1"
+					aria-labelledby="TabA1">
+					<div id="tabTitle1">
+						<p class="text-center">
+							<strong>(2018년 전체) 월별 통계</strong>
+						</p>
+					</div>
+					<div id="tabContent1"
+						style="height: 400px; width: 560px; float: left;"></div>
+
+				</div>
+				<!-- content2 -->
+				<!-- simple bar chart -->
+				<div role="tabpanel" class="tab-pane fade" id="dropdown1"
+					aria-labelledby="home-tab">
+					<div id="tabTitle2">
+						<p class="text-center">
+							<strong>(2018년 1월) 통계</strong>
+						</p>
+					</div>
+					<div id="tabContent2"
+						style="height: 400px; width: 560px; float: left;"></div>
+
+				</div>
+				<!-- content3 -->
+				<!-- simple bar chart -->
+				<div role="tabpanel" class="tab-pane fade" id="dropdown2"
+					aria-labelledby="home-tab">
+					<div id="tabTitle3">
+						<p class="text-center">
+							<strong>(2018년 1월) 통계</strong>
+						</p>
+					</div>
+					<div id="tabContent3"
+						style="height: 400px; width: 560px; float: left;"></div>
+
+				</div>
+
+				<div role="tabpanel" class="tab-pane fade" id="dropdown4"
+					aria-labelledby="dropdown4-tab">
+					<p>4번입니다</p>
+
+				</div>
+				<div role="tabpanel" class="tab-pane fade" id="dropdown5"
+					aria-labelledby="dropdown5-tab">
+					<p>5번입니다</p>
+
+				</div>
+			</div>
+			<!-- perc -->
+			<div class="for_center">
+				<div class="btn-group for_center" role="group"
+					aria-label="Basic example">
+					<button type="button" class="btn btn-outline-info multibtn">
+						<h5>학습</h5>
+						<h5>80%</h5>
+						<h6>(20건)</h6>
+					</button>
+					<button type="button" class="btn btn-outline-secondary multibtn">
+						<h5>예측</h5>
+						<h5>83%</h5>
+						<h6>(20건)</h6>
+					</button>
+					<button type="button" class="btn btn-outline-primary multibtn">
+						<h5>결과</h5>
+						<h5>84%</h5>
+						<h6>(20건)</h6>
+					</button>
+				</div>
+			</div>
+
+
+			<!-- Tabs5 -->
+			<div style="padding: 20px;">
+				<ul id="myTab" class="nav nav-tabs" role="tablist">
+
+					<li role="presentation" class="nav-item dropdown"><a
+						data-target="#" id="myTabDrop1" class="nav-link dropdown-toggle"
+						data-toggle="dropdown" aria-controls="myTabDrop1-contents">산업별
+							<span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1"
+							id="myTabDrop1-contents">
+							<li class="dropdown-divider"></li>
+							<li><a class="dropdown-item" data-target="#dropdown1"
+								tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab"
+								aria-controls="dropdown1">통신분야</a></li>
+							<li><a class="dropdown-item" data-target="#dropdown2"
+								tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab"
+								aria-controls="dropdown2">게임분야</a></li>
+						</ul></li>
+
+					<li role="presentation" class="nav-item dropdown"><a
+						data-target="#" id="myTabDrop1" class="nav-link dropdown-toggle"
+						data-toggle="dropdown" aria-controls="myTabDrop1-contents">기간별
+							<span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1"
+							id="myTabDrop1-contents">
+							<li class="dropdown-divider"></li>
+							<li><a class="dropdown-item" data-target="#dropdown1"
+								tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab"
+								aria-controls="dropdown1">2018년 1월</a></li>
+							<li><a class="dropdown-item" data-target="#dropdown2"
+								tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab"
+								aria-controls="dropdown2">2018년 2월</a></li>
+						</ul></li>
+					<li role="presentation" class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" data-target="#" id="myTabDrop2"
+						class="nav-link dropdown-toggle" data-toggle="dropdown"
+						aria-controls="myTabDrop2-contents">캠페인별 <span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop2"
+							id="myTabDrop2-contents">
+							<li><a class="dropdown-item" data-target="#dropdown4"
+								tabindex="-1" role="tab" id="dropdown4-tab" data-toggle="tab"
+								aria-controls="dropdown4">캠페인1</a></li>
+							<li><a class="dropdown-item" data-target="#dropdown5"
+								tabindex="-1" role="tab" id="dropdown5-tab" data-toggle="tab"
+								aria-controls="dropdown5">캠페인2</a></li>
+						</ul></li>
+				</ul>
+				<div id="myTabContent" class="tab-content"
+					style="width: 560px; height: 469px;">
+					<!-- content1 -->
+					<!-- simple bar chart -->
+					<div role="tabpanel" class="tab-pane fade active in" id="Tab1"
+						aria-labelledby="TabA1">
+						<div id="tabTitle1">
+							<p class="text-center">
+								<strong>(2018년 전체) 월별 통계</strong>
+							</p>
 						</div>
-						<!-- /.box -->
+						<div id="tabContent1"
+							style="height: 400px; width: 560px; float: left;"></div>
+
+					</div>
+					<!-- content2 -->
+					<!-- simple bar chart -->
+					<div role="tabpanel" class="tab-pane fade" id="dropdown1"
+						aria-labelledby="home-tab">
+						<div id="tabTitle2">
+							<p class="text-center">
+								<strong>(2018년 1월) 통계</strong>
+							</p>
+						</div>
+						<div id="tabContent2"
+							style="height: 400px; width: 560px; float: left;"></div>
+
+					</div>
+					<!-- content3 -->
+					<!-- simple bar chart -->
+					<div role="tabpanel" class="tab-pane fade" id="dropdown2"
+						aria-labelledby="home-tab">
+						<div id="tabTitle3">
+							<p class="text-center">
+								<strong>(2018년 1월) 통계</strong>
+							</p>
+						</div>
+						<div id="tabContent3"
+							style="height: 400px; width: 560px; float: left;"></div>
+
+					</div>
+
+					<div role="tabpanel" class="tab-pane fade" id="dropdown4"
+						aria-labelledby="dropdown4-tab">
+						<p>4번입니다</p>
+
+					</div>
+					<div role="tabpanel" class="tab-pane fade" id="dropdown5"
+						aria-labelledby="dropdown5-tab">
+						<p>5번입니다</p>
+
 					</div>
 				</div>
 			</div>
-			<div role="tabpanel" class="tab-pane fade" id="dropdown5"
-				aria-labelledby="dropdown5-tab">
-				<p>5번입니다</p>
-				<!-- Info boxes -->
-				<div class="row">
 
-					<div class="col-md-3">
-						<!-- BAR CHART -->
-						<div class="box box-success">
-
-							<div class="box-header with-border">
-								<h3 class="box-title">캠페인 예측율 증가 학습</h3>
-
-								<div class="box-tools pull-right">
-									<button type="button" class="btn btn-box-tool"
-										data-widget="collapse">
-										<i class="fa fa-minus"></i>
-									</button>
-									<button type="button" class="btn btn-box-tool"
-										data-widget="remove">
-										<i class="fa fa-times"></i>
-									</button>
-								</div>
-							</div>
-							<div class="box-body">
-								<div class="chart">
-									<canvas id="chBar4" style="height: 230px"></canvas>
-								</div>
-							</div>
-							<!-- /.box-body -->
+			<!-- Tabs6 -->
+			<div style="padding: 20px;">
+				<ul id="myTab" class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="nav-item dropdown"><a
+						data-target="#" id="myTabDrop1" class="nav-link dropdown-toggle"
+						data-toggle="dropdown" aria-controls="myTabDrop1-contents">산업별
+							<span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1"
+							id="myTabDrop1-contents">
+							<li class="dropdown-divider"></li>
+							<li><a class="dropdown-item" data-target="#dropdown1"
+								tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab"
+								aria-controls="dropdown1">통신분야</a></li>
+							<li><a class="dropdown-item" data-target="#dropdown2"
+								tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab"
+								aria-controls="dropdown2">게임분야</a></li>
+						</ul></li>
+					<li role="presentation" class="nav-item dropdown"><a
+						data-target="#" id="myTabDrop1" class="nav-link dropdown-toggle"
+						data-toggle="dropdown" aria-controls="myTabDrop1-contents">기간별
+							<span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1"
+							id="myTabDrop1-contents">
+							<li class="dropdown-divider"></li>
+							<li><a class="dropdown-item" data-target="#dropdown1"
+								tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab"
+								aria-controls="dropdown1">2018년 1월</a></li>
+							<li><a class="dropdown-item" data-target="#dropdown2"
+								tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab"
+								aria-controls="dropdown2">2018년 2월</a></li>
+						</ul></li>
+					<li role="presentation" class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" data-target="#" id="myTabDrop2"
+						class="nav-link dropdown-toggle" data-toggle="dropdown"
+						aria-controls="myTabDrop2-contents">캠페인별 <span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop2"
+							id="myTabDrop2-contents">
+							<li><a class="dropdown-item" data-target="#dropdown4"
+								tabindex="-1" role="tab" id="dropdown4-tab" data-toggle="tab"
+								aria-controls="dropdown4">캠페인1</a></li>
+							<li><a class="dropdown-item" data-target="#dropdown5"
+								tabindex="-1" role="tab" id="dropdown5-tab" data-toggle="tab"
+								aria-controls="dropdown5">캠페인2</a></li>
+						</ul></li>
+				</ul>
+				<div id="myTabContent" class="tab-content"
+					style="width: 560px; height: 469px;">
+					<!-- content1 -->
+					<!-- simple bar chart -->
+					<div role="tabpanel" class="tab-pane fade active in" id="Tab1"
+						aria-labelledby="TabA1">
+						<div id="tabTitle1">
+							<p class="text-center">
+								<strong>(2018년 전체) 월별 통계</strong>
+							</p>
 						</div>
-						<!-- /.box -->
+						<div id="tabContent1"
+							style="height: 400px; width: 560px; float: left;"></div>
+
+					</div>
+					<!-- content2 -->
+					<!-- simple bar chart -->
+					<div role="tabpanel" class="tab-pane fade" id="dropdown1"
+						aria-labelledby="home-tab">
+						<div id="tabTitle2">
+							<p class="text-center">
+								<strong>(2018년 1월) 통계</strong>
+							</p>
+						</div>
+						<div id="tabContent2"
+							style="height: 400px; width: 560px; float: left;"></div>
+
+					</div>
+					<!-- content3 -->
+					<!-- simple bar chart -->
+					<div role="tabpanel" class="tab-pane fade" id="dropdown2"
+						aria-labelledby="home-tab">
+						<div id="tabTitle3">
+							<p class="text-center">
+								<strong>(2018년 1월) 통계</strong>
+							</p>
+						</div>
+						<div id="tabContent3"
+							style="height: 400px; width: 560px; float: left;"></div>
+
+					</div>
+
+					<div role="tabpanel" class="tab-pane fade" id="dropdown4"
+						aria-labelledby="dropdown4-tab">
+						<p>4번입니다</p>
+
+					</div>
+					<div role="tabpanel" class="tab-pane fade" id="dropdown5"
+						aria-labelledby="dropdown5-tab">
+						<p>5번입니다</p>
+
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
 
 
-		<!-- Info boxes -->
-		<div class="row">
-			<!-- Default box -->
-			<div class="box">
-				<div class="box-header with-border">
-					<h4 class="box-title">전체 실시간 현황</h4>
-
-					<div class="box-tools pull-right">
-						<button type="button" class="btn btn-box-tool"
-							data-widget="collapse" data-toggle="tooltip" title="Collapse">
-							<i class="fa fa-minus"></i>
-						</button>
-						<button type="button" class="btn btn-box-tool"
-							data-widget="remove" data-toggle="tooltip" title="Remove">
-							<i class="fa fa-times"></i>
-						</button>
-					</div>
-				</div>
-				<div class="box-body">
-
-					<div class="col-md-4 col-sm-6 col-xs-12">
-						<div class="info-box">
-							<span class="info-box-icon bg-aqua"><i
-								class="ion ion-ios-gear-outline"></i></span>
-
-							<div class="info-box-content">
-								<span class="info-box-text" style="text-align: center">AI학습</span>
-								<span class="info-box-number" style="text-align: center">90<small>%</small></span>
-							</div>
-							<!-- /.info-box-content -->
-						</div>
-						<!-- /.info-box -->
-					</div>
-					<!-- /.col -->
-					<div class="col-md-4 col-sm-6 col-xs-12">
-						<div class="info-box">
-							<span class="info-box-icon bg-red"><i
-								class="ion ion-ios-eye"></i></span>
-
-							<div class="info-box-content">
-								<span class="info-box-text" style="text-align: center">AI예측</span>
-								<span class="info-box-number" style="text-align: center">41,410</span>
-							</div>
-							<!-- /.info-box-content -->
-						</div>
-						<!-- /.info-box -->
-					</div>
-					<!-- /.col -->
-
-					<!-- fix for small devices only -->
-					<div class="clearfix visible-sm-block"></div>
-
-					<div class="col-md-4 col-sm-6 col-xs-12">
-						<div class="info-box">
-							<span class="info-box-icon bg-green"><i
-								class="ion ion-ios-cart-outline"></i></span>
-
-							<div class="info-box-content">
-								<span class="info-box-text" style="text-align: center">AI결과</span>
-								<span class="info-box-number" style="text-align: center">760</span>
-							</div>
-							<!-- /.info-box-content -->
-						</div>
-						<!-- /.info-box -->
-					</div>
-
-
-				</div>
-				<!-- /.box -->
-			</div>
-			<!-- /.box -->
-		</div>
-		<!-- /.row -->
+	<!-- line -->
+	<hr class="my-4" style="clear: both;">
 
 
 
-	</section>
-	<!-- /.Main content -->
 
 
-	<!-- jQuery 3 -->
-	<script src="/resources/bower_components/jquery/dist/jquery.min.js"></script>
-	<!-- jQuery UI 1.11.4 -->
-	<script src="/resources/bower_components/jquery-ui/jquery-ui.min.js"></script>
-	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+
+
 	<script>
-		$.widget.bridge('uibutton', $.ui.button);
-	</script>
-	<!-- Bootstrap 3.3.7 -->
-	<script
-		src="/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	<!-- ChartJS -->
-	<!-- <script src="/resources/bower_components/Chart.js/Chart.js"></script> -->
-	<!-- Morris.js charts -->
-	<script src="/resources/bower_components/raphael/raphael.min.js"></script>
-	<script src="/resources/bower_components/morris.js/morris.min.js"></script>
-	<!-- Sparkline -->
-	<script
-		src="/resources/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
-	<!-- jvectormap -->
-	<script
-		src="/resources/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-	<script
-		src="/resources/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-	<!-- jQuery Knob Chart -->
-	<script
-		src="/resources/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
-	<!-- daterangepicker -->
-	<script src="/resources/bower_components/moment/min/moment.min.js"></script>
-	<script
-		src="/resources/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-	<!-- datepicker -->
-	<script
-		src="/resources/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-	<!-- Bootstrap WYSIHTML5 -->
-	<script
-		src="/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-	<!-- Slimscroll -->
-	<script
-		src="/resources/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-	<!-- FastClick -->
-	<script src="/resources/bower_components/fastclick/lib/fastclick.js"></script>
-	<!-- AdminLTE App -->
-	<script src="/resources/dist/js/adminlte.min.js"></script>
-	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-	<script src="/resources/dist/js/pages/dashboard.js"></script>
-	<!-- AdminLTE for demo purposes -->
-	<script src="/resources/dist/js/demo.js"></script>
+		$(document).ready(function() {
+			$('.nav-tabs').on('shown.bs.tab', 'a', function(e) {
+				console.log(e.relatedTarget);
+				if (e.relatedTarget) {
+					$(e.relatedTarget).removeClass('active');
+				}
+			});
+		});
 
-	<!-- MDB charts ADD -->
-	<script src="/resources/js/chart.js"></script>
-
-	<!-- page script -->
-	<script>
 		$(function() {
+			
+			var data1 = [
+				{y : '1월',a : 100,b : 90,c : 30},
+				{y : '2월',a : 25,b : 90,c : 30},
+				{y : '3월',a : 36,b : 20,c : 30},
+				{y : '4월',a : 82,b : 90,c : 30},
+				{y : '5월',a : 85,b : 90,c : 30},
+				{y : '6월',a : 10,b : 50,c : 30},
+				{y : '7월',a : 100,b : 40,c : 30},
+				{y : '8월',a : 10,b : 50,c : 30},
+				{y : '9월',a : 100,b : 60,c : 30},
+				{y : '10월',a : 100,b : 70,c : 30},
+				{y : '11월',a : 20,b : 90,c : 30},
+				{y : '12월',a : 100,b : 80,c : 30}];
+			var data2 = [
+				{y : '1월',a : 23,b : 27,c : 58},
+				{y : '2월',a : 25,b : 27,c : 30},
+				{y : '3월',a : 36,b : 20,c : 58},
+				{y : '4월',a : 82,b : 90,c : 30},
+				{y : '5월',a : 85,b : 27,c : 58},
+				{y : '6월',a : 10,b : 50,c : 30},
+				{y : '7월',a : 73,b : 40,c : 30},
+				{y : '8월',a : 10,b : 50,c : 58},
+				{y : '9월',a : 73,b : 60,c : 30},
+				{y : '10월',a : 73,b : 70,c : 58},
+				{y : '11월',a : 20,b : 90,c : 30},
+				{y : '12월',a : 73,b : 80,c : 58}];
 
-			var label1 = '# 예측율 증가 학습';
-			var label2 = '# 예측율 감소 학습';
-			var label3 = '# 수행율 증가 학습';
-			var label4 = '# 수행율 감소 학습';
-			var label0 = [ "학습전", "학습전", " ", "학습후", "학습후" ]
+			//tabContent1
+			new Morris.Bar({
+				element : 'tabContent1',
+				data : data1,
+				barColors : [ '#11998e', '#bdc3c7', '#f64f59' ],
+				xkey : 'y',
+				ykeys : [ 'a', 'b', 'c' ],
+				labels : [ '정확도', '예측', '결과' ],
+				hideHover : 'auto',
+				hoverCallback : function(index, options, content, row) {
+					return (content) + "단위(%)";
+				}
+			});
 
-			var data1 = [ 150, 59, 0, 139, 150 ];
-			var data2 = [ 91, 70, 0, 128, 84 ];
-			var data3 = [ 830, 59, 0, 139, 150 ];
-			var data4 = [ 91, 70, 0, 128, 84 ];
+			// tabContent2
+			new Morris.Bar({
+				element : 'tabContent2',
+				data : data2,
+				barColors : [ '#11998e', '#bdc3c7', '#f64f59' ],
+				xkey : 'y',
+				ykeys : [ 'a', 'b', 'c' ],
+				labels : [ '정확도', '예측', '결과' ],
+				hideHover : 'auto',
+				hoverCallback : function(index, options, content, row) {
+					return (content) + "단위(%)";
+				}
+			});
 
-			var ctx1 = document.getElementById("chBar1").getContext('2d');
-			var ctx2 = document.getElementById("chBar2").getContext('2d');
-			var ctx3 = document.getElementById("chBar3").getContext('2d');
-			var ctx4 = document.getElementById("chBar4").getContext('2d');
+			// tabContent3
+			new Morris.Bar({
+				element : 'tabContent3',
+				data : data1,
+				barColors : [ '#11998e', '#bdc3c7', '#f64f59' ],
+				xkey : 'y',
+				ykeys : [ 'a', 'b', 'c' ],
+				labels : [ '정확도', '예측', '결과' ],
+				hideHover : 'auto',
+				hoverCallback : function(index, options, content, row) {
+					return (content) + "단위(%)";
+				}
+			});
+			// tabContent4
+			var bar2 = new Morris.Bar({
+				element : 'tabContent4',
+				data : data2,
+				barColors : [ '#11998e', '#bdc3c7', '#f64f59' ],
+				xkey : 'y',
+				ykeys : [ 'a', 'b', 'c' ],
+				labels : [ '정확도', '예측', '결과' ],
+				hideHover : 'auto',
+				hoverCallback : function(index, options, content, row) {
+					return (content) + "단위(%)";
+				}
+			});
 
-			var myChart1 = new Chart(ctx1,
-					{
-						type : 'bar',
-						data : {
-							labels : label0,
-							datasets : [ {
-								label : label1,
-								data : data1,
-								backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-										'rgba(54, 162, 235, 0.2)',
-										'rgba(0, 0, 0, 0)',
-										'rgba(255, 99, 132, 0.2)',
-										'rgba(54, 162, 235, 0.2)' ],
-								borderColor : [ 'rgba(255,99,132,1)',
-										'rgba(54, 162, 235, 1)',
-										'rgba(0, 0, 0, 0)',
-										'rgba(255,99,132,1)',
-										'rgba(54, 162, 235, 1)' ],
-								borderWidth : 1
-							} ]
-						},
-						options : {
-							scales : {
-								yAxes : [ {
-									ticks : {
-										beginAtZero : true
-									}
-								} ]
-							}
-						}
-					});
+			// tabContent5
+			new Morris.Bar({
+				element : 'tabContent5',
+				data : data1,
+				barColors : [ '#11998e', '#bdc3c7', '#f64f59' ],
+				xkey : 'y',
+				ykeys : [ 'a', 'b', 'c' ],
+				labels : [ '정확도', '예측', '결과' ],
+				hideHover : 'auto',
+				hoverCallback : function(index, options, content, row) {
+					return (content) + "단위(%)";
+				}
+			});
 
-			var myChart2 = new Chart(ctx2,
-					{
-						type : 'bar',
-						data : {
-							labels : label0,
-							datasets : [ {
-								label : label2,
-								data : data2,
-								backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-										'rgba(54, 162, 235, 0.2)',
-										'rgba(0, 0, 0, 0)',
-										'rgba(255, 99, 132, 0.2)',
-										'rgba(54, 162, 235, 0.2)' ],
-								borderColor : [ 'rgba(255,99,132,1)',
-										'rgba(54, 162, 235, 1)',
-										'rgba(0, 0, 0, 0)',
-										'rgba(255,99,132,1)',
-										'rgba(54, 162, 235, 1)' ],
-								borderWidth : 1
-							} ]
-						},
-						options : {
-							scales : {
-								yAxes : [ {
-									ticks : {
-										beginAtZero : true
-									}
-								} ]
-							}
-						}
-					});
-
-			var myChart3 = new Chart(ctx3,
-					{
-						type : 'bar',
-						data : {
-							labels : label0,
-							datasets : [ {
-								label : label3,
-								data : data3,
-								backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-										'rgba(54, 162, 235, 0.2)',
-										'rgba(0, 0, 0, 0)',
-										'rgba(255, 99, 132, 0.2)',
-										'rgba(54, 162, 235, 0.2)' ],
-								borderColor : [ 'rgba(255,99,132,1)',
-										'rgba(54, 162, 235, 1)',
-										'rgba(0, 0, 0, 0)',
-										'rgba(255,99,132,1)',
-										'rgba(54, 162, 235, 1)' ],
-								borderWidth : 1
-							} ]
-						},
-						options : {
-							scales : {
-								yAxes : [ {
-									ticks : {
-										beginAtZero : true
-									}
-								} ]
-							}
-						}
-					});
-
-			var myChart4 = new Chart(ctx4,
-					{
-						type : 'bar',
-						data : {
-							labels : label0,
-							datasets : [ {
-								label : label4,
-								data : data4,
-								backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-										'rgba(54, 162, 235, 0.2)',
-										'rgba(0, 0, 0, 0)',
-										'rgba(255, 99, 132, 0.2)',
-										'rgba(54, 162, 235, 0.2)' ],
-								borderColor : [ 'rgba(255,99,132,1)',
-										'rgba(54, 162, 235, 1)',
-										'rgba(0, 0, 0, 0)',
-										'rgba(255,99,132,1)',
-										'rgba(54, 162, 235, 1)' ],
-								borderWidth : 1
-							} ]
-						},
-						options : {
-							scales : {
-								yAxes : [ {
-									ticks : {
-										beginAtZero : true
-									}
-								} ]
-							}
-						}
-					});
+			//else
 
 			var _response = $('#noticeVal');
 			var admin = new Object();
