@@ -340,11 +340,13 @@
 											<div class="col-sm-12">
 												<button id="id_getAiStaningTrain" type="button" class="btn btn-info pull-right">전처리전</button>
 											</div>
-											<!-- campaign table -->
-											<table id="ai_staging_train" class="table table-bordered table-hover"></table>
-											<nav aria-label="Page navigation example" style="text-align: center;">
-											<ul class="pagination-sm" id="id_Train_pagination"></ul></nav>
 											
+											<div class="col-sm-12 text-center">
+												<!-- campaign table -->
+												<table id="ai_staging_train" class="table table-bordered table-hover"></table>
+												<nav aria-label="Page navigation example" style="text-align: center;">
+												<ul class="pagination-sm" id="id_Train_pagination"></ul></nav>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -381,11 +383,13 @@
 											<div class="col-sm-12">
 												<button id="id_getAiStaningTest" type="button" class="btn btn-info pull-right">전처리전</button>
 											</div>
-											<!-- campaign table -->
-											<table id="ai_staging_test" class="table table-bordered table-hover"></table>
-											<nav aria-label="Page navigation example" style="text-align: center;">
-											<ul class="pagination-sm" id="id_Test_pagination"></ul></nav>
 											
+											<div class="col-sm-12 text-center">
+												<!-- campaign table -->
+												<table id="ai_staging_test" class="table table-bordered table-hover"></table>
+												<nav aria-label="Page navigation example" style="text-align: center;">
+												<ul class="pagination-sm" id="id_Test_pagination"></ul></nav>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -425,11 +429,13 @@
 												<button id="id_getAiStaningResult" type="button" class="btn btn-info pull-right">대상자데이터전처리전</button>
 												<button id="id_getAiStaningResult" type="button" class="btn btn-info pull-right">대상자데이터전처리후</button>
 											</div>
-											<!-- campaign table -->
-											<table id="ai_staging_result" class="table table-bordered table-hover"></table>
-											<nav aria-label="Page navigation example" style="text-align: center;">
-											<ul class="pagination-sm" id="id_result_pagination"></ul></nav>
 											
+											<div class="col-sm-12 text-center">
+												<!-- campaign table -->
+												<table id="ai_staging_result" class="table table-bordered table-hover"></table>
+												<nav aria-label="Page navigation example" style="text-align: center;">
+												<ul class="pagination-sm" id="id_result_pagination"></ul></nav>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -464,11 +470,10 @@
 										<!-- /.box-header -->
 										<div class="box-body">
 											<div class="col-sm-12">
-												<!--<button id="id_getAiStaningResult" type="button" class="btn btn-info pull-right">AI학습</button>  -->
-												<div id="barchart" style="height: 250px;"></div>
+												<canvas id="barchart" style="height: 250px;"></canvas>
 											</div>
 											
-											<div class="col-sm-12">
+											<div class="col-sm-12 text-center">
 												<!-- model table -->
 												<table id="ai_model_View" class="table table-bordered table-hover"></table>
 											</div>
@@ -507,9 +512,10 @@
 											<div class="col-sm-12">
 												<button id="id_getAiTestPredict" type="button" class="btn btn-info pull-right">AI예측실행</button>
 											</div>
-											<!-- model table -->
-											<table id="ai_TestPredict" class="table table-bordered table-hover"></table>
-											
+											<div class="col-sm-12 text-center">
+												<!-- model table -->
+												<table id="ai_TestPredict" class="table table-bordered table-hover"></table>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -546,9 +552,10 @@
 											<div class="col-sm-12">
 												<button id="id_getAiStaningReal" type="button" class="btn btn-info pull-right">AI예측실행</button>
 											</div>
-											<!-- model table -->
-											<table id="ai_StagingReal" class="table table-bordered table-hover"></table>
-											
+											<div class="col-sm-12 text-center">
+												<!-- model table -->
+												<table id="ai_StagingReal" class="table table-bordered table-hover"></table>
+											</div>
 										</div>
 									</div>
 								</div>
