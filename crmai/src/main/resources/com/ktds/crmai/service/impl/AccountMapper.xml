@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ktds.crmai.service.impl.AccountMapper">
+
+	<select id="selectAllAccountList" resultType="account">
+		SELECT 
+		    ADM_ID AS "adm_id", 
+			ADM_PW AS "adm_pw",
+			ADM_NAME AS "adm_name",
+			ADM_CDATE as "adm_cdate"
+
+		FROM  
+			AI_ACCOUNT
+ 
+	</select>
+	
+	<select id="selectAccountList" resultType="account">
+		SELECT
+		     ADM_ID AS "adm_id", 
+			ADM_PW AS "adm_pw"
+	
+		FROM 
+		    AI_ACCOUNT
+		<where>
+			<if test="adm_id != null and adm_id != '' ">
+				adm_id like '%' || #{adm_id} || '%'
+			</if>
+			
+			<if test="adm_pw != null and adm_pw != '' ">
+				AND type adm_pw '%' || #{adm_pw} || '%'
+			</if>
+		</where>
+
+    </select>
+    
+    <select id="selectAccountDetail" resultType="account">
+			SELECT 
+		    ADM_ID AS "adm_id", 
+			ADM_PW AS "adm_pw",
+			ADM_NAME AS "adm_name",
+			ADM_EMAIL as "adm_email",
+			ADM_CDATE as "adm_cdate"
+
+		FROM  
+			AI_ACCOUNT
+		WHERE
+			adm_id =  #{adm_id}
+    </select>
+    
+    <insert id="insertAccount">
+    	INSERT INTO AI_ACCOUNT (ADM_ID, ADM_PW, ADM_NAME, ADM_CDATE, ADM_UDATE, ADM_EMAIL, ADM_ROLE, ADM_TYPE, ADM_LOGIN)
+      	VALUES (#{adm_id}, #{adm_pw}, #{adm_name}, sysdate, sysdate, #{adm_email},1,1,0)
+    </insert>
+    
+    <delete id="deleteAccount">
+    	DELETE FROM AI_ACCOUNT 
+    	WHERE 
+    		adm_id =  #{adm_id}
+    </delete>
+	
+</mapper>	

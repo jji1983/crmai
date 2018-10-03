@@ -193,7 +193,8 @@
 				}
 
 				if (v == 'null' || v == '') {
-					html += '<td></td>';
+	
+						html += '<td></td>';
 				} else if (k == 'title') {
 					html += '<td style="text-align: left; padding-left: 10px;">' + v + '</td>';
 				} else {
