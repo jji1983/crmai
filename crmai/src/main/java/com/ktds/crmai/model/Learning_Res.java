@@ -9,27 +9,25 @@ import lombok.Data;
 public class Learning_Res{
 
 	private static final long serialVersionUID = 3947489072259877540L;
-	private String learn_name;
-	private String name;
-	private String created;
-	private String last_upd;
-	private String model_dir;
+	
+	private String cam_id;
+	private String train_method;
+	private String feature_name;
+	private String weight;
 	
 	public Learning_Res(){
 		
 	}
 	
 	public Learning_Res(
-			String learn_name,
-			String name,
-			String created,
-			String last_upd,
-			String model_dir) {
+			String cam_id,
+			String train_method,
+			String feature_name,
+			String weight) {
 	
-		this.learn_name = learn_name;
-		this.name = name;
-		this.created = created;
-		this.last_upd = last_upd;
-		this.model_dir = model_dir;
+		this.cam_id = cam_id;
+		this.train_method = train_method;
+		this.feature_name = feature_name;
+		this.weight = weight;
 	}
 }

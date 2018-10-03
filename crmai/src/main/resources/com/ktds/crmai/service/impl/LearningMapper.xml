@@ -6,37 +6,54 @@
 
     <select id="getLearning_info" resultType="learning_info">
 		select  
-		    lena.learn_name as "learn_name",
-		    lena.desc_text as "desc_text",
-		    lena_md.model_prob as "model_prob",
-		    lena_md.succ_prob as "succ_prob",
-		    lena_md.fail_prob as "fail_prob"
+		    MODEL.TRAIN_METHOD as "train_method",
+		    MODEL.ORIGINAL_ACC as "original_acc",
+		    MODEL.SO_ACC as "so_acc",
+		    MODEL.MODEL_DIR as "model_dir",
+		    MODEL.MODEL_NAME  as "model_name"
 		from 
-		    ds_learning lena,
-		    ds_learn_model lena_md
+		    AI_CAMPAIGN CAMP,
+		    AI_TRAIN_MODEL MODEL
 		where
-		    lena.row_id = lena_md.learn_id
-    	 <if test="row_id != null">
-		 	and lena_md.cam_id = #{row_id}
+		    CAMP.CAM_ID = MODEL.CAM_ID
+    	 <if test="cam_id != null">
+		 	AND  MODEL.CAM_ID = #{cam_id}
 		 </if>
+		 ORDER BY MODEL.SO_ACC DESC
     </select>
     
     
     <select id="getLearning_res" resultType="learning_res">
 		select  
-		    lena.learn_name as "learn_name",
-		    lena_md.name as "name",
-		    lena_md.created as "created",
-		    lena_md.last_upd as "last_upd",
-		    lena_md.model_dir as "model_dir"
+		    CAMP.CAM_ID as "cam_id",
+		    FEATURE.TRAIN_METHOD as "train_method",
+		    FEATURE.FEATURE_NAME as "feature_name",
+		    FEATURE.WEIGHT as "weight"
 		from 
-		    ds_learning lena,
-		    ds_learn_model lena_md
+		    AI_CAMPAIGN CAMP,
+		    AI_TRAIN_MODEL MODEL,
+		    AI_TRAIN_MODEL_FEATURE FEATURE
 		where
-		    lena.row_id = lena_md.learn_id
-    	 <if test="row_id != null">
-		 	and lena_md.cam_id = #{row_id}
+		    CAMP.CAM_ID = MODEL.CAM_ID
+		   AND CAMP.CAM_ID = FEATURE.CAM_ID
+		   AND MODEL.TRAIN_METHOD = FEATURE.TRAIN_METHOD
+    	 <if test="cam_id != null">
+		 	AND  CAMP.CAM_ID = #{cam_id}
 		 </if>
+		 order by 
+		 	FEATURE.WEIGHT desc
+    </select>
+    
+    
+    <select id="getLearning_feature" >
+		select  
+		    feat.train_method as "train_method",
+		    feat.feature_name as "feature_name",
+		    feat.weight as "weight"
+		from 
+		    ai_train_model_feature feat
+		where
+		    feat.camp_id = '1004'
     </select>
 
 </mapper>

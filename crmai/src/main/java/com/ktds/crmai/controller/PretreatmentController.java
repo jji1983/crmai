@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ktds.crmai.model.AI_CAMPAIGN;
 import com.ktds.crmai.model.AI_STAGING;
-import com.ktds.crmai.model.Pretreatment;
 import com.ktds.crmai.service.PretreatmentService;
 
 

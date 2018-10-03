@@ -50,6 +50,7 @@
   </style>
 
 </head>
+
 <body class="hold-transition skin-blue sidebar-mini">
 
 
@@ -87,15 +88,15 @@
 		            <div class="col-md-6">
 					  <div class="form-group">
 		                  <div class="col-sm-10">
-		                    <label for="inputname" >캠페인명</label>
-		                    <input type="text" class="form-control" id="inputname" placeholder="캠페인명">
+		                    <label for="cam_name" >캠페인명</label>
+		                    <input type="text" class="form-control" id="cam_name" placeholder="캠페인명">
 		                  </div>
    	                  </div>
    	                   <!-- /.form-group -->
    	                  <div class="form-group">
 	                	<div class="col-sm-10">
-	                		<label for="select_type" >캠페인목적</label>
-	                		<select id="select_type" class="form-control select2" style="width: 100%;" data-placeholder="Acquisition">
+	                		<label for="cam_type" >캠페인목적</label>
+	                		<select id="cam_type" class="form-control select2" style="width: 100%;" data-placeholder="Acquisition">
 	                		<option selected="selected">ALL</option>
 	                  		<option>Acquisition</option>
 	                  		</select>
@@ -108,8 +109,8 @@
 		            <div class="col-md-6">
 		              <div class="form-group">
 		                <div class="col-sm-10">
-		                	<label for="select_status" >캠페인상태</label>
-			                <select id="select_status" class="form-control select2" style="width: 100%;" data-placeholder="캠페인상태">
+		                	<label for="cam_status" >캠페인상태</label>
+			                <select id="cam_status" class="form-control select2" style="width: 100%;" data-placeholder="캠페인상태">
 			                  <option selected="selected">ALL</option>
 			                  <option>시작</option>
 			                  <option>종료</option>
@@ -119,8 +120,8 @@
 		              <!-- /.form-group -->
 		              <div class="form-group">
 		              	<div class="col-sm-10">
-                		   <label for="input_crea_by" >생성자</label>
-		                   <input type="text" class="form-control" id="input_crea_by" placeholder="생성자">
+                		   <label for="adm_id" >생성자</label>
+		                   <input type="text" class="form-control" id="adm_id" placeholder="생성자">
 			            </div>
    	                  </div>
 		              <!-- /.form-group -->
@@ -153,15 +154,15 @@
 	          <!-- campaign table -->
 	          <table id="ai_campaign" class="table table-bordered table-hover text-center"></table>
 	          
-	          <button id="selectBtn" type="button" class="btn btn-info pull-right" >학습모델 보기</button>
+	          <button id="selectBtn" type="button" class="btn btn-info pull-right" style="margin-top: 10px">학습모델 보기</button>
 	        </div>
 	        </div>
         </div>
    </div>
    <!-- /.캠페인목록 -->
-   
+
    <!-- 학습모델 보기 -->
-	<div class="row">
+	<div class="row hidden" id="learn_model">
           <div class="col-xs-12">
           <div class="box">
 			<div class="box-header">
@@ -175,10 +176,6 @@
 	        
 	         <!-- box-body -->
 	        <div class="box-body">
-	        	<div>
-	        	   <button id="learning_asis" type="button" class="btn btn-flat">학습모델</button>&nbsp;
-	        	   <button id="learning_tobe" type="button" class="btn btn-flat">학습결과</button>
-	        	</div>  
 	            <div>
 		            <table id="ds_learning_info" class="table table-bordered table-hover text-center"></table>
 	            </div>
@@ -189,93 +186,42 @@
    </div>
    <!-- /.학습모델 보기 -->
    
-   <!-- 항목별 중요도 -->
-   <div class="row">
-        <div class="col-md-12">
+   <!-- 항목별 중요도 보기 -->
+	<div class="row hidden" id="learn_top10">
+          <div class="col-xs-12">
           <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title">항목별 중요도(TOP 10)</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table class="table table-bordered">
-                <tr>
-                  <th style="width: 10px">#</th>
-                  <th>Task</th>
-                  <th>Progress</th>
-                  <th style="width: 40px">Label</th>
-                </tr>
-                <tr>
-                  <td>1.</td>
-                  <td>Update software</td>
-                  <td>
-                    <div class="progress progress-xs">
-                      <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                    </div>
-                  </td>
-                  <td><span class="badge bg-red">55%</span></td>
-                </tr>
-                <tr>
-                  <td>2.</td>
-                  <td>Clean database</td>
-                  <td>
-                    <div class="progress progress-xs">
-                      <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
-                    </div>
-                  </td>
-                  <td><span class="badge bg-yellow">70%</span></td>
-                </tr>
-                <tr>
-                  <td>3.</td>
-                  <td>Cron job running</td>
-                  <td>
-                    <div class="progress progress-xs progress-striped active">
-                      <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                    </div>
-                  </td>
-                  <td><span class="badge bg-light-blue">30%</span></td>
-                </tr>
-                <tr>
-                  <td>4.</td>
-                  <td>Fix and squish bugs</td>
-                  <td>
-                    <div class="progress progress-xs progress-striped active">
-                      <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                    </div>
-                  </td>
-                  <td><span class="badge bg-green">90%</span></td>
-                </tr>
-              </table>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              <ul class="pagination pagination-sm no-margin pull-right">
-                <li><a href="#">&laquo;</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">&raquo;</a></li>
-              </ul>
-            </div>
-          </div>
-          <!-- /.box -->
-       </div>
+			<div class="box-header">
+	          <h3 class="box-title">항목별 중요도(TOP10)</h3>
+	          <div class="box-tools pull-right">
+		            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+		            <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button> -->
+		      </div>
+	        </div>
+	        <!-- /.box-header -->
+	        
+	         <!-- box-body -->
+	        <div class="box-body">
+	            <div>
+		            <table id="ds_learning_res" class="table table-bordered table-hover text-center"></table>
+	            </div>
+	        </div>
+	         <!-- /.box-body -->
+	        </div>
+        </div>
    </div>
-   <!-- /.항목별 중요도 -->
-   
-   
+   <!-- /.항목별 중요도 보기 -->
    
 </section>
 <!-- /.Main content -->
 
+<!-- jQuery 3 -->
+<script src="/resources/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="/resources/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button);
 </script>
-<!-- jQuery 3 -->
-<script src="/resources/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Select2 -->
@@ -318,6 +264,7 @@
     var tbl = $("#ds_campaign");
     //radio버튼처럼 Checkbox name값 설정
     $('input[type="checkbox"][name="camCheck"]').click(function(){
+    	console.log('checked');
   	 //click이벤트가 발생했는지 체크
   	 if($(this).prop('checked')){
   		//checkbox 전체를 checked 해제후 click한 요소만 true지정
@@ -341,6 +288,7 @@
 	  		campaign.cam_status = '';
 	  	}
 	  	campaign.adm_id = $('#adm_id').val();
+	  	
 	    $.ajax({
 	        type    : 'GET', // method
 	        url     : '/Pretreatment/list',
@@ -370,13 +318,14 @@
       
       html = '<table width="100%" class="table table-bordered table-hover">';
       html += '<thead><tr>';
+      html += 	'<th>체크</th>';
       html += 	'<th>캠페인ID</th>';
       html += 	'<th>캠페인이름</th>';
       html += 	'<th>등록자</th>';
       html += 	'<th>캠페인목적</th>';
       html += 	'<th>캠페인상태</th>';
       html += 	'<th>AI진행상태</th>';
-      html += 	'<th><center>AI버튼</center></th>';
+      //html += 	'<th><center>AI버튼</center></th>';
       html += 	'<th>캠페인 등록일자</th>';
       html += 	'<th>설명</th>';
       html += 	'<th>메시지</th>';
@@ -386,7 +335,7 @@
       var json = $.parseJSON(obj);
    	  $(json).each(function(i,val){
    		html += '<tr>';
-   		//html += '<td><input type="checkbox" name="camCheck"/></td>';
+   		html += '<td><input type="radio" name="camCheck"/></td>';
    		$.each(val,function(k,v){
    			flag = 0;
    			if(k == 'cam_id'){
@@ -410,32 +359,40 @@
    			if(k == 'cam_itype'){
    				if(v == '0'){
    					html += '<td><span class="label label-info">데이터 로딩 필요</span></td>';
-   					html += '<td>';
-   					html += '<button type="button" class="btn btn-info btn-xs">데이터등록</button>';
-   					html += '</td>';
+   					//html += '<td>';
+   					//html += '<button type="button" class="btn btn-info btn-xs">데이터등록</button>';
+   					//html += '</td>';
    				}
    				if(v == '1'){
    					html += '<td><span class="label label-warning">데이터 엑셀 로딩중</span></td>';
-   					html += '<td></td>';
+   					//html += '<td></td>';
    				}
    				if(v == '2'){
    					html += '<td><span class="label label-warning">데이터 엑셀 처리중</span></td>';
-   					html += '<td></td>';
+   					//html += '<td></td>';
    				}
    				if(v == '3'){
    					html += '<td><span class="label label-danger">데이터 엑셀 처리 오류</span></td>';
-   					html += '<td>';
-   					html += '<button type="button" class="btn btn-info btn-xs">데이터 재등록</button>';
-   					html += '</td>';
+   					//html += '<td>';
+   					//html += '<button type="button" class="btn btn-info btn-xs">데이터 재등록</button>';
+   					//html += '</td>';
    				}
    				if(v == '4'){
    					html += '<td><span class="label label-primary">데이터 엑셀 처리 종료</span></td>';
-   					html += '<td>';
-   					html += '<button type="button" class="btn btn-success btn-xs" onclick="search_campaignDetail();">학습데이터 보기</button>';
-   					html += '<button type="button" class="btn btn-success btn-xs">전처리시작</button>';
-   					html += '</td>';
+   					//html += '<td>';
+   					//html += '<button type="button" class="btn btn-success btn-xs" onclick="search_campaignDetail();">학습데이터 보기</button>';
+   					//html += '<button type="button" class="btn btn-success btn-xs">전처리시작</button>';
+   					//html += '</td>';
+   				}
+   				else{
+   					html += '<td><span class="label label-primary">학습완료</span></td> ';
+   					//html += '<td>';
+   					//html += '<button type="button" class="btn btn-success btn-xs" onclick="search_campaignDetail();">학습데이터 보기</button>';
+   					//html += '<button type="button" class="btn btn-success btn-xs">학습완료</button>';
+   					//html += '</td>';
    				}
    			}
+   			
    			if(k == 'cam_cdate'){
    				html += '<td>' + v + '</td>';	
    			}
@@ -460,10 +417,10 @@
       
       div.innerHTML = html;
       
-      tableDataRe();
+      //tableDataRe();
   }
   
-  //상단 선택버튼 클릭시 체크된 Row의 값을 가져온다.
+  //학습모델보기 버튼 클릭시 체크된 Row의 값을 가져온다.
   $("#selectBtn").click(function(){ 
 		
 		var rowData = new Array();
@@ -472,9 +429,8 @@
 		
 		var row_id = '';
 		
-		// 체크된 체크박스 값을 가져온다
+		// 체크된 라디오 버튼 값을 가져온다
 		checkbox.each(function(i) {
-
 			// checkbox.parent() : checkbox의 부모는 <td>이다.
 			// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
 			var tr = checkbox.parent().parent().eq(i);
@@ -484,50 +440,36 @@
 			rowData.push(tr.text());
 			
 			row_id = td.eq(1).text();
-			
 		});
 		
 		//$("#ex3_Result1").html(" * 체크된 Row의 모든 데이터 = "+rowData);	
 		//$("#ex3_Result2").html(tdArr);	
 		
+		
+		//alert("row_id :: " + row_id);
 		//alert("rowData :: " + rowData);
 		
-		//alert("row_id :: " + row_id);
-		
-		getLearning_asis(row_id);
-	});
-  
-  //상단 선택버튼 클릭시 체크된 Row의 값을 가져온다.
-  $("#learning_asis").click(function(){ 
-		var tdArr = new Array();
-		var checkbox = $("input[name=camCheck]:checked");
-		
-		var row_id = '';
-		
-		// 체크된 체크박스 값을 가져온다
-		checkbox.each(function(i) {
-
-			// checkbox.parent() : checkbox의 부모는 <td>이다.
-			// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
-			var tr = checkbox.parent().parent().eq(i);
-			var td = tr.children();
-			
-			row_id = td.eq(1).text();
-		});
-
-		//alert("row_id :: " + row_id);
-		getLearning_asis(row_id);
-	});
-  
-  
-  function getLearning_asis(row_id){
-	  	var campaign = new Object();
-	  	campaign.row_id = row_id;
-
 	  	if(row_id == ""){
-	  		alert("체크박스를 선택 하세요.");
+	  		alert("학습 모델을 선택 하세요.");
 	  		return;
 	  	}
+		
+		getLearning_asis(row_id);
+		$('#learn_model').removeClass('hidden');
+		
+		//alert("row_id2 :: " + row_id);
+		
+		getLearning_res(row_id);
+		$('#learn_top10').removeClass('hidden');
+	});
+  
+ 
+  
+  function getLearning_asis(cam_id){
+	  	var campaign = new Object();
+	  	campaign.cam_id = cam_id;
+
+	  	//alert("getLearning_asis :: " + cam_id);
 	  	
 	    $.ajax({
 	        type    : 'GET', // method
@@ -545,6 +487,7 @@
 	        	
 	        	grid_table_learning_asis(obj);
 	        	
+	        	
 	        },
 	        error : function(request,status,error){
 	        	 //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -558,13 +501,17 @@
       //alert("grid_table_learning_asis :: " + obj);
 
       html = '<table class="table table-bordered table-hover">';
-      html += '<thead><tr><th>학승방법</th><th>학습설명</th><th>정확도</th><th>분류별확률(성공->성공))</th><th>분류별확률(실패->실패)</th></tr></thead>';
+      html += '<thead><tr><th>학습방법</th><th>정확도(ORIGINAL)(%)</th><th>정확도(SO엔진)(%)</th><th>모델경로</th><th>모델명</th></tr></thead>';
       html += '<tbody>';
-
       var json = $.parseJSON(obj);
    	  $(json).each(function(i,val){
    		html += '<tr>';
+   		//html += '<td><input type="checkbox" name="camCheck"/></td>';
    		$.each(val,function(k,v){
+   			if(k == 'original_acc' || k == 'so_acc'){
+   				v = Number(v) * 100
+   			}
+   			
    			if(v == 'null' || v == ''){
    				html += '<td></td>';
    			}else{
@@ -582,33 +529,13 @@
   
   }
   
-  //상단 선택버튼 클릭시 체크된 Row의 값을 가져온다.
-  $("#learning_tobe").click(function(){ 
-		var tdArr = new Array();
-		var checkbox = $("input[name=camCheck]:checked");
-		
-		var row_id = '';
-		
-		// 체크된 체크박스 값을 가져온다
-		checkbox.each(function(i) {
-
-			// checkbox.parent() : checkbox의 부모는 <td>이다.
-			// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
-			var tr = checkbox.parent().parent().eq(i);
-			var td = tr.children();
-			
-			row_id = td.eq(1).text();
-		});
-
-		//alert("row_id :: " + row_id);
-		getLearning_tobe(row_id);
-	});
   
-  
-  function getLearning_tobe(row_id){
+  function getLearning_res(cam_id){
 	  	var campaign = new Object();
-	  	campaign.row_id = row_id;
+	  	campaign.cam_id = cam_id;
 
+	  	//alert("getLearning_res22 :: " + cam_id);
+	  	
 	    $.ajax({
 	        type    : 'GET', // method
 	        url     : '/Learning/res',
@@ -621,46 +548,53 @@
 	        success : function(data){
 	        	
 	        	var obj = JSON.stringify(data, true, 2);
-	        	//alert("search_learning result :: " + obj);
+	        	//alert("search_learning_res result :: " + obj);
 	        	
-	        	grid_table_learning_tobe(obj);
+	        	grid_table_learning_res(obj);
+	        	
 	        	
 	        },
 	        error : function(request,status,error){
 	        	 //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 	        }
 		});
-  }
-  
-  function grid_table_learning_tobe(obj){
-	  var div = document.querySelector('#ds_learning_info');
+}
+
+function grid_table_learning_res(obj){
+	  var div = document.querySelector('#ds_learning_res');
 	  
-      //alert("grid_table_learning :: " + obj);
+    //alert("grid_table_learning_asis :: " + obj);
 
-      html = '<table class="table table-bordered table-hover">';
-      html += '<thead><tr><th>학승방법</th><th>모델이름</th><th>생성일자</th><th>수정일자</th><th>모델경로</th></tr></thead>';
-      html += '<tbody>';
+    html = '<table class="table table-bordered table-hover">';
+    html += '<thead><tr><th width="8%">캠페인ID</th><th>학습방법</th><th>항목명</th><th colspan="2">중요도(%)</th></tr></thead>';
+    html += '<tbody>';
 
-      var json = $.parseJSON(obj);
-   	  $(json).each(function(i,val){
-   		html += '<tr>';
-   		$.each(val,function(k,v){
-   			if(v == 'null' || v == ''){
-   				html += '<td></td>';
-   			}else{
-   				html += '<td>' + v + '</td>';
-   			}
-   		});
-   		
-   		html += '</tr>';
-  	  });
-   	  html += '</tbody>';
-      html += '</table>';
-      
-      //alert("Table :: " + html);
-      div.innerHTML = html;
-  
-  }
+    var json = $.parseJSON(obj);
+ 	  $(json).each(function(i,val){
+ 		html += '<tr>';
+ 		$.each(val,function(k,v){
+ 			if(v == 'null' || v == ''){
+ 				html += '<td></td>';
+ 			}else if(k == 'weight'){
+ 				v = (Number(v) * 100).toFixed(2); //소숫점 자리수 반올림
+ 				if (Number(v) == 0) v = 0;
+ 				html += '<td width="50%"><div class="progress progress-xs progress-striped active">'
+                   + '<div class="progress-bar progress-bar-primary" style="width: '+v+'%"></div>'
+                	  + '</div></td><td width="5%"><span class="badge bg-light-blue">'+v+'%</span></td>';
+ 			}else{
+ 				html += '<td>' + v + '</td>';
+ 			}
+ 		});
+ 		
+ 		html += '</tr>';
+	  });
+ 	  html += '</tbody>';
+    html += '</table>';
+    
+    //alert("Table :: " + html);
+    div.innerHTML = html;
+
+}
   
   function tableDataRe(){
 
@@ -684,6 +618,54 @@
   search_campaign();
   startCallback();
 
+
+  function getFtImportList() {
+		$.ajax({
+			type : 'GET', // method
+			url : '/Learning/feature/list',
+			async : 'true', // true
+			contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
+			//dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
+			success : function(data) {
+				var obj = JSON.stringify(data);
+				// console.log("board list result :: " + obj);
+				grid_table_feature(obj);
+			},
+			error : function(request, status, error) {
+				// console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
+
+	function grid_table_feature(obj) {
+		var div = document.querySelector('#ai_train_model_feature');
+
+		var html = '<tbody>';
+		var json = $.parseJSON(obj);
+		$(json).each(function(i, val) {
+			html += '<tr onClick="view_feature('+val.code+')">';
+			$.each(val, function(k, v) {
+				if (k == 'train_method') {
+					return;
+				}
+				
+				if (k == 'feature_name') {
+					return;
+				}
+				
+				if (k == 'weight') {
+					return;
+				}
+				
+			});
+			html += '</tr>';
+		});
+		html += '</tbody>';
+
+		// console.log("Tbody == " + html);
+		div.innerHTML = html;
+	}
+	
 
  </script>
 
