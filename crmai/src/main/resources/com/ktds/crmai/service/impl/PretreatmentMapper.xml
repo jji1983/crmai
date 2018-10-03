@@ -17,7 +17,7 @@
 		  cam.cam_ifilename as "cam_ifilename",
 		  cam.cam_idate as "cam_idate",
 		  cam.cam_otype as "cam_otype",
-		  cam.cam_otablename as "cam_ofilename",
+		  cam.cam_ofilename as "cam_ofilename",
 		  cam.cam_cdate as "cam_cdate",
 		  cam.cam_desc as "cam_desc",
 		  cam.cam_msg as "cam_msg"
@@ -46,7 +46,7 @@
 		  cam.cam_ifilename as "cam_ifilename",
 		  cam.cam_idate as "cam_idate",
 		  cam.cam_otype as "cam_otype",
-		  cam.cam_otablename as "cam_ofilename",
+		  cam.cam_ofilename as "cam_ofilename",
 		  cam.cam_cdate as "cam_cdate",
 		  cam.cam_desc as "cam_desc",
 		  cam.cam_msg as "cam_msg"
