@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ktds.crmai.model.AI_CAMPAIGN;
 import com.ktds.crmai.model.AI_STAGING_TRAIN;
-import com.ktds.crmai.model.Pretreatment;
 import com.ktds.crmai.service.PretreatmentService;
 
 
@@ -32,6 +31,8 @@ public class PretreatmentController {
     public ResponseEntity<Object> getCampaignList(@ModelAttribute("campaign") AI_CAMPAIGN in_compaign){
     	logger.info("Request List....getCampaignList.... - {}", in_compaign);
     	List<AI_CAMPAIGN> out_campaign = null;
+    	
+    	logger.info("캠페인 유형"  + in_compaign.getCam_type());
     	
     	if(in_compaign.getCam_name() != null 
     			|| in_compaign.getAdm_id() != null

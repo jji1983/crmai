@@ -11,11 +11,11 @@ public class Learning_Info{
 	private static final long serialVersionUID = 3947489072259877540L;
 
 	
-	private String learn_name;
-	private String desc_text;
-	private String model_prob;
-	private String succ_prob;
-	private String fail_prob;
+	private String train_method;
+	private String original_acc;
+	private String so_acc;
+	private String model_dir;
+	private String model_name;
 	
 	
 	public Learning_Info(){
@@ -23,18 +23,21 @@ public class Learning_Info{
 	}
 	
 	public Learning_Info(
-			String learn_name,
-			String desc_text,
-			String model_prob,
-			String succ_prob,
-			String fail_prob
+			String train_method,
+			String original_acc,
+			String so_acc,
+			String model_dir,
+			String model_name
             ) {
 		
-		this.learn_name = learn_name;
-		this.desc_text = desc_text;
-		this.model_prob = model_prob;
-		this.succ_prob = succ_prob;
-		this.fail_prob = fail_prob;
+		this.train_method = train_method;
+		this.original_acc = original_acc;
+		this.so_acc = so_acc;
+		this.model_dir = model_dir;
+		this.model_name = model_name;
 		
+
+		
+
 	}
 }

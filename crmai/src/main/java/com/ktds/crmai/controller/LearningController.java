@@ -13,8 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ktds.crmai.model.AI_BOARD;
 import com.ktds.crmai.model.AI_CAMPAIGN;
+import com.ktds.crmai.model.AI_TRAIN_MODEL;
+import com.ktds.crmai.model.AI_TRAIN_MODEL_FEATURE;
 import com.ktds.crmai.model.Learning_Info;
 import com.ktds.crmai.model.Learning_Res;
 import com.ktds.crmai.service.LearningService;
@@ -31,7 +36,10 @@ public class LearningController {
 	@RequestMapping(value = "/info", method = RequestMethod.GET, consumes=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getLearning_info(@ModelAttribute("campaign") AI_CAMPAIGN in_compaign){
     	logger.info("Request List....getLearning.... - {}", in_compaign);
+    	logger.info("Request List....getLearning.... - {}", in_compaign.getCam_id());
     	List<Learning_Info> out_learning = null;
+    	
+    	alert("getCam_id :: " + in_compaign.getCam_id());
     	
     	if(in_compaign.getCam_id() != null) {
     		logger.info("##################");
@@ -53,22 +61,31 @@ public class LearningController {
     }
 	
 	
+	private void alert(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 	@RequestMapping(value = "/res", method = RequestMethod.GET, consumes=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getLearning_res(@ModelAttribute("campaign") AI_CAMPAIGN in_compaign){
-    	logger.info("Request List....getLearning.... - {}", in_compaign);
+    	logger.info("Request List....getLearningres.... - {}", in_compaign);
+    	logger.info("Request List....getLearningres.... - {}", in_compaign.getCam_id());
     	List<Learning_Res> out_learning = null;
     	
-    	if(in_compaign.getCam_id() != null) {
+    	alert("getCam_id22 :: " + in_compaign.getCam_id());
+    	
+    	if(in_compaign.getCam_id() != null) { 
     		logger.info("##################");
     		out_learning = learningService.getLearning_res(in_compaign);
     	}
     	    	
-    	logger.info("Request List....getLearning out .... - {}", out_learning);
+    	logger.info("Request List....getLearningres out .... - {}", out_learning);
     	Iterator<Learning_Res> ite = out_learning.iterator();
     	
     	while(ite.hasNext()) {
-    		Learning_Res info = (Learning_Res)ite.next();
-    		logger.info("Learning :: "+ info.toString());
+    		Learning_Res res = (Learning_Res)ite.next();
+    		logger.info("Learning res :: "+ res.toString());
     	}
     	
     	//응답과 함깨 HttpStatus를 지정할 수 있습니다.
@@ -76,5 +93,18 @@ public class LearningController {
     	
     	return response;
     }
+
+	@ResponseBody 
+	@RequestMapping(value="/feature/list")
+//	public List<AI_BOARD> selectBoardList(@ModelAttribute("AI_BOARD") AI_BOARD aiBoard, Model model) {
+	public List<AI_TRAIN_MODEL_FEATURE> getLearning_feature(@ModelAttribute("campaign") AI_CAMPAIGN in_compaign) {
+		List<AI_TRAIN_MODEL_FEATURE> list = learningService.getLearning_feature(in_compaign);
+//		model.addAttribute("list", list);
+		
+		return list;  
+	}
+	
+	
+	
 
 }
