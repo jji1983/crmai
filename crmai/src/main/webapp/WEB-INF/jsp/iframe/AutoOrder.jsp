@@ -47,12 +47,22 @@
   <script src="/resources/dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="/resources/dist/js/demo.js"></script>
+  <!-- FLOT CHARTS -->
+  <script src="/resources/bower_components/Flot/jquery.flot.js"></script>
+  <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
+  <script src="/resources/bower_components/Flot/jquery.flot.resize.js"></script>
+  <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
+  <script src="/resources/bower_components/Flot/jquery.flot.pie.js"></script>
+  <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
+  <script src="/resources/bower_components/Flot/jquery.flot.categories.js"></script>
+  
 
   <!-- AI MAKE JS -->
   <script src="/resources/js/ai_campaign.js"></script>
   <script src="/resources/js/ai_stageing_train.js"></script>
   <script src="/resources/js/ai_stageing_test.js"></script>
   <script src="/resources/js/ai_stageing_result.js"></script>
+  <script src="/resources/js/ai_model.js"></script>
   
   <!-- twbsPagination :: https://github.com/josecebe/twbs-pagination -->
   <script src="/resources/js/jquery.twbsPagination.js"></script>
@@ -157,7 +167,7 @@
 	            </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
-	              	<button id='id_runf_msg' type="button" class="btn btn-info pull-center" data-toggle="modal" data-target="#newModal"></button>
+	              	<button id='id_runf_msg' type="button" class="btn btn-info pull-center" data-toggle="modal" data-target="#ModelDataModal"></button>
 	            </div>
 	            <!-- /.box-body -->
 	            
@@ -177,7 +187,7 @@
 	              <h3 class="box-title">4. AI예측실행</h3>
 	            </div>
 	            <div class="box-body">
-	              	<button id='id_predict_msg' type="button" class="btn btn-info pull-center" data-toggle="modal" data-target="#newModal"></button>
+	              	<button id='id_predict_msg' type="button" class="btn btn-info pull-center" data-toggle="modal" data-target="#PredictDataModal"></button>
 	            </div>
 	            <!-- /.box-body -->
 	            
@@ -196,7 +206,7 @@
 	              <h3 class="box-title">5. AI결과</h3>
 	            </div>
 	            <div class="box-body">
-	               	<button id='id_real_msg' type="button" class="btn btn-info pull-center" data-toggle="modal" data-target="#newModal"></button>
+	               	<button id='id_real_msg' type="button" class="btn btn-info pull-center" data-toggle="modal" data-target="#RealDataModal"></button>
 	            </div>
 	            <!-- /.box-body -->
 	            
@@ -305,12 +315,12 @@
 		</div>
 		<!--/. Modal -->
 		
-		<!-- 학습데이터 Modal -->
+		<!-- 1.1 학습데이터 Modal -->
 	    <div class="modal fade" id="trainDataModal" tabindex="-1" role="dialog" aria-labelledby="trainModalLabel" aria-hidden="true">
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="trainModalLabel">학습데이터 미리보기</h5>
+							<h5 class="modal-title" id="trainModalLabel">1.1 학습데이터 미리보기</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -347,12 +357,12 @@
 		</div>
 		<!--/. Modal -->
 		
-		<!--대상자데이터 Modal -->
+		<!--1.2 대상자데이터 Modal -->
 	    <div class="modal fade" id="testDataModal" tabindex="-1" role="dialog" aria-labelledby="testModalLabel" aria-hidden="true">
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="testModalLabel">대상자데이터 미리보기</h5>
+							<h5 class="modal-title" id="testModalLabel">1.2 대상자데이터 미리보기</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -388,12 +398,12 @@
 		<!--/. Modal -->
 		
 		
-		<!--전처리후 데이터 Modal -->
+		<!--2.AI전처리 데이터 Modal -->
 	    <div class="modal fade" id="ResultDataModal" tabindex="-1" role="dialog" aria-labelledby="ResultDataLabel" aria-hidden="true">
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="ResultDataLabel">전처리데이터 미리보기</h5>
+							<h5 class="modal-title" id="ResultDataLabel">2.AI전처리 미리보기</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -427,9 +437,131 @@
 							<!-- /.전처리후 상세보기 -->	
 					</div>
 				</div>
+			</div>
 		</div>
 		<!--/. Modal -->
+		
+		
+		<!--3.AI학습(model) Modal -->
+	    <div class="modal fade" id="ModelDataModal" tabindex="-1" role="dialog" aria-labelledby="ModelDataLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="ModelDataLabel">3.AI학습(Model) 세부정보</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<!-- 모델  상세보기 -->
+							<div id="detailView" class="row">
+								<div class="col-xs-12">
+									<div class="box">
+										<div class="box-header">
+											<h3 class="box-title">AI학습 세부정보</h3>
+										</div>
+					
+										<!-- /.box-header -->
+										<div class="box-body">
+											<div class="col-sm-12">
+												<!--<button id="id_getAiStaningResult" type="button" class="btn btn-info pull-right">AI학습</button>  -->
+												<div id="barchart" style="height: 250px;"></div>
+											</div>
+											
+											<div class="col-sm-12">
+												<!-- model table -->
+												<table id="ai_model_View" class="table table-bordered table-hover"></table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /.모델  상세보기 -->	
+					</div>
+				</div>
+			</div>
 		</div>
+		<!--/. Modal -->
+		
+		<!--4.AI예측실행 Modal -->
+	    <div class="modal fade" id="PredictDataModal" tabindex="-1" role="dialog" aria-labelledby="PredictDataLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="PredictDataLabel">4.AI예측실행세부정보</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<!-- 모델  상세보기 -->
+							<div id="detailView" class="row">
+								<div class="col-xs-12">
+									<div class="box">
+										<div class="box-header">
+											<h3 class="box-title">AI예측실행 세부정보</h3>
+										</div>
+					
+										<!-- /.box-header -->
+										<div class="box-body">
+											<div class="col-sm-12">
+												<button id="id_getAiTestPredict" type="button" class="btn btn-info pull-right">AI예측실행</button>
+											</div>
+											<!-- model table -->
+											<table id="ai_TestPredict" class="table table-bordered table-hover"></table>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /.모델  상세보기 -->	
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/. Modal -->
+		
+		
+		<!--5.AI예측실행 Modal -->
+	    <div class="modal fade" id="RealDataModal" tabindex="-1" role="dialog" aria-labelledby="RealDataLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="RealDataLabel">5.AI예측실행 세부정보</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<!-- 모델  상세보기 -->
+							<div id="detailView" class="row">
+								<div class="col-xs-12">
+									<div class="box">
+										<div class="box-header">
+											<h3 class="box-title">AI예측실행 세부정보</h3>
+										</div>
+					
+										<!-- /.box-header -->
+										<div class="box-body">
+											<div class="col-sm-12">
+												<button id="id_getAiStaningReal" type="button" class="btn btn-info pull-right">AI예측실행</button>
+											</div>
+											<!-- model table -->
+											<table id="ai_StagingReal" class="table table-bordered table-hover"></table>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /.모델  상세보기 -->	
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/. Modal -->
+		
+		
+		
         <!-- /.box-body -->
       </div>
       <!-- /.box -->
@@ -477,13 +609,37 @@
 	    $('#ResultDataModal').on('show.bs.modal', function (event) {
 	    	 
 	    	  //페이징을 보여준다.
-	    	 //alert("페이징을 보여준다. !!");
+	    	 //alert("2.AI전처리 보여준다. !!");
 	    	 var div_t_pageing = $('#id_result_pagination');
 	    	 grid_pagingSt3(div_t_pageing);
 	    	  
 	    	  //테이블 을 그린다.
 	    	 //alert("테이블을 그린다.. !!");
 	    	 search_st3();
+	    });
+	    
+	    $('#ModelDataModal').on('show.bs.modal', function (event) {
+	    	 
+	    	  //AI학습 정보를 보여준다.
+	    	 //alert("3.AI모델 보여준다. !!");
+	    	 get_aiTrainModel();
+	    	 
+	    	 setAiTrainModelChart();
+	    
+	    });
+	    
+	    $('#PredictDataModal').on('show.bs.modal', function (event) {
+	    	 
+	    	  //AI예측 실행 정보를 보여준다
+	    	 alert("4.AI예측 보여준다. !!");
+	    
+	    });
+	    
+	    $('#RealDataModal').on('show.bs.modal', function (event) {
+	    	 
+	    	  //AI결과 정보를 보여준다
+	    	 alert("5.AI결과 보여준다. !!");
+	    
 	    });
 
   });
