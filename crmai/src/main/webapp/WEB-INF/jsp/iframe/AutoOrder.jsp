@@ -384,13 +384,16 @@
 	        submit_newCampagin();
 	    });
 		
-		//모달 처리(학습데이터 미리보기)
-	    $('#trainDataModal').click(function (event) {
-	    	//stop submit the form, we will post it manually.
-	        event.preventDefault();
-	    	
-	    	aiStagingTrain();
-    	});
+	    $('#trainDataModal').on('show.bs.modal', function (event) {
+	    	 
+	    	  //페이징을 보여준다.
+	    	 alert("페이징을 보여준다. !!");
+	    	  
+	    	  
+	    	  //테이블 을 그린다.
+	    	 alert("테이블을 그린다.. !!");
+	    	 search_campaignDetail();
+	    })
 
   });
 

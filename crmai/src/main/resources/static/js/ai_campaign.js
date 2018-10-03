@@ -226,8 +226,8 @@ function grid_table_campaign(obj){
 }
 	
 
-  function submit_newCampagin(){
-	//alert('-- submit_newCampagin -- ');
+function submit_newCampagin(){
+//alert('-- submit_newCampagin -- ');
   
 // Get form
 var form = $('#newUploadForm')[0];
