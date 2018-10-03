@@ -7,7 +7,7 @@ var s3_page_end = 10;
 var page_no = 1;
 
 function grid_pagingSt3(div){
-	//alert("call grid_pagingSt ");
+	alert("call grid_pagingSt ");
 	
 	div.twbsPagination('destroy');
 	window.pagObj = div.twbsPagination({

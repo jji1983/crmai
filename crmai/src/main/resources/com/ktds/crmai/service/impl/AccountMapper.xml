@@ -54,7 +54,7 @@
       	VALUES (#{adm_id}, #{adm_pw}, #{adm_name}, sysdate, sysdate, #{adm_email},1,1,0)
     </insert>
     
-    <delete id="deleteAccount" parameterType="java.lang.String">
+    <delete id="deleteAccount">
     	DELETE FROM AI_ACCOUNT 
     	WHERE 
     		adm_id =  #{adm_id}

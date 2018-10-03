@@ -52,6 +52,7 @@
   <script src="/resources/js/ai_campaign.js"></script>
   <script src="/resources/js/ai_stageing_train.js"></script>
   <script src="/resources/js/ai_stageing_test.js"></script>
+  <script src="/resources/js/ai_stageing_result.js"></script>
   
   <!-- twbsPagination :: https://github.com/josecebe/twbs-pagination -->
   <script src="/resources/js/jquery.twbsPagination.js"></script>
@@ -87,8 +88,8 @@
             <!-- <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"> <i class="fa fa-times"></i></button>-->
           </div>
         </div>
+        
         <div class="box-body">
- 		
 		 <div id="ai_status" class="row">
 		
 	        <div id='id_loading1' class="col-md-2.5 col-sm-2 text-center">
@@ -409,7 +410,10 @@
 										<!-- /.box-header -->
 										<div class="box-body">
 											<div class="col-sm-12">
-												<button id="id_getAiStaningResult" type="button" class="btn btn-info pull-right">전처리후</button>
+												<button id="id_getAiStaningResult" type="button" class="btn btn-info pull-right">학습데이터전처리전</button>
+												<button id="id_getAiStaningResult" type="button" class="btn btn-info pull-right">학습데이터전처리후</button>
+												<button id="id_getAiStaningResult" type="button" class="btn btn-info pull-right">대상자데이터전처리전</button>
+												<button id="id_getAiStaningResult" type="button" class="btn btn-info pull-right">대상자데이터전처리후</button>
 											</div>
 											<!-- campaign table -->
 											<table id="ai_staging_result" class="table table-bordered table-hover"></table>
@@ -425,8 +429,7 @@
 				</div>
 		</div>
 		<!--/. Modal -->
-		
-        
+		</div>
         <!-- /.box-body -->
       </div>
       <!-- /.box -->
@@ -474,13 +477,13 @@
 	    $('#ResultDataModal').on('show.bs.modal', function (event) {
 	    	 
 	    	  //페이징을 보여준다.
-	    	 alert("페이징을 보여준다. !!");
+	    	 //alert("페이징을 보여준다. !!");
 	    	 var div_t_pageing = $('#id_result_pagination');
 	    	 grid_pagingSt3(div_t_pageing);
 	    	  
 	    	  //테이블 을 그린다.
 	    	 //alert("테이블을 그린다.. !!");
-	    	 search_st2();
+	    	 search_st3();
 	    });
 
   });

@@ -90,7 +90,7 @@ public class AccountController {
 			@RequestParam("inputAdmId") String adm_id,
 			HttpSession session){
 		
-		String result = accountService.deleteAccount(adm_id);
+		accountService.deleteAccount(adm_id);
 		
 		ResponseEntity<Object> response = null;
 	//	if (result > 0) {
