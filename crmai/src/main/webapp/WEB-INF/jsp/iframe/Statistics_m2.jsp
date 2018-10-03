@@ -112,6 +112,8 @@
 	    }).on('hide', function(e) {
 	      e.stopPropagation(); // 모달 팝업도 같이 닫히는걸 막아준다.
 	    });
+		
+		search_statistics();	// 처음에 불러오기
   	});
   
   	function Content_Learning() {
