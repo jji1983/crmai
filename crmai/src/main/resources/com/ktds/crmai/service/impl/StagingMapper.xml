@@ -24,14 +24,59 @@
     
     
     <select id="selectStaginTrainResult" resultType="staging">
-		select 
-			*  
-		from 
-			ai_staging_train_result
-		where  
-			cam_id = #{cam_id}
-			<![CDATA[ and ROWNUM >= 1 AND ROWNUM <= 100 ]]>
-		order by st_seq 
+		select st_seq, cam_id, st_c1, st_c2, st_c3, st_c4, st_c5, st_c6, st_c7, st_c8, st_c9, st_c10, st_c200  
+		   from (		
+		        select  <![CDATA[ rownum as rnum ]]> , A.* 
+		        from       
+		        (
+		        select 
+					*  
+				from 
+					ai_staging_train_result
+				where  
+					cam_id = #{cam_id} order by st_seq desc
+		        ) A
+		        where <![CDATA[ rownum <= #{page_end} ]]> 
+		    ) B
+		where b.rnum >= #{page_st}
+    </select>
+    
+    
+    <select id="selectStaginTest" resultType="staging">
+		select st_seq, cam_id, st_c1, st_c2, st_c3, st_c4, st_c5, st_c6, st_c7, st_c8, st_c9, st_c10, st_c200  
+		   from (		
+		        select  <![CDATA[ rownum as rnum ]]> , A.* 
+		        from       
+		        (
+		        select 
+					*  
+				from 
+					ai_staging_test
+				where  
+					cam_id = #{cam_id} order by st_seq desc
+		        ) A
+		        where <![CDATA[ rownum <= #{page_end} ]]> 
+		    ) B
+		where b.rnum >= #{page_st}
+    </select>
+    
+    
+    <select id="selectStaginTestResult" resultType="staging">
+		select st_seq, cam_id, st_c1, st_c2, st_c3, st_c4, st_c5, st_c6, st_c7, st_c8, st_c9, st_c10, st_c200  
+		   from (		
+		        select  <![CDATA[ rownum as rnum ]]> , A.* 
+		        from       
+		        (
+		        select 
+					*  
+				from 
+					ai_staging_test_result
+				where  
+					cam_id = #{cam_id} order by st_seq desc
+		        ) A
+		        where <![CDATA[ rownum <= #{page_end} ]]> 
+		    ) B
+		where b.rnum >= #{page_st}
     </select>
     
 

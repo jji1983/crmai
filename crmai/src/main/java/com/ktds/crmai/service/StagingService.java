@@ -21,15 +21,27 @@ public class StagingService implements StagingMapper {
 	StagingMapper stagingMapper;
 
 	@Override
-	public List<AI_STAGING> selectStaginTrain(AI_PAGE staingTrain) {
+	public List<AI_STAGING> selectStaginTrain(AI_PAGE page) {
 		// TODO Auto-generated method stub
-		return stagingMapper.selectStaginTrain(staingTrain);
+		return stagingMapper.selectStaginTrain(page);
 	}
 
 	@Override
-	public List<AI_STAGING> selectStaginTrainResult(AI_PAGE staingTrain) {
+	public List<AI_STAGING> selectStaginTrainResult(AI_PAGE page) {
 		// TODO Auto-generated method stub
-		return stagingMapper.selectStaginTrainResult(staingTrain);
+		return stagingMapper.selectStaginTrainResult(page);
+	}
+
+	@Override
+	public List<AI_STAGING> selectStaginTest(AI_PAGE page) {
+		// TODO Auto-generated method stub
+		return stagingMapper.selectStaginTest(page);
+	}
+
+	@Override
+	public List<AI_STAGING> selectStaginTestResult(AI_PAGE page) {
+		// TODO Auto-generated method stub
+		return stagingMapper.selectStaginTestResult(page);
 	}
 	
 	
