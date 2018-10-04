@@ -79,7 +79,7 @@ public class LearningProc {
 		        		dao.updateCampaignTest_end(data, 3, errorMsg);
 		        		
 		        	}else {
-		        		dao.updateCampaignTest_end(data, 4, "");
+		        		dao.updateCampaignTest_end(data, 7, "");
 		        	}
 		        		
 				}

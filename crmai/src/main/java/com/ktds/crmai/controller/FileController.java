@@ -163,12 +163,12 @@ public class FileController {
 	@RequestMapping(value = "/downloadGuide", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> downloadGuideFile() throws Exception {
 
-	 String GuideFile = "D:\\TEMP\\GUIDE\\가이드문서.pdf";
+	 String GuideFile = "\\resources\\static\\file\\CRM_MarketingPlatform(Admin)_20180928.pdf";
 	 
 	 Path path = Paths.get(GuideFile);
 		
 	 byte[] array = Files.readAllBytes(path);
-	 String fileName = "attachment; filename=가이드문서.pdf";
+	 String fileName = "attachment; filename=CRM_MarketingPlatform(Admin)_20180928.pdf";
 
 	 HttpHeaders responseHeaders = new HttpHeaders();
 	 responseHeaders.set("charset", "utf-8");
