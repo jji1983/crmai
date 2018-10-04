@@ -113,7 +113,7 @@
 	      e.stopPropagation(); // 모달 팝업도 같이 닫히는걸 막아준다.
 	    });
 		
-		$("#const").val($("input[name='session_name']", parent.document).val());
+		//$("#const").val($("input[name='session_name']", parent.document).val());
 		
 		search_statistics();	// 처음에 불러오기
   	});
