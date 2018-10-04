@@ -120,7 +120,7 @@
   
   	function Content_Learning() {
 		//alert("call Content_Learning!!");
-		document.getElementById("main_frame").src = "/Learning/data";
+		document.getElementById("main_frame").src = "/Learning/data"; 
 	}
 	
 	function search_statistics() {
