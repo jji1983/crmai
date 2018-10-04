@@ -124,7 +124,7 @@
 <script src="/resources/dist/js/adminlte.min.js"></script>
 
 <script type="text/javascript">
-	alert("start!!~~~");
+	//alert("start!!~~~");
 
 	$(document).ready(function() {
 		// 모달 처리
@@ -190,21 +190,26 @@
 		   //	html += '<tr onClick="view_account('1')">';
 		  //	alert.("adm_id");
 				$.each(val, function(k, v) {
-				/* if (k == 'adm_id') {
-					html += '<td >' + v + '</td>';
+				 if (k == 'adm_id') {
+					 //html += '<td >' + v + '</td>';
+					 v = v.substr(0, 20);
 				}
 				
 				if (k == 'adm_name') {
-					html += '<td >' + v + '</td>';
+					 //html += '<td >' + v + '</td>';
+					 v = v.substr(0, 20);
 				}
-				
+				s
 				if (k == 'adm_pw') {
-					html += '<td >' + v + '</td>';
+					//html += '<td >' + v + '</td>';
+					 v = v.substr(0, 20);
 				}
 				
 				if (k == 'adm_email') {
-					html += '<td >' + v + '</td>';
-				} */
+					//return;
+					//html += '<td >' + v + '</td>';
+					 //v = v.substr(0, 20);
+				}
 				
 				if (k == 'adm_cdate') {
 					v = v.substr(0, 10);
@@ -213,7 +218,7 @@
 				if (v == 'null' || v == '') {
 					html += '<td></td>';
 					
-				} else if (k == 'adm_id') {
+				} else if (k == 'adm_name') {
 					html += '<td style="text-align: left; padding-left: 10px;">' + v + '</td>';
 					//return;
 				} else {
@@ -235,7 +240,7 @@
 
 		var form = document.getElementById("AccountForm");
 
-		alert("start222~~~");
+	//	alert("start222~~~");
 		form.action = "<c:url value='/account/writeForm.do'/>";
 		form.submit();
 
@@ -244,7 +249,7 @@
 	//글조회
 	function fn_view(adm_id) {
 
-		alert("call fn_view ~!! " + adm_id);
+	//	alert("call fn_view ~!! " + adm_id);
 		
 		var form = document.getElementById("AccountForm");
 		var url = "<c:url value='/account/list'/>";
@@ -256,7 +261,7 @@
 	
 	//계정 조회
 	function view_account(adm_id) {
-	   alert("-- view_account -- :: " + adm_id);
+	   //alert("-- view_account -- :: " + adm_id);
 		//alert("1111 :: " + e.responseText);
 		
 		$.ajax({
@@ -447,6 +452,7 @@
 											<th style="width: 100px">이름</th>
 											<!--  <th style="width: 100px">e-mail</th> -->
 											<th style="width: 100px">날짜</th>
+											<th style="width: 100px">e-mail</th>
 											<!--<th>조회수</th>-->
 										</tr>
 									</thead>
@@ -515,7 +521,7 @@
 														
 													</div>
 												</div>
-												
+											<!-- 	
 												<div class="form-group readAccount">
 													<label for="inputAdmCdate" class="col-sm-2 control-label">등록일</label>
 			
@@ -523,7 +529,7 @@
 														<input id="inputAdmCdate" name="inputAdmCdate" type="text" class="form-control" readonly>
 													</div>
 												</div>
-												
+												 -->
 								
 											
 			

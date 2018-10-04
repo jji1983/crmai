@@ -9,6 +9,7 @@
 		    ADM_ID AS "adm_id", 
 			ADM_PW AS "adm_pw",
 			ADM_NAME AS "adm_name",
+			ADM_EMAIL AS "adm_email",
 			ADM_CDATE as "adm_cdate"
 
 		FROM  
