@@ -606,7 +606,7 @@
 			var myTotalData2 = 90;
 			var myTotalData3 = 88;
 			var myTotalDatas = [ myTotalData1, myTotalData2, myTotalData3 ];
-
+ 
 			//myTotalData
 			var myTotalData = {
 				labels : campains,
