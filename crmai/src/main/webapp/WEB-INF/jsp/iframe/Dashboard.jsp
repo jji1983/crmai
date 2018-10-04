@@ -181,11 +181,11 @@
 								<div class="box box-success">
 
 									<div class="box-header with-border text-center">
-										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
+										<h3 class="box-title">나의 캠페인 전체</h3>
 									</div>
 									<div class="box-body">
-										<div class="chart">
-											<canvas id="chBar0" style="height: 270px"></canvas>
+										<div class="chart" style="height: 320px">
+											<canvas id="chBar0" style="height: 320px"></canvas>
 										</div>
 									</div>
 								</div>
@@ -199,12 +199,12 @@
 								<div class="box box-success">
 
 									<div class="box-header with-border text-center">
-										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
+										<h3 class="box-title">월별 통계</h3>
 
 									</div>
 									<div class="box-body">
 										<div class="chart">
-											<canvas id="chBar1" style="height: 270px"></canvas>
+											<canvas id="chBar1" style="height: 320px"></canvas>
 										</div>
 									</div>
 								</div>
@@ -218,11 +218,11 @@
 								<div class="box box-success">
 
 									<div class="box-header with-border text-center">
-										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
+										<h3 class="box-title">기간 통계</h3>
 									</div>
 									<div class="box-body">
 										<div class="chart">
-											<canvas id="chBar2" style="height: 270px"></canvas>
+											<canvas id="chBar2" style="height: 320px"></canvas>
 										</div>
 									</div>
 								</div>
@@ -236,11 +236,11 @@
 								<div class="box box-success">
 
 									<div class="box-header with-border text-center">
-										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
+										<h3 class="box-title">캠페인별 정확도</h3>
 									</div>
 									<div class="box-body">
 										<div class="chart">
-											<canvas id="chBar3" style="height: 270px"></canvas>
+											<canvas id="chBar3" style="height: 320px"></canvas>
 										</div>
 									</div>
 								</div>
@@ -254,11 +254,11 @@
 								<div class="box box-success">
 
 									<div class="box-header with-border text-center">
-										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
+										<h3 class="box-title">캠페인별 정확도</h3>
 									</div>
 									<div class="box-body">
 										<div class="chart">
-											<canvas id="chBar4" style="height: 270px"></canvas>
+											<canvas id="chBar4" style="height: 320px"></canvas>
 										</div>
 									</div>
 								</div>
@@ -355,22 +355,12 @@
 								<div class="box box-success">
 
 									<div class="box-header with-border text-center">
-										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
+										<h3 class="box-title">산업군별 정확도 예측 결과</h3>
 
-										<div class="box-tools pull-right">
-											<button type="button" class="btn btn-box-tool"
-												data-widget="collapse">
-												<i class="fa fa-minus"></i>
-											</button>
-											<button type="button" class="btn btn-box-tool"
-												data-widget="remove">
-												<i class="fa fa-times"></i>
-											</button>
-										</div>
 									</div>
 									<div class="box-body">
-										<div class="chart">
-											<canvas id="chBar5" style="height: 270px"></canvas>
+										<div class="chart" style="height: 320px">
+											<canvas id="chBar5" style="height: 320px"></canvas>
 										</div>
 									</div>
 								</div>
@@ -384,22 +374,12 @@
 								<div class="box box-success">
 
 									<div class="box-header with-border text-center">
-										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
+										<h3 class="box-title">산업군별 정확도 예측 결과</h3>
 
-										<div class="box-tools pull-right">
-											<button type="button" class="btn btn-box-tool"
-												data-widget="collapse">
-												<i class="fa fa-minus"></i>
-											</button>
-											<button type="button" class="btn btn-box-tool"
-												data-widget="remove">
-												<i class="fa fa-times"></i>
-											</button>
-										</div>
 									</div>
 									<div class="box-body">
 										<div class="chart">
-											<canvas id="chBar6" style="height: 270px"></canvas>
+											<canvas id="chBar6" style="height: 320px"></canvas>
 										</div>
 									</div>
 								</div>
@@ -413,23 +393,13 @@
 								<div class="box box-success">
 
 									<div class="box-header with-border text-center">
-										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
+										<h3 class="box-title">기간 통계</h3>
 
-										<div class="box-tools pull-right">
-											<button type="button" class="btn btn-box-tool"
-												data-widget="collapse">
-												<i class="fa fa-minus"></i>
-											</button>
-											<button type="button" class="btn btn-box-tool"
-												data-widget="remove">
-												<i class="fa fa-times"></i>
-											</button>
-										</div>
 									</div>
 									<div class="box-body">
 										<div class="chart">
 											<div class="chart">
-												<canvas id="chBar7" style="height: 270px"></canvas>
+												<canvas id="chBar7" style="height: 320px"></canvas>
 											</div>
 										</div>
 									</div>
@@ -444,13 +414,13 @@
 								<div class="box box-success">
 
 									<div class="box-header with-border text-center">
-										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
+										<h3 class="box-title">월별 통계</h3>
 
 									</div>
 									<div class="box-body">
 										<div class="chart">
 											<div class="chart">
-												<canvas id="chBar8" style="height: 270px"></canvas>
+												<canvas id="chBar8" style="height: 320px"></canvas>
 											</div>
 										</div>
 									</div>
@@ -465,12 +435,12 @@
 								<div class="box box-success">
 
 									<div class="box-header with-border text-center">
-										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
+										<h3 class="box-title">캠페인별 정확도</h3>
 
 									</div>
 									<div class="box-body">
 										<div class="chart">
-											<canvas id="chBar9" style="height: 270px"></canvas>
+											<canvas id="chBar9" style="height: 320px"></canvas>
 										</div>
 									</div>
 								</div>
@@ -484,12 +454,12 @@
 								<div class="box box-success">
 
 									<div class="box-header with-border text-center">
-										<h3 class="box-title">캠페인 예측율 증가 학습</h3>
+										<h3 class="box-title">캡페인별 정확도</h3>
 
 									</div>
 									<div class="box-body">
 										<div class="chart">
-											<canvas id="chBar10" style="height: 270px"></canvas>
+											<canvas id="chBar10" style="height: 320px"></canvas>
 										</div>
 									</div>
 								</div>
@@ -602,6 +572,8 @@
 			var months = [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월",
 					"9월", "10월", "11월", "12월" ];
 			var campains = [ "정확도(%)", "예측(%)", "결과(%)" ];
+			var chartBGColor = [ 'rgba(81, 152, 255, 0.6)',
+					'rgba(99, 132, 0, 0.6)', 'rgba(0, 180, 175, 0.6)' ];
 			var label1 = '# 예측율 증가 학습';
 			var label2 = '# 예측율 감소 학습';
 			var label3 = '# 수행율 증가 학습';
@@ -625,8 +597,59 @@
 			var dummy4 = [ 37, 21, 90, 87, 63, 90, 87, 100, 90, 87, 100, 21 ];
 			var dummy5 = [ 25, 84, 77, 25, 16, 74, 88, 90, 90, 19, 100, 100 ];
 
-			//sample
+			var dummy6 = [ 16, 74, 88, 90 ];
+			var dummy7 = [ 90, 87, 100, 90 ];
+			var dummy8 = [ 37, 21, 90, 87 ];
+			var dummy9 = [ 11, 53, 14, 33 ];
 
+			var myTotalData1 = 94;
+			var myTotalData2 = 90;
+			var myTotalData3 = 88;
+			var myTotalDatas = [ myTotalData1, myTotalData2, myTotalData3 ];
+
+			//myTotalData
+			var myTotalData = {
+				labels : campains,
+				datasets : [ {
+					label : '나의 캠페인',
+					data : myTotalDatas,
+					backgroundColor : chartBGColor,
+					borderWidth : 0
+				} ]
+			};
+			//Campains Data
+			var campainData = {
+				labels : campains,
+				datasets : [ {
+					label : '캠페인',
+					data : myTotalDatas,
+					backgroundColor : chartBGColor,
+					borderWidth : 0
+				} ]
+			};
+
+			//Types Data
+			var typeData = {
+				labels : types,
+				datasets : [ {
+					label : '정확도(%)',
+					data : dummy6,
+					backgroundColor : 'rgba(81, 152, 255, 0.6)',
+					borderWidth : 0,
+				}, {
+					label : '예측(%)',
+					data : dummy7,
+					backgroundColor : 'rgba(99, 132, 0, 0.6)',
+					borderWidth : 0,
+				}, {
+					label : '결과(%)',
+					data : dummy8,
+					backgroundColor : 'rgba(0, 180, 175, 0.6)',
+					borderWidth : 0
+				} ]
+			};
+
+			//Months Data
 			var dummyData1 = {
 				labels : months,
 				datasets : [ {
@@ -643,7 +666,7 @@
 					label : '결과(%)',
 					data : dummy3,
 					backgroundColor : 'rgba(0, 180, 175, 0.6)',
-					borderWidth : 0,
+					borderWidth : 0
 				} ]
 			};
 			var dummyData2 = {
@@ -662,20 +685,26 @@
 					label : '결과(%)',
 					data : dummy1,
 					backgroundColor : 'rgba(0, 180, 175, 0.6)',
-					borderWidth : 0,
+					borderWidth : 0
 				} ]
 			};
 
 			var chartOptions = {
+				legend : {
+					labels : {
+						fontColor : '#666'
+					}
+				},
 				scales : {
 					xAxes : [ {
 						gridLines : {
-							display: false
-						}
+							display : false
+						},
+						maxBarThickness : 60
 					} ],
 					yAxes : [ {
-						gridLines: {
-							display: false
+						gridLines : {
+							display : false
 						},
 						ticks : {
 							beginAtZero : true
@@ -695,10 +724,45 @@
 					position : 'bottom',
 				}
 			};
+			/* 			var chartOptions = {
+			 legend : {
+			 labels : {
+			 fontColor : 'rgba(0, 0, 0, 0.6)',
+			 fontSize : 18
+			 }
+			 },
+			 scales : {
+			 xAxes : [ {
+			 gridLines : {
+			 display : false
+			 }
+			 } ],
+			 yAxes : [ {
+			 gridLines : {
+			 display : false
+			 },
+			 ticks : {
+			 beginAtZero : true
+			 },
+			 gridLines : {
+			 display : true,
+			 drawBorder : true,
+			 drawOnChartArea : true,
+			 drawTicks : false,
+			 }
+			 }, ]
+			 },
+			 tooltips : {
+			 mode : 'index'
+			 },
+			 legend : {
+			 position : 'bottom',
+			 }
+			 }; */
 
 			var barChart = new Chart(ctx0, {
 				type : 'bar',
-				data : dummyData1,
+				data : myTotalData,
 				options : chartOptions
 			});
 			var barChart = new Chart(ctx1, {
@@ -713,17 +777,22 @@
 			});
 			var barChart = new Chart(ctx3, {
 				type : 'bar',
-				data : dummyData1,
+				data : campainData,
 				options : chartOptions
 			});
 			var barChart = new Chart(ctx4, {
 				type : 'bar',
-				data : dummyData2,
+				data : campainData,
 				options : chartOptions
 			});
 			var barChart = new Chart(ctx5, {
 				type : 'bar',
-				data : dummyData2,
+				data : typeData,
+				options : chartOptions
+			});
+			var barChart = new Chart(ctx6, {
+				type : 'bar',
+				data : typeData,
 				options : chartOptions
 			});
 			var barChart = new Chart(ctx7, {
@@ -738,12 +807,12 @@
 			});
 			var barChart = new Chart(ctx9, {
 				type : 'bar',
-				data : dummyData1,
+				data : campainData,
 				options : chartOptions
 			});
 			var barChart = new Chart(ctx10, {
 				type : 'bar',
-				data : dummyData1,
+				data : campainData,
 				options : chartOptions
 			});
 
