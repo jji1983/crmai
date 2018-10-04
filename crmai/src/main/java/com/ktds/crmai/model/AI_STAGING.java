@@ -10,7 +10,6 @@ public class AI_STAGING{
 
 	private static final long serialVersionUID = 3947489072259877540L;
 
-	private String seq;
 	private String st_seq;
 	private String cam_id;
 	
@@ -38,7 +37,6 @@ public class AI_STAGING{
 	}
 	
 	public AI_STAGING(
-			 String seq,
 			 String st_seq,
 			 String cam_id,
 			 String st_c1,

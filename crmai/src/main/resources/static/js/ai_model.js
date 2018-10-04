@@ -37,7 +37,7 @@ function grid_tableModel(obj){
     //alert("grid_table_learning_asis :: " + obj);
 
     html = '<table class="table table-bordered table-hover">';
-    html += '<thead><tr><th>캠페인ID</th><th>학습방법</th><th>기존정확도</th><th>AI정확도</th><th>학습시작시간</th><th>학습종료시간</th><th>선택Model</th><th>메시지</th></tr></thead>';
+    html += '<thead><tr><th>캠페인ID</th><th>학습모델</th><th>기존정확도</th><th>AI정확도</th><th>학습시작시간</th><th>학습종료시간</th><th>선택Model</th><th>메시지</th></tr></thead>';
     html += '<tbody>';
 
     var json = $.parseJSON(obj);

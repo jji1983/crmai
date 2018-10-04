@@ -88,7 +88,7 @@ function grid_tableStaging4(obj){
  		//html += '<td><input type="checkbox" name="camCheck"/></td>';
  		$.each(val,function(k,v){
  			
- 			if(k == 'st_Sseq' || k == 'cam_id') {
+ 			if(k == 'st_seq' || k == 'cam_id') {
  				html += '<td>' + v + '</td>';
  			}
  			

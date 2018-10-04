@@ -478,7 +478,7 @@
 												<!-- model table -->
 												
 												<div class="callout callout-success">
-									                <h4>모델 세부 정보</h4>
+									                <h4>AI학습결과 세부 정보</h4>
 									            </div>
 												<table id="ai_model_View" class="table table-bordered table-hover"></table>
 											</div>

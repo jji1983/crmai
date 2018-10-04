@@ -91,7 +91,7 @@
 				from 
 					ai_test_predict
 				where  
-					cam_id = #{cam_id} order by seq desc
+					cam_id = #{cam_id} order by st_seq desc
 		        ) A
 		        where <![CDATA[ rownum <= #{page_end} ]]> 
 		    ) B
