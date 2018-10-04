@@ -43,6 +43,12 @@ public class StagingService implements StagingMapper {
 		// TODO Auto-generated method stub
 		return stagingMapper.selectStaginTestResult(page);
 	}
+
+	@Override
+	public List<AI_STAGING> selectTestPredict(AI_PAGE page) {
+		// TODO Auto-generated method stub
+		return stagingMapper.selectTestPredict(page);
+	}
 	
 	
 

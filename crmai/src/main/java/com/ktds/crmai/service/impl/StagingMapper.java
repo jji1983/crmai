@@ -34,4 +34,10 @@ public interface StagingMapper {
 	 * Name : 학습전처리완료데이터 가져오기 (max : 100개)
 	 */
 	List<AI_STAGING> selectStaginTestResult(AI_PAGE page);
+	
+	
+	/*
+	 * Name : 학습전처리완료데이터 가져오기 (max : 100개)
+	 */
+	List<AI_STAGING> selectTestPredict(AI_PAGE page);
 }

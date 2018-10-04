@@ -63,6 +63,7 @@
   <script src="/resources/js/ai_stageing_test.js"></script>
   <script src="/resources/js/ai_stageing_result.js"></script>
   <script src="/resources/js/ai_model.js"></script>
+  <script src="/resources/js/ai_test_predict.js"></script>
   
   <!-- twbsPagination :: https://github.com/josecebe/twbs-pagination -->
   <script src="/resources/js/jquery.twbsPagination.js"></script>
@@ -336,12 +337,17 @@
 					
 										<!-- /.box-header -->
 										<div class="box-body">
-											
+											<!-- 
 											<div class="col-sm-12">
-												<button id="id_getAiStaningTrain" type="button" class="btn btn-info pull-right">전처리전</button>
+												<button id="id_getAiStaningTrain" type="button" class="btn btn-info pull-right">전처리전</button> 
+												
 											</div>
-											
+											-->
 											<div class="col-sm-12 text-center">
+												<div class="callout callout-info">
+									                <h4>학습데이터 전처리전</h4>
+									            </div>
+											
 												<!-- campaign table -->
 												<table id="ai_staging_train" class="table table-bordered table-hover"></table>
 												<nav aria-label="Page navigation example" style="text-align: center;">
@@ -380,11 +386,10 @@
 					
 										<!-- /.box-header -->
 										<div class="box-body">
-											<div class="col-sm-12">
-												<button id="id_getAiStaningTest" type="button" class="btn btn-info pull-right">전처리전</button>
-											</div>
-											
 											<div class="col-sm-12 text-center">
+												<div class="callout callout-info">
+									                <h4>대상자데이터 전처리전</h4>
+									            </div>
 												<!-- campaign table -->
 												<table id="ai_staging_test" class="table table-bordered table-hover"></table>
 												<nav aria-label="Page navigation example" style="text-align: center;">
@@ -469,13 +474,21 @@
 					
 										<!-- /.box-header -->
 										<div class="box-body">
-											<div class="col-sm-12">
-												<canvas id="barchart" style="height: 250px;"></canvas>
+											<div class="col-sm-12 text-center">
+												<!-- model table -->
+												
+												<div class="callout callout-success">
+									                <h4>모델 세부 정보</h4>
+									            </div>
+												<table id="ai_model_View" class="table table-bordered table-hover"></table>
 											</div>
 											
 											<div class="col-sm-12 text-center">
-												<!-- model table -->
-												<table id="ai_model_View" class="table table-bordered table-hover"></table>
+												<!--  <canvas id="modelchart" style="height: 250px;"></canvas>-->
+												<div class="callout callout-warning">
+									                <h4>중요도 TOP</h4>
+									            </div>			
+												<table id="modelchart" class="table table-bordered table-hover text-center"></table>
 											</div>
 										</div>
 									</div>
@@ -504,17 +517,21 @@
 								<div class="col-xs-12">
 									<div class="box">
 										<div class="box-header">
-											<h3 class="box-title">AI예측실행 세부정보</h3>
+											<h3 class="box-title">AI예측실행 세부정보  (최대 100건 만 출력 됩니다.)</h3>
 										</div>
 					
 										<!-- /.box-header -->
 										<div class="box-body">
-											<div class="col-sm-12">
-												<button id="id_getAiTestPredict" type="button" class="btn btn-info pull-right">AI예측실행</button>
-											</div>
 											<div class="col-sm-12 text-center">
-												<!-- model table -->
+												<div class="callout callout-success">
+									                <h4>AI 예측 실행 정보</h4>
+									            </div>
+									            <!-- model table -->
 												<table id="ai_TestPredict" class="table table-bordered table-hover"></table>
+												<nav aria-label="Page navigation example" style="text-align: center;">
+												<ul class="pagination-sm" id="id_predict_pagination"></ul></nav>
+												
+									            <button id="id_Download" type="button" class="btn btn-info pull-right">예측결과 DOWNLOAD</button>
 											</div>
 										</div>
 									</div>
@@ -528,7 +545,7 @@
 		<!--/. Modal -->
 		
 		
-		<!--5.AI예측실행 Modal -->
+		<!--5.AI예측결과 Modal -->
 	    <div class="modal fade" id="RealDataModal" tabindex="-1" role="dialog" aria-labelledby="RealDataLabel" aria-hidden="true">
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
@@ -615,7 +632,7 @@
 	    
 	    $('#ResultDataModal').on('show.bs.modal', function (event) {
 	    	 
-	    	  //페이징을 보여준다.
+	    	 //페이징을 보여준다.
 	    	 //alert("2.AI전처리 보여준다. !!");
 	    	 var div_t_pageing = $('#id_result_pagination');
 	    	 grid_pagingSt3(div_t_pageing);
@@ -638,7 +655,14 @@
 	    $('#PredictDataModal').on('show.bs.modal', function (event) {
 	    	 
 	    	  //AI예측 실행 정보를 보여준다
-	    	 alert("4.AI예측 보여준다. !!");
+	    	 //alert("4.AI예측 보여준다. !!");
+	    	  
+	    	 var div_t_pageing = $('#id_predict_pagination');
+	    	 grid_pagingSt4(div_t_pageing);
+	    	  
+	    	  //테이블 을 그린다.
+	    	 //alert("테이블을 그린다.. !!");
+	    	 search_st4();
 	    
 	    });
 	    
