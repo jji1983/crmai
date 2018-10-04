@@ -76,8 +76,6 @@ function grid_tableModel(obj){
  				}else{
  					html += '<td>' + v + '</td>';	
  				}
- 				
- 					
  			}
  			
  			if(k == 'desc_text') {

@@ -81,7 +81,7 @@
     
     
     <select id="selectTestPredict" resultType="staging">
-		select seq, cam_id, train_method, predict, round(SUCC_PROB * 100, 2) as succ_prob,  round(FAIL_PROB * 100, 2) as fail_prob  
+		select st_seq, cam_id, train_method, predict, round(SUCC_PROB * 100, 2) as succ_prob,  round(FAIL_PROB * 100, 2) as fail_prob  
 		   from (		
 		        select  <![CDATA[ rownum as rnum ]]> , A.* 
 		        from       

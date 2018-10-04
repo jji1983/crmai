@@ -56,6 +56,9 @@
   <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
   <script src="/resources/bower_components/Flot/jquery.flot.categories.js"></script>
   
+  <!-- twbsPagination :: https://github.com/josecebe/twbs-pagination -->
+  <script src="/resources/js/jquery.twbsPagination.js"></script>
+  <script src="/resources/js/jquery.twbsPagination.min.js"></script>
 
   <!-- AI MAKE JS -->
   <script src="/resources/js/ai_campaign.js"></script>
@@ -64,10 +67,7 @@
   <script src="/resources/js/ai_stageing_result.js"></script>
   <script src="/resources/js/ai_model.js"></script>
   <script src="/resources/js/ai_test_predict.js"></script>
-  
-  <!-- twbsPagination :: https://github.com/josecebe/twbs-pagination -->
-  <script src="/resources/js/jquery.twbsPagination.js"></script>
-  <script src="/resources/js/jquery.twbsPagination.min.js"></script>
+
   
 </head>
 <!-- ADD THE CLASS layout-boxed TO GET A BOXED LAYOUT -->
