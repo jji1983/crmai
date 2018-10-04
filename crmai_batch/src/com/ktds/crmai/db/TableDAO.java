@@ -611,7 +611,8 @@ public class TableDAO {
 				}
 //				System.out.println(campaign.getIcnum() + " :: " + campaign.getIcnum() + " :: ST_C200 :: " + column.get("ST_C" + campaign.getIcnum()) );
 				
-				pstmt.setString(campaign.getIcnum(), column.get("ST_C" + campaign.getIcnum()));
+				//pstmt.setString(campaign.getIcnum(), column.get("ST_C" + campaign.getIcnum()));
+				pstmt.setString(campaign.getIcnum(), "0");
 				
                 // addBatch에 담기
                 pstmt.addBatch();

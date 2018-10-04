@@ -76,7 +76,7 @@ public class PretreatmentProc {
 	        	if(errorMsg != null) {
 	        		dao.updateCampaignTrain_end(data, 3, errorMsg);
 	        	}else {
-	        		dao.updateCampaignTrain_end(data, 4, "");
+	        		dao.updateCampaignTrain_end(data, 7, "");
 	        	}
 			}
 			System.out.println("Insert end :: " + DateTool.getTimestamp());
