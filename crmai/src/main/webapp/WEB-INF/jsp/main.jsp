@@ -56,7 +56,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   
   <script type="text/javascript">
-	function Content_Dashboard() {
+	var sessionName;
+  
+  	function Content_Dashboard() {
 		//alert("call Content_Dashboard!!");
 		document.getElementById("main_frame").src = "/iframe/Dashboard";
 	}
@@ -93,16 +95,19 @@
 	function Content_Statistics_m1() {
 		//alert("call Content_Statistics!!");
 		document.getElementById("main_frame").src = "/iframe/Statistics_m1";
+		$("input[name='session_name']").val("${sessionNAME}");
 	}
 	
 	function Content_Statistics_m2() {
 		//alert("call Content_Statistics!!");
 		document.getElementById("main_frame").src = "/iframe/Statistics_m2";
+		$("input[name='session_name']").val("${sessionNAME}");
 	}
 	
 	function Content_Statistics_m3() {
 		//alert("call Content_Statistics!!");
 		document.getElementById("main_frame").src = "/iframe/Statistics_m3";
+		$("input[name='session_name']").val("${sessionNAME}");
 	}
 	
 	function Content_NoticeBoard() {
@@ -294,6 +299,7 @@
 </div>
 <!-- ./wrapper -->
 
+<input name="session_name" type="hidden">
 
 <!-- jQuery 3 -->
 <script src="/resources/bower_components/jquery/dist/jquery.min.js"></script>

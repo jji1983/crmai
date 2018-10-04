@@ -112,6 +112,10 @@
 	    }).on('hide', function(e) {
 	      e.stopPropagation(); // 모달 팝업도 같이 닫히는걸 막아준다.
 	    });
+		
+		$("#const").val($("input[name='session_name']", parent.document).val());
+		
+		search_statistics();	// 처음에 불러오기
   	});
   
   	function Content_Learning() {
@@ -353,7 +357,7 @@
 			            <div class="col-md-3">
 			              <div class="form-group">
 			              	<div class="col-sm-10">
-			              		<label>생성자</label> <input type="text" class="form-control" id="const" placeholder="생성자">
+			              		<label>생성자</label> <input type="text" class="form-control" id="const" placeholder="생성자" disabled>
 			              	</div>
 			              </div>
 			            </div>
