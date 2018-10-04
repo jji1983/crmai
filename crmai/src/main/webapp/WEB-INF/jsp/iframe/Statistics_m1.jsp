@@ -110,7 +110,7 @@
 		    autoclose : true,
 		    todayHighlight : true          
 	    }).on('hide', function(e) {
-	      e.stopPropagation(); // 모달 팝업도 같이 닫히는걸 막아준다.
+	      e.stopPropagation(); // 모달 팝업도 같이 닫히는걸 막아준다. 
 	    });
 		
 		//$("#const").val($("input[name='session_name']", parent.document).val());
