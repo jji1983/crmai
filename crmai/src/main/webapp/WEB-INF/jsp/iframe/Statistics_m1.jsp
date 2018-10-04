@@ -357,7 +357,7 @@
 			            <div class="col-md-3">
 			              <div class="form-group">
 			              	<div class="col-sm-10">
-			              		<label>생성자</label> <input type="text" class="form-control" id="const" placeholder="생성자" disabled>
+			              		<label>생성자</label> <input type="text" class="form-control" id="const" disabled>
 			              	</div>
 			              </div>
 			            </div>
