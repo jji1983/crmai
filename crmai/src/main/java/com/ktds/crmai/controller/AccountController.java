@@ -93,6 +93,7 @@ public class AccountController {
 		accountService.deleteAccount(adm_id);
 		
 		ResponseEntity<Object> response = null;
+	
 	//	if (result > 0) {
 	//		response = new ResponseEntity<Object>("OK::삭제 성공", HttpStatus.OK);
 	//	} else {

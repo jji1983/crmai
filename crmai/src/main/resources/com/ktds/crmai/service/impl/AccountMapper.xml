@@ -13,7 +13,7 @@
 			ADM_CDATE as "adm_cdate"
 
 		FROM  
-			AI_ACCOUNT
+			AI_ADMINUSER
  
 	</select>
 	
@@ -23,7 +23,7 @@
 			ADM_PW AS "adm_pw"
 	
 		FROM 
-		    AI_ACCOUNT
+		    AI_ADMINUSER
 		<where>
 			<if test="adm_id != null and adm_id != '' ">
 				adm_id like '%' || #{adm_id} || '%'
@@ -45,18 +45,18 @@
 			ADM_CDATE as "adm_cdate"
 
 		FROM  
-			AI_ACCOUNT
+			AI_ADMINUSER
 		WHERE
 			adm_id =  #{adm_id}
     </select>
     
     <insert id="insertAccount">
-    	INSERT INTO AI_ACCOUNT (ADM_ID, ADM_PW, ADM_NAME, ADM_CDATE, ADM_UDATE, ADM_EMAIL, ADM_ROLE, ADM_TYPE, ADM_LOGIN)
+    	INSERT INTO AI_ADMINUSER (ADM_ID, ADM_PW, ADM_NAME, ADM_CDATE, ADM_UDATE, ADM_EMAIL, ADM_ROLE, ADM_TYPE, ADM_LOGIN)
       	VALUES (#{adm_id}, #{adm_pw}, #{adm_name}, sysdate, sysdate, #{adm_email},1,1,0)
     </insert>
     
     <delete id="deleteAccount">
-    	DELETE FROM AI_ACCOUNT 
+    	DELETE FROM AI_ADMINUSER 
     	WHERE 
     		adm_id =  #{adm_id}
     </delete>
