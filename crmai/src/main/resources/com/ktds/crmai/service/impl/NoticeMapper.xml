@@ -4,13 +4,102 @@
 
 <mapper namespace="com.ktds.crmai.service.impl.NoticeMapper">
 
-    <insert id="insertNotice">
-      INSERT INTO AI_NOTICE (CONTENTS,WRITER,REG_DATETIME)
-      VALUES (#{NOTICE_TEXT}, 'admin', sysdate)
-    </insert>
+	<select id="selectAllNoticeList" resultType="Notice">
+		SELECT
+		CODE AS
+		"code",
+		TITLE AS "title",
+		CONTENTS AS "contents",
+		WRITER AS "writer",
+		REG_DATETIME AS "reg_datetime"
+		FROM
+		AI_Notice
+		ORDER BY
+		reg_datetime DESC
+	</select>
 
-    <select id="selectNotice" resultType="notice">
-        SELECT contents FROM AI_NOTICE order by reg_datetime desc
-    </select>
+	<select id="selectNoticePageNum" resultType="int">
+		select count(*) as
+		totalCount from AI_Notice
+	</select>
 
-</mapper>
+	<select id="selectNotice" resultType="Notice">
+		select CODE AS
+		"code",
+		TITLE AS "title",
+		CONTENTS AS "contents",
+		WRITER AS "writer",
+		REG_DATETIME AS "reg_datetime"
+		FROM (
+		select  <![CDATA[ rownum as rnum ]]>
+		, A.*
+		from
+		(
+		select
+		*
+		from
+		AI_Notice
+		where
+		code = #{code} order by reg_datetime desc
+		) A
+		where <![CDATA[ rownum <= #{page_end} ]]>
+		) B
+		where b.rnum >= #{page_st}
+	</select>
+
+
+	<select id="selectNoticeList" resultType="Notice">
+		SELECT
+		CODE AS "code",
+		TITLE AS "title",
+		CONTENTS AS "contents",
+		WRITER AS
+		"writer",
+		REG_DATETIME AS "reg_datetime"
+		FROM
+		AI_Notice
+		<where>
+			<if test="title != null and title != '' ">
+				title like '%' || #{title} || '%'
+			</if>
+
+			<if test="writer != null and writer != '' ">
+				AND type writer '%' || #{writer} || '%'
+			</if>
+
+			<if test="reg_datetime != null and reg_datetime != '' ">
+				AND reg_datetime like '%' || #{reg_datetime} || '%'
+			</if>
+		</where>
+		ORDER BY
+		reg_datetime DESC
+	</select>
+
+	<select id="selectNoticeDetail" resultType="Notice">
+		SELECT
+		CODE AS "code",
+		TITLE AS "title",
+		CONTENTS AS "contents",
+		WRITER AS "writer",
+		REG_DATETIME AS "reg_datetime"
+		FROM
+		AI_Notice
+		WHERE
+		code = #{code}
+	</select>
+
+	<insert id="insertNotice">
+		INSERT INTO AI_Notice (CODE, TITLE, CONTENTS, WRITER,
+		REG_DATETIME)
+		VALUES ((SELECT MAX(code + 1) FROM AI_Notice), #{title},
+		#{contents},
+		#{writer}, sysdate)
+	</insert>
+
+	<delete id="deleteNotice">
+		DELETE FROM AI_Notice
+		WHERE
+		code = #{code}
+	</delete>
+
+</mapper>	

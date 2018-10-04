@@ -39,21 +39,7 @@
 <link rel="stylesheet"
 	href="/resources/bower_components/select2/dist/css/select2.min.css">
 
-<!-- minty <link
-	href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/minty/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-Qt9Hug5NfnQDGMoaQYXN1+PiQvda7poO7/5k4qAmMN6evu0oDFMJTyjqaoTGHdqf"
-	crossorigin="anonymous"> -->
 
-
-
-
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
 
 <!-- Google Font -->
 <link rel="stylesheet"
@@ -66,11 +52,6 @@
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 <script>
-	$(document).ready(function() {
-		$('a[data-toggle="tab"]').on('hidden.bs.tab', function(e) {
-			alert("이벤트 실행됨");
-		});
-	});
 	function Content_Learning() {
 		//alert("call Content_Learning!!");
 		document.getElementById("main_frame").src = "/Learning/data";
@@ -104,7 +85,7 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Dashboard <small>Control panel</small>
+			Dashboard <small id="session">Control panel</small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -141,32 +122,27 @@
 								<div class="box box-default">
 									<!-- /.box-header -->
 									<div class="box-body with-border">
-										<!-- board table -->
+										<!-- notice table -->
 										<!-- /.게시판 목록 -->
-										<form id="boardForm" name="boardForm" method="post">
-											<table
-												class="table table-bordered table-striped table-hover text-center">
-												<thead>
-													<tr>
-														<th style="width: 70px">번호</th>
-														<th style="width: 65%">제목</th>
-														<th style="width: 100px">작성자</th>
-														<th style="width: 100px">날짜</th>
-														<!--<th>조회수</th>-->
-													</tr>
-												</thead>
-												<tbody id="ai_board">
-											</table>
-										</form>
-										<div>
-											<!--<a href='#' onClick='fn_write()' class="btn btn-success">글쓰기</a>-->
-											<button id='newBtn' type="button"
-												class="btn btn-info pull-right"
-												onClick='showModal("EDIT", null)'>글쓰기</button>
+										<div class="row">
+											<!-- notice table -->
+											<table id="ai_notice"
+												class="table table-bordered table-hover text-center"></table>
+											<nav aria-label="Page navigation example"
+												style="text-align: center;">
+												<ul class="pagination-sm" id="id_notice"></ul>
+											</nav>
+											<table id="id_notice"
+												class="table table-bordered table-hover"></table>
+											<nav aria-label="Page navigation example"
+												style="text-align: center;">
+												<ul class="pagination-sm" id="pagination"></ul>
+											</nav>
+
 										</div>
 
 										<!-- Modal -->
-										<div class="modal fade" id="boardNewModal" tabindex="-1"
+										<div class="modal fade" id="noticeNewModal" tabindex="-1"
 											role="dialog" aria-labelledby="newModalLabel"
 											aria-hidden="true">
 											<div class="modal-dialog" role="document">
@@ -188,74 +164,61 @@
 													<div class="modal-body">
 														<!-- form start -->
 														<form class="form-horizontal" id="newUploadForm"
-															action="/board/insert" method="post">
+															action="/notice/insert" method="post">
 															<div class="box-body">
 
 																<input type="hidden" id="user_id" name="user_id"
-																	value=<%=session.getAttribute("sessionID")%>>
-
-																<input type="hidden" id="boardCode" name="boardCode">
+																	value=<%=session.getAttribute("sessionID")%>> <input
+																	type="hidden" id="noticeCode" name="noticeCode">
 
 																<div class="form-group">
-																	<label for="inputBoardName"
+																	<label for="inputNoticeName"
 																		class="col-sm-2 control-label">제목</label>
 
 																	<div class="col-sm-10">
-																		<input id="inputBoardName" name="inputBoardName"
+																		<input id="inputNoticeName" name="inputNoticeName"
 																			type="text" class="form-control" placeholder="제목"
 																			required>
 																	</div>
 																</div>
 
-																<div class="form-group readBoard">
-																	<label for="boardDate" class="col-sm-2 control-label">등록일</label>
+																<div class="form-group readNotice">
+																	<label for="noticeDate" class="col-sm-2 control-label">등록일</label>
 
 																	<div class="col-sm-10">
-																		<input id="boardDate" name="boardDate" type="text"
+																		<input id="noticeDate" name="noticeDate" type="text"
 																			class="form-control" readonly>
 																	</div>
 																</div>
 
-																<div class="form-group readBoard">
-																	<label for="boardWriter" class="col-sm-2 control-label">작성자</label>
+																<div class="form-group readNotice">
+																	<label for="noticeWriter"
+																		class="col-sm-2 control-label">작성자</label>
 
 																	<div class="col-sm-10">
-																		<input id="boardWriter" name="boardWriter" type="text"
-																			class="form-control" readonly>
+																		<input id="noticeWriter" name="noticeWriter"
+																			type="text" class="form-control" readonly>
 																	</div>
 																</div>
 
 																<div class="form-group">
-																	<label for="inputBoardDesc"
+																	<label for="inputNoticeDesc"
 																		class="col-sm-2 control-label">내용</label>
 
 																	<div class="col-sm-10">
-																		<textarea id="inputBoardDesc" name="inputBoardDesc"
+																		<textarea id="inputNoticeDesc" name="inputNoticeDesc"
 																			class="form-control" rows="10" placeholder="내용"
 																			style="resize: none;"></textarea>
 																	</div>
 																</div>
 
-																<!-- TODO: 첨부파일 등록 -->
-																<!--
-												<div class="form-group">
-													<label for="InputFile_csv" class="col-sm-2 control-label">파일 등록(CSV)</label>
-													<div class="col-sm-10">
-														<input id="InputFile_csv" type="file" name="file_board" accept=".csv">
-													</div>
-												</div>
-												-->
 															</div>
 															<!-- /.box-body -->
 															<div class="box-footer">
 																<div class='row pull-right' style='margin-right: 3px'>
-																	<button id="bthNew" type="submit"
-																		class="btn btn-primary editBoard">등록</button>
-																	<button id="bthDel" type="submit"
-																		class="btn btn-danger readBoard">삭제</button>
 																	<button id="bthClose" type="button"
 																		class="btn btn-secondary" data-dismiss="modal"
-																		style="margin-left: 5px">취소</button>
+																		style="margin-left: 5px">돌아가기</button>
 																</div>
 															</div>
 															<!-- /.box-footer -->
@@ -719,135 +682,42 @@
 	<!-- MDB charts ADD -->
 	<script src="/resources/js/chart.js"></script>
 
+	<!-- twbsPagination :: https://github.com/josecebe/twbs-pagination -->
+	<script src="/resources/js/jquery.twbsPagination.js"></script>
+	<script src="/resources/js/jquery.twbsPagination.min.js"></script>
+
+	<!-- AI MAKE JS -->
+	<script src="/resources/js/ai_campaign.js"></script>
+	<script src="/resources/js/ai_notice.js"></script>
+
 	<script type="text/javascript">
 		$(document).ready(function() {
-			// 모달 처리
 			$('.modal').on('hidden.bs.modal', function(e) {
 				// console.log('modal close');
 				$(this).find('form')[0].reset();
 			});
-
-			$('.modal').on('shown.bs.modal', function() {
-				// console.log('modal open');
+			$('#ai_notice').on('shown.bs.modal', function(e) {
+				var div_t_pageing = $('#id_notice');
+				grid_table_notice(div_t_pageing);
+				noticePage();
 			});
 
-			// 게시글 신규 등록
-			$("#bthNew").click(function(e) {
-				//stop submit the form, we will post it manually.
-				e.preventDefault();
-				submit_newBoard();
-			});
-
-			// 게시글 삭제
-			$("#bthDel").click(function(e) {
-				//stop submit the form, we will post it manually.
-				e.preventDefault();
-				var r = confirm("정말 삭제 하시겠습니까?");
-				if (r == true) {
-					delete_board();
-				} else {
-					return;
-				}
-			});
-
-			// 게시판 조회
-			getBoardList();
 		});
 
-		function getBoardList() {
-			$.ajax({
-				type : 'GET', // method
-				url : '/board/list',
-				async : 'true', // true
-				contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
-				//dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
-				success : function(data) {
-					var obj = JSON.stringify(data);
-					// console.log("board list result :: " + obj);
-					grid_table_board(obj);
-				},
-				error : function(request, status, error) {
-					// console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-				}
-			});
-		}
-
-		function grid_table_board(obj) {
-			var div = document.querySelector('#ai_board');
-
-			var html = '<tbody>';
-			var json = $.parseJSON(obj);
-			$(json)
-					.each(
-							function(i, val) {
-								html += '<tr onClick="view_board(' + val.code
-										+ ')">';
-								$
-										.each(
-												val,
-												function(k, v) {
-													if (k == 'contents') {
-														return;
-													}
-
-													if (k == 'reg_datetime') {
-														v = v.substr(0, 10);
-													}
-
-													if (v == 'null' || v == '') {
-
-														html += '<td></td>';
-													} else if (k == 'title') {
-														html += '<td style="text-align: left; padding-left: 10px;">'
-																+ v + '</td>';
-													} else {
-														html += '<td>' + v
-																+ '</td>';
-													}
-												});
-								html += '</tr>';
-							});
-			html += '</tbody>';
-
-			// console.log("Tbody == " + html);
-			div.innerHTML = html;
-		}
-
-		//글쓰기
-		function fn_write() {
-
-			var form = document.getElementById("boardForm");
-
-			form.action = "<c:url value='/board/writeForm.do'/>";
-			form.submit();
-
-		}
-
-		//글조회
-		function fn_view(code) {
-
-			var form = document.getElementById("boardForm");
-			var url = "<c:url value='/board/list'/>";
-			url = url + "?code=" + code;
-
-			form.action = url;
-			form.submit();
-		}
-
 		//게시글 조회
-		function view_board(code) {
+		function view_notice(code) {
 			//console.log('-- view_board -- ', code);
 
 			$.ajax({
 				type : "GET",
-				url : "/board/detail?code=" + code,
+				url : "/notice/detail?code=" + code,
 				contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
 				cache : false,
 				timeout : 600000,
 				success : function(data) {
 					console.log("SUCCESS : ", data);
 
-					showModal('READ', data);
+					showModal(data);
 				},
 				error : function(e) {
 					alert("error :: " + e.responseText);
@@ -856,369 +726,32 @@
 			});
 		}
 
-		//게시글 등록
-		function submit_newBoard() {
-			// console.log('-- submit_newBoard -- ');
-			var title = $('#inputBoardName').val().trim();
-			if (!title || title === undefined) {
-				alert('게시글 제목을 입력하세요.');
-				return;
-			}
+		function showModal(data) {
+			console.log('-- showModal -- ', data);
 
-			// Get form
-			var form = $('#newUploadForm')[0];
-			var data = new FormData(form);
-			$("#bthNew").prop("disabled", true);
-			// $("#bthClose").prop("disabled", true);
+			var d = data[0];
+			$('#newModalLabel').text('게시글 상세 조회');
 
-			$.ajax({
-				type : "POST",
-				url : "/board/insert",
-				data : data,
-				processData : false, //prevent jQuery from automatically transforming the data into a query string
-				contentType : false,
-				cache : false,
-				timeout : 600000,
-				success : function(data) {
-					console.log("SUCCESS : ", data);
-					$("#bthNew").prop("disabled", false);
+			$("#inputNoticeName").attr("readonly", true);
+			$("#inputNoticeName").val(d.title);
 
-					var res = data.split('::');
-					if (res[0] == "OK") {
-						// 게시판 목록 새로고침
-						getBoardList();
+			$("#inputNoticeDesc").attr("readonly", true);
+			$("#inputNoticeDesc").val(d.contents);
 
-						$('#boardNewModal').modal('hide');
-					}
-				},
-				error : function(e) {
-					alert("error :: " + e.responseText);
-					console.log("ERROR : ", e);
-					$("#bthNew").prop("disabled", false);
-				}
-			});
-		}
+			$("#noticeCode").val(d.code);
+			$("#noticeWriter").val(d.writer);
+			$("#noticeDate").val(d.reg_datetime.substr(0, 19));
 
-		//게시글 삭제
-		function delete_board() {
-			// Get form
-			var form = $('#newUploadForm')[0];
-			var data = new FormData(form);
-			$("#bthDel").prop("disabled", true);
+			$('.readNotice').show();
+			$('.editNotice').hide();
 
-			$.ajax({
-				type : "POST",
-				url : "/board/delete",
-				data : data,
-				processData : false, //prevent jQuery from automatically transforming the data into a query string
-				contentType : false,
-				cache : false,
-				timeout : 600000,
-				success : function(data) {
-					console.log("SUCCESS : ", data);
-					$("#bthDel").prop("disabled", false);
-
-					var res = data.split('::');
-					if (res[0] == "OK") {
-						// 게시판 목록 새로고침
-						getBoardList();
-
-						$('#boardNewModal').modal('hide');
-					}
-				},
-				error : function(e) {
-					alert("error :: " + e.responseText);
-					console.log("ERROR : ", e);
-					$("#bthDel").prop("disabled", false);
-				}
-			});
-		}
-
-		function showModal(type, data) {
-			//console.log('-- showModal -- ', type);
-			if (type === 'EDIT') {
-				$('#newModalLabel').text('게시글 신규 등록');
-
-				$("#inputBoardName").attr("readonly", false);
-
-				$("#inputBoardDesc").attr("readonly", false);
-
-				$('.readBoard').hide();
-				$('.editBoard').show();
-			} else { // type === 'READ'
-				var d = data[0];
-				$('#newModalLabel').text('게시글 상세 조회');
-
-				$("#inputBoardName").attr("readonly", true);
-				$("#inputBoardName").val(d.title);
-
-				$("#inputBoardDesc").attr("readonly", true);
-				$("#inputBoardDesc").val(d.contents);
-
-				$("#boardCode").val(d.code);
-				$("#boardWriter").val(d.writer);
-				$("#boardDate").val(d.reg_datetime.substr(0, 19));
-
-				$('.readBoard').show();
-				$('.editBoard').hide();
-			}
-
-			$('#boardNewModal').modal('show');
+			$('#noticeNewModal').modal('show');
 		}
 	</script>
 
 	<!-- page script -->
 	<script>
 		$(function() {
-
-			//notice
-			$(document).ready(function() {
-				// 모달 처리
-				$('.modal').on('hidden.bs.modal', function(e) {
-					// console.log('modal close');
-					$(this).find('form')[0].reset();
-				});
-
-				$('.modal').on('shown.bs.modal', function() {
-					// console.log('modal open');
-				});
-
-				// 게시글 신규 등록
-				$("#bthNew").click(function(e) {
-					//stop submit the form, we will post it manually.
-					e.preventDefault();
-					submit_newBoard();
-				});
-
-				// 게시글 삭제
-				$("#bthDel").click(function(e) {
-					//stop submit the form, we will post it manually.
-					e.preventDefault();
-					var r = confirm("정말 삭제 하시겠습니까?");
-					if (r == true) {
-						delete_board();
-					} else {
-						return;
-					}
-				});
-
-				// 게시판 조회
-				getBoardList();
-			});
-
-			function getBoardList() {
-				$.ajax({
-					type : 'GET', // method
-					url : '/board/list',
-					async : 'true', // true
-					contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
-					//dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
-					success : function(data) {
-						var obj = JSON.stringify(data);
-						// console.log("board list result :: " + obj);
-						grid_table_board(obj);
-					},
-					error : function(request, status, error) {
-						// console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-					}
-				});
-			}
-
-			function grid_table_board(obj) {
-				var div = document.querySelector('#ai_board');
-
-				var html = '<tbody>';
-				var json = $.parseJSON(obj);
-				$(json)
-						.each(
-								function(i, val) {
-									html += '<tr onClick="view_board('
-											+ val.code + ')">';
-									$
-											.each(
-													val,
-													function(k, v) {
-														if (k == 'contents') {
-															return;
-														}
-
-														if (k == 'reg_datetime') {
-															v = v.substr(0, 10);
-														}
-
-														if (v == 'null'
-																|| v == '') {
-
-															html += '<td></td>';
-														} else if (k == 'title') {
-															html += '<td style="text-align: left; padding-left: 10px;">'
-																	+ v
-																	+ '</td>';
-														} else {
-															html += '<td>' + v
-																	+ '</td>';
-														}
-													});
-									html += '</tr>';
-								});
-				html += '</tbody>';
-
-				// console.log("Tbody == " + html);
-				div.innerHTML = html;
-			}
-
-			//글쓰기
-			function fn_write() {
-
-				var form = document.getElementById("boardForm");
-
-				form.action = "<c:url value='/board/writeForm.do'/>";
-				form.submit();
-
-			}
-
-			//글조회
-			function fn_view(code) {
-
-				var form = document.getElementById("boardForm");
-				var url = "<c:url value='/board/list'/>";
-				url = url + "?code=" + code;
-
-				form.action = url;
-				form.submit();
-			}
-
-			//게시글 조회
-			function view_board(code) {
-				//console.log('-- view_board -- ', code);
-
-				$.ajax({
-					type : "GET",
-					url : "/board/detail?code=" + code,
-					contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
-					cache : false,
-					timeout : 600000,
-					success : function(data) {
-						console.log("SUCCESS : ", data);
-
-						showModal('READ', data);
-					},
-					error : function(e) {
-						alert("error :: " + e.responseText);
-						console.log("ERROR : ", e);
-					}
-				});
-			}
-
-			//게시글 등록
-			function submit_newBoard() {
-				// console.log('-- submit_newBoard -- ');
-				var title = $('#inputBoardName').val().trim();
-				if (!title || title === undefined) {
-					alert('게시글 제목을 입력하세요.');
-					return;
-				}
-
-				// Get form
-				var form = $('#newUploadForm')[0];
-				var data = new FormData(form);
-				$("#bthNew").prop("disabled", true);
-				// $("#bthClose").prop("disabled", true);
-
-				$.ajax({
-					type : "POST",
-					url : "/board/insert",
-					data : data,
-					processData : false, //prevent jQuery from automatically transforming the data into a query string
-					contentType : false,
-					cache : false,
-					timeout : 600000,
-					success : function(data) {
-						console.log("SUCCESS : ", data);
-						$("#bthNew").prop("disabled", false);
-
-						var res = data.split('::');
-						if (res[0] == "OK") {
-							// 게시판 목록 새로고침
-							getBoardList();
-
-							$('#boardNewModal').modal('hide');
-						}
-					},
-					error : function(e) {
-						alert("error :: " + e.responseText);
-						console.log("ERROR : ", e);
-						$("#bthNew").prop("disabled", false);
-					}
-				});
-			}
-
-			//게시글 삭제
-			function delete_board() {
-				// Get form
-				var form = $('#newUploadForm')[0];
-				var data = new FormData(form);
-				$("#bthDel").prop("disabled", true);
-
-				$.ajax({
-					type : "POST",
-					url : "/board/delete",
-					data : data,
-					processData : false, //prevent jQuery from automatically transforming the data into a query string
-					contentType : false,
-					cache : false,
-					timeout : 600000,
-					success : function(data) {
-						console.log("SUCCESS : ", data);
-						$("#bthDel").prop("disabled", false);
-
-						var res = data.split('::');
-						if (res[0] == "OK") {
-							// 게시판 목록 새로고침
-							getBoardList();
-
-							$('#boardNewModal').modal('hide');
-						}
-					},
-					error : function(e) {
-						alert("error :: " + e.responseText);
-						console.log("ERROR : ", e);
-						$("#bthDel").prop("disabled", false);
-					}
-				});
-			}
-
-			function showModal(type, data) {
-				//console.log('-- showModal -- ', type);
-				if (type === 'EDIT') {
-					$('#newModalLabel').text('게시글 신규 등록');
-
-					$("#inputBoardName").attr("readonly", false);
-
-					$("#inputBoardDesc").attr("readonly", false);
-
-					$('.readBoard').hide();
-					$('.editBoard').show();
-				} else { // type === 'READ'
-					var d = data[0];
-					$('#newModalLabel').text('게시글 상세 조회');
-
-					$("#inputBoardName").attr("readonly", true);
-					$("#inputBoardName").val(d.title);
-
-					$("#inputBoardDesc").attr("readonly", true);
-					$("#inputBoardDesc").val(d.contents);
-
-					$("#boardCode").val(d.code);
-					$("#boardWriter").val(d.writer);
-					$("#boardDate").val(d.reg_datetime.substr(0, 19));
-
-					$('.readBoard').show();
-					$('.editBoard').hide();
-				}
-
-				$('#boardNewModal').modal('show');
-			}
 
 			//labels
 			var types = [ "통신", "금융", "유통", "기타" ];
@@ -1435,28 +968,28 @@
 			});
 
 			//ajax
-			var _response = $('#noticeVal');
-			var admin = new Object();
+			/* 
+				 var _response = $('#noticeVal');
+				 var admin = new Object();
 
-			$.ajax({
-				type : 'GET', // method
-				url : '/notice/noticeVal',
-				//url       : '/admin/login_proc?ADM_ID=XXXX&ADM_PW=XXXX', // GET 요청은 데이터가 URL 파라미터로 포함되어 전송됩니다.
-				async : 'true', // true
-				data : admin, // GET 요청은 지원되지 않습니다.
-				processData : true, // GET 요청은 데이터가 바디에 포함되는 것이 아니기 때문에 URL에 파라미터 형식으로 추가해서 전송해줍니다.
-				contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
-				cache : false,
-				//dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
-				success : function(data, status, xhr) {
-					//alert("Login1 :: " + data);
-					_response.html(data)
-				},
-				error : function(request, status, error) {
-					alert("code:" + request.status + "\n" + "message:"
-							+ request.responseText + "\n" + "error:" + error);
-				}
-			});
+				 type : 'GET', // method
+				 url : '/notice/noticeVal',
+				 //url       : '/admin/login_proc?ADM_ID=XXXX&ADM_PW=XXXX', // GET 요청은 데이터가 URL 파라미터로 포함되어 전송됩니다.
+				 async : 'true', // true
+				 data : admin, // GET 요청은 지원되지 않습니다.
+				 processData : true, // GET 요청은 데이터가 바디에 포함되는 것이 아니기 때문에 URL에 파라미터 형식으로 추가해서 전송해줍니다.
+				 contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
+				 cache : false,
+				 //dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
+				 success : function(data, status, xhr) {
+				 //alert("Login1 :: " + data);
+				 _response.html(data)
+				 },
+				 error : function(request, status, error) {
+				 alert("code:" + request.status + "\n" + "message:"
+				 + request.responseText + "\n" + "error:" + error);
+				 }
+				 }); */
 
 		});
 	</script>
