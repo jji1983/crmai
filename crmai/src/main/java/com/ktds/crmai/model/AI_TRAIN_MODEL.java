@@ -18,6 +18,7 @@ private static final long serialVersionUID = 3947489072259877540L;
 	private String model_name;
 	private String train_start;
 	private String train_end;
+	private String model_flag;
 	private String desc_text;
 
 	
@@ -36,6 +37,7 @@ private static final long serialVersionUID = 3947489072259877540L;
 			String model_name,
 			String train_start,
 			String train_end,
+			String model_flag,
 			String desc_text
 	    ) {
 		this.cam_id = cam_id;
@@ -46,6 +48,7 @@ private static final long serialVersionUID = 3947489072259877540L;
 		this.model_name = model_name;
 		this.train_start = train_start;
 		this.train_end = train_end;
+		this.model_flag = model_flag;
 		this.desc_text = desc_text;
 
 	}
