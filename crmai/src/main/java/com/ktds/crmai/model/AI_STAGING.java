@@ -10,6 +10,7 @@ public class AI_STAGING{
 
 	private static final long serialVersionUID = 3947489072259877540L;
 
+	private String seq;
 	private String st_seq;
 	private String cam_id;
 	
@@ -25,12 +26,19 @@ public class AI_STAGING{
 	private String st_c10;
 	private String st_c200;
 	
+	private String train_method;
+	private String predict;
+	private String succ_prob;
+	private String fail_prob;
+	
+	private String result;
+	
 	public AI_STAGING(){
 		
 	}
 	
 	public AI_STAGING(
-		
+			 String seq,
 			 String st_seq,
 			 String cam_id,
 			 String st_c1,
@@ -43,7 +51,14 @@ public class AI_STAGING{
 			 String st_c8,
 			 String st_c9,
 			 String st_c10,
-			 String st_c200
+			 String st_c200,
+			 
+			 String train_method,
+			 String predict,
+			 String succ_prob,
+			 String fail_prob,
+			 String result
+			 
 
 	    ) {
 
@@ -60,5 +75,12 @@ public class AI_STAGING{
 		this.st_c9=st_c9;
 		this.st_c10=st_c10;
 		this.st_c200=st_c200;
+		
+		this.train_method=train_method;
+		this.predict=predict;
+		this.succ_prob=succ_prob;
+		this.fail_prob=fail_prob;
+		this.result=result;
+		
 	}
 }

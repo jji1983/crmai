@@ -79,5 +79,24 @@
 		where b.rnum >= #{page_st}
     </select>
     
+    
+    <select id="selectTestPredict" resultType="staging">
+		select seq, cam_id, train_method, predict, round(SUCC_PROB * 100, 2) as succ_prob,  round(FAIL_PROB * 100, 2) as fail_prob  
+		   from (		
+		        select  <![CDATA[ rownum as rnum ]]> , A.* 
+		        from       
+		        (
+		        select 
+					*  
+				from 
+					ai_test_predict
+				where  
+					cam_id = #{cam_id} order by seq desc
+		        ) A
+		        where <![CDATA[ rownum <= #{page_end} ]]> 
+		    ) B
+		where b.rnum >= #{page_st}
+    </select>
+    
 
 </mapper>

@@ -100,5 +100,26 @@ public class StagingController {
     	return response;
     }
 	
+	@RequestMapping(value = "/predict", method = RequestMethod.GET, consumes=MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> getPredict(@ModelAttribute("page") AI_PAGE page){
+    	logger.info("Request List....getPredict.... - {}", page);
+    	List<AI_STAGING> out_test = null;
+    	
+    
+    	out_test = stagingService.selectTestPredict(page);
+    	
+    	Iterator<AI_STAGING> ite = out_test.iterator();
+    	
+    	while(ite.hasNext()) {
+    		AI_STAGING info = (AI_STAGING)ite.next();
+    		logger.info("test :: "+ info.toString());
+    	}
+    	
+    	//응답과 함깨 HttpStatus를 지정할 수 있습니다.
+    	ResponseEntity<Object> response = new ResponseEntity<Object>(out_test, HttpStatus.OK);
+    	
+    	return response;
+    }
+	
 	
 }
