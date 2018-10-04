@@ -262,21 +262,21 @@
 					<!-- left -->
 					<div class="col-md-6">
 
-						<ul id="myTab" class="nav nav-tabs" role="tablist">
-							<li role="presentation" class="active"><a
-								data-target="#dropdown0" id="dropdown0-tab" role="tab"
-								data-toggle="tab" aria-controls="dropdown0" aria-expanded="true">나의전체</a></li>
+						<ul id="leftTab" class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active"><a data-target="#"
+								id="dropdown0-tab" role="tab" data-toggle="tab"
+								aria-controls="dropdown0" aria-expanded="true">나의전체</a></li>
 							<li role="presentation" class="dropdown"><a data-target="#"
 								id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown"
 								aria-controls="myTabDrop1-contents">기간별 <span class="caret"></span></a>
 								<ul class="dropdown-menu" role="menu"
 									aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
-									<li><a class="dropdown-header">선택하세요</a>
-										<hr style="padding: 0px; margin: 0px;"></li>
-									<li><a data-target="#dropdown1" tabindex="-1" role="tab"
+									<li><a class="dropdown-header">선택하세요</a></li>
+									<li role="presentation" class="divider"></li>
+									<li><a data-target="#" tabindex="-1" role="tab"
 										id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">2018년
 											1월</a></li>
-									<li><a data-target="#dropdown2" tabindex="-1" role="tab"
+									<li><a data-target="#" tabindex="-1" role="tab"
 										id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">2018년
 											2월</a></li>
 								</ul></li>
@@ -285,9 +285,11 @@
 								aria-controls="myTabDrop2-contents">캠페인별 <span class="caret"></span></a>
 								<ul class="dropdown-menu" role="menu"
 									aria-labelledby="myTabDrop2" id="myTabDrop2-contents">
-									<li><a data-target="#dropdown3" tabindex="-1" role="tab"
+									<li><a class="dropdown-header">선택하세요</a></li>
+									<li role="presentation" class="divider"></li>
+									<li><a data-target="#" tabindex="-1" role="tab"
 										id="dropdown3-tab" data-toggle="tab" aria-controls="dropdown3">캠페인1</a></li>
-									<li><a data-target="#dropdown4" tabindex="-1" role="tab"
+									<li><a data-target="#" tabindex="-1" role="tab"
 										id="dropdown4-tab" data-toggle="tab" aria-controls="dropdown4">캠페인2</a></li>
 								</ul></li>
 						</ul>
@@ -301,7 +303,7 @@
 								<div class="box box-success">
 
 									<div class="box-header with-border text-center">
-										<h3 class="box-title">나의 캠페인 전체</h3>
+										<h3 class="box-title" id="LChartTitle">나의 캠페인 전체</h3>
 									</div>
 									<div class="box-body">
 										<div class="chart" style="height: 320px">
@@ -422,60 +424,45 @@
 
 					<!-- right -->
 					<div class="col-md-6">
-						<ul id="myTab" class="nav nav-tabs" role="tablist">
-							<li role="presentation" class="dropdown"><a data-target="#"
-								id="myTabDrop3" class="dropdown-toggle" data-toggle="dropdown"
-								aria-controls="myTabDrop3-contents">산업군별 <span class="caret"></span></a>
-								<ul class="dropdown-menu" role="menu"
-									aria-labelledby="myTabDrop3" id="myTabDrop3-contents">
-									<li><a class="dropdown-header">선택하세요</a>
-										<hr style="padding: 0px; margin: 0px;"></li>
-									<li><a data-target="#dropdown5" tabindex="-1" role="tab"
-										id="dropdown5-tab" data-toggle="tab" aria-controls="dropdown5">통신분야</a></li>
-									<li><a data-target="#dropdown6" tabindex="-1" role="tab"
-										id="dropdown6-tab" data-toggle="tab" aria-controls="dropdown6">게임분야</a></li>
+
+						<ul id="rightTab" class="nav nav-tabs">
+							<li class="active"><a href="#" id="dropdown5-tab"
+								data-toggle="tab">산업군별</a></li>
+							<li role="presentation" class="dropdown"><a
+								class="dropdown-toggle" data-toggle="dropdown" href="#">기간별
+									<span class="caret"></span>
+							</a>
+								<ul class="dropdown-menu">
+									<li role="presentation"><a class="dropdown-header"
+										role="tab" tabindex="-1" href="#">선택하세요</a></li>
+									<li role="presentation" class="divider"></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										data-toggle="tab" href="#" id="dropdown6-tab">2019년</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										data-toggle="tab" href="#" id="dropdown7-tab">2018년</a></li>
 								</ul></li>
-							<li role="presentation" class="dropdown"><a data-target="#"
-								id="myTabDrop4" class="dropdown-toggle" data-toggle="dropdown"
-								aria-controls="myTabDrop4-contents">기간별 <span class="caret"></span></a>
-								<ul class="dropdown-menu" role="menu"
-									aria-labelledby="myTabDrop4" id="myTabDrop4-contents">
-									<li><a class="dropdown-header">선택하세요</a>
-										<hr style="padding: 0px; margin: 0px;"></li>
-									<li><a data-target="#dropdown7" tabindex="-1" role="tab"
-										id="dropdown7-tab" data-toggle="tab" aria-controls="dropdown7">2019년
-											1월</a></li>
-									<li><a data-target="#dropdown8" tabindex="-1" role="tab"
-										id="dropdown8-tab" data-toggle="tab" aria-controls="dropdown8">2019년
-											2월</a></li>
-								</ul></li>
-							<li role="presentation" class="dropdown"><a data-target="#"
-								id="myTabDrop5" class="dropdown-toggle" data-toggle="dropdown"
-								aria-controls="myTabDrop5-contents">캠페인별 <span class="caret"></span></a>
-								<ul class="dropdown-menu" role="menu"
-									aria-labelledby="myTabDrop5" id="myTabDrop5-contents">
-									<li><a class="dropdown-header">선택하세요</a>
-										<hr style="padding: 0px; margin: 0px;"></li>
-									<li><a data-target="#dropdown9" tabindex="-1" role="tab"
-										id="dropdown9-tab" data-toggle="tab" aria-controls="dropdown9">2018년도
-											신규상품..</a></li>
-									<li><a data-target="#dropdown10" tabindex="-1" role="tab"
-										id="dropdown10-tab" data-toggle="tab"
-										aria-controls="dropdown10">아이폰X 프로모션</a></li>
+							<li role="presentation" class="dropdown"><a
+								class="dropdown-toggle" data-toggle="dropdown" href="#">캠페인별
+									<span class="caret"></span>
+							</a>
+								<ul class="dropdown-menu">
+									<li role="presentation"><a class="dropdown-header"
+										role="menuitem" tabindex="-1" href="#">선택하세요</a></li>
+									<li role="presentation" class="divider"></li>
+									<li role="presentation"><a role="menuitem"
+										data-toggle="tab" tabindex="-1" href="#" id="dropdown8-tab">기가지니</a></li>
+									<li role="presentation"><a role="menuitem"
+										data-toggle="tab" tabindex="-1" href="#" id="dropdown9-tab">아이폰X
+											프로모션</a></li>
 								</ul></li>
 						</ul>
-						<div id="myTabContent" class="tab-content">
-							<div role="tabpanel" class="tab-pane fade active in"
-								id="dropdown5" aria-labelledby="dropdown5-tab">
-								<!-- 		<p>5번입니다</p> -->
-								<!-- Info boxes -->
-
+						<div class="tab-content">
+							<div class="tab-pane active">
 								<!-- BAR CHART -->
 								<div class="box box-success">
 
 									<div class="box-header with-border text-center">
-										<h3 class="box-title">산업군별 정확도 예측 결과</h3>
-
+										<h3 class="box-title" id="RChartTitle">나의 캠페인 전체</h3>
 									</div>
 									<div class="box-body">
 										<div class="chart" style="height: 320px">
@@ -484,108 +471,12 @@
 									</div>
 								</div>
 							</div>
-							<div role="tabpanel" class="tab-pane fade" id="dropdown6"
-								aria-labelledby="dropdown6-tab">
-								<!-- 	<p>6번입니다</p> -->
-								<!-- Info boxes -->
-
-								<!-- BAR CHART -->
-								<div class="box box-success">
-
-									<div class="box-header with-border text-center">
-										<h3 class="box-title">산업군별 정확도 예측 결과</h3>
-
-									</div>
-									<div class="box-body">
-										<div class="chart">
-											<canvas id="chBar6" style="height: 320px"></canvas>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div role="tabpanel" class="tab-pane fade" id="dropdown7"
-								aria-labelledby="dropdown7-tab">
-								<!-- 	<p>7번입니다</p> -->
-								<!-- Info boxes -->
-
-								<!-- BAR CHART -->
-								<div class="box box-success">
-
-									<div class="box-header with-border text-center">
-										<h3 class="box-title">기간 통계</h3>
-
-									</div>
-									<div class="box-body">
-										<div class="chart">
-											<div class="chart">
-												<canvas id="chBar7" style="height: 320px"></canvas>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div role="tabpanel" class="tab-pane fade" id="dropdown8"
-								aria-labelledby="dropdown8-tab">
-								<!-- 	<p>8번입니다</p> -->
-								<!-- Info boxes -->
-
-								<!-- BAR CHART -->
-								<div class="box box-success">
-
-									<div class="box-header with-border text-center">
-										<h3 class="box-title">월별 통계</h3>
-
-									</div>
-									<div class="box-body">
-										<div class="chart">
-											<div class="chart">
-												<canvas id="chBar8" style="height: 320px"></canvas>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div role="tabpanel" class="tab-pane fade" id="dropdown9"
-								aria-labelledby="dropdown9-tab">
-								<!-- 	<p>9번입니다</p> -->
-								<!-- Info boxes -->
-
-								<!-- BAR CHART -->
-								<div class="box box-success">
-
-									<div class="box-header with-border text-center">
-										<h3 class="box-title">캠페인별 정확도</h3>
-
-									</div>
-									<div class="box-body">
-										<div class="chart">
-											<canvas id="chBar9" style="height: 320px"></canvas>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div role="tabpanel" class="tab-pane fade" id="dropdown10"
-								aria-labelledby="dropdown10-tab">
-								<!-- 	<p>10번입니다</p> -->
-								<!-- Info boxes -->
-
-								<!-- BAR CHART -->
-								<div class="box box-success">
-
-									<div class="box-header with-border text-center">
-										<h3 class="box-title">캡페인별 정확도</h3>
-
-									</div>
-									<div class="box-body">
-										<div class="chart">
-											<canvas id="chBar10" style="height: 320px"></canvas>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- /.chart -->
+							<!-- /.tab-pane -->
 						</div>
-						<!-- Tabs -->
+						<!-- /.tab-content -->
+
+
+
 						<div class="col-md-4 col-sm-6 col-xs-12">
 							<div class="info-box">
 								<span class="info-box-text text-center">학습</span> <span
@@ -618,14 +509,13 @@
 						</div>
 					</div>
 				</div>
-
-
-				<!-- /.box -->
 			</div>
 
-		</div>
-		<!-- /.row -->
 
+			<!-- /.box -->
+		</div>
+
+		<!-- /.row -->
 	</section>
 	<!-- /.Main content -->
 
@@ -754,15 +644,12 @@
 		$(function() {
 
 			//labels
-			var types = [ "통신", "금융", "유통", "기타" ];
-			var months = [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월",
-					"9월", "10월", "11월", "12월" ];
-			var campains = [ "정확도(%)", "예측(%)", "결과(%)" ];
-			var chartBGColor = [ 'rgba(81, 152, 255, 0.6)',
+			types = [ "통신", "금융", "유통", "기타" ];
+			months = [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월",
+					"10월", "11월", "12월" ];
+			campains = [ "정확도(%)", "예측(%)", "결과(%)" ];
+			chartBGColor = [ 'rgba(81, 152, 255, 0.6)',
 					'rgba(99, 132, 0, 0.6)', 'rgba(0, 180, 175, 0.6)' ];
-			var label1 = '# 예측율 증가 학습';
-			var label2 = '# 예측율 감소 학습';
-			var label3 = '# 수행율 증가 학습';
 
 			//elements
 			var ctx0 = document.getElementById("chBar0").getContext('2d');
@@ -771,105 +658,115 @@
 			var ctx3 = document.getElementById("chBar3").getContext('2d');
 			var ctx4 = document.getElementById("chBar4").getContext('2d');
 			var ctx5 = document.getElementById("chBar5").getContext('2d');
-			var ctx6 = document.getElementById("chBar6").getContext('2d');
-			var ctx7 = document.getElementById("chBar7").getContext('2d');
-			var ctx8 = document.getElementById("chBar8").getContext('2d');
-			var ctx9 = document.getElementById("chBar9").getContext('2d');
-			var ctx10 = document.getElementById("chBar10").getContext('2d');
 
-			var dummy1 = [ 54, 53, 14, 33, 13, 87, 11, 63, 90, 87, 100, 21 ];
-			var dummy2 = [ 37, 89, 98, 37, 21, 90, 87, 11, 53, 14, 33, 13 ];
-			var dummy3 = [ 26, 37, 48, 37, 23, 90, 87, 100, 21, 90, 87, 11 ];
-			var dummy4 = [ 37, 21, 90, 87, 63, 90, 87, 100, 90, 87, 100, 21 ];
-			var dummy5 = [ 25, 84, 77, 25, 16, 74, 88, 90, 90, 19, 100, 100 ];
+			monthORIGINAL = [ 54, 53, 14, 33, 13, 87, 11, 63, 90, 87, 100, 21 ];
+			monthSO = [ 37, 89, 98, 37, 21, 90, 87, 11, 53, 14, 33, 13 ];
+			monthREAL = [ 26, 37, 48, 37, 23, 90, 87, 100, 21, 90, 87, 11 ];
 
-			var dummy6 = [ 16, 74, 88, 90 ];
-			var dummy7 = [ 90, 87, 100, 90 ];
-			var dummy8 = [ 37, 21, 90, 87 ];
-			var dummy9 = [ 11, 53, 14, 33 ];
+			typeORIGINAL = [ 16, 74, 88, 90 ];
+			typeSO = [ 90, 87, 100, 90 ];
+			typeREAL = [ 37, 21, 90, 87 ];
 
-			var myTotalData1 = 94;
-			var myTotalData2 = 90;
-			var myTotalData3 = 88;
-			var myTotalDatas = [ myTotalData1, myTotalData2, myTotalData3 ];
+			campainData1 = 94;
+			campainData2 = 90;
+			campainData3 = 88;
+			campainDatas = [ campainData1, campainData2, campainData3 ];
 
-			//myTotalData
-			var myTotalData = {
+			//Campains Data
+			campainLeft = {
 				labels : campains,
 				datasets : [ {
-					label : '나의 캠페인',
-					data : myTotalDatas,
+					label : '캠페인',
+					data : campainDatas,
 					backgroundColor : chartBGColor,
 					borderWidth : 0
 				} ]
 			};
-			//Campains Data
-			var campainData = {
+			campainRight = {
 				labels : campains,
 				datasets : [ {
 					label : '캠페인',
-					data : myTotalDatas,
+					data : campainDatas,
 					backgroundColor : chartBGColor,
 					borderWidth : 0
 				} ]
 			};
 
 			//Types Data
-			var typeData = {
+			typeLeft = {
 				labels : types,
 				datasets : [ {
 					label : '정확도(%)',
-					data : dummy6,
+					data : typeORIGINAL,
 					backgroundColor : 'rgba(81, 152, 255, 0.6)',
 					borderWidth : 0,
 				}, {
 					label : '예측(%)',
-					data : dummy7,
+					data : typeSO,
 					backgroundColor : 'rgba(99, 132, 0, 0.6)',
 					borderWidth : 0,
 				}, {
 					label : '결과(%)',
-					data : dummy8,
+					data : typeREAL,
+					backgroundColor : 'rgba(0, 180, 175, 0.6)',
+					borderWidth : 0
+				} ]
+			};
+			typeRight = {
+				labels : types,
+				datasets : [ {
+					label : '정확도(%)',
+					data : typeORIGINAL,
+					backgroundColor : 'rgba(81, 152, 255, 0.6)',
+					borderWidth : 0,
+				}, {
+					label : '예측(%)',
+					data : typeSO,
+					backgroundColor : 'rgba(99, 132, 0, 0.6)',
+					borderWidth : 0,
+				}, {
+					label : '결과(%)',
+					data : typeREAL,
 					backgroundColor : 'rgba(0, 180, 175, 0.6)',
 					borderWidth : 0
 				} ]
 			};
 
 			//Months Data
-			var dummyData1 = {
+			monthRight = {
 				labels : months,
 				datasets : [ {
 					label : '정확도(%)',
-					data : dummy1,
+					data : monthORIGINAL,
 					backgroundColor : 'rgba(81, 152, 255, 0.6)',
 					borderWidth : 0,
 				}, {
 					label : '예측(%)',
-					data : dummy2,
+					data : monthSO,
 					backgroundColor : 'rgba(99, 132, 0, 0.6)',
 					borderWidth : 0,
 				}, {
 					label : '결과(%)',
-					data : dummy3,
+					data : monthREAL,
 					backgroundColor : 'rgba(0, 180, 175, 0.6)',
 					borderWidth : 0
 				} ]
 			};
-			var dummyData2 = {
+			monthLeft = {
 				labels : months,
 				datasets : [ {
 					label : '정확도(%)',
-					data : dummy4,
+					data : monthORIGINAL,
 					backgroundColor : 'rgba(81, 152, 255, 0.6)',
 					borderWidth : 0,
 				}, {
 					label : '예측(%)',
-					data : dummy5,
+					data : monthSO,
 					backgroundColor : 'rgba(99, 132, 0, 0.6)',
 					borderWidth : 0,
 				}, {
 					label : '결과(%)',
-					data : dummy1,
+					data : monthREAL,
 					backgroundColor : 'rgba(0, 180, 175, 0.6)',
 					borderWidth : 0
 				} ]
@@ -886,7 +783,7 @@
 						gridLines : {
 							display : false
 						},
-						maxBarThickness : 60
+						maxBarThickness : 35
 					} ],
 					yAxes : [ {
 						gridLines : {
@@ -911,87 +808,380 @@
 				}
 			};
 
-			var barChart = new Chart(ctx0, {
+			barChart0 = new Chart(ctx0, {
 				type : 'bar',
-				data : myTotalData,
+				data : typeLeft,
 				options : chartOptions
 			});
-			var barChart = new Chart(ctx1, {
+			barChart1 = new Chart(ctx1, {
 				type : 'bar',
-				data : dummyData2,
+				data : monthLeft,
 				options : chartOptions
 			});
-			var barChart = new Chart(ctx2, {
+			barChart2 = new Chart(ctx2, {
 				type : 'bar',
-				data : dummyData2,
+				data : monthLeft,
 				options : chartOptions
 			});
-			var barChart = new Chart(ctx3, {
+			barChart3 = new Chart(ctx3, {
 				type : 'bar',
-				data : campainData,
+				data : campainLeft,
 				options : chartOptions
 			});
-			var barChart = new Chart(ctx4, {
+			barChart4 = new Chart(ctx4, {
 				type : 'bar',
-				data : campainData,
+				data : campainLeft,
 				options : chartOptions
 			});
-			var barChart = new Chart(ctx5, {
+			barChart5 = new Chart(ctx5, {
 				type : 'bar',
-				data : typeData,
-				options : chartOptions
-			});
-			var barChart = new Chart(ctx6, {
-				type : 'bar',
-				data : typeData,
-				options : chartOptions
-			});
-			var barChart = new Chart(ctx7, {
-				type : 'bar',
-				data : dummyData1,
-				options : chartOptions
-			});
-			var barChart = new Chart(ctx8, {
-				type : 'bar',
-				data : dummyData1,
-				options : chartOptions
-			});
-			var barChart = new Chart(ctx9, {
-				type : 'bar',
-				data : campainData,
-				options : chartOptions
-			});
-			var barChart = new Chart(ctx10, {
-				type : 'bar',
-				data : campainData,
+				data : typeRight,
 				options : chartOptions
 			});
 
-			//ajax
-			/* 
-				 var _response = $('#noticeVal');
-				 var admin = new Object();
+			//dropdown0-tab click
+			document.getElementById('dropdown0-tab').addEventListener('click',
+					function() {
+						//type 1
+						toggleLeft(1);
+					});
+			//dropdown1-tab click
+			document.getElementById('dropdown1-tab').addEventListener('click',
+					function() {
+						//month 2
+						toggleLeft(2);
+					});
+			//dropdown2-tab click
+			document.getElementById('dropdown2-tab').addEventListener('click',
+					function() {
+						//month 2
+						toggleLeft(2);
+					});
+			//dropdown3-tab click
+			document.getElementById('dropdown3-tab').addEventListener('click',
+					function() {
+						//month 2
+						toggleLeft(3);
+					});
+			//dropdown4-tab click
+			document.getElementById('dropdown4-tab').addEventListener('click',
+					function() {
+						//month 2
+						toggleLeft(3);
+					});
 
-				 type : 'GET', // method
-				 url : '/notice/noticeVal',
-				 //url       : '/admin/login_proc?ADM_ID=XXXX&ADM_PW=XXXX', // GET 요청은 데이터가 URL 파라미터로 포함되어 전송됩니다.
-				 async : 'true', // true
-				 data : admin, // GET 요청은 지원되지 않습니다.
-				 processData : true, // GET 요청은 데이터가 바디에 포함되는 것이 아니기 때문에 URL에 파라미터 형식으로 추가해서 전송해줍니다.
-				 contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
-				 cache : false,
-				 //dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
-				 success : function(data, status, xhr) {
-				 //alert("Login1 :: " + data);
-				 _response.html(data)
-				 },
-				 error : function(request, status, error) {
-				 alert("code:" + request.status + "\n" + "message:"
-				 + request.responseText + "\n" + "error:" + error);
-				 }
-				 }); */
+			//dropdown5-tab click
+			document.getElementById('dropdown5-tab').addEventListener('click',
+					function() {
+						//type 1
+						toggleRight(1);
+					});
+			//dropdown6-tab click
+			document.getElementById('dropdown6-tab').addEventListener('click',
+					function() {
+						//month 2
+						toggleRight(2);
+					});
+			//dropdown7-tab click
+			document.getElementById('dropdown7-tab').addEventListener('click',
+					function() {
+						//month 2
+						toggleRight(2);
+					});
+			//dropdown8-tab click
+			document.getElementById('dropdown8-tab').addEventListener('click',
+					function() {
+						//month 2
+						toggleRight(3);
+					});
+			//dropdown9-tab click
+			document.getElementById('dropdown9-tab').addEventListener('click',
+					function() {
+						//month 2
+						toggleRight(3);
+					});
 
 		});
+
+		function toggleLeft(kind) {
+			var cngTitle = "변경합시다";
+
+			//type 1
+			if (kind == 1) {
+				cngTitle = "typeLeft 변경합니당";
+
+				//data delete
+				//Types Data
+				var title = document.getElementById('LChartTitle');
+				$(title).text(cngTitle);
+
+				var some_new_data = {
+					labels : types,
+					datasets : [ {
+						label : '정확도(%)',
+						data : typeORIGINAL,
+						backgroundColor : 'rgba(81, 152, 255, 0.6)',
+						borderWidth : 0,
+					}, {
+						label : '예측(%)',
+						data : typeSO,
+						backgroundColor : 'rgba(99, 132, 0, 0.6)',
+						borderWidth : 0,
+					}, {
+						label : '결과(%)',
+						data : typeREAL,
+						backgroundColor : 'rgba(0, 180, 175, 0.6)',
+						borderWidth : 0
+					} ]
+				};
+
+				barChart0.config.data = some_new_data;
+				barChart0.update();
+
+				/* $.ajax({
+				type : "GET",
+				url : "/notice/detail?code=" + code,
+				contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
+				cache : false,
+				timeout : 600000,
+				success : function(data) {
+					console.log("SUCCESS : ", data);
+
+					showModal(data);
+				},
+				error : function(e) {
+					alert("error :: " + e.responseText);
+					console.log("ERROR : ", e);
+				}
+				}); */
+			}
+
+			//month 2
+			if (kind == 2) {
+				cngTitle = "monthLeft 변경합니당";
+				var title = document.getElementById('LChartTitle');
+				$(title).text(cngTitle);
+
+				var some_new_data = {
+					labels : months,
+					datasets : [ {
+						label : '정확도(%)',
+						data : monthORIGINAL,
+						backgroundColor : 'rgba(81, 152, 255, 0.6)',
+						borderWidth : 0,
+					}, {
+						label : '예측(%)',
+						data : monthSO,
+						backgroundColor : 'rgba(99, 132, 0, 0.6)',
+						borderWidth : 0,
+					}, {
+						label : '결과(%)',
+						data : monthREAL,
+						backgroundColor : 'rgba(0, 180, 175, 0.6)',
+						borderWidth : 0
+					} ]
+				};
+
+				barChart0.config.data = some_new_data;
+				barChart0.update();
+				/* $.ajax({
+				type : "GET",
+				url : "/notice/detail?code=" + code,
+				contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
+				cache : false,
+				timeout : 600000,
+				success : function(data) {
+					console.log("SUCCESS : ", data);
+
+					showModal(data);
+				},
+				error : function(e) {
+					alert("error :: " + e.responseText);
+					console.log("ERROR : ", e);
+				}
+				}); */
+			}
+
+			//campain 3
+			if (kind == 3) {
+				cngTitle = "campainLeft 변경합니당";
+				var title = document.getElementById('LChartTitle');
+				$(title).text(cngTitle);
+				some_new_data = {
+					labels : campains,
+					datasets : [ {
+						label : '캠페인',
+						data : campainDatas,
+						backgroundColor : chartBGColor,
+						borderWidth : 0
+					} ]
+				};
+
+				barChart0.config.data = some_new_data;
+				barChart0.update();
+
+				/* $.ajax({
+				type : "GET",
+				url : "/notice/detail?code=" + code,
+				contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
+				cache : false,
+				timeout : 600000,
+				success : function(data) {
+					console.log("SUCCESS : ", data);
+
+					showModal(data);
+				},
+				error : function(e) {
+					alert("error :: " + e.responseText);
+					console.log("ERROR : ", e);
+				}
+				}); */
+			}
+		}
+		function toggleRight(kind) {
+			var cngTitle = "변경합시다";
+
+			//type 1
+			if (kind == 1) {
+				cngTitle = "typeRight 변경합니당";
+
+				//data delete
+				//Types Data
+				var title = document.getElementById('RChartTitle');
+				$(title).text(cngTitle);
+
+				var some_new_data = {
+					labels : types,
+					datasets : [ {
+						label : '정확도(%)',
+						data : typeORIGINAL,
+						backgroundColor : 'rgba(81, 152, 255, 0.6)',
+						borderWidth : 0,
+					}, {
+						label : '예측(%)',
+						data : typeSO,
+						backgroundColor : 'rgba(99, 132, 0, 0.6)',
+						borderWidth : 0,
+					}, {
+						label : '결과(%)',
+						data : typeREAL,
+						backgroundColor : 'rgba(0, 180, 175, 0.6)',
+						borderWidth : 0
+					} ]
+				};
+
+				barChart5.config.data = some_new_data;
+				barChart5.update();
+
+				/* $.ajax({
+				type : "GET",
+				url : "/notice/detail?code=" + code,
+				contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
+				cache : false,
+				timeout : 600000,
+				success : function(data) {
+					console.log("SUCCESS : ", data);
+
+					showModal(data);
+				},
+				error : function(e) {
+					alert("error :: " + e.responseText);
+					console.log("ERROR : ", e);
+				}
+				}); */
+			}
+
+			//month 2
+			if (kind == 2) {
+				cngTitle = "monthRight 변경합니당";
+				var title = document.getElementById('RChartTitle');
+				$(title).text(cngTitle);
+
+				var some_new_data = {
+					labels : months,
+					datasets : [ {
+						label : '정확도(%)',
+						data : monthORIGINAL,
+						backgroundColor : 'rgba(81, 152, 255, 0.6)',
+						borderWidth : 0,
+					}, {
+						label : '예측(%)',
+						data : monthSO,
+						backgroundColor : 'rgba(99, 132, 0, 0.6)',
+						borderWidth : 0,
+					}, {
+						label : '결과(%)',
+						data : monthREAL,
+						backgroundColor : 'rgba(0, 180, 175, 0.6)',
+						borderWidth : 0
+					} ]
+				};
+
+				barChart5.config.data = some_new_data;
+				barChart5.update();
+				/* $.ajax({
+				type : "GET",
+				url : "/notice/detail?code=" + code,
+				contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
+				cache : false,
+				timeout : 600000,
+				success : function(data) {
+					console.log("SUCCESS : ", data);
+
+					showModal(data);
+				},
+				error : function(e) {
+					alert("error :: " + e.responseText);
+					console.log("ERROR : ", e);
+				}
+				}); */
+			}
+
+			//campain 3
+			if (kind == 3) {
+				cngTitle = "campainRight 변경합니당";
+				var title = document.getElementById('RChartTitle');
+				$(title).text(cngTitle);
+				some_new_data = {
+					labels : campains,
+					datasets : [ {
+						label : '캠페인',
+						data : campainDatas,
+						backgroundColor : chartBGColor,
+						borderWidth : 0
+					} ]
+				};
+
+				barChart5.config.data = some_new_data;
+				barChart5.update();
+
+				/* $.ajax({
+				type : "GET",
+				url : "/notice/detail?code=" + code,
+				contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
+				cache : false,
+				timeout : 600000,
+				success : function(data) {
+					console.log("SUCCESS : ", data);
+
+					showModal(data);
+				},
+				error : function(e) {
+					alert("error :: " + e.responseText);
+					console.log("ERROR : ", e);
+				}
+				}); */
+			}
+		}
+
+		function addData(chart, label, data) {
+
+			chart.update();
+		}
+
+		function updateChart(chart) {
+			chart.update();
+		}
 	</script>
 </body>
 </html>
