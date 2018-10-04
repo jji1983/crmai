@@ -1,8 +1,10 @@
 package com.ktds.crmai.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,11 +21,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ktds.crmai.model.AI_ADMINUSER;
+import com.ktds.crmai.model.AICampaign;
 import com.ktds.crmai.model.AI_CAMPAIGN;
-import com.ktds.crmai.model.Pretreatment;
 import com.ktds.crmai.service.CampaignService;
-import com.ktds.crmai.service.PretreatmentService;
 
 
 @Controller
@@ -96,5 +96,31 @@ public class CampaignController {
     	return response;
     }
 	
-
+	@ResponseBody
+	@RequestMapping(value="/list")
+	public List<AICampaign> getCampaignList(
+		HttpSession session,
+		@RequestParam(required=false) String camName,
+		@RequestParam(required=false) String camType,
+		@RequestParam(required=false) String camStatus
+		) {
+		
+		if("ALL".equals(camType)) {
+			camType = "";
+		}
+		
+		if("ALL".equals(camStatus)) {
+			camStatus = "";
+		}
+		
+		String admId = (String) session.getAttribute("sessionID");
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("admId", admId);
+		paramMap.put("camName", camName);
+		paramMap.put("camType", camType);
+		paramMap.put("camStatus", camStatus);
+		
+		return campaignService.selectCampaignList(paramMap);
+	}
 }

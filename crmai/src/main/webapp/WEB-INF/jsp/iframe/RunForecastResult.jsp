@@ -91,10 +91,20 @@
   <!-- AI MAKE JS -->
   <script src="/resources/js/ai_campaign.js"></script>
   <script src="/resources/js/ai_model.js"></script>
+  <script src="/resources/js/ai_predict_result.js"></script>
+
+<script type="text/javascript">
+$(function() {
+	$("#adm_name").val($("input[name='session_name']", parent.document).val());
+	
+	campaignPage();
+	
+	get_aiTrainModel();
+});
+</script>
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-
 
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -127,18 +137,21 @@
 		        <!-- /.box-header -->
 		        <div class="box-body">
 		          <div class="row">
-		            <div class="col-md-6">
+		            <div class="col-md-3">
 					  <div class="form-group">
 		                  <div class="col-sm-10">
-		                    <label for="inputname" >캠페인명</label>
-		                    <input type="text" class="form-control" id="inputname" placeholder="캠페인명">
+		                    <label>캠페인명</label>
+		                    <input type="text" class="form-control" id="cam_name" placeholder="캠페인명">
 		                  </div>
    	                  </div>
    	                   <!-- /.form-group -->
+   	                </div>
+		            <!-- /.col -->
+		            <div class="col-md-3">
    	                  <div class="form-group">
 	                	<div class="col-sm-10">
-	                		<label for="select_type" >캠페인목적</label>
-	                		<select id="select_type" class="form-control select2" style="width: 100%;" data-placeholder="Acquisition">
+	                		<label>캠페인목적</label>
+	                		<select id="cam_type" class="form-control select2" style="width: 100%;" data-placeholder="Acquisition">
 	                		<option selected="selected">ALL</option>
 	                  		<option>Acquisition</option>
 	                  		</select>
@@ -146,13 +159,12 @@
 		              </div>
 					  <!-- /.form-group -->
 		            </div>
-		            
 		            <!-- /.col -->
-		            <div class="col-md-6">
+		            <div class="col-md-3">
 		              <div class="form-group">
 		                <div class="col-sm-10">
-		                	<label for="select_status" >캠페인상태</label>
-			                <select id="select_status" class="form-control select2" style="width: 100%;" data-placeholder="캠페인상태">
+		                	<label>캠페인상태</label>
+			                <select id="cam_status" class="form-control select2" style="width: 100%;" data-placeholder="캠페인상태">
 			                  <option selected="selected">ALL</option>
 			                  <option>시작</option>
 			                  <option>종료</option>
@@ -160,10 +172,13 @@
 			          	</div>      
 		              </div>
 		              <!-- /.form-group -->
+		            </div>
+		            <!-- /.col -->
+		            <div class="col-md-3">
 		              <div class="form-group">
 		              	<div class="col-sm-10">
-                		   <label for="input_crea_by" >생성자</label>
-		                   <input type="text" class="form-control" id="input_crea_by" placeholder="생성자">
+                		   <label>생성자</label>
+		                   <input type="text" class="form-control" id="adm_name" disabled>
 			            </div>
    	                  </div>
 		              <!-- /.form-group -->
@@ -198,7 +213,6 @@
 	   		  <nav aria-label="Page navigation example" style="text-align: center;">
 			  <ul class="pagination-sm" id="pagination"></ul></nav>
 			  
-			  
 			  <table id="ai_model_View" class="table table-bordered table-hover"></table>
 			  
 	          <button id="selectBtn" type="button" class="btn btn-info pull-right" >예측실행</button>&nbsp;
@@ -208,21 +222,8 @@
    </div>
    <!-- /.캠페인목록 -->
    
-   
 </section>
 <!-- /.Main content -->
-
-
-<script type="text/javascript">
-  
-$(document).ready(function () {
-	campaignPage();
-	
-	 get_aiTrainModel();
-
-});
-
- </script>
 
 </body>
 </html>

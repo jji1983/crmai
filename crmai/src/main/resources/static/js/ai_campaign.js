@@ -412,3 +412,18 @@ $.ajax({
 	  alert("미 처리 :: " + cam_itype + " :: " + cam_otype);
   }
 }
+  
+  // 파라메터 추가된 캠페인 함수 
+  	function newSearchCampaign(nowPage, pageSt, pageEnd) {
+		$.ajax({
+			url:"/campaign/list",
+			data:{
+				camName : $("#cam_name").val(),
+				camType : $("#cam_type").val(),
+				camStatus : $("#cam_status").val()
+			},
+			success:function(data) {
+				
+			}
+		});
+	}

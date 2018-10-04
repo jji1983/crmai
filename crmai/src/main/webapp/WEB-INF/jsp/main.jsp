@@ -90,6 +90,7 @@
 	function Content_RunForecastResult() {
 		//alert("call Content_RunForecastResult!!");
 		document.getElementById("main_frame").src = "/iframe/RunForecastResult";
+		$("input[name='session_name']").val("${sessionNAME}");
 	}
 	
 	function Content_Statistics_m1() {
