@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/*
+ * 새 캠페인 VO
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 public class AICampaign {

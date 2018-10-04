@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/*
+ * 예측 결과 VO
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 public class AIPredict {
