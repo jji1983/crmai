@@ -32,8 +32,7 @@ function grid_pagingSt4(div){
 function search_st4(){
 	//alert("search_st :: cam_id[" + currentValue + "],s1_totalpage[" + s1_totalpage + "], s1_page_st[" + s1_page_st + "], s1_page_end[" + s1_page_end + "]");
 	
-	//var cam_id = currentValue;
-	var cam_id = "1004";
+	var cam_id = currentValue;
 	
 	var page = new Object();
 	page.cam_id = cam_id;

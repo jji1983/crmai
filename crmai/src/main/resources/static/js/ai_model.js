@@ -2,8 +2,7 @@
 function get_aiTrainModel(){
 	//alert("call get_aiTrainModel ::" + currentValue);
 	
-	//var cam_id = currentValue;
-	var cam_id = "1004";
+	var cam_id = currentValue;
 	
 	var page = new Object();
 	page.cam_id = cam_id;
@@ -100,8 +99,7 @@ function grid_tableModel(obj){
 
 function setAiTrainModelChart(){
 	
-	//var cam_id = currentValue;
-	var cam_id = "1004";
+	var cam_id = currentValue;
 	
 	var campaign = new Object();
   	campaign.cam_id = cam_id;
