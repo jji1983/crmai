@@ -1,13 +1,10 @@
 package com.ktds.crmai.service;
 
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ktds.crmai.model.AICampaign;
 import com.ktds.crmai.model.AI_CAMPAIGN;
 import com.ktds.crmai.service.impl.CampaignMapper;
 
@@ -49,7 +46,8 @@ public class CampaignService implements CampaignMapper {
 	}
 
 	@Override
-	public List<AICampaign> selectCampaignList(Map<String, Object> param) {
-		return campaignMapper.selectCampaignList(param);
+	public List<AI_CAMPAIGN> selectNewCampaignPage(AI_CAMPAIGN campaign) {
+		return campaignMapper.selectNewCampaignPage(campaign);
 	}
+
 }

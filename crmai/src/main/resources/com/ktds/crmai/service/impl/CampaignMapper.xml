@@ -3,25 +3,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ktds.crmai.service.impl.CampaignMapper">
-	<resultMap type="com.ktds.crmai.model.AICampaign" id="campaignMap">
-		<id column="CAM_ID" property="camId"/>
-		<result column="RNUM" property="rnum"/>
-		<result column="ADM_ID" property="admId"/>
-		<result column="CAM_NAME" property="camName"/>
-		<result column="CAM_DESC" property="camDesc"/>
-		<result column="CAM_ITYPE" property="camItype"/>
-		<result column="CAM_IFILENAME" property="camIfileName"/>
-		<result column="CAM_OTYPE" property="camOtype"/>
-		<result column="CAM_OFILENAME" property="camOfileName"/>
-		<result column="CAM_CDATE" property="camCdate"/>
-		<result column="CAM_IDATE" property="camIdate"/>
-		<result column="CAM_TYPE" property="camType"/>
-		<result column="CAM_STATUS" property="camStatus"/>
-		<result column="CAM_MSG" property="camMsg"/>
-		<result column="CAM_ICNUM" property="camIcNum"/>
-		<result column="CAM_AUTO_YN" property="camAutoYn"/>
-	</resultMap>
-
      <select id="selectCampaignPage" resultType="campaign">
 		select * 
 			from (
@@ -63,7 +44,7 @@
 	</insert>
     
 	<!-- 파라메터 존재하는 캠페인 쿼리 -->
-	<select id="selectCampaignList" resultMap="campaignMap" parameterType="hashmap">
+	<select id="selectNewCampaignPage" resultType="campaign">
 		select * 
 			from (
 			    select <![CDATA[ rownum as rnum ]]> , A.cam_id, A.cam_name, A.adm_id, A.cam_type, A.cam_status, A.cam_itype, A.cam_autoyn, A.cam_icnum, A.cam_ifilename,  A.cam_idate, A.cam_otype, A.cam_ofilename, A.cam_cdate, A.cam_desc, A.cam_msg 
@@ -72,24 +53,22 @@
 				         select cam_id, cam_name, adm_id, cam_type, cam_status, cam_itype, cam_autoyn, cam_icnum, cam_ifilename,  cam_idate, cam_otype, cam_ofilename, cam_cdate, cam_desc, cam_msg  
 				         from ai_campaign
 				         
-				         <where>
-				         		adm_id = #{admId}
+				         where adm_id = #{adm_id}
 				         	
-				         	<if test="camName != null">
-				         		AND CAM_NAME LIKE '%' || #{camName} || '%'
-				         	</if>
-				         	<if test='(camType != null) and !(camType eq "".toString())'>
-				         		AND CAM_TYPE = #{camType}
-				         	</if>
-				         	<if test='(camStatus != null) and !(camStatus eq "".toString())'>
-				         		AND CAM_STATUS = #{camStatus}
-				         	</if>
-				         </where>
+				         <if test="cam_name != null">
+				         	AND CAM_NAME LIKE '%' || #{cam_name} || '%'
+				         </if>
+				         <if test='(cam_type != null) and !(cam_type eq "".toString()) and !(cam_type eq "ALL".toString())'>
+				         	AND CAM_TYPE = #{cam_type}
+				         </if>
+				         <if test='(cam_status != null) and !(cam_status eq "".toString()) and !(cam_status eq "ALL".toString())'>
+				         	AND CAM_STATUS = #{cam_status}
+				         </if>
 				          
 				         order by cam_id desc 
 			         ) A
-			    where <![CDATA[ rownum <= #{pageEnd} ]]> 
+			    where <![CDATA[ rownum <= #{page_end} ]]> 
 			    ) B
-		where b.rnum >= #{pageSt}
+		where b.rnum >= #{page_st}
 	</select>
 </mapper>

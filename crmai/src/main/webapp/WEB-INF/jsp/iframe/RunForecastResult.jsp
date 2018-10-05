@@ -97,7 +97,7 @@
 $(function() {
 	$("#adm_name").val($("input[name='session_name']", parent.document).val());
 	
-	campaignPage();
+	newCampaignPage();
 	
 	get_aiTrainModel();
 });
@@ -189,7 +189,7 @@ $(function() {
 		        </div>
 		        <!-- /.box-body -->
 		        <div class="box-footer">
-		          <button type="button" onclick="search_campaign();" class="btn btn-info pull-right">검색</button>
+		          <button type="button" onclick="newSearchCampaign();" class="btn btn-info pull-right">검색</button>
 		        </div>
 		    </div>
 		    </div>

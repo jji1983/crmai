@@ -1,11 +1,8 @@
 package com.ktds.crmai.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -18,10 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ktds.crmai.model.AICampaign;
 import com.ktds.crmai.model.AI_CAMPAIGN;
 import com.ktds.crmai.service.CampaignService;
 
@@ -96,31 +91,27 @@ public class CampaignController {
     	return response;
     }
 	
-	@ResponseBody
-	@RequestMapping(value="/list")
-	public List<AICampaign> getCampaignList(
-		HttpSession session,
-		@RequestParam(required=false) String camName,
-		@RequestParam(required=false) String camType,
-		@RequestParam(required=false) String camStatus
-		) {
-		
-		if("ALL".equals(camType)) {
-			camType = "";
-		}
-		
-		if("ALL".equals(camStatus)) {
-			camStatus = "";
-		}
-		
-		String admId = (String) session.getAttribute("sessionID");
-		
-		Map<String, Object> paramMap = new HashMap<>();
-		paramMap.put("admId", admId);
-		paramMap.put("camName", camName);
-		paramMap.put("camType", camType);
-		paramMap.put("camStatus", camStatus);
-		
-		return campaignService.selectCampaignList(paramMap);
-	}
+	// 파라미터 받는 캠페인 리스트 페이지
+	@RequestMapping(value = "/newListPage", method = RequestMethod.GET, consumes=MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> getNewCampaignListPage(@ModelAttribute("campaign") AI_CAMPAIGN in_compaign, HttpSession session){
+    	logger.info("Request List....getNewCampaignListPage.... - {}", in_compaign);
+    	List<AI_CAMPAIGN> out_campaign = null;
+    	
+    	String admId= (String)session.getAttribute("sessionID");
+    	in_compaign.setAdm_id(admId);
+    		
+    	out_campaign = campaignService.selectNewCampaignPage(in_compaign);
+    	
+    	Iterator<AI_CAMPAIGN> ite = out_campaign.iterator();
+    	
+    	while(ite.hasNext()) {
+    		AI_CAMPAIGN cam = (AI_CAMPAIGN)ite.next();
+    		logger.info("NEW_AI_CAMPAIGN :: "+ cam.toString());
+    	}
+    	
+    	//응답과 함깨 HttpStatus를 지정할 수 있습니다.
+    	ResponseEntity<Object> response = new ResponseEntity<Object>(out_campaign, HttpStatus.OK);
+    	
+    	return response;
+    }
 }

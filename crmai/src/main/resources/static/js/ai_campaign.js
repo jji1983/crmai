@@ -225,6 +225,191 @@ function grid_table_campaign(obj){
     div.innerHTML = html;
 }
 	
+// 파라메터 존재하는 캠페인 찾기 메서드 사용하려면 밑의 new 접두어가 들어간 메서드 사용할 것!!!
+function newCampaignPage(){
+	var admin = new Object();
+
+	//alert("campaignPage call ");
+    $.ajax({
+        type    : 'GET', // method
+        url     : '/campaign/totalPage',
+        //url       : '/admin/login_proc?ADM_ID=XXXX&ADM_PW=XXXX', // GET 요청은 데이터가 URL 파라미터로 포함되어 전송됩니다.
+        async   : 'true', // true
+        data    : admin, // GET 요청은 지원되지 않습니다.
+        processData : true, // GET 요청은 데이터가 바디에 포함되는 것이 아니기 때문에 URL에 파라미터 형식으로 추가해서 전송해줍니다.
+        contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
+        cache: false,
+        //dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
+        success : function(data, status, xhr){
+    		//alert( "data :: " + data[0]);
+    		
+    		if(data[0] != "0"){
+    			totalPages = Math.ceil(data[0] / visiblePages);
+    		
+    			//alert( "totalPages :: " + totalPages + " :: " + visiblePages);
+    			newGridPagination(totalPages, visiblePages);
+    		}else{
+    			$("#id_span_msg").text("등록된 캠페인 이 없습니다. >> \"캠페인 신규등록 \"버튼 클릭!");
+    			$("#ai_status").hide(); //학습데이터 숨기기
+    		}
+        },
+        error   : function(request,status,error){
+        	 //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        	 
+        	 responseError(error);
+        	 
+        	 $('#msg').html(error);
+	        }
+		});
+}
+	  
+function newGridPagination(totalPages, visiblePages){
+		//alert("grid_pagination :: " + totalPages + " :: " + visiblePages);
+		
+		$('#pagination').twbsPagination('destroy');
+		window.pagObj = $('#pagination').twbsPagination({
+	          totalPages: totalPages,
+	          visiblePages: visiblePages,
+	          onPageClick: function (event, page) {
+	        	  //alert("on1 " + page + ' (from event listening)');
+	        	  
+	        	  page_st = ((1 * visiblePages) * page) - (visiblePages - 1);
+	        	  page_end = (page_st + visiblePages) - 1;
+	        	  
+	              newSearchCampaign(page, page_st, page_end);
+	          }
+	    }).on('page', function (event, page) {
+            //alert("on2 " + page + ' (from event listening)');
+        });
+}
+	   
+function newSearchCampaign(now_page, page_st, page_end){
+	  
+	  	//alert("search_campaign call :: now[" + now_page + "] :: interval[" +visiblePages +"] :: st[" + page_st + "] :: end[" + page_end + "]" );
+	  	
+	  	var campaign = new Object();
+	  	campaign.page_st = page_st;
+	  	campaign.page_end = page_end;
+	  	
+	  	campaign.cam_name = $("#cam_name").val();
+	  	campaign.cam_type = $("#cam_type").val();
+	  	campaign.cam_status = $("#cam_status").val();
+	  	
+	    $.ajax({
+	        type    : 'GET', // method
+	        url     : '/campaign/newListPage',
+	        //url       : '/admin/login_proc?ADM_ID=XXXX&ADM_PW=XXXX', // GET 요청은 데이터가 URL 파라미터로 포함되어 전송됩니다.
+	        async   : 'true', // true
+	        data    : campaign, // GET 요청은 지원되지 않습니다.
+	        processData : true, // GET 요청은 데이터가 바디에 포함되는 것이 아니기 때문에 URL에 파라미터 형식으로 추가해서 전송해줍니다.
+	        cache: false,
+	        contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
+	        //dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
+	        success : function(data){
+	        	var obj = JSON.stringify(data, true, 2);
+	        	//alert("search_campaign result :: " + obj);
+	        	
+	        	newGridTableCampaign(obj);
+	        	
+	        },
+	        error : function(request,status,error){
+	        	 //alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	        }
+		});
+}
+	
+function newGridTableCampaign(obj){
+	var div = document.querySelector('#ai_campaign');
+    var first = 0;
+	
+    html = '<table width="100%" class="table table-bordered table-hover">';
+    html += '<thead><tr>';
+    html += 	'<th>체크</th>';
+    html += 	'<th>캠페인ID</th>';
+    html += 	'<th>캠페인이름</th>';
+    html += 	'<th>등록자</th>';
+    html += 	'<th>캠페인목적</th>';
+    /*html += 	'<th>캠페인상태</th>'; */
+    html += 	'<th>AI진행상태</th>';
+    html += 	'<th>캠페인 등록일자</th>';
+    html += 	'<th>설명</th>';
+    html += 	'<th>메시지</th>';
+    html += 	'<tr></thead>';
+    html += '<tbody>';
+    
+    var json = $.parseJSON(obj);
+ 	  $(json).each(function(i,val){
+ 		html += '<tr>';
+ 		
+ 		$.each(val,function(k,v){
+ 			
+ 			if(k == 'cam_id'){
+ 				if(first == 0){
+ 					html += '<td><input type="radio" name="cam_check" checked="checked" onclick="handleClick(this);" value="'+v+'" /></td>';
+ 					radioInit(v);
+ 					getAIStatus();
+ 					first = 1;
+ 				}else{
+ 					html += '<td><input type="radio" name="cam_check" onclick="handleClick(this);" value="'+v+'" /></td>';
+ 				}
+ 				html += '<td><center>' + v + '</center></td>';	
+ 			}
+ 			if(k == 'cam_name'){
+ 				html += '<td>' + v + '</td>';	
+ 			}
+ 			if(k == 'adm_id'){
+ 				html += '<td>' + v + '</td>';	
+ 			}
+ 			
+ 			if(k == 'cam_type'){
+ 				html += '<td>' + v + '</td>';	
+ 			}
+ 			
+ 			if(k == 'cam_status'){
+ 				html += '<td>' + v + '</td>';	
+ 			}
+ 			 /*
+ 			if(k == 'cam_itype'){
+ 				if(v == '0'){
+ 					html += '<td><span class="label label-info">데이터 로딩 필요</span></td>';
+ 				}
+ 				if(v == '1'){
+ 					html += '<td><span class="label label-warning">데이터 엑셀 로딩중</span></td>';
+ 				}
+ 				if(v == '2'){
+ 					html += '<td><span class="label label-warning">데이터 엑셀 처리중</span></td>';
+ 				}
+ 				if(v == '3'){
+ 					html += '<td><span class="label label-danger">데이터 엑셀 처리 오류</span></td>';
+ 				}
+ 				if(v == '4'){
+ 					html += '<td><span class="label label-primary">데이터 엑셀 처리 종료</span></td>';
+ 				}
+ 			}
+ 			 */
+ 			if(k == 'cam_cdate'){
+ 				html += '<td>' + v + '</td>';	
+ 			}
+ 			if(k == 'cam_desc'){
+ 				html += '<td>' + v + '</td>';	
+ 			}
+ 			
+ 			if(k == 'cam_msg'){
+ 				
+ 				if(v == '' || v == null || v == 'null' ){
+ 					html += '<td></td>';
+ 				}else{
+ 					html += '<td>' + v + '</td>';
+ 				}
+ 			}
+ 		});
+ 		html += '</tr>';
+	  });
+ 	  html += '</tbody>';
+    html += '</table>';
+    
+    div.innerHTML = html;
+}
 
 function submit_newCampagin(){
 //alert('-- submit_newCampagin -- ');
@@ -412,18 +597,3 @@ $.ajax({
 	  alert("미 처리 :: " + cam_itype + " :: " + cam_otype);
   }
 }
-  
-  // 파라메터 추가된 캠페인 함수 
-  	function newSearchCampaign(nowPage, pageSt, pageEnd) {
-		$.ajax({
-			url:"/campaign/list",
-			data:{
-				camName : $("#cam_name").val(),
-				camType : $("#cam_type").val(),
-				camStatus : $("#cam_status").val()
-			},
-			success:function(data) {
-				
-			}
-		});
-	}
