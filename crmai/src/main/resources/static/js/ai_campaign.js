@@ -14,7 +14,7 @@ function handleClick(myRadio) {
       //alert('Old value: ' + currentValue);
       //alert('New value: ' + myRadio.value);
       currentValue = myRadio.value;
-  
+       
 	  $("#ai_status").show(); //현황창 보이기
 	  $("#id_span_msg").text("캠페인ID :: " + currentValue);
       
@@ -345,14 +345,14 @@ function newGridTableCampaign(obj){
  			
  			if(k == 'cam_id'){
  				if(first == 0){
- 					html += '<td><input type="radio" name="cam_check" checked="checked" onclick="handleClick(this);" value="'+v+'" /></td>';
+ 					html += '<td><input id="cam_radio_' + v + '" type="radio" name="cam_check" checked="checked" onclick="handleClick(this);" value="'+v+'" /></td>';
  					radioInit(v);
  					getAIStatus();
  					first = 1;
  				}else{
- 					html += '<td><input type="radio" name="cam_check" onclick="handleClick(this);" value="'+v+'" /></td>';
+ 					html += '<td><input id="cam_radio_' + v + '" type="radio" name="cam_check" onclick="handleClick(this);" value="'+v+'" /></td>';
  				}
- 				html += '<td><center>' + v + '</center></td>';	
+ 				html += '<td id="cam_id_val_' + v + '" class="text-center">' + v + '</td>';	
  			}
  			if(k == 'cam_name'){
  				html += '<td>' + v + '</td>';	

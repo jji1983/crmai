@@ -9,11 +9,14 @@ var pPageSt = 1;
 var pPageEnd = 10;
 
 // 캠페인과 연결되어 불러오는 ajax
-function connectCampaignAjax() {
+function connectCampaignAjax(currentCamId) {
+	// 숫자형으로 변형
+	currentCamId = Number(currentCamId);
+	
 	$.ajax({
 		url:"/predict/list",
 		data:{
-			camId : $("#cam_name").val()
+			camId : currentCamId
 		},
 		success:function(data) {
 			createPredictTable(data);

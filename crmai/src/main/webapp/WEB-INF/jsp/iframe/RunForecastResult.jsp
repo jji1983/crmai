@@ -98,7 +98,6 @@ $(function() {
 	$("#adm_name").val($("input[name='session_name']", parent.document).val());
 	
 	newCampaignPage();
-	
 	get_aiTrainModel();
 });
 </script>
