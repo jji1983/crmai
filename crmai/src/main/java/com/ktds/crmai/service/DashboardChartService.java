@@ -7,11 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ktds.crmai.model.AIStatistics;
-import com.ktds.crmai.model.AI_NOTICE;
-import com.ktds.crmai.model.AI_PAGE;
-import com.ktds.crmai.model.DashboardChart;
+import com.ktds.crmai.model.DashboardChartData;
 import com.ktds.crmai.service.impl.DashboardChartMapper;
-import com.ktds.crmai.service.impl.NoticeMapper;
 
 @Service
 @Transactional
@@ -20,34 +17,45 @@ public class DashboardChartService implements DashboardChartMapper {
 	@Autowired
 	DashboardChartMapper dashboardChartMapper;
 
-	@Override
-	public List<AIStatistics> selectMyData(String ADM_ID) {
-		return dashboardChartMapper.selectMyData(ADM_ID);
-	}
 
 	@Override
-	public int selectMyDataCount(String ADM_ID) {
-		return dashboardChartMapper.selectMyDataCount(ADM_ID);
-	}
-
-	@Override
-	public DashboardChart selectMyDataStat(String ADM_ID) {
+	public DashboardChartData selectMyDataStat(String ADM_ID) {
 		return dashboardChartMapper.selectMyDataStat(ADM_ID);
 	}
 
 	@Override
-	public List<AIStatistics> selectTotalData() {
-		return dashboardChartMapper.selectTotalData();
-	}
-
-	@Override
-	public int selectTotalDataCount() {
-		return dashboardChartMapper.selectTotalDataCount();
-	}
-
-	@Override
-	public DashboardChart selectTotalDataStat() {
+	public DashboardChartData selectTotalDataStat() {
 		return dashboardChartMapper.selectTotalDataStat();
+	}
+
+	@Override
+	public List<DashboardChartData> selectMyDataType(String ADM_ID) {
+		return dashboardChartMapper.selectMyDataType(ADM_ID);
+	}
+
+	@Override
+	public List<DashboardChartData> selectTotalDataType() {
+		return dashboardChartMapper.selectTotalDataType();
+	}
+
+	@Override
+	public List<AIStatistics> selectMyTab(String ADM_ID) {
+		return dashboardChartMapper.selectMyTab(ADM_ID);
+	}
+
+	@Override
+	public List<AIStatistics> selectTotalTab() {
+		return dashboardChartMapper.selectTotalTab();
+	}
+
+	@Override
+	public List<DashboardChartData> selectMyPeriod(String ADM_ID) {
+		return dashboardChartMapper.selectMyPeriod(ADM_ID);
+	}
+
+	@Override
+	public List<DashboardChartData> selectTotalPeriod() {
+		return dashboardChartMapper.selectTotalPeriod();
 	}
 
 
