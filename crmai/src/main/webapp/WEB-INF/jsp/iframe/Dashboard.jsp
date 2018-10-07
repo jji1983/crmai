@@ -63,6 +63,12 @@
 	border-collapse: collapse;
 }
 
+.btn-bg-mint {
+	color: #fff;
+	background-color: #78C2AD;
+	border-color: #78C2AD;
+}
+
 #ds_campaign td, #ds_campaign th {
 	padding: 20px;
 }
@@ -262,6 +268,15 @@
 					<!-- left -->
 					<div class="col-md-6">
 
+						<!-- 나의 현황 -->
+						<div class="row" style="margin-bottom: 30px; margin-top: 10px;">
+							<div class="col-md-4">
+								<button type="button"
+									class="btn btn-block btn-bg-mint btn-lg disabled">나의
+									현황</button>
+							</div>
+						</div>
+
 						<ul id="leftTab" class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active"><a data-target="#"
 								id="dropdown0-tab" role="tab" data-toggle="tab"
@@ -425,6 +440,16 @@
 					<!-- right -->
 					<div class="col-md-6">
 
+
+						<!-- 나의 현황 -->
+						<div class="row" style="margin-bottom: 30px; margin-top: 10px;">
+							<div class="col-md-4">
+								<button type="button"
+									class="btn btn-block btn-bg-mint btn-lg disabled">전체
+									현황</button>
+							</div>
+						</div>
+
 						<ul id="rightTab" class="nav nav-tabs">
 							<li class="active"><a href="#" id="dropdown5-tab"
 								data-toggle="tab">산업군별</a></li>
@@ -580,6 +605,7 @@
 	<script src="/resources/js/ai_campaign.js"></script>
 	<script src="/resources/js/ai_notice.js"></script>
 
+
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('.modal').on('hidden.bs.modal', function(e) {
@@ -639,9 +665,42 @@
 		}
 	</script>
 
-	<!-- page script -->
-	<script>
+	<!-- Chart script -->
+	<script type="text/javascript">
 		$(function() {
+
+			//LeftTab Ajax
+
+			$.ajax({
+				type : "GET",
+				url : "/dashboardChart/totalData",
+				contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
+				cache : false,
+				processData : true,
+				async : true,
+				success : function(data) {
+					//alert(data);
+					$.each(data, function(){
+						
+						//dashboardChart print
+                        //alert("totalCount : "+ this.totalCount +" , totalOriginal : " +this.totalOriginal + " , totalSo : " + this.totalSo +" , totalReal :" +this.totalReal);
+                        
+						//aiStat print
+						alert("AIStatistics [camId=" + this.camId + ", camName=" + this.camName + ", camStatus=" + this.camStatus + ", admId=" + this.admId
+								+ ", admName=" + this.admName + ", camType=" + this.camType + ", camCdate=" + this.camCdate + ", admType=" + this.admType
+								+ ", trainMethod=" + this.trainMethod + ", originalAcc=" + this.originalAcc + ", soAcc=" + this.soAcc + ", realAcc="
+								+ this.realAcc + ", modelFlag=" + this.modelFlag + ", testCnt=" + this.testCnt + ", beforeDate=" + this.beforeDate
+								+ ", afterDate=" + this.afterDate + ", originalAccAvg=" + this.originalAccAvg + ", soAccAvg=" + this.soAccAvg
+								+ ", realAccAvg=" + this.realAccAvg + "]");
+
+						
+	            	   });
+					
+				},
+				error : function(e) {
+					//console.log("ERROR : ", e);
+				}
+			});
 
 			//labels
 			types = [ "통신", "금융", "유통", "기타" ];
@@ -833,11 +892,14 @@
 				data : campainLeft,
 				options : chartOptions
 			});
+
 			barChart5 = new Chart(ctx5, {
 				type : 'bar',
 				data : typeRight,
 				options : chartOptions
 			});
+
+			//rightChart initData ajax
 
 			//dropdown0-tab click
 			document.getElementById('dropdown0-tab').addEventListener('click',
@@ -902,6 +964,10 @@
 					});
 
 		});
+
+		function initLeft() {
+			alert('왼쪽 차트 초기화할꼐용~');
+		}
 
 		function toggleLeft(kind) {
 			var cngTitle = "변경합시다";
