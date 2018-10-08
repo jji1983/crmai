@@ -51,10 +51,9 @@ var chartOptions = {
 		position : 'bottom',
 	}
 };
-function initChart() {
-	var ctx0 = document.getElementById("chBar0").getContext('2d');
-	var ctx5 = document.getElementById("chBar5").getContext('2d');
 
+function initLeftChart() {
+	var ctx0 = document.getElementById("chBar0").getContext('2d');
 	var some_new_data = {
 		labels : types,
 		datasets : [ {
@@ -74,72 +73,49 @@ function initChart() {
 			borderWidth : 0
 		} ]
 	};
-	if (ctx0 != null) {
-		leftChart = new Chart(ctx0, {
-			type : 'bar',
-			data : some_new_data,
-			options : chartOptions
-		});
-	}
-	if (ctx5 != null) {
-		rightChart = new Chart(ctx5, {
-			type : 'bar',
-			data : some_new_data,
-			options : chartOptions
-		});
-	}
+	leftChart = new Chart(ctx0, {
+		type : 'bar',
+		data : some_new_data,
+		options : chartOptions
+	});
 
-	loadData();
-}
-
-function loadData() {
-	loadTab();
-
-	// Type 차트 업데이트
+	loadLeftStat();
+	loadLeftTab();
 	myType();
-	totalType();
+}
+function initRightChart() {
+	var ctx5 = document.getElementById("chBar5").getContext('2d');
+	var some_new_data = {
+		labels : types,
+		datasets : [ {
+			label : '정확도(%)',
+			data : leftOriginal,
+			backgroundColor : 'rgba(81, 152, 255, 0.6)',
+			borderWidth : 0,
+		}, {
+			label : '예측(%)',
+			data : leftSo,
+			backgroundColor : 'rgba(243, 115, 79, 0.6)',
+			borderWidth : 0,
+		}, {
+			label : '결과(%)',
+			data : leftReal,
+			backgroundColor : 'rgba(0, 180, 175, 0.6)',
+			borderWidth : 0
+		} ]
+	};
+	rightChart = new Chart(ctx5, {
+		type : 'bar',
+		data : some_new_data,
+		options : chartOptions
+	});
 
+	loadRightStat();
+	loadRightTab();
+	totalType();
 }
 
-function loadStat() {
-	// totalStat
-	$
-			.ajax({
-				type : "GET",
-				url : "/dashboardChart/totalStat",
-				cache : false,
-				processData : true,
-				async : true,
-				success : function(data) {
-					var stat = $('#rightStat')
-
-					var totalData = [ data.totalOriginal, data.totalSo,
-							data.totalReal ];
-					for (var i = 0; i < 3; i++) {
-
-						if (i % 3 == 1) {
-							for (var j = 0; j < 3; j++) {
-								stat.find("div span").eq(i + j * 3).text(
-										totalData[j] + "%");
-							}
-						}
-
-						if (i % 3 == 2) {
-							for (var j = 0; j < 3; j++) {
-								// (20건)
-								stat.find("div span").eq(i + j * 3).text(
-										"(" + data.totalCount + "건)");
-							}
-						}
-
-					}
-
-				},
-				error : function(e) {
-					// console.log("ERROR : ", e);
-				}
-			});
-
+function loadLeftStat() {
 	// myStat
 	$
 			.ajax({
@@ -153,6 +129,7 @@ function loadStat() {
 
 					var totalData = [ data.totalOriginal, data.totalSo,
 							data.totalReal ];
+					
 					for (var i = 0; i < 3; i++) {
 
 						if (i % 3 == 1) {
@@ -177,6 +154,47 @@ function loadStat() {
 					// console.log("ERROR : ", e);
 				}
 			});
+}
+function loadRightStat() {
+	// totalStat
+	$
+			.ajax({
+				type : "GET",
+				url : "/dashboardChart/totalStat",
+				cache : false,
+				processData : true,
+				async : true,
+				success : function(data) {
+					var stat = $('#rightStat');
+					
+					var totalData = [ data.totalOriginal, data.totalSo,
+							data.totalReal ];
+					
+					for (var i = 0; i < 3; i++) {
+
+						if (i % 3 == 1) {
+							for (var j = 0; j < 3; j++) {
+								stat.find("div span").eq(i + j * 3).text(
+										totalData[j] + "%");
+							}
+						}
+
+						if (i % 3 == 2) {
+							for (var j = 0; j < 3; j++) {
+								// (20건)
+								stat.find("div span").eq(i + j * 3).text(
+										"(" + data.totalCount + "건)");
+							}
+						}
+
+					}
+
+				},
+				error : function(e) {
+					// console.log("ERROR : ", e);
+				}
+			});
+
 }
 
 function toggleLeft(kind, cngTitle) {
@@ -505,8 +523,51 @@ function totalPeriod(year) {
 		}
 	});
 }
+function loadRightTab() {
+	// right
+	$.ajax({
+		type : "GET",
+		url : "/dashboardChart/totalTab",
+		cache : false,
+		processData : true,
+		async : true,
+		success : function(data) {
+			var html = "<li role='presentation'><a class='dropdown-header' role='menuitem' tabindex='-1' href='#'>선택하세요</a></li><li role='presentation' class='divider'></li>";
+			var periodValue = "";
+			var period = "";
+			var campain = "";
 
-function loadTab() {
+			$.each(data, function(index, value) {
+				campain += "<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='rightCam"
+						+ index
+						+ "-tab' onclick='toggleRight(3,"
+						+ this.camId
+						+ ")'>"
+						+ this.camName + "</a></li>"
+				if (periodValue != this.camCdate) {
+					periodValue = this.camCdate;
+					period += "<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='rightPeriod"
+							+ index
+							+ "-tab' onclick='toggleRight(2,"
+							+ this.camCdate
+							+ ")'>"
+							+ this.camCdate
+							+ "년</a></li>"
+				}
+			});
+
+			var div1 = document.querySelector('#rightPeriod');
+			div1.innerHTML = html + period;
+			var div2 = document.querySelector('#rightCam');
+			div2.innerHTML = html + campain;
+
+		},
+		error : function(e) {
+			// console.log("ERROR : ", e);
+		}
+	});
+}
+function loadLeftTab() {
 
 	// left
 	$
@@ -555,50 +616,4 @@ function loadTab() {
 				}
 			});
 
-	// right
-	$
-			.ajax({
-				type : "GET",
-				url : "/dashboardChart/totalTab",
-				cache : false,
-				processData : true,
-				async : true,
-				success : function(data) {
-					var html = "<li role='presentation'><a class='dropdown-header' role='menuitem' tabindex='-1' href='#'>선택하세요</a></li><li role='presentation' class='divider'></li>";
-					var periodValue = "";
-					var period = "";
-					var campain = "";
-
-					$
-							.each(
-									data,
-									function(index, value) {
-										campain += "<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='rightCam"
-												+ index
-												+ "-tab' onclick='toggleRight(3,"
-												+ this.camId
-												+ ")'>"
-												+ this.camName + "</a></li>"
-										if (periodValue != this.camCdate) {
-											periodValue = this.camCdate;
-											period += "<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='rightPeriod"
-													+ index
-													+ "-tab' onclick='toggleRight(2,"
-													+ this.camCdate
-													+ ")'>"
-													+ this.camCdate
-													+ "년</a></li>"
-										}
-									});
-
-					var div1 = document.querySelector('#rightPeriod');
-					div1.innerHTML = html + period;
-					var div2 = document.querySelector('#rightCam');
-					div2.innerHTML = html + campain;
-
-				},
-				error : function(e) {
-					// console.log("ERROR : ", e);
-				}
-			});
 }

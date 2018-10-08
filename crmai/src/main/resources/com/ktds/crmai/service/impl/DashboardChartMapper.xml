@@ -152,7 +152,16 @@
 		FROM AI_STATISTICS
 		WHERE MODEL_FLAG = 'Y' AND ADM_ID =
 		#{sessionId}
-		ORDER BY MMdate
+		<if test="mmDate != null ">
+			ORDER BY MMdate
+		</if>
+		<if test="camName != null ">
+			ORDER BY CAM_NAME
+		</if>
+		<if test="camType != null ">
+			ORDER BY CAM_TYPE
+		</if>
+		
 	</select>
 
 	<select id="selectTotalTab" resultMap="aiStatisticMap">

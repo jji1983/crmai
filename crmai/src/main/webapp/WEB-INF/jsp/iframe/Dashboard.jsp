@@ -137,118 +137,99 @@
 						</div>
 					</div>
 					<div class="box-body">
-						<div id="ai_status" class="row">
+						<div class="row">
 
-							<div id='id_loading1' class="col-md-2.5 col-sm-2 text-center">
+							<div class="col-md-2.5 col-sm-2 text-center">
 								<div class="box box-default box-solid">
 									<div class="box-header with-border">
 										<h3 class="box-title">1.1 학습데이터</h3>
 									</div>
 									<!-- /.box-header -->
 									<div class="box-body">
-										<button id='id_loading1_msg' type="button"
-											class="btn btn-default" data-toggle="modal" disabled
-											data-target="#trainDataModal" data-title="cam_id">데이터
-											없음</button>
+										<button type="button" class="btn btn-default"
+											disabled="disabled">데이터 없음</button>
 									</div>
 									<!-- /.box-body -->
 
 								</div>
 							</div>
 							<!-- /.col -->
-
-							<div id='id_loading2' class="col-md-2.5 col-sm-2 text-center">
+							<div class="col-md-2.5 col-sm-2 text-center">
 								<div class="box box-default box-solid">
 									<div class="box-header with-border">
 										<h3 class="box-title">1.2 대상자데이터</h3>
 									</div>
 									<!-- /.box-header -->
 									<div class="box-body">
-										<button id='id_loading2_msg' type="button"
-											class="btn btn-default" disabled data-toggle="modal"
-											data-target="#testDataModal">데이터 없음</button>
+										<button type="button" class="btn btn-default"
+											disabled="disabled">데이터 없음</button>
 									</div>
 									<!-- /.box-body -->
 
 								</div>
-								<!-- /.box -->
 							</div>
 							<!-- /.col -->
-
-							<div id='id_pre' class="col-md-2.5 col-sm-2 text-center">
-								<div class="box box-success box-solid">
+							<div class="col-md-2.5 col-sm-2 text-center">
+								<div class="box box-default box-solid">
 									<div class="box-header with-border">
-										<h3 class="box-title text-center">2. AI전처리</h3>
+										<h3 class="box-title">2. AI 전처리</h3>
 									</div>
 									<!-- /.box-header -->
 									<div class="box-body">
-										<button id='id_pre_msg' type="button"
-											class="btn btn-info pull-center" disabled data-toggle="modal"
-											data-target="#ResultDataModal">데이터 없음</button>
+										<button type="button" class="btn btn-default"
+											disabled="disabled">데이터 없음</button>
 									</div>
 									<!-- /.box-body -->
 
-
 								</div>
-								<!-- /.box -->
 							</div>
 							<!-- /.col -->
-
-							<div id='id_runf' class="col-md-2.5 col-sm-2 text-center">
-								<div class="box box-warning box-solid">
+							<div class="col-md-2.5 col-sm-2 text-center">
+								<div class="box box-default box-solid">
 									<div class="box-header with-border">
 										<h3 class="box-title">3. AI학습</h3>
 									</div>
 									<!-- /.box-header -->
 									<div class="box-body">
-										<button id='id_runf_msg' type="button"
-											class="btn btn-info pull-center" disabled data-toggle="modal"
-											data-target="#ModelDataModal">데이터 없음</button>
+										<button type="button" class="btn btn-default"
+											disabled="disabled">데이터 없음</button>
 									</div>
 									<!-- /.box-body -->
 
-
 								</div>
-								<!-- /.box -->
 							</div>
 							<!-- /.col -->
-
-
-							<div id='id_predict' class="col-md-2.5 col-sm-2 text-center">
-								<div class="box box-danger box-solid">
-									<div class="box-header">
-										<h3 class="box-title">4. AI예측실행</h3>
+							<div class="col-md-2.5 col-sm-2 text-center">
+								<div class="box box-default box-solid">
+									<div class="box-header with-border">
+										<h3 class="box-title">4. AI 예측실행</h3>
 									</div>
+									<!-- /.box-header -->
 									<div class="box-body">
-										<button id='id_predict_msg' type="button"
-											class="btn btn-info pull-center" disabled data-toggle="modal"
-											data-target="#PredictDataModal">데이터 없음</button>
+										<button type="button" class="btn btn-default"
+											disabled="disabled">데이터 없음</button>
 									</div>
 									<!-- /.box-body -->
 
-
 								</div>
-								<!-- /.box -->
 							</div>
 							<!-- /.col -->
-
-							<div id='id_real' class="col-md-2.5 col-sm-2 text-center">
-								<div class="box box-success box-solid">
-									<div class="box-header">
-										<h3 class="box-title">5. AI결과</h3>
+							<div class="col-md-2.5 col-sm-2 text-center">
+								<div class="box box-default box-solid">
+									<div class="box-header with-border">
+										<h3 class="box-title">5. AI 결과</h3>
 									</div>
+									<!-- /.box-header -->
 									<div class="box-body">
-										<button id='id_real_msg' type="button"
-											class="btn btn-info pull-center" disabled data-toggle="modal"
-											data-target="#RealDataModal">데이터 없음</button>
+										<button type="button" class="btn btn-default"
+											disabled="disabled">데이터 없음</button>
 									</div>
 									<!-- /.box-body -->
 
-
 								</div>
-								<!-- /.box -->
 							</div>
 							<!-- /.col -->
+
 							<div class="row">
 								<div class="col-md-3 col-md-offset-10">
 									<button id='newBtn' type="button" class="btn btn-info"
@@ -447,14 +428,16 @@
 									onclick='toggleLeft(1)'>나의전체</a></li>
 								<li role="presentation" class="dropdown"><a data-target="#"
 									id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown"
-									aria-controls="myTabDrop1-contents">기간별 <span class="caret"></span></a>
+									aria-controls="myTabDrop1-contents">기간별 <span class="caret"></span>
+								</a>
 									<ul class="dropdown-menu" role="menu"
 										aria-labelledby="myTabDrop1" id="leftPeriod">
 									</ul></li>
 								<li role="presentation" class="dropdown"><a data-target="#"
 									id="myTabDrop2" class="dropdown-toggle" data-toggle="dropdown"
 									aria-controls="myTabDrop2-contents">캠페인별 <span
-										class="caret"></span></a>
+										class="caret"></span>
+								</a>
 									<ul class="dropdown-menu" role="menu"
 										aria-labelledby="myTabDrop2" id="leftCam">
 									</ul></li>
@@ -516,17 +499,20 @@
 							</div>
 							<!-- /.box -->
 						</c:if>
-						<c:if test="${sessionCAMCNT <= 0}">
-							<button type="button" class="btn btn-default btn-block" onclick="location.href='/iframe/AutoOrder'">
-								<strong>${sessionNAME }님 </strong> 현재 등록된 캠페인이 없습니다 <small>(클릭하여 등록하기)</small>
-							</button>
-						</c:if>
+						<div>
+							<c:if test="${sessionCAMCNT <= 0}">
+								<button type="button" class="btn btn-default btn-block"
+									onclick="location.href='/iframe/AutoOrder'">
+									<strong>${sessionNAME }님 </strong> 현재 등록된 캠페인이 없습니다 <small>(클릭하여
+										등록하기)</small>
+								</button>
+							</c:if>
+						</div>
 					</div>
 
 
 					<!-- right -->
 					<div class="col-md-6">
-
 
 						<!-- 전체 현황 -->
 						<div class="row" style="margin-bottom: 30px; margin-top: 10px;">
@@ -537,26 +523,30 @@
 							</div>
 						</div>
 
-						<ul id="rightTab" class="nav nav-tabs">
-							<li class="active"><a href="#" id="dropdown5-tab"
-								data-toggle="tab" onclick='toggleRight(1)'>산업군별</a></li>
-							<li role="presentation" class="dropdown"><a
-								class="dropdown-toggle" data-toggle="dropdown" href="#">기간별
-									<span class="caret"></span>
-							</a>
-								<ul class="dropdown-menu" id="rightPeriod">
-
+						<ul id="RightTab" class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active"><a data-target="#"
+								id="dropdown1-tab" role="tab" data-toggle="tab"
+								aria-controls="dropdown1" aria-expanded="true"
+								onclick='toggleRight(1)'>산업군별</a></li>
+							<li role="presentation" class="dropdown"><a data-target="#"
+								id="myTabDrop3" class="dropdown-toggle" data-toggle="dropdown"
+								aria-controls="myTabDrop3-contents">기간별 <span class="caret"></span></a>
+								<ul class="dropdown-menu" role="menu"
+									aria-labelledby="myTabDrop3" id="rightPeriod">
 								</ul></li>
-							<li role="presentation" class="dropdown"><a
-								class="dropdown-toggle" data-toggle="dropdown" href="#">캠페인별
-									<span class="caret"></span>
-							</a>
-								<ul class="dropdown-menu" id="rightCam">
-
+							<li role="presentation" class="dropdown"><a data-target="#"
+								id="myTabDrop4" class="dropdown-toggle" data-toggle="dropdown"
+								aria-controls="myTabDrop4-contents">캠페인별 <span class="caret"></span></a>
+								<ul class="dropdown-menu" role="menu"
+									aria-labelledby="myTabDrop4" id="rightCam">
 								</ul></li>
 						</ul>
-						<div class="tab-content">
-							<div class="tab-pane active">
+						<div id="myTabContent" class="tab-content">
+							<div role="tabpanel" class="tab-pane fade active in"
+								id="dropdown1" aria-labelledby="dropdown1-tab">
+								<!-- 		<p>5번입니다</p> -->
+								<!-- Info boxes -->
+
 								<!-- BAR CHART -->
 								<div class="box box-success">
 
@@ -570,10 +560,9 @@
 									</div>
 								</div>
 							</div>
-							<!-- /.tab-pane -->
+							<!-- /.chart -->
 						</div>
-						<!-- /.tab-content -->
-
+						<!-- Tabs -->
 
 						<div class="row" id="rightStat">
 							<div class="col-md-4 col-sm-6 col-xs-12">
@@ -608,6 +597,8 @@
 							</div>
 						</div>
 					</div>
+
+					<!-- ~right -->
 				</div>
 			</div>
 
@@ -686,8 +677,7 @@
 		$(document).ready(function() {
 
 			/* 차트 초기화 */
-			initChart(); //Chart init
-			loadStat(); //Stat init
+			initRightChart();
 			/* ~차트 초기화 */
 
 			$('.modal').on('hidden.bs.modal', function(e) {
@@ -699,6 +689,12 @@
 				grid_table_notice(div_t_pageing);
 				noticePage();
 			});
+
+			var leftTab = document.getElementById("leftTab");
+			if (leftTab != null) {
+				initLeftChart();
+			}
+
 		});
 
 		//게시글 조회
