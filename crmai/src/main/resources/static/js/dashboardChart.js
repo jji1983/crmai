@@ -3,13 +3,11 @@ types = [ "통신", "금융", "유통", "기타" ];
 period = [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월",
 		"12월" ];
 campaigns = [ "정확도(%)", "예측(%)", "결과(%)" ];
-
 chartBGColor = [ 'rgba(81, 152, 255, 0.6)', 'rgba(243, 115, 79, 0.6)',
 		'rgba(0, 180, 175, 0.6)' ];
-
+ 
 // elements
-var ctx0 = document.getElementById("chBar0").getContext('2d');
-var ctx5 = document.getElementById("chBar5").getContext('2d');
+
 
 leftOriginal = [ 0, 0, 0, 0 ];
 leftSo = [ 0, 0, 0, 0 ];
@@ -55,6 +53,9 @@ var chartOptions = {
 	}
 };
 function initChart() {
+	var ctx0 = document.getElementById("chBar0").getContext('2d');
+	var ctx5 = document.getElementById("chBar5").getContext('2d');
+	
 	var some_new_data = {
 		labels : types,
 		datasets : [ {
@@ -238,7 +239,6 @@ function myCam(cam_id) {
 			leftReal = 0;
 			var title = document.getElementById('LChartTitle');
 			$.each(data, function() {
-
 				$(title).text(this.totalBase);
 
 				leftOriginal = this.totalOriginal;
@@ -247,7 +247,7 @@ function myCam(cam_id) {
 			});
 
 			var some_new_data = {
-				labels : campains,
+				labels : campaigns,
 				datasets : [ {
 					label : '캠페인',
 					data : [ leftOriginal, leftSo, leftReal ],
@@ -282,9 +282,8 @@ function totalCam(cam_id) {
 				rightSo = this.totalSo;
 				rightReal = this.totalReal;
 			});
-
 			var some_new_data = {
-				labels : campains,
+				labels : campaigns,
 				datasets : [ {
 					label : '캠페인',
 					data : [ rightOriginal, rightSo, rightReal ],
@@ -300,7 +299,7 @@ function totalCam(cam_id) {
 		error : function(e) {
 			// console.log("ERROR : ", e);
 		}
-	}); 
+	});
 }
 
 function myType() {

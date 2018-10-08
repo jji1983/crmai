@@ -20,8 +20,4 @@ public class DashboardChartData {
 	}
 	public DashboardChartData() {
 	}
-	
-	
-	
-	
 }

@@ -14,10 +14,9 @@ import com.ktds.crmai.service.impl.DashboardChartMapper;
 @Service
 @Transactional
 public class DashboardChartService implements DashboardChartMapper {
-	
+
 	@Autowired
 	DashboardChartMapper dashboardChartMapper;
-
 
 	@Override
 	public DashboardChartData selectMyDataStat(String ADM_ID) {
@@ -68,7 +67,4 @@ public class DashboardChartService implements DashboardChartMapper {
 	public List<DashboardChartData> selectTotalCampaign(HashMap<String, Object> baseData) {
 		return dashboardChartMapper.selectTotalCampaign(baseData);
 	}
-
-
-
 }

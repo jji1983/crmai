@@ -204,9 +204,7 @@
 		GROUP BY ADM_TYPE
 	</select>
 
-
-	<!-- 차트 밑 -->
-	<!-- totalBASE 포함 -->
+	<!-- stat -->
 	<select id="selectMyDataStat" resultMap="chartData">
 		SELECT count(CAM_ID) as
 		TOTAL_BASE,
@@ -222,7 +220,8 @@
 	</select>
 
 	<select id="selectTotalDataStat" resultMap="chartData">
-		SELECT
+		SELECT count(CAM_ID) as
+		TOTAL_BASE,
 		COUNT(*) AS
 		TOTAL_COUNT,
 		ROUND(AVG(ORIGINAL_ACC), 2) AS TOTAL_ORIGINAL,
@@ -230,5 +229,4 @@
 		FROM AI_STATISTICS
 		WHERE MODEL_FLAG = 'Y'
 	</select>
-
 </mapper>
