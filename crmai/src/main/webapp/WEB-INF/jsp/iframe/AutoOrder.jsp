@@ -486,7 +486,7 @@
 											<div class="col-sm-12 text-center">
 												<!--  <canvas id="modelchart" style="height: 250px;"></canvas>-->
 												<div class="callout callout-warning">
-									                <h4>중요도 TOP</h4>
+									                <h4>중요도 TOP10</h4>
 									            </div>			
 												<table id="modelchart" class="table table-bordered table-hover text-center"></table>
 											</div>
