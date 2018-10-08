@@ -429,10 +429,10 @@
 										<!-- /.box-header -->
 										<div class="box-body">
 											<div class="col-sm-12">
-												<button id="id_getAiStaningResult" type="button" class="btn btn-info pull-right">학습데이터전처리전</button>
-												<button id="id_getAiStaningResult" type="button" class="btn btn-info pull-right">학습데이터전처리후</button>
-												<button id="id_getAiStaningResult" type="button" class="btn btn-info pull-right">대상자데이터전처리전</button>
-												<button id="id_getAiStaningResult" type="button" class="btn btn-info pull-right">대상자데이터전처리후</button>
+												<button id="id_getAiStTestResult" type="button" class="btn btn-info pull-right">대상자데이터전처리후</button>
+												<button id="id_getAiStTest" type="button" class="btn btn-primary pull-right">대상자데이터전처리전</button>
+												<button id="id_getAiStTrainResult" type="button" class="btn btn-info pull-right">학습데이터전처리후</button>
+												<button id="id_getAiStTrain" type="button" class="btn btn-primary pull-right">학습데이터전처리전</button>
 											</div>
 											
 											<div class="col-sm-12 text-center">
@@ -669,8 +669,32 @@
 	    $('#RealDataModal').on('show.bs.modal', function (event) {
 	    	 
 	    	  //AI결과 정보를 보여준다
-	    	 alert("5.AI결과 보여준다. !!");
+	    	 //alert("5.AI결과 보여준다. !!");
 	    
+	    });
+	    
+	    $('#id_getAiStTrain').click(function(event){
+	    	//alert("id_getAiStTrain click");
+	    	page_no = 1;
+	    	search_st3();
+	    });
+
+	    $('#id_getAiStTest').click(function(event){
+	    	//alert("id_getAiStTest click");
+	    	page_no = 2;
+	    	search_st3();
+	    });
+
+	    $('#id_getAiStTrainResult').click(function(event){
+	    	//alert("id_getAiStTrainResult click");
+	    	page_no = 3;
+	    	search_st3();
+	    });
+
+	    $('#id_getAiStTestResult').click(function(event){
+	    	//alert("id_getAiStTestResult click");
+	    	page_no = 4;
+	    	search_st3();
 	    });
 
   });
