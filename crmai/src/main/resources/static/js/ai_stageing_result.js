@@ -30,7 +30,7 @@ function grid_pagingSt3(div){
 
 
 function search_st3(){
-	//alert("search_st :: cam_id[" + currentValue + "],s1_totalpage[" + s1_totalpage + "], s1_page_st[" + s1_page_st + "], s1_page_end[" + s1_page_end + "]");
+	//alert("search_st :: cam_id[" + currentValue + "],s3_totalpage[" + s3_totalpage + "], s3_page_st[" + s3_page_st + "], s3_page_end[" + s3_page_end + "] page_no ::" + page_no);
 	
 	var cam_id = currentValue;
 	
@@ -39,6 +39,18 @@ function search_st3(){
 	page.page_st = s3_page_st;
 	page.page_end = s3_page_end;
 	page.page = page_no;
+	
+	if(page_no == 1){
+		$("#id_msg_result").text('(학습데이터 처리전)');	
+	}else if(page_no == 2){
+		$("#id_msg_result").text('(대상자데이터 처리전)');
+	}else if(page_no == 3){
+		$("#id_msg_result").text('(학습데이터 처리후)');
+	}else if(page_no == 4){
+		$("#id_msg_result").text('(대상자데이터 처리후)');
+	}
+	
+	
 	
 	$.ajax({
         type    : 'GET', // method

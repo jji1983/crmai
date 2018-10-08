@@ -429,6 +429,8 @@
 										<!-- /.box-header -->
 										<div class="box-body">
 											<div class="col-sm-12">
+												<span id='id_msg_result' class="label label-success"></span>
+												
 												<button id="id_getAiStTestResult" type="button" class="btn btn-info pull-right">대상자데이터전처리후</button>
 												<button id="id_getAiStTest" type="button" class="btn btn-primary pull-right">대상자데이터전처리전</button>
 												<button id="id_getAiStTrainResult" type="button" class="btn btn-info pull-right">학습데이터전처리후</button>
@@ -436,6 +438,7 @@
 											</div>
 											
 											<div class="col-sm-12 text-center">
+												
 												<!-- campaign table -->
 												<table id="ai_staging_result" class="table table-bordered table-hover"></table>
 												<nav aria-label="Page navigation example" style="text-align: center;">
