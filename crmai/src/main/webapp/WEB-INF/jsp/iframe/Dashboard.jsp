@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,6 +83,18 @@
 	color: #fff;
 	font-weight: bold;
 }
+
+.myAlert {
+	position: relative;
+	padding: 0.75rem 1.25rem;
+	margin-bottom: 1rem;
+	border: 1px solid transparent;
+	border-radius: 0.4rem;
+	padding-right: 4rem;
+	color: #38656f;
+	background-color: #e2f3f7;
+	border-color: #d6eef3;
+}
 </style>
 
 </head>
@@ -101,6 +114,155 @@
 
 	<!-- Main content -->
 	<section class="content">
+
+		<c:if test="${sessionCAMCNT <= 0}">
+
+			<div class="row">
+				<!-- Default box -->
+				<div class="box">
+					<div class="box-header">
+						<h4 class="box-title">
+							AI 자동 수행 안내 <small> 등록된 캠페인이 없습니다</small>
+						</h4>
+
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool"
+								data-widget="collapse" data-toggle="tooltip" title="Collapse">
+								<i class="fa fa-minus"></i>
+							</button>
+							<button type="button" class="btn btn-box-tool"
+								data-widget="remove" data-toggle="tooltip" title="Remove">
+								<i class="fa fa-times"></i>
+							</button>
+						</div>
+					</div>
+					<div class="box-body">
+						<div id="ai_status" class="row">
+
+							<div id='id_loading1' class="col-md-2.5 col-sm-2 text-center">
+								<div class="box box-default box-solid">
+									<div class="box-header with-border">
+										<h3 class="box-title">1.1 학습데이터</h3>
+									</div>
+									<!-- /.box-header -->
+									<div class="box-body">
+										<button id='id_loading1_msg' type="button"
+											class="btn btn-default" data-toggle="modal" disabled
+											data-target="#trainDataModal" data-title="cam_id">데이터
+											없음</button>
+									</div>
+									<!-- /.box-body -->
+
+								</div>
+							</div>
+							<!-- /.col -->
+
+							<div id='id_loading2' class="col-md-2.5 col-sm-2 text-center">
+								<div class="box box-default box-solid">
+									<div class="box-header with-border">
+										<h3 class="box-title">1.2 대상자데이터</h3>
+									</div>
+									<!-- /.box-header -->
+									<div class="box-body">
+										<button id='id_loading2_msg' type="button"
+											class="btn btn-default" disabled data-toggle="modal"
+											data-target="#testDataModal">데이터 없음</button>
+									</div>
+									<!-- /.box-body -->
+
+								</div>
+								<!-- /.box -->
+							</div>
+							<!-- /.col -->
+
+							<div id='id_pre' class="col-md-2.5 col-sm-2 text-center">
+								<div class="box box-success box-solid">
+									<div class="box-header with-border">
+										<h3 class="box-title text-center">2. AI전처리</h3>
+									</div>
+									<!-- /.box-header -->
+									<div class="box-body">
+										<button id='id_pre_msg' type="button"
+											class="btn btn-info pull-center" disabled data-toggle="modal"
+											data-target="#ResultDataModal">데이터 없음</button>
+									</div>
+									<!-- /.box-body -->
+
+
+								</div>
+								<!-- /.box -->
+							</div>
+							<!-- /.col -->
+
+							<div id='id_runf' class="col-md-2.5 col-sm-2 text-center">
+								<div class="box box-warning box-solid">
+									<div class="box-header with-border">
+										<h3 class="box-title">3. AI학습</h3>
+									</div>
+									<!-- /.box-header -->
+									<div class="box-body">
+										<button id='id_runf_msg' type="button"
+											class="btn btn-info pull-center" disabled data-toggle="modal"
+											data-target="#ModelDataModal">데이터 없음</button>
+									</div>
+									<!-- /.box-body -->
+
+
+								</div>
+								<!-- /.box -->
+							</div>
+							<!-- /.col -->
+
+
+							<div id='id_predict' class="col-md-2.5 col-sm-2 text-center">
+								<div class="box box-danger box-solid">
+									<div class="box-header">
+										<h3 class="box-title">4. AI예측실행</h3>
+									</div>
+									<div class="box-body">
+										<button id='id_predict_msg' type="button"
+											class="btn btn-info pull-center" disabled data-toggle="modal"
+											data-target="#PredictDataModal">데이터 없음</button>
+									</div>
+									<!-- /.box-body -->
+
+
+								</div>
+								<!-- /.box -->
+							</div>
+							<!-- /.col -->
+
+							<div id='id_real' class="col-md-2.5 col-sm-2 text-center">
+								<div class="box box-success box-solid">
+									<div class="box-header">
+										<h3 class="box-title">5. AI결과</h3>
+									</div>
+									<div class="box-body">
+										<button id='id_real_msg' type="button"
+											class="btn btn-info pull-center" disabled data-toggle="modal"
+											data-target="#RealDataModal">데이터 없음</button>
+									</div>
+									<!-- /.box-body -->
+
+
+								</div>
+								<!-- /.box -->
+							</div>
+							<!-- /.col -->
+							<div class="row">
+								<div class="col-md-3 col-md-offset-10">
+									<button id='newBtn' type="button" class="btn btn-info"
+										onclick="location.href='/iframe/AutoOrder'">신규 캠페인
+										등록하기</button>
+								</div>
+							</div>
+						</div>
+						<!-- /.row -->
+
+					</div>
+				</div>
+			</div>
+		</c:if>
 
 		<!-- 공지사항 -->
 		<div class="row">
@@ -277,82 +439,89 @@
 							</div>
 						</div>
 
-						<ul id="leftTab" class="nav nav-tabs" role="tablist">
-							<li role="presentation" class="active"><a data-target="#"
-								id="dropdown0-tab" role="tab" data-toggle="tab"
-								aria-controls="dropdown0" aria-expanded="true" onclick='toggleLeft(1)'>나의전체</a></li>
-							<li role="presentation" class="dropdown"><a data-target="#"
-								id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown"
-								aria-controls="myTabDrop1-contents">기간별 <span class="caret"></span></a>
-								<ul class="dropdown-menu" role="menu"
-									aria-labelledby="myTabDrop1" id="leftPeriod">
-								</ul></li>
-							<li role="presentation" class="dropdown"><a data-target="#"
-								id="myTabDrop2" class="dropdown-toggle" data-toggle="dropdown"
-								aria-controls="myTabDrop2-contents">캠페인별 <span class="caret"></span></a>
-								<ul class="dropdown-menu" role="menu"
-									aria-labelledby="myTabDrop2" id="leftCam">
-								</ul></li>
-						</ul>
-						<div id="myTabContent" class="tab-content">
-							<div role="tabpanel" class="tab-pane fade active in"
-								id="dropdown0" aria-labelledby="dropdown0-tab">
-								<!-- 		<p>0번입니다</p> -->
-								<!-- Info boxes -->
+						<c:if test="${sessionCAMCNT > 0}">
+							<ul id="leftTab" class="nav nav-tabs" role="tablist">
+								<li role="presentation" class="active"><a data-target="#"
+									id="dropdown0-tab" role="tab" data-toggle="tab"
+									aria-controls="dropdown0" aria-expanded="true"
+									onclick='toggleLeft(1)'>나의전체</a></li>
+								<li role="presentation" class="dropdown"><a data-target="#"
+									id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown"
+									aria-controls="myTabDrop1-contents">기간별 <span class="caret"></span></a>
+									<ul class="dropdown-menu" role="menu"
+										aria-labelledby="myTabDrop1" id="leftPeriod">
+									</ul></li>
+								<li role="presentation" class="dropdown"><a data-target="#"
+									id="myTabDrop2" class="dropdown-toggle" data-toggle="dropdown"
+									aria-controls="myTabDrop2-contents">캠페인별 <span
+										class="caret"></span></a>
+									<ul class="dropdown-menu" role="menu"
+										aria-labelledby="myTabDrop2" id="leftCam">
+									</ul></li>
+							</ul>
+							<div id="myTabContent" class="tab-content">
+								<div role="tabpanel" class="tab-pane fade active in"
+									id="dropdown0" aria-labelledby="dropdown0-tab">
+									<!-- 		<p>0번입니다</p> -->
+									<!-- Info boxes -->
 
-								<!-- BAR CHART -->
-								<div class="box box-success">
+									<!-- BAR CHART -->
+									<div class="box box-success">
 
-									<div class="box-header with-border text-center">
-										<h3 class="box-title" id="LChartTitle">나의 캠페인 전체</h3>
-									</div>
-									<div class="box-body">
-										<div class="chart" style="height: 320px">
-											<canvas id="chBar0" style="height: 320px"></canvas>
+										<div class="box-header with-border text-center">
+											<h3 class="box-title" id="LChartTitle">나의 캠페인 전체</h3>
+										</div>
+										<div class="box-body">
+											<div class="chart" style="height: 320px">
+												<canvas id="chBar0" style="height: 320px"></canvas>
+											</div>
 										</div>
 									</div>
 								</div>
+								<!-- /.chart -->
 							</div>
-							<!-- /.chart -->
-						</div>
-						<!-- Tabs -->
+							<!-- Tabs -->
 
-						<div class="row" id="leftStat">
-							<div class="col-md-4 col-sm-6 col-xs-12">
-								<div class="info-box">
-									<span class="info-box-text text-center text-light-blue">학습</span>
-									<span class="info-box-number text-center text-light-blue">0%</span>
-									<span class="info-box-text text-center text-light-blue">(0건)</span>
+							<div class="row" id="leftStat">
+								<div class="col-md-4 col-sm-6 col-xs-12">
+									<div class="info-box">
+										<span class="info-box-text text-center text-light-blue">학습</span>
+										<span class="info-box-number text-center text-light-blue">0%</span>
+										<span class="info-box-text text-center text-light-blue">(0건)</span>
+									</div>
+									<!-- /.info-box -->
 								</div>
-								<!-- /.info-box -->
-							</div>
-							<!-- /.col -->
-							<div class="col-md-4 col-sm-6 col-xs-12">
-								<div class="info-box">
-									<span class="info-box-text text-center text-yellow">예측</span> <span
-										class="info-box-number text-center text-yellow">0%</span> <span
-										class="info-box-text text-center text-yellow">(0건)</span>
+								<!-- /.col -->
+								<div class="col-md-4 col-sm-6 col-xs-12">
+									<div class="info-box">
+										<span class="info-box-text text-center text-yellow">예측</span>
+										<span class="info-box-number text-center text-yellow">0%</span>
+										<span class="info-box-text text-center text-yellow">(0건)</span>
+									</div>
+									<!-- /.info-box -->
 								</div>
-								<!-- /.info-box -->
-							</div>
-							<!-- /.col -->
+								<!-- /.col -->
 
-							<!-- fix for small devices only -->
-							<div class="clearfix visible-sm-block"></div>
+								<!-- fix for small devices only -->
+								<div class="clearfix visible-sm-block"></div>
 
-							<div class="col-md-4 col-sm-6 col-xs-12">
-								<div class="info-box">
-									<span class="info-box-text text-center text-green">결과</span> <span
-										class="info-box-number text-center text-green">0%</span> <span
-										class="info-box-text text-center text-green">(0건)</span>
+								<div class="col-md-4 col-sm-6 col-xs-12">
+									<div class="info-box">
+										<span class="info-box-text text-center text-green">결과</span> <span
+											class="info-box-number text-center text-green">0%</span> <span
+											class="info-box-text text-center text-green">(0건)</span>
+									</div>
+									<!-- /.info-box -->
 								</div>
-								<!-- /.info-box -->
 							</div>
-						</div>
-
-
+							<!-- /.box -->
+						</c:if>
+						<c:if test="${sessionCAMCNT <= 0}">
+							<button type="button" class="btn btn-default btn-block" onclick="location.href='/iframe/AutoOrder'">
+								<strong>${sessionNAME }님 </strong> 현재 등록된 캠페인이 없습니다 <small>(클릭하여 등록하기)</small>
+							</button>
+						</c:if>
 					</div>
-					<!-- /.box -->
 
 
 					<!-- right -->
@@ -376,14 +545,14 @@
 									<span class="caret"></span>
 							</a>
 								<ul class="dropdown-menu" id="rightPeriod">
-									
+
 								</ul></li>
 							<li role="presentation" class="dropdown"><a
 								class="dropdown-toggle" data-toggle="dropdown" href="#">캠페인별
 									<span class="caret"></span>
 							</a>
 								<ul class="dropdown-menu" id="rightCam">
-									
+
 								</ul></li>
 						</ul>
 						<div class="tab-content">
@@ -392,7 +561,7 @@
 								<div class="box box-success">
 
 									<div class="box-header with-border text-center">
-										<h3 class="box-title" id="RChartTitle">전체 캠페인</h3>
+										<h3 class="box-title" id="RChartTitle">캠페인 전체</h3>
 									</div>
 									<div class="box-body">
 										<div class="chart" style="height: 320px">
@@ -515,8 +684,11 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
+
+			/* 차트 초기화 */
 			initChart(); //Chart init
 			loadStat(); //Stat init
+			/* ~차트 초기화 */
 
 			$('.modal').on('hidden.bs.modal', function(e) {
 				// console.log('modal close');

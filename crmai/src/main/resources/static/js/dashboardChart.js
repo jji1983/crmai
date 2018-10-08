@@ -5,9 +5,8 @@ period = [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월
 campaigns = [ "정확도(%)", "예측(%)", "결과(%)" ];
 chartBGColor = [ 'rgba(81, 152, 255, 0.6)', 'rgba(243, 115, 79, 0.6)',
 		'rgba(0, 180, 175, 0.6)' ];
- 
-// elements
 
+// elements
 
 leftOriginal = [ 0, 0, 0, 0 ];
 leftSo = [ 0, 0, 0, 0 ];
@@ -55,7 +54,7 @@ var chartOptions = {
 function initChart() {
 	var ctx0 = document.getElementById("chBar0").getContext('2d');
 	var ctx5 = document.getElementById("chBar5").getContext('2d');
-	
+
 	var some_new_data = {
 		labels : types,
 		datasets : [ {
@@ -75,18 +74,20 @@ function initChart() {
 			borderWidth : 0
 		} ]
 	};
-
-	leftChart = new Chart(ctx0, {
-		type : 'bar',
-		data : some_new_data,
-		options : chartOptions
-	});
-
-	rightChart = new Chart(ctx5, {
-		type : 'bar',
-		data : some_new_data,
-		options : chartOptions
-	});
+	if (ctx0 != null) {
+		leftChart = new Chart(ctx0, {
+			type : 'bar',
+			data : some_new_data,
+			options : chartOptions
+		});
+	}
+	if (ctx5 != null) {
+		rightChart = new Chart(ctx5, {
+			type : 'bar',
+			data : some_new_data,
+			options : chartOptions
+		});
+	}
 
 	loadData();
 }
@@ -205,7 +206,7 @@ function toggleRight(kind, cngTitle) {
 
 	// type 1
 	if (kind == 1) {
-		cngTitle = "전체 캠페인";
+		cngTitle = "캠페인 전체";
 		$(title).text(cngTitle);
 
 		totalType();
