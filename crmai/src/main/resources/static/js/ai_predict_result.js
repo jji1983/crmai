@@ -1,20 +1,254 @@
 /**
- * 	예측 결과 관련 자바스크립트 코드
+ *	예측 결과 관련 자바스크립트 코드
  */
 
-var pTotalPage = 10;
-var pVisiblePages = 10;
+var currentValue = 0;
 
-var pPageSt = 1;
-var pPageEnd = 10;
+function handleClick(myRadio) {
+    currentValue = myRadio.value;
+       
+	$("#id_span_msg").text("캠페인ID :: " + currentValue);
+	
+	connectLearningModel(currentValue);
+}
+  
+function radioInit(myRadio) {  
+	if(myRadio != 0){
+		$("#id_span_msg").text("캠페인ID :: " + myRadio); 
+		  
+		currentValue = myRadio;
+	}
+}
+
+// 파라메터 존재하는 캠페인 찾기 메서드 사용하려면 밑의 new 접두어가 들어간 메서드 사용할 것!!!
+function newCampaignPage(){
+	var campaignData = { 
+		cam_name : $("#cam_name").val(), 
+		cam_type : $("#cam_type").val(),
+		cam_status : $("#cam_status").val()
+	};
+			
+	$.ajax({
+		url:"/campaign/count",
+		data:campaignData,
+		success:function(pagingData) {
+			createPagenationCam(pagingData["endPage"], pagingData["displayPageNum"]);
+		}
+	});
+}
+
+function createPagenationCam(totalPage, displayPage) {
+	$("#pagination_cam").twbsPagination({
+        totalPages: totalPage,
+        visiblePages: displayPage,
+        onPageClick: function (event, page) {
+        	newSearchCampaign(page);
+        }
+    });
+}
+
+function newSearchCampaign(clickPage){
+	var campaignData = { 
+		cam_name : $("#cam_name").val(), 
+		cam_type : $("#cam_type").val(),
+		cam_status : $("#cam_status").val(),
+		page : clickPage
+	};
+		
+	$.ajax({
+		url:"/campaign/list",
+		data:campaignData,
+		success:function(data) {
+			createTableCampaign(data);
+		}
+	});	
+}
+
+function createTableCampaign(arr){
+	var html = "<table id='cpi_table' class='table table-bordered table-hover'>";
+	var first = true;
+	
+	html += "<thead><tr><th class='text-center'>체크</th>";
+	html += "<th class='text-center'>캠페인ID</th>";
+	html += "<th class='text-center'>캠페인이름</th>";
+	html += "<th class='text-center'>등록자</th>";
+	html += "<th class='text-center'>캠페인목적</th>";
+	html += "<th class='text-center'>캠페인상태</th>";
+	html += "<th class='text-center'>캠페인 등록일자</th>";
+	html += "<th class='text-center'>설명</th>";
+	html += "<th class='text-center'>메시지</th></tr></thead><tbody>";
+	
+	// 데이터 존재 미존재 여부에 따른 표 표시
+	if(arr.length != 0) {
+		arr.forEach(function(arrVal, arrIdx) {
+			html += "<tr>";
+			
+			Object.getOwnPropertyNames(arr[arrIdx]).forEach(function(val, idx, array) {
+				switch (val) {
+					case "cam_id":
+						if(first == true) {
+							html += "<td><input name='cam_check' type='radio' value='" + arr[arrIdx][val] + "' onclick='handleClick(this);' checked='checked'></td>";
+							
+							radioInit(arr[arrIdx][val]);
+							
+							first = false;
+						} else {
+							html += "<td><input name='cam_check' type='radio' value='" + arr[arrIdx][val] + "' onclick='handleClick(this);'></td>";
+						}
+						
+						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
+						
+						break;
+					case "cam_name":
+						html += "<td>" + arr[arrIdx][val] + "</td>";
+						
+						break;
+					case "adm_id":
+						html += "<td>" + arr[arrIdx][val] + "</td>";
+						
+						break;
+					case "cam_type":
+						html += "<td>" + arr[arrIdx][val] + "</td>";
+						
+						break;
+					case "cam_status":
+						html += "<td>" + arr[arrIdx][val] + "</td>";
+						
+						break;
+					case "cam_cdate":
+						html += "<td>" + arr[arrIdx][val] + "</td>";
+						
+						break;
+					case "cam_desc":
+						html += "<td>" + arr[arrIdx][val] + "</td>";
+						
+						break;
+					case "cam_msg":
+						if((arr[arrIdx][val] == null) || (arr[arrIdx][val] == "null") || (arr[arrIdx][val] == "")) {
+							html += "<td></td>";
+						} else {
+							html += "<td>" + arr[arrIdx][val] + "</td>";
+						}
+						
+						break;
+					default:
+						break;
+				}
+			});
+			
+			html += "</tr>";
+		});
+		
+	} else {
+		html += "<tr><td class='text-center' colspan='9'>조회된 데이터가 없습니다.</td></tr>";
+	}
+	
+	html += "</tbody></table>";
+	  	
+	$("#div_campaign").html(html);					// innerHtml jquery버전
+	
+	connectLearningModel();
+}
+
+// 캠페인 아이디로 모델 테이블 불러오기
+function connectLearningModel(clickCamId) {
+	var cam_id = currentValue;
+	
+	if(cam_id != 0) {
+		$.ajax({
+			url:"/model/learn",
+			data:{
+				cam_id : cam_id
+			},
+			success:function(data) {
+				createTableModel(data);
+			}
+		});
+	}
+}
+
+function createTableModel(arr){
+	var html = "<table id='model_table' class='table table-bordered table-hover'>";
+	var first = true;
+	
+	html += "<thead><tr><th class='text-center'>캠페인ID</th>";
+	html += "<th class='text-center'>학습모델</th>";
+	html += "<th class='text-center'>기존정확도</th>";
+	html += "<th class='text-center'>AI정확도</th>";
+	html += "<th class='text-center'>학습시작시간</th>";
+	html += "<th class='text-center'>학습종료시간</th>";
+	html += "<th class='text-center'>선택Model</th>";
+	html += "<th class='text-center'>메시지</th></tr></thead><tbody>";
+	
+	// 데이터 존재 미존재 여부에 따른 표 표시
+	if(arr.length != 0) {
+		arr.forEach(function(arrVal, arrIdx) {
+			html += "<tr>";
+			
+			Object.getOwnPropertyNames(arr[arrIdx]).forEach(function(val, idx, array) {
+				switch (val) {
+					case "cam_id":
+						html += "<td>" + arr[arrIdx][val] + "</td>";
+						
+						break;
+					case "train_method":
+						html += "<td>" + arr[arrIdx][val] + "</td>";
+						
+						break;
+					case "original_acc":
+						html += "<td>" + arr[arrIdx][val] + "%</td>";
+						
+						break;
+					case "so_acc":
+						html += "<td>" + arr[arrIdx][val] + "%</td>";
+						
+						break;
+					case "train_start":
+						html += "<td>" + arr[arrIdx][val] + "</td>";
+						
+						break;
+					case "train_end":
+						html += "<td>" + arr[arrIdx][val] + "</td>";
+						
+						break;
+					case "model_flag":
+						html += "<td>" + arr[arrIdx][val] + "</td>";
+						
+						break;
+					case "desc_text":
+						if((arr[arrIdx][val] == null) || (arr[arrIdx][val] == "null") || (arr[arrIdx][val] == "")) {
+							html += "<td></td>";
+						} else {
+							html += "<td>" + arr[arrIdx][val] + "</td>";
+						}
+						
+						break;
+					default:
+						break;
+				}
+			});
+			
+			html += "</tr>";
+		});
+		
+	} else {
+		html += "<tr><td class='text-center' colspan='8'>조회된 데이터가 없습니다.</td></tr>";
+	}
+	
+	html += "</tbody></table>";
+	  	
+	$("#div_model").html(html);					// innerHtml jquery버전
+}
 
 // 캠페인과 연결되어 불러오는 ajax
-function connectCampaignAjax(currentCamId) {
+function connectCampaignAjax() {
 	// 숫자형으로 변형
-	currentCamId = Number(currentCamId);
+	currentCamId = Number(currentValue);
 	
 	$.ajax({
 		url:"/predict/list",
+		cache:false,
+		contentType:"application/json",
 		data:{
 			camId : currentCamId
 		},

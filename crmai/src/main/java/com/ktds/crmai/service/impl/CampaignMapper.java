@@ -31,9 +31,14 @@ public interface CampaignMapper {
 	AI_CAMPAIGN selectCampaignAiStatus(AI_CAMPAIGN campaign);
 	
 	/*
-	 * Name : 캠페인  정보 검색
+	 * Name : 파라메터 입력받는 캠페인 정보 검색
 	 */
 	List<AI_CAMPAIGN> selectNewCampaignPage(AI_CAMPAIGN campaign);
+	
+	/*
+	 * Name : 파라메터 입력받는 캠페인 총 갯수
+	 */
+	int selectCamCount(AI_CAMPAIGN campaign);
 	
 	/*
 	 * Name : 캠페인 Insert

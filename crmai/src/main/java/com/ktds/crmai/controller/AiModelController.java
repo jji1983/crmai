@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ktds.crmai.model.AI_PAGE;
 import com.ktds.crmai.model.AI_TRAIN_MODEL;
@@ -46,4 +48,12 @@ public class AiModelController {
     	
     	return response;
     }
+	
+	@ResponseBody
+	@RequestMapping(value="/learn", method=RequestMethod.GET)
+	public List<AI_TRAIN_MODEL> getNewModelList(@RequestParam String cam_id) {
+		logger.info("$$$$$ 캠페인 아이디:" + cam_id);
+		
+		return aiModelService.selectAiTrainModel(cam_id);
+	}
 }

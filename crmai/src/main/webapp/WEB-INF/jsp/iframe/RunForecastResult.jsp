@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,16 +90,15 @@
   <script src="/resources/js/jquery.twbsPagination.min.js"></script>
 
   <!-- AI MAKE JS -->
-  <script src="/resources/js/ai_campaign.js"></script>
-  <script src="/resources/js/ai_model.js"></script>
   <script src="/resources/js/ai_predict_result.js"></script>
 
 <script type="text/javascript">
+var init = false;
+
 $(function() {
 	$("#adm_name").val($("input[name='session_name']", parent.document).val());
 	
 	newCampaignPage();
-	get_aiTrainModel();
 });
 </script>
 
@@ -199,27 +199,38 @@ $(function() {
 	
 	<!-- 캠페인목록 -->
 	<div class="row">
-          <div class="col-xs-12">
-          <div class="box">
+       <div class="col-xs-12">
+         <div class="box">
 			<div class="box-header">
 	          <h3 class="box-title">캠페인 목록 <span id='id_span_msg' class="label label-success"></span></h3>
 	        </div>
-        
-	        <!-- /.box-header -->
-	        <div class="box-body">
-	          <!-- campaign table -->
-	          <table id="ai_campaign" class="table table-bordered table-hover text-center"></table>
-	   		  <nav aria-label="Page navigation example" style="text-align: center;">
-			  <ul class="pagination-sm" id="pagination"></ul></nav>
-			  
-			  <table id="ai_model_View" class="table table-bordered table-hover"></table>
-			  
-	          <button id="selectBtn" type="button" class="btn btn-info pull-right" >예측실행</button>&nbsp;
+        	<!-- /.box-header -->
+	        
+	        <div id="div_campaign" class="box-body">
+	          
 	        </div>
+	        <div class="text-center">
+	        	<ul class="pagination-sm" id="pagination_cam"></ul>
 	        </div>
-        </div>
+	     </div>
+       </div>
    </div>
    <!-- /.캠페인목록 -->
+   
+   <!-- 모델목록 -->
+	<div class="row">
+       <div class="col-xs-12">
+         <div class="box">
+			<div class="box-header">
+	          <h3 class="box-title">모델 목록 <span id='id_span_msg' class="label label-success"></span></h3>
+	        </div>
+	        
+	        <div id="div_model" class="box-body">
+	          
+	        </div>
+	     </div>
+	   </div>
+	</div>
    
 </section>
 <!-- /.Main content -->

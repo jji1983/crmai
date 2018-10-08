@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Alias("campaign")
-public class AI_CAMPAIGN{
+public class AI_CAMPAIGN extends PageCriteria {
 
 	private static final long serialVersionUID = 3947489072259877540L;
 	
@@ -33,7 +33,6 @@ public class AI_CAMPAIGN{
 	public AI_CAMPAIGN(){
 		
 	}
-	
 	
 	public AI_CAMPAIGN(
 			int page_st,
@@ -73,5 +72,12 @@ public class AI_CAMPAIGN{
 		this.cam_cdate = cam_cdate;
 		this.cam_desc = cam_desc;
 		this.cam_msg = cam_msg;
+	}
+
+	public AI_CAMPAIGN(String cam_name, String adm_id, String cam_type, String cam_status) {
+		this.cam_name = cam_name;
+		this.adm_id = adm_id;
+		this.cam_type = cam_type;
+		this.cam_status = cam_status;
 	}
 }
