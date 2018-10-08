@@ -1,5 +1,6 @@
 package com.ktds.crmai.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -20,24 +21,30 @@ public interface DashboardChartMapper {
 	DashboardChartData selectTotalDataStat();
 	
 	
-	//나의 전체(산업군별)
-	List<DashboardChartData> selectMyDataType(String ADM_ID); 
-	
-	//전체 평균(산업군별)
-	List<DashboardChartData> selectTotalDataType();
-
-	
 	//나의 전체(탭)
 	List<AIStatistics> selectMyTab(String ADM_ID);
 	
 	//전체(탭)
 	List<AIStatistics> selectTotalTab();
 	
+	//나의 전체(산업군별)
+	List<DashboardChartData> selectMyDataType(HashMap<String, Object> baseData);
+	
+	//전체 평균(산업군별)
+	List<DashboardChartData> selectTotalDataType();
+	
 	
 	//나의 전체(기간별)
-	List<DashboardChartData> selectMyPeriod(String ADM_ID);
+	List<DashboardChartData> selectMyPeriod(HashMap<String, Object> baseData);
 	
 	//전체 평균(기간별)
-	List<DashboardChartData> selectTotalPeriod();
+	List<DashboardChartData> selectTotalPeriod(String year); 
+	
+	
+	//나의 전체(캠페인별)
+	List<DashboardChartData> selectMyCampaign(HashMap<String, Object> baseData);
+	
+	//전체 평균(캠페인별)
+	List<DashboardChartData> selectTotalCampaign(HashMap<String, Object> baseData);
 	
 }

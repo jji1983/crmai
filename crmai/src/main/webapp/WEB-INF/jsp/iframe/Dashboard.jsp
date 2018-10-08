@@ -515,7 +515,7 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			loadData(); //Chart init
+			initChart(); //Chart init
 			loadStat(); //Stat init
 
 			$('.modal').on('hidden.bs.modal', function(e) {

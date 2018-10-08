@@ -1,5 +1,6 @@
 package com.ktds.crmai.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,8 @@ public class DashboardChartService implements DashboardChartMapper {
 	}
 
 	@Override
-	public List<DashboardChartData> selectMyDataType(String ADM_ID) {
-		return dashboardChartMapper.selectMyDataType(ADM_ID);
+	public List<DashboardChartData> selectMyDataType(HashMap<String, Object> baseData) {
+		return dashboardChartMapper.selectMyDataType(baseData);
 	}
 
 	@Override
@@ -49,13 +50,23 @@ public class DashboardChartService implements DashboardChartMapper {
 	}
 
 	@Override
-	public List<DashboardChartData> selectMyPeriod(String ADM_ID) {
-		return dashboardChartMapper.selectMyPeriod(ADM_ID);
+	public List<DashboardChartData> selectMyPeriod(HashMap<String, Object> baseData) {
+		return dashboardChartMapper.selectMyPeriod(baseData);
 	}
 
 	@Override
-	public List<DashboardChartData> selectTotalPeriod() {
-		return dashboardChartMapper.selectTotalPeriod();
+	public List<DashboardChartData> selectTotalPeriod(String year) {
+		return dashboardChartMapper.selectTotalPeriod(year);
+	}
+
+	@Override
+	public List<DashboardChartData> selectMyCampaign(HashMap<String, Object> baseData) {
+		return dashboardChartMapper.selectMyCampaign(baseData);
+	}
+
+	@Override
+	public List<DashboardChartData> selectTotalCampaign(HashMap<String, Object> baseData) {
+		return dashboardChartMapper.selectTotalCampaign(baseData);
 	}
 
 

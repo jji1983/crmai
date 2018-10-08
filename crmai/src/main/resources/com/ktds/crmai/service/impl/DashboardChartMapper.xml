@@ -28,13 +28,47 @@
 		<result column="TOTAL_REAL" property="totalReal" />
 	</resultMap>
 
-	<!-- 기간별, 캠페인별 탭 -->
+	<!-- 나의 캠페인별 -->
+	<select id="selectMyCampaign" resultMap="chartData">
+		SELECT CAM_NAME AS
+		total_Base, count(*) AS total_count,
+		AVG(ORIGINAL_ACC) AS
+		total_original, AVG(SO_ACC) AS total_so,
+		AVG(REAL_ACC) AS total_real
+		FROM AI_STATISTICS
+		WHERE MODEL_FLAG = 'Y'
+		AND ADM_ID =
+		#{sessionId}
+		<if test="camId != null ">
+			AND cam_id = #{camId}
+		</if>
+		GROUP BY CAM_NAME
+	</select>
+
+	<select id="selectTotalCampaign" resultMap="chartData">
+		SELECT CAM_NAME AS
+		total_Base, count(*) AS total_count,
+		AVG(ORIGINAL_ACC) AS
+		total_original, AVG(SO_ACC) AS total_so,
+		AVG(REAL_ACC) AS total_real
+		FROM AI_STATISTICS
+		WHERE MODEL_FLAG = 'Y'
+		<if test="camId != null ">
+			AND cam_id = #{camId}
+		</if>
+		GROUP BY CAM_NAME
+	</select>
+
+	<!-- 나의 기간별 -->
 	<select id="selectMyPeriod" resultMap="chartData">
-		SELECT MMdate AS TOTAL_BASE, COUNT(*)
+		SELECT TO_CHAR(TO_DATE(MMdate,'YYYY-MM'),'MM') AS
+		TOTAL_BASE, COUNT(*)
 		AS
 		TOTAL_COUNT,
-		ROUND(AVG(ORIGINAL_ACC), 2) AS TOTAL_ORIGINAL,
-		ROUND(AVG(SO_ACC),2) AS TOTAL_SO,
+		ROUND(AVG(ORIGINAL_ACC), 2) AS
+		TOTAL_ORIGINAL,
+		ROUND(AVG(SO_ACC),2) AS
+		TOTAL_SO,
 		ROUND(AVG(REAL_ACC),2) AS TOTAL_REAL
 		FROM (
 		SELECT
@@ -44,7 +78,8 @@
 		ADM_ID,
 		ADM_NAME,
 		CAM_TYPE,
-		TO_CHAR(CAM_CDATE,'YYYY-MM') AS MMdate,
+		TO_CHAR(CAM_CDATE,'YYYY-MM') AS
+		MMdate,
 		ADM_TYPE,
 		TRAIN_METHOD,
 		ORIGINAL_ACC,
@@ -53,15 +88,26 @@
 		MODEL_FLAG,
 		TEST_CNT
 		FROM AI_STATISTICS
-		WHERE MODEL_FLAG = 'Y' AND ADM_ID = #{ADM_ID}) A 
+		<where>
+			MODEL_FLAG = 'Y' AND ADM_ID =
+			#{sessionId}
+			<if test="year != null ">
+				AND <![CDATA[CAM_CDATE < ROUND (to_date(to_char(TO_DATE(#{year},'yyyy'),'yyyy-mm-dd'),'yyyy-mm-dd'),'year')]]>
+				AND <![CDATA[CAM_CDATE >= TRUNC (to_date(to_char(TO_DATE(#{year},'yyyy'),'yyyy-mm-dd'),'yyyy-mm-dd'),'year')]]>
+			</if>
+		</where>
+		) A
 		GROUP BY MMdate
 	</select>
 
 	<select id="selectTotalPeriod" resultMap="chartData">
-		SELECT MMdate AS TOTAL_BASE, COUNT(*)
+		SELECT
+		TO_CHAR(TO_DATE(MMdate,'YYYY-MM'),'MM') AS
+		TOTAL_BASE, COUNT(*)
 		AS
 		TOTAL_COUNT,
-		ROUND(AVG(ORIGINAL_ACC), 2) AS TOTAL_ORIGINAL,
+		ROUND(AVG(ORIGINAL_ACC), 2) AS
+		TOTAL_ORIGINAL,
 		ROUND(AVG(SO_ACC),2) AS TOTAL_SO,
 		ROUND(AVG(REAL_ACC),2) AS TOTAL_REAL
 		FROM (
@@ -72,7 +118,8 @@
 		ADM_ID,
 		ADM_NAME,
 		CAM_TYPE,
-		TO_CHAR(CAM_CDATE,'YYYY-MM') AS MMdate,
+		TO_CHAR(CAM_CDATE,'YYYY-MM') AS
+		MMdate,
 		ADM_TYPE,
 		TRAIN_METHOD,
 		ORIGINAL_ACC,
@@ -81,7 +128,7 @@
 		MODEL_FLAG,
 		TEST_CNT
 		FROM AI_STATISTICS
-		WHERE MODEL_FLAG = 'Y') A 
+		WHERE MODEL_FLAG = 'Y') A
 		GROUP BY MMdate
 	</select>
 
@@ -104,7 +151,7 @@
 		TEST_CNT
 		FROM AI_STATISTICS
 		WHERE MODEL_FLAG = 'Y' AND ADM_ID =
-		#{ADM_ID}
+		#{sessionId}
 		ORDER BY MMdate
 	</select>
 
@@ -140,7 +187,7 @@
 		ROUND(AVG(REAL_ACC),2) AS TOTAL_REAL
 		FROM AI_STATISTICS
 		WHERE MODEL_FLAG
-		= 'Y' AND ADM_ID = #{ADM_ID}
+		= 'Y' AND ADM_ID = #{sessionId}
 		GROUP BY ADM_TYPE
 	</select>
 
@@ -171,7 +218,7 @@
 		ROUND(AVG(REAL_ACC),2) AS TOTAL_REAL
 		FROM AI_STATISTICS
 		WHERE MODEL_FLAG
-		= 'Y' AND ADM_ID = #{ADM_ID}
+		= 'Y' AND ADM_ID = #{sessionId}
 	</select>
 
 	<select id="selectTotalDataStat" resultMap="chartData">

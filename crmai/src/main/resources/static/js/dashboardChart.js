@@ -1,14 +1,94 @@
-typeORIGINAL = [ 0, 0, 0, 0 ];
-typeSO = [ 0, 0, 0, 0 ];
-typeREAL = [ 0, 0, 0, 0 ];
+//labels
+types = [ "통신", "금융", "유통", "기타" ];
+period = [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월",
+		"12월" ];
+campaigns = [ "정확도(%)", "예측(%)", "결과(%)" ];
 
-leftOriginal = [];
-leftSo = [];
-leftReal = [];
+chartBGColor = [ 'rgba(81, 152, 255, 0.6)', 'rgba(243, 115, 79, 0.6)',
+		'rgba(0, 180, 175, 0.6)' ];
 
-rightOriginal = [];
-rightSo = [];
-rightReal = [];
+// elements
+var ctx0 = document.getElementById("chBar0").getContext('2d');
+var ctx5 = document.getElementById("chBar5").getContext('2d');
+
+leftOriginal = [ 0, 0, 0, 0 ];
+leftSo = [ 0, 0, 0, 0 ];
+leftReal = [ 0, 0, 0, 0 ];
+
+rightOriginal = [ 0, 0, 0, 0 ];
+rightSo = [ 0, 0, 0, 0 ];
+rightReal = [ 0, 0, 0, 0 ];
+
+var chartOptions = {
+	legend : {
+		labels : {
+			fontColor : '#666'
+		}
+	},
+	scales : {
+		xAxes : [ {
+			gridLines : {
+				display : false
+			},
+			maxBarThickness : 35
+		} ],
+		yAxes : [ {
+			gridLines : {
+				display : false
+			},
+			ticks : {
+				beginAtZero : true
+			},
+			gridLines : {
+				display : true,
+				drawBorder : true,
+				drawOnChartArea : true,
+				drawTicks : false,
+			}
+		}, ]
+	},
+	tooltips : {
+		mode : 'index'
+	},
+	legend : {
+		position : 'bottom',
+	}
+};
+function initChart() {
+	var some_new_data = {
+		labels : types,
+		datasets : [ {
+			label : '정확도(%)',
+			data : leftOriginal,
+			backgroundColor : 'rgba(81, 152, 255, 0.6)',
+			borderWidth : 0,
+		}, {
+			label : '예측(%)',
+			data : leftSo,
+			backgroundColor : 'rgba(243, 115, 79, 0.6)',
+			borderWidth : 0,
+		}, {
+			label : '결과(%)',
+			data : leftReal,
+			backgroundColor : 'rgba(0, 180, 175, 0.6)',
+			borderWidth : 0
+		} ]
+	};
+
+	leftChart = new Chart(ctx0, {
+		type : 'bar',
+		data : some_new_data,
+		options : chartOptions
+	});
+
+	rightChart = new Chart(ctx5, {
+		type : 'bar',
+		data : some_new_data,
+		options : chartOptions
+	});
+
+	loadData();
+}
 
 function loadData() {
 	loadTab();
@@ -98,63 +178,33 @@ function loadStat() {
 }
 
 function toggleLeft(kind, cngTitle) {
-	alert(cngTitle);
 	var title = document.getElementById('LChartTitle');
-	// type 1
-	if (kind == 1) {
-		cngTitle = "나의 캠페인 전체";
 
-		// data delete
-		// Types Data
+	switch (kind) {
+	case 1:
+		cngTitle = "나의 캠페인 전체";
 		$(title).text(cngTitle);
 
 		myType();
+		break;
+	case 2:
+		var tempTitle = "( " + cngTitle + "년 ) 월별 통계";
+		$(title).text(tempTitle);
+
+		myPeriod(cngTitle);
+		break;
+	case 3:
+		myCam(cngTitle);
+		break;
 	}
 
-	// month 2
-	if (kind == 2) {
-		alert("기간별 실행");
-		cngTitle = "( "+cngTitle+"년 ) 월별 통계";
-		$(title).text(cngTitle);
-		
-		myPeriod();
-	}
-
-	// campain 3
-	if (kind == 3) {
-		$(title).text(cngTitle);
-		
-		some_new_data = {
-			labels : campains,
-			datasets : [ {
-				label : '캠페인',
-				data : campainDatas,
-				backgroundColor : chartBGColor,
-				borderWidth : 0
-			} ]
-		};
-
-		leftChart.config.data = some_new_data;
-		leftChart.update();
-
-		/*
-		 * $.ajax({ type : "GET", url : "/notice/detail?code=" + code,
-		 * contentType : 'application/json', // List 컨트롤러는 application/json
-		 * 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다. cache : false, timeout : 600000,
-		 * success : function(data) { console.log("SUCCESS : ", data);
-		 * 
-		 * showModal(data); }, error : function(e) { alert("error :: " +
-		 * e.responseText); console.log("ERROR : ", e); } });
-		 */
-	}
 }
 function toggleRight(kind, cngTitle) {
-	alert(cngTitle);
+	var title = document.getElementById('RChartTitle');
+
 	// type 1
 	if (kind == 1) {
 		cngTitle = "전체 캠페인";
-
-		var title = document.getElementById('RChartTitle');
 		$(title).text(cngTitle);
 
 		totalType();
@@ -162,41 +212,95 @@ function toggleRight(kind, cngTitle) {
 
 	// month 2
 	if (kind == 2) {
-		cngTitle = "monthRight 변경합니당";
-		var title = document.getElementById('RChartTitle');
-		$(title).text(cngTitle);
+		var tempTitle = "( " + cngTitle + "년 ) 월별 통계";
+		$(title).text(tempTitle);
 
 		totalPeriod();
 	}
 
 	// campain 3
 	if (kind == 3) {
-		cngTitle = "campainRight 변경합니당";
-		var title = document.getElementById('RChartTitle');
-		$(title).text(cngTitle);
-		some_new_data = {
-			labels : campains,
-			datasets : [ {
-				label : '캠페인',
-				data : campainDatas,
-				backgroundColor : chartBGColor,
-				borderWidth : 0
-			} ]
-		};
 
-		rightChart.config.data = some_new_data;
-		rightChart.update();
-
-		/*
-		 * $.ajax({ type : "GET", url : "/notice/detail?code=" + code,
-		 * contentType : 'application/json', // List 컨트롤러는 application/json
-		 * 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다. cache : false, timeout : 600000,
-		 * success : function(data) { console.log("SUCCESS : ", data);
-		 * 
-		 * showModal(data); }, error : function(e) { alert("error :: " +
-		 * e.responseText); console.log("ERROR : ", e); } });
-		 */
+		totalCam(cngTitle);
 	}
+}
+
+function myCam(cam_id) {
+	$.ajax({
+		type : "GET",
+		url : "/dashboardChart/myCampaign?camId=" + cam_id,
+		cache : false,
+		processData : true,
+		async : true,
+		success : function(data) {
+			leftOriginal = 0;
+			leftSo = 0;
+			leftReal = 0;
+			var title = document.getElementById('LChartTitle');
+			$.each(data, function() {
+
+				$(title).text(this.totalBase);
+
+				leftOriginal = this.totalOriginal;
+				leftSo = this.totalSo;
+				leftReal = this.totalReal;
+			});
+
+			var some_new_data = {
+				labels : campains,
+				datasets : [ {
+					label : '캠페인',
+					data : [ leftOriginal, leftSo, leftReal ],
+					backgroundColor : chartBGColor,
+					borderWidth : 0
+				} ]
+			};
+
+			leftChart.config.data = some_new_data;
+			leftChart.update();
+
+		},
+		error : function(e) {
+			// console.log("ERROR : ", e);
+		}
+	});
+}
+
+function totalCam(cam_id) {
+	$.ajax({
+		type : "GET",
+		url : "/dashboardChart/totalCampaign?camId=" + cam_id,
+		cache : false,
+		processData : true,
+		async : true,
+		success : function(data) {
+			var title = document.getElementById('RChartTitle');
+			$.each(data, function() {
+				$(title).text(this.totalBase);
+
+				rightOriginal = this.totalOriginal;
+				rightSo = this.totalSo;
+				rightReal = this.totalReal;
+			});
+
+			var some_new_data = {
+				labels : campains,
+				datasets : [ {
+					label : '캠페인',
+					data : [ rightOriginal, rightSo, rightReal ],
+					backgroundColor : chartBGColor,
+					borderWidth : 0
+				} ]
+			};
+
+			rightChart.config.data = some_new_data;
+			rightChart.update();
+
+		},
+		error : function(e) {
+			// console.log("ERROR : ", e);
+		}
+	}); 
 }
 
 function myType() {
@@ -222,31 +326,30 @@ function myType() {
 					leftSo[this.totalBase] = this.totalSo;
 					leftReal[this.totalBase] = this.totalReal;
 				}
-
-				var some_new_data = {
-					labels : types,
-					datasets : [ {
-						label : '정확도(%)',
-						data : leftOriginal,
-						backgroundColor : 'rgba(81, 152, 255, 0.6)',
-						borderWidth : 0,
-					}, {
-						label : '예측(%)',
-						data : leftSo,
-						backgroundColor : 'rgba(243, 115, 79, 0.6)',
-						borderWidth : 0,
-					}, {
-						label : '결과(%)',
-						data : leftReal,
-						backgroundColor : 'rgba(0, 180, 175, 0.6)',
-						borderWidth : 0
-					} ]
-				};
-
-				leftChart.config.data = some_new_data;
-				leftChart.update();
-
 			});
+			var some_new_data = {
+				labels : types,
+				datasets : [ {
+					label : '정확도(%)',
+					data : leftOriginal,
+					backgroundColor : 'rgba(81, 152, 255, 0.6)',
+					borderWidth : 0,
+				}, {
+					label : '예측(%)',
+					data : leftSo,
+					backgroundColor : 'rgba(243, 115, 79, 0.6)',
+					borderWidth : 0,
+				}, {
+					label : '결과(%)',
+					data : leftReal,
+					backgroundColor : 'rgba(0, 180, 175, 0.6)',
+					borderWidth : 0
+				} ]
+			};
+
+			leftChart.config.data = some_new_data;
+			leftChart.update();
+
 		},
 		error : function(e) {
 			// console.log("ERROR : ", e);
@@ -277,31 +380,31 @@ function totalType() {
 					rightSo[this.totalBase] = this.totalSo;
 					rightReal[this.totalBase] = this.totalReal;
 				}
-
-				var some_new_data = {
-					labels : types,
-					datasets : [ {
-						label : '정확도(%)',
-						data : rightOriginal,
-						backgroundColor : 'rgba(81, 152, 255, 0.6)',
-						borderWidth : 0,
-					}, {
-						label : '예측(%)',
-						data : rightSo,
-						backgroundColor : 'rgba(243, 115, 79, 0.6)',
-						borderWidth : 0,
-					}, {
-						label : '결과(%)',
-						data : rightReal,
-						backgroundColor : 'rgba(0, 180, 175, 0.6)',
-						borderWidth : 0
-					} ]
-				};
-
-				rightChart.config.data = some_new_data;
-				rightChart.update();
-
 			});
+
+			var some_new_data = {
+				labels : types,
+				datasets : [ {
+					label : '정확도(%)',
+					data : rightOriginal,
+					backgroundColor : 'rgba(81, 152, 255, 0.6)',
+					borderWidth : 0,
+				}, {
+					label : '예측(%)',
+					data : rightSo,
+					backgroundColor : 'rgba(243, 115, 79, 0.6)',
+					borderWidth : 0,
+				}, {
+					label : '결과(%)',
+					data : rightReal,
+					backgroundColor : 'rgba(0, 180, 175, 0.6)',
+					borderWidth : 0
+				} ]
+			};
+
+			rightChart.config.data = some_new_data;
+			rightChart.update();
+
 		},
 		error : function(e) {
 			// console.log("ERROR : ", e);
@@ -309,11 +412,10 @@ function totalType() {
 	});
 }
 
-function myPeriod() {
-	alert("myPeriod 실행");
+function myPeriod(year) {
 	$.ajax({
 		type : "GET",
-		url : "/dashboardChart/myPeriod",
+		url : "/dashboardChart/myPeriod?year=" + year,
 		cache : false,
 		processData : true,
 		async : true,
@@ -323,77 +425,80 @@ function myPeriod() {
 			leftReal = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
 
 			$.each(data, function() {
-				
-				alert(this.totalBase);
- 
-				var some_new_data = {
-					labels : period,
-					datasets : [ {
-						label : '정확도(%)',
-						data : leftOriginal,
-						backgroundColor : 'rgba(81, 152, 255, 0.6)',
-						borderWidth : 0,
-					}, {
-						label : '예측(%)',
-						data : leftSo,
-						backgroundColor : 'rgba(243, 115, 79, 0.6)',
-						borderWidth : 0,
-					}, {
-						label : '결과(%)',
-						data : leftReal,
-						backgroundColor : 'rgba(0, 180, 175, 0.6)',
-						borderWidth : 0
-					} ]
-				};
 
-				leftChart.config.data = some_new_data;
-				leftChart.update();
-
+				leftOriginal[this.totalBase - 1] = this.totalOriginal;
+				leftSo[this.totalBase - 1] = this.totalSo;
+				leftReal[this.totalBase - 1] = this.totalReal;
 			});
+			var some_new_data = {
+				labels : period,
+				datasets : [ {
+					label : '정확도(%)',
+					data : leftOriginal,
+					backgroundColor : 'rgba(81, 152, 255, 0.6)',
+					borderWidth : 0,
+				}, {
+					label : '예측(%)',
+					data : leftSo,
+					backgroundColor : 'rgba(243, 115, 79, 0.6)',
+					borderWidth : 0,
+				}, {
+					label : '결과(%)',
+					data : leftReal,
+					backgroundColor : 'rgba(0, 180, 175, 0.6)',
+					borderWidth : 0
+				} ]
+			};
+
+			leftChart.config.data = some_new_data;
+			leftChart.update();
+
 		},
 		error : function(e) {
 			// console.log("ERROR : ", e);
 		}
 	});
 }
-function totalPeriod() {
+function totalPeriod(year) {
 	$.ajax({
 		type : "GET",
-		url : "/dashboardChart/totalPeriod",
+		url : "/dashboardChart/totalPeriod?year=" + year,
 		cache : false,
 		processData : true,
 		async : true,
 		success : function(data) {
 			rightOriginal = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
 			rightSo = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
-			rightReal = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
+			rightReal = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
 
 			$.each(data, function() {
-
-				var some_new_data = {
-					labels : period,
-					datasets : [ {
-						label : '정확도(%)',
-						data : rightOriginal,
-						backgroundColor : 'rgba(81, 152, 255, 0.6)',
-						borderWidth : 0,
-					}, {
-						label : '예측(%)',
-						data : rightSo,
-						backgroundColor : 'rgba(243, 115, 79, 0.6)',
-						borderWidth : 0,
-					}, {
-						label : '결과(%)',
-						data : rightReal,
-						backgroundColor : 'rgba(0, 180, 175, 0.6)',
-						borderWidth : 0
-					} ]
-				};
-
-				rightChart.config.data = some_new_data;
-				rightChart.update();
-
+				rightOriginal[this.totalBase - 1] = this.totalOriginal;
+				rightSo[this.totalBase - 1] = this.totalSo;
+				rightReal[this.totalBase - 1] = this.totalReal;
 			});
+			var some_new_data = {
+				labels : period,
+				datasets : [ {
+					label : '정확도(%)',
+					data : rightOriginal,
+					backgroundColor : 'rgba(81, 152, 255, 0.6)',
+					borderWidth : 0,
+				}, {
+					label : '예측(%)',
+					data : rightSo,
+					backgroundColor : 'rgba(243, 115, 79, 0.6)',
+					borderWidth : 0,
+				}, {
+					label : '결과(%)',
+					data : rightReal,
+					backgroundColor : 'rgba(0, 180, 175, 0.6)',
+					borderWidth : 0
+				} ]
+			};
+
+			rightChart.config.data = some_new_data;
+			rightChart.update();
+
 		},
 		error : function(e) {
 			// console.log("ERROR : ", e);
@@ -402,57 +507,59 @@ function totalPeriod() {
 }
 
 function loadTab() {
-	
-	
+
 	// left
 	$
-	.ajax({
-		type : "GET",
-		url : "/dashboardChart/myCam",
-		cache : false,
-		processData : true,
-		async : true,
-		success : function(data) {
-			var html = "<li role='presentation'><a class='dropdown-header' role='menuitem' tabindex='-1' href='#'>선택하세요</a></li><li role='presentation' class='divider'></li>";
-			var periodValue = "";
-			var period = "";
-			var campain = "";
-			
-			$
-			.each(
-					data,
-					function(index, value) {
-						campain += "<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='leftCam"
-							+ index
-							+ "-tab' onclick='toggleLeft(3,"+this.camId+")'>"
-							+ this.camName + "</a></li>"
-							if (periodValue != this.camCdate) {
-								periodValue = this.camCdate;
-								period += "<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='leftPeriod"
-									+ index
-									+ "-tab' onclick='toggleLeft(2,"+this.camCdate+")'>"
-									+ this.camCdate
-									+ "년</a></li>"
-							}
-					});
-			
-			var div1 = document.querySelector('#leftPeriod');
-			div1.innerHTML = html + period;
-			var div2 = document.querySelector('#leftCam');
-			div2.innerHTML = html + campain;
-			
-		},
-		error : function(e) {
-			// console.log("ERROR : ", e);
-		}
-	});
-	
+			.ajax({
+				type : "GET",
+				url : "/dashboardChart/myTab",
+				cache : false,
+				processData : true,
+				async : true,
+				success : function(data) {
+					var html = "<li role='presentation'><a class='dropdown-header' role='menuitem' tabindex='-1' href='#'>선택하세요</a></li><li role='presentation' class='divider'></li>";
+					var periodValue = "";
+					var period = "";
+					var campain = "";
+
+					$
+							.each(
+									data,
+									function(index, value) {
+										campain += "<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='leftCam"
+												+ index
+												+ "-tab' onclick='toggleLeft(3,"
+												+ this.camId
+												+ ")'>"
+												+ this.camName + "</a></li>"
+										if (periodValue != this.camCdate) {
+											periodValue = this.camCdate;
+											period += "<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='leftPeriod"
+													+ index
+													+ "-tab' onclick='toggleLeft(2,"
+													+ this.camCdate
+													+ ")'>"
+													+ this.camCdate
+													+ "년</a></li>"
+										}
+									});
+
+					var div1 = document.querySelector('#leftPeriod');
+					div1.innerHTML = html + period;
+					var div2 = document.querySelector('#leftCam');
+					div2.innerHTML = html + campain;
+
+				},
+				error : function(e) {
+					// console.log("ERROR : ", e);
+				}
+			});
 
 	// right
 	$
 			.ajax({
 				type : "GET",
-				url : "/dashboardChart/totalCam",
+				url : "/dashboardChart/totalTab",
 				cache : false,
 				processData : true,
 				async : true,
@@ -468,13 +575,17 @@ function loadTab() {
 									function(index, value) {
 										campain += "<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='rightCam"
 												+ index
-												+ "-tab' onclick='toggleRight(3,"+this.camId+")'>"
+												+ "-tab' onclick='toggleRight(3,"
+												+ this.camId
+												+ ")'>"
 												+ this.camName + "</a></li>"
 										if (periodValue != this.camCdate) {
 											periodValue = this.camCdate;
 											period += "<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='rightPeriod"
 													+ index
-													+ "-tab' onclick='toggleRight(2,"+this.camCdate+")'>"
+													+ "-tab' onclick='toggleRight(2,"
+													+ this.camCdate
+													+ ")'>"
 													+ this.camCdate
 													+ "년</a></li>"
 										}

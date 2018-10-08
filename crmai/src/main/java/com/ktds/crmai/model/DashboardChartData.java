@@ -13,7 +13,6 @@ public class DashboardChartData {
 	private float totalSo;
 	private float totalReal;
 	public DashboardChartData(String totalBase, int totalCount, float totalOriginal, float totalSo, float totalReal) {
-		this.totalBase = totalBase;
 		this.totalCount = totalCount;
 		this.totalOriginal = totalOriginal;
 		this.totalSo = totalSo;
@@ -21,6 +20,8 @@ public class DashboardChartData {
 	}
 	public DashboardChartData() {
 	}
+	
+	
 	
 	
 }
