@@ -538,7 +538,7 @@
 										                <div class="col-lg-2 text-left">
 											                <!-- select -->
 											                <div class="form-group">
-											                  <select class="form-control">
+											                  <select id="pr_succVal" class="form-control">
 											                    <option value='10'>10%</option>
 											                    <option value='30'>30%</option>
 											                    <option value='50'>50%</option>
@@ -555,7 +555,7 @@
 										                <div class="col-lg-3 text-left">
 											                <!-- select -->
 											                <div class="form-group">
-											                  <select class="form-control">
+											                  <select  id="pr_totalVal" class="form-control">
 											                    <option value='1'>1만건</option>
 											                    <option value='3'>3만건</option>
 											                    <option value='5'>5만건</option>
@@ -567,7 +567,7 @@
 										                <!-- /.col-lg-6 -->
 										                
 										                <div class="col-lg-12 text-right" >
-									           		  		<button id="id_PrDownload" type="button" class="btn btn-info pull-right">다운로드</button>
+									           		  		<button id="id_PrDownload" type="button" class="btn btn-info pull-right"><i class="fa fa-download"></i>다운로드</button>
 					                		    	  		<button id="id_PrSearch" type="button" class="btn btn-info pull-right">조회</button>
 										              	</div>
 										                <!-- /.col-lg-6 -->
@@ -619,13 +619,31 @@
 					
 										<!-- /.box-header -->
 										<div class="box-body">
-											<div class="col-sm-12">
-												<button id="id_getAiStaningReal" type="button" class="btn btn-info pull-right">AI예측실행</button>
-											</div>
-											<div class="col-sm-12 text-center">
-												<!-- model table -->
-												<table id="ai_StagingReal" class="table table-bordered table-hover"></table>
-											</div>
+											<!-- form start -->
+											<form class="form-horizontal" id="newUploadForm"
+												action="fileUpload" method="post"
+												enctype="multipart/form-data">
+												<div class="box-body">
+													<input type="hidden" id="user_id" name="user_id" value=<%=session.getAttribute("sessionID") %>>
+				
+													<div class="form-group">
+														<label for="InputFile_train" class="col-sm-2 control-label">실측데이터 등록(실측데이터CSV)</label>
+														<div class="col-sm-10">
+															<input id="InputFile_train" type="file" name="file_train"  accept=".csv">
+														</div>
+													</div>
+				
+												</div>
+												<!-- /.box-body -->
+												<div class="box-footer text-right">
+													<button id="bthNew" type="submit" class="btn btn-primary">등록</button>
+													<button id="bthClose" type="button"	class="btn btn-secondary" data-dismiss="modal">Close</button>
+												</div>
+												<!-- /.box-footer -->
+											</form>
+											
+											
+											
 										</div>
 									</div>
 								</div>
@@ -714,7 +732,7 @@
 	    	 grid_pagingSt4(div_t_pageing);
 	    	  
 	    	  //테이블 을 그린다.
-	    	 //alert("테이블을 그린다.. !!");
+	    	 //alert("테이블을 그린다.. !! :: " + currentValue);
 	    	 search_st4();
 	    
 	    });
@@ -748,6 +766,16 @@
 	    	//alert("id_getAiStTestResult click");
 	    	page_no = 4;
 	    	search_st3();
+	    });
+	    
+	    $("#id_PrSearch").click(function(event) {
+	        alert('id_PrSearch 클릭 ~!!');
+	        PrSearch();
+	    });
+	    
+	    $("#id_PrDownload").click(function(event) {
+	        alert('id_PrDownload 클릭~!!');
+	        PrDownload();
 	    });
 
   });
