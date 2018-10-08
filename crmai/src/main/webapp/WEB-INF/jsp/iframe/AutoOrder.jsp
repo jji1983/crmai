@@ -429,13 +429,16 @@
 										<!-- /.box-header -->
 										<div class="box-body">
 											<div class="col-sm-12">
-												<button id="id_getAiStaningResult" type="button" class="btn btn-info pull-right">학습데이터전처리전</button>
-												<button id="id_getAiStaningResult" type="button" class="btn btn-info pull-right">학습데이터전처리후</button>
-												<button id="id_getAiStaningResult" type="button" class="btn btn-info pull-right">대상자데이터전처리전</button>
-												<button id="id_getAiStaningResult" type="button" class="btn btn-info pull-right">대상자데이터전처리후</button>
+												<span id='id_msg_result' class="label label-success"></span>
+												
+												<button id="id_getAiStTestResult" type="button" class="btn btn-info pull-right">대상자데이터전처리후</button>
+												<button id="id_getAiStTest" type="button" class="btn btn-primary pull-right">대상자데이터전처리전</button>
+												<button id="id_getAiStTrainResult" type="button" class="btn btn-info pull-right">학습데이터전처리후</button>
+												<button id="id_getAiStTrain" type="button" class="btn btn-primary pull-right">학습데이터전처리전</button>
 											</div>
 											
 											<div class="col-sm-12 text-center">
+												
 												<!-- campaign table -->
 												<table id="ai_staging_result" class="table table-bordered table-hover"></table>
 												<nav aria-label="Page navigation example" style="text-align: center;">
@@ -486,7 +489,7 @@
 											<div class="col-sm-12 text-center">
 												<!--  <canvas id="modelchart" style="height: 250px;"></canvas>-->
 												<div class="callout callout-warning">
-									                <h4>중요도 TOP</h4>
+									                <h4>중요도 TOP10</h4>
 									            </div>			
 												<table id="modelchart" class="table table-bordered table-hover text-center"></table>
 											</div>
@@ -526,13 +529,63 @@
 												<div class="callout callout-success">
 									                <h4>AI 예측 실행 정보</h4>
 									            </div>
-									            <!-- model table -->
-												<table id="ai_TestPredict" class="table table-bordered table-hover"></table>
-												<nav aria-label="Page navigation example" style="text-align: center;">
-												<ul class="pagination-sm" id="id_predict_pagination"></ul></nav>
-												
-									            <button id="id_Download" type="button" class="btn btn-info pull-right">예측결과 DOWNLOAD</button>
+									            <div class="col-sm-12 text-center">
+									              <div class="row">
+									                <div class="box-body">
+										                <div class="col-lg-1 text-left">
+										                	<button type="button" class="btn btn-danger">성공률</button>
+										                </div>
+										                <div class="col-lg-2 text-left">
+											                <!-- select -->
+											                <div class="form-group">
+											                  <select id="pr_succVal" class="form-control">
+											                    <option value='10'>10%</option>
+											                    <option value='30'>30%</option>
+											                    <option value='50'>50%</option>
+											                    <option value='70'>70%</option>
+											                    <option value='100' selected="selected">100%</option>
+											                  </select>
+											                </div>
+										                </div>
+										                <!-- /.col-lg-6 -->
+										                
+										          		<div class="col-lg-1 text-left">
+										                	<button type="button" class="btn btn-danger">총건수</button>
+										                </div>
+										                <div class="col-lg-3 text-left">
+											                <!-- select -->
+											                <div class="form-group">
+											                  <select  id="pr_totalVal" class="form-control">
+											                    <option value='1'>1만건</option>
+											                    <option value='3'>3만건</option>
+											                    <option value='5'>5만건</option>
+											                    <option value='10'>10만건</option>
+											                    <option value='0' selected="selected">모두</option>
+											                  </select>
+											                </div>
+										                </div>
+										                <!-- /.col-lg-6 -->
+										                
+										                <div class="col-lg-12 text-right" >
+									           		  		<button id="id_PrDownload" type="button" class="btn btn-info pull-right"><i class="fa fa-download"></i>다운로드</button>
+					                		    	  		<button id="id_PrSearch" type="button" class="btn btn-info pull-right">조회</button>
+										              	</div>
+										                <!-- /.col-lg-6 -->
+									                </div>
+									              </div>
+									              <!-- /.row -->
+
+										        </div>
+									            
+									            <div class="col-sm-12 text-center">
+										            <!-- model table -->
+													<table id="ai_TestPredict" class="table table-bordered table-hover"></table>
+													<nav aria-label="Page navigation example" style="text-align: center;">
+													<ul class="pagination-sm" id="id_predict_pagination"></ul></nav>
+									            </div>
 											</div>
+											
+											
 										</div>
 									</div>
 								</div>
@@ -566,13 +619,31 @@
 					
 										<!-- /.box-header -->
 										<div class="box-body">
-											<div class="col-sm-12">
-												<button id="id_getAiStaningReal" type="button" class="btn btn-info pull-right">AI예측실행</button>
-											</div>
-											<div class="col-sm-12 text-center">
-												<!-- model table -->
-												<table id="ai_StagingReal" class="table table-bordered table-hover"></table>
-											</div>
+											<!-- form start -->
+											<form class="form-horizontal" id="newUploadForm"
+												action="fileUpload" method="post"
+												enctype="multipart/form-data">
+												<div class="box-body">
+													<input type="hidden" id="user_id" name="user_id" value=<%=session.getAttribute("sessionID") %>>
+				
+													<div class="form-group">
+														<label for="InputFile_train" class="col-sm-2 control-label">실측데이터 등록(실측데이터CSV)</label>
+														<div class="col-sm-10">
+															<input id="InputFile_train" type="file" name="file_train"  accept=".csv">
+														</div>
+													</div>
+				
+												</div>
+												<!-- /.box-body -->
+												<div class="box-footer text-right">
+													<button id="bthNew" type="submit" class="btn btn-primary">등록</button>
+													<button id="bthClose" type="button"	class="btn btn-secondary" data-dismiss="modal">Close</button>
+												</div>
+												<!-- /.box-footer -->
+											</form>
+											
+											
+											
 										</div>
 									</div>
 								</div>
@@ -661,7 +732,7 @@
 	    	 grid_pagingSt4(div_t_pageing);
 	    	  
 	    	  //테이블 을 그린다.
-	    	 //alert("테이블을 그린다.. !!");
+	    	 //alert("테이블을 그린다.. !! :: " + currentValue);
 	    	 search_st4();
 	    
 	    });
@@ -669,8 +740,42 @@
 	    $('#RealDataModal').on('show.bs.modal', function (event) {
 	    	 
 	    	  //AI결과 정보를 보여준다
-	    	 alert("5.AI결과 보여준다. !!");
+	    	 //alert("5.AI결과 보여준다. !!");
 	    
+	    });
+	    
+	    $('#id_getAiStTrain').click(function(event){
+	    	//alert("id_getAiStTrain click");
+	    	page_no = 1;
+	    	search_st3();
+	    });
+
+	    $('#id_getAiStTest').click(function(event){
+	    	//alert("id_getAiStTest click");
+	    	page_no = 2;
+	    	search_st3();
+	    });
+
+	    $('#id_getAiStTrainResult').click(function(event){
+	    	//alert("id_getAiStTrainResult click");
+	    	page_no = 3;
+	    	search_st3();
+	    });
+
+	    $('#id_getAiStTestResult').click(function(event){
+	    	//alert("id_getAiStTestResult click");
+	    	page_no = 4;
+	    	search_st3();
+	    });
+	    
+	    $("#id_PrSearch").click(function(event) {
+	        alert('id_PrSearch 클릭 ~!!');
+	        PrSearch();
+	    });
+	    
+	    $("#id_PrDownload").click(function(event) {
+	        alert('id_PrDownload 클릭~!!');
+	        PrDownload();
 	    });
 
   });

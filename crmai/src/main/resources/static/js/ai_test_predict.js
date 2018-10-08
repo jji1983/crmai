@@ -113,3 +113,23 @@ function grid_tableStaging4(obj){
     
     div.innerHTML = html;
 }
+
+
+function PrSearch(){
+	alert("call PrSearch ~!!");
+	
+}
+
+function PrDownload(){
+	alert("call PrDownload ~!!");
+	
+	var pr_succVal = $('#pr_succVal').val();
+	var pr_totalVal = $('#pr_totalVal').val();
+	
+	alert("PrDownload :: pr_succVal[" + pr_succVal + "],  pr_totalVal[" + pr_totalVal + "]");
+	
+	
+	
+	
+	
+}
