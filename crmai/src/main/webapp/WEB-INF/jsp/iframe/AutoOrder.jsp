@@ -529,13 +529,63 @@
 												<div class="callout callout-success">
 									                <h4>AI 예측 실행 정보</h4>
 									            </div>
-									            <!-- model table -->
-												<table id="ai_TestPredict" class="table table-bordered table-hover"></table>
-												<nav aria-label="Page navigation example" style="text-align: center;">
-												<ul class="pagination-sm" id="id_predict_pagination"></ul></nav>
-												
-									            <button id="id_Download" type="button" class="btn btn-info pull-right">예측결과 DOWNLOAD</button>
+									            <div class="col-sm-12 text-center">
+									              <div class="row">
+									                <div class="box-body">
+										                <div class="col-lg-1 text-left">
+										                	<button type="button" class="btn btn-danger">성공률</button>
+										                </div>
+										                <div class="col-lg-2 text-left">
+											                <!-- select -->
+											                <div class="form-group">
+											                  <select class="form-control">
+											                    <option value='10'>10%</option>
+											                    <option value='30'>30%</option>
+											                    <option value='50'>50%</option>
+											                    <option value='70'>70%</option>
+											                    <option value='100' selected="selected">100%</option>
+											                  </select>
+											                </div>
+										                </div>
+										                <!-- /.col-lg-6 -->
+										                
+										          		<div class="col-lg-1 text-left">
+										                	<button type="button" class="btn btn-danger">총건수</button>
+										                </div>
+										                <div class="col-lg-3 text-left">
+											                <!-- select -->
+											                <div class="form-group">
+											                  <select class="form-control">
+											                    <option value='1'>1만건</option>
+											                    <option value='3'>3만건</option>
+											                    <option value='5'>5만건</option>
+											                    <option value='10'>10만건</option>
+											                    <option value='0' selected="selected">모두</option>
+											                  </select>
+											                </div>
+										                </div>
+										                <!-- /.col-lg-6 -->
+										                
+										                <div class="col-lg-12 text-right" >
+									           		  		<button id="id_PrDownload" type="button" class="btn btn-info pull-right">다운로드</button>
+					                		    	  		<button id="id_PrSearch" type="button" class="btn btn-info pull-right">조회</button>
+										              	</div>
+										                <!-- /.col-lg-6 -->
+									                </div>
+									              </div>
+									              <!-- /.row -->
+
+										        </div>
+									            
+									            <div class="col-sm-12 text-center">
+										            <!-- model table -->
+													<table id="ai_TestPredict" class="table table-bordered table-hover"></table>
+													<nav aria-label="Page navigation example" style="text-align: center;">
+													<ul class="pagination-sm" id="id_predict_pagination"></ul></nav>
+									            </div>
 											</div>
+											
+											
 										</div>
 									</div>
 								</div>
