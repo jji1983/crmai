@@ -1,12 +1,16 @@
 package com.ktds.crmai.controller;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -17,6 +21,8 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +35,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.google.gson.Gson;
+import com.ktds.crmai.model.AIPredict;
 import com.ktds.crmai.model.AI_CAMPAIGN;
 import com.ktds.crmai.service.CampaignService;
+import com.ktds.crmai.service.PredictService;
 import com.ktds.crmai.service.PretreatmentService;
+import com.ktds.crmai.service.StagingService;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -48,6 +59,9 @@ public class FileController {
 	
 	@Autowired
 	CampaignService campaignService;
+	
+	@Autowired
+	PredictService predictService;
 	
 	@RequestMapping(value = "/Upload_Pretreatment") // method = RequestMethod.GET 
 	public ResponseEntity<Object> fileUpload_Pretreatment(
@@ -172,12 +186,98 @@ public class FileController {
 
 	 HttpHeaders responseHeaders = new HttpHeaders();
 	 responseHeaders.set("charset", "utf-8");
-	 responseHeaders.setContentType(MediaType.valueOf("text/html"));
+	 responseHeaders.setContentType(MediaType.valueOf("application/pdf"));
 	 responseHeaders.setContentLength(array.length);
 	 responseHeaders.set("Content-disposition", fileName);
 
 	 return new ResponseEntity<byte[]>(array, responseHeaders, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/downPredict/{cam_id}", method = RequestMethod.GET, produces = "text/csv")
+    @ResponseBody
+    public void downloadPredict(
+    	@PathVariable String cam_id,
+    	HttpServletRequest request,
+    	HttpServletResponse response){
+		
+		try {
+			request.setCharacterEncoding("UTF-8");
+			
+			logger.info("downloadPredict :: cam_id :: {}", cam_id );
+			
+			String[] values = cam_id.split("_"); 
+			
+			//실제 내보낼 파일명 
+            String oriFileName = "예측 데이터.csv";
+            String client = "";
+            boolean skip = false;
+            
+            OutputStream os = null;
+			
+            client = request.getHeader("User-Agent");
+            
+            //파일 다운로드 헤더 지정 
+            response.reset();
+            response.setContentType("application/csv");
+            response.setHeader("Content-Description", "CSV Generated Data");
+            if (!skip) {
+                // IE
+                if (client.indexOf("MSIE") != -1) {
+                    response.setHeader("Content-Disposition", "attachment; filename=\""
+                            + java.net.URLEncoder.encode(oriFileName, "UTF-8").replaceAll("\\+", "\\ ") + "\"");
+                    // IE 11 이상.
+                } else if (client.indexOf("Trident") != -1) {
+                    response.setHeader("Content-Disposition", "attachment; filename=\""
+                            + java.net.URLEncoder.encode(oriFileName, "UTF-8").replaceAll("\\+", "\\ ") + "\"");
+                } else {
+                    // 한글 파일명 처리
+                    response.setHeader("Content-Disposition",
+                            "attachment; filename=\"" + new String(oriFileName.getBytes("UTF-8"), "ISO8859_1") + "\"");
+                    response.setHeader("Content-Type", "application/csv; charset=utf-8");
+                }
+                
+                AIPredict vo = new AIPredict();
+                
+                vo.setCamId(Integer.parseInt(values[0]));
+                
+                List<AIPredict> lists = predictService.selectAllPredictList(vo);
+                
+                StringBuilder sb = new StringBuilder();
+                for(AIPredict list : lists) {
+                	
+                	sb.append(list.toString());
+                	
+                }
+                
+                
+                response.setHeader("Content-Length", "" + sb.length());
+                os = response.getOutputStream();
+                
+                
+                os.write(sb.toString().getBytes());
+
+                /*
+                byte b[] = new byte[(int) sb.length()];
+                int leng = 0;
+                while ((leng = in.read(b)) > 0) {
+                    os.write(b, 0, leng);
+                }
+                */
+                
+                
+            } else {
+                response.setContentType("text/html;charset=UTF-8");
+                System.out.println("<script language='javascript'>alert('파일을 찾을 수 없습니다');history.back();</script>");
+            }
+            
+            os.close();
+        } catch (Exception e) {
+            System.out.println("ERROR : " + e.getMessage());
+        } 		
+				
+    }
+
+  
 	
 	
 	

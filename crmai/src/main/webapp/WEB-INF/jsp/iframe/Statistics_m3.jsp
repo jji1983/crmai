@@ -150,7 +150,7 @@
 		html += "<th class='text-center'>생성자</th>";
 		html += "<th class='text-center'>생성일자</th>";
 		html += "<th class='text-center'>대상건수</th>";
-		html += "<th class='text-center'>정확도</th>";
+		html += "<th class='text-center'>기존</th>";
 		html += "<th class='text-center'>학습모델</th>";
 		html += "<th class='text-center'>예측</th>";
 		html += "<th class='text-center'>결과</th>";

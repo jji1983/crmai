@@ -37,7 +37,6 @@
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
-    
       <div class="form-group has-feedback">
         <input id="ADM_ID" name="ADM_ID" type="text" class="form-control" placeholder="ID">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -55,7 +54,6 @@
         </div>
         <!-- /.col -->
       </div>
-
     <!-- <a href="#">비밀번호 찾기</a><br> -->
     <a href="register" class="text-center">회원가입</a>
 
@@ -71,6 +69,20 @@
 <!-- iCheck -->
 <script src="/resources/plugins/iCheck/icheck.min.js"></script>
 <script>
+
+$(document).ready(function(){
+	 
+    $('#ADM_PW').keydown(function (key) {
+ 
+        if(key.keyCode == 13){//키가 13이면 실행 (엔터는 13)
+        	login_check();
+        }
+ 
+    });
+     
+});
+
+
 var _response = $('#msg');
 function login_check(){
 	var _response = $('#msg');

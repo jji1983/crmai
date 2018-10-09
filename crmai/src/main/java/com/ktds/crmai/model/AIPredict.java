@@ -22,4 +22,20 @@ public class AIPredict {
 	public AIPredict(Integer camId) {
 		this.camId = camId;
 	}
+	
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(stSeq + ",");
+		sb.append(camId + ",");
+		sb.append(trainMethod + ",");
+		sb.append(predict + ",");
+		sb.append(succProb + ",");
+		sb.append(failProb + ",");
+		sb.append("" + ",\n");
+		
+		return sb.toString();
+		
+	};
 }

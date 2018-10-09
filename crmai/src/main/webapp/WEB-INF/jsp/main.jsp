@@ -158,6 +158,12 @@
               <label>사용자 가이드</label> 
             </a>
           </li>
+          
+          <li class="dropdown tasks-menu">
+            <a onclick="Logout();" class="dropdown-toggle" data-toggle="dropdown">
+              <label>로그아웃</label> 
+            </a>
+          </li>
       	</ul>
       </div>
     </nav>
@@ -360,6 +366,16 @@
 	            console.log("in error");
 	     } 
 		});
+	}
+	
+	function Logout(){
+		
+		var result= confirm("Logout 진행 하시겠습니까? ");
+		if(result){
+			window.location.href = "/logout";
+		}else{
+			result;
+		}
 	}
 
 </script>

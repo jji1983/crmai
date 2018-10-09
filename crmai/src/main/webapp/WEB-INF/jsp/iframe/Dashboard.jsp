@@ -471,7 +471,7 @@
 							<div class="row" id="leftStat">
 								<div class="col-md-4 col-sm-6 col-xs-12">
 									<div class="info-box">
-										<span class="info-box-text text-center text-light-blue">학습</span>
+										<span class="info-box-text text-center text-light-blue">기존</span>
 										<span class="info-box-number text-center text-light-blue">0%</span>
 										<span class="info-box-text text-center text-light-blue">(0건)</span>
 									</div>
@@ -573,7 +573,7 @@
 						<div class="row" id="rightStat">
 							<div class="col-md-4 col-sm-6 col-xs-12">
 								<div class="info-box">
-									<span class="info-box-text text-center text-light-blue">학습</span>
+									<span class="info-box-text text-center text-light-blue">기존</span>
 									<span class="info-box-number text-center text-light-blue">0%</span>
 									<span class="info-box-text text-center text-light-blue">(0건)</span>
 								</div>

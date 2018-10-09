@@ -567,8 +567,8 @@
 										                <!-- /.col-lg-6 -->
 										                
 										                <div class="col-lg-12 text-right" >
-									           		  		<button id="id_PrDownload" type="button" class="btn btn-info pull-right"><i class="fa fa-download"></i>다운로드</button>
-					                		    	  		<button id="id_PrSearch" type="button" class="btn btn-info pull-right">조회</button>
+									           		  		<button id="id_PrDownload" type="button" class="btn btn-info pull-right" onclick="javascript:PrDownload();"><i class="fa fa-download"></i>다운로드</button>
+					                		    	  		<button id="id_PrSearch" type="button" class="btn btn-info pull-right" onclick="javascript:PrSearch();">조회</button>
 										              	</div>
 										                <!-- /.col-lg-6 -->
 									                </div>
@@ -768,16 +768,6 @@
 	    	search_st3();
 	    });
 	    
-	    $("#id_PrSearch").click(function(event) {
-	        alert('id_PrSearch 클릭 ~!!');
-	        PrSearch();
-	    });
-	    
-	    $("#id_PrDownload").click(function(event) {
-	        alert('id_PrDownload 클릭~!!');
-	        PrDownload();
-	    });
-
   });
 
  </script>

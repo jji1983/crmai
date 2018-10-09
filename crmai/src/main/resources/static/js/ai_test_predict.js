@@ -125,10 +125,13 @@ function PrDownload(){
 	
 	var pr_succVal = $('#pr_succVal').val();
 	var pr_totalVal = $('#pr_totalVal').val();
+	var cam_id = currentValue + "_" + pr_succVal + "_" + pr_totalVal;
 	
 	alert("PrDownload :: pr_succVal[" + pr_succVal + "],  pr_totalVal[" + pr_totalVal + "]");
 	
 	
+	//window.open('/file/downPredict/${'+cam_id+'}');
+	window.open('/file/downPredict/'+cam_id+'');
 	
 	
 	
