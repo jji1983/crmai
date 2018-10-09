@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -192,63 +193,88 @@ public class FileController {
 	 return new ResponseEntity<byte[]>(array, responseHeaders, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/downPredict", method = RequestMethod.GET, produces = "text/csv")
+	@RequestMapping(value = "/downPredict/{cam_id}", method = RequestMethod.GET, produces = "text/csv")
     @ResponseBody
     public void downloadPredict(
-    	@RequestParam("pr_succVal") String pr_succVal,
-    	@RequestParam("pr_totalVal") String pr_totalVal,
-    	@RequestParam("cam_id") String cam_id,
+    	@PathVariable String cam_id,
+    	HttpServletRequest request,
     	HttpServletResponse response){
 		
-		logger.info("downloadPredict :: pr_succVal ::{}, pr_totalVal :: {}, cam_id :: {}",pr_succVal, pr_succVal, cam_id );
-		
-        //List<String> ids = Arrays.asList("1312321","312313");
-        //String NEW_LINE_SEPARATOR = "\n";
-        
-        //CSV file header
-        //Object[] FILE_HEADER = {"Token Number", "Token Expiry Date", };
-        //CSVPrinter csvPrinter = null;
-        
-        //response.setContentType ("application/csv");
-        //response.setHeader ("Content-Disposition", "attachment; filename=\"nishith.csv\"");
-        
-        PrintWriter writer = null;
-        try {
-        	writer = response.getWriter();
-        	
-        	 AIPredict pre = new AIPredict(Integer.parseInt(cam_id));
-        	
-        	List<AIPredict> list = predictService.selectAllPredictList(pre);
-        	
-        	Gson gson = new Gson();			
-        	String tagsAsJson = gson.toJson((list));
-        	
-        	writer.write(tagsAsJson);
-        	
-        	/*
-        	
-            csvPrinter = new CSVPrinter(new BufferedWriter(writer), CSVFormat.DEFAULT.withRecordSeparator(NEW_LINE_SEPARATOR));
-            //Create CSV file header
-            csvPrinter.printRecord(FILE_HEADER);
+		try {
+			request.setCharacterEncoding("UTF-8");
+			
+			logger.info("downloadPredict :: cam_id :: {}", cam_id );
+			
+			String[] values = cam_id.split("_"); 
+			
+			//실제 내보낼 파일명 
+            String oriFileName = "예측 데이터.csv";
+            String client = "";
+            boolean skip = false;
             
-            for (AIPredict predict : list) {
-	            try {
-	                csvPrinter.printRecord(predict.toString());
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	            }
+            OutputStream os = null;
+			
+            client = request.getHeader("User-Agent");
+            
+            //파일 다운로드 헤더 지정 
+            response.reset();
+            response.setContentType("application/csv");
+            response.setHeader("Content-Description", "CSV Generated Data");
+            if (!skip) {
+                // IE
+                if (client.indexOf("MSIE") != -1) {
+                    response.setHeader("Content-Disposition", "attachment; filename=\""
+                            + java.net.URLEncoder.encode(oriFileName, "UTF-8").replaceAll("\\+", "\\ ") + "\"");
+                    // IE 11 이상.
+                } else if (client.indexOf("Trident") != -1) {
+                    response.setHeader("Content-Disposition", "attachment; filename=\""
+                            + java.net.URLEncoder.encode(oriFileName, "UTF-8").replaceAll("\\+", "\\ ") + "\"");
+                } else {
+                    // 한글 파일명 처리
+                    response.setHeader("Content-Disposition",
+                            "attachment; filename=\"" + new String(oriFileName.getBytes("UTF-8"), "ISO8859_1") + "\"");
+                    response.setHeader("Content-Type", "application/csv; charset=utf-8");
+                }
+                
+                AIPredict vo = new AIPredict();
+                
+                vo.setCamId(Integer.parseInt(values[0]));
+                
+                List<AIPredict> lists = predictService.selectAllPredictList(vo);
+                
+                StringBuilder sb = new StringBuilder();
+                for(AIPredict list : lists) {
+                	
+                	sb.append(list.toString());
+                	
+                }
+                
+                
+                response.setHeader("Content-Length", "" + sb.length());
+                os = response.getOutputStream();
+                
+                
+                os.write(sb.toString().getBytes());
+
+                /*
+                byte b[] = new byte[(int) sb.length()];
+                int leng = 0;
+                while ((leng = in.read(b)) > 0) {
+                    os.write(b, 0, leng);
+                }
+                */
+                
+                
+            } else {
+                response.setContentType("text/html;charset=UTF-8");
+                System.out.println("<script language='javascript'>alert('파일을 찾을 수 없습니다');history.back();</script>");
             }
-            */
             
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-        
-                writer.flush();
-                writer.close();
-        
-        }
-        
+            os.close();
+        } catch (Exception e) {
+            System.out.println("ERROR : " + e.getMessage());
+        } 		
+				
     }
 
   
