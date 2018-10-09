@@ -150,7 +150,7 @@
 		html += "<th class='text-center'>생성자</th>";
 		html += "<th class='text-center'>생성일자</th>";
 		html += "<th class='text-center'>대상건수</th>";
-		html += "<th class='text-center'>정확도</th></tr></thead><tbody>";
+		html += "<th class='text-center'>기존</th></tr></thead><tbody>";
 		
 		// 데이터 존재 미존재 여부에 따른 표 표시
 		if(arr.length != 0) {

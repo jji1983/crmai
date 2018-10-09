@@ -125,10 +125,44 @@ function PrDownload(){
 	
 	var pr_succVal = $('#pr_succVal').val();
 	var pr_totalVal = $('#pr_totalVal').val();
+	var cam_id = currentValue;
 	
 	alert("PrDownload :: pr_succVal[" + pr_succVal + "],  pr_totalVal[" + pr_totalVal + "]");
 	
+	var staging = new Object();
+	staging.pr_succVal = pr_succVal;
+	staging.pr_totalVal = pr_totalVal;
+	staging.cam_id = cam_id;
 	
+	$.ajax({
+		type    : 'GET', // method
+	    url     : '/file/downPredict',
+	    //url       : '/admin/login_proc?ADM_ID=XXXX&ADM_PW=XXXX', // GET 요청은 데이터가 URL 파라미터로 포함되어 전송됩니다.
+	    async   : 'true', // true
+	    data    : staging, // GET 요청은 지원되지 않습니다.
+	    processData : true, // GET 요청은 데이터가 바디에 포함되는 것이 아니기 때문에 URL에 파라미터 형식으로 추가해서 전송해줍니다.
+	    cache: false,
+	    contentType : 'application/csv', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
+	    //dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
+	    success : function(data){
+	    	
+	    	alert("PrDownload :: " + data);
+	    	
+	    	var filename = 'relatorio_gerencial.csv';
+			var blobby = new Blob([data], {type: 'text/csv;charset=utf-8;'});
+			$(exportLink).attr({
+			                'download' : filename,
+			                'href': window.URL.createObjectURL(blobby),
+			                'target': '_blank'
+			                });
+			
+			exportLink.click();
+	    	
+	    },
+	    error : function(request,status,error){
+	    	 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	    }
+	});
 	
 	
 	

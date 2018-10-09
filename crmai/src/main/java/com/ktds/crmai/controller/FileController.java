@@ -1,12 +1,15 @@
 package com.ktds.crmai.controller;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -17,6 +20,8 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +34,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.google.gson.Gson;
+import com.ktds.crmai.model.AIPredict;
 import com.ktds.crmai.model.AI_CAMPAIGN;
 import com.ktds.crmai.service.CampaignService;
+import com.ktds.crmai.service.PredictService;
 import com.ktds.crmai.service.PretreatmentService;
+import com.ktds.crmai.service.StagingService;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -48,6 +58,9 @@ public class FileController {
 	
 	@Autowired
 	CampaignService campaignService;
+	
+	@Autowired
+	PredictService predictService;
 	
 	@RequestMapping(value = "/Upload_Pretreatment") // method = RequestMethod.GET 
 	public ResponseEntity<Object> fileUpload_Pretreatment(
@@ -172,12 +185,73 @@ public class FileController {
 
 	 HttpHeaders responseHeaders = new HttpHeaders();
 	 responseHeaders.set("charset", "utf-8");
-	 responseHeaders.setContentType(MediaType.valueOf("text/html"));
+	 responseHeaders.setContentType(MediaType.valueOf("application/pdf"));
 	 responseHeaders.setContentLength(array.length);
 	 responseHeaders.set("Content-disposition", fileName);
 
 	 return new ResponseEntity<byte[]>(array, responseHeaders, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/downPredict", method = RequestMethod.GET, produces = "text/csv")
+    @ResponseBody
+    public void downloadPredict(
+    	@RequestParam("pr_succVal") String pr_succVal,
+    	@RequestParam("pr_totalVal") String pr_totalVal,
+    	@RequestParam("cam_id") String cam_id,
+    	HttpServletResponse response){
+		
+		logger.info("downloadPredict :: pr_succVal ::{}, pr_totalVal :: {}, cam_id :: {}",pr_succVal, pr_succVal, cam_id );
+		
+        //List<String> ids = Arrays.asList("1312321","312313");
+        //String NEW_LINE_SEPARATOR = "\n";
+        
+        //CSV file header
+        //Object[] FILE_HEADER = {"Token Number", "Token Expiry Date", };
+        //CSVPrinter csvPrinter = null;
+        
+        //response.setContentType ("application/csv");
+        //response.setHeader ("Content-Disposition", "attachment; filename=\"nishith.csv\"");
+        
+        PrintWriter writer = null;
+        try {
+        	writer = response.getWriter();
+        	
+        	 AIPredict pre = new AIPredict(Integer.parseInt(cam_id));
+        	
+        	List<AIPredict> list = predictService.selectAllPredictList(pre);
+        	
+        	Gson gson = new Gson();			
+        	String tagsAsJson = gson.toJson((list));
+        	
+        	writer.write(tagsAsJson);
+        	
+        	/*
+        	
+            csvPrinter = new CSVPrinter(new BufferedWriter(writer), CSVFormat.DEFAULT.withRecordSeparator(NEW_LINE_SEPARATOR));
+            //Create CSV file header
+            csvPrinter.printRecord(FILE_HEADER);
+            
+            for (AIPredict predict : list) {
+	            try {
+	                csvPrinter.printRecord(predict.toString());
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+            }
+            */
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+        
+                writer.flush();
+                writer.close();
+        
+        }
+        
+    }
+
+  
 	
 	
 	
