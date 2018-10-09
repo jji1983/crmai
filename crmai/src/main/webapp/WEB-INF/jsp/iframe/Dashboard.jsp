@@ -422,10 +422,13 @@
 
 						<c:if test="${sessionCAMCNT > 0}">
 							<ul id="leftTab" class="nav nav-tabs" role="tablist">
-								<li role="presentation" class="active"><a data-target="#"
-									id="dropdown0-tab" role="tab" data-toggle="tab"
-									aria-controls="dropdown0" aria-expanded="true"
-									onclick='toggleLeft(1)'>나의전체</a></li>
+								<li role="presentation" class="dropdown"><a data-target="#"
+									id="myTabDrop0" class="dropdown-toggle" data-toggle="dropdown"
+									aria-controls="myTabDrop0-contents">나의전체<span class="caret"></span>
+								</a>
+									<ul class="dropdown-menu" role="menu"
+										aria-labelledby="myTabDrop1" id="leftType">
+									</ul></li>
 								<li role="presentation" class="dropdown"><a data-target="#"
 									id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown"
 									aria-controls="myTabDrop1-contents">기간별 <span class="caret"></span>
@@ -444,7 +447,7 @@
 							</ul>
 							<div id="myTabContent" class="tab-content">
 								<div role="tabpanel" class="tab-pane fade active in"
-									id="dropdown0" aria-labelledby="dropdown0-tab">
+									id="dropdown0">
 									<!-- 		<p>0번입니다</p> -->
 									<!-- Info boxes -->
 
@@ -456,7 +459,7 @@
 										</div>
 										<div class="box-body">
 											<div class="chart" style="height: 320px">
-												<canvas id="chBar0" style="height: 320px"></canvas>
+												<canvas id="chBarLeft" style="height: 320px"></canvas>
 											</div>
 										</div>
 									</div>
@@ -524,21 +527,24 @@
 						</div>
 
 						<ul id="RightTab" class="nav nav-tabs" role="tablist">
-							<li role="presentation" class="active"><a data-target="#"
-								id="dropdown1-tab" role="tab" data-toggle="tab"
-								aria-controls="dropdown1" aria-expanded="true"
-								onclick='toggleRight(1)'>산업군별</a></li>
 							<li role="presentation" class="dropdown"><a data-target="#"
-								id="myTabDrop3" class="dropdown-toggle" data-toggle="dropdown"
-								aria-controls="myTabDrop3-contents">기간별 <span class="caret"></span></a>
-								<ul class="dropdown-menu" role="menu"
-									aria-labelledby="myTabDrop3" id="rightPeriod">
-								</ul></li>
+									id="myTabDrop3" class="dropdown-toggle" data-toggle="dropdown"
+									aria-controls="myTabDrop3-contents">산업군별<span class="caret"></span>
+								</a>
+									<ul class="dropdown-menu" role="menu"
+										aria-labelledby="myTabDrop3" id="rightType">
+									</ul></li>
 							<li role="presentation" class="dropdown"><a data-target="#"
 								id="myTabDrop4" class="dropdown-toggle" data-toggle="dropdown"
-								aria-controls="myTabDrop4-contents">캠페인별 <span class="caret"></span></a>
+								aria-controls="myTabDrop3-contents">기간별 <span class="caret"></span></a>
 								<ul class="dropdown-menu" role="menu"
-									aria-labelledby="myTabDrop4" id="rightCam">
+									aria-labelledby="myTabDrop5" id="rightPeriod">
+								</ul></li>
+							<li role="presentation" class="dropdown"><a data-target="#"
+								id="myTabDrop5" class="dropdown-toggle" data-toggle="dropdown"
+								aria-controls="myTabDrop5-contents">캠페인별 <span class="caret"></span></a>
+								<ul class="dropdown-menu" role="menu"
+									aria-labelledby="myTabDrop5" id="rightCam">
 								</ul></li>
 						</ul>
 						<div id="myTabContent" class="tab-content">
@@ -555,7 +561,7 @@
 									</div>
 									<div class="box-body">
 										<div class="chart" style="height: 320px">
-											<canvas id="chBar5" style="height: 320px"></canvas>
+											<canvas id="chBarRight" style="height: 320px"></canvas>
 										</div>
 									</div>
 								</div>
@@ -676,9 +682,6 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 
-			/* 차트 초기화 */
-			initRightChart();
-			/* ~차트 초기화 */
 
 			$('.modal').on('hidden.bs.modal', function(e) {
 				// console.log('modal close');
@@ -690,10 +693,6 @@
 				noticePage();
 			});
 
-			var leftTab = document.getElementById("leftTab");
-			if (leftTab != null) {
-				initLeftChart();
-			}
 
 		});
 
@@ -740,6 +739,18 @@
 
 			$('#noticeNewModal').modal('show');
 		}
+	</script>
+
+	<!-- 차트 초기화 -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var leftTab = document.getElementById("leftTab");
+			if (leftTab != null) {
+				initLeftChart();
+			}
+			
+			initRightChart();
+		});
 	</script>
 </body>
 </html>

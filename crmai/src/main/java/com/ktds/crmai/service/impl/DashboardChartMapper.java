@@ -14,35 +14,19 @@ import com.ktds.crmai.model.DashboardChartData;
 @Repository
 public interface DashboardChartMapper {
 	
-	//나의 전체 평균(정확도,예측,결과)
-	DashboardChartData selectMyDataStat(String ADM_ID);
+	//전체 데이터 통계
+	DashboardChartData selectTotal(HashMap<String, Object> baseData);
 	
-	//전체 평균(정확도,예측,결과)
-	DashboardChartData selectTotalDataStat();
+	//산업군별 데이터 통계
+	List<DashboardChartData> selectType(HashMap<String, Object> baseData);
 	
-	//나의 전체(탭)
-	List<AIStatistics> selectMyTab(String ADM_ID);
+	//기간별 데이터 통계
+	List<DashboardChartData> selectPeriod(HashMap<String, Object> baseData);
 	
-	//전체(탭)
-	List<AIStatistics> selectTotalTab();
+	//캠페인별 데이터 통계
+	List<DashboardChartData> selectCampaign(HashMap<String, Object> baseData);
 	
-	//나의 전체(산업군별)
-	List<DashboardChartData> selectMyDataType(HashMap<String, Object> baseData);
-	
-	//전체 평균(산업군별)
-	List<DashboardChartData> selectTotalDataType();
-	
-	//나의 전체(기간별)
-	List<DashboardChartData> selectMyPeriod(HashMap<String, Object> baseData);
-	
-	//전체 평균(기간별)
-	List<DashboardChartData> selectTotalPeriod(String year); 
-	
-	
-	//나의 전체(캠페인별)
-	List<DashboardChartData> selectMyCampaign(HashMap<String, Object> baseData);
-	
-	//전체 평균(캠페인별)
-	List<DashboardChartData> selectTotalCampaign(HashMap<String, Object> baseData);
+	//캠페인별 탭
+	List<AIStatistics> selectCampaignTab(HashMap<String, Object> baseData);
 	
 }

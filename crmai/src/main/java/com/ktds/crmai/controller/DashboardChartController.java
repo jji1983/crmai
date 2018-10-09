@@ -27,108 +27,93 @@ public class DashboardChartController {
 	@Autowired
 	private DashboardChartService dashboardChartService;
 
+	// stat init
 	@ResponseBody
-	@RequestMapping(value = "totalStat")
-	public DashboardChartData selectTotalDataStat(HttpSession session) {
-		DashboardChartData response = dashboardChartService.selectTotalDataStat();
-
-		return response;
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "myStat")
-	public DashboardChartData selectMyDataStat(HttpSession session) {
-		DashboardChartData response = dashboardChartService
-				.selectMyDataStat((String) session.getAttribute("sessionID"));
-
-		return response;
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "totalType")
-	public List<DashboardChartData> selectTotalDataType(HttpSession session) {
-		List<DashboardChartData> response = new ArrayList<>();
-		response = dashboardChartService.selectTotalDataType();
-
-		return response;
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "myType")
-	public List<DashboardChartData> selectMyDataType(HttpSession session) {
-		List<DashboardChartData> response = new ArrayList<>();
+	@RequestMapping(value = "total")
+	public DashboardChartData selectTotal(@RequestParam(value = "pers", required = false) String pers,
+			HttpSession session) {
 		HashMap<String, Object> baseData = new HashMap<>();
-		baseData.put("sessionId", (String) session.getAttribute("sessionID"));
-		baseData.put("type", "type");
-
-		response = dashboardChartService.selectMyDataType(baseData);
+		if (pers != null) {
+			baseData.put("sessionId", (String) session.getAttribute("sessionID"));
+		}
+		DashboardChartData response = dashboardChartService.selectTotal(baseData);
 
 		return response;
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "totalTab")
-	public List<AIStatistics> selectTotalDataTab(HttpSession session) {
+	@RequestMapping(value = "type")
+	public List<DashboardChartData> selectType(@RequestParam(value = "pers", required = false) String pers,
+			@RequestParam(value = "type", required = false) String type, HttpSession session) {
+		HashMap<String, Object> baseData = new HashMap<>();
+		if (pers != null) {
+			baseData.put("sessionId", (String) session.getAttribute("sessionID"));
+		}
+		if (type != null) {
+			baseData.put("type", type);
+		}
+
+		List<DashboardChartData> response = new ArrayList<>();
+
+		response = dashboardChartService.selectType(baseData);
+
+		return response;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "period")
+	public List<DashboardChartData> selectPeriod(@RequestParam(value = "pers", required = false) String pers,
+			@RequestParam(value = "period", required = false) String period,
+			@RequestParam(value = "periodBase", required = false) String periodBase, HttpSession session) {
+		
+		HashMap<String, Object> baseData = new HashMap<>();
+		if (period != null) {
+			baseData.put("period", period);
+		}
+		if (periodBase != null) {
+			baseData.put("periodBase", periodBase+"");
+		}
+		if (pers != null) {
+			baseData.put("sessionId", (String) session.getAttribute("sessionID"));
+		}
+
+		List<DashboardChartData> response = new ArrayList<>();
+		response = dashboardChartService.selectPeriod(baseData);
+
+		return response;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "campaign")
+	public List<DashboardChartData> selectCampaign(@RequestParam(value = "pers", required = false) String pers,
+			@RequestParam(value = "campaign", required = false) String campaign, HttpSession session) {
+		
+		HashMap<String, Object> baseData = new HashMap<>();
+		if (pers != null) {
+			baseData.put("sessionId", (String) session.getAttribute("sessionID"));
+		}
+		if (campaign != null) {
+			baseData.put("campaign", campaign);
+		}
+
+		List<DashboardChartData> response = new ArrayList<>();
+		response = dashboardChartService.selectCampaign(baseData);
+
+		return response;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "campaignTab")
+	public List<AIStatistics> selectCampaignTab(@RequestParam(value = "pers", required = false) String pers, HttpSession session) {
+		
+		HashMap<String, Object> baseData = new HashMap<>();
+		if (pers != null) {
+			baseData.put("sessionId", (String) session.getAttribute("sessionID"));
+		}
+		
 		List<AIStatistics> response = new ArrayList<>();
-		response = dashboardChartService.selectTotalTab();
-
+		response = dashboardChartService.selectCampaignTab(baseData);
+		
 		return response;
 	}
-
-	@ResponseBody
-	@RequestMapping(value = "myTab")
-	public List<AIStatistics> selectMyDataTab(HttpSession session) {
-		List<AIStatistics> response = new ArrayList<>();
-		response = dashboardChartService.selectMyTab((String) session.getAttribute("sessionID"));
-
-		return response;
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "totalPeriod")
-	public List<DashboardChartData> selectTotalDataPeriod(@RequestParam("year") String year, HttpSession session) {
-		List<DashboardChartData> response = new ArrayList<>();
-		response = dashboardChartService.selectTotalPeriod(year);
-
-		return response;
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "myPeriod")
-	public List<DashboardChartData> selectMyDataPeriod(@RequestParam("year") String year, HttpSession session) {
-
-		List<DashboardChartData> response = new ArrayList<>();
-		HashMap<String, Object> baseData = new HashMap<>();
-		baseData.put("sessionId", (String) session.getAttribute("sessionID"));
-		baseData.put("year", year);
-
-		response = dashboardChartService.selectMyPeriod(baseData);
-
-		return response;
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "totalCampaign")
-	public List<DashboardChartData> selectTotalDataCampaign(@RequestParam("camId") String camId, HttpSession session) {
-		List<DashboardChartData> response = new ArrayList<>();
-		HashMap<String, Object> baseData = new HashMap<>();
-		baseData.put("camId", camId);
-		response = dashboardChartService.selectTotalCampaign(baseData);
-
-		return response;
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "myCampaign")
-	public List<DashboardChartData> selectMyDataCampaign(@RequestParam("camId") String camId, HttpSession session) {
-		List<DashboardChartData> response = new ArrayList<>();
-		HashMap<String, Object> baseData = new HashMap<>();
-		baseData.put("sessionId", (String) session.getAttribute("sessionID"));
-		baseData.put("camId", camId);
-
-		response = dashboardChartService.selectMyCampaign(baseData);
-
-		return response;
-	}
-
 }

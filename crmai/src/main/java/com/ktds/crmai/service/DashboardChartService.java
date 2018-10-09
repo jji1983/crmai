@@ -18,53 +18,33 @@ public class DashboardChartService implements DashboardChartMapper {
 	@Autowired
 	DashboardChartMapper dashboardChartMapper;
 
+	//전체 데이터 통계
 	@Override
-	public DashboardChartData selectMyDataStat(String ADM_ID) {
-		return dashboardChartMapper.selectMyDataStat(ADM_ID);
+	public DashboardChartData selectTotal(HashMap<String, Object> baseData) {
+		return dashboardChartMapper.selectTotal(baseData);
 	}
 
+	//산업군별 데이터 통계
 	@Override
-	public DashboardChartData selectTotalDataStat() {
-		return dashboardChartMapper.selectTotalDataStat();
+	public List<DashboardChartData> selectType(HashMap<String, Object> baseData) {
+		return dashboardChartMapper.selectType(baseData);
 	}
 
+	//기간별 데이터 통계
 	@Override
-	public List<DashboardChartData> selectMyDataType(HashMap<String, Object> baseData) {
-		return dashboardChartMapper.selectMyDataType(baseData);
+	public List<DashboardChartData> selectPeriod(HashMap<String, Object> baseData) {
+		return dashboardChartMapper.selectPeriod(baseData);
 	}
 
+	//캠페인별 데이터 통계
 	@Override
-	public List<DashboardChartData> selectTotalDataType() {
-		return dashboardChartMapper.selectTotalDataType();
+	public List<DashboardChartData> selectCampaign(HashMap<String, Object> baseData) {
+		return dashboardChartMapper.selectCampaign(baseData);
 	}
 
+	//캠페인별 탭
 	@Override
-	public List<AIStatistics> selectMyTab(String ADM_ID) {
-		return dashboardChartMapper.selectMyTab(ADM_ID);
-	}
-
-	@Override
-	public List<AIStatistics> selectTotalTab() {
-		return dashboardChartMapper.selectTotalTab();
-	}
-
-	@Override
-	public List<DashboardChartData> selectMyPeriod(HashMap<String, Object> baseData) {
-		return dashboardChartMapper.selectMyPeriod(baseData);
-	}
-
-	@Override
-	public List<DashboardChartData> selectTotalPeriod(String year) {
-		return dashboardChartMapper.selectTotalPeriod(year);
-	}
-
-	@Override
-	public List<DashboardChartData> selectMyCampaign(HashMap<String, Object> baseData) {
-		return dashboardChartMapper.selectMyCampaign(baseData);
-	}
-
-	@Override
-	public List<DashboardChartData> selectTotalCampaign(HashMap<String, Object> baseData) {
-		return dashboardChartMapper.selectTotalCampaign(baseData);
+	public List<AIStatistics> selectCampaignTab(HashMap<String, Object> baseData) {
+		return dashboardChartMapper.selectCampaignTab(baseData);
 	}
 }
