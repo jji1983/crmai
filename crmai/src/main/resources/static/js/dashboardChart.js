@@ -566,11 +566,9 @@ function getLeftCampaign(data) {
 			leftOriginal = 0;
 			leftSo = 0;
 			leftReal = 0;
-
+			var label;
 			$.each(data, function() {
-				var title = document.getElementById('LChartTitle');
-				$(title).text(this.totalBase);
-
+				label = this.totalBase;
 				leftOriginal = this.totalOriginal;
 				leftSo = this.totalSo;
 				leftReal = this.totalReal;
@@ -578,7 +576,7 @@ function getLeftCampaign(data) {
 			var some_new_data = {
 					labels : campaigns,
 					datasets : [ {
-						label : '캠페인',
+						label : label,
 						data : [ leftOriginal, leftSo, leftReal ],
 						backgroundColor : chartBGColor,
 						borderWidth : 0
@@ -605,11 +603,9 @@ function getRightCampaign(data) {
 			rightOriginal = 0;
 			rightSo = 0;
 			rightReal = 0;
-			
+			var label;
 			$.each(data, function() {
-				var title = document.getElementById('RChartTitle');
-				$(title).text(this.totalBase);
-				
+				label = this.totalBase;
 				rightOriginal = this.totalOriginal;
 				rightSo = this.totalSo;
 				rightReal = this.totalReal;
@@ -617,7 +613,7 @@ function getRightCampaign(data) {
 			var some_new_data = {
 					labels : campaigns,
 					datasets : [ {
-						label : '캠페인',
+						label : label,
 						data : [ rightOriginal, rightSo, rightReal ],
 						backgroundColor : chartBGColor,
 						borderWidth : 0
@@ -667,7 +663,7 @@ function toggleLeft(kind, cngTitle) {
 		break;
 	case 3:
 		var data = {"pers" : "y", "campaign" : cngTitle};
-
+		$(title).text("캠페인별 정확도");
 		getLeftCampaign(data);
 		break;
 	}
@@ -707,7 +703,7 @@ function toggleRight(kind, cngTitle) {
 		break;
 	case 3:
 		var data = {"campaign" : cngTitle};
-
+		$(title).text("캠페인별 정확도");
 		getRightCampaign(data);
 		break;
 	}
