@@ -29,6 +29,7 @@ public class AIPredict {
 		
 		sb.append(stSeq + ",");
 		sb.append(camId + ",");
+		sb.append(stC1 + ",");
 		sb.append(trainMethod + ",");
 		sb.append(predict + ",");
 		sb.append(succProb + ",");
