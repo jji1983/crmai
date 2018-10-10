@@ -34,7 +34,7 @@ public class DashboardChartController {
 			HttpSession session) {
 		HashMap<String, Object> baseData = new HashMap<>();
 		if (pers != null) {
-			baseData.put("sessionId", (String) session.getAttribute("sessionID"));
+			baseData.put("sessionID", (String) session.getAttribute("sessionID"));
 		}
 		DashboardChartData response = dashboardChartService.selectTotal(baseData);
 
@@ -47,7 +47,7 @@ public class DashboardChartController {
 			@RequestParam(value = "type", required = false) String type, HttpSession session) {
 		HashMap<String, Object> baseData = new HashMap<>();
 		if (pers != null) {
-			baseData.put("sessionId", (String) session.getAttribute("sessionID"));
+			baseData.put("sessionID", (String) session.getAttribute("sessionID"));
 		}
 		if (type != null) {
 			baseData.put("type", type);
@@ -74,7 +74,7 @@ public class DashboardChartController {
 			baseData.put("periodBase", periodBase+"");
 		}
 		if (pers != null) {
-			baseData.put("sessionId", (String) session.getAttribute("sessionID"));
+			baseData.put("sessionID", (String) session.getAttribute("sessionID"));
 		}
 
 		List<DashboardChartData> response = new ArrayList<>();
@@ -90,7 +90,7 @@ public class DashboardChartController {
 		
 		HashMap<String, Object> baseData = new HashMap<>();
 		if (pers != null) {
-			baseData.put("sessionId", (String) session.getAttribute("sessionID"));
+			baseData.put("sessionID", (String) session.getAttribute("sessionID"));
 		}
 		if (campaign != null) {
 			baseData.put("campaign", campaign);
@@ -108,7 +108,7 @@ public class DashboardChartController {
 		
 		HashMap<String, Object> baseData = new HashMap<>();
 		if (pers != null) {
-			baseData.put("sessionId", (String) session.getAttribute("sessionID"));
+			baseData.put("sessionID", (String) session.getAttribute("sessionID"));
 		}
 		
 		List<AIStatistics> response = new ArrayList<>();

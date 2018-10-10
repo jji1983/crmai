@@ -95,6 +95,10 @@
 	background-color: #e2f3f7;
 	border-color: #d6eef3;
 }
+
+.text-pink {
+	color: #F3734F;
+}
 </style>
 
 </head>
@@ -410,13 +414,9 @@
 
 						<c:if test="${sessionCAMCNT > 0}">
 							<ul id="leftTab" class="nav nav-tabs" role="tablist">
-								<li role="presentation" class="dropdown"><a data-target="#"
-									id="myTabDrop0" class="dropdown-toggle" data-toggle="dropdown"
-									aria-controls="myTabDrop0-contents">나의전체<span class="caret"></span>
-								</a>
-									<ul class="dropdown-menu" role="menu"
-										aria-labelledby="myTabDrop1" id="leftType">
-									</ul></li>
+								<li class="nav-item active"><a class="nav-link active"
+									role="tab" id="myTabDrop0" onclick="totalLeft()">나의전체</span>
+								</a></li>
 								<li role="presentation" class="dropdown"><a data-target="#"
 									id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown"
 									aria-controls="myTabDrop1-contents">기간별 <span class="caret"></span>
@@ -459,7 +459,7 @@
 							<div class="row" id="leftStat">
 								<div class="col-md-4 col-sm-6 col-xs-12">
 									<div class="info-box">
-										<span class="info-box-text text-center text-light-blue">기존</span>
+										<span class="info-box-text text-center text-light-blue">학습</span>
 										<span class="info-box-number text-center text-light-blue">0%</span>
 										<span class="info-box-text text-center text-light-blue">(0건)</span>
 									</div>
@@ -468,9 +468,9 @@
 								<!-- /.col -->
 								<div class="col-md-4 col-sm-6 col-xs-12">
 									<div class="info-box">
-										<span class="info-box-text text-center text-yellow">예측</span>
-										<span class="info-box-number text-center text-yellow">0%</span>
-										<span class="info-box-text text-center text-yellow">(0건)</span>
+										<span class="info-box-text text-center text-pink">예측</span> <span
+											class="info-box-number text-center text-pink">0%</span> <span
+											class="info-box-text text-center text-pink">(0건)</span>
 									</div>
 									<!-- /.info-box -->
 								</div>
@@ -561,7 +561,7 @@
 						<div class="row" id="rightStat">
 							<div class="col-md-4 col-sm-6 col-xs-12">
 								<div class="info-box">
-									<span class="info-box-text text-center text-light-blue">기존</span>
+									<span class="info-box-text text-center text-light-blue">학습</span>
 									<span class="info-box-number text-center text-light-blue">0%</span>
 									<span class="info-box-text text-center text-light-blue">(0건)</span>
 								</div>
@@ -570,9 +570,9 @@
 							<!-- /.col -->
 							<div class="col-md-4 col-sm-6 col-xs-12">
 								<div class="info-box">
-									<span class="info-box-text text-center text-yellow">예측</span> <span
-										class="info-box-number text-center text-yellow">0%</span> <span
-										class="info-box-text text-center text-yellow">(0건)</span>
+									<span class="info-box-text text-center text-pink">예측</span> <span
+										class="info-box-number text-center text-pink">0%</span> <span
+										class="info-box-text text-center text-pink">(0건)</span>
 								</div>
 								<!-- /.info-box -->
 							</div>

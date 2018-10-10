@@ -88,45 +88,6 @@ function loadLeftTab() {
 	
 	$.ajax({
 		type : "GET",
-		url : "/dashboardChart/type",
-		cache : false,
-		processData : true,
-		data: data,
-		async : true,
-		success : function(data) {
-
-			var html = "<li role='presentation'><a class='dropdown-header' role='menuitem' data-toggle='tab' tabindex='-1' href='#' onclick='totalLeft()'>전체보기</a></li><li role='presentation' class='divider'></li>";
-			$.each(data, function(index, value) {
-				html += "<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='leftType"
-						+ index
-						+ "-tab' onclick='toggleLeft(1,"
-						+ this.totalBase
-						+ ")'>";
-				switch (this.totalBase) {
-				case "1":
-					html += "통신분야</a></li>";
-					break;
-				case "2":
-					html += "금융분야</a></li>";
-					break;
-				case "3":
-					html += "유통분야</a></li>";
-					break;
-				case "0":
-					html += "기타분야</a></li>";
-					break;
-				}
-			});
-			
-			var div1 = document.querySelector('#leftType');
-			div1.innerHTML = html;
-		},
-		error : function(e) {
-		}
-	});
-	
-	$.ajax({
-		type : "GET",
 		url : "/dashboardChart/period",
 		cache : false,
 		processData : true,
@@ -305,7 +266,6 @@ function totalLeft() {
 		async : true,
 		success : function(data) {
 			loadLeftStat(data);
-			
 		},
 		error : function(e) {
 		}
