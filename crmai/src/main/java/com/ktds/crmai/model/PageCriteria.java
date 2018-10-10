@@ -35,8 +35,12 @@ public class PageCriteria {
 		this.perPageNum = perPageNum;
 	}
 	
-	public int getPageStart() {
-		return (this.page - 1) * perPageNum;
+	public int getListStart() {
+		return ((this.page - 1) * perPageNum) + 1;
+	}
+	
+	public int getListEnd() {
+		return this.page * perPageNum;
 	}
 
 	@Override

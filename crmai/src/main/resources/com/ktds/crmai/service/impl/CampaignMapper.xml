@@ -71,9 +71,9 @@
 				          
 				         order by cam_id desc 
 			         ) A
-			    where <![CDATA[ rownum <= #{perPageNum} ]]> 
+			    where <![CDATA[ rownum <= #{listEnd} ]]> 
 			    ) B
-		where <![CDATA[ B.rnum >= #{pageStart} ]]>
+		where <![CDATA[ B.rnum >= #{listStart} ]]>
 	</select>
 	
 	<!-- 파라메터 존재하는 캠페인 총 갯수 쿼리 -->

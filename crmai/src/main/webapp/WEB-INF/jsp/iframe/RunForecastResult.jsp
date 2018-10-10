@@ -214,19 +214,87 @@ $(function() {
 	        </div>
 	     </div>
        </div>
-   </div>
-   <!-- /.캠페인목록 -->
+   	</div>
+   	<!-- /.캠페인목록 -->
    
-   <!-- 모델목록 -->
+   	<!-- 모델목록 -->
 	<div class="row">
        <div class="col-xs-12">
          <div class="box">
 			<div class="box-header">
-	          <h3 class="box-title">모델 목록 <span id='id_span_msg' class="label label-success"></span></h3>
+	          <h3 class="box-title">학습 결과 <span id='id_span_msg' class="label label-success"></span></h3>
 	        </div>
 	        
 	        <div id="div_model" class="box-body">
 	          
+	        </div>
+	     </div>
+	   </div>
+	</div>
+	<!-- /.모델목록 -->
+	
+	<!-- 예측 결과 -->
+	<div class="row">
+       <div class="col-xs-12">
+         <div class="box">
+			<div class="box-header">
+	          <h3 class="box-title">예측 결과 <span id='id_span_msg' class="label label-success"></span></h3>
+	        </div>
+	        
+	        <div class="box-body">
+		       <div class="row">
+		       	<div class="col-lg-3">
+		       		<div class="form-group">
+		       			<div class="input-group">
+				          	<div class="input-group-btn">
+				          		<button type="button" class="btn btn-info">성공률</button>
+				          	</div>
+				          	<!-- /btn-group -->
+				          	<select class="form-control select2" style="width: 60%;">
+				                <option value="10">10%</option>
+				                <option value="30">30%</option>
+				                <option value="50">50%</option>
+				                <option value="70">70%</option>
+				                <option value="100" selected="selected">100%</option>
+				            </select>
+				        </div>
+				        <!-- /input-group -->
+		       		</div>
+		       	  	<!-- /form-group -->
+		       	</div>
+		          
+		        <div class="col-lg-3">
+		        	<div class="form-group">
+		        	  <div class="input-group">
+			          	<div class="input-group-btn">
+			          		<button type="button" class="btn btn-info">추출건수</button>
+			          	</div>
+			          	<!-- /btn-group -->
+			          	<select class="form-control select2" style="width: 60%;">
+			                <option value="1">1만건</option>
+			                <option value="3">3만건</option>
+			                <option value="5">5만건</option>
+			                <option value="10">10만건</option>
+			                <option value="0" selected="selected">모두</option>
+			            </select>
+			          </div>
+			          <!-- /input-group -->
+		        	</div>
+		        </div>
+		        <div class="col-lg-6">
+		          <div class="input-group pull-right">
+		          	<button type="button" onclick="" class="btn btn-info" style="margin-right: 10px;">조회</button>
+		          	<button type="button" onclick="" class="btn btn-info" style="margin-right: 10px;">다운로드</button>
+		          </div>
+		        </div>
+   	           </div>
+   	        </div>
+	        
+	        <div id="div_predict" class="box-body">
+	          
+	        </div>
+	        <div class="text-center">
+	        	<ul class="pagination-sm" id="pagination_predict"></ul>
 	        </div>
 	     </div>
 	   </div>

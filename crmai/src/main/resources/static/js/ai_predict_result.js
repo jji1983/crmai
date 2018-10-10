@@ -32,7 +32,7 @@ function newCampaignPage(){
 		url:"/campaign/count",
 		data:campaignData,
 		success:function(pagingData) {
-			createPagenationCam(pagingData["endPage"], pagingData["displayPageNum"]);
+			createPagenationCam(pagingData["realEndPage"], pagingData["displayPageNum"]);
 		}
 	});
 }
@@ -238,19 +238,48 @@ function createTableModel(arr){
 	html += "</tbody></table>";
 	  	
 	$("#div_model").html(html);					// innerHtml jquery버전
+	
+	predictCount();
 }
 
-// 캠페인과 연결되어 불러오는 ajax
-function connectCampaignAjax() {
+function predictCount() {
 	// 숫자형으로 변형
 	currentCamId = Number(currentValue);
 	
 	$.ajax({
-		url:"/predict/list",
-		cache:false,
-		contentType:"application/json",
+		url:"/predict/count",
 		data:{
 			camId : currentCamId
+		},
+		success:function(pagingData) {
+			createPagenationPredict(pagingData["realEndPage"], pagingData["displayPageNum"]);
+		},
+		error:function(xhr, status, error) {
+			console.log("오류:" + error);
+		}
+	});
+}
+
+function createPagenationPredict(totalPage, displayPage) {
+	$("#pagination_predict").twbsPagination({
+        totalPages: totalPage,
+        visiblePages: displayPage,
+        onPageClick: function (event, page) {
+        	connectCampaignAjax(page);
+        }
+    });
+}
+
+// 캠페인과 연결되어 불러오는 ajax
+function connectCampaignAjax(clickPage) {
+	// 숫자형으로 변형
+	currentCamId = Number(currentCamId);
+	
+	$.ajax({
+		url:"/predict/paging",
+		data:{
+			camId : currentCamId,
+			page : clickPage
 		},
 		success:function(data) {
 			createPredictTable(data);
@@ -287,5 +316,5 @@ function createPredictTable(arr) {
 	
 	html += "</tbody></table>";
 	  	
-	$("#div_table").html(html);					// innerHtml jquery버전
+	$("#div_predict").html(html);					// innerHtml jquery버전
 }
