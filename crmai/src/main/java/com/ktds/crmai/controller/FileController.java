@@ -251,47 +251,36 @@ public class FileController {
     }
 
 	
-	@RequestMapping(value = "/Upload_Real") // method = RequestMethod.GET 
+	@RequestMapping(value = "/UploadReal") // method = RequestMethod.GET 
 	public ResponseEntity<Object> fileUpload_Real(
+		@RequestParam("cam_id") String cam_id,
 		@RequestParam("user_id") String user_id,
-		@RequestParam("inputCamName") String inputCamName,
-		@RequestParam("inputCamDesc") String inputCamDesc,
-		@RequestParam("cam_type") String cam_type,
-		@RequestParam("cam_autoyn") String cam_autoyn,
-        @RequestParam("file_train") MultipartFile[] file_train,
-        @RequestParam("file_test") MultipartFile[] file_test) { 
+        @RequestParam("file_real") MultipartFile[] file_real) { 
 		
 		ResponseEntity<Object> response = new ResponseEntity<Object>("OK::등록 성공", HttpStatus.OK);
-		logger.info("Upload_Pretreatment :: user_id ::{}, inputCamName :: {}, inputCamDesc :: {}",user_id, inputCamName, inputCamDesc );
+		logger.info("fileUpload_Real :: cam_id ::{}, user_id :: {}, inputCamDesc :: {}",cam_id, user_id);
 		
-		AI_CAMPAIGN campaign = campaignService.selectCampaignSeq();
-		logger.info("Upload_Pretreatment :: user_id ::{}, inputCamName :: {}, inputCamDesc :: {}, cam_id :: {} ",user_id, inputCamName, inputCamDesc,  campaign.getCam_seq());
 		
-		campaign.setAdm_id(user_id);
-		campaign.setCam_name(inputCamName);
-		campaign.setCam_desc(inputCamDesc);
-		campaign.setCam_type(cam_type);
-		campaign.setCam_autoyn(cam_autoyn);
+		AI_CAMPAIGN campaign = new AI_CAMPAIGN();
+		campaign.setCam_id(cam_id);
 		
-		logger.info("### file_train check {}, {} :: file_test check {}, {}", file_train, file_train.length, file_test, file_test.length);
-        
-        // windows 사용자라면 "c:\temp\년도\월\일" 형태의 문자열을 구한다.
+		
+		 // windows 사용자라면 "c:\temp\년도\월\일" 형태의 문자열을 구한다.
         String fullPath = baseDir + user_id;
         File f = new File(fullPath);
         if(!f.exists()){ // 파일이 존재하지 않는다면
             f.mkdirs(); // 해당 디렉토리를 만든다. 하위폴더까지 한꺼번에 만든다.
         }
  
-        MultipartFile file_t1 = file_train[0];
-        MultipartFile file_t2 = file_test[0];
+        MultipartFile file_t1 = file_real[0];
+        
         
         long size_t1 = file_t1.getSize();
-        long size_t2 = file_t2.getSize();
-        if(size_t1 == 0 || size_t2 == 0) {
+        if(size_t1 == 0) {
     	   
-    	   response = new ResponseEntity<Object>("FAIL::학습파일/대상자 파일은 필수 입니다.", HttpStatus.OK);
+    	   response = new ResponseEntity<Object>("FAIL::Real Data 파일은 필수 입니다.", HttpStatus.OK);
     	   
-    	   logger.info("### size_t1 {}, size_t2{}", size_t1, size_t2);
+    	   logger.info("### size_t1 {}", size_t1);
        }else{
     	   String uuid = UUID.randomUUID().toString(); // 중복될 일이 거의 없다.
     	   
@@ -300,26 +289,8 @@ public class FileController {
            String originalFilename_t1 = file_t1.getOriginalFilename();
            String saveFileName_t1 = fullPath + File.separator + uuid +"_"+campaign.getCam_seq() + "_" +name_t1; // 실제 저장되는 파일의 절대 경로
            
-           String contentType_t2 = file_t2.getContentType();
-           String name_t2 = file_t2.getName();
-           String originalFilename_t2 = file_t2.getOriginalFilename();
-           String saveFileName_t2 = fullPath + File.separator + uuid +"_"+campaign.getCam_seq() + "_" +name_t2; // 실제 저장되는 파일의 절대 경로
- 
-           // 아래에서 출력되는 결과는 모두 database에 저장되야 한다.
-           // pk 값은 자동으로 생성되도록 한다.
-//           logger.debug("user_id :" + user_id);
-//           logger.debug("inputCamName :" + inputCamName);
-//           logger.debug("inputCamDesc :" + inputCamDesc);
-//           logger.debug("cam_type :" + cam_type);
-//           logger.debug("cam_autoyn :" + cam_autoyn);
-//           logger.debug("contentType :" + contentType_t1);
-//           logger.debug("name :" + name_t1);
-//           logger.debug("originalFilename : " + originalFilename_t1);
-//           logger.debug("size_t : " + size_t1);
-//           logger.debug("saveFileName : " + saveFileName_t1);
- 
-           campaign.setCam_ifilename(saveFileName_t1);
-           campaign.setCam_itype("1");
+           campaign.setCam_rfilename(saveFileName_t1);
+           campaign.setCam_rtype("1");
         	
            // 실제 파일을 저장함.
            // try-with-resource 구문. close()를 할 필요가 없다. java 7 이상에서 가능
@@ -334,29 +305,11 @@ public class FileController {
            }catch(Exception ex){
                 ex.printStackTrace();
            }
-           
-    	   campaign.setCam_otype("1");
-    	   campaign.setCam_ofilename(saveFileName_t2);
-               
-           // 실제 파일을 저장함.
-           // try-with-resource 구문. close()를 할 필요가 없다. java 7 이상에서 가능
-           try(
-              InputStream in = file_t2.getInputStream();
-              FileOutputStream fos = new FileOutputStream(saveFileName_t2)){
-              int readCount = 0;
-              byte[] buffer = new byte[512];
-              while((readCount = in.read(buffer)) != -1){
-            	  fos.write(buffer,0,readCount);
-              }
-           }catch(Exception ex){
-                ex.printStackTrace();
-           }
-           
+                      
            logger.info("### Upload_Pretreatment Insert {}", campaign);
-           campaignService.insertCampaign(campaign);
+           campaignService.updateCampaign(campaign);
        }
-       
-        logger.info("### response {}", response);
+		
         
 	  return response; 
 	}

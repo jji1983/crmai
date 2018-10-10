@@ -25,6 +25,8 @@ public class AI_CAMPAIGN extends PageCriteria {
 	private String cam_idate;
 	private String cam_otype;
 	private String cam_ofilename;
+	private String cam_rtype;
+	private String cam_rfilename;
 	private String cam_cdate;
 	private String cam_desc;
 	private String cam_msg;
@@ -52,7 +54,9 @@ public class AI_CAMPAIGN extends PageCriteria {
 			String cam_ofilename,
 			String cam_cdate,
 			String cam_desc,
-			String cam_msg
+			String cam_msg,
+			String cam_rtype,
+			String cam_rfilename
 	    ) {
 		this.page_st = page_st;
 		this.page_end = page_end;
@@ -72,6 +76,8 @@ public class AI_CAMPAIGN extends PageCriteria {
 		this.cam_cdate = cam_cdate;
 		this.cam_desc = cam_desc;
 		this.cam_msg = cam_msg;
+		this.cam_rtype = cam_rtype;
+		this.cam_rfilename = cam_rfilename;
 	}
 
 	public AI_CAMPAIGN(String cam_name, String adm_id, String cam_type, String cam_status) {

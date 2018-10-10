@@ -234,7 +234,7 @@ function submit_newCampagin(){
 var form = $('#newUploadForm')[0];
 var data = new FormData(form);
 $("#bthNew").prop("disabled", true);
-$("bthClose").prop("disabled", true);
+$("#bthClose").prop("disabled", true);
 
 
 $.ajax({
@@ -411,4 +411,54 @@ $.ajax({
   }else{
 	  alert("미 처리 :: " + cam_itype + " :: " + cam_otype);
   }
+}
+
+  
+function submitUploadRealData(){
+	//alert('-- submit_newCampagin -- ');
+  
+	// Get form
+	var form = $('#realUploadForm')[0];
+	var data = new FormData(form);
+	$("#bthReal").prop("disabled", true);
+	$("#bthRealClose").prop("disabled", true);
+	
+	
+	$.ajax({
+	    type: "POST",
+	    enctype: 'multipart/form-data',
+	    url: "/file/UploadReal",
+	    data: data,
+	    //http://api.jquery.com/jQuery.ajax/
+	    //https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
+	    processData: false, //prevent jQuery from automatically transforming the data into a query string
+	    contentType: false,
+	    cache: false,
+	    timeout: 600000,
+	    success: function (data) {
+	    	alert( data );
+	    	
+	    	//console.log("SUCCESS : ", data);
+	        $("#bthReal").prop("disabled", false);
+	        
+	        var jbSplit = data.split('::');
+	        
+	        //alert("jbSplit :: " + jbSplit );
+	        
+	    	if(jbSplit[0] == "OK"){
+	            //alert('모달 종료.');
+	            form.reset();
+	            $('#RealDataModal').modal('hide');
+	    	    
+	    	    // alert('캠페인 리프리시');
+	    	    campaignPage();
+	    	}
+	        
+	    },
+	    error: function (e) {
+	        alert("error :: " + e.responseText);
+	        console.log("ERROR : ", e);
+	        $("#bthNew").prop("disabled", false);
+	        }
+	 });
 }

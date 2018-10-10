@@ -620,24 +620,24 @@
 										<!-- /.box-header -->
 										<div class="box-body">
 											<!-- form start -->
-											<form class="form-horizontal" id="newUploadForm"
-												action="fileUpload" method="post"
+											<form class="form-horizontal" id="realUploadForm" action="realUploadForm" method="post"
 												enctype="multipart/form-data">
 												<div class="box-body">
+													<input type="hidden" id="cam_id" name="cam_id" value="">
 													<input type="hidden" id="user_id" name="user_id" value=<%=session.getAttribute("sessionID") %>>
 				
 													<div class="form-group">
 														<label for="InputFile_train" class="col-sm-2 control-label">실측데이터 등록(실측데이터CSV)</label>
 														<div class="col-sm-10">
-															<input id="InputFile_train" type="file" name="file_train"  accept=".csv">
+															<input id="InputFileReal" type="file" name="file_real"  accept=".csv">
 														</div>
 													</div>
 				
 												</div>
 												<!-- /.box-body -->
 												<div class="box-footer text-right">
-													<button id="bthNew" type="submit" class="btn btn-primary">등록</button>
-													<button id="bthClose" type="button"	class="btn btn-secondary" data-dismiss="modal">Close</button>
+													<button id="bthReal" type="submit" class="btn btn-primary">등록</button>
+													<button id="bthRealClose" type="button"	class="btn btn-secondary" data-dismiss="modal">Close</button>
 												</div>
 												<!-- /.box-footer -->
 											</form>
@@ -675,6 +675,15 @@
 	    	
 	        //alert('클릭 신규~!!');
 	        submit_newCampagin();
+	    });
+		
+		//모달 처리(Real).
+	    $("#bthReal").click(function(event) {
+	    	//stop submit the form, we will post it manually.
+	        event.preventDefault();
+	    	
+	        //alert('클릭 Real~!!');
+	        submitUploadRealData();
 	    });
 		
 	    $('#trainDataModal').on('show.bs.modal', function (event) {
@@ -738,11 +747,13 @@
 	    });
 	    
 	    $('#RealDataModal').on('show.bs.modal', function (event) {
-	    	 
-	    	  //AI결과 정보를 보여준다
-	    	 //alert("5.AI결과 보여준다. !!");
+	    	//alert("currentValue :: " + currentValue);
+	    	$('#cam_id').val(currentValue);
+	    	//alert("RealDataModal call!!");	 
 	    
 	    });
+	    
+	    
 	    
 	    $('#id_getAiStTrain').click(function(event){
 	    	//alert("id_getAiStTrain click");

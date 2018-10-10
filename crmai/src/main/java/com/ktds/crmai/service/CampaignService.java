@@ -54,4 +54,10 @@ public class CampaignService implements CampaignMapper {
 	public int selectCamCount(AI_CAMPAIGN campaign) {
 		return campaignMapper.selectCamCount(campaign);
 	}
+
+	@Override
+	public void updateCampaign(AI_CAMPAIGN campaign) {
+		// TODO Auto-generated method stub
+		campaignMapper.updateCampaign(campaign);
+	}
 }

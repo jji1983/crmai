@@ -8,6 +8,8 @@ public class CampaignData {
 	private String cam_ifilename;
 	private String cam_otype;
 	private String cam_ofilename;
+	private String cam_rtype;
+	private String cam_rfilename;
 	private int icnum;
 	
 	
@@ -48,6 +50,21 @@ public class CampaignData {
 	public void setCam_ofilename(String cam_ofilename) {
 		this.cam_ofilename = cam_ofilename;
 	}
+	
+	
+	public String getCam_rtype() {
+		return cam_rtype;
+	}
+	public void setCam_rtype(String cam_rtype) {
+		this.cam_rtype = cam_rtype;
+	}
+	public String getCam_rfilename() {
+		return cam_rfilename;
+	}
+	public void setCam_rfilename(String cam_rfilename) {
+		this.cam_rfilename = cam_rfilename;
+	}
+	
 	public int getIcnum() {
 		return icnum;
 	}

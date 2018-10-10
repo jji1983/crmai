@@ -45,4 +45,9 @@ public interface CampaignMapper {
 	 */
 	void insertCampaign(AI_CAMPAIGN campaign);
 	
+	/*
+	 * Name : 캠페인 Update
+	 */
+	void updateCampaign(AI_CAMPAIGN campaign);
+	
 }

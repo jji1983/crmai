@@ -84,4 +84,9 @@
 		
 		<include refid="inputParam"></include>
     </select>
+    
+    
+    <update id="updateCampaign">
+    	update ai_campaign set cam_rtype = #{cam_rtype}, cam_rfilename = #{cam_rfilename} where cam_id = #{cam_id}  
+    </update>
 </mapper>
