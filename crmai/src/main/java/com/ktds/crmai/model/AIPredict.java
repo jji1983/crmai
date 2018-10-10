@@ -10,7 +10,8 @@ import lombok.Setter;
  */
 @NoArgsConstructor
 @AllArgsConstructor
-public class AIPredict {
+public class AIPredict extends PageCriteria {
+	@Getter @Setter private Integer rnum;				// 순번
 	@Getter @Setter private Integer stSeq;				// 스테이징 시퀀스
 	@Getter @Setter private Integer camId;				// 캠페인ID
 	@Getter @Setter private String trainMethod;			// 학습모델
@@ -29,6 +30,7 @@ public class AIPredict {
 		
 		sb.append(stSeq + ",");
 		sb.append(camId + ",");
+		sb.append(stC1 + ",");
 		sb.append(trainMethod + ",");
 		sb.append(predict + ",");
 		sb.append(succProb + ",");

@@ -20,11 +20,40 @@
 			   ROUND(P.SUCC_PROB * 100, 2) as SUCC_PROB,
 			   ROUND(P.FAIL_PROB * 100, 2) as FAIL_PROB,
 			   R.ST_C1
-		  FROM AI_TEST_PREDICT P INNER JOIN AI_STAGING_TRAIN_RESULT R
+		  FROM AI_TEST_PREDICT P INNER JOIN AI_STAGING_TEST R
         		ON P.ST_SEQ = R.ST_SEQ
          WHERE P.CAM_ID = #{camId}
 	</select>
 	
+	<!-- 파라메터 존재하는 예측 결과 갯수 쿼리 -->
+	<select id="selectPredictCnt" resultType="int" parameterType="int">
+		SELECT COUNT(*)
+		FROM AI_TEST_PREDICT P INNER JOIN AI_STAGING_TEST T
+        		ON P.ST_SEQ = T.ST_SEQ
+        WHERE P.CAM_ID = #{camId}
+	</select>
+	
 	<!-- 페이징 처리 목록 -->
+	<select id="selectPredictList" resultMap="aiPredictMap" parameterType="hashmap">
+		SELECT * 
+		FROM (
+				SELECT ROWNUM as RNUM, A.*
+				FROM (
+				        SELECT P.ST_SEQ,
+							   P.CAM_ID,
+							   P.TRAIN_METHOD,
+							   P.PREDICT,
+							   ROUND(P.SUCC_PROB * 100, 2) as SUCC_PROB,
+							   ROUND(P.FAIL_PROB * 100, 2) as FAIL_PROB,
+							   ST_C1
+						  FROM AI_TEST_PREDICT P INNER JOIN AI_STAGING_TEST T
+				        			ON P.ST_SEQ = T.ST_SEQ
+				         WHERE P.CAM_ID = #{camId}
+				         ORDER BY ST_SEQ DESC
+				      ) A
+				WHERE <![CDATA[ ROWNUM <= #{listEnd} ]]>
+	    	 ) B
+	    WHERE <![CDATA[ B.RNUM >= #{listStart} ]]>
+	</select>
 	
 </mapper>
