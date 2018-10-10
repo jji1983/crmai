@@ -247,147 +247,135 @@
 
 		<!-- 공지사항 -->
 		<div class="row">
-			<!-- Default box -->
-			<div class="box">
-				<div class="box-header with-border">
-					<h4 class="box-title">공지사항</h4>
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box box-default">
+						<div class="box-header with-border">
+							<h3 class="box-title">공지사항</h3>
+						</div>
+						<!-- /.box-header -->
+						<div class="box-body">
+							<!-- board table -->
+							<!-- /.게시판 목록 -->
+							<form id="noticeForm" name="noticeForm" method="post">
+								<table
+									class="table table-bordered table-striped table-hover text-center">
+									<thead>
+										<tr>
+											<th style="width: 70px">번호</th>
+											<th style="width: 65%">제목</th>
+											<th style="width: 100px">작성자</th>
+											<th style="width: 100px">날짜</th>
+											<!--<th>조회수</th>-->
+										</tr>
+									</thead>
+									<tbody id="ai_notice">
+								</table>
+								<nav aria-label="Page navigation example"
+									style="text-align: center;">
+									<ul class="pagination-sm" id="pagination"></ul>
+								</nav>
+							</form>
 
-					<div class="box-tools pull-right">
-						<button type="button" class="btn btn-box-tool"
-							data-widget="collapse" data-toggle="tooltip" title="Collapse">
-							<i class="fa fa-minus"></i>
-						</button>
-						<button type="button" class="btn btn-box-tool"
-							data-widget="remove" data-toggle="tooltip" title="Remove">
-							<i class="fa fa-times"></i>
-						</button>
-					</div>
-				</div>
-				<div class="box-body">
-					<p id="noticeVal"></p>
-					<div class="row">
-						<div class="col-xs-12">
-							<div class="box">
-								<div class="box box-default">
-									<!-- /.box-header -->
-									<div class="box-body with-border">
-										<!-- notice table -->
-										<!-- /.게시판 목록 -->
-										<div class="row">
-											<!-- notice table -->
-											<table id="ai_notice"
-												class="table table-bordered table-hover text-center"></table>
-											<nav aria-label="Page navigation example"
-												style="text-align: center;">
-												<ul class="pagination-sm" id="id_notice"></ul>
-											</nav>
-											<table id="id_notice"
-												class="table table-bordered table-hover"></table>
-											<nav aria-label="Page navigation example"
-												style="text-align: center;">
-												<ul class="pagination-sm" id="pagination"></ul>
-											</nav>
-
-										</div>
-
-										<!-- Modal -->
-										<div class="modal fade" id="noticeNewModal" tabindex="-1"
-											role="dialog" aria-labelledby="newModalLabel"
-											aria-hidden="true">
-											<div class="modal-dialog" role="document">
-												<div class="modal-content">
-													<div class="modal-header">
-														<div class="row">
-															<div class="col-xs-10">
-																<h5 class="modal-title" id="newModalLabel">게시글 신규
-																	등록</h5>
-															</div>
-															<div class="col-xs-2">
-																<button type="button" class="close" data-dismiss="modal"
-																	aria-label="Close">
-																	<span aria-hidden="true">&times;</span>
-																</button>
-															</div>
-														</div>
-													</div>
-													<div class="modal-body">
-														<!-- form start -->
-														<form class="form-horizontal" id="newUploadForm"
-															action="/notice/insert" method="post">
-															<div class="box-body">
-
-																<input type="hidden" id="user_id" name="user_id"
-																	value=<%=session.getAttribute("sessionID")%>> <input
-																	type="hidden" id="noticeCode" name="noticeCode">
-
-																<div class="form-group">
-																	<label for="inputNoticeName"
-																		class="col-sm-2 control-label">제목</label>
-
-																	<div class="col-sm-10">
-																		<input id="inputNoticeName" name="inputNoticeName"
-																			type="text" class="form-control" placeholder="제목"
-																			required>
-																	</div>
-																</div>
-
-																<div class="form-group readNotice">
-																	<label for="noticeDate" class="col-sm-2 control-label">등록일</label>
-
-																	<div class="col-sm-10">
-																		<input id="noticeDate" name="noticeDate" type="text"
-																			class="form-control" readonly>
-																	</div>
-																</div>
-
-																<div class="form-group readNotice">
-																	<label for="noticeWriter"
-																		class="col-sm-2 control-label">작성자</label>
-
-																	<div class="col-sm-10">
-																		<input id="noticeWriter" name="noticeWriter"
-																			type="text" class="form-control" readonly>
-																	</div>
-																</div>
-
-																<div class="form-group">
-																	<label for="inputNoticeDesc"
-																		class="col-sm-2 control-label">내용</label>
-
-																	<div class="col-sm-10">
-																		<textarea id="inputNoticeDesc" name="inputNoticeDesc"
-																			class="form-control" rows="10" placeholder="내용"
-																			style="resize: none;"></textarea>
-																	</div>
-																</div>
-
-															</div>
-															<!-- /.box-body -->
-															<div class="box-footer">
-																<div class='row pull-right' style='margin-right: 3px'>
-																	<button id="bthClose" type="button"
-																		class="btn btn-secondary" data-dismiss="modal"
-																		style="margin-left: 5px">돌아가기</button>
-																</div>
-															</div>
-															<!-- /.box-footer -->
-														</form>
-													</div>
+							<!-- Modal -->
+							<div class="modal fade" id="noticeNewModal" tabindex="-1"
+								role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<div class="row">
+												<div class="col-xs-10">
+													<h5 class="modal-title" id="newModalLabel">게시글 신규 등록</h5>
+												</div>
+												<div class="col-xs-2">
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
 												</div>
 											</div>
 										</div>
-										<!--/. Modal -->
+										<div class="modal-body">
+											<!-- form start -->
+											<form class="form-horizontal" id="newUploadForm"
+												action="/notice/insert" method="post">
+												<div class="box-body">
 
+													<input type="hidden" id="user_id" name="user_id"
+														value=<%=session.getAttribute("sessionID")%>> <input
+														type="hidden" id="noticeCode" name="noticeCode">
+
+													<div class="form-group">
+														<label for="inputNoticeName"
+															class="col-sm-2 control-label">제목</label>
+
+														<div class="col-sm-10">
+															<input id="inputNoticeName" name="inputNoticeName"
+																type="text" class="form-control" placeholder="제목"
+																required>
+														</div>
+													</div>
+
+													<div class="form-group readNotice">
+														<label for="noticeDate" class="col-sm-2 control-label">등록일</label>
+
+														<div class="col-sm-10">
+															<input id="noticeDate" name="noticeDate" type="text"
+																class="form-control" readonly>
+														</div>
+													</div>
+
+													<div class="form-group readNotice">
+														<label for="noticeWriter" class="col-sm-2 control-label">작성자</label>
+
+														<div class="col-sm-10">
+															<input id="noticeWriter" name="noticeWriter" type="text"
+																class="form-control" readonly>
+														</div>
+													</div>
+
+													<div class="form-group">
+														<label for="inputNoticeDesc"
+															class="col-sm-2 control-label">내용</label>
+
+														<div class="col-sm-10">
+															<textarea id="inputNoticeDesc" name="inputNoticeDesc"
+																class="form-control" rows="10" placeholder="내용"
+																style="resize: none;"></textarea>
+														</div>
+													</div>
+
+													<!-- TODO: 첨부파일 등록 -->
+													<!--
+												<div class="form-group">
+													<label for="InputFile_csv" class="col-sm-2 control-label">파일 등록(CSV)</label>
+													<div class="col-sm-10">
+														<input id="InputFile_csv" type="file" name="file_board" accept=".csv">
+													</div>
+												</div>
+												-->
+												</div>
+												<!-- /.box-body -->
+												<div class="box-footer">
+													<div class='row pull-right' style='margin-right: 3px'>
+														<button id="bthClose" type="button"
+															class="btn btn-secondary" data-dismiss="modal"
+															style="margin-left: 5px">돌아가기</button>
+													</div>
+												</div>
+												<!-- /.box-footer -->
+											</form>
+										</div>
 									</div>
 								</div>
 							</div>
+							<!--/. Modal -->
+
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- /.box -->
 		</div>
-		<!-- /.row -->
 
 		<!-- 통계 -->
 		<div class="row">
@@ -528,12 +516,12 @@
 
 						<ul id="RightTab" class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="dropdown"><a data-target="#"
-									id="myTabDrop3" class="dropdown-toggle" data-toggle="dropdown"
-									aria-controls="myTabDrop3-contents">산업군별<span class="caret"></span>
-								</a>
-									<ul class="dropdown-menu" role="menu"
-										aria-labelledby="myTabDrop3" id="rightType">
-									</ul></li>
+								id="myTabDrop3" class="dropdown-toggle" data-toggle="dropdown"
+								aria-controls="myTabDrop3-contents">산업군별<span class="caret"></span>
+							</a>
+								<ul class="dropdown-menu" role="menu"
+									aria-labelledby="myTabDrop3" id="rightType">
+								</ul></li>
 							<li role="presentation" class="dropdown"><a data-target="#"
 								id="myTabDrop4" class="dropdown-toggle" data-toggle="dropdown"
 								aria-controls="myTabDrop3-contents">기간별 <span class="caret"></span></a>
@@ -679,68 +667,23 @@
 	<script src="/resources/js/dashboardChart.js"></script>
 
 
+	<!-- 게시판 -->
 	<script type="text/javascript">
 		$(document).ready(function() {
-
-
+			// 모달 처리
 			$('.modal').on('hidden.bs.modal', function(e) {
 				// console.log('modal close');
 				$(this).find('form')[0].reset();
 			});
-			$('#ai_notice').on('shown.bs.modal', function(e) {
-				var div_t_pageing = $('#id_notice');
-				grid_table_notice(div_t_pageing);
-				noticePage();
+
+			$('.modal').on('shown.bs.modal', function() {
+				// console.log('modal open');
 			});
 
-
+			// 게시판 조회
+			getPagination();
 		});
-
-		//게시글 조회
-		function view_notice(code) {
-			//console.log('-- view_board -- ', code);
-
-			$.ajax({
-				type : "GET",
-				url : "/notice/detail?code=" + code,
-				contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
-				cache : false,
-				timeout : 600000,
-				success : function(data) {
-					console.log("SUCCESS : ", data);
-
-					showModal(data);
-				},
-				error : function(e) {
-					alert("error :: " + e.responseText);
-					console.log("ERROR : ", e);
-				}
-			});
-		}
-
-		function showModal(data) {
-			console.log('-- showModal -- ', data);
-
-			var d = data[0];
-			$('#newModalLabel').text('게시글 상세 조회');
-
-			$("#inputNoticeName").attr("readonly", true);
-			$("#inputNoticeName").val(d.title);
-
-			$("#inputNoticeDesc").attr("readonly", true);
-			$("#inputNoticeDesc").val(d.contents);
-
-			$("#noticeCode").val(d.code);
-			$("#noticeWriter").val(d.writer);
-			$("#noticeDate").val(d.reg_datetime.substr(0, 19));
-
-			$('.readNotice').show();
-			$('.editNotice').hide();
-
-			$('#noticeNewModal').modal('show');
-		}
 	</script>
-
 	<!-- 차트 초기화 -->
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -748,7 +691,7 @@
 			if (leftTab != null) {
 				initLeftChart();
 			}
-			
+
 			initRightChart();
 		});
 	</script>

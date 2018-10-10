@@ -343,6 +343,7 @@ function totalRight() {
 
 
 function getLeftType(data) {
+	var etc = 3;
 	$.ajax({
 		type : "GET",
 		url : "/dashboardChart/type",
@@ -361,10 +362,10 @@ function getLeftType(data) {
 					leftOriginal[this.totalBase - 1] = this.totalOriginal;
 					leftSo[this.totalBase - 1] = this.totalSo;
 					leftReal[this.totalBase - 1] = this.totalReal;
-				} else {
-					leftOriginal[this.totalBase] = this.totalOriginal;
-					leftSo[this.totalBase] = this.totalSo;
-					leftReal[this.totalBase] = this.totalReal;
+				} else if (this.totalBase == 0) {
+					leftOriginal[etc] = this.totalOriginal;
+					leftSo[etc] = this.totalSo;
+					leftReal[etc] = this.totalReal;
 				}
 			});
 			var some_new_data = {
@@ -396,6 +397,8 @@ function getLeftType(data) {
 	});
 }
 function getRightType(data) {
+	var etc = 3;
+	
 	$.ajax({
 		type : "GET",
 		url : "/dashboardChart/type",
@@ -414,10 +417,10 @@ function getRightType(data) {
 					rightOriginal[this.totalBase - 1] = this.totalOriginal;
 					rightSo[this.totalBase - 1] = this.totalSo;
 					rightReal[this.totalBase - 1] = this.totalReal;
-				} else {
-					rightOriginal[this.totalBase] = this.totalOriginal;
-					rightSo[this.totalBase] = this.totalSo;
-					rightReal[this.totalBase] = this.totalReal;
+				} else if (this.totalBase == 0) {
+					rightOriginal[etc] = this.totalOriginal;
+					rightSo[etc] = this.totalSo;
+					rightReal[etc] = this.totalReal;
 				}
 			});
 			var some_new_data = {

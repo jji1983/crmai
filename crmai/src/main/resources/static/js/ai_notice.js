@@ -1,103 +1,220 @@
-var notice_totalpage = 10;
-var notice_visiblePages = 10;
+var nowPages = 1;
+var totalPages = 1;
+var visiblePages = 5;
 
-var notice_page_st = 1;
-var notice_page_end = 10;
+var page_st = 1;
+var page_end = 5;
 
-var page_no = 1;
-
-function grid_pagingNotice(div){
-	//alert("call grid_pagingNotice ");
-	
-	div.twbsPagination('destroy');
-	window.pagObj = div.twbsPagination({
-          totalPages: notice_totalpage,
-          visiblePages: notice_visiblePages,
-          onPageClick: function (event, page) {
-        	  
-        	  notice_page_st = ((1 * notice_visiblePages) * page) - (notice_visiblePages - 1);
-        	  notice_page_end = (notice_page_st + notice_visiblePages) - 1;
-        	  
-        	  search_notice();
-          }
-    }).on('page', function (event, page) {
-    });
-}
-
-
-function search_notice(){
-	//alert("search_st :: code[" + currentValue + "],s1_totalpage[" + s1_totalpage + "], s1_page_st[" + s1_page_st + "], s1_page_end[" + s1_page_end + "]");
-	
-	var code = currentValue;
-	
-	var page = new Object();
-	page.code = code;
-	page.page_st = notice_page_st;
-	page.page_end = notice_page_end;
-	page.page = page_no;
-	
+function getPagination() {
 	$.ajax({
-        type    : 'GET', // method
-        url     : '/notice/result',
-        //url       : '/admin/login_proc?ADM_ID=XXXX&ADM_PW=XXXX', // GET 요청은 데이터가 URL 파라미터로 포함되어 전송됩니다.
-        async   : 'true', // true
-        data    : page, // GET 요청은 지원되지 않습니다.
-        processData : true, // GET 요청은 데이터가 바디에 포함되는 것이 아니기 때문에 URL에 파라미터 형식으로 추가해서 전송해줍니다.
-        cache: false,
-        contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
-        //dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
-        success : function(data){
-        	var obj = JSON.stringify(data, true, 2);
-        	//alert("search_st result :: " + obj);
-        	
-        	grid_tableNotice(obj);
-        	
-        },
-        error : function(request,status,error){
-        	 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-        }
+		type : 'GET',
+		url : '/notice/totalPage',
+		async : 'true',
+		processData : true,
+		cache : false,
+		success : function(data) {
+			if (data[0] != "0") {
+				totalPages = Math.ceil(data[0] / visiblePages);
+
+				grid_pagination(totalPages, visiblePages);
+			}
+		},
+		error : function(request, status, error) {
+		}
 	});
+}
+
+function grid_table_notice(obj) {
+	var div = document.querySelector('#ai_notice');
+
+	var html = '<tbody>';
+	var json = $.parseJSON(obj);
+	$(json)
+			.each(
+					function(i, val) {
+						html += '<tr onClick="view_notice(' + val.code + ')">';
+						$
+								.each(
+										val,
+										function(k, v) {
+											if (k == 'contents') {
+												return;
+											}
+
+											if (k == 'reg_datetime') {
+												v = v.substr(0, 10);
+											}
+
+											if (v == 'null' || v == '') {
+
+												// html += '<td></td>';
+											} else if (k == 'title') {
+												html += '<td style="text-align: left; padding-left: 10px;">'
+														+ v + '</td>';
+											} else {
+												html += '<td>' + v + '</td>';
+											}
+										});
+						html += '</tr>';
+					});
+	html += '</tbody>';
+
+	// console.log("Tbody == " + html);
+	div.innerHTML = html;
+}
+
+// 글쓰기
+function fn_write() {
+
+	var form = document.getElementById("noticeForm");
+
+	form.action = "<c:url value='/notice/writeForm.do'/>";
+	form.submit();
 
 }
 
-function grid_tableNotice(obj){
-	//alert("grid_table_campaign :: " + obj);
+// 글조회
+function fn_view(code) {
+
+	var form = document.getElementById("noticeForm");
+	var url = "<c:url value='/notice/list'/>";
+	url = url + "?code=" + code;
+
+	form.action = url;
+	form.submit();
+}
+
+// 게시글 조회
+function view_notice(code) {
+	// console.log('-- view_board -- ', code);
+
+	$.ajax({
+		type : "GET",
+		url : "/notice/detail?code=" + code,
+		contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만
+		// 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
+		cache : false,
+		timeout : 600000,
+		success : function(data) {
+			console.log("SUCCESS : ", data);
+
+			showModal('READ', data);
+		},
+		error : function(e) {
+			alert("error :: " + e.responseText);
+			console.log("ERROR : ", e);
+		}
+	});
+}
+
+function showModal(type, data) {
+	// console.log('-- showModal -- ', type);
+	if (type === 'EDIT') {
+		$('#newModalLabel').text('게시글 신규 등록');
+
+		$("#inputNoticeName").attr("readonly", false);
+
+		$("#inputNoticeDesc").attr("readonly", false);
+
+		$('.readNotice').hide();
+		$('.editNotice').show();
+	} else { // type === 'READ'
+		var d = data[0];
+		$('#newModalLabel').text('게시글 상세 조회');
+
+		$("#inputNoticeName").attr("readonly", true);
+		$("#inputNoticeName").val(d.title);
+
+		$("#inputNoticeDesc").attr("readonly", true);
+		$("#inputNoticeDesc").val(d.contents);
+
+		$("#noticeCode").val(d.code);
+		$("#noticeWriter").val(d.writer);
+		$("#noticeDate").val(d.reg_datetime.substr(0, 19));
+
+		$('.readNotice').show();
+		$('.editNotice').hide();
+	}
+
+	$('#noticeNewModal').modal('show');
+}
+
+// 페이징처리
+function grid_pagination(totalPages, visiblePages) {
+	// alert("grid_pagination :: " + totalPages + " :: " + visiblePages);
+
+	$('#pagination').twbsPagination('destroy');
+	window.pagObj = $('#pagination').twbsPagination({
+		totalPages : totalPages,
+		visiblePages : visiblePages,
+		onPageClick : function(event, page) {
+			// alert("on1 " + page + ' (from event listening)');
+
+			page_st = ((1 * visiblePages) * page) - (visiblePages - 1);
+			page_end = (page_st + visiblePages) - 1;
+
+			search_notice(page, page_st, page_end);
+		}
+	}).on('page', function(event, page) {
+		// alert("on2 " + page + ' (from event listening)');
+	});
+}
+
+function search_notice(now_page, page_st, page_end) {
+
+	// alert("search_campaign call :: now[" + now_page + "] :: interval["
+	// +visiblePages +"] :: st[" + page_st + "] :: end[" + page_end + "]" );
+
+	var notice = new Object();
+	notice.page_st = page_st;
+	notice.page_end = page_end;
+
+	$.ajax({
+		type : 'GET', // method
+		url : '/notice/listPage',
+		async : 'true', // true
+		cache : false,
+		data : notice,
+		processData : true,
+		success : function(data) {
+
+			grid_table_notice(data);
+
+		},
+		error : function(request, status, error) {
+			// alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+}
+
+function grid_table_notice(obj) {
 	var div = document.querySelector('#ai_notice');
-    
-	html = '<table style="width: 100%" class="table table-bordered table-striped table-hover text-center">';
-    html += 	'<thead><tr>';
-    html += 	'<th style="width: 70px">번호</th>';
-    html += 	'<th style="width: 65%">제목</th>';
-    html += 	'<th style="width: 100px">작성자</th>';
-    html += 	'<th style="width: 100px">날짜</th>';
-    html += 	'<!--<th>조회수</th>-->';
-    html += 	'</tr></thead>';
-    html += '<tbody>';
-    
-    var json = $.parseJSON(obj);
-    $(json).each(function(i, val) {
-		html += '<tr onClick="view_board('+val.code+')">';
+
+	var html = '';
+	$.each(obj, function(i, val) {
+		html += '<tr onClick="view_notice(' + val.code + ')">';
 		$.each(val, function(k, v) {
 			if (k == 'contents') {
 				return;
 			}
-			
+
 			if (k == 'reg_datetime') {
 				v = v.substr(0, 10);
 			}
 
-		 	if (v == 'null' || v == '') {
+			if (v == 'null' || v == '') {
 
-					//html += '<td></td>';
 			} else if (k == 'title') {
-				html += '<td style="text-align: left; padding-left: 10px;">' + v + '</td>';
+				html += '<td style="text-align: left; padding-left: 10px;">'
+						+ v + '</td>';
 			} else {
 				html += '<td>' + v + '</td>';
 			}
- 		});
+		});
 		html += '</tr>';
 	});
 	html += '</tbody>';
-    
-    div.innerHTML = html;
+
+	// console.log("Tbody == " + html);
+	div.innerHTML = html;
 }
