@@ -3,7 +3,6 @@ package com.ktds.crmai.controller;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -16,14 +15,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ktds.crmai.model.AI_ADMINUSER;
 import com.ktds.crmai.model.AI_CAMPAIGN;
-import com.ktds.crmai.model.Pretreatment;
+import com.ktds.crmai.model.PageCriteria;
+import com.ktds.crmai.model.PageMaker;
 import com.ktds.crmai.service.CampaignService;
-import com.ktds.crmai.service.PretreatmentService;
 
 
 @Controller
@@ -73,6 +70,8 @@ public class CampaignController {
     		logger.info("AI_CAMPAIGN :: "+ cam.toString());
     	}
     	
+    	session.setAttribute("sessionCAMCNT", out_campaign.size());
+    	
     	//응답과 함깨 HttpStatus를 지정할 수 있습니다.
     	ResponseEntity<Object> response = new ResponseEntity<Object>(out_campaign, HttpStatus.OK);
     	
@@ -96,5 +95,54 @@ public class CampaignController {
     	return response;
     }
 	
-
+	// 파라미터 받는 캠페인 목록의 총 갯수
+	@ResponseBody
+	@RequestMapping(value="/count", method=RequestMethod.GET)
+	public PageMaker getCamTotalCount(
+		@ModelAttribute AI_CAMPAIGN campaignParam,
+		PageCriteria cri,
+		HttpSession session) {
+		
+		String admId= (String)session.getAttribute("sessionID");
+		
+		campaignParam.setAdm_id(admId);
+    	
+    	PageMaker pageMaker = new PageMaker();
+    	
+    	pageMaker.setCri(cri);
+    	
+    	int totalCount = campaignService.selectCamCount(campaignParam);
+    	
+    	pageMaker.setTotalCount(totalCount);
+    	
+    	logger.info("$$$$$ 총 목록 수:" + totalCount + ", 디스플레이 페이지:" + pageMaker.getDisplayPageNum() + ", 페이지 총 수:" + pageMaker.getRealEndPage());
+    	
+    	return pageMaker;
+	}
+	
+	// 파라미터 받는 캠페인 리스트 페이지
+	@ResponseBody
+	@RequestMapping(value = "/list", method=RequestMethod.GET)
+    public List<AI_CAMPAIGN> getNewCampaignListPage(
+    		@ModelAttribute AI_CAMPAIGN campaignParam,
+    		PageCriteria cri,
+    		HttpSession session){
+    	
+    	logger.info("Request List....getNewCampaignListPage.... - {}", campaignParam.getCam_name());
+    	
+    	String admId= (String)session.getAttribute("sessionID");
+    	
+    	campaignParam.setAdm_id(admId);
+    	campaignParam.setPage(cri.getPage());
+    	
+    	logger.info("$$$$$$perPageNum:" + cri.getPerPageNum());
+    	
+    	campaignParam.setPerPageNum(cri.getPerPageNum());
+    		
+    	List<AI_CAMPAIGN> campaign = campaignService.selectNewCampaignPage(campaignParam);
+    	
+    	logger.info("NEW_AI_CAMPAIGN :: "+ campaign.toString());
+    	
+    	return campaign;
+    }
 }

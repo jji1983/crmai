@@ -192,15 +192,15 @@
 					v = v.substr(0, 10);
 				}
 
-				if (v == 'null' || v == '') {
+			 	if (v == 'null' || v == '') {
 	
-						html += '<td></td>';
+						//html += '<td></td>';
 				} else if (k == 'title') {
 					html += '<td style="text-align: left; padding-left: 10px;">' + v + '</td>';
 				} else {
 					html += '<td>' + v + '</td>';
 				}
-			});
+	 		});
 			html += '</tr>';
 		});
 		html += '</tbody>';

@@ -1,7 +1,6 @@
 package com.ktds.crmai.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,5 +45,13 @@ public class CampaignService implements CampaignMapper {
 		
 	}
 
+	@Override
+	public List<AI_CAMPAIGN> selectNewCampaignPage(AI_CAMPAIGN campaign) {
+		return campaignMapper.selectNewCampaignPage(campaign);
+	}
 
+	@Override
+	public int selectCamCount(AI_CAMPAIGN campaign) {
+		return campaignMapper.selectCamCount(campaign);
+	}
 }

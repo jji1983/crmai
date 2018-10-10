@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.ktds.crmai.service.impl.DashboardChartMapper">
+	<resultMap type="com.ktds.crmai.model.AIStatistics"
+		id="aiStatisticMap">
+		<result column="CAM_ID" property="camId" />
+		<result column="CAM_NAME" property="camName" />
+		<result column="CAM_STATUS" property="camStatus" />
+		<result column="ADM_ID" property="admId" />
+		<result column="ADM_NAME" property="admName" />
+		<result column="CAM_TYPE" property="camType" />
+		<result column="MMdate" property="camCdate" />
+		<result column="ADM_TYPE" property="admType" />
+		<result column="TRAIN_METHOD" property="trainMethod" />
+		<result column="ORIGINAL_ACC" property="originalAcc" />
+		<result column="SO_ACC" property="soAcc" />
+		<result column="REAL_ACC" property="realAcc" />
+		<result column="MODEL_FLAG" property="modelFlag" />
+		<result column="TEST_CNT" property="testCnt" />
+	</resultMap>
+	<resultMap type="com.ktds.crmai.model.DashboardChartData"
+		id="chartData">
+		<result column="TOTAL_BASE" property="totalBase" />
+		<result column="TOTAL_COUNT" property="totalCount" />
+		<result column="TOTAL_ORIGINAL" property="totalOriginal" />
+		<result column="TOTAL_SO" property="totalSo" />
+		<result column="TOTAL_REAL" property="totalReal" />
+	</resultMap>
+
+	<!-- Total -->
+	<select id="selectTotal" resultMap="chartData">
+		SELECT
+		count(*) as TOTAL_COUNT, ROUND(AVG(ORIGINAL_ACC),2) AS TOTAL_ORIGINAL, ROUND(AVG(SO_ACC),2) AS
+		TOTAL_SO, ROUND(AVG(REAL_ACC),2) as TOTAL_REAL
+		FROM AI_STATISTICS
+		WHERE
+		MODEL_FLAG = 'Y' 
+		<if test="sessionID != null and sessionID != ''">
+			AND ADM_ID = #{sessionID}
+		</if>
+	</select>
+
+	<!-- Type -->
+	<select id="selectType" resultMap="chartData">
+		SELECT ADM_TYPE AS TOTAL_BASE, count(*) as TOTAL_COUNT,
+		ROUND(AVG(ORIGINAL_ACC),2) AS TOTAL_ORIGINAL, ROUND(AVG(SO_ACC),2) AS TOTAL_SO,
+		ROUND(AVG(REAL_ACC),2) as TOTAL_REAL
+		FROM
+		(SELECT
+		CAM_ID,
+		CAM_NAME,
+		CAM_STATUS,
+		ADM_ID,
+		ADM_NAME,
+		CAM_TYPE,
+		CAM_CDATE,
+		ADM_TYPE,
+		TRAIN_METHOD,
+		ORIGINAL_ACC,
+		SO_ACC,
+		REAL_ACC,
+		MODEL_FLAG,
+		TEST_CNT
+		FROM AI_STATISTICS
+		WHERE
+		MODEL_FLAG = 'Y'
+		<if test="sessionID != null and sessionID != ''">
+			AND ADM_ID = #{sessionID}
+		</if>
+		<if test="type != null and type != ''">
+			and ADM_TYPE = #{type}
+		</if>
+		ORDER BY ADM_TYPE) A
+		GROUP BY ADM_TYPE
+	</select>
+
+	<!-- Period -->
+	<select id="selectPeriod" resultMap="chartData">
+		SELECT
+		<if test="period != null and period != ''">
+			period AS TOTAL_BASE
+		</if>
+		<if test="periodBase != null and periodBase != ''">
+			TO_CHAR(TO_DATE(periodBase,'YYYY-MM'),'MM')  AS TOTAL_BASE
+		</if>
+		, ROUND(AVG(ORIGINAL_ACC),2) AS TOTAL_ORIGINAL, ROUND(AVG(SO_ACC),2) AS TOTAL_SO,
+		ROUND(AVG(REAL_ACC),2) as TOTAL_REAL
+		FROM
+		(SELECT
+		CAM_ID,
+		CAM_NAME,
+		CAM_STATUS,
+		ADM_ID,
+		ADM_NAME,
+		CAM_TYPE,
+		TO_CHAR(CAM_CDATE,'YYYY') AS
+		period,
+		TO_CHAR(CAM_CDATE,'YYYY-MM') AS periodBase,
+		ADM_TYPE,
+		TRAIN_METHOD,
+		ORIGINAL_ACC,
+		SO_ACC,
+		REAL_ACC,
+		MODEL_FLAG,
+		TEST_CNT
+		FROM AI_STATISTICS
+		WHERE MODEL_FLAG = 'Y'
+		<if test="sessionID != null and sessionID != ''">
+			AND ADM_ID = #{sessionID}
+		</if>
+		<if test="periodBase != null and periodBase != ''">
+				AND <![CDATA[CAM_CDATE < ROUND (to_date(to_char(TO_DATE(#{periodBase},'yyyy'),'yyyy-mm-dd'),'yyyy-mm-dd'),'year')]]>
+				AND <![CDATA[CAM_CDATE >= TRUNC (to_date(to_char(TO_DATE(#{periodBase},'yyyy'),'yyyy-mm-dd'),'yyyy-mm-dd'),'year')]]>
+		</if>
+		ORDER BY
+		<if test="period != null and period != ''">
+			period desc
+		</if>
+		<if test="periodBase != null and periodBase != ''">
+			periodBase
+		</if>
+		) A
+		GROUP BY
+		<if test="period != null and period != ''">
+			period
+		</if>
+		<if test="periodBase != null and periodBase != ''">
+			periodBase
+		</if>
+	</select>
+
+	<!-- Campaign -->
+	<select id="selectCampaign" resultMap="chartData">
+		SELECT CAM_NAME AS TOTAL_BASE, ROUND(AVG(ORIGINAL_ACC),2) AS TOTAL_ORIGINAL, ROUND(AVG(SO_ACC),2) AS TOTAL_SO,
+		ROUND(AVG(REAL_ACC),2) as TOTAL_REAL
+		FROM (
+		SELECT
+		CAM_ID,
+		CAM_NAME,
+		CAM_STATUS,
+		ADM_ID,
+		ADM_NAME,
+		CAM_TYPE,
+		TO_CHAR(CAM_CDATE,'YYYY-MM') AS
+		period,
+		ADM_TYPE,
+		TRAIN_METHOD,
+		ORIGINAL_ACC,
+		SO_ACC,
+		REAL_ACC,
+		MODEL_FLAG,
+		TEST_CNT
+		FROM AI_STATISTICS
+		WHERE MODEL_FLAG = 'Y' 
+		<if test="sessionID != null and sessionID != ''">
+			AND ADM_ID = #{sessionID}
+		</if>
+		<if test="campaign != null and campaign != ''">
+			AND CAM_ID = #{campaign}
+		</if>
+		ORDER BY CAM_CDATE DESC) A
+		GROUP BY CAM_NAME
+	</select>
+	
+	
+	<!-- Campaign -->
+	<!--  cam_id = totalCount -->
+	<select id="selectCampaignTab" resultMap="aiStatisticMap">
+		SELECT
+		CAM_ID,
+		CAM_NAME,
+		CAM_STATUS,
+		ADM_ID,
+		ADM_NAME,
+		CAM_TYPE,
+		CAM_CDATE,
+		ADM_TYPE,
+		TRAIN_METHOD,
+		ORIGINAL_ACC,
+		SO_ACC,
+		REAL_ACC,
+		MODEL_FLAG,
+		TEST_CNT
+		FROM
+		(SELECT
+		CAM_ID,
+		CAM_NAME,
+		CAM_STATUS,
+		ADM_ID,
+		ADM_NAME,
+		CAM_TYPE,
+		TO_CHAR(CAM_CDATE,'YYYY-MM') AS
+		CAM_CDATE,
+		ADM_TYPE,
+		TRAIN_METHOD,
+		ORIGINAL_ACC,
+		SO_ACC,
+		REAL_ACC,
+		MODEL_FLAG,
+		TEST_CNT
+		FROM AI_STATISTICS
+		WHERE MODEL_FLAG = 'Y'
+		<if test="sessionID != null and sessionID != ''">
+			AND ADM_ID = #{sessionID}
+		</if>
+		ORDER BY CAM_CDATE DESC) A
+	</select>
+
+</mapper>

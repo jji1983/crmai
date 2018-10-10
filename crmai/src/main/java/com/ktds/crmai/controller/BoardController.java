@@ -30,7 +30,7 @@ public class BoardController {
 		List<AI_BOARD> list = boardService.selectAllBoardList();
 //		model.addAttribute("list", list);
 		
-		return list;  
+		return list; 
 	}
 	
 	@ResponseBody 

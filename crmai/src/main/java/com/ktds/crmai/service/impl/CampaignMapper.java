@@ -1,7 +1,6 @@
 package com.ktds.crmai.service.impl;
 
 import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -32,11 +31,18 @@ public interface CampaignMapper {
 	AI_CAMPAIGN selectCampaignAiStatus(AI_CAMPAIGN campaign);
 	
 	/*
+	 * Name : 파라메터 입력받는 캠페인 정보 검색
+	 */
+	List<AI_CAMPAIGN> selectNewCampaignPage(AI_CAMPAIGN campaign);
+	
+	/*
+	 * Name : 파라메터 입력받는 캠페인 총 갯수
+	 */
+	int selectCamCount(AI_CAMPAIGN campaign);
+	
+	/*
 	 * Name : 캠페인 Insert
 	 */
 	void insertCampaign(AI_CAMPAIGN campaign);
-	
-	
-
 	
 }

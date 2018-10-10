@@ -113,7 +113,7 @@
 	      e.stopPropagation(); // 모달 팝업도 같이 닫히는걸 막아준다.
 	    });
 		
-		//$("#const").val($("input[name='session_name']", parent.document).val()); 
+		$("#const").val($("input[name='session_name']", parent.document).val());
 		
 		search_statistics();	// 처음에 불러오기
   	});
@@ -150,7 +150,7 @@
 		html += "<th class='text-center'>생성자</th>";
 		html += "<th class='text-center'>생성일자</th>";
 		html += "<th class='text-center'>대상건수</th>";
-		html += "<th class='text-center'>정확도</th>";
+		html += "<th class='text-center'>기존</th>";
 		html += "<th class='text-center'>학습모델</th>";
 		html += "<th class='text-center'>예측</th>";
 		html += "<th class='text-center'>결과</th>";
@@ -185,177 +185,216 @@
 	}
 	
 	function createChart(arr) {
-		var camNameArr = new Array();			// 캠페인명 배열
-		var originalAccArr = new Array();		// 정확도 배열
-		var soAccArr = new Array();				// 예측 배열
-		var realAccArr = new Array();			// 결과 배열
-		var trainMethodArr = new Array();		// 학습모델 배열
-		
-		for (var i = 0; i < arr.length; i++) {
-			camNameArr[i] = arr[i]["camName"];
-			originalAccArr[i] = arr[i]["originalAcc"];
-			soAccArr[i] = arr[i]["soAcc"];
-			realAccArr[i] = arr[i]["realAcc"];
-			trainMethodArr[i] = arr[i]["trainMethod"];
-		}
-		
-		var areaChartData = {
-				labels : camNameArr,
-				datasets: [
-				    {
-				       label               : '정확도',
-				       fillColor           : 'rgba(210, 214, 222, 1)',
-				       strokeColor         : 'rgba(210, 214, 222, 1)',
-				       pointColor          : 'rgba(210, 214, 222, 1)',
-				       pointStrokeColor    : '#c1c7d1',
-				       pointHighlightFill  : '#fff',
-				       pointHighlightStroke: 'rgba(220,220,220,1)',
-				       data                : originalAccArr
-				    },
-				    {
-				       label               : '예측',
-				       fillColor           : 'rgba(60,141,188,0.9)',
-				       strokeColor         : 'rgba(60,141,188,0.8)',
-				       pointColor          : '#3b8bba',
-				       pointStrokeColor    : 'rgba(60,141,188,1)',
-				       pointHighlightFill  : '#fff',
-				       pointHighlightStroke: 'rgba(60,141,188,1)',
-				       data                : soAccArr
-				    },
-				    {
-					   label               : '결과',
-					   fillColor           : 'rgba(60,141,188,0.9)',
-					   strokeColor         : 'rgba(60,141,188,0.8)',
-					   pointColor          : '#3b8bba',
-					   pointStrokeColor    : 'rgba(60,141,188,1)',
-					   pointHighlightFill  : '#fff',
-					   pointHighlightStroke: 'rgba(60,141,188,1)',
-					   data                : realAccArr
-					}
-				]
-		};
-		
-		var radarChartData = {
-				labels : trainMethodArr,
-				datasets: [
-				    {
-				       label               : '정확도',
-				       fillColor           : 'rgba(210, 214, 222, 1)',
-				       strokeColor         : 'rgba(210, 214, 222, 1)',
-				       pointColor          : 'rgba(210, 214, 222, 1)',
-				       pointStrokeColor    : '#c1c7d1',
-				       pointHighlightFill  : '#fff',
-				       pointHighlightStroke: 'rgba(220,220,220,1)',
-				       data                : originalAccArr
-				    },
-				    {
-				       label               : '예측',
-				       fillColor           : 'rgba(60,141,188,0.9)',
-				       strokeColor         : 'rgba(60,141,188,0.8)',
-				       pointColor          : '#3b8bba',
-				       pointStrokeColor    : 'rgba(60,141,188,1)',
-				       pointHighlightFill  : '#fff',
-				       pointHighlightStroke: 'rgba(60,141,188,1)',
-				       data                : soAccArr
-				    },
-				    {
-					   label               : '결과',
-					   fillColor           : 'rgba(60,141,188,0.9)',
-					   strokeColor         : 'rgba(60,141,188,0.8)',
-					   pointColor          : '#3b8bba',
-					   pointStrokeColor    : 'rgba(60,141,188,1)',
-					   pointHighlightFill  : '#fff',
-					   pointHighlightStroke: 'rgba(60,141,188,1)',
-					   data                : realAccArr
-					}
-				]
-		};
-			
-		//-------------
-		//- BAR CHART -
-		//-------------
-		var barChartCanvas                   = $('#barChart').get(0).getContext('2d');
-		var barChart                         = new Chart(barChartCanvas);
-		var barChartData                     = areaChartData;
-		    
-		barChartData.datasets[1].fillColor   = '#00a65a';
-		barChartData.datasets[1].strokeColor = '#00a65a';
-		barChartData.datasets[1].pointColor  = '#00a65a';
-		    
-		var barChartOptions                  = {
-		      //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
-		      scaleBeginAtZero        : true,
-		      //Boolean - Whether grid lines are shown across the chart
-		      scaleShowGridLines      : true,
-		      //String - Colour of the grid lines
-		      scaleGridLineColor      : 'rgba(0,0,0,.05)',
-		      //Number - Width of the grid lines
-		      scaleGridLineWidth      : 1,
-		      //Boolean - Whether to show horizontal lines (except X axis)
-		      scaleShowHorizontalLines: true,
-		      //Boolean - Whether to show vertical lines (except Y axis)
-		      scaleShowVerticalLines  : true,
-		      //Boolean - If there is a stroke on each bar
-		      barShowStroke           : true,
-		      //Number - Pixel width of the bar stroke
-		      barStrokeWidth          : 2,
-		      //Number - Spacing between each of the X value sets
-		      barValueSpacing         : 5,
-		      //Number - Spacing between data sets within X values
-		      barDatasetSpacing       : 1,
-		      //String - A legend template
-		      //Boolean - whether to make the chart responsive
-		      responsive              : true,
-		      maintainAspectRatio     : true
-		};
-		    
-		var areaChartOptions = {
-		        //Boolean - If we should show the scale at all
-		    	showScale               : true,
-		    	//Boolean - Whether grid lines are shown across the chart
-		    	scaleShowGridLines      : false,
-		    	//String - Colour of the grid lines
-		    	scaleGridLineColor      : 'rgba(0,0,0,.05)',
-		    	//Number - Width of the grid lines
-		    	scaleGridLineWidth      : 1,
-		    	//Boolean - Whether to show horizontal lines (except X axis)
-		    	scaleShowHorizontalLines: true,
-		    	//Boolean - Whether to show vertical lines (except Y axis)
-		    	scaleShowVerticalLines  : true,
-		    	//Boolean - Whether the line is curved between points
-		    	bezierCurve             : true,
-		    	//Number - Tension of the bezier curve between points
-		    	bezierCurveTension      : 0.3,
-		    	//Boolean - Whether to show a dot for each point
-		    	pointDot                : false,
-		    	//Number - Radius of each point dot in pixels
-		    	pointDotRadius          : 4,
-		    	//Number - Pixel width of point dot stroke
-		    	pointDotStrokeWidth     : 1,
-		    	//Number - amount extra to add to the radius to cater for hit detection outside the drawn point
-		    	pointHitDetectionRadius : 20,
-		    	//Boolean - Whether to show a stroke for datasets
-		    	datasetStroke           : true,
-		    	//Number - Pixel width of dataset stroke
-		    	datasetStrokeWidth      : 2,
-		    	//Boolean - Whether to fill the dataset with a color
-		    	datasetFill             : true,
-		    	//Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-		    	maintainAspectRatio     : true,
-		    	//Boolean - whether to make the chart responsive to window resizing
-		    	responsive              : true
-		}
-
-		barChartOptions.datasetFill = false;
-		barChart.Bar(barChartData, barChartOptions);
-		
-		//-------------
-	    //- RADAR CHART -
-	    //-------------
-	    var radarChartCanvas = $('#radarChart').get(0).getContext('2d');
-		var radarChart = new Chart(radarChartCanvas);
-		
-		radarChart.Radar(radarChartData, barChartOptions);
+		$.ajax({
+			url:"/statistics/average",
+			data:{
+				camName : $("#cam_name").val(),
+				camType : $("#cam_type").val(),
+				camStatus : $("#cam_status").val(),
+				admName : $("#const").val(),
+				beforeDate : $("#before_date").val(),
+				afterDate : $("#after_date").val()
+			},
+			success:function(avgMap) {
+				var camNameArr = new Array();			// 캠페인명 배열
+				var originalAccArr = new Array();		// 정확도 배열
+				var soAccArr = new Array();				// 예측 배열
+				var realAccArr = new Array();			// 결과 배열
+				var trainMethodArr = new Array();		// 학습모델 배열
+				var orgAccAvgArr = new Array();			// 방사형 그래프용 정확도 평균 배열
+				var soAccAvgArr = new Array();			// 방사형 그래프용 예측 평균 배열
+				var realAccAvgArr = new Array();		// 방사형 그래프용 결과 평균 배열
+				
+				for (var i = 0; i < arr.length; i++) {
+					camNameArr[i] = arr[i]["camName"];
+					originalAccArr[i] = arr[i]["originalAcc"];
+					soAccArr[i] = arr[i]["soAcc"];
+					realAccArr[i] = arr[i]["realAcc"];
+				}
+				
+				// 학습모델 대입
+				trainMethodArr.push("DecisionTree");
+				trainMethodArr.push("RandomForest");
+				trainMethodArr.push("svm");
+				trainMethodArr.push("LogisticRegression");
+				
+				// 정확도 배열 대입
+				orgAccAvgArr.push(avgMap["dTreeVO"]["originalAccAvg"]);
+				orgAccAvgArr.push(avgMap["rfVO"]["originalAccAvg"]);
+				orgAccAvgArr.push(avgMap["svmVO"]["originalAccAvg"]);
+				orgAccAvgArr.push(avgMap["lRVO"]["originalAccAvg"]);
+				
+				// 예측 배열 대입
+				soAccAvgArr.push(avgMap["dTreeVO"]["soAccAvg"]);
+				soAccAvgArr.push(avgMap["rfVO"]["soAccAvg"]);
+				soAccAvgArr.push(avgMap["svmVO"]["soAccAvg"]);
+				soAccAvgArr.push(avgMap["lRVO"]["soAccAvg"]);
+				
+				// 결과 배열 대입
+				realAccAvgArr.push(avgMap["dTreeVO"]["realAccAvg"]);
+				realAccAvgArr.push(avgMap["rfVO"]["realAccAvg"]);
+				realAccAvgArr.push(avgMap["svmVO"]["realAccAvg"]);
+				realAccAvgArr.push(avgMap["lRVO"]["realAccAvg"]);
+				
+				var areaChartData = {
+						labels : camNameArr,
+						datasets: [
+						    {
+						       label               : '정확도',
+						       fillColor           : 'rgba(210, 214, 222, 1)',
+						       strokeColor         : 'rgba(210, 214, 222, 1)',
+						       pointColor          : 'rgba(210, 214, 222, 1)',
+						       pointStrokeColor    : '#c1c7d1',
+						       pointHighlightFill  : '#fff',
+						       pointHighlightStroke: 'rgba(220,220,220,1)',
+						       data                : originalAccArr
+						    },
+						    {
+						       label               : '예측',
+						       fillColor           : 'rgba(60,141,188,0.9)',
+						       strokeColor         : 'rgba(60,141,188,0.8)',
+						       pointColor          : '#3b8bba',
+						       pointStrokeColor    : 'rgba(60,141,188,1)',
+						       pointHighlightFill  : '#fff',
+						       pointHighlightStroke: 'rgba(60,141,188,1)',
+						       data                : soAccArr
+						    },
+						    {
+							   label               : '결과',
+							   fillColor           : 'rgba(60,141,188,0.9)',
+							   strokeColor         : 'rgba(60,141,188,0.8)',
+							   pointColor          : '#3b8bba',
+							   pointStrokeColor    : 'rgba(60,141,188,1)',
+							   pointHighlightFill  : '#fff',
+							   pointHighlightStroke: 'rgba(60,141,188,1)',
+							   data                : realAccArr
+							}
+						]
+				};
+				
+				var radarChartData = {
+						labels : trainMethodArr,
+						datasets: [
+						    {
+						       label               : '정확도',
+						       fillColor           : 'rgba(210, 214, 222, 1)',
+						       strokeColor         : 'rgba(210, 214, 222, 1)',
+						       pointColor          : 'rgba(210, 214, 222, 1)',
+						       pointStrokeColor    : '#c1c7d1',
+						       pointHighlightFill  : '#fff',
+						       pointHighlightStroke: 'rgba(220,220,220,1)',
+						       data                : orgAccAvgArr
+						    },
+						    {
+						       label               : '예측',
+						       fillColor           : 'rgba(60,141,188,0.9)',
+						       strokeColor         : 'rgba(60,141,188,0.8)',
+						       pointColor          : '#3b8bba',
+						       pointStrokeColor    : 'rgba(60,141,188,1)',
+						       pointHighlightFill  : '#fff',
+						       pointHighlightStroke: 'rgba(60,141,188,1)',
+						       data                : soAccAvgArr
+						    },
+						    {
+							   label               : '결과',
+							   fillColor           : 'rgba(60,141,188,0.9)',
+							   strokeColor         : 'rgba(60,141,188,0.8)',
+							   pointColor          : '#3b8bba',
+							   pointStrokeColor    : 'rgba(60,141,188,1)',
+							   pointHighlightFill  : '#fff',
+							   pointHighlightStroke: 'rgba(60,141,188,1)',
+							   data                : realAccAvgArr
+							}
+						]
+				};
+					
+				//-------------
+				//- BAR CHART -
+				//-------------
+				var barChartCanvas                   = $('#barChart').get(0).getContext('2d');
+				var barChart                         = new Chart(barChartCanvas);
+				var barChartData                     = areaChartData;
+				    
+				barChartData.datasets[1].fillColor   = '#00a65a';
+				barChartData.datasets[1].strokeColor = '#00a65a';
+				barChartData.datasets[1].pointColor  = '#00a65a';
+				    
+				var barChartOptions                  = {
+				      //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+				      scaleBeginAtZero        : true,
+				      //Boolean - Whether grid lines are shown across the chart
+				      scaleShowGridLines      : true,
+				      //String - Colour of the grid lines
+				      scaleGridLineColor      : 'rgba(0,0,0,.05)',
+				      //Number - Width of the grid lines
+				      scaleGridLineWidth      : 1,
+				      //Boolean - Whether to show horizontal lines (except X axis)
+				      scaleShowHorizontalLines: true,
+				      //Boolean - Whether to show vertical lines (except Y axis)
+				      scaleShowVerticalLines  : true,
+				      //Boolean - If there is a stroke on each bar
+				      barShowStroke           : true,
+				      //Number - Pixel width of the bar stroke
+				      barStrokeWidth          : 2,
+				      //Number - Spacing between each of the X value sets
+				      barValueSpacing         : 5,
+				      //Number - Spacing between data sets within X values
+				      barDatasetSpacing       : 1,
+				      //String - A legend template
+				      //Boolean - whether to make the chart responsive
+				      responsive              : true,
+				      maintainAspectRatio     : true
+				};
+				    
+				var areaChartOptions = {
+				        //Boolean - If we should show the scale at all
+				    	showScale               : true,
+				    	//Boolean - Whether grid lines are shown across the chart
+				    	scaleShowGridLines      : false,
+				    	//String - Colour of the grid lines
+				    	scaleGridLineColor      : 'rgba(0,0,0,.05)',
+				    	//Number - Width of the grid lines
+				    	scaleGridLineWidth      : 1,
+				    	//Boolean - Whether to show horizontal lines (except X axis)
+				    	scaleShowHorizontalLines: true,
+				    	//Boolean - Whether to show vertical lines (except Y axis)
+				    	scaleShowVerticalLines  : true,
+				    	//Boolean - Whether the line is curved between points
+				    	bezierCurve             : true,
+				    	//Number - Tension of the bezier curve between points
+				    	bezierCurveTension      : 0.3,
+				    	//Boolean - Whether to show a dot for each point
+				    	pointDot                : false,
+				    	//Number - Radius of each point dot in pixels
+				    	pointDotRadius          : 4,
+				    	//Number - Pixel width of point dot stroke
+				    	pointDotStrokeWidth     : 1,
+				    	//Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+				    	pointHitDetectionRadius : 20,
+				    	//Boolean - Whether to show a stroke for datasets
+				    	datasetStroke           : true,
+				    	//Number - Pixel width of dataset stroke
+				    	datasetStrokeWidth      : 2,
+				    	//Boolean - Whether to fill the dataset with a color
+				    	datasetFill             : true,
+				    	//Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+				    	maintainAspectRatio     : true,
+				    	//Boolean - whether to make the chart responsive to window resizing
+				    	responsive              : true
+				}
+	
+				barChartOptions.datasetFill = false;
+				barChart.Bar(barChartData, barChartOptions);
+				
+				//-------------
+			    //- RADAR CHART -
+			    //-------------
+			    var radarChartCanvas = $('#radarChart').get(0).getContext('2d');
+				var radarChart = new Chart(radarChartCanvas);
+				
+				radarChart.Radar(radarChartData, barChartOptions);
+			}
+		});
 	}
   </script>
 

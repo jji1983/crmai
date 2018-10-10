@@ -40,6 +40,7 @@
     	 <if test="cam_id != null">
 		 	AND  CAMP.CAM_ID = #{cam_id}
 		 </if>
+		   AND <![CDATA[ ROWNUM <= 10 ]]>
 		 order by 
 		 	FEATURE.WEIGHT desc
     </select>

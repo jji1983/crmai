@@ -124,7 +124,7 @@
 <script src="/resources/dist/js/adminlte.min.js"></script>
 
 <script type="text/javascript">
-	alert("start!!~~~");
+	//alert("start!!~~~");
 
 	$(document).ready(function() {
 		// 모달 처리
@@ -139,7 +139,7 @@
 		
 		// 게시글 신규 등록
 	    $("#bthNew").click(function(e) {
-	    	alert("계정 신규 등록!!!");
+	    	//alert("계정 신규 등록!!!");
    			//stop submit the form, we will post it manually.
         	e.preventDefault();
  			submit_newAccount();
@@ -155,8 +155,9 @@
         	} else {
         	    return;
         	} 
-	    });
-		
+    	 	$('#accountNewModal').modal('hide');
+    
+	    });       
 		// 계정 조회
 		getAccountList();
 	});
@@ -166,7 +167,7 @@
 			type : 'GET', // method
 			url : '/account/list',
 			async : 'true', // true
-			cache : false,
+			//cache : true,
 			contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
 			//dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
 			success : function(data) {
@@ -190,21 +191,26 @@
 		   //	html += '<tr onClick="view_account('1')">';
 		  //	alert.("adm_id");
 				$.each(val, function(k, v) {
-				/* if (k == 'adm_id') {
-					html += '<td >' + v + '</td>';
+			 	 if (k == 'adm_id') {
+					 //html += '<td >' + v + '</td>';
+					 v = v.substr(0, 20);
 				}
 				
 				if (k == 'adm_name') {
-					html += '<td >' + v + '</td>';
+					 //html += '<td >' + v + '</td>';
+					 v = v.substr(0, 20);
 				}
 				
 				if (k == 'adm_pw') {
-					html += '<td >' + v + '</td>';
+					//html += '<td >' + v + '</td>';
+					 v = v.substr(0, 20);
 				}
 				
 				if (k == 'adm_email') {
-					html += '<td >' + v + '</td>';
-				} */
+					//return;
+					//html += '<td >' + v + '</td>';
+					 //v = v.substr(0, 20);
+				} 
 				
 				if (k == 'adm_cdate') {
 					v = v.substr(0, 10);
@@ -213,7 +219,7 @@
 				if (v == 'null' || v == '') {
 					html += '<td></td>';
 					
-				} else if (k == 'adm_id') {
+				} else if (k == 'adm_name') {
 					html += '<td style="text-align: left; padding-left: 10px;">' + v + '</td>';
 					//return;
 				} else {
@@ -235,7 +241,7 @@
 
 		var form = document.getElementById("AccountForm");
 
-		alert("start222~~~");
+	//	alert("start222~~~");
 		form.action = "<c:url value='/account/writeForm.do'/>";
 		form.submit();
 
@@ -244,7 +250,7 @@
 	//글조회
 	function fn_view(adm_id) {
 
-		alert("call fn_view ~!! " + adm_id);
+	//	alert("call fn_view ~!! " + adm_id);
 		
 		var form = document.getElementById("AccountForm");
 		var url = "<c:url value='/account/list'/>";
@@ -256,7 +262,7 @@
 	
 	//계정 조회
 	function view_account(adm_id) {
-	   alert("-- view_account -- :: " + adm_id);
+	   //alert("-- view_account -- :: " + adm_id);
 		//alert("1111 :: " + e.responseText);
 		
 		$.ajax({
@@ -344,7 +350,7 @@
 				var res = data.split('::');
 	        	if(res[0] == "OK"){
 					// 게시판 목록 새로고침
-					
+					getAccountList();
 					
 					$('#accountNewModal').modal('hide');
 					
@@ -447,6 +453,7 @@
 											<th style="width: 100px">이름</th>
 											<!--  <th style="width: 100px">e-mail</th> -->
 											<th style="width: 100px">날짜</th>
+											<th style="width: 100px">e-mail</th>
 											<!--<th>조회수</th>-->
 										</tr>
 									</thead>
@@ -515,7 +522,7 @@
 														
 													</div>
 												</div>
-												
+											<!-- 	
 												<div class="form-group readAccount">
 													<label for="inputAdmCdate" class="col-sm-2 control-label">등록일</label>
 			
@@ -523,7 +530,7 @@
 														<input id="inputAdmCdate" name="inputAdmCdate" type="text" class="form-control" readonly>
 													</div>
 												</div>
-												
+												 -->
 								
 											
 			

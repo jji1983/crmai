@@ -15,7 +15,27 @@ public class StatisticsService implements StatisticsMapper {
 	StatisticsMapper statisticsMapper;
 	
 	@Override
-	public List<AIStatistics> selectStatisticsList(AIStatistics vo) {
-		return statisticsMapper.selectStatisticsList(vo);
+	public List<AIStatistics> selectSttModelYList(AIStatistics vo) {
+		return statisticsMapper.selectSttModelYList(vo);
+	}
+	
+	@Override
+	public AIStatistics selectDTreeAvg(AIStatistics vo) {
+		return statisticsMapper.selectDTreeAvg(vo);
+	}
+
+	@Override
+	public AIStatistics selectRFavg(AIStatistics vo) {
+		return statisticsMapper.selectRFavg(vo);
+	}
+
+	@Override
+	public AIStatistics selectSVMavg(AIStatistics vo) {
+		return statisticsMapper.selectSVMavg(vo);
+	}
+
+	@Override
+	public AIStatistics selectLRavg(AIStatistics vo) {
+		return statisticsMapper.selectLRavg(vo);
 	}
 }

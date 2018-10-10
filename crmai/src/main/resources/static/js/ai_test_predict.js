@@ -32,8 +32,7 @@ function grid_pagingSt4(div){
 function search_st4(){
 	//alert("search_st :: cam_id[" + currentValue + "],s1_totalpage[" + s1_totalpage + "], s1_page_st[" + s1_page_st + "], s1_page_end[" + s1_page_end + "]");
 	
-	//var cam_id = currentValue;
-	var cam_id = "1004";
+	var cam_id = currentValue;
 	
 	var page = new Object();
 	page.cam_id = cam_id;
@@ -73,7 +72,7 @@ function grid_tableStaging4(obj){
     html += '<thead><tr>';
     html += 	'<th>SEQ</th>';
     html += 	'<th>캠페인ID</th>';
-    
+    html += 	'<th>컬럼1</th>';
     html += 	'<th>TRAIN_METHOD</th>';
     html += 	'<th>PREDICT</th>';
     html += 	'<th>SUCC_PROB</th>';
@@ -88,11 +87,12 @@ function grid_tableStaging4(obj){
  		//html += '<td><input type="checkbox" name="camCheck"/></td>';
  		$.each(val,function(k,v){
  			
- 			if(k == 'seq' || k == 'cam_id') {
+ 			if(k == 'st_seq' || k == 'cam_id') {
  				html += '<td>' + v + '</td>';
  			}
  			
- 			if(k == 'train_method' 
+ 			if( k == 'st_c1'
+ 			 || k == 'train_method' 
  			 || k == 'predict'
  			
  			){
@@ -113,4 +113,27 @@ function grid_tableStaging4(obj){
     html += '</table>';
     
     div.innerHTML = html;
+}
+
+
+function PrSearch(){
+	alert("call PrSearch ~!!");
+	
+}
+
+function PrDownload(){
+	//alert("call PrDownload ~!!");
+	
+	var pr_succVal = $('#pr_succVal').val();
+	var pr_totalVal = $('#pr_totalVal').val();
+	var cam_id = currentValue + "_" + pr_succVal + "_" + pr_totalVal;
+	
+	//alert("PrDownload :: pr_succVal[" + pr_succVal + "],  pr_totalVal[" + pr_totalVal + "]");
+	
+	
+	//window.open('/file/downPredict/${'+cam_id+'}');
+	window.open('/file/downPredict/'+cam_id+'');
+	
+	
+	
 }

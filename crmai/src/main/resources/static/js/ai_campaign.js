@@ -14,7 +14,7 @@ function handleClick(myRadio) {
       //alert('Old value: ' + currentValue);
       //alert('New value: ' + myRadio.value);
       currentValue = myRadio.value;
-  
+       
 	  $("#ai_status").show(); //현황창 보이기
 	  $("#id_span_msg").text("캠페인ID :: " + currentValue);
       
@@ -226,6 +226,7 @@ function grid_table_campaign(obj){
 }
 	
 
+
 function submit_newCampagin(){
 //alert('-- submit_newCampagin -- ');
   
@@ -313,7 +314,6 @@ $.ajax({
 	        }
 		});
   }
-  
   
   function setAiStatus(cam_id, cam_itype, cam_otype) {
 	  //alert("call setAiStatus :: " + cam_id + " :: " + cam_itype + " :: " + cam_otype);
