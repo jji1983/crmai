@@ -42,22 +42,14 @@ public class NoticeService implements NoticeMapper {
 		return noticeBoardMapper.deleteNotice(code);
 	}
 
-
 	@Override
-	public int selectCount() {
-		return noticeBoardMapper.selectCount();
+	public List<AI_NOTICE> selectNoticePage(AI_PAGE page) {
+		return noticeBoardMapper.selectNoticePage(page);
 	}
 
 	@Override
 	public int selectNoticePageNum() {
-		// TODO Auto-generated method stub
 		return noticeBoardMapper.selectNoticePageNum();
-	}
-
-	@Override
-	public List<AI_NOTICE> selectNotice(AI_PAGE page) {
-		// TODO Auto-generated method stub
-		return noticeBoardMapper.selectNotice(page);
 	}
 
 

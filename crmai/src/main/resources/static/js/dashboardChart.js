@@ -57,21 +57,12 @@ function initLeftChart() {
 	var ctxLeft = document.getElementById("chBarLeft").getContext('2d');
 	leftChart = new Chart(ctxLeft, {
 		type : 'bar',
-		data : {labels : types,
+		data : {
+			labels : campaigns,
 			datasets : [ {
-				label : '정확도(%)',
-				data : rightOriginal,
-				backgroundColor : 'rgba(81, 152, 255, 0.6)',
-				borderWidth : 0,
-			}, {
-				label : '예측(%)',
-				data : rightSo,
-				backgroundColor : 'rgba(243, 115, 79, 0.6)',
-				borderWidth : 0,
-			}, {
-				label : '결과(%)',
-				data : rightReal,
-				backgroundColor : 'rgba(0, 180, 175, 0.6)',
+				label : "캠페인",
+				data : [ leftOriginal, leftSo, leftReal ],
+				backgroundColor : chartBGColor,
 				borderWidth : 0
 			} ]
 		},
@@ -85,45 +76,6 @@ function initLeftChart() {
 function loadLeftTab() {
 	var data = { "pers": "y"};
 	var periodData = {"pers" : "y", "period" : "y"};
-	
-	$.ajax({
-		type : "GET",
-		url : "/dashboardChart/type",
-		cache : false,
-		processData : true,
-		data: data,
-		async : true,
-		success : function(data) {
-
-			var html = "<li role='presentation'><a class='dropdown-header' role='menuitem' data-toggle='tab' tabindex='-1' href='#' onclick='totalLeft()'>전체보기</a></li><li role='presentation' class='divider'></li>";
-			$.each(data, function(index, value) {
-				html += "<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='leftType"
-						+ index
-						+ "-tab' onclick='toggleLeft(1,"
-						+ this.totalBase
-						+ ")'>";
-				switch (this.totalBase) {
-				case "1":
-					html += "통신분야</a></li>";
-					break;
-				case "2":
-					html += "금융분야</a></li>";
-					break;
-				case "3":
-					html += "유통분야</a></li>";
-					break;
-				case "0":
-					html += "기타분야</a></li>";
-					break;
-				}
-			});
-			
-			var div1 = document.querySelector('#leftType');
-			div1.innerHTML = html;
-		},
-		error : function(e) {
-		}
-	});
 	
 	$.ajax({
 		type : "GET",
@@ -305,7 +257,6 @@ function totalLeft() {
 		async : true,
 		success : function(data) {
 			loadLeftStat(data);
-			
 		},
 		error : function(e) {
 		}
@@ -343,6 +294,7 @@ function totalRight() {
 
 
 function getLeftType(data) {
+	var etc = 3;
 	$.ajax({
 		type : "GET",
 		url : "/dashboardChart/type",
@@ -351,41 +303,38 @@ function getLeftType(data) {
 		data : data,
 		async : true,
 		success : function(data) {
-			leftOriginal = [ 0, 0, 0, 0 ];
-			leftSo = [ 0, 0, 0, 0 ];
-			leftReal = [ 0, 0, 0, 0 ];
-
+			leftOriginal = 0;
+			leftSo = 0;
+			leftReal = 0;
+			var label;
 			$.each(data, function() {
-
-				if (this.totalBase != 0) {
-					leftOriginal[this.totalBase - 1] = this.totalOriginal;
-					leftSo[this.totalBase - 1] = this.totalSo;
-					leftReal[this.totalBase - 1] = this.totalReal;
-				} else {
-					leftOriginal[this.totalBase] = this.totalOriginal;
-					leftSo[this.totalBase] = this.totalSo;
-					leftReal[this.totalBase] = this.totalReal;
+				switch(this.totalBase) {
+				case "1":
+					label = "통신분야";
+					break;
+				case "2":
+					label = "금융분야";
+					break;
+				case "3":
+					label = "유통분야";
+					break;
+				case "0":
+					label = "기타분야";
+					break;
 				}
+				leftOriginal = this.totalOriginal;
+				leftSo = this.totalSo;
+				leftReal = this.totalReal;
 			});
 			var some_new_data = {
-				labels : types,
-				datasets : [ {
-					label : '정확도(%)',
-					data : leftOriginal,
-					backgroundColor : 'rgba(81, 152, 255, 0.6)',
-					borderWidth : 0,
-				}, {
-					label : '예측(%)',
-					data : leftSo,
-					backgroundColor : 'rgba(243, 115, 79, 0.6)',
-					borderWidth : 0,
-				}, {
-					label : '결과(%)',
-					data : leftReal,
-					backgroundColor : 'rgba(0, 180, 175, 0.6)',
-					borderWidth : 0
-				} ]
-			};
+					labels : campaigns,
+					datasets : [ {
+						label : label,
+						data : [ leftOriginal, leftSo, leftReal ],
+						backgroundColor : chartBGColor,
+						borderWidth : 0
+					} ]
+				};
 
 			leftChart.config.data = some_new_data;
 			leftChart.update();
@@ -396,6 +345,8 @@ function getLeftType(data) {
 	});
 }
 function getRightType(data) {
+	var etc = 3;
+	
 	$.ajax({
 		type : "GET",
 		url : "/dashboardChart/type",
@@ -414,10 +365,10 @@ function getRightType(data) {
 					rightOriginal[this.totalBase - 1] = this.totalOriginal;
 					rightSo[this.totalBase - 1] = this.totalSo;
 					rightReal[this.totalBase - 1] = this.totalReal;
-				} else {
-					rightOriginal[this.totalBase] = this.totalOriginal;
-					rightSo[this.totalBase] = this.totalSo;
-					rightReal[this.totalBase] = this.totalReal;
+				} else if (this.totalBase == 0) {
+					rightOriginal[etc] = this.totalOriginal;
+					rightSo[etc] = this.totalSo;
+					rightReal[etc] = this.totalReal;
 				}
 			});
 			var some_new_data = {

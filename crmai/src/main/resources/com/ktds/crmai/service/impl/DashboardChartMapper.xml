@@ -37,7 +37,7 @@
 		WHERE
 		MODEL_FLAG = 'Y' 
 		<if test="sessionID != null and sessionID != ''">
-			AND ADM_ID = #{sessionId}
+			AND ADM_ID = #{sessionID}
 		</if>
 	</select>
 
@@ -66,7 +66,7 @@
 		WHERE
 		MODEL_FLAG = 'Y'
 		<if test="sessionID != null and sessionID != ''">
-			AND ADM_ID = #{sessionId}
+			AND ADM_ID = #{sessionID}
 		</if>
 		<if test="type != null and type != ''">
 			and ADM_TYPE = #{type}
@@ -107,7 +107,7 @@
 		FROM AI_STATISTICS
 		WHERE MODEL_FLAG = 'Y'
 		<if test="sessionID != null and sessionID != ''">
-			AND ADM_ID = #{sessionId}
+			AND ADM_ID = #{sessionID}
 		</if>
 		<if test="periodBase != null and periodBase != ''">
 				AND <![CDATA[CAM_CDATE < ROUND (to_date(to_char(TO_DATE(#{periodBase},'yyyy'),'yyyy-mm-dd'),'yyyy-mm-dd'),'year')]]>
@@ -154,7 +154,7 @@
 		FROM AI_STATISTICS
 		WHERE MODEL_FLAG = 'Y' 
 		<if test="sessionID != null and sessionID != ''">
-			AND ADM_ID = #{sessionId}
+			AND ADM_ID = #{sessionID}
 		</if>
 		<if test="campaign != null and campaign != ''">
 			AND CAM_ID = #{campaign}
@@ -202,7 +202,7 @@
 		FROM AI_STATISTICS
 		WHERE MODEL_FLAG = 'Y'
 		<if test="sessionID != null and sessionID != ''">
-			AND ADM_ID = #{sessionId}
+			AND ADM_ID = #{sessionID}
 		</if>
 		ORDER BY CAM_CDATE DESC) A
 	</select>

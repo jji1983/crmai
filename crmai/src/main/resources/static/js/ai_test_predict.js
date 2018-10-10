@@ -72,7 +72,7 @@ function grid_tableStaging4(obj){
     html += '<thead><tr>';
     html += 	'<th>SEQ</th>';
     html += 	'<th>캠페인ID</th>';
-    
+    html += 	'<th>컬럼1</th>';
     html += 	'<th>TRAIN_METHOD</th>';
     html += 	'<th>PREDICT</th>';
     html += 	'<th>SUCC_PROB</th>';
@@ -91,7 +91,8 @@ function grid_tableStaging4(obj){
  				html += '<td>' + v + '</td>';
  			}
  			
- 			if(k == 'train_method' 
+ 			if( k == 'st_c1'
+ 			 || k == 'train_method' 
  			 || k == 'predict'
  			
  			){
@@ -121,13 +122,13 @@ function PrSearch(){
 }
 
 function PrDownload(){
-	alert("call PrDownload ~!!");
+	//alert("call PrDownload ~!!");
 	
 	var pr_succVal = $('#pr_succVal').val();
 	var pr_totalVal = $('#pr_totalVal').val();
 	var cam_id = currentValue + "_" + pr_succVal + "_" + pr_totalVal;
 	
-	alert("PrDownload :: pr_succVal[" + pr_succVal + "],  pr_totalVal[" + pr_totalVal + "]");
+	//alert("PrDownload :: pr_succVal[" + pr_succVal + "],  pr_totalVal[" + pr_totalVal + "]");
 	
 	
 	//window.open('/file/downPredict/${'+cam_id+'}');

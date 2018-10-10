@@ -1,5 +1,6 @@
 package com.ktds.crmai.controller;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ktds.crmai.model.AI_CAMPAIGN;
 import com.ktds.crmai.model.AI_NOTICE;
 import com.ktds.crmai.model.AI_PAGE;
-import com.ktds.crmai.model.AI_STAGING;
 import com.ktds.crmai.service.NoticeService;
 
 @Controller
@@ -33,41 +34,18 @@ public class NoticeController {
 
 	@ResponseBody
 	@RequestMapping(value = "/list")
+//	public List<AI_BOARD> selectBoardList(@ModelAttribute("AI_BOARD") AI_BOARD aiBoard, Model model) {
 	public List<AI_NOTICE> selectAllNoticeList() {
 		List<AI_NOTICE> list = noticeService.selectAllNoticeList();
+//		model.addAttribute("list", list);
 
 		return list;
 	}
-	
-	@RequestMapping(value = "/result", method = RequestMethod.GET, consumes=MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getResult(@ModelAttribute("page") AI_PAGE page){
-    	logger.info("Request List....getResult.... - {}", page);
-    	List<AI_NOTICE> out_test = null;
-    	
-    	out_test = noticeService.selectNotice(page);
-    	
-    	
-    	
-    	Iterator<AI_NOTICE> ite = out_test.iterator();
-    	
-    	while(ite.hasNext()) {
-    		AI_NOTICE info = (AI_NOTICE)ite.next();
-    		logger.info("test :: "+ info.toString());
-    	}
-    	
-    	//응답과 함깨 HttpStatus를 지정할 수 있습니다.
-    	ResponseEntity<Object> response = new ResponseEntity<Object>(out_test, HttpStatus.OK);
-    	
-    	return response;
-    }
 
 	@ResponseBody
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public List<AI_NOTICE> selectNoticeDetail(@RequestParam("code") int code) {
 		List<AI_NOTICE> list = noticeService.selectNoticeDetail(code);
-
-		// 글 하나 읽기
-		System.out.println(list);
 		return list;
 	}
 
@@ -111,4 +89,31 @@ public class NoticeController {
 		return response;
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/listPage")
+	public List<AI_NOTICE> getNoticeListPage(@ModelAttribute("notice") AI_PAGE in_notice, HttpSession session) {
+		logger.info("Request List....getCampaignListPage.... - {}", in_notice);
+
+		// 응답과 함깨 HttpStatus를 지정할 수 있습니다.
+		List<AI_NOTICE> response = noticeService.selectNoticePage(in_notice);
+
+		return response;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/totalPage")
+	public List<String> getTotalNotice(HttpSession session) {
+		logger.info("Request TotalCampaign....");
+		List<String> response = new ArrayList<>();
+		
+		int maxRowNum = noticeService.selectNoticePageNum();
+		
+		if(maxRowNum == 0) {
+			response.add("0");
+		}else {
+			response.add(maxRowNum + "");
+		}
+
+		return response;
+	}
 }
