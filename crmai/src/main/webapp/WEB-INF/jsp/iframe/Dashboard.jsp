@@ -69,6 +69,9 @@
 	background-color: #78C2AD;
 	border-color: #78C2AD;
 }
+.box-minty {
+	border-top-color: #78C2AD;
+}
 
 #ds_campaign td, #ds_campaign th {
 	padding: 20px;
@@ -95,9 +98,15 @@
 	background-color: #e2f3f7;
 	border-color: #d6eef3;
 }
-
 .text-pink {
 	color: #F3734F;
+
+}
+.text-blue {
+	color: #5198FF;
+}
+.text-green {
+	color: #00B4AF;
 }
 </style>
 
@@ -405,7 +414,7 @@
 
 						<!-- 나의 현황 -->
 						<div class="row" style="margin-bottom: 30px; margin-top: 10px;">
-							<div class="col-md-4">
+							<div class="col-md-12">
 								<button type="button"
 									class="btn btn-block btn-bg-mint btn-lg disabled">나의
 									현황</button>
@@ -440,7 +449,7 @@
 									<!-- Info boxes -->
 
 									<!-- BAR CHART -->
-									<div class="box box-success">
+									<div class="box box-minty">
 
 										<div class="box-header with-border text-center">
 											<h3 class="box-title" id="LChartTitle">나의 캠페인 전체</h3>
@@ -507,9 +516,9 @@
 
 						<!-- 전체 현황 -->
 						<div class="row" style="margin-bottom: 30px; margin-top: 10px;">
-							<div class="col-md-4">
+							<div class="col-md-12">
 								<button type="button"
-									class="btn btn-block btn-bg-mint btn-lg disabled">전체
+									class="btn btn-block btn-primary btn-lg disabled">전체
 									현황</button>
 							</div>
 						</div>
@@ -542,7 +551,7 @@
 								<!-- Info boxes -->
 
 								<!-- BAR CHART -->
-								<div class="box box-success">
+								<div class="box box-primary">
 
 									<div class="box-header with-border text-center">
 										<h3 class="box-title" id="RChartTitle">캠페인 전체</h3>
@@ -561,9 +570,9 @@
 						<div class="row" id="rightStat">
 							<div class="col-md-4 col-sm-6 col-xs-12">
 								<div class="info-box">
-									<span class="info-box-text text-center text-light-blue">학습</span>
-									<span class="info-box-number text-center text-light-blue">0%</span>
-									<span class="info-box-text text-center text-light-blue">(0건)</span>
+									<span class="info-box-text text-center text-blue">학습</span>
+									<span class="info-box-number text-center text-blue">0%</span>
+									<span class="info-box-text text-center text-blue">(0건)</span>
 								</div>
 								<!-- /.info-box -->
 							</div>
