@@ -1,18 +1,24 @@
 package com.ktds.crmai.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -157,23 +163,32 @@ public class FileController {
 	  return response; 
 	}
 	
+
 	@RequestMapping(value = "/downloadGuide", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> downloadGuideFile() throws Exception {
 
-	 String GuideFile = "\\resources\\static\\file\\CRM_MarketingPlatform(Admin)_20180928.pdf";
-	 
+	 String GuideFile = "src/main/resources/static/file/CRM_MarketingPlatform(Admin)_20180928.pdf"; 
+
 	 Path path = Paths.get(GuideFile);
-		
+	
 	 byte[] array = Files.readAllBytes(path);
-	 String fileName = "attachment; filename=CRM_MarketingPlatform(Admin)_20180928.pdf";
-
+	 
+	 String fileName = "inline; filename=CRM_MarketingPlatform(Admin)_20180928.pdf"; //attachment
+	 
 	 HttpHeaders responseHeaders = new HttpHeaders();
+	 
 	 responseHeaders.set("charset", "utf-8");
-	 responseHeaders.setContentType(MediaType.valueOf("application/pdf"));
+	 responseHeaders.setContentType(MediaType.parseMediaType("application/pdf")); //application/pdf text/html
 	 responseHeaders.setContentLength(array.length);
-	 responseHeaders.set("Content-disposition", fileName);
-
-	 return new ResponseEntity<byte[]>(array, responseHeaders, HttpStatus.OK);
+	 responseHeaders.set("Content-disposition",fileName);
+	 //responseHeaders.setContentDispositionFormData("attachment", fileName);
+	 //responseHeaders.set("Content-Transfer-Encoding", "binary");
+	 
+	 
+	 ResponseEntity<byte[]> response = new ResponseEntity<byte[]>(array, responseHeaders, HttpStatus.OK);
+	 
+	 return response;
+	 
 	}
 	
 	@RequestMapping(value = "/downPredict/{cam_id}", method = RequestMethod.GET, produces = "text/csv")
@@ -314,8 +329,6 @@ public class FileController {
 	  return response; 
 	}
   
-	
-	
 	
 	//uuid생성 
 	public static String getUuid() { 

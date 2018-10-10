@@ -348,24 +348,8 @@
 <script>
 	function getGuideFile(){
 	
-		alert("getGuideFile ~~!! ");
-		var campaign = new Object();
-	    $.ajax({
-	        type: 'GET',
-	        url: '/file/downloadGuide',
-	        dataType: 'json',
-	        contentType: 'application/json;charset=UTF-8',
-	        data: campaign,
-	        success: function (data) {
-	        	
-	        	
-	            window.open(data.fileUrl);
-	            // or window.location.href = data.fileUrl;
-	        },
-	        error:function (xhr, ajaxOptions, thrownError) {
-	            console.log("in error");
-	     } 
-		});
+		window.location="/file/downloadGuide";
+		
 	}
 	
 	function Logout(){
@@ -378,6 +362,8 @@
 		}
 	}
 
+	 
+	
 </script>
 </body>
 </html>
