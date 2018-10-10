@@ -115,7 +115,7 @@ public class CampaignController {
     	
     	pageMaker.setTotalCount(totalCount);
     	
-    	logger.info("$$$$$ 총 목록 수:" + totalCount + ", 디스플레이 페이지:" + pageMaker.getDisplayPageNum() + ", 페이지 총 수:" + pageMaker.getEndPage());
+    	logger.info("$$$$$ 총 목록 수:" + totalCount + ", 디스플레이 페이지:" + pageMaker.getDisplayPageNum() + ", 페이지 총 수:" + pageMaker.getRealEndPage());
     	
     	return pageMaker;
 	}
