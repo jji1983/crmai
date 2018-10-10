@@ -57,21 +57,12 @@ function initLeftChart() {
 	var ctxLeft = document.getElementById("chBarLeft").getContext('2d');
 	leftChart = new Chart(ctxLeft, {
 		type : 'bar',
-		data : {labels : types,
+		data : {
+			labels : campaigns,
 			datasets : [ {
-				label : '정확도(%)',
-				data : rightOriginal,
-				backgroundColor : 'rgba(81, 152, 255, 0.6)',
-				borderWidth : 0,
-			}, {
-				label : '예측(%)',
-				data : rightSo,
-				backgroundColor : 'rgba(243, 115, 79, 0.6)',
-				borderWidth : 0,
-			}, {
-				label : '결과(%)',
-				data : rightReal,
-				backgroundColor : 'rgba(0, 180, 175, 0.6)',
+				label : "캠페인",
+				data : [ leftOriginal, leftSo, leftReal ],
+				backgroundColor : chartBGColor,
 				borderWidth : 0
 			} ]
 		},
@@ -312,41 +303,38 @@ function getLeftType(data) {
 		data : data,
 		async : true,
 		success : function(data) {
-			leftOriginal = [ 0, 0, 0, 0 ];
-			leftSo = [ 0, 0, 0, 0 ];
-			leftReal = [ 0, 0, 0, 0 ];
-
+			leftOriginal = 0;
+			leftSo = 0;
+			leftReal = 0;
+			var label;
 			$.each(data, function() {
-
-				if (this.totalBase != 0) {
-					leftOriginal[this.totalBase - 1] = this.totalOriginal;
-					leftSo[this.totalBase - 1] = this.totalSo;
-					leftReal[this.totalBase - 1] = this.totalReal;
-				} else if (this.totalBase == 0) {
-					leftOriginal[etc] = this.totalOriginal;
-					leftSo[etc] = this.totalSo;
-					leftReal[etc] = this.totalReal;
+				switch(this.totalBase) {
+				case "1":
+					label = "통신분야";
+					break;
+				case "2":
+					label = "금융분야";
+					break;
+				case "3":
+					label = "유통분야";
+					break;
+				case "0":
+					label = "기타분야";
+					break;
 				}
+				leftOriginal = this.totalOriginal;
+				leftSo = this.totalSo;
+				leftReal = this.totalReal;
 			});
 			var some_new_data = {
-				labels : types,
-				datasets : [ {
-					label : '정확도(%)',
-					data : leftOriginal,
-					backgroundColor : 'rgba(81, 152, 255, 0.6)',
-					borderWidth : 0,
-				}, {
-					label : '예측(%)',
-					data : leftSo,
-					backgroundColor : 'rgba(243, 115, 79, 0.6)',
-					borderWidth : 0,
-				}, {
-					label : '결과(%)',
-					data : leftReal,
-					backgroundColor : 'rgba(0, 180, 175, 0.6)',
-					borderWidth : 0
-				} ]
-			};
+					labels : campaigns,
+					datasets : [ {
+						label : label,
+						data : [ leftOriginal, leftSo, leftReal ],
+						backgroundColor : chartBGColor,
+						borderWidth : 0
+					} ]
+				};
 
 			leftChart.config.data = some_new_data;
 			leftChart.update();
