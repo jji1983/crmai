@@ -12,9 +12,9 @@ import com.ktds.crmai.util.DateTool;
 import com.ktds.crmai.vo.AiStaging;
 import com.ktds.crmai.vo.CampaignData;
 
-public class PretreatmentProc {
+public class RealProc {
 
-	public void PretreatmentProc() {
+	public void RealProc() {
 		
 		TableDAO dao = new TableDAO();
 		BufferedReader br = null;
@@ -22,17 +22,15 @@ public class PretreatmentProc {
 		String cvsSplitBy = ",";
 		String line;
 		String cam_msg = null;
-		String type = "cam_itype";
+		String type = "cam_rtype";
 		
 		try {
 			//1. 학습데이터 대상을 가져온다.
 			ArrayList<CampaignData> list = dao.selectCampaign(type);
 			
 			if(list == null || list.isEmpty()) {
-				System.out.println("PretreatmentProc :: 조건 대상이 없음");
+				System.out.println("RealProc :: 조건 대상이 없음");
 				return;
-			}else {
-				System.err.println("PretreatmentProc :: 조건 대상이 있음");
 			}
 
 			//2. Flag 변경
@@ -45,32 +43,34 @@ public class PretreatmentProc {
 				String[] columns = null;
 				ArrayList<AiStaging> arrayList = new ArrayList<AiStaging>();
 				System.out.println(data.toString());
-				br = new BufferedReader(new InputStreamReader(new FileInputStream(data.getCam_ifilename()), encoding));
+				br = new BufferedReader(new InputStreamReader(new FileInputStream(data.getCam_rfilename()), encoding));
 				System.out.println(data.getCam_id() + " start :: " + DateTool.getTimestamp());
 	            while ((line = br.readLine()) != null) {
-	            	AiStaging train = new AiStaging();
+	            	AiStaging real = new AiStaging();
 	            	
-	            	//System.out.println(data.getCam_id() + " line :: " + line);
+	            	System.out.println(data.getCam_id() + " line :: " + line);
 	            	columns = line.split("\\" + cvsSplitBy);
 	            	
-	            	//3.1 스테이징DB(TRAIN) Insert
-	            	train.setCam_id(data.getCam_id());
-	            	train.setSt_itype(4);
-	            	train.setColumnTrain(columns);
+	            	//3.1 RealDB update
+	            	
+	            	//st_seq, cam_id, st_c1, method, predict, succ_prob, fail_prob, result
+	            	real.setSt_seq(columns[0]);
+	            	real.setCam_id(data.getCam_id());
+	            	real.setTrain_method(columns[2]);
+	            	real.setPredict(columns[3]);
+	            	real.setSucc_prob(columns[4]);
+	            	real.setFail_prob(columns[5]);
+	            	real.setResult(columns[6]);
 	            	
 	            	//System.out.println(train.toQuery());
-	            	arrayList.add(train);
+	            	arrayList.add(real);
 	            
-	            	int nowNum = columns.length;
 	            	
-	            	if(nowNum > feature) {
-	            		feature = nowNum;
-	            		data.setIcnum(feature);
-	            	}
 	            }
 	            System.out.println(data.getCam_id() + " ing :: " + DateTool.getTimestamp());
 	            
-	            cam_msg = dao.insertAI_STAGING_TRAIN_BATCH(data, arrayList);
+	            //업데이트
+	            //cam_msg = dao.insertAI_STAGING_TRAIN_BATCH(data, arrayList);
 	            
 	            System.out.println(data.getCam_id() + " end :: " + DateTool.getTimestamp() + " :: cam_msg[" + cam_msg + "]");
 	            

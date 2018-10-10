@@ -20,19 +20,22 @@ public class LearningProc {
 			String encoding = "UTF-8";
 			String cvsSplitBy = ",";
 			String line;
+			String cam_msg = null;
+			String type = "cam_otype";
 			
 			try {
 				//1. 학습데이터 대상을 가져온다.
-				ArrayList<CampaignData> list = dao.selectCampaign_otype();
+				ArrayList<CampaignData> list = dao.selectCampaign(type);
 				
 				if(list == null || list.isEmpty()) {
-					System.out.println("PretreatmentProc :: 조건 대상이 없음");
+					System.out.println("LearningProc :: 조건 대상이 없음");
 					return;
+				}else {
+					System.err.println("LearningProc :: 조건 대상이 있음");
 				}
 	
 				//2. Flag 변경
-				dao.updateCampaignTest(list, 2);
-	
+				dao.updateCampaign(list, type,  2, cam_msg);
 				
 				//3. 데이터를 분석 DB 에 Insert
 				System.out.println("Insert start :: " + DateTool.getTimestamp());
@@ -66,20 +69,16 @@ public class LearningProc {
 		            }
 		            System.out.println(data.getCam_id() + " ing :: " + DateTool.getTimestamp());
 		            
-		            String errorMsg = dao.insertAI_STAGING_TEST_BATCH(data, arrayList);
-		            
-		            System.out.println(data.getCam_id() + " end :: " + DateTool.getTimestamp());
+		            cam_msg = dao.insertAI_STAGING_TEST_BATCH(data, arrayList);
+		            System.out.println(data.getCam_id() + " end :: " + DateTool.getTimestamp() + " :: cam_msg[" + cam_msg + "]");
 		            
 		            //3.2 캠페인 정보 업데이트 피쳐 갯수
 		        	System.out.println("feature len[" + feature + "]");
 		        	
-		        	
-		        	if(errorMsg != null) {
-		        		
-		        		dao.updateCampaignTest_end(data, 3, errorMsg);
-		        		
+		        	if(cam_msg != null) {
+		        		dao.updateCampaign(data, type, 3, cam_msg);
 		        	}else {
-		        		dao.updateCampaignTest_end(data, 7, "");
+		        		dao.updateCampaign(data, type, 7, cam_msg);
 		        	}
 		        		
 				}

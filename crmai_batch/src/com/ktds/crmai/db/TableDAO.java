@@ -7,21 +7,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.Hashtable;
 
 import com.ktds.crmai.util.DateTool;
 import com.ktds.crmai.vo.AiStaging;
 import com.ktds.crmai.vo.CampaignData;
-import com.ktds.crmai.vo.TableMake_Query;
 
 public class TableDAO {
-	
-	private String select_campaign_itype = "select cam_id, adm_id, cam_itype, cam_ifilename from ai_campaign where cam_itype in (1, 3)";
-	private String select_campaign_otype = "select cam_id, adm_id, cam_otype, cam_ofilename from ai_campaign where cam_otype in (1, 3)";
-	
-	private Statement stmt;
-	
 	private Connection getConn() throws SQLException, ClassNotFoundException {
 		String jdbc_driver = "oracle.jdbc.OracleDriver";
 		String db_url = "jdbc:oracle:thin:@crmai.iptime.org:1521:xe";
@@ -33,82 +25,26 @@ public class TableDAO {
 		return conn;
 	} 
 
-	public String create_table(TableMake_Query query){
-		Connection conn = null;
-		String msg = null;
-		try {
-			conn = getConn();
-
-			// 드라이버 연결위한 준비  conn객체 생성.
-			stmt = conn.createStatement();
-
-			String sql = query.toString();
-			ResultSet rs = stmt.executeQuery(sql);
-			
-		}catch (ClassNotFoundException e) {
-			System.err.println("Oracle Driver not Found!");
-		} catch(SQLException e) {
-			System.err.println("create_table SQL 오류 :: " + e.getMessage() + " :: " + query);
-			
-			msg = e.getMessage();
-		}finally {
-			try {
-				if(stmt != null) stmt.close();
-				if(conn != null) conn.close();
-			}catch(final SQLException e) {
-				
-			}
-			return msg;
-		}
-	}
-	
-	
-	public String insertData_Pretreatment(ArrayList<String> list){
-		Connection conn = null;
-		String query = null;
-		String msg = null;
-		try {
-			conn = getConn();
-			
-			// 드라이버 연결위한 준비  conn객체 생성.
-			stmt = conn.createStatement();
-
-			for(int i = 0; i < list.size(); i++) {
-				
-				query = list.get(i);
-				
-				stmt.executeUpdate(query);
-				
-			}
-			
-			
-		}catch (ClassNotFoundException e) {
-			System.err.println("Oracle Driver not Found!");
-		} catch(SQLException e) {
-			System.err.println("insertData_Pretreatment SQL 오류 :: " + e.getMessage() + " :: " + query);
-			
-			msg = e.getMessage();
-		}finally {
-			try {
-				if(stmt != null) stmt.close();
-				if(conn != null) conn.close();
-			}catch(final SQLException e) {
-				
-			}
-			return msg;
-		}
-	}
-	
-	
-
 	/*
 	 * Name : 캠페인 학습데이터 목록 가져오기
 	 * 
 	 * 
 	 */
-	public ArrayList<CampaignData> selectCampaign_itype(){
+	public ArrayList<CampaignData> selectCampaign(String type){
+		Statement stmt = null;
 		Connection conn = null;
 		ArrayList<CampaignData> list = new ArrayList<>();
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("select cam_id, adm_id, cam_itype, cam_ifilename, cam_otype, cam_ofilename, cam_rtype, cam_rfilename from ai_campaign where ");
+		
+		if(type.equals("cam_itype")) {
+			sb.append("cam_itype in (1, 3)");
+		}else if(type.equals("cam_otype")) {
+			sb.append("cam_otype in (1, 3)");
+		}else if(type.equals("cam_rtype")){
+			sb.append("cam_rtype in (1, 3)");
+		}
 		
 		try {
 			conn = getConn();
@@ -117,7 +53,7 @@ public class TableDAO {
 			stmt = conn.createStatement();
 
 		   //5. sql문을 DB에 전송(실행)
-		   ResultSet rs = stmt.executeQuery(select_campaign_itype); // 결과 테이블 반환
+		   ResultSet rs = stmt.executeQuery(sb.toString()); // 결과 테이블 반환
 		   
 		   
 		   while(rs.next()){// memo 테이블 1번 레코드 직전에 위치해서 next가 다음 칸으로 이동(첫번째 행을 가리킴)
@@ -127,61 +63,19 @@ public class TableDAO {
 			   String adm_id        =  rs.getString("adm_id");        // 등록자ID
 			   String cam_itype     =  rs.getString("cam_itype");     // 캠페인진행현황
 			   String cam_ifilename =  rs.getString("cam_ifilename"); // 캠페인 학습데이터 경로
+			   String cam_otype     =  rs.getString("cam_otype");     // 캠페인진행현황
+			   String cam_ofilename =  rs.getString("cam_ofilename"); // 캠페인 학습데이터 경로
+			   String cam_rtype     =  rs.getString("cam_rtype");     // 캠페인진행현황
+			   String cam_rfilename =  rs.getString("cam_rfilename"); // 캠페인 학습데이터 경로
 			   
 			   data.setCam_id(cam_id);
 			   data.setAdm_id(adm_id);
 			   data.setCam_itype(cam_itype);
 			   data.setCam_ifilename(cam_ifilename);
-			   
-			   list.add(data);
-		   }
-			
-		}catch (ClassNotFoundException e) {
-			System.err.println("Oracle Driver not Found!");
-		} catch(SQLException e) {
-			System.err.println("insertData_Pretreatment SQL 오류 :: " + e.getMessage() + " :: " + select_campaign_itype);
-		}finally {
-			try {
-				if(stmt != null) stmt.close();
-				if(conn != null) conn.close();
-			}catch(final SQLException e) {
-				
-			}
-			return list;
-		}
-	}
-	
-	
-	/*
-	 * Name : 캠페인 학습데이터 목록 가져오기
-	 * 
-	 * 
-	 */
-	public ArrayList<CampaignData> selectCampaign_otype(){
-		Connection conn = null;
-		ArrayList<CampaignData> list = new ArrayList<>();
-		
-		try {
-			conn = getConn();
-			
-			// 드라이버 연결위한 준비  conn객체 생성.
-			stmt = conn.createStatement();
-
-		   //5. sql문을 DB에 전송(실행)
-		   ResultSet rs = stmt.executeQuery(select_campaign_otype); // 결과 테이블 반환
-		   
-		   while(rs.next()){// memo 테이블 1번 레코드 직전에 위치해서 next가 다음 칸으로 이동(첫번째 행을 가리킴)
-			   CampaignData data = new CampaignData();
-			   // 메모 테이블에 컬럼 데이터를 뽑아오기
-			   int    cam_id        =  rs.getInt("cam_id");           // 캠페인ID
-			   String adm_id        =  rs.getString("adm_id");        // 등록자ID
-			   String cam_otype     =  rs.getString("cam_otype");     // 캠페인진행현황
-			   String cam_ofilename =  rs.getString("cam_ofilename"); // 캠페인 학습데이터 경로
-			   
-			   data.setCam_id(cam_id);
-			   data.setAdm_id(adm_id);
 			   data.setCam_otype(cam_otype);
 			   data.setCam_ofilename(cam_ofilename);
+			   data.setCam_rtype(cam_rtype);
+			   data.setCam_rfilename(cam_rfilename);
 			   
 			   list.add(data);
 		   }
@@ -189,7 +83,7 @@ public class TableDAO {
 		}catch (ClassNotFoundException e) {
 			System.err.println("Oracle Driver not Found!");
 		} catch(SQLException e) {
-			System.err.println("insertData_Pretreatment SQL 오류 :: " + e.getMessage() + " :: " + select_campaign_otype);
+			System.err.println("selectCampaign SQL 오류 :: " + e.getMessage() + " :: " + sb.toString());
 		}finally {
 			try {
 				if(stmt != null) stmt.close();
@@ -201,12 +95,15 @@ public class TableDAO {
 		}
 	}
 	
+	
+	
 	/*
 	 * Name : 캠페인 학습데이터 목록 가져오기
 	 * 
 	 * 
 	 */
-	public int updateCampaignTrain(ArrayList<CampaignData> list, int cam_itype){
+	public int updateCampaign(ArrayList<CampaignData> list, String type, int type_num, String msg){
+		Statement stmt = null;
 		Connection conn = null;
 		StringBuilder update_campaign =  new StringBuilder();
 		
@@ -219,8 +116,12 @@ public class TableDAO {
 			// 드라이버 연결위한 준비  conn객체 생성.
 			stmt = conn.createStatement();
 
-			update_campaign.append("update ai_campaign set cam_itype = ");
-			update_campaign.append(cam_itype);
+			update_campaign.append("update ai_campaign set ");
+			update_campaign.append(type + "=" + type_num);
+			
+			if(msg != null) {
+				update_campaign.append(", cam_msg=" + msg);	
+			}
 			update_campaign.append(" where cam_id in ");
 			
 			update_campaign.append("(");
@@ -257,13 +158,9 @@ public class TableDAO {
 		}
 	}
 	
-	
-	/*
-	 * Name : 캠페인 학습데이터 목록 가져오기
-	 * 
-	 * 
-	 */
-	public int updateCampaignTrain_end(CampaignData campaign, int cam_itype, String errorMsg){
+
+	public int updateCampaign(CampaignData data, String type, int type_num, String cam_msg) {
+		Statement stmt = null;
 		Connection conn = null;
 		StringBuilder update_campaign =  new StringBuilder();
 		
@@ -277,71 +174,18 @@ public class TableDAO {
 			stmt = conn.createStatement();
 
 			update_campaign.append("update ai_campaign set ");
-			update_campaign.append("cam_itype = " + cam_itype);
-			update_campaign.append(", cam_icnum = " + campaign.getIcnum());
-			update_campaign.append(", cam_msg = '" + errorMsg + "'");
-			
-			update_campaign.append(" where cam_id in ");
-			
-			update_campaign.append("(");
-			update_campaign.append(campaign.getCam_id());
-			update_campaign.append(")");
-			
-			System.out.println("update_campaign :: " + update_campaign.toString());
-			
-		    //sql문을 DB에 전송(실행)
-		    rs = stmt.executeUpdate(update_campaign.toString()); // 결과 테이블 반환
-		   
-			
-		}catch (ClassNotFoundException e) {
-			System.err.println("Oracle Driver not Found!");
-		} catch(SQLException e) {
-			System.err.println("insertData_Pretreatment SQL 오류 :: " + e.getMessage() );
-		}finally {
-			try {
-				if(stmt != null) stmt.close();
-				if(conn != null) conn.close();
-			}catch(final SQLException e) {
-				
-			}
-			return rs;
-		}
-	}
-	
-	/*
-	 * Name : 캠페인 학습데이터 목록 가져오기
-	 * 
-	 * 
-	 */
-	public int updateCampaignTest(ArrayList<CampaignData> list, int cam_otype){
-		Connection conn = null;
-		StringBuilder update_campaign =  new StringBuilder();
-		
-		int rs = 1;
-		int flag = 0;
-		
-		try {
-			conn = getConn();
-			
-			// 드라이버 연결위한 준비  conn객체 생성.
-			stmt = conn.createStatement();
+			update_campaign.append(type + "=" + type_num);
 
-			update_campaign.append("update ai_campaign set cam_otype = ");
-			update_campaign.append(cam_otype);
-			update_campaign.append(" where cam_id in ");
-			
-			update_campaign.append("(");
-			for(CampaignData data : list) {
-				
-				if(flag == 1) {
-					update_campaign.append("," + data.getCam_id());	
-				}else {
-					update_campaign.append(data.getCam_id());
-					flag = 1;
-				}
-				
+			if(type.equals("cam_itype")) {
+				update_campaign.append(", cam_icnum=" + data.getIcnum() );
 			}
-			update_campaign.append(")");
+			
+			if(cam_msg != null) {
+				update_campaign.append(", cam_msg=" + cam_msg);	
+			}
+			
+			update_campaign.append(" where cam_id = " + data.getCam_id() );
+			
 			
 			System.out.println("update_campaign :: " + update_campaign.toString());
 			
@@ -362,98 +206,11 @@ public class TableDAO {
 			}
 			return rs;
 		}
-	}
-	
-	/*
-	 * Name : 캠페인 학습데이터 목록 가져오기
-	 * 
-	 * 
-	 */
-	public int updateCampaignTest_end(CampaignData campaign, int cam_otype, String errorMsg){
-		Connection conn = null;
-		StringBuilder update_campaign =  new StringBuilder();
 		
-		int rs = 1;
-		int flag = 0;
-		
-		try {
-			conn = getConn();
-			
-			// 드라이버 연결위한 준비  conn객체 생성.
-			stmt = conn.createStatement();
-
-			update_campaign.append("update ai_campaign set ");
-			update_campaign.append("cam_otype = " + cam_otype);
-			update_campaign.append(", cam_icnum = " + campaign.getIcnum());
-			update_campaign.append(", cam_msg = '" + errorMsg + "'");
-			
-			update_campaign.append(" where cam_id in ");
-			
-			update_campaign.append("(");
-			update_campaign.append(campaign.getCam_id());
-			update_campaign.append(")");
-			
-			System.out.println("update_campaign :: " + update_campaign.toString());
-			
-		    //sql문을 DB에 전송(실행)
-		    rs = stmt.executeUpdate(update_campaign.toString()); // 결과 테이블 반환
-		   
-			
-		}catch (ClassNotFoundException e) {
-			System.err.println("Oracle Driver not Found!");
-		} catch(SQLException e) {
-			System.err.println("insertData_Pretreatment SQL 오류 :: " + e.getMessage() );
-		}finally {
-			try {
-				if(stmt != null) stmt.close();
-				if(conn != null) conn.close();
-			}catch(final SQLException e) {
-				
-			}
-			return rs;
-		}
 	}
-	
-	public String insertAI_STAGING_TRAIN(CampaignData data, ArrayList<AiStaging> arrayList){
-		Connection conn = null;
-		String msg = null;
-		AiStaging query = null;
-		try {
-			conn = getConn();
-			
-			// 드라이버 연결위한 준비  conn객체 생성.
-			stmt = conn.createStatement();
-			for(int i = 0; i < arrayList.size(); i++) {
-				
-				query = arrayList.get(i);
-				
-				stmt.executeUpdate(query.toQueryTrain(data.getIcnum(), 1));
-				
-				if(i % 1000 == 0) {
-					System.out.println(query.getCam_id() + " ing"+i+" :: " + DateTool.getTimestamp() +" :: " + query.toQueryTrain(data.getIcnum(), 1));
-				}
-				
-			}
-						
-		}catch (ClassNotFoundException e) {
-			System.err.println("Oracle Driver not Found!");
-		} catch(SQLException e) {
-			System.err.println("insertData_Pretreatment SQL 오류 :: " + e.getMessage() + " :: " + query.toQueryTrain(data.getIcnum(), 1));
-			
-			msg = e.getMessage();
-		}finally {
-			try {
-				if(stmt != null) stmt.close();
-				if(conn != null) conn.close();
-			}catch(final SQLException e) {
-				
-			}
-			return msg;
-		}
-	}
-	
 	
 	public String insertAI_STAGING_TRAIN_BATCH(CampaignData campaign, ArrayList<AiStaging> arrayList){
+		Statement stmt = null;
 		Connection conn = null;
 		String msg = null;
 		StringBuilder query_h = new StringBuilder();
@@ -562,6 +319,7 @@ public class TableDAO {
 	
 	
 	public String insertAI_STAGING_TEST_BATCH(CampaignData campaign, ArrayList<AiStaging> arrayList){
+		Statement stmt = null;
 		Connection conn = null;
 		String msg = null;
 		StringBuilder query_h = new StringBuilder();
@@ -668,5 +426,6 @@ public class TableDAO {
 			return msg;
 		}
 	}
+
 
 }
