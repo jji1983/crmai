@@ -92,7 +92,6 @@ function getPagination() {
 		success : function(data) {
 			if (data[0] != "0") {
 				totalPages = Math.ceil(data[0] / visiblePages);
-
 				grid_pagination(totalPages, visiblePages);
 			}
 		},
