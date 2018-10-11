@@ -13,10 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ktds.crmai.model.AI_CAMPAIGN;
 import com.ktds.crmai.model.AI_PAGE;
 import com.ktds.crmai.model.AI_STAGING;
+import com.ktds.crmai.model.PageCriteria;
+import com.ktds.crmai.model.PageMaker;
 import com.ktds.crmai.service.StagingService;
 
 @Controller
@@ -121,5 +123,90 @@ public class StagingController {
     	return response;
     }
 	
+	// 값에 따른 선택에 의한 전처리 목록 총 갯수 가져오기
+	@ResponseBody
+	@RequestMapping(value="/count", method=RequestMethod.GET)
+	public PageMaker getPreprocessCount(
+		@ModelAttribute AI_STAGING staging,
+		PageCriteria cri) {
+		
+		PageMaker pageMaker = new PageMaker();
+    	
+    	pageMaker.setCri(cri);
+    	
+    	Integer totalCount = 0;
+    	
+    	switch (staging.getStatusFlag()) {
+			// 학습 데이터 처리 전
+    		case 1:
+    			totalCount = stagingService.selectStagingTrainCnt(staging);
+				
+				break;
+			// 대상자 데이터 처리 전
+			case 2:
+				totalCount = stagingService.selectStagingTestCnt(staging);
+				
+				break;
+			// 학습 데이터 처리 후
+			case 3:
+				totalCount = stagingService.selectStagingTrainResultCnt(staging);
+				
+				break;
+			// 대상자 데이터 처리 후
+			case 4:
+				totalCount = stagingService.selectStagingTestResultCnt(staging);
+				
+				break;
+			default:
+				break;
+		}
+    	
+    	pageMaker.setTotalCount(totalCount);
+    	
+    	logger.info("$$$$$ 총 목록 수:" + totalCount + ", 디스플레이 페이지:" + pageMaker.getDisplayPageNum() + ", 페이지 총 수:" + pageMaker.getRealEndPage());
+    	
+    	return pageMaker;
+	}
 	
+	// 전처리 목록 가져오기(다른 방식, 수동에 사용)
+	public List<AI_STAGING> getPreprocessList(
+		@ModelAttribute AI_STAGING stagingParam,
+		PageCriteria cri) {
+		
+		stagingParam.setPage(cri.getPage());
+		stagingParam.setPerPageNum(cri.getPerPageNum());
+		
+		logger.info("$$$$$$페이지:" + cri.getPage() + ", 페이지당 목록 수:" + cri.getPerPageNum());
+		
+		List<AI_STAGING> staging = null;
+		
+		switch (stagingParam.getStatusFlag()) {
+			// 학습 데이터 처리 전
+			case 1:
+				staging = stagingService.selectStagingTrainList(stagingParam);
+				
+				break;
+			// 대상자 데이터 처리 전
+			case 2:
+				staging = stagingService.selectStagingTestList(stagingParam);
+				
+				break;
+			// 학습 데이터 처리 후
+			case 3:
+				staging = stagingService.selectStagingTrainResultList(stagingParam);
+				
+				break;
+			// 대상자 데이터 처리 후
+			case 4:
+				staging = stagingService.selectStagingTestResultList(stagingParam);
+				
+				break;
+			default:
+				break;
+		}
+		
+		logger.info("$$$$$스테이징 :: " + staging.toString());
+		
+		return staging;
+	}
 }

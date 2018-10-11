@@ -76,6 +76,7 @@
 	function Content_PretreatmentResult() {
 		//alert("call Content_PretreatmentResult!!");
 		document.getElementById("main_frame").src = "/iframe/PretreatmentResult";
+		$("input[name='session_name']").val("${sessionNAME}");
 	}
 	function Content_Learning() {
 		//alert("call Content_Learning!!");
