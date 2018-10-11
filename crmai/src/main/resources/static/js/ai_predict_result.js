@@ -318,3 +318,14 @@ function createPredictTable(arr) {
 	  	
 	$("#div_predict").html(html);					// innerHtml jquery버전
 }
+
+// csv 다운로드 함수
+function csvDown() {
+	var succVal = $("#succ_rate").val();
+	var extractVal = $("#extract").val();
+	var cam_id = currentValue + "_" + succVal + "_" + extractVal;
+	
+	window.open('/file/downPredict/'+cam_id+'');
+	
+	$("#modal-default").modal("hide");
+}
