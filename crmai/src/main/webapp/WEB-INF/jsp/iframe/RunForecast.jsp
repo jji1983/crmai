@@ -84,14 +84,18 @@
 		        <!-- /.box-header -->
 		        <div class="box-body">
 		          <div class="row">
-		            <div class="col-md-6">
+		            <div class="col-md-3">
 					  <div class="form-group">
 		                  <div class="col-sm-10">
 		                    <label for="inputname" >캠페인명</label>
 		                    <input type="text" class="form-control" id="inputname" placeholder="캠페인명">
 		                  </div>
    	                  </div>
-   	                   <!-- /.form-group -->
+   	                  <!-- /.form-group -->
+   	                </div>
+   	                <!-- /.col -->
+   	                
+   	                <div class="col-md-3"> 
    	                  <div class="form-group">
 	                	<div class="col-sm-10">
 	                		<label for="select_type" >캠페인목적</label>
@@ -103,9 +107,9 @@
 		              </div>
 					  <!-- /.form-group -->
 		            </div>
-		            
 		            <!-- /.col -->
-		            <div class="col-md-6">
+		            
+		            <div class="col-md-3">
 		              <div class="form-group">
 		                <div class="col-sm-10">
 		                	<label for="select_status" >캠페인상태</label>
@@ -117,6 +121,10 @@
 			          	</div>      
 		              </div>
 		              <!-- /.form-group -->
+		            </div>
+		            <!-- /.col -->
+		            
+		            <div class="col-md-3">
 		              <div class="form-group">
 		              	<div class="col-sm-10">
                 		   <label for="input_crea_by" >생성자</label>

@@ -91,15 +91,17 @@
 						<!-- /.box-header -->
 						<div class="box-body">
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-3">
 									<div class="form-group">
 										<div class="col-sm-10">
 											<label for="cam_name">캠페인명</label> <input type="text" class="form-control" id="cam_name" placeholder="캠페인명">
 										</div>
 									</div>
 									<!-- /.form-group -->
+								</div>
+								<!-- /.col -->
 
-									<!-- form-group -->
+								<div class="col-md-3">
 									<div class="form-group">
 										<div class="col-sm-10">
 											<label for="cam_type">캠페인목적</label> <select id="cam_type"	class="form-control select2" style="width: 100%;">
@@ -115,8 +117,7 @@
 								</div>
 								<!-- /.col -->
 
-								<div class="col-md-6">
-									<!-- form-group -->
+								<div class="col-md-3">
 									<div class="form-group">
 										<div class="col-sm-10">
 											<label for="cam_status">캠페인상태</label> <select id="cam_status" class="form-control select2" style="width: 100%;">
@@ -127,8 +128,10 @@
 										</div>
 									</div>
 									<!-- /.form-group -->
+								</div>
+								<!-- /.col -->
 
-									<!-- form-group -->
+								<div class="col-md-3">
 									<div class="form-group">
 										<div class="col-sm-10">
 											<label for="adm_id">생성자</label> <input type="text"	class="form-control" id="adm_id" placeholder="생성자">
