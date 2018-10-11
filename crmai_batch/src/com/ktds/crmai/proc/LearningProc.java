@@ -22,6 +22,8 @@ public class LearningProc {
 			String line;
 			String cam_msg = null;
 			String type = "cam_otype";
+			String type1 = "st_otype";
+			String tableName = "AI_STAGING_TEST";
 			
 			try {
 				//1. 학습데이터 대상을 가져온다.
@@ -69,7 +71,7 @@ public class LearningProc {
 		            }
 		            System.out.println(data.getCam_id() + " ing :: " + DateTool.getTimestamp());
 		            
-		            cam_msg = dao.insertAI_STAGING_TEST_BATCH(data, arrayList);
+		            cam_msg = dao.insertAI_STAGING(data, arrayList, tableName, type1);
 		            System.out.println(data.getCam_id() + " end :: " + DateTool.getTimestamp() + " :: cam_msg[" + cam_msg + "]");
 		            
 		            //3.2 캠페인 정보 업데이트 피쳐 갯수

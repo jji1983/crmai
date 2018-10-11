@@ -180,10 +180,7 @@ public class TableDAO {
 				update_campaign.append(", cam_icnum=" + data.getIcnum() );
 			}
 			
-			if(cam_msg != null) {
-				update_campaign.append(", cam_msg=" + cam_msg);	
-			}
-			
+			update_campaign.append(", cam_msg='" + cam_msg + "' ");	
 			update_campaign.append(" where cam_id = " + data.getCam_id() );
 			
 			
@@ -209,7 +206,7 @@ public class TableDAO {
 		
 	}
 	
-	public String insertAI_STAGING_TRAIN_BATCH(CampaignData campaign, ArrayList<AiStaging> arrayList){
+	public String insertAI_STAGING(CampaignData campaign, ArrayList<AiStaging> arrayList, String tableName, String type){
 		Statement stmt = null;
 		Connection conn = null;
 		String msg = null;
@@ -225,117 +222,8 @@ public class TableDAO {
 			
 			//init
 			{ 
-				query_h.append("insert into AI_STAGING_TRAIN(ST_SEQ, cam_id, st_itype ");
-				query_b.append("values(ST_SEQ_TRAIN.NEXTVAL, '" + campaign.getCam_id() + "', " + campaign.getCam_itype() + " ");
-				
-				for(int i = 1; i < campaign.getIcnum(); i++) {
-					query_h.append(",ST_C" + i + " " );
-					query_b.append(",?");
-				}
-				
-				query_h.append(",ST_C200) ");
-				query_b.append(",?) ");
-			}
-			
-			query = query_h.toString() + query_b.toString();
-			
-			System.out.println("query :: " + query);
-			System.out.println("arrayList.size :: " + arrayList.size());
-			
-			PreparedStatement pstmt = conn.prepareStatement(query) ;
-
-			
-			// 드라이버 연결위한 준비  conn객체 생성.
-			stmt = conn.createStatement();
-			for(int i = 0; i < arrayList.size(); i++) {
-				
-				AiStaging temp = arrayList.get(i);
-				
-				Hashtable<String, String> column = temp.getColumnTrain();
-				
-				for(int y = 1 ; y < campaign.getIcnum(); y++) {
-					
-//					System.out.println(y + " :: " + column.size() + " :: " + column.get("ST_C" + y) );
-					pstmt.setString(y, column.get("ST_C" + y));
-				}
-//				System.out.println(campaign.getIcnum() + " :: " + campaign.getIcnum() + " :: ST_C200 :: " + column.get("ST_C" + campaign.getIcnum()) );
-				
-				pstmt.setString(campaign.getIcnum(), column.get("ST_C" + campaign.getIcnum()));
-				
-                // addBatch에 담기
-                pstmt.addBatch();
-				
-                // OutOfMemory를 고려하여 만건 단위로 커밋
-                if( (i % 10000) == 0){
-                	
-                	System.out.println("ing_"+i+" :: " + DateTool.getTimestamp() );
-                	
-                    // Batch 실행
-                    pstmt.executeBatch() ;
-                     
-                    // Batch 초기화
-                    pstmt.clearBatch();
-                     
-                    // 커밋
-                    conn.commit() ;
-                }
-			}
-	        // Batch 실행
-            pstmt.executeBatch() ;
-             
-            // Batch 초기화
-            pstmt.clearBatch();
-			
-			// 커밋
-            conn.commit();
-						
-		}catch (ClassNotFoundException e) {
-			System.err.println("Oracle Driver not Found!");
-		} catch(SQLException e) {
-			System.err.println("insertData_Pretreatment SQL 오류 :: " + e.getMessage() );
-			
-			msg = e.getMessage();
-		}finally {
-
-			
-			try {
-				conn.setAutoCommit(true);  // 오토 커밋을 true로 다시 변경한다.
-
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			try {
-				if(stmt != null) stmt.close();
-				if(conn != null) conn.close();
-			}catch(final SQLException e) {
-				
-			}
-                       
-			return msg;
-		}
-	}
-	
-	
-	public String insertAI_STAGING_TEST_BATCH(CampaignData campaign, ArrayList<AiStaging> arrayList){
-		Statement stmt = null;
-		Connection conn = null;
-		String msg = null;
-		StringBuilder query_h = new StringBuilder();
-		StringBuilder query_b = new StringBuilder();
-		
-		String query = null;
-		AiStaging data;
-		try {
-			conn = getConn();
-			conn.setAutoCommit(false);                        // 오토커밋을 false로 지정한다.
-	
-			
-			//init
-			{ 
-				query_h.append("insert into AI_STAGING_TEST(ST_SEQ, cam_id, st_otype ");
-				query_b.append("values(ST_SEQ_TEST.NEXTVAL, '" + campaign.getCam_id() + "', " + campaign.getCam_otype() + " ");
+				query_h.append("insert into " + tableName +"(ST_SEQ, cam_id ," + type);
+				query_b.append("values(ST_SEQ_TEST.NEXTVAL, '" + campaign.getCam_id() + "', 4 ");
 				
 				for(int i = 1; i < campaign.getIcnum(); i++) {
 					query_h.append(",ST_C" + i + " " );
@@ -402,7 +290,7 @@ public class TableDAO {
 		}catch (ClassNotFoundException e) {
 			System.err.println("Oracle Driver not Found!");
 		} catch(SQLException e) {
-			System.err.println("insertData_Pretreatment SQL 오류 :: " + e.getMessage() );
+			System.err.println("insert tableName SQL 오류 :: " + e.getMessage() );
 			
 			msg = e.getMessage();
 		}finally {
@@ -421,6 +309,99 @@ public class TableDAO {
 				if(conn != null) conn.close();
 			}catch(final SQLException e) {
 				
+			}
+                       
+			return msg;
+		}
+	}
+	
+	public String insertAI_STAGING_Real(CampaignData campaign, ArrayList<AiStaging> arrayList){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String msg = null;
+		StringBuilder query = new StringBuilder();
+		
+		try {
+			conn = getConn();
+			conn.setAutoCommit(false);                        // 오토커밋을 false로 지정한다.
+	
+			query.append("insert into AI_STAGING_REAL(ST_SEQ, cam_id, st_c1, train_method, predict, succ_prob, fail_prob, result) ");
+			query.append("values(?, ?, ?, ?, ?, ?, ?, ?)");
+
+			System.out.println("query :: " + query);
+			System.out.println("arrayList.size :: " + arrayList.size());
+			
+			pstmt = conn.prepareStatement(query.toString()) ;
+			
+			// 드라이버 연결위한 준비  conn객체 생성.
+			for(int i = 0; i < arrayList.size(); i++) {
+				
+				AiStaging temp = arrayList.get(i);
+				
+				//System.out.println(i + " :: insertAI_STAGING_Real :: " + temp.toStringReal());
+				
+				pstmt.setInt(1, temp.getSt_seq());
+				pstmt.setInt(2, temp.getCam_id());
+				pstmt.setString(3, temp.getSt_c1());
+				pstmt.setString(4, temp.getTrain_method());
+				
+				pstmt.setInt(5, temp.getPredict());
+				pstmt.setInt(6, temp.getSucc_prob());
+				pstmt.setInt(7, temp.getFail_prob());
+				pstmt.setInt(8, temp.getResult());
+				
+                // addBatch에 담기
+                pstmt.addBatch();
+				
+                // OutOfMemory를 고려하여 만건 단위로 커밋
+                if( (i % 10000) == 0){
+                	
+                	System.out.println("ing_"+i+" :: " + DateTool.getTimestamp() );
+                	
+                    // Batch 실행
+                    pstmt.executeBatch() ;
+                     
+                    // Batch 초기화
+                    pstmt.clearBatch();
+                     
+                    // 커밋
+                    conn.commit() ;
+                }
+			}
+	        // Batch 실행
+            pstmt.executeBatch() ;
+             
+            // Batch 초기화
+            pstmt.clearBatch();
+			
+			// 커밋
+            conn.commit();
+						
+		}catch (ClassNotFoundException e) {
+			System.err.println("Oracle Driver not Found!");
+		} catch(SQLException e) {
+			System.err.println("insertAI_STAGING_Real SQL 오류 :: " + e.getMessage() );
+			msg = e.getMessage();
+		}catch(Exception e){
+			e.printStackTrace();
+			
+			System.err.println("insertAI_STAGING_Real 오류 :: " + e.getMessage() );
+			msg = e.getMessage();
+		}finally {
+			
+			try {
+				conn.setAutoCommit(true);  // 오토 커밋을 true로 다시 변경한다.
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				pstmt.close();
+				if(conn != null) conn.close();
+			}catch(final SQLException e) {
+				e.printStackTrace();
 			}
                        
 			return msg;

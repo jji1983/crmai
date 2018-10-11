@@ -2,6 +2,7 @@ package com.ktds.crmai;
 
 import com.ktds.crmai.proc.LearningProc;
 import com.ktds.crmai.proc.PretreatmentProc;
+import com.ktds.crmai.proc.RealProc;
 
 public class AppMain{
 	
@@ -15,6 +16,11 @@ public class AppMain{
 		 LearningProc learn_proc = new LearningProc();
 		 learn_proc.LearningProc();
 	
+		 
+		 //3. 실측 데이터 입력
+		 RealProc real_proc = new RealProc();
+		 real_proc.RealProc();
+		 
 	 }
 
 }

@@ -23,6 +23,8 @@ public class PretreatmentProc {
 		String line;
 		String cam_msg = null;
 		String type = "cam_itype";
+		String type1 = "st_itype";
+		String tableName = "AI_STAGING_TRAIN";
 		
 		try {
 			//1. 학습데이터 대상을 가져온다.
@@ -70,7 +72,7 @@ public class PretreatmentProc {
 	            }
 	            System.out.println(data.getCam_id() + " ing :: " + DateTool.getTimestamp());
 	            
-	            cam_msg = dao.insertAI_STAGING_TRAIN_BATCH(data, arrayList);
+	            cam_msg = dao.insertAI_STAGING(data, arrayList, tableName, type1);
 	            
 	            System.out.println(data.getCam_id() + " end :: " + DateTool.getTimestamp() + " :: cam_msg[" + cam_msg + "]");
 	            

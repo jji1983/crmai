@@ -83,8 +83,8 @@ public class AiStaging {
 	
 	
 	
-	public String getSt_seq() {
-		return st_seq;
+	public int getSt_seq() {
+		return Integer.parseInt(st_seq);
 	}
 	public void setSt_seq(String st_seq) {
 		this.st_seq = st_seq;
@@ -101,26 +101,26 @@ public class AiStaging {
 	public void setTrain_method(String train_method) {
 		this.train_method = train_method;
 	}
-	public String getPredict() {
-		return predict;
+	public int getPredict() {
+		return Integer.parseInt(predict);
 	}
 	public void setPredict(String predict) {
 		this.predict = predict;
 	}
-	public String getSucc_prob() {
-		return succ_prob;
+	public int getSucc_prob() {
+		return Integer.parseInt(succ_prob);
 	}
 	public void setSucc_prob(String succ_prob) {
 		this.succ_prob = succ_prob;
 	}
-	public String getFail_prob() {
-		return fail_prob;
+	public int getFail_prob() {
+		return Integer.parseInt(fail_prob);
 	}
 	public void setFail_prob(String fail_prob) {
 		this.fail_prob = fail_prob;
 	}
-	public String getResult() {
-		return result;
+	public int getResult() {
+		return Integer.parseInt(result);
 	}
 	public void setResult(String result) {
 		this.result = result;
@@ -131,6 +131,8 @@ public class AiStaging {
 	public void setSt_rtype(int st_rtype) {
 		this.st_rtype = st_rtype;
 	}
+	
+	
 	public String insertQueryTrain(int cNum, int st_itype) {
 		StringBuilder query_h = new StringBuilder();
 		StringBuilder query_b = new StringBuilder();
@@ -237,5 +239,19 @@ public class AiStaging {
 		return sb.toString();
 	}
 	
-
+	public String toStringReal() {
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("st_seq :: " + st_seq + ",");
+		sb.append("cam_id :: " + cam_id + ",");
+		sb.append("st_c1 :: " + st_c1 + ",");
+		sb.append("train_method :: " + train_method + ",");
+		sb.append("predict :: " + predict + ",");
+		sb.append("succ_prob :: " + succ_prob + ",");
+		sb.append("fail_prob :: " + fail_prob + ",");
+		sb.append("result :: " + result + ",");
+		
+		return sb.toString();
+	}
+	
 }

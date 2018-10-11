@@ -80,6 +80,8 @@ public class CampaignData {
 		sb.append("cam_ifilename :: " + cam_ifilename + "\n");
 		sb.append("cam_otype :: " + cam_otype + "\n");
 		sb.append("cam_ofilename :: " + cam_ofilename + "\n");
+		sb.append("cam_rtype :: " + cam_rtype + "\n");
+		sb.append("cam_rfilename :: " + cam_rfilename + "\n");
 		sb.append("icnum :: " + icnum + "\n");
 		
 		return sb.toString();

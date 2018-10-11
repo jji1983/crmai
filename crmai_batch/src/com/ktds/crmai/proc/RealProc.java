@@ -43,12 +43,14 @@ public class RealProc {
 				String[] columns = null;
 				ArrayList<AiStaging> arrayList = new ArrayList<AiStaging>();
 				System.out.println(data.toString());
+				
 				br = new BufferedReader(new InputStreamReader(new FileInputStream(data.getCam_rfilename()), encoding));
 				System.out.println(data.getCam_id() + " start :: " + DateTool.getTimestamp());
+				
 	            while ((line = br.readLine()) != null) {
 	            	AiStaging real = new AiStaging();
 	            	
-	            	System.out.println(data.getCam_id() + " line :: " + line);
+	            	//System.out.println(data.getCam_id() + " line :: " + line);
 	            	columns = line.split("\\" + cvsSplitBy);
 	            	
 	            	//3.1 RealDB update
@@ -56,26 +58,26 @@ public class RealProc {
 	            	//st_seq, cam_id, st_c1, method, predict, succ_prob, fail_prob, result
 	            	real.setSt_seq(columns[0]);
 	            	real.setCam_id(data.getCam_id());
-	            	real.setTrain_method(columns[2]);
-	            	real.setPredict(columns[3]);
-	            	real.setSucc_prob(columns[4]);
-	            	real.setFail_prob(columns[5]);
-	            	real.setResult(columns[6]);
+	            	real.setSt_c1(columns[2]);
+	            	real.setTrain_method(columns[3]);
+	            	real.setPredict(columns[4]);
+	            	real.setSucc_prob(columns[5]);
+	            	real.setFail_prob(columns[6]);
+	            	real.setResult(columns[7]);
 	            	
 	            	//System.out.println(train.toQuery());
 	            	arrayList.add(real);
-	            
 	            	
 	            }
 	            System.out.println(data.getCam_id() + " ing :: " + DateTool.getTimestamp());
 	            
 	            //업데이트
-	            //cam_msg = dao.insertAI_STAGING_TRAIN_BATCH(data, arrayList);
+	            cam_msg = dao.insertAI_STAGING_Real(data, arrayList);
 	            
 	            System.out.println(data.getCam_id() + " end :: " + DateTool.getTimestamp() + " :: cam_msg[" + cam_msg + "]");
 	            
 	            //3.2 캠페인 정보 업데이트 피쳐 갯수
-	        	System.out.println("feature len[" + feature + "]");
+	        	System.out.println("cam_msg[" + cam_msg + "]");
 	        	
 	        	if(cam_msg != null) {
 	        		dao.updateCampaign(data, type, 3, cam_msg);
