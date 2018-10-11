@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Alias("staging")
-public class AI_STAGING{
+public class AI_STAGING extends PageCriteria {
 
 	private static final long serialVersionUID = 3947489072259877540L;
 
@@ -31,6 +31,8 @@ public class AI_STAGING{
 	private String fail_prob;
 	
 	private String result;
+	
+	private Integer statusFlag;				// 학습 데이터, 대상자 데이터 구분필드 
 	
 	public AI_STAGING(){
 		

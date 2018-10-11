@@ -93,8 +93,6 @@
   <script src="/resources/js/ai_predict_result.js"></script>
 
 <script type="text/javascript">
-var init = false;
-
 $(function() {
 	$("#adm_name").val($("input[name='session_name']", parent.document).val());
 	
