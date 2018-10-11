@@ -58,7 +58,7 @@ public class PretreatmentProc {
 	            	//3.1 스테이징DB(TRAIN) Insert
 	            	train.setCam_id(data.getCam_id());
 	            	train.setSt_itype(4);
-	            	train.setColumnTrain(columns);
+	            	train.setColumn(columns);
 	            	
 	            	//System.out.println(train.toQuery());
 	            	arrayList.add(train);

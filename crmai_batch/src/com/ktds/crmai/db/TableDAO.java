@@ -248,7 +248,7 @@ public class TableDAO {
 				
 				AiStaging temp = arrayList.get(i);
 				
-				Hashtable<String, String> column = temp.getColumnTest();
+				Hashtable<String, String> column = temp.getColumn();
 				
 				for(int y = 1 ; y < campaign.getIcnum(); y++) {
 					

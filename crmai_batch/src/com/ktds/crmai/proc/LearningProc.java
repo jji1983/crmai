@@ -57,7 +57,7 @@ public class LearningProc {
 		            	//3.1 스테이징DB(TRAIN) Insert
 		            	test.setCam_id(data.getCam_id());
 		            	test.setSt_otype(4);
-		            	test.setColumnTest(columns);
+		            	test.setColumn(columns);
 		            	
 		            	//System.out.println(train.toQuery());
 		            	arrayList.add(test);
