@@ -303,10 +303,8 @@ $(function() {
 	<div class="modal fade" id="modal-default">
        <div class="modal-dialog">
           <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">정말 다운로드 하시겠습니까?</h4>
+              <div class="modal-body">
+                <p>정말 다운로드 하시겠습니까?</p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
