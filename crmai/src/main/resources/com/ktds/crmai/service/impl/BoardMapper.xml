@@ -66,5 +66,31 @@
     	WHERE 
     		code =  #{code}
     </delete>
+    
+    <select id="selectBoardPage" resultType="notice">
+		select *
+		from (
+		select <![CDATA[ rownum as rnum ]]>
+		, A.CODE, A.TITLE, A.CONTENTS, A.WRITER, A.REG_DATETIME
+		from
+		(
+		select
+			CODE,
+			TITLE,
+			CONTENTS,
+			WRITER,
+			REG_DATETIME
+		from AI_BOARD
+		order by REG_DATETIME desc
+		) A
+		where <![CDATA[ rownum <= #{page_end} ]]>
+		) B
+		where b.rnum >= #{page_st}
+	</select>
+
+	<select id="selectBoardPageNum" resultType="int">
+		select count(*) as
+		totalCount from AI_BOARD
+	</select>
 	
 </mapper>	

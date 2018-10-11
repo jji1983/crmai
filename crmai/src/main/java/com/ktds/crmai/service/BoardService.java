@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ktds.crmai.model.AI_BOARD;
+import com.ktds.crmai.model.AI_PAGE;
 import com.ktds.crmai.service.impl.BoardMapper;
 
 @Service("BoardService")
@@ -37,5 +38,15 @@ public class BoardService implements BoardMapper{
 	@Override
 	public int deleteBoard(int code) {
 		return boardmapper.deleteBoard(code);
+	}
+
+	@Override
+	public List<AI_BOARD> selectBoardPage(AI_PAGE page) {
+		return boardmapper.selectBoardPage(page);
+	}
+
+	@Override
+	public int selectBoardPageNum() {
+		return boardmapper.selectBoardPageNum();
 	}
 }

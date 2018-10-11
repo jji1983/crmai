@@ -3,6 +3,8 @@ package com.ktds.crmai.service.impl;
 import java.util.List;
 
 import com.ktds.crmai.model.AI_BOARD;
+import com.ktds.crmai.model.AI_NOTICE;
+import com.ktds.crmai.model.AI_PAGE;
 
 public interface BoardMapper {
 
@@ -17,4 +19,7 @@ public interface BoardMapper {
 
 	int deleteBoard(int code);
 	
+	List<AI_BOARD> selectBoardPage(AI_PAGE page);
+	
+	int selectBoardPageNum();
 }

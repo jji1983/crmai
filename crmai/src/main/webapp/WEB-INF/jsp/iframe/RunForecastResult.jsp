@@ -250,7 +250,7 @@ $(function() {
 				          		<button type="button" class="btn btn-info">성공률</button>
 				          	</div>
 				          	<!-- /btn-group -->
-				          	<select class="form-control select2" style="width: 60%;">
+				          	<select id="succ_rate" class="form-control select2" style="width: 60%;">
 				                <option value="10">10%</option>
 				                <option value="30">30%</option>
 				                <option value="50">50%</option>
@@ -270,7 +270,7 @@ $(function() {
 			          		<button type="button" class="btn btn-info">추출건수</button>
 			          	</div>
 			          	<!-- /btn-group -->
-			          	<select class="form-control select2" style="width: 60%;">
+			          	<select id="extract" class="form-control select2" style="width: 60%;">
 			                <option value="1">1만건</option>
 			                <option value="3">3만건</option>
 			                <option value="5">5만건</option>
@@ -283,8 +283,8 @@ $(function() {
 		        </div>
 		        <div class="col-lg-6">
 		          <div class="input-group pull-right">
-		          	<button type="button" onclick="" class="btn btn-info" style="margin-right: 10px;">조회</button>
-		          	<button type="button" onclick="" class="btn btn-info" style="margin-right: 10px;">다운로드</button>
+		          	<button type="button" class="btn btn-info" style="margin-right: 10px;" onclick="">조회</button>
+		          	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default" style="margin-right: 10px;">다운로드</button>
 		          </div>
 		        </div>
    	           </div>
@@ -299,6 +299,23 @@ $(function() {
 	     </div>
 	   </div>
 	</div>
+	
+	<div class="modal fade" id="modal-default">
+       <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-body">
+                <p>정말 다운로드 하시겠습니까?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                <button id="down" type="button" class="btn btn-primary" onclick="csvDown();">다운로드</button>
+              </div>
+          </div>
+          <!-- /.modal-content -->
+       </div>
+       <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
    
 </section>
 <!-- /.Main content -->

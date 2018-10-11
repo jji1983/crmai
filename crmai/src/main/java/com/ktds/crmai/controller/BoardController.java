@@ -1,5 +1,6 @@
 package com.ktds.crmai.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ktds.crmai.model.AI_BOARD;
+import com.ktds.crmai.model.AI_NOTICE;
+import com.ktds.crmai.model.AI_PAGE;
 import com.ktds.crmai.service.BoardService;
 
 @Controller
@@ -82,6 +86,32 @@ public class BoardController {
 			response = new ResponseEntity<Object>("FAIL::삭제 실패", HttpStatus.OK);
 		}
 		
+		return response;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/listPage")
+	public List<AI_BOARD> getBoardListPage(@ModelAttribute("board") AI_PAGE in_board, HttpSession session) {
+
+		// 응답과 함깨 HttpStatus를 지정할 수 있습니다.
+		List<AI_BOARD> response = boardService.selectBoardPage(in_board);
+
+		return response;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/totalPage")
+	public List<String> getTotalBoard(HttpSession session) {
+		List<String> response = new ArrayList<>();
+		
+		int maxRowNum = boardService.selectBoardPageNum();
+		
+		if(maxRowNum == 0) {
+			response.add("0");
+		}else {
+			response.add(maxRowNum + "");
+		}
+
 		return response;
 	}
 

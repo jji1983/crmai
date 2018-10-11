@@ -5,64 +5,6 @@ var visiblePages = 5;
 var page_st = 1;
 var page_end = 5;
 
-function getPagination() {
-	$.ajax({
-		type : 'GET',
-		url : '/notice/totalPage',
-		async : 'true',
-		processData : true,
-		cache : false,
-		success : function(data) {
-			if (data[0] != "0") {
-				totalPages = Math.ceil(data[0] / visiblePages);
-
-				grid_pagination(totalPages, visiblePages);
-			}
-		},
-		error : function(request, status, error) {
-		}
-	});
-}
-
-function grid_table_notice(obj) {
-	var div = document.querySelector('#ai_notice');
-
-	var html = '<tbody>';
-	var json = $.parseJSON(obj);
-	$(json)
-			.each(
-					function(i, val) {
-						html += '<tr onClick="view_notice(' + val.code + ')">';
-						$
-								.each(
-										val,
-										function(k, v) {
-											if (k == 'contents') {
-												return;
-											}
-
-											if (k == 'reg_datetime') {
-												v = v.substr(0, 10);
-											}
-
-											if (v == 'null' || v == '') {
-
-												// html += '<td></td>';
-											} else if (k == 'title') {
-												html += '<td style="text-align: left; padding-left: 10px;">'
-														+ v + '</td>';
-											} else {
-												html += '<td>' + v + '</td>';
-											}
-										});
-						html += '</tr>';
-					});
-	html += '</tbody>';
-
-	// console.log("Tbody == " + html);
-	div.innerHTML = html;
-}
-
 // 글쓰기
 function fn_write() {
 
@@ -140,6 +82,25 @@ function showModal(type, data) {
 }
 
 // 페이징처리
+function getPagination() {
+	$.ajax({
+		type : 'GET',
+		url : '/notice/totalPage',
+		async : 'true',
+		processData : true,
+		cache : false,
+		success : function(data) {
+			if (data[0] != "0") {
+				totalPages = Math.ceil(data[0] / visiblePages);
+
+				grid_pagination(totalPages, visiblePages);
+			}
+		},
+		error : function(request, status, error) {
+		}
+	});
+}
+
 function grid_pagination(totalPages, visiblePages) {
 	// alert("grid_pagination :: " + totalPages + " :: " + visiblePages);
 
