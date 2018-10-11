@@ -123,6 +123,12 @@
 <!-- AdminLTE App -->
 <script src="/resources/dist/js/adminlte.min.js"></script>
 
+	<!-- twbsPagination :: https://github.com/josecebe/twbs-pagination -->
+	<script src="/resources/js/jquery.twbsPagination.js"></script>
+	<script src="/resources/js/jquery.twbsPagination.min.js"></script>
+	
+		<script src="/resources/js/ai_board.js"></script>
+	
 <script type="text/javascript">
 	$(document).ready(function() {
 		// 모달 처리
@@ -155,7 +161,7 @@
 	    });
 		
 		// 게시판 조회
-		getBoardList();
+		getPagination();
 	});
 	
 	function getBoardList() {
@@ -175,7 +181,7 @@
 			}
 		});
 	}
-
+/* 
 	function grid_table_board(obj) {
 		var div = document.querySelector('#ai_board');
 
@@ -207,7 +213,7 @@
 
 		// console.log("Tbody == " + html);
 		div.innerHTML = html;
-	}
+	} */
 
 	//글쓰기
 	function fn_write() {
@@ -402,6 +408,10 @@
 									</thead>
 									<tbody id="ai_board">
 								</table>
+								<nav aria-label="Page navigation example"
+									style="text-align: center;">
+									<ul class="pagination-sm" id="pagination"></ul>
+								</nav>
 							</form>
 						<div>
 							<!--<a href='#' onClick='fn_write()' class="btn btn-success">글쓰기</a>-->

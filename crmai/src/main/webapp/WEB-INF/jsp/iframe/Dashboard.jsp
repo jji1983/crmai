@@ -671,7 +671,6 @@
 	<script src="/resources/js/jquery.twbsPagination.min.js"></script>
 
 	<!-- AI MAKE JS -->
-	<script src="/resources/js/ai_campaign.js"></script>
 	<script src="/resources/js/ai_notice.js"></script>
 	<script src="/resources/js/dashboardChart.js"></script>
 

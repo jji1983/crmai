@@ -92,7 +92,6 @@ public class NoticeController {
 	@ResponseBody
 	@RequestMapping(value = "/listPage")
 	public List<AI_NOTICE> getNoticeListPage(@ModelAttribute("notice") AI_PAGE in_notice, HttpSession session) {
-		logger.info("Request List....getCampaignListPage.... - {}", in_notice);
 
 		// 응답과 함깨 HttpStatus를 지정할 수 있습니다.
 		List<AI_NOTICE> response = noticeService.selectNoticePage(in_notice);
@@ -103,7 +102,6 @@ public class NoticeController {
 	@ResponseBody
 	@RequestMapping(value = "/totalPage")
 	public List<String> getTotalNotice(HttpSession session) {
-		logger.info("Request TotalCampaign....");
 		List<String> response = new ArrayList<>();
 		
 		int maxRowNum = noticeService.selectNoticePageNum();
