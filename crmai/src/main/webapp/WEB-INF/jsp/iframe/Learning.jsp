@@ -193,7 +193,7 @@
 		        </div>
 		        <!-- /.box-body -->
 		        <div class="box-footer">
-		          <button type="button" onclick="newSearchCampaign();" class="btn btn-info pull-right">검색</button>
+		          <button type="button" onclick="newCampaignPage();" class="btn btn-info pull-right">검색</button>
 		        </div>
 		    </div>
 		    </div>

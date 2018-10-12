@@ -38,6 +38,7 @@ function newCampaignPage(){
 }
 
 function createPagenationCam(totalPage, displayPage) {
+	$("#pagination_cam").twbsPagination("destroy");
 	$("#pagination_cam").twbsPagination({
         totalPages: totalPage,
         visiblePages: displayPage,

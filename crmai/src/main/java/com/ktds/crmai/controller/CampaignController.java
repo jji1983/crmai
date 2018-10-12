@@ -103,6 +103,8 @@ public class CampaignController {
 		PageCriteria cri,
 		HttpSession session) {
 		
+		logger.info("##### 캠페인 매개변수:" + campaignParam.getCam_name());
+		
 		String admId= (String)session.getAttribute("sessionID");
 		
 		campaignParam.setAdm_id(admId);
