@@ -169,6 +169,8 @@ public class StagingController {
 	}
 	
 	// 전처리 목록 가져오기(다른 방식, 수동에 사용)
+	@ResponseBody
+	@RequestMapping(value = "/list", method=RequestMethod.GET)
 	public List<AI_STAGING> getPreprocessList(
 		@ModelAttribute AI_STAGING stagingParam,
 		PageCriteria cri) {

@@ -29,12 +29,12 @@ public class StagingService implements StagingMapper {
 
 	@Override
 	public Integer selectStagingTestCnt(AI_STAGING staging) {
-		return selectStagingTestCnt(staging);
+		return stagingMapper.selectStagingTestCnt(staging);
 	}
 
 	@Override
 	public Integer selectStagingTestResultCnt(AI_STAGING staging) {
-		return selectStagingTestResultCnt(staging);
+		return stagingMapper.selectStagingTestResultCnt(staging);
 	}
 
 	@Override

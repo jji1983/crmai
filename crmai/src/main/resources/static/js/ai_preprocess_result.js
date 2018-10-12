@@ -5,6 +5,8 @@ var currentValue = 0;
 
 function handleClick(myRadio) {
     currentValue = myRadio.value;
+    
+    choiceData(1);									// 캠페인 초기화 시나 페이징 번호 클릭 시 처음은 학습데이터 처리전 데이터부터 불러오는 것으로 초기화
 }
   
 function radioInit(myRadio) {  
@@ -176,5 +178,117 @@ function createTableCampaign(arr){
 	html += "</tbody></table>";
 	  	
 	$("#div_campaign").html(html);					// innerHtml jquery버전
+	
+	choiceData(1);									// 캠페인 초기화 시나 페이징 번호 클릭 시 처음은 학습데이터 처리전 데이터부터 불러오는 것으로 초기화
+}
+
+/*
+ * 학습, 대상자 데이터 전이나 후의 클릭한 버튼에 따라 데이터를 가져오는 함수
+ * thisNo는 클릭한 버튼의 상태 번호를 뜻함
+ */
+function choiceData(thisNo) {
+	switch (thisNo) {
+		case 1:
+			$("#id_span_msg").text("(학습데이터 처리전)");
+			
+			break;
+		case 2:
+			$("#id_span_msg").text("(대상자데이터 처리전)");
+			
+			break;
+		case 3:
+			$("#id_span_msg").text("(학습데이터 처리후)");
+			
+			break;
+		case 4:
+			$("#id_span_msg").text("(대상자데이터 처리후)");
+			
+			break;
+		default:
+			break;
+	}
+	
+	var stagingData = {
+		statusFlag : thisNo,
+		cam_id : currentValue
+	};
+	
+	$.ajax({
+		url:"/staging/count",
+		data:stagingData,
+		success:function(pagingData) {
+			createPagenationPreprocess(pagingData["realEndPage"], pagingData["displayPageNum"], thisNo);
+		}
+	});
+}
+
+function createPagenationPreprocess(totalPage, displayPage, thisNo) {
+	$("#pagination_preprocess").twbsPagination("destroy");
+	$("#pagination_preprocess").twbsPagination({
+        totalPages: totalPage,
+        visiblePages: displayPage,
+        onPageClick: function (event, page) {
+        	searchPreprocess(page, thisNo);
+        }
+    });
+}
+
+function searchPreprocess(clickPage, thisNo) {
+	var stagingData = { 
+		statusFlag : thisNo,
+		cam_id : currentValue,
+		page : clickPage
+	};
+		
+	$.ajax({
+		url:"/staging/list",
+		data:stagingData,
+		success:function(data) {
+			createTablePreprocess(data);
+		}
+	});	
+}
+
+function createTablePreprocess(arr){
+	var html = "<table id='preprcs_ai_table' class='table table-bordered table-hover'>";
+	
+	html += "<thead><tr><th class='text-center'>SEQ</th>";
+	html += "<th class='text-center'>캠페인ID</th>";
+	html += "<th class='text-center'>컬럼1</th>";
+	html += "<th class='text-center'>컬럼2</th>";
+	html += "<th class='text-center'>컬럼3</th>";
+	html += "<th class='text-center'>컬럼4</th>";
+	html += "<th class='text-center'>컬럼5</th>";
+	html += "<th class='text-center'>컬럼6</th>";
+	html += "<th class='text-center'>컬럼7</th>";
+	html += "<th class='text-center'>컬럼8</th>";
+	html += "<th class='text-center'>컬럼9</th>";
+	html += "<th class='text-center'>컬럼10</th>";
+	html += "<th class='text-center'>컬럼200</th></tr></thead><tbody>";
+	
+	// 데이터 존재 미존재 여부에 따른 표 표시
+	if(arr.length != 0) {
+		arr.forEach(function(arrVal, arrIdx) {
+			html += "<tr>";
+			
+			Object.getOwnPropertyNames(arr[arrIdx]).forEach(function(val, idx, array) {
+				if(val == "st_seq" || val == "cam_id" || val == "st_c1" || val == "st_c2" || val == "st_c3" ||
+					val == "st_c4" || val == "st_c5" || val == "st_c6" || val == "st_c7" || val == "st_c8" || 
+					val == "st_c9" || val == "st_c10" || val == "st_c200") {
+					
+					html += "<td>" + arr[arrIdx][val] + "</td>";
+				}
+			});
+			
+			html += "</tr>";
+		});
+		
+	} else {
+		html += "<tr><td class='text-center' colspan='13'>조회된 데이터가 없습니다.</td></tr>";
+	}
+	
+	html += "</tbody></table>";
+	  	
+	$("#div_preprocess").html(html);					// innerHtml jquery버전
 	
 }

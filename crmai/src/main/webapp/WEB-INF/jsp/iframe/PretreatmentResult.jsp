@@ -189,6 +189,54 @@ $(function() {
 			</div>
 		</div>
 		<!-- /.캠페인목록 -->
+		
+		<!-- 전처리목록 -->
+		<div class="row">
+	       <div class="col-xs-12">
+	         <div class="box">
+				<div class="box-header">
+		          <h3 class="box-title">전처리데이터 상세보기</h3>
+		        </div>
+		        
+		        <div class="box-body">
+		          <div class="row">
+		          	<div class="col-md-2">
+		          		<span id="id_span_msg" class="label label-success"></span>
+		          	</div>
+		          	<div class="col-md-2"></div>
+		          	<div class="col-md-2">
+		          	  <div class="form-group">
+		          		<button id="pre_learning" type="button" class="btn btn-block btn-primary" onclick="choiceData(1);">학습데이터전처리전</button>
+		          	  </div>
+		          	</div>
+		          	<div class="col-md-2">
+		          	  <div class="form-group">
+		          		<button id="post_learning" type="button" class="btn btn-block btn-info" onclick="choiceData(3);">학습데이터전처리후</button>
+		          	  </div>
+		          	</div>
+		          	<div class="col-md-2">
+		          	  <div class="form-group">
+		          		<button id="pre_client" type="button" class="btn btn-block btn-primary" onclick="choiceData(2);">대상자데이터전처리전</button>
+		          	  </div>
+		          	</div>
+		          	<div class="col-md-2">
+		          	  <div class="form-group">
+		          		<button id="post_client" type="button" class="btn btn-block btn-info" onclick="choiceData(4);">대상자데이터전처리후</button>
+		          	  </div>
+		          	</div>
+		          </div>
+		        </div>
+		        
+		        <div id="div_preprocess" class="box-body">
+		          
+		        </div>
+		        <div class="text-center">
+		        	<ul class="pagination-sm" id="pagination_preprocess"></ul>
+		        </div>
+		     </div>
+		   </div>
+		</div>
+		<!-- /.전처리목록 -->
 
 	</section>
 	<!-- /.Main content -->

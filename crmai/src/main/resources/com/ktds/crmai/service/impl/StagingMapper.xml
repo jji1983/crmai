@@ -6,7 +6,7 @@
 	<select id="selectStagingTrainCnt" resultType="int">
 		select count(*) as totalCount 
 		from ai_staging_train
-		where cam_id = #{camId}
+		where cam_id = #{cam_id}
 	</select>
 
     <select id="selectStaginTrain" resultType="staging">
@@ -30,7 +30,7 @@
     <select id="selectStagingTrainList" resultType="staging">
 		select st_seq, cam_id, st_c1, st_c2, st_c3, st_c4, st_c5, st_c6, st_c7, st_c8, st_c9, st_c10, st_c200  
 		   from (		
-		        select  <![CDATA[ rownum as rnum ]]> , A.* 
+		        select rownum as rnum, A.* 
 		        from       
 		        (
 		        select 
@@ -38,7 +38,7 @@
 				from 
 					ai_staging_train
 				where  
-					cam_id = #{camId} order by st_seq desc
+					cam_id = #{cam_id} order by st_seq desc
 		        ) A
 		        where <![CDATA[ rownum <= #{listEnd} ]]> 
 		    ) B
@@ -48,7 +48,7 @@
     <select id="selectStagingTrainResultCnt" resultType="int">
     	select count(*) as totalCount 
 		from ai_staging_train_result
-		where cam_id = #{camId}
+		where cam_id = #{cam_id}
     </select>
     
     <select id="selectStaginTrainResult" resultType="staging">
@@ -72,7 +72,7 @@
     <select id="selectStagingTrainResultList" resultType="staging">
 		select st_seq, cam_id, st_c1, st_c2, st_c3, st_c4, st_c5, st_c6, st_c7, st_c8, st_c9, st_c10, st_c200  
 		   from (		
-		        select  <![CDATA[ rownum as rnum ]]> , A.* 
+		        select rownum as rnum, A.* 
 		        from       
 		        (
 		        select 
@@ -80,7 +80,7 @@
 				from 
 					ai_staging_train_result
 				where  
-					cam_id = #{camId} order by st_seq desc
+					cam_id = #{cam_id} order by st_seq desc
 		        ) A
 		        where <![CDATA[ rownum <= #{listEnd} ]]> 
 		    ) B
@@ -90,7 +90,7 @@
     <select id="selectStagingTestCnt" resultType="int">
 		select count(*) as totalCount 
 		from ai_staging_test
-		where cam_id = #{camId}
+		where cam_id = #{cam_id}
 	</select>
     
     <select id="selectStaginTest" resultType="staging">
@@ -114,7 +114,7 @@
     <select id="selectStagingTestList" resultType="staging">
 		select st_seq, cam_id, st_c1, st_c2, st_c3, st_c4, st_c5, st_c6, st_c7, st_c8, st_c9, st_c10, st_c200  
 		   from (		
-		        select  <![CDATA[ rownum as rnum ]]> , A.* 
+		        select rownum as rnum, A.* 
 		        from       
 		        (
 		        select 
@@ -122,7 +122,7 @@
 				from 
 					ai_staging_test
 				where  
-					cam_id = #{camId} order by st_seq desc
+					cam_id = #{cam_id} order by st_seq desc
 		        ) A
 		        where <![CDATA[ rownum <= #{listEnd} ]]> 
 		    ) B
@@ -132,7 +132,7 @@
     <select id="selectStagingTestResultCnt" resultType="int">
     	select count(*) as totalCount 
 		from ai_staging_test_result
-		where cam_id = #{camId}
+		where cam_id = #{cam_id}
     </select>
     
     <select id="selectStaginTestResult" resultType="staging">
@@ -156,7 +156,7 @@
     <select id="selectStagingTestResultList" resultType="staging">
 		select st_seq, cam_id, st_c1, st_c2, st_c3, st_c4, st_c5, st_c6, st_c7, st_c8, st_c9, st_c10, st_c200  
 		   from (		
-		        select  <![CDATA[ rownum as rnum ]]> , A.* 
+		        select rownum as rnum, A.* 
 		        from       
 		        (
 		        select 
@@ -164,7 +164,7 @@
 				from 
 					ai_staging_test_result
 				where  
-					cam_id = #{camId} order by st_seq desc
+					cam_id = #{cam_id} order by st_seq desc
 		        ) A
 		        where <![CDATA[ rownum <= #{listEnd} ]]> 
 		    ) B
