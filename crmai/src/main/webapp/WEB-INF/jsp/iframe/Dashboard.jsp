@@ -671,13 +671,29 @@
 	<script src="/resources/js/jquery.twbsPagination.min.js"></script>
 
 	<!-- AI MAKE JS -->
-	<script src="/resources/js/ai_notice.js"></script>
 	<script src="/resources/js/dashboardChart.js"></script>
 
 
 	<!-- 게시판 -->
 	<script type="text/javascript">
 		$(document).ready(function() {
+			// 게시판 조회
+			getPagination();
+			
+			//차트 초기화
+			var leftTab = document.getElementById("leftTab");
+			if (leftTab != null) {
+				initLeftChart();
+				loadLeftStat();
+			}
+			initRightChart();
+			loadRightStat();
+			
+			if (leftTab != null) {
+				loadLeftTab();
+			}
+			loadRightTab();
+			
 			// 모달 처리
 			$('.modal').on('hidden.bs.modal', function(e) {
 				// console.log('modal close');
@@ -688,19 +704,7 @@
 				// console.log('modal open');
 			});
 
-			// 게시판 조회
-			getPagination();
-		});
-	</script>
-	<!-- 차트 초기화 -->
-	<script type="text/javascript">
-		$(document).ready(function() {
-			var leftTab = document.getElementById("leftTab");
-			if (leftTab != null) {
-				initLeftChart();
-			}
-
-			initRightChart();
+			
 		});
 	</script>
 </body>
