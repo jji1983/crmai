@@ -151,7 +151,7 @@ function createTableCampaign(arr){
 }
 
 // 캠페인 아이디로 모델 테이블 불러오기
-function connectLearningModel(clickCamId) {
+function connectLearningModel() {
 	var cam_id = currentValue;
 	
 	if(cam_id != 0) {
