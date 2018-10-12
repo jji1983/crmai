@@ -81,6 +81,7 @@
 	function Content_Learning() {
 		//alert("call Content_Learning!!");
 		document.getElementById("main_frame").src = "/iframe/Learning";
+		$("input[name='session_name']").val("${sessionNAME}");
 	}
   
 	function Content_RunForecast() {

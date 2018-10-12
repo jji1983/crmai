@@ -169,7 +169,6 @@ function connectLearningModel() {
 
 function createTableModel(arr){
 	var html = "<table id='model_table' class='table table-bordered table-hover'>";
-	var first = true;
 	
 	html += "<thead><tr><th class='text-center'>캠페인ID</th>";
 	html += "<th class='text-center'>학습모델</th>";

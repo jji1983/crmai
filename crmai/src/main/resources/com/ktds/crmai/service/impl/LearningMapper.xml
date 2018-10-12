@@ -56,5 +56,19 @@
 		where
 		    feat.camp_id = '1004'
     </select>
+    
+    <select id="getLearningResultList" resultType="learning_info">
+    	select train_method, original_acc, so_acc, model_dir, model_name
+		from ai_train_model
+		where cam_id = #{cam_id}
+		order by so_acc desc
+    </select>
+    
+    <select id="getLearningWeighting" resultType="learning_res">
+    	select cam_id, train_method, feature_name, weight
+	    from ai_train_model_feature
+	    where <![CDATA[ rownum <= 10 ]]> and cam_id = #{cam_id}
+	    order by weight desc
+    </select>
 
 </mapper>

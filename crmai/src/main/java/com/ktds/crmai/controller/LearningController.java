@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ktds.crmai.model.AI_BOARD;
 import com.ktds.crmai.model.AI_CAMPAIGN;
-import com.ktds.crmai.model.AI_TRAIN_MODEL;
 import com.ktds.crmai.model.AI_TRAIN_MODEL_FEATURE;
 import com.ktds.crmai.model.Learning_Info;
 import com.ktds.crmai.model.Learning_Res;
@@ -104,7 +102,15 @@ public class LearningController {
 		return list;  
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/result")
+	public List<Learning_Info> getLearningResultList(@RequestParam String cam_id) {
+		return learningService.getLearningResultList(cam_id);
+	}
 	
-	
-
+	@ResponseBody
+	@RequestMapping(value="/weight")
+	public List<Learning_Res> getLearningWeighting(@RequestParam String cam_id) {
+		return learningService.getLearningWeighting(cam_id);
+	}
 }
