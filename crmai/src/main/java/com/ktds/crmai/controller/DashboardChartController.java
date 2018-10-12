@@ -65,13 +65,13 @@ public class DashboardChartController {
 	public List<DashboardChartData> selectPeriod(@RequestParam(value = "pers", required = false) String pers,
 			@RequestParam(value = "period", required = false) String period,
 			@RequestParam(value = "periodBase", required = false) String periodBase, HttpSession session) {
-		
+
 		HashMap<String, Object> baseData = new HashMap<>();
 		if (period != null) {
 			baseData.put("period", period);
 		}
 		if (periodBase != null) {
-			baseData.put("periodBase", periodBase+"");
+			baseData.put("periodBase", periodBase + "");
 		}
 		if (pers != null) {
 			baseData.put("sessionID", (String) session.getAttribute("sessionID"));
@@ -87,7 +87,7 @@ public class DashboardChartController {
 	@RequestMapping(value = "campaign")
 	public List<DashboardChartData> selectCampaign(@RequestParam(value = "pers", required = false) String pers,
 			@RequestParam(value = "campaign", required = false) String campaign, HttpSession session) {
-		
+
 		HashMap<String, Object> baseData = new HashMap<>();
 		if (pers != null) {
 			baseData.put("sessionID", (String) session.getAttribute("sessionID"));
@@ -101,19 +101,20 @@ public class DashboardChartController {
 
 		return response;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "campaignTab")
-	public List<AIStatistics> selectCampaignTab(@RequestParam(value = "pers", required = false) String pers, HttpSession session) {
-		
+	public List<AIStatistics> selectCampaignTab(@RequestParam(value = "pers", required = false) String pers,
+			HttpSession session) {
+
 		HashMap<String, Object> baseData = new HashMap<>();
 		if (pers != null) {
 			baseData.put("sessionID", (String) session.getAttribute("sessionID"));
 		}
-		
+
 		List<AIStatistics> response = new ArrayList<>();
 		response = dashboardChartService.selectCampaignTab(baseData);
-		
+
 		return response;
 	}
 }

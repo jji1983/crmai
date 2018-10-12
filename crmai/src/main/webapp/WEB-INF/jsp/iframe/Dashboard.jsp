@@ -685,7 +685,7 @@
 			if (leftTab != null) {
 				initLeftChart();
 				loadLeftStat();
-			}
+			} 
 			initRightChart();
 			loadRightStat();
 			

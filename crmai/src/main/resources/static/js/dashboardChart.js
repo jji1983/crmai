@@ -9,7 +9,7 @@ var page_end = 3;
 
 // 글쓰기
 function fn_write() {
-
+ 
 	var form = document.getElementById("noticeForm");
 
 	form.action = "<c:url value='/notice/writeForm.do'/>";
