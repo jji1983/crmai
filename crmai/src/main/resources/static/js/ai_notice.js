@@ -2,6 +2,7 @@ var nowPages = 1;
 var totalPages = 1;
 var visiblePages = 5;
 
+var pageSize = 3;
 var page_st = 1;
 var page_end = 5;
 
@@ -92,6 +93,7 @@ function getPagination() {
 		success : function(data) {
 			if (data[0] != "0") {
 				totalPages = Math.ceil(data[0] / visiblePages);
+				alert("totalPages : " + totalPages + " visiblePages : " + visiblePages);
 				grid_pagination(totalPages, visiblePages);
 			}
 		},
@@ -110,8 +112,8 @@ function grid_pagination(totalPages, visiblePages) {
 		onPageClick : function(event, page) {
 			// alert("on1 " + page + ' (from event listening)');
 
-			page_st = ((1 * visiblePages) * page) - (visiblePages - 1);
-			page_end = (page_st + visiblePages) - 1;
+			page_st = ((1 * pageSize) * page) - (pageSize - 1);
+			page_end = (page_st + pageSize) - 1;
 
 			search_notice(page, page_st, page_end);
 		}
