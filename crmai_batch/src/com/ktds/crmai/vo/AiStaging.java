@@ -145,8 +145,9 @@ public class AiStaging {
 		}
 		
 		String temp = column.get("ST_C" + cNum);
+		System.out.println("######### 널이 아님 " + "ST_C" + cNum + " :: " + temp);
 		if(temp != null) {
-			//System.out.println("######### 널이 아님 " + "ST_C" + cNum + " :: " + temp);
+			
 			query_h.append(", ST_C200 ");
 			query_b.append(", '" + temp + "'");
 		}

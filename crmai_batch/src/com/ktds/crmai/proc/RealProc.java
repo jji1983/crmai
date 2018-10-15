@@ -67,7 +67,12 @@ public class RealProc {
 	            	real.setPredict(columns[4]);
 	            	real.setSucc_prob(columns[5]);
 	            	real.setFail_prob(columns[6]);
-	            	real.setResult(columns[7]);
+	            	
+	            	if(columns.length == 8) {
+	            		real.setResult(columns[7]);	
+	            	}else {
+	            		real.setResult("0");
+	            	}
 	            	
 	            	//System.out.println(train.toQuery());
 	            	arrayList.add(real);
