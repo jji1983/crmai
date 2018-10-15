@@ -200,7 +200,10 @@
 		//-------------
 		//- BAR CHART -
 		//-------------
-		var barChartCanvas                   = $('#barChart').get(0).getContext('2d');
+		$("#bar_chart").remove();
+		$("#bar_parent").append("<canvas id='bar_chart' style='height:270px'></canvas>");
+		
+		var barChartCanvas                   = $('#bar_chart').get(0).getContext('2d');
 		var barChart                         = new Chart(barChartCanvas);
 		var barChartData                     = areaChartData;
 		        
@@ -274,7 +277,10 @@
 		//-------------
 	    //- LINE CHART -
 	    //--------------
-	    var lineChartCanvas          = $('#lineChart').get(0).getContext('2d');
+	    $("#line_chart").remove();
+		$("#line_parent").append("<canvas id='line_chart' style='height:270px'></canvas>");
+	    
+	    var lineChartCanvas          = $('#line_chart').get(0).getContext('2d');
 	    var lineChart                = new Chart(lineChartCanvas);
 	    var lineChartOptions         = areaChartOptions;
 	    
@@ -420,8 +426,8 @@
               </div>
             </div>
             <div class="box-body">
-              <div class="chart">
-                <canvas id="barChart" style="height:270px"></canvas>
+              <div id="bar_parent" class="chart">
+                <canvas id="bar_chart" style="height:270px"></canvas>
               </div>
             </div>
             <!-- /.box-body -->
@@ -442,8 +448,8 @@
                 <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button> -->
               </div>
             </div>
-            <div class="box-body">
-              <canvas id="lineChart" style="height:270px"></canvas>
+            <div id="line_parent" class="box-body">
+              <canvas id="line_chart" style="height:270px"></canvas>
             </div>
             <!-- /.box-body -->
           </div>

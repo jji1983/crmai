@@ -311,7 +311,10 @@
 				//-------------
 				//- BAR CHART -
 				//-------------
-				var barChartCanvas                   = $('#barChart').get(0).getContext('2d');
+				$("#bar_chart").remove();
+				$("#bar_parent").append("<canvas id='bar_chart' style='height:270px'></canvas>");
+				
+				var barChartCanvas                   = $('#bar_chart').get(0).getContext('2d');
 				var barChart                         = new Chart(barChartCanvas);
 				var barChartData                     = areaChartData;
 				    
@@ -389,7 +392,10 @@
 				//-------------
 			    //- RADAR CHART -
 			    //-------------
-			    var radarChartCanvas = $('#radarChart').get(0).getContext('2d');
+			    $("#radar_chart").remove();
+				$("#radar_parent").append("<canvas id='radar_chart' style='height:270px'></canvas>");
+				
+			    var radarChartCanvas = $('#radar_chart').get(0).getContext('2d');
 				var radarChart = new Chart(radarChartCanvas);
 				
 				radarChart.Radar(radarChartData, barChartOptions);
@@ -535,8 +541,8 @@
               </div>
             </div>
             <div class="box-body">
-              <div class="chart">
-                <canvas id="barChart" style="height:270px"></canvas>
+              <div id="bar_parent" class="chart">
+                <canvas id="bar_chart" style="height:270px"></canvas>
               </div>
             </div>
             <!-- /.box-body -->
@@ -557,8 +563,8 @@
                 <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button> -->
               </div>
             </div>
-            <div class="box-body">
-              <canvas id="radarChart" style="height:270px"></canvas>
+            <div id="radar_parent" class="box-body">
+              <canvas id="radar_chart" style="height:270px"></canvas>
             </div>
             <!-- /.box-body -->
           </div>
