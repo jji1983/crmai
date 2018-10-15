@@ -23,6 +23,7 @@ public class RealProc {
 		String line;
 		String cam_msg = null;
 		String type = "cam_rtype";
+		CampaignData dataTemp = null;
 		
 		try {
 			//1. 학습데이터 대상을 가져온다.
@@ -39,6 +40,9 @@ public class RealProc {
 			//3. 데이터를 분석 DB 에 Insert
 			System.out.println("Insert start :: " + DateTool.getTimestamp());
 			for(CampaignData data : list) {
+				
+				dataTemp = data;
+				
 				int feature = 0;
 				String[] columns = null;
 				ArrayList<AiStaging> arrayList = new ArrayList<AiStaging>();
@@ -89,8 +93,10 @@ public class RealProc {
 		
 		} catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (IOException e) {
+            dao.updateCampaign(dataTemp, type, 3, e.getMessage());
+        } catch (Exception e) {
             e.printStackTrace();
+            dao.updateCampaign(dataTemp, type, 3, e.getMessage());
         } finally {
             if (br != null) {
                 try {
