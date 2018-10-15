@@ -121,3 +121,53 @@ function grid_tableStaging2(obj){
 }
 
 
+
+function submit_addStagingTest(){
+//alert('-- submit_newCampagin -- ');
+  
+// Get form
+var form = $('#addUploadForm')[0];
+var data = new FormData(form);
+$("#bthadd").prop("disabled", true);
+$("#bthClose").prop("disabled", true);
+
+
+$.ajax({
+    type: "POST",
+    enctype: 'multipart/form-data',
+    url: "/file/Upload_StagingTest",
+    data: data,
+    //http://api.jquery.com/jQuery.ajax/
+    //https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
+    processData: false, //prevent jQuery from automatically transforming the data into a query string
+    contentType: false,
+    cache: false,
+    timeout: 600000,
+    success: function (data) {
+    	alert( data );
+    	
+    	//console.log("SUCCESS : ", data);
+        $("#bthadd").prop("disabled", false);
+        
+        var jbSplit = data.split('::');
+        
+        //alert("jbSplit :: " + jbSplit );
+        
+    	if(jbSplit[0] == "OK"){
+            //alert('모달 종료.');
+            form.reset();
+            $('#addModal').modal('hide');
+    	    
+    	    // alert('캠페인 리프리시');
+    	    campaignPage();
+    	}
+        
+    },
+    error: function (e) {
+        alert("error :: " + e.responseText);
+        console.log("ERROR : ", e);
+        $("#bthNew").prop("disabled", false);
+        }
+    });
+  }
+

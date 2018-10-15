@@ -53,6 +53,15 @@
   <!-- twbsPagination :: https://github.com/josecebe/twbs-pagination -->
   <script src="/resources/js/jquery.twbsPagination.js"></script>
   <script src="/resources/js/jquery.twbsPagination.min.js"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+		$("#adm_name").val($("input[name='session_name']", parent.document).val());
+		
+		newCampaignPage();
+  });
+  </script>
+  
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 
@@ -65,7 +74,7 @@
 		<ol class="breadcrumb">
 			<li><a href="/iframe/Dashboard"><i class="fa fa-dashboard"></i>
 					Home</a></li>
-			<li class="active">대상자 로딩</li>
+			<li class="active">AI 학습/대상자 로딩</li>
 		</ol>
 	</section>
 
@@ -134,7 +143,7 @@
 								<div class="col-md-3">
 									<div class="form-group">
 										<div class="col-sm-10">
-											<label for="adm_id">생성자</label> <input type="text"	class="form-control" id="adm_id" placeholder="생성자">
+											<label>생성자</label> <input type="text"	class="form-control" id="adm_name" disabled>
 										</div>
 									</div>
 									<!-- /.form-group -->

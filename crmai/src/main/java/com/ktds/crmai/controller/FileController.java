@@ -157,6 +157,77 @@ public class FileController {
 	  return response; 
 	}
 	
+	@RequestMapping(value = "/Upload_StagingTest") // method = RequestMethod.GET 
+	public ResponseEntity<Object> fileUpload_StagingTest(
+		@RequestParam("user_id") String user_id,
+		@RequestParam("inputCamId") String inputCamId,
+		@RequestParam("cam_autoyn") String cam_autoyn,
+        @RequestParam("file_test") MultipartFile[] file_test) { 
+		
+		ResponseEntity<Object> response = new ResponseEntity<Object>("OK::등록 성공", HttpStatus.OK);
+		
+		logger.info("Upload_StagingTest :: user_id ::{}, cam_id :: {} ",user_id, inputCamId);
+		
+		AI_CAMPAIGN inCampaign = new AI_CAMPAIGN();
+		
+		inCampaign.setCam_id(inputCamId);
+		
+		AI_CAMPAIGN campaign = campaignService.selectCampaignAiStatus(inCampaign);
+		logger.info("Upload_Pretreatment :: campaign ::{} ",campaign);
+		
+		logger.info("### file_test check {}, {}", file_test, file_test.length);
+        
+        // windows 사용자라면 "c:\temp\년도\월\일" 형태의 문자열을 구한다.
+        String fullPath = baseDir + user_id;
+        File f = new File(fullPath);
+        if(!f.exists()){ // 파일이 존재하지 않는다면
+            f.mkdirs(); // 해당 디렉토리를 만든다. 하위폴더까지 한꺼번에 만든다.
+        }
+ 
+        MultipartFile file_t2 = file_test[0];
+        
+        long size_t2 = file_t2.getSize();
+        if( size_t2 == 0) {
+    	   
+    	   response = new ResponseEntity<Object>("FAIL::학습파일/대상자 파일은 필수 입니다.", HttpStatus.OK);
+    	   
+    	   logger.info("###  size_t2{}", size_t2);
+       }else{
+    	   String uuid = UUID.randomUUID().toString(); // 중복될 일이 거의 없다.
+    	   
+           String contentType_t2 = file_t2.getContentType();
+           String name_t2 = file_t2.getName();
+           String originalFilename_t2 = file_t2.getOriginalFilename();
+           String saveFileName_t2 = fullPath + File.separator + uuid +"_"+campaign.getCam_seq() + "_" +name_t2; // 실제 저장되는 파일의 절대 경로
+           
+    	   campaign.setCam_otype("1");
+    	   campaign.setCam_ofilename(saveFileName_t2);
+               
+           // 실제 파일을 저장함.
+           // try-with-resource 구문. close()를 할 필요가 없다. java 7 이상에서 가능
+           try(
+              InputStream in = file_t2.getInputStream();
+              FileOutputStream fos = new FileOutputStream(saveFileName_t2)){
+              int readCount = 0;
+              byte[] buffer = new byte[512];
+              while((readCount = in.read(buffer)) != -1){
+            	  fos.write(buffer,0,readCount);
+              }
+           }catch(Exception ex){
+                ex.printStackTrace();
+           }
+           
+           logger.info("### fileUpload_StagingTest Insert {}", campaign);
+           campaignService.updateCampaignOtype(campaign);
+       }
+       
+        logger.info("### response {}", response);
+        
+	  return response; 
+	}
+	
+	
+	
 
 	@RequestMapping(value = "/downloadGuide", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> downloadGuideFile() throws Exception {
@@ -315,8 +386,8 @@ public class FileController {
                 ex.printStackTrace();
            }
                       
-           logger.info("### Upload_Pretreatment Insert {}", campaign);
-           campaignService.updateCampaign(campaign);
+           logger.info("### fileUpload_Real Insert {}", campaign);
+           campaignService.updateCampaignRtype(campaign);
        }
 		
         

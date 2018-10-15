@@ -199,13 +199,13 @@
         
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-laptop"></i> <span>AI 캠페인 대상자  학습</span>
+            <i class="fa fa-laptop"></i> <span>AI 학습 등록</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li  class="active"><a  href="javascript:Content_Pretreatment();"><i class="fa fa-circle-o"></i>대상자 로딩</a></li>
+            <li  class="active"><a  href="javascript:Content_Pretreatment();"><i class="fa fa-circle-o"></i>학습데이터 로딩</a></li>
           </ul>
         </li>
         

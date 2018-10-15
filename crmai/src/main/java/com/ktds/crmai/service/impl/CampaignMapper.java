@@ -48,6 +48,11 @@ public interface CampaignMapper {
 	/*
 	 * Name : 캠페인 Update
 	 */
-	void updateCampaign(AI_CAMPAIGN campaign);
+	void updateCampaignOtype(AI_CAMPAIGN campaign);
+	
+	/*
+	 * Name : 캠페인 Update
+	 */
+	void updateCampaignRtype(AI_CAMPAIGN campaign);
 	
 }
