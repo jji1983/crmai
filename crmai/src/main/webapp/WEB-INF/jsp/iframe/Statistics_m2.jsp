@@ -130,7 +130,7 @@
 				camName : $("#cam_name").val(),
 				camType : $("#cam_type").val(),
 				camStatus : $("#cam_status").val(),
-				admName : $("#const").val(),
+				admId : $("#const").val(),
 				beforeDate : $("#before_date").val(),
 				afterDate : $("#after_date").val()
 			},
