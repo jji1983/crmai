@@ -52,5 +52,10 @@ public class NoticeService implements NoticeMapper {
 		return noticeBoardMapper.selectNoticePageNum();
 	}
 
+	@Override
+	public int updateNotice(AI_NOTICE notice) {
+		return noticeBoardMapper.updateNotice(notice);
+	}
+
 
 }

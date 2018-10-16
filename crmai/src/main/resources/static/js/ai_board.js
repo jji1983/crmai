@@ -1,9 +1,10 @@
 var nowPages = 1;
 var totalPages = 1;
-var visiblePages = 10;
+var visiblePages = 5;
 
 var page_st = 1;
 var page_end = 5;
+var pageSize = 10;
 
 // 페이징처리
 function getPagination() {
@@ -15,7 +16,7 @@ function getPagination() {
 		cache : false,
 		success : function(data) {
 			if (data[0] != "0") {
-				totalPages = Math.ceil(data[0] / visiblePages);
+				totalPages = Math.ceil(data[0] / pageSize);
 
 				grid_pagination(totalPages, visiblePages);
 			}
@@ -35,8 +36,8 @@ function grid_pagination(totalPages, visiblePages) {
 		onPageClick : function(event, page) {
 			// alert("on1 " + page + ' (from event listening)');
 
-			page_st = ((1 * visiblePages) * page) - (visiblePages - 1);
-			page_end = (page_st + visiblePages) - 1;
+			page_st = ((1 * pageSize) * page) - (pageSize - 1);
+			page_end = (page_st + pageSize) - 1;
 
 			search_board(page, page_st, page_end);
 		}

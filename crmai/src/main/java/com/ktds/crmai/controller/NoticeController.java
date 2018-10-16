@@ -71,6 +71,29 @@ public class NoticeController {
 
 		return response;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public ResponseEntity<Object> updateNewNotice(@RequestParam("noticeCode") int code,
+			@RequestParam("inputNoticeName") String inputNoticeName,
+			@RequestParam("inputNoticeDesc") String inputNoticeDesc, HttpSession session) {
+		
+		AI_NOTICE notice = new AI_NOTICE();
+		notice.setTitle(inputNoticeName);
+		notice.setContents(inputNoticeDesc);
+		notice.setCode(code+"");
+		
+		int result = noticeService.updateNotice(notice);
+		
+		ResponseEntity<Object> response = null;
+		if (result > 0) {
+			response = new ResponseEntity<Object>("OK::수정 성공", HttpStatus.OK);
+		} else {
+			response = new ResponseEntity<Object>("FAIL::수정 실패", HttpStatus.OK);
+		}
+		
+		return response;
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)

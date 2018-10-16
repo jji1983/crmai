@@ -71,6 +71,10 @@
 		#{contents},
 		#{writer}, sysdate)
 	</insert>
+	
+	<update id="updateNotice">
+		update ai_notice set title=#{title}, contents=#{contents} where code=#{code}
+	</update>
 
 	<delete id="deleteNotice">
 		DELETE FROM AI_NOTICE

@@ -423,7 +423,7 @@
 
 						<c:if test="${sessionCAMCNT > 0}">
 							<ul id="leftTab" class="nav nav-tabs" role="tablist">
-								<li class="nav-item active"><a class="nav-link active"
+								<li class="nav-item active"><a class="nav-link active" data-toggle="tab"
 									role="tab" id="myTabDrop0" onclick="totalLeft()">나의전체</span>
 								</a></li>
 								<li role="presentation" class="dropdown"><a data-target="#"

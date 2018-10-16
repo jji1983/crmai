@@ -24,4 +24,6 @@ public interface NoticeMapper {
 	List<AI_NOTICE> selectNoticePage(AI_PAGE page);
 	
 	int selectNoticePageNum();
+	
+	int updateNotice(AI_NOTICE notice);
 }
