@@ -71,7 +71,6 @@ function createTableCampaign(arr){
 	html += "<th class='text-center'>캠페인목적</th>";
 	html += "<th class='text-center'>캠페인상태</th>";
 	html += "<th class='text-center'>AI진행상태</th>";
-	html += "<th class='text-center'>AI버튼</th>";
 	html += "<th class='text-center'>캠페인 등록일자</th>";
 	html += "<th class='text-center'>설명</th>";
 	html += "<th class='text-center'>메시지</th></tr></thead><tbody>";
@@ -117,33 +116,27 @@ function createTableCampaign(arr){
 						switch (arr[arrIdx][val]) {
 							case "0":
 								html += "<td><span class='label label-info'>데이터 로딩 필요</span></td>";
-								html += "<td><button type='button' class='btn btn-info btn-xs'>데이터등록</button></td>";
 								
 								break;
 							case "1":
 								html += "<td><span class='label label-warning'>데이터 엑셀 로딩중</span></td>";
-								html += "<td></td>";
 								
 								break;
 							case "2":
 								html += "<td><span class='label label-warning'>데이터 엑셀 처리중</span></td>";
-								html += "<td></td>";
 								
 								break;
 							case "3":
 								html += "<td><span class='label label-danger'>데이터 엑셀 처리 오류</span></td>";
-								html += "<td><button type='button' class='btn btn-info btn-xs'>데이터 재등록</button></td>";
 								
 								break;
 							case "4":
 								html += "<td><span class='label label-primary'>데이터 엑셀 처리 종료</span></td>";
-								html += "<td>";
-								html += "<button type='button' class='btn btn-success btn-xs'>학습데이터 보기</button>";
-								html += "<button type='button' class='btn btn-success btn-xs'>전처리시작</button>";
-								html += "</td>";
 								
 								break;
 							default:
+								html += "<td><span class='label label-primary'>학습완료</span></td>";
+							
 								break;
 						}
 						
@@ -173,7 +166,7 @@ function createTableCampaign(arr){
 		});
 		
 	} else {
-		html += "<tr><td class='text-center' colspan='11'>조회된 데이터가 없습니다.</td></tr>";
+		html += "<tr><td class='text-center' colspan='10'>조회된 데이터가 없습니다.</td></tr>";
 	}
 	
 	html += "</tbody></table>";
