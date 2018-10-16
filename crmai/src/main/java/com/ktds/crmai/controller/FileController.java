@@ -38,7 +38,8 @@ import java.nio.file.Paths;
 @RequestMapping(value="/file")
 public class FileController {
 	private static Logger logger = LoggerFactory.getLogger(FileController.class);
-	private String baseDir = "D:" + File.separator + "TEMP" + File.separator; // D:\temp 디렉토리를 미리 만들어둔다.
+	//private String baseDir = "D:" + File.separator + "TEMP" + File.separator; // D:\temp 디렉토리를 미리 만들어둔다.
+	private String baseDir = "/home/jji5636/CSV_DATA" + File.separator; // D:\temp 디렉토리를 미리 만들어둔다.
 	
 	@Autowired
 	CampaignService campaignService;
@@ -232,7 +233,7 @@ public class FileController {
 	@RequestMapping(value = "/downloadGuide", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> downloadGuideFile() throws Exception {
 
-	 String GuideFile = "src/main/resources/static/file/CRM_MarketingPlatform(Admin)_20180928.pdf"; 
+	 String GuideFile = "/resources/file/CRM_MarketingPlatform(Admin)_20180928.pdf"; 
 
 	 Path path = Paths.get(GuideFile);
 	
