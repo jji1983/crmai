@@ -242,6 +242,8 @@
  <script type="text/javascript">
   
   $(document).ready(function () {
+	  $("#adm_name").val("${sessionID}");
+	  
 	  campaignPage();
 	  
     //모달 처리(신규).

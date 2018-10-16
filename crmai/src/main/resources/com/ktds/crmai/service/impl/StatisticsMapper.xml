@@ -22,6 +22,29 @@
 		<result column="REAL_ACC_AVG" property="realAccAvg"/>
 	</resultMap>
 	
+	<sql id="inputParam">
+		<!-- 캠페인명 존재 시 -->
+		<if test="camName != null">
+			AND CAM_NAME LIKE '%' || #{camName} || '%'
+		</if>
+		<!-- 캠페인 목적 존재 시 -->
+		<if test='(camType != null) and !(camType eq "".toString())'>
+			AND CAM_TYPE = #{camType}
+		</if>
+		<!-- 캠페인 상태 존재 시 -->
+		<if test='(camStatus != null) and !(camStatus eq "".toString())'>
+			AND CAM_STATUS = #{camStatus}
+		</if>
+		<!-- 생성자 존재 시 -->
+		<if test='(admId != null) and !(admId eq "".toString())'>
+			AND ADM_ID = #{admId}
+		</if>
+		<!-- 기간 존재 시 -->
+		<if test='(beforeDate != null) and !(beforeDate eq "".toString()) and (afterDate != null) and !(afterDate eq "".toString())'>
+			AND CAM_CDATE BETWEEN #{beforeDate} AND #{afterDate}
+		</if>
+	</sql>
+	
 	<!-- 선택된 모델 여부(MODEL_FLAG가 Y인 목록) -->
 	<select id="selectSttModelYList" resultMap="aiStatisticMap" parameterType="com.ktds.crmai.model.AIStatistics">
 		SELECT CAM_ID,
@@ -43,26 +66,7 @@
 		<!-- 파라메터 조건 -->
 		WHERE MODEL_FLAG = 'Y'
 		
-		<!-- 캠페인명 존재 시 -->
-		<if test="camName != null">
-			AND CAM_NAME LIKE '%' || #{camName} || '%'
-		</if>
-		<!-- 캠페인 목적 존재 시 -->
-		<if test='(camType != null) and !(camType eq "".toString())'>
-			AND CAM_TYPE = #{camType}
-		</if>
-		<!-- 캠페인 상태 존재 시 -->
-		<if test='(camStatus != null) and !(camStatus eq "".toString())'>
-			AND CAM_STATUS = #{camStatus}
-		</if>
-		<!-- 생성자 존재 시 -->
-		<if test='(admName != null) and !(admName eq "".toString())'>
-			AND ADM_NAME = #{admName}
-		</if>
-		<!-- 기간 존재 시 -->
-		<if test='(beforeDate != null) and !(beforeDate eq "".toString()) and (afterDate != null) and !(afterDate eq "".toString())'>
-			AND CAM_CDATE BETWEEN #{beforeDate} AND #{afterDate}
-		</if>
+		<include refid="inputParam"></include>
 	</select>
 	
 	<!-- 의사결정나무평균 쿼리 -->
@@ -75,26 +79,7 @@
 		<!-- 파라메터 조건 -->
 		WHERE TRAIN_METHOD = 'DecisionTree' 
 		
-		<!-- 캠페인명 존재 시 -->
-		<if test="camName != null">
-			AND CAM_NAME LIKE '%' || #{camName} || '%'
-		</if>
-		<!-- 캠페인 목적 존재 시 -->
-		<if test='(camType != null) and !(camType eq "".toString())'>
-			AND CAM_TYPE = #{camType}
-		</if>
-		<!-- 캠페인 상태 존재 시 -->
-		<if test='(camStatus != null) and !(camStatus eq "".toString())'>
-			AND CAM_STATUS = #{camStatus}
-		</if>
-		<!-- 생성자 존재 시 -->
-		<if test='(admName != null) and !(admName eq "".toString())'>
-			AND ADM_NAME = #{admName}
-		</if>
-		<!-- 기간 존재 시 -->
-		<if test='(beforeDate != null) and !(beforeDate eq "".toString()) and (afterDate != null) and !(afterDate eq "".toString())'>
-			AND CAM_CDATE BETWEEN #{beforeDate} AND #{afterDate}
-		</if>
+		<include refid="inputParam"></include>
 	</select>
 	
 	<!-- 랜덤포레스트 평균 쿼리 -->
@@ -107,26 +92,7 @@
 		<!-- 파라메터 조건 -->
 		WHERE TRAIN_METHOD = 'RandomForest' 
 		
-		<!-- 캠페인명 존재 시 -->
-		<if test="camName != null">
-			AND CAM_NAME LIKE '%' || #{camName} || '%'
-		</if>
-		<!-- 캠페인 목적 존재 시 -->
-		<if test='(camType != null) and !(camType eq "".toString())'>
-			AND CAM_TYPE = #{camType}
-		</if>
-		<!-- 캠페인 상태 존재 시 -->
-		<if test='(camStatus != null) and !(camStatus eq "".toString())'>
-			AND CAM_STATUS = #{camStatus}
-		</if>
-		<!-- 생성자 존재 시 -->
-		<if test='(admName != null) and !(admName eq "".toString())'>
-			AND ADM_NAME = #{admName}
-		</if>
-		<!-- 기간 존재 시 -->
-		<if test='(beforeDate != null) and !(beforeDate eq "".toString()) and (afterDate != null) and !(afterDate eq "".toString())'>
-			AND CAM_CDATE BETWEEN #{beforeDate} AND #{afterDate}
-		</if>
+		<include refid="inputParam"></include>
 	</select>
 	
 	<!-- SVM 평균 쿼리 -->
@@ -139,26 +105,7 @@
 		<!-- 파라메터 조건 -->
 		WHERE TRAIN_METHOD = 'svm' 
 		
-		<!-- 캠페인명 존재 시 -->
-		<if test="camName != null">
-			AND CAM_NAME LIKE '%' || #{camName} || '%'
-		</if>
-		<!-- 캠페인 목적 존재 시 -->
-		<if test='(camType != null) and !(camType eq "".toString())'>
-			AND CAM_TYPE = #{camType}
-		</if>
-		<!-- 캠페인 상태 존재 시 -->
-		<if test='(camStatus != null) and !(camStatus eq "".toString())'>
-			AND CAM_STATUS = #{camStatus}
-		</if>
-		<!-- 생성자 존재 시 -->
-		<if test='(admName != null) and !(admName eq "".toString())'>
-			AND ADM_NAME = #{admName}
-		</if>
-		<!-- 기간 존재 시 -->
-		<if test='(beforeDate != null) and !(beforeDate eq "".toString()) and (afterDate != null) and !(afterDate eq "".toString())'>
-			AND CAM_CDATE BETWEEN #{beforeDate} AND #{afterDate}
-		</if>
+		<include refid="inputParam"></include>
 	</select>
 	
 	<!-- 선형회기 평균 쿼리 -->
@@ -171,25 +118,6 @@
 		<!-- 파라메터 조건 -->
 		WHERE TRAIN_METHOD = 'LogisticRegression' 
 		
-		<!-- 캠페인명 존재 시 -->
-		<if test="camName != null">
-			AND CAM_NAME LIKE '%' || #{camName} || '%'
-		</if>
-		<!-- 캠페인 목적 존재 시 -->
-		<if test='(camType != null) and !(camType eq "".toString())'>
-			AND CAM_TYPE = #{camType}
-		</if>
-		<!-- 캠페인 상태 존재 시 -->
-		<if test='(camStatus != null) and !(camStatus eq "".toString())'>
-			AND CAM_STATUS = #{camStatus}
-		</if>
-		<!-- 생성자 존재 시 -->
-		<if test='(admName != null) and !(admName eq "".toString())'>
-			AND ADM_NAME = #{admName}
-		</if>
-		<!-- 기간 존재 시 -->
-		<if test='(beforeDate != null) and !(beforeDate eq "".toString()) and (afterDate != null) and !(afterDate eq "".toString())'>
-			AND CAM_CDATE BETWEEN #{beforeDate} AND #{afterDate}
-		</if>
+		<include refid="inputParam"></include>
 	</select>
 </mapper>

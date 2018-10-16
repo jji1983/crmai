@@ -278,7 +278,9 @@
  <script type="text/javascript">
   
   $(document).ready(function () {
-	  campaignPage();
+	 $("#adm_name").val("${sessionID}");
+	 
+	 campaignPage();
 	  
     //모달 처리(신규).
     $("#bthNew").click(function(event) {
