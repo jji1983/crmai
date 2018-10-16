@@ -31,11 +31,11 @@ public class AIStatistics {
 	@Getter @Setter private Double soAccAvg;			// 예측 평균
 	@Getter @Setter private Double realAccAvg;			// 결과 평균
 	
-	public AIStatistics(String camName, String camStatus, String admName, String camType, String beforeDate,
+	public AIStatistics(String camName, String camStatus, String admId, String camType, String beforeDate,
 			String afterDate) {
 		this.camName = camName;
 		this.camStatus = camStatus;
-		this.admName = admName;
+		this.admId = admId;
 		this.camType = camType;
 		this.beforeDate = beforeDate;
 		this.afterDate = afterDate;

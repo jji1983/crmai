@@ -113,7 +113,7 @@
 	      e.stopPropagation(); // 모달 팝업도 같이 닫히는걸 막아준다.
 	    });
 		
-		$("#const").val($("input[name='session_name']", parent.document).val());
+		$("#const").val("${sessionID}");
 		
 		search_statistics();	// 처음에 불러오기
   	});
@@ -179,7 +179,7 @@
 				camName : $("#cam_name").val(),
 				camType : $("#cam_type").val(),
 				camStatus : $("#cam_status").val(),
-				admName : $("#const").val(),
+				admId : $("#const").val(),
 				beforeDate : $("#before_date").val(),
 				afterDate : $("#after_date").val()
 			},

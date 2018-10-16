@@ -94,7 +94,7 @@
 
 <script type="text/javascript">
 $(function() {
-	$("#adm_name").val($("input[name='session_name']", parent.document).val());
+	$("#adm_name").val("${sessionID}");
 	
 	newCampaignPage();
 });

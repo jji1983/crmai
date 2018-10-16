@@ -55,18 +55,8 @@
   <script src="/resources/js/jquery.twbsPagination.js"></script>
   <script src="/resources/js/jquery.twbsPagination.min.js"></script>
   
-  <script type="text/javascript">
-  $(function() {
-		$("#adm_name").val($("input[name='session_name']", parent.document).val());
-		
-		newCampaignPage();
-  });
-  </script>
-  
-  
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-
 
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
@@ -156,7 +146,7 @@
 						</div>
 						<!-- /.box-body -->
 						<div class="box-footer">
-							<button type="button" onclick="search_campaign();" class="btn btn-info pull-right">검색</button>
+							<button type="button" onclick="newCampaignPage();" class="btn btn-info pull-right">검색</button>
 						</div>
 					</div>
 				</div>
@@ -174,13 +164,11 @@
 					</div>
 
 					<!-- /.box-header -->
-					<div class="box-body">
-						<div class="row">
-						<!-- campaign table -->
-						<table id="ai_campaign" class="table table-bordered table-hover text-center"></table>
-						<nav aria-label="Page navigation example" style="text-align: center;">
-						<ul class="pagination-sm" id="pagination"></ul></nav>
-			 	   </div>
+					<div id="div_campaign" class="box-body"></div>
+			 	    
+			 	    <div class="text-center">
+			        	<ul class="pagination-sm" id="pagination_cam"></ul>
+			        </div>
 
 					<!-- Button trigger modal -->
 					<div class="box-footer">
@@ -227,10 +215,8 @@
 										<div class="modal-footer">대상자 추가 등록화면</div>
 									</div>
 								</div>
-						</div>
-						<!--/. Modal -->
-
 					</div>
+					<!--/. Modal -->
 				</div>
 			</div>
 		</div>
@@ -242,7 +228,10 @@
  <script type="text/javascript">
   
   $(document).ready(function () {
-	  campaignPage();
+	  $("#adm_name").val("${sessionID}");
+	  
+	  //campaignPage();
+	  newCampaignPage();
 	  
     //모달 처리(신규).
     $("#bthAdd").click(function(event) {

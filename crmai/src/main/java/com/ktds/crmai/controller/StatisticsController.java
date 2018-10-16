@@ -26,7 +26,7 @@ public class StatisticsController {
 			@RequestParam(required=false) String camName,
 			@RequestParam(required=false) String camType,
 			@RequestParam(required=false) String camStatus,
-			@RequestParam(required=false) String admName,
+			@RequestParam(required=false) String admId,
 			@RequestParam(required=false) String beforeDate,
 			@RequestParam(required=false) String afterDate
 			) {
@@ -39,7 +39,7 @@ public class StatisticsController {
 			camStatus = "";
 		}
 			
-		AIStatistics aiVO = new AIStatistics(camName, camStatus, admName, camType, beforeDate, afterDate);
+		AIStatistics aiVO = new AIStatistics(camName, camStatus, admId, camType, beforeDate, afterDate);
 			
 		return statisticsService.selectSttModelYList(aiVO);
 	}
@@ -51,7 +51,7 @@ public class StatisticsController {
 			@RequestParam(required=false) String camName,
 			@RequestParam(required=false) String camType,
 			@RequestParam(required=false) String camStatus,
-			@RequestParam(required=false) String admName,
+			@RequestParam(required=false) String admId,
 			@RequestParam(required=false) String beforeDate,
 			@RequestParam(required=false) String afterDate
 			) {
@@ -64,7 +64,7 @@ public class StatisticsController {
 			camStatus = "";
 		}
 		
-		AIStatistics aiVO = new AIStatistics(camName, camStatus, admName, camType, beforeDate, afterDate);
+		AIStatistics aiVO = new AIStatistics(camName, camStatus, admId, camType, beforeDate, afterDate);
 		
 		AIStatistics dTreeVO = statisticsService.selectDTreeAvg(aiVO);
 		AIStatistics rfVO = statisticsService.selectRFavg(aiVO);

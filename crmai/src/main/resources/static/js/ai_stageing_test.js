@@ -159,7 +159,8 @@ $.ajax({
             $('#addModal').modal('hide');
     	    
     	    // alert('캠페인 리프리시');
-    	    campaignPage();
+    	    //campaignPage();
+            newCampaignPage();
     	}
         
     },

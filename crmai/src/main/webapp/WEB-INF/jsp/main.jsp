@@ -76,12 +76,12 @@
 	function Content_PretreatmentResult() {
 		//alert("call Content_PretreatmentResult!!");
 		document.getElementById("main_frame").src = "/iframe/PretreatmentResult";
-		$("input[name='session_name']").val("${sessionNAME}");
+		//$("input[name='session_name']").val("${sessionNAME}");
 	}
 	function Content_Learning() {
 		//alert("call Content_Learning!!");
 		document.getElementById("main_frame").src = "/iframe/Learning";
-		$("input[name='session_name']").val("${sessionNAME}");
+		//$("input[name='session_name']").val("${sessionNAME}");
 	}
   
 	function Content_RunForecast() {
@@ -92,25 +92,25 @@
 	function Content_RunForecastResult() {
 		//alert("call Content_RunForecastResult!!");
 		document.getElementById("main_frame").src = "/iframe/RunForecastResult";
-		$("input[name='session_name']").val("${sessionNAME}");
+		//$("input[name='session_name']").val("${sessionNAME}");
 	}
 	
 	function Content_Statistics_m1() {
 		//alert("call Content_Statistics!!");
 		document.getElementById("main_frame").src = "/iframe/Statistics_m1";
-		$("input[name='session_name']").val("${sessionNAME}");
+		//$("input[name='session_name']").val("${sessionNAME}");
 	}
 	
 	function Content_Statistics_m2() {
 		//alert("call Content_Statistics!!");
 		document.getElementById("main_frame").src = "/iframe/Statistics_m2";
-		$("input[name='session_name']").val("${sessionNAME}");
+		//$("input[name='session_name']").val("${sessionNAME}");
 	}
 	
 	function Content_Statistics_m3() {
 		//alert("call Content_Statistics!!");
 		document.getElementById("main_frame").src = "/iframe/Statistics_m3";
-		$("input[name='session_name']").val("${sessionNAME}");
+		//$("input[name='session_name']").val("${sessionNAME}");
 	}
 	
 	function Content_NoticeBoard() {
@@ -308,6 +308,7 @@
 </div>
 <!-- ./wrapper -->
 
+<!-- 세션에서 로그인 사용자를 생성자 텍스트에 입력하려면 이 것을 사용해야 함 -->
 <input name="session_name" type="hidden">
 
 <!-- jQuery 3 -->
