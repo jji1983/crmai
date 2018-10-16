@@ -199,7 +199,7 @@
 															style="margin-left: 5px">수정</button>
 														<button id="bthClose" type="button"
 															class="btn btn-secondary" data-dismiss="modal"
-															style="margin-left: 5px">취소</button>
+															style="margin-left: 5px">돌아가기</button>
 													</div>
 												</div>
 												<!-- /.box-footer -->
@@ -601,6 +601,7 @@
 				$("#inputNoticeDesc").attr("readonly", false);
 
 				$('.readNotice').hide();
+				$('.modNotice').hide();
 				$('.editNotice').show();
 			} else { // type === 'READ'
 				var d = data[0];
@@ -617,7 +618,13 @@
 				$("#noticeDate").val(d.reg_datetime.substr(0, 19));
 
 				$('.readNotice').show();
-				$("#modNotice").show();
+				
+				if ($("#user_id").val() == d.writer) {
+					$(".modNotice").show();
+				}
+				else {
+					$(".modNotice").hide();
+				}
 				$('.editNotice').hide();
 			}
 
