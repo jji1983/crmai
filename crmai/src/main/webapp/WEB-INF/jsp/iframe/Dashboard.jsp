@@ -108,6 +108,12 @@
 .text-green {
 	color: #00B4AF;
 }
+.chart-container {
+  position: relative;
+  margin: auto;
+  height: auto;
+  width: 100%;
+}
 </style>
 
 </head>
@@ -455,8 +461,8 @@
 											<h3 class="box-title" id="LChartTitle">나의 캠페인 전체</h3>
 										</div>
 										<div class="box-body">
-											<div class="chart" style="height: 320px">
-												<canvas id="chBarLeft" style="height: 320px"></canvas>
+											<div class="chart-container">
+												<canvas id="chBarLeft"></canvas>
 											</div>
 										</div>
 									</div>
@@ -557,8 +563,8 @@
 										<h3 class="box-title" id="RChartTitle">캠페인 전체</h3>
 									</div>
 									<div class="box-body">
-										<div class="chart" style="height: 320px">
-											<canvas id="chBarRight" style="height: 320px"></canvas>
+										<div class="chart-container">
+											<canvas id="chBarRight"></canvas>
 										</div>
 									</div>
 								</div>

@@ -383,77 +383,6 @@ function loadLeftTab() {
 	$
 			.ajax({
 				type : "GET",
-				url : "/dashboardChart/type",
-				cache : false,
-				processData : true,
-				data : data,
-				async : true,
-				success : function(data) {
-					var div1 = document.querySelector('#leftType');
-					var string = new Array();
-					string.push("<li role='presentation'><a class='dropdown-header' role='menuitem' data-toggle='tab' tabindex='-1' href='#' onclick='totalLeft()'>전체보기</a></li><li role='presentation' class='divider'></li>");
-					$.each(data, function(index, value) {
-						string.push("<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='leftType");
-						string.push(index);
-						string.push("-tab' onclick='toggleLeft(1,");
-						string.push(this.totalBase);
-						string.push(")'>");
-						switch (this.totalBase) {
-						case "1":
-							string.push("통신분야</a></li>");
-							break;
-						case "2":
-							string.push("금융분야</a></li>");
-							break;
-						case "3":
-							string.push("유통분야</a></li>");
-							break;
-						case "0":
-							string.push("기타분야</a></li>");
-							break;
-						}
-						var html = string.join('');
-						div1.innerHTML = html;
-					});
-					
-					
-					
-					
-					/*var html = "<li role='presentation'><a class='dropdown-header' role='menuitem' data-toggle='tab' tabindex='-1' href='#' onclick='totalLeft()'>전체보기</a></li><li role='presentation' class='divider'></li>";
-					$
-							.each(
-									data,
-									function(index, value) {
-										html += "<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='leftType"
-												+ index
-												+ "-tab' onclick='toggleLeft(1,"
-												+ this.totalBase + ")'>";
-										switch (this.totalBase) {
-										case "1":
-											html += "통신분야</a></li>";
-											break;
-										case "2":
-											html += "금융분야</a></li>";
-											break;
-										case "3":
-											html += "유통분야</a></li>";
-											break;
-										case "0":
-											html += "기타분야</a></li>";
-											break;
-										}
-									});
-
-					var div1 = document.querySelector('#leftType');
-					div1.innerHTML = html;*/
-				},
-				error : function(e) {
-				}
-			});
-
-	$
-			.ajax({
-				type : "GET",
 				url : "/dashboardChart/period",
 				cache : false,
 				processData : true,
@@ -481,17 +410,6 @@ function loadLeftTab() {
 					var html = string.join('');
 					var div1 = document.querySelector('#leftPeriod');
 					div1.innerHTML = html;
-					/*
-					 * var html = "<li role='presentation'><a
-					 * class='dropdown-header' role='menuitem'
-					 * tabindex='-1'>선택하세요</a></li><li role='presentation' class='divider'></li>"; $
-					 * .each( data, function(index, value) { html += "<li role='presentation'><a
-					 * role='menuitem' data-toggle='tab' tabindex='-1' href='#'
-					 * id='leftPeriod" + index + "-tab' onclick='toggleLeft(2," +
-					 * this.totalBase + ")'>" + this.totalBase + "년</a></li>";
-					 * }); var div1 = document.querySelector('#leftPeriod');
-					 * div1.innerHTML = html;
-					 */
 				},
 				error : function(e) {
 				}
@@ -527,21 +445,6 @@ function loadLeftTab() {
 					var div1 = document.querySelector('#leftCam');
 					div1.innerHTML = html;
 					
-					/*var html = "<li role='presentation'><a class='dropdown-header' role='menuitem' tabindex='-1'>선택하세요</a></li><li role='presentation' class='divider'></li>";
-					$
-							.each(
-									data,
-									function(index, value) {
-
-										html += "<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='leftCampaign"
-												+ index
-												+ "-tab' onclick='toggleLeft(3,"
-												+ this.camId
-												+ ")'>"
-												+ this.camName + "</a></li>";
-									});
-					var div1 = document.querySelector('#leftCam');
-					div1.innerHTML = html;*/
 				},
 				error : function(e) {
 				}
@@ -588,34 +491,6 @@ function loadRightTab() {
 			var html = string.join('');
 			var div1 = document.querySelector('#rightType');
 			div1.innerHTML = html;
-			
-			/*var html = "<li role='presentation'><a class='dropdown-header' role='menuitem' data-toggle='tab' tabindex='-1' href='#' onclick='totalLeft()'>전체보기</a></li><li role='presentation' class='divider'></li>";
-					$
-							.each(
-									data,
-									function(index, value) {
-										html += "<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='leftType"
-												+ index
-												+ "-tab' onclick='toggleLeft(1,"
-												+ this.totalBase + ")'>";
-										switch (this.totalBase) {
-										case "1":
-											html += "통신분야</a></li>";
-											break;
-										case "2":
-											html += "금융분야</a></li>";
-											break;
-										case "3":
-											html += "유통분야</a></li>";
-											break;
-										case "0":
-											html += "기타분야</a></li>";
-											break;
-										}
-									});
-
-					var div1 = document.querySelector('#leftType');
-					div1.innerHTML = html;*/
 		},
 		error : function(e) {
 		}
@@ -1007,7 +882,6 @@ function totalLeft() {
 		async : true,
 		success : function(data) {
 			getLeftType(data);
-			loadLeftStat(data);
 		},
 		error : function(e) {
 		}
@@ -1029,7 +903,6 @@ function totalRight() {
 		async : true,
 		success : function(data) {
 			getRightType(data);
-			loadRightStat(data);
 		},
 		error : function(e) {
 		}
