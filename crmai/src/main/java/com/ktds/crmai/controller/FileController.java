@@ -233,13 +233,13 @@ public class FileController {
 	@RequestMapping(value = "/downloadGuide", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> downloadGuideFile() throws Exception {
 
-	 String GuideFile = "/resources/file/CRM_MarketingPlatform(Admin)_20180928.pdf"; 
+	 String GuideFile = "/home/jji5636/AIGuide/AI_CRMMarketingPlatform.pdf";  
 
 	 Path path = Paths.get(GuideFile);
 	
 	 byte[] array = Files.readAllBytes(path);
 	 
-	 String fileName = "inline; filename=CRM_MarketingPlatform(Admin)_20180928.pdf"; //attachment
+	 String fileName = "inline; filename=AI_CRMMarketingPlatform.pdf"; //attachment
 	 
 	 HttpHeaders responseHeaders = new HttpHeaders();
 	 
