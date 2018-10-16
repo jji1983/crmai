@@ -249,8 +249,6 @@
 				      barShowStroke           : true,
 				      //Number - Pixel width of the bar stroke
 				      barStrokeWidth          : 2,
-				      //Number - Spacing between each of the X value sets
-				      barValueSpacing         : 5,
 				      //Number - Spacing between data sets within X values
 				      barDatasetSpacing       : 1,
 				      //String - A legend template
@@ -258,6 +256,13 @@
 				      responsive              : true,
 				      maintainAspectRatio     : true
 				};
+				
+				// 그래프 굵기 조정(데이터 갯수에 따라서...)
+				if((soAccArr.length >= 1) && (soAccArr.length <= 6)) {
+					barChartOptions["barValueSpacing"] = 100;
+				} else {
+					barChartOptions["barValueSpacing"] = 5;
+				}
 				    
 				var areaChartOptions = {
 				        //Boolean - If we should show the scale at all
