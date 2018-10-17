@@ -236,8 +236,8 @@ public class TableDAO {
 			
 			query = query_h.toString() + query_b.toString();
 			
-			System.out.println("query :: " + query);
-			System.out.println("arrayList.size :: " + arrayList.size());
+			//System.out.println("query :: " + query);
+			//System.out.println("arrayList.size :: " + arrayList.size());
 			
 			PreparedStatement pstmt = conn.prepareStatement(query) ;
 
@@ -262,20 +262,20 @@ public class TableDAO {
                 // addBatch에 담기
                 pstmt.addBatch();
 				
-                // OutOfMemory를 고려하여 만건 단위로 커밋
-                if( (i % 10000) == 0){
-                	
-                	System.out.println("ing_"+i+" :: " + DateTool.getTimestamp() );
-                	
-                    // Batch 실행
-                    pstmt.executeBatch() ;
-                     
-                    // Batch 초기화
-                    pstmt.clearBatch();
-                     
-                    // 커밋
-                    conn.commit() ;
-                }
+//                // OutOfMemory를 고려하여 만건 단위로 커밋
+//                if( (i % 10000) == 0){
+//                	
+//                	System.out.println("ing_"+i+" :: " + DateTool.getTimestamp() );
+//                	
+//                    // Batch 실행
+//                    pstmt.executeBatch() ;
+//                     
+//                    // Batch 초기화
+//                    pstmt.clearBatch();
+//                     
+//                    // 커밋
+//                    conn.commit() ;
+//                }
 			}
 	        // Batch 실행
             pstmt.executeBatch() ;

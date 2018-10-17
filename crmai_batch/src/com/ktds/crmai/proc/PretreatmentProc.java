@@ -5,6 +5,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import com.ktds.crmai.db.TableDAO;
@@ -48,11 +52,16 @@ public class PretreatmentProc {
 				dataTemp = data;
 				
 				int feature = 0;
+				int maxCnt = 0;
 				String[] columns = null;
 				ArrayList<AiStaging> arrayList = new ArrayList<AiStaging>();
 				System.out.println(data.toString());
 				br = new BufferedReader(new InputStreamReader(new FileInputStream(data.getCam_ifilename()), encoding));
 				System.out.println(data.getCam_id() + " start :: " + DateTool.getTimestamp());
+				
+				Path path = Paths.get(data.getCam_ifilename());
+				long lineCount = Files.lines(path).count();
+				
 	            while ((line = br.readLine()) != null) {
 	            	AiStaging train = new AiStaging();
 	            	
@@ -66,19 +75,39 @@ public class PretreatmentProc {
 	            	
 	            	//System.out.println(train.toQuery());
 	            	arrayList.add(train);
-	            
+	            	
 	            	int nowNum = columns.length;
 	            	
 	            	if(nowNum > feature) {
+	            		System.err.println("##### " + columns[0] + " || nowNum :: " + nowNum + " || feature :: " + feature);
 	            		feature = nowNum;
 	            		data.setIcnum(feature);
 	            	}
+	            	
+	            	// OutOfMemory를 고려하여 만건 단위로 커밋
+	                if( (maxCnt % 50000) == 0){
+	     	           cam_msg = dao.insertAI_STAGING(data, arrayList, tableName, type1);
+	     	            
+	     	           int value = maxCnt;
+	     	           int total = (int) lineCount; 
+	     	           double rate = (double)((double)value/(double)total) * 100; 
+	     	           
+	     	           rate = rate * 100;
+	     	           
+	     	           String dispPattern = "##%";
+	     	           DecimalFormat form = new DecimalFormat(dispPattern);
+	     	           System.out.println(DateTool.getTimestamp()  + " :: " + data.getCam_id() + " TOTAL ["+ String.format("%,d", lineCount)+"] :: ING[" + String.format("%,d", maxCnt) + "] :: Percent[" + form.format(rate) + "]");
+	     	            
+	     	           //초기화.
+	     	           arrayList = new ArrayList<AiStaging>();
+	                }
+	            	
+	            	maxCnt++;
 	            }
-	            System.out.println(data.getCam_id() + " ing :: " + DateTool.getTimestamp());
 	            
+	            //마지막 남은 값을 처리.
 	            cam_msg = dao.insertAI_STAGING(data, arrayList, tableName, type1);
-	            
-	            System.out.println(data.getCam_id() + " end :: " + DateTool.getTimestamp() + " :: cam_msg[" + cam_msg + "]");
+	            System.out.println(DateTool.getTimestamp()  + " :: " + data.getCam_id() + " TOTAL ["+ String.format("%,d", lineCount)+"] :: ING[" + String.format("%,d", maxCnt) + "] :: Percent[100%]");
 	            
 	            //3.2 캠페인 정보 업데이트 피쳐 갯수
 	        	System.out.println("feature len[" + feature + "]");

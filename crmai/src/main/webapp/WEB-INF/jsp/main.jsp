@@ -178,7 +178,12 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
+        
+        <% if(session.getAttribute("sessionID").equals("asdf")){ %>
+          <img src="/resources/dist/img/user8-128x128.jpg" class="img-circle" alt="User Image">
+        <% }else{ %>
           <img src="/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+        <% }%>
         </div>
         <div class="pull-left info">
           <p><%=session.getAttribute("sessionNAME")%>님 환영 합니다.</p>

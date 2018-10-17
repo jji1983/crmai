@@ -98,6 +98,11 @@
 
 function register_check(){
 	
+	if($('#ADM_ID').val() == '' || $('#ADM_NAME').val() == '' || $('#ADM_PW').val() == ''){
+		alert("ID/PW/NAME/ 은 필수 입니다.");
+		return;
+	}
+	
 	if($('#ADM_PW').val() != $('#ADM_PW_R').val()){
 		alert("비밀번호가 일치 하지 안습니다.!");
 		return;
