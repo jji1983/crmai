@@ -130,7 +130,6 @@
 				camName : $("#cam_name").val(),
 				camType : $("#cam_type").val(),
 				camStatus : $("#cam_status").val(),
-				admId : $("#const").val(),
 				beforeDate : $("#before_date").val(),
 				afterDate : $("#after_date").val()
 			},
@@ -191,7 +190,6 @@
 				camName : $("#cam_name").val(),
 				camType : $("#cam_type").val(),
 				camStatus : $("#cam_status").val(),
-				admName : $("#const").val(),
 				beforeDate : $("#before_date").val(),
 				afterDate : $("#after_date").val()
 			},
@@ -241,12 +239,12 @@
 						datasets: [
 						    {
 						       label               : '정확도',
-						       fillColor           : 'rgba(210, 214, 222, 1)',
-						       strokeColor         : 'rgba(210, 214, 222, 1)',
-						       pointColor          : 'rgba(210, 214, 222, 1)',
-						       pointStrokeColor    : '#c1c7d1',
+						       fillColor           : 'rgba(205, 102, 0, 1)',
+						       strokeColor         : 'rgba(205, 102, 0, 1)',
+						       pointColor          : 'rgba(205, 102, 0, 1)',
+						       pointStrokeColor    : '#cd6600',
 						       pointHighlightFill  : '#fff',
-						       pointHighlightStroke: 'rgba(220,220,220,1)',
+						       pointHighlightStroke: 'rgba(205, 102, 0, 1)',
 						       data                : originalAccArr
 						    },
 						    {
@@ -261,12 +259,12 @@
 						    },
 						    {
 							   label               : '결과',
-							   fillColor           : 'rgba(60,141,188,0.9)',
-							   strokeColor         : 'rgba(60,141,188,0.8)',
-							   pointColor          : '#3b8bba',
-							   pointStrokeColor    : 'rgba(60,141,188,1)',
+							   fillColor           : 'rgba(255,215,0,0.9)',
+							   strokeColor         : 'rgba(255,215,0,0.8)',
+							   pointColor          : '#ffd700',
+							   pointStrokeColor    : 'rgba(255,215,0,1)',
 							   pointHighlightFill  : '#fff',
-							   pointHighlightStroke: 'rgba(60,141,188,1)',
+							   pointHighlightStroke: 'rgba(255,215,0,1)',
 							   data                : realAccArr
 							}
 						]
@@ -277,32 +275,32 @@
 						datasets: [
 						    {
 						       label               : '정확도',
-						       fillColor           : 'rgba(210, 214, 222, 1)',
-						       strokeColor         : 'rgba(210, 214, 222, 1)',
-						       pointColor          : 'rgba(210, 214, 222, 1)',
-						       pointStrokeColor    : '#c1c7d1',
+						       fillColor           : 'rgba(255, 87, 0, 0.9)',
+						       strokeColor         : 'rgba(255, 87, 0, 0.8)',
+						       pointColor          : 'rgba(255, 87, 0, 1)',
+						       pointStrokeColor    : '#ff5700',
 						       pointHighlightFill  : '#fff',
-						       pointHighlightStroke: 'rgba(220,220,220,1)',
+						       pointHighlightStroke: 'rgba(255, 87, 0, 1)',
 						       data                : orgAccAvgArr
 						    },
 						    {
 						       label               : '예측',
-						       fillColor           : 'rgba(60,141,188,0.9)',
-						       strokeColor         : 'rgba(60,141,188,0.8)',
-						       pointColor          : '#3b8bba',
-						       pointStrokeColor    : 'rgba(60,141,188,1)',
+						       fillColor           : 'rgba(211, 255, 206, 0.9)',
+						       strokeColor         : 'rgba(211, 255, 206, 0.8)',
+						       pointColor          : '#d3ffce',
+						       pointStrokeColor    : 'rgba(211, 255, 206, 1)',
 						       pointHighlightFill  : '#fff',
-						       pointHighlightStroke: 'rgba(60,141,188,1)',
+						       pointHighlightStroke: 'rgba(211, 255, 206, 1)',
 						       data                : soAccAvgArr
 						    },
 						    {
 							   label               : '결과',
-							   fillColor           : 'rgba(60,141,188,0.9)',
-							   strokeColor         : 'rgba(60,141,188,0.8)',
-							   pointColor          : '#3b8bba',
-							   pointStrokeColor    : 'rgba(60,141,188,1)',
+							   fillColor           : 'rgba(238, 162, 173, 0.9)',
+							   strokeColor         : 'rgba(238, 162, 173, 0.8)',
+							   pointColor          : '#eea2ad',
+							   pointStrokeColor    : 'rgba(238, 162, 173, 1)',
 							   pointHighlightFill  : '#fff',
-							   pointHighlightStroke: 'rgba(60,141,188,1)',
+							   pointHighlightStroke: 'rgba(238, 162, 173, 1)',
 							   data                : realAccAvgArr
 							}
 						]

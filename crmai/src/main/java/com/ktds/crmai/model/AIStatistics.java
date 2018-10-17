@@ -1,5 +1,7 @@
 package com.ktds.crmai.model;
 
+import java.math.BigDecimal;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,9 +29,9 @@ public class AIStatistics {
 	// 파라메터 방식으로만 사용
 	@Getter @Setter private String beforeDate;			// 기간(이전)
 	@Getter @Setter private String afterDate;			// 기간(이후)
-	@Getter @Setter private Double originalAccAvg;		// 정확도 평균
-	@Getter @Setter private Double soAccAvg;			// 예측 평균
-	@Getter @Setter private Double realAccAvg;			// 결과 평균
+	@Getter @Setter private BigDecimal originalAccAvg;		// 정확도 평균
+	@Getter @Setter private BigDecimal soAccAvg;			// 예측 평균
+	@Getter @Setter private BigDecimal realAccAvg;			// 결과 평균
 	
 	public AIStatistics(String camName, String camStatus, String admId, String camType, String beforeDate,
 			String afterDate) {

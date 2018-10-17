@@ -71,9 +71,9 @@
 	
 	<!-- 의사결정나무평균 쿼리 -->
 	<select id="selectDTreeAvg" resultMap="aiStatisticMap" parameterType="com.ktds.crmai.model.AIStatistics">
-		SELECT AVG(ORIGINAL_ACC) as ORIGINAL_ACC_AVG, 
-			   AVG(SO_ACC) as SO_ACC_AVG, 
-			   AVG(REAL_ACC) as REAL_ACC_AVG
+		SELECT NVL(ROUND(AVG(ORIGINAL_ACC), 2), 0) as ORIGINAL_ACC_AVG, 
+			   NVL(ROUND(AVG(SO_ACC), 2), 0) as SO_ACC_AVG, 
+			   NVL(ROUND(AVG(REAL_ACC), 2), 0) as REAL_ACC_AVG
 		FROM AI_STATISTICS
 		
 		<!-- 파라메터 조건 -->
@@ -84,9 +84,9 @@
 	
 	<!-- 랜덤포레스트 평균 쿼리 -->
 	<select id="selectRFavg" resultMap="aiStatisticMap" parameterType="com.ktds.crmai.model.AIStatistics">
-		SELECT AVG(ORIGINAL_ACC) as ORIGINAL_ACC_AVG, 
-			   AVG(SO_ACC) as SO_ACC_AVG, 
-			   AVG(REAL_ACC) as REAL_ACC_AVG
+		SELECT NVL(ROUND(AVG(ORIGINAL_ACC), 2), 0) as ORIGINAL_ACC_AVG, 
+			   NVL(ROUND(AVG(SO_ACC), 2), 0) as SO_ACC_AVG, 
+			   NVL(ROUND(AVG(REAL_ACC), 2), 0) as REAL_ACC_AVG
 		FROM AI_STATISTICS
 		
 		<!-- 파라메터 조건 -->
@@ -97,9 +97,9 @@
 	
 	<!-- SVM 평균 쿼리 -->
 	<select id="selectSVMavg" resultMap="aiStatisticMap" parameterType="com.ktds.crmai.model.AIStatistics">
-		SELECT AVG(ORIGINAL_ACC) as ORIGINAL_ACC_AVG, 
-			   AVG(SO_ACC) as SO_ACC_AVG, 
-			   AVG(REAL_ACC) as REAL_ACC_AVG
+		SELECT NVL(ROUND(AVG(ORIGINAL_ACC), 2), 0) as ORIGINAL_ACC_AVG, 
+			   NVL(ROUND(AVG(SO_ACC), 2), 0) as SO_ACC_AVG, 
+			   NVL(ROUND(AVG(REAL_ACC), 2), 0) as REAL_ACC_AVG
 		FROM AI_STATISTICS
 		
 		<!-- 파라메터 조건 -->
@@ -110,9 +110,9 @@
 	
 	<!-- 선형회기 평균 쿼리 -->
 	<select id="selectLRavg" resultMap="aiStatisticMap" parameterType="com.ktds.crmai.model.AIStatistics">
-		SELECT AVG(ORIGINAL_ACC) as ORIGINAL_ACC_AVG, 
-			   AVG(SO_ACC) as SO_ACC_AVG, 
-			   AVG(REAL_ACC) as REAL_ACC_AVG
+		SELECT NVL(ROUND(AVG(ORIGINAL_ACC), 2), 0) as ORIGINAL_ACC_AVG, 
+			   NVL(ROUND(AVG(SO_ACC), 2), 0) as SO_ACC_AVG, 
+			   NVL(ROUND(AVG(REAL_ACC), 2), 0) as REAL_ACC_AVG
 		FROM AI_STATISTICS
 		
 		<!-- 파라메터 조건 -->

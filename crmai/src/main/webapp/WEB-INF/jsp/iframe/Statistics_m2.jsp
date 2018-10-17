@@ -130,7 +130,6 @@
 				camName : $("#cam_name").val(),
 				camType : $("#cam_type").val(),
 				camStatus : $("#cam_status").val(),
-				admId : $("#const").val(),
 				beforeDate : $("#before_date").val(),
 				afterDate : $("#after_date").val()
 			},
@@ -179,7 +178,6 @@
 				camName : $("#cam_name").val(),
 				camType : $("#cam_type").val(),
 				camStatus : $("#cam_status").val(),
-				admId : $("#const").val(),
 				beforeDate : $("#before_date").val(),
 				afterDate : $("#after_date").val()
 			},
@@ -211,12 +209,12 @@
 						datasets: [
 						    {
 						       label               : '예측',
-						       fillColor           : 'rgba(60,141,188,0.9)',
-						       strokeColor         : 'rgba(60,141,188,0.8)',
-						       pointColor          : '#3b8bba',
-						       pointStrokeColor    : 'rgba(60,141,188,1)',
+						       fillColor           : 'rgba(147, 0, 156, 0.9)',
+						       strokeColor         : 'rgba(147, 0, 156, 0.8)',
+						       pointColor          : '#93009c',
+						       pointStrokeColor    : 'rgba(147, 0, 156, 1)',
 						       pointHighlightFill  : '#fff',
-						       pointHighlightStroke: 'rgba(60,141,188,1)',
+						       pointHighlightStroke: 'rgba(147, 0, 156, 1)',
 						       data                : soAccArr
 						    }
 						]
@@ -306,12 +304,12 @@
 						datasets: [
 						    {
 						       label               : '예측',
-						       fillColor           : 'rgba(60,141,188,0.9)',
-						       strokeColor         : 'rgba(60,141,188,0.8)',
-						       pointColor          : '#3b8bba',
-						       pointStrokeColor    : 'rgba(60,141,188,1)',
+						       fillColor           : 'rgba(147, 0, 156, 0.9)',
+						       strokeColor         : 'rgba(147, 0, 156, 0.8)',
+						       pointColor          : '#93009c',
+						       pointStrokeColor    : 'rgba(147, 0, 156, 1)',
 						       pointHighlightFill  : '#fff',
-						       pointHighlightStroke: 'rgba(60,141,188,1)',
+						       pointHighlightStroke: 'rgba(147, 0, 156, 1)',
 						       data                : soAccAvgArr
 						    }
 						]

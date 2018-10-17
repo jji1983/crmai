@@ -156,6 +156,9 @@
 	                		<select id="cam_type" class="form-control select2" style="width: 100%;" data-placeholder="Acquisition">
 	                		<option selected="selected">ALL</option>
 	                  		<option>Acquisition</option>
+	                  		<option>Retention</option>
+							<option>Cultivation</option>
+							<option>KeepCare</option>
 	                  		</select>
 	                    </div>
 		              </div>
