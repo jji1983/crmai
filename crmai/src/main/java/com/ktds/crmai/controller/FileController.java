@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -336,7 +337,8 @@ public class FileController {
 	public ResponseEntity<Object> fileUpload_Real(
 		@RequestParam("cam_id") String cam_id,
 		@RequestParam("user_id") String user_id,
-        @RequestParam("file_real") MultipartFile[] file_real) { 
+        @RequestParam("file_real") MultipartFile[] file_real,
+        HttpSession session) { 
 		
 		ResponseEntity<Object> response = new ResponseEntity<Object>("OK::등록 성공", HttpStatus.OK);
 		logger.info("fileUpload_Real :: cam_id ::{}, user_id :: {}, inputCamDesc :: {}",cam_id, user_id);

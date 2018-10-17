@@ -58,8 +58,8 @@ public class LearningProc {
 					br = new BufferedReader(new InputStreamReader(new FileInputStream(data.getCam_ofilename()), encoding));
 					System.out.println(data.getCam_id() + " start :: " + DateTool.getTimestamp());
 					
-					Path path = Paths.get(data.getCam_ifilename());
-					long lineCount = Files.lines(path).count();
+					//Path path = Paths.get(data.getCam_ifilename());
+					//long lineCount = Files.lines(path).count();
 					
 		            while ((line = br.readLine()) != null) {
 		            	AiStaging test = new AiStaging();
@@ -86,16 +86,10 @@ public class LearningProc {
 		            	// OutOfMemory를 고려하여 만건 단위로 커밋
 		                if( (maxCnt % 50000) == 0){
 		                   cam_msg = dao.insertAI_STAGING(data, arrayList, tableName, type1);
-		     	            
-		     	           int value = maxCnt;
-		     	           int total = (int) lineCount; 
-		     	           double rate = (double)((double)value/(double)total) * 100; 
-		     	           
-		     	           rate = rate * 100;
 		     	           
 		     	           String dispPattern = "##%";
 		     	           DecimalFormat form = new DecimalFormat(dispPattern);
-		     	           System.out.println(DateTool.getTimestamp()  + " :: " + data.getCam_id() + " TOTAL ["+ String.format("%,d", lineCount)+"] :: ING[" + String.format("%,d", maxCnt) + "] :: Percent[" + form.format(rate) + "]");
+		     	           System.out.println(DateTool.getTimestamp()  + " :: " + data.getCam_id() + " ING[" + String.format("%,d", maxCnt) + "]");
 		     	            
 		     	           //초기화.
 		     	           arrayList = new ArrayList<AiStaging>();
@@ -105,13 +99,13 @@ public class LearningProc {
 		            	maxCnt++;
 		            }
 		            cam_msg = dao.insertAI_STAGING(data, arrayList, tableName, type1);
-		            System.out.println(DateTool.getTimestamp()  + " :: " + data.getCam_id() + " TOTAL ["+ String.format("%,d", lineCount)+"] :: ING[" + String.format("%,d", maxCnt) + "] :: Percent[100%]");
+		            System.out.println(DateTool.getTimestamp()  + " :: " + data.getCam_id() + " ING[" + String.format("%,d", maxCnt) + "]");
 		            
 		            //3.2 캠페인 정보 업데이트 피쳐 갯수
 		        	System.out.println("feature len[" + feature + "]");
 		        	
 		        	if(cam_msg != null) {
-		        		dao.updateCampaign(data, type, 3, cam_msg);
+		        		dao.updateCampaign(data, type, 3, "LearningProc :: " + cam_msg);
 		        	}else {
 		        		dao.updateCampaign(data, type, 7, cam_msg);
 		        	}

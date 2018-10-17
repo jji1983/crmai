@@ -98,7 +98,7 @@ public class RealProc {
 		
 		} catch (FileNotFoundException e) {
             e.printStackTrace();
-            dao.updateCampaign(dataTemp, type, 3, e.getMessage());
+            dao.updateCampaign(dataTemp, type, 3, "RealProc :: " + e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
             dao.updateCampaign(dataTemp, type, 3, e.getMessage());
