@@ -49,4 +49,9 @@ public class BoardService implements BoardMapper{
 	public int selectBoardPageNum() {
 		return boardmapper.selectBoardPageNum();
 	}
+
+	@Override
+	public int updateBoard(AI_BOARD board) {
+		return boardmapper.updateBoard(board);
+	}
 }

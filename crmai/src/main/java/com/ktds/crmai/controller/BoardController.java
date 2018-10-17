@@ -71,6 +71,31 @@ public class BoardController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public ResponseEntity<Object> updateBoard(
+			@RequestParam("boardCode") int code,
+			@RequestParam("inputBoardName") String inputBoardName,
+			@RequestParam("inputBoardDesc") String inputBoardDesc,
+			HttpSession session){
+		
+		AI_BOARD board = new AI_BOARD();
+		board.setTitle(inputBoardName);
+		board.setContents(inputBoardDesc);
+		board.setCode(code+"");
+		
+		int result = boardService.updateBoard(board);
+		
+		ResponseEntity<Object> response = null;
+		if (result > 0) {
+			response = new ResponseEntity<Object>("OK::수정 성공", HttpStatus.OK);
+		} else {
+			response = new ResponseEntity<Object>("FAIL::수정 실패", HttpStatus.OK);
+		}
+		
+		return response;
+	}
+	
+	@ResponseBody
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	public ResponseEntity<Object> deleteBoard(
 			@RequestParam("user_id") String user_id,

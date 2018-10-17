@@ -131,6 +131,7 @@
 	
 <script type="text/javascript">
 	$(document).ready(function() {
+		
 		// 모달 처리
 		$('.modal').on('hidden.bs.modal', function (e) {
 		    // console.log('modal close');
@@ -148,6 +149,18 @@
  			submit_newBoard();
 	    });
 		
+		// 게시글 수정
+	    $("#bthMod").click(function(e) {
+	    	e.preventDefault();
+	    	
+	    	var title = $('#inputBoardName');
+			if (!(title.attr('readonly'))) {
+				submit_modBoard();
+			}
+			title.attr("readonly", false);
+			$("#inputBoardDesc").attr("readonly", false);
+	    });
+		
 	 	// 게시글 삭제
 	    $("#bthDel").click(function(e) {
    			//stop submit the form, we will post it manually.
@@ -163,57 +176,6 @@
 		// 게시판 조회
 		getPagination();
 	});
-	
-	function getBoardList() {
-		$.ajax({
-			type : 'GET', // method
-			url : '/board/list',
-			async : 'true', // true
-			contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
-			//dataType  : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
-			success : function(data) {
-				var obj = JSON.stringify(data);
-				// console.log("board list result :: " + obj);
-				grid_table_board(obj);
-			},
-			error : function(request, status, error) {
-				// console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-		});
-	}
-/* 
-	function grid_table_board(obj) {
-		var div = document.querySelector('#ai_board');
-
-		var html = '<tbody>';
-		var json = $.parseJSON(obj);
-		$(json).each(function(i, val) {
-			html += '<tr onClick="view_board('+val.code+')">';
-			$.each(val, function(k, v) {
-				if (k == 'contents') {
-					return;
-				}
-				
-				if (k == 'reg_datetime') {
-					v = v.substr(0, 10);
-				}
-
-			 	if (v == 'null' || v == '') {
-	
-						//html += '<td></td>';
-				} else if (k == 'title') {
-					html += '<td style="text-align: left; padding-left: 10px;">' + v + '</td>';
-				} else {
-					html += '<td>' + v + '</td>';
-				}
-	 		});
-			html += '</tr>';
-		});
-		html += '</tbody>';
-
-		// console.log("Tbody == " + html);
-		div.innerHTML = html;
-	} */
 
 	//글쓰기
 	function fn_write() {
@@ -288,7 +250,51 @@
 				var res = data.split('::');
 	        	if(res[0] == "OK"){
 					// 게시판 목록 새로고침
-					getBoardList();
+					getPagination();
+					
+					$('#boardNewModal').modal('hide');
+	        	}
+			},
+			error : function(e) {
+				alert("error :: " + e.responseText);
+				console.log("ERROR : ", e);
+				$("#bthNew").prop("disabled", false);
+			}
+		});
+	}
+	
+	
+	//게시글 수정
+	function submit_modBoard() {
+		// console.log('-- submit_newBoard -- ');
+		var title = $('#inputBoardName').val().trim();
+		if (!title || title === undefined) {
+			alert('게시글 제목을 입력하세요.');
+			return;
+		}
+		  
+		// Get form
+	    var form = $('#newUploadForm')[0];
+	    var data = new FormData(form);
+	    $("#bthMod").prop("disabled", true);
+	    // $("#bthClose").prop("disabled", true);
+	    
+		$.ajax({
+			type : "POST",
+			url : "/board/update",
+			data : data,
+			processData : false, //prevent jQuery from automatically transforming the data into a query string
+			contentType : false,
+			cache : false,
+			timeout : 600000,
+			success : function(data) {
+				console.log("SUCCESS : ", data);
+				$("#bthMod").prop("disabled", false);
+				
+				var res = data.split('::');
+	        	if(res[0] == "OK"){
+					// 게시판 목록 새로고침
+					getPagination();
 					
 					$('#boardNewModal').modal('hide');
 	        	}
@@ -323,7 +329,7 @@
 				var res = data.split('::');
 	        	if(res[0] == "OK"){
 					// 게시판 목록 새로고침
-					getBoardList();
+					getPagination();
 					
 					$('#boardNewModal').modal('hide');
 	        	}
@@ -346,6 +352,7 @@
 			$("#inputBoardDesc").attr("readonly", false);
 			
 			$('.readBoard').hide();
+			$('.modBoard').hide();
 			$('.editBoard').show();
 		} else { // type === 'READ'
 			var d = data[0];
@@ -362,6 +369,12 @@
 			$("#boardDate").val(d.reg_datetime.substr(0, 19));
 		
 			$('.readBoard').show();
+			if ($("#user_id").val() == d.writer) {
+				$(".modBoard").show();
+			}
+			else {
+				$(".modBoard").hide();
+			}
 			$('.editBoard').hide();
 		}
 		
@@ -489,8 +502,9 @@
 											<div class="box-footer">
 												<div class='row pull-right' style='margin-right: 3px'>
 													<button id="bthNew" type="submit" class="btn btn-primary editBoard">등록</button>
-													<button id="bthDel" type="submit" class="btn btn-danger readBoard">삭제</button>
-													<button id="bthClose" type="button" class="btn btn-secondary" data-dismiss="modal" style="margin-left: 5px">취소</button>
+													<button id="bthDel" type="submit" class="btn btn-danger modBoard" style="margin-left: 5px">삭제</button>
+													<button id="bthMod" type="submit" class="btn btn-warning modBoard" style="margin-left: 5px">수정</button>
+													<button id="bthClose" type="button" class="btn btn-secondary" data-dismiss="modal" style="margin-left: 5px">돌아가기</button>
 												</div>
 											</div>
 											<!-- /.box-footer -->

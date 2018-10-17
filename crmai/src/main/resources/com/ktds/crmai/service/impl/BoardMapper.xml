@@ -61,6 +61,11 @@
       	VALUES ((SELECT MAX(code + 1) FROM AI_BOARD), #{title}, #{contents}, #{writer}, sysdate)
     </insert>
     
+    	
+	<update id="updateBoard">
+		update AI_BOARD set title=#{title}, contents=#{contents} where code=#{code}
+	</update>
+    
     <delete id="deleteBoard">
     	DELETE FROM AI_BOARD 
     	WHERE 

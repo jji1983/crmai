@@ -22,4 +22,6 @@ public interface BoardMapper {
 	List<AI_BOARD> selectBoardPage(AI_PAGE page);
 	
 	int selectBoardPageNum();
+	
+	int updateBoard(AI_BOARD board);
 }

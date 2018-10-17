@@ -1197,23 +1197,6 @@ function toggleLeft(kind, cngTitle) {
 	case 1:
 		totalLeft();
 
-		switch (cngTitle) {
-		case 1:
-			$(title).text("통신분야 정확도 예측 결과");
-			break;
-		case 2:
-			$(title).text("금융분야 정확도 예측 결과");
-			break;
-		case 3:
-			$(title).text("유통분야 정확도 예측 결과");
-			break;
-		case 0:
-			$(title).text("기타분야 정확도 예측 결과");
-			break;
-		}
-
-		getLeftType(data);
-
 		break;
 	case 2:
 		var data = {

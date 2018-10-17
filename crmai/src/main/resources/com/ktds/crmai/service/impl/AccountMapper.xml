@@ -54,11 +54,44 @@
     	INSERT INTO AI_ADMINUSER (ADM_ID, ADM_PW, ADM_NAME, ADM_CDATE, ADM_UDATE, ADM_EMAIL, ADM_ROLE, ADM_TYPE, ADM_LOGIN)
       	VALUES (#{adm_id}, #{adm_pw}, #{adm_name}, sysdate, sysdate, #{adm_email},1,1,0)
     </insert>
+	
+	<update id="updateAccount">
+	update AI_ADMINUSER set ADM_PW=#{adm_pw}, ADM_NAME=#{adm_name}, ADM_EMAIL=#{adm_email}, ADM_UDATE=sysdate where ADM_ID=#{adm_id}
+	</update>
+
     
     <delete id="deleteAccount">
     	DELETE FROM AI_ADMINUSER 
     	WHERE 
     		adm_id =  #{adm_id}
     </delete>
+    
+    
+    <select id="selectAccountPage" resultType="account">
+		select *
+		from (
+		select <![CDATA[ rownum as rnum ]]>
+		, A.ADM_ID, A.ADM_PW, A.ADM_NAME, A.ADM_EMAIL, A.ADM_CDATE
+		from
+		(
+		select
+			ADM_ID, 
+			ADM_PW,
+			ADM_NAME,
+			ADM_EMAIL,
+			ADM_CDATE
+		from AI_ADMINUSER
+		order by ADM_CDATE desc
+		) A
+		where <![CDATA[ rownum <= #{page_end} ]]>
+		) B
+		where b.rnum >= #{page_st}
+	</select>
+
+	<select id="selectAccountPageNum" resultType="int">
+		select count(*) as
+		totalCount from AI_ADMINUSER
+	</select>
+	
 	
 </mapper>	

@@ -1,5 +1,6 @@
 package com.ktds.crmai.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ktds.crmai.model.AI_ACCOUNT;
 import com.ktds.crmai.model.AI_BOARD;
+import com.ktds.crmai.model.AI_PAGE;
 import com.ktds.crmai.service.AccountService;
 import com.ktds.crmai.service.BoardService;
 
@@ -83,6 +86,34 @@ public class AccountController {
 		return response;
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public ResponseEntity<Object> updateAccount(
+			@RequestParam("inputAdmId") String inputAdmId,
+			@RequestParam("inputAdmPw") String inputAdmPw,
+			@RequestParam("inputAdmName") String inputAdmName,
+			@RequestParam("inputAdmEmail") String inputAdmEmail,
+			HttpSession session){
+		
+		AI_ACCOUNT account = new AI_ACCOUNT();
+		account.setAdm_id(inputAdmId);
+		account.setAdm_pw(inputAdmPw);
+		account.setAdm_name(inputAdmName);
+		account.setAdm_email(inputAdmEmail);
+		
+		int result = accountService.updateAccount(account);
+		
+		ResponseEntity<Object> response = null;
+		if (result > 0) {
+			response = new ResponseEntity<Object>("OK::수정 성공", HttpStatus.OK);
+		} else {
+			response = new ResponseEntity<Object>("FAIL::수정 실패", HttpStatus.OK);
+		}
+		
+		return response;
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	public ResponseEntity<Object> deleteAccount(
@@ -90,17 +121,46 @@ public class AccountController {
 			@RequestParam("inputAdmId") String adm_id,
 			HttpSession session){
 		
-		accountService.deleteAccount(adm_id);
+		int result = accountService.deleteAccount(adm_id);
 		
 		ResponseEntity<Object> response = null;
 	
-	//	if (result > 0) {
-	//		response = new ResponseEntity<Object>("OK::삭제 성공", HttpStatus.OK);
-	//	} else {
-	//		response = new ResponseEntity<Object>("FAIL::삭제 실패", HttpStatus.OK);
-	//	}
+		if (result > 0) {
+			response = new ResponseEntity<Object>("OK::삭제 성공", HttpStatus.OK);
+		} else {
+			response = new ResponseEntity<Object>("FAIL::삭제 실패", HttpStatus.OK);
+		}
 		
 		return response;
 	}
 
+	
+	@ResponseBody
+	@RequestMapping(value = "/listPage")
+	public List<AI_ACCOUNT> getAccountListPage(@ModelAttribute("account") AI_PAGE in_account, HttpSession session) {
+
+		// 응답과 함깨 HttpStatus를 지정할 수 있습니다.
+		List<AI_ACCOUNT> response = accountService.selectAccountPage(in_account);
+		
+		System.out.println(response);
+
+		return response;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/totalPage")
+	public List<String> getTotalAccount(HttpSession session) {
+		List<String> response = new ArrayList<>();
+		
+		int maxRowNum = accountService.selectAccountPageNum();
+		
+		if(maxRowNum == 0) {
+			response.add("0");
+		}else {
+			response.add(maxRowNum + "");
+		}
+
+		return response;
+	}
+	
 }

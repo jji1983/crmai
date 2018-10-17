@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ktds.crmai.model.AI_ACCOUNT;
-
+import com.ktds.crmai.model.AI_BOARD;
+import com.ktds.crmai.model.AI_PAGE;
 import com.ktds.crmai.service.impl.AccountMapper;
 
 
@@ -37,8 +38,23 @@ public class AccountService implements AccountMapper{
 	}
 
 	@Override
-	public void deleteAccount(String adm_id) {
-		accountmapper.deleteAccount(adm_id);
+	public int deleteAccount(String adm_id) {
+		return accountmapper.deleteAccount(adm_id);
+	}
+
+	@Override
+	public List<AI_ACCOUNT> selectAccountPage(AI_PAGE page) {
+		return accountmapper.selectAccountPage(page);
+	}
+
+	@Override
+	public int selectAccountPageNum() {
+		return accountmapper.selectAccountPageNum();
+	}
+
+	@Override
+	public int updateAccount(AI_ACCOUNT account) {
+		return accountmapper.updateAccount(account);
 	}
 
 
