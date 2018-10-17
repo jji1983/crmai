@@ -86,7 +86,7 @@ public class RealProc {
 	            System.out.println(data.getCam_id() + " end :: " + DateTool.getTimestamp() + " :: cam_msg[" + cam_msg + "]");
 	            
 	            //3.2 캠페인 정보 업데이트 피쳐 갯수
-	        	System.out.println("cam_msg[" + cam_msg + "]");
+	        	System.out.println("RealProc :: cam_msg[" + cam_msg + "]");
 	        	
 	        	if(cam_msg != null) {
 	        		dao.updateCampaign(data, type, 3, cam_msg);
