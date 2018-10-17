@@ -173,6 +173,7 @@ public class FileController {
 		AI_CAMPAIGN inCampaign = new AI_CAMPAIGN();
 		
 		inCampaign.setCam_id(inputCamId);
+		inCampaign.setCam_seq(inputCamId);
 		
 		AI_CAMPAIGN campaign = campaignService.selectCampaignAiStatus(inCampaign);
 		logger.info("Upload_Pretreatment :: campaign ::{} ",campaign);
@@ -346,7 +347,7 @@ public class FileController {
 		
 		AI_CAMPAIGN campaign = new AI_CAMPAIGN();
 		campaign.setCam_id(cam_id);
-		
+		campaign.setCam_seq(cam_id);
 		
 		 // windows 사용자라면 "c:\temp\년도\월\일" 형태의 문자열을 구한다.
         String fullPath = baseDir + user_id;
