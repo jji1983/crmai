@@ -9,7 +9,7 @@ var page_end = 3;
 
 // 글쓰기
 function fn_write() {
- 
+
 	var form = document.getElementById("noticeForm");
 
 	form.action = "<c:url value='/notice/writeForm.do'/>";
@@ -83,56 +83,69 @@ function showModal(type, data) {
 	$('#noticeNewModal').modal('show');
 }
 
-//페이징처리
+// 페이징처리
 function getPagination() {
 	var notice = new Object();
 	notice.page_st = page_st;
 	notice.page_end = page_end;
-	
-	$.ajax({
-		type : 'GET', // method
-		url : '/notice/listPage',
-		async : true, // true
-		cache : true,
-		data : notice,
-		processData : true,
-		success : function(data) {
-			var div = document.querySelector('#ai_notice');
 
-			var html = '';
-			$.each(data, function(i, val) {
-				html += '<tr onClick="view_notice(' + val.code + ')">';
-				$.each(val, function(k, v) {
-					if (k == 'contents') {
-						return;
-					}
+	$
+			.ajax({
+				type : 'GET', // method
+				url : '/notice/listPage',
+				async : true, // true
+				cache : true,
+				data : notice,
+				processData : true,
+				success : function(data) {
+					var div = document.querySelector('#ai_notice');
 
-					if (k == 'reg_datetime') {
-						v = v.substr(0, 10);
-					}
+					var html = '';
+					$
+							.each(
+									data,
+									function(i, val) {
+										html += '<tr onClick="view_notice('
+												+ val.code + ')">';
+										$
+												.each(
+														val,
+														function(k, v) {
+															if (k == 'contents') {
+																return;
+															}
 
-					if (v == 'null' || v == '') {
+															if (k == 'reg_datetime') {
+																v = v.substr(0,
+																		10);
+															}
 
-					} else if (k == 'title') {
-						html += '<td style="text-align: left; padding-left: 10px;">'
-								+ v + '</td>';
-					} else {
-						html += '<td>' + v + '</td>';
-					}
-				});
-				html += '</tr>';
+															if (v == 'null'
+																	|| v == '') {
+
+															} else if (k == 'title') {
+																html += '<td style="text-align: left; padding-left: 10px;">'
+																		+ v
+																		+ '</td>';
+															} else {
+																html += '<td>'
+																		+ v
+																		+ '</td>';
+															}
+														});
+										html += '</tr>';
+									});
+					html += '</tbody>';
+
+					// console.log("Tbody == " + html);
+					div.innerHTML = html;
+
+				},
+				error : function(request, status, error) {
+					// alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
 			});
-			html += '</tbody>';
 
-			// console.log("Tbody == " + html);
-			div.innerHTML = html;
-
-		},
-		error : function(request, status, error) {
-			// alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		}
-	});
-	
 	$.ajax({
 		type : 'GET',
 		url : '/notice/totalPage',
@@ -180,49 +193,62 @@ function search_notice(now_page, page_st, page_end) {
 	notice.page_st = page_st;
 	notice.page_end = page_end;
 
-	$.ajax({
-		type : 'GET', // method
-		url : '/notice/listPage',
-		async : 'true', // true
-		cache : false,
-		data : notice,
-		processData : true,
-		success : function(data) {
-			var div = document.querySelector('#ai_notice');
+	$
+			.ajax({
+				type : 'GET', // method
+				url : '/notice/listPage',
+				async : 'true', // true
+				cache : false,
+				data : notice,
+				processData : true,
+				success : function(data) {
+					var div = document.querySelector('#ai_notice');
 
-			var html = '';
-			$.each(data, function(i, val) {
-				html += '<tr onClick="view_notice(' + val.code + ')">';
-				$.each(val, function(k, v) {
-					if (k == 'contents') {
-						return;
-					}
+					var html = '';
+					$
+							.each(
+									data,
+									function(i, val) {
+										html += '<tr onClick="view_notice('
+												+ val.code + ')">';
+										$
+												.each(
+														val,
+														function(k, v) {
+															if (k == 'contents') {
+																return;
+															}
 
-					if (k == 'reg_datetime') {
-						v = v.substr(0, 10);
-					}
+															if (k == 'reg_datetime') {
+																v = v.substr(0,
+																		10);
+															}
 
-					if (v == 'null' || v == '') {
+															if (v == 'null'
+																	|| v == '') {
 
-					} else if (k == 'title') {
-						html += '<td style="text-align: left; padding-left: 10px;">'
-								+ v + '</td>';
-					} else {
-						html += '<td>' + v + '</td>';
-					}
-				});
-				html += '</tr>';
+															} else if (k == 'title') {
+																html += '<td style="text-align: left; padding-left: 10px;">'
+																		+ v
+																		+ '</td>';
+															} else {
+																html += '<td>'
+																		+ v
+																		+ '</td>';
+															}
+														});
+										html += '</tr>';
+									});
+					html += '</tbody>';
+
+					// console.log("Tbody == " + html);
+					div.innerHTML = html;
+
+				},
+				error : function(request, status, error) {
+					// alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
 			});
-			html += '</tbody>';
-
-			// console.log("Tbody == " + html);
-			div.innerHTML = html;
-
-		},
-		error : function(request, status, error) {
-			// alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		}
-	});
 }
 
 function grid_table_notice(obj) {
@@ -256,7 +282,6 @@ function grid_table_notice(obj) {
 	// console.log("Tbody == " + html);
 	div.innerHTML = html;
 }
-
 
 // labels
 types = [ "통신", "금융", "유통", "기타" ];
@@ -444,155 +469,13 @@ function loadLeftTab() {
 					var html = string.join('');
 					var div1 = document.querySelector('#leftCam');
 					div1.innerHTML = html;
-					
+
 				},
 				error : function(e) {
 				}
 			});
 }
 function loadRightTab() {
-	var data;
-	var periodData = {
-			"period" : "y"
-	};
-	
-	$
-	.ajax({
-		type : "GET",
-		url : "/dashboardChart/type",
-		cache : false,
-		processData : true,
-		data : data,
-		async : true,
-		success : function(data) {
-			
-			var string = new Array("<li role='presentation'><a class='dropdown-header' role='menuitem' data-toggle='tab' tabindex='-1' href='#' onclick='totalRight()'>전체보기</a></li><li role='presentation' class='divider'></li>");
-			$.each(data, function(index, value) {
-				string.push("<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='rightType");
-				string.push(index);
-				string.push("-tab' onclick='toggleRight(1,");
-				string.push(this.totalBase);
-				string.push(")'>");
-				switch (this.totalBase) {
-				case "1":
-					string.push("통신분야</a></li>");
-					break;
-				case "2":
-					string.push("금융분야</a></li>");
-					break;
-				case "3":
-					string.push("유통분야</a></li>");
-					break;
-				case "0":
-					string.push("기타분야</a></li>");
-					break;
-				}
-			});
-			var html = string.join('');
-			var div1 = document.querySelector('#rightType');
-			div1.innerHTML = html;
-		},
-		error : function(e) {
-		}
-	});
-	
-	$
-	.ajax({
-		type : "GET",
-		url : "/dashboardChart/period",
-		cache : false,
-		processData : true,
-		data : periodData,
-		async : true,
-		success : function(data) {
-			
-			var string = new Array();
-			string
-			.push("<li role='presentation'><a class='dropdown-header' role='menuitem' tabindex='-1'>선택하세요</a></li><li role='presentation' class='divider'></li>");
-			$
-			.each(
-					data,
-					function(index, value) {
-						string
-						.push("<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='rightPeriod");
-						string.push(index);
-						string
-						.push("-tab' onclick='toggleRight(2,");
-						string.push(this.totalBase);
-						string.push(")'>");
-						string.push(this.totalBase);
-						string.push("년</a></li>");
-					});
-			var html = string.join('');
-			var div1 = document.querySelector('#rightPeriod');
-			div1.innerHTML = html;
-			/*
-			 * var html = "<li role='presentation'><a
-			 * class='dropdown-header' role='menuitem'
-			 * tabindex='-1'>선택하세요</a></li><li role='presentation' class='divider'></li>"; $
-			 * .each( data, function(index, value) { html += "<li role='presentation'><a
-			 * role='menuitem' data-toggle='tab' tabindex='-1' href='#'
-			 * id='leftPeriod" + index + "-tab' onclick='toggleLeft(2," +
-			 * this.totalBase + ")'>" + this.totalBase + "년</a></li>";
-			 * }); var div1 = document.querySelector('#leftPeriod');
-			 * div1.innerHTML = html;
-			 */
-		},
-		error : function(e) {
-		}
-	});
-	
-	$
-	.ajax({
-		type : "GET",
-		url : "/dashboardChart/campaignTab",
-		cache : false,
-		processData : true,
-		data : data,
-		async : true,
-		success : function(data) {
-			var string = new Array();
-			string
-			.push("<li role='presentation'><a class='dropdown-header' role='menuitem' tabindex='-1'>선택하세요</a></li><li role='presentation' class='divider'></li>");
-			$
-			.each(
-					data,
-					function(index, value) {
-						string
-						.push("<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='rightCampaign");
-						string.push(index);
-						string
-						.push("-tab' onclick='toggleRight(3,");
-						string.push(this.camId);
-						string.push(")'>");
-						string.push(this.camName);
-						string.push("</a></li>");
-					});
-			var html = string.join('');
-			var div1 = document.querySelector('#rightCam');
-			div1.innerHTML = html;
-			
-			/*var html = "<li role='presentation'><a class='dropdown-header' role='menuitem' tabindex='-1'>선택하세요</a></li><li role='presentation' class='divider'></li>";
-					$
-							.each(
-									data,
-									function(index, value) {
-
-										html += "<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='leftCampaign"
-												+ index
-												+ "-tab' onclick='toggleLeft(3,"
-												+ this.camId
-												+ ")'>"
-												+ this.camName + "</a></li>";
-									});
-					var div1 = document.querySelector('#leftCam');
-					div1.innerHTML = html;*/
-		},
-		error : function(e) {
-		}
-	});
-}
-/*function loadRightTab() {
 	var data;
 	var periodData = {
 		"period" : "y"
@@ -608,31 +491,35 @@ function loadRightTab() {
 				async : true,
 				success : function(data) {
 
-					var html = "<li role='presentation'><a class='dropdown-header' role='menuitem' data-toggle='tab' tabindex='-1' href='#' onclick='totalRight()'>전체보기</a></li><li role='presentation' class='divider'></li>";
+					var string = new Array(
+							"<li role='presentation'><a class='dropdown-header' role='menuitem' data-toggle='tab' tabindex='-1' href='#' onclick='totalRight()'>전체보기</a></li><li role='presentation' class='divider'></li>");
 					$
 							.each(
 									data,
 									function(index, value) {
-										html += "<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='rightType"
-												+ index
-												+ "-tab' onclick='toggleRight(1,"
-												+ this.totalBase + ")'>";
+										string
+												.push("<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='rightType");
+										string.push(index);
+										string
+												.push("-tab' onclick='toggleRight(1,");
+										string.push(this.totalBase);
+										string.push(")'>");
 										switch (this.totalBase) {
 										case "1":
-											html += "통신분야</a></li>";
+											string.push("통신분야</a></li>");
 											break;
 										case "2":
-											html += "금융분야</a></li>";
+											string.push("금융분야</a></li>");
 											break;
 										case "3":
-											html += "유통분야</a></li>";
+											string.push("유통분야</a></li>");
 											break;
 										case "0":
-											html += "기타분야</a></li>";
+											string.push("기타분야</a></li>");
 											break;
 										}
 									});
-
+					var html = string.join('');
 					var div1 = document.querySelector('#rightType');
 					div1.innerHTML = html;
 				},
@@ -649,20 +536,38 @@ function loadRightTab() {
 				data : periodData,
 				async : true,
 				success : function(data) {
-					var html = "<li role='presentation'><a class='dropdown-header' role='menuitem' tabindex='-1'>선택하세요</a></li><li role='presentation' class='divider'></li>";
+
+					var string = new Array();
+					string
+							.push("<li role='presentation'><a class='dropdown-header' role='menuitem' tabindex='-1'>선택하세요</a></li><li role='presentation' class='divider'></li>");
 					$
 							.each(
 									data,
 									function(index, value) {
-										html += "<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='rightPeriod"
-												+ index
-												+ "-tab' onclick='toggleRight(2,"
-												+ this.totalBase
-												+ ")'>"
-												+ this.totalBase + "년</a></li>";
+										string
+												.push("<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='rightPeriod");
+										string.push(index);
+										string
+												.push("-tab' onclick='toggleRight(2,");
+										string.push(this.totalBase);
+										string.push(")'>");
+										string.push(this.totalBase);
+										string.push("년</a></li>");
 									});
+					var html = string.join('');
 					var div1 = document.querySelector('#rightPeriod');
 					div1.innerHTML = html;
+					/*
+					 * var html = "<li role='presentation'><a
+					 * class='dropdown-header' role='menuitem'
+					 * tabindex='-1'>선택하세요</a></li><li role='presentation' class='divider'></li>"; $
+					 * .each( data, function(index, value) { html += "<li role='presentation'><a
+					 * role='menuitem' data-toggle='tab' tabindex='-1' href='#'
+					 * id='leftPeriod" + index + "-tab' onclick='toggleLeft(2," +
+					 * this.totalBase + ")'>" + this.totalBase + "년</a></li>";
+					 * }); var div1 = document.querySelector('#leftPeriod');
+					 * div1.innerHTML = html;
+					 */
 				},
 				error : function(e) {
 				}
@@ -677,27 +582,85 @@ function loadRightTab() {
 				data : data,
 				async : true,
 				success : function(data) {
-					var html = "<li role='presentation'><a class='dropdown-header' role='menuitem' tabindex='-1'>선택하세요</a></li><li role='presentation' class='divider'></li>";
+					var string = new Array();
+					string
+							.push("<li role='presentation'><a class='dropdown-header' role='menuitem' tabindex='-1'>선택하세요</a></li><li role='presentation' class='divider'></li>");
 					$
 							.each(
 									data,
 									function(index, value) {
-
-										html += "<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='rightCampaign"
-												+ index
-												+ "-tab' onclick='toggleRight(3,"
-												+ this.camId
-												+ ")'>"
-												+ this.camName + "</a></li>";
+										string
+												.push("<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='rightCampaign");
+										string.push(index);
+										string
+												.push("-tab' onclick='toggleRight(3,");
+										string.push(this.camId);
+										string.push(")'>");
+										string.push(this.camName);
+										string.push("</a></li>");
 									});
+					var html = string.join('');
 					var div1 = document.querySelector('#rightCam');
 					div1.innerHTML = html;
+
+					/*
+					 * var html = "<li role='presentation'><a
+					 * class='dropdown-header' role='menuitem'
+					 * tabindex='-1'>선택하세요</a></li><li role='presentation' class='divider'></li>"; $
+					 * .each( data, function(index, value) {
+					 * 
+					 * html += "<li role='presentation'><a role='menuitem'
+					 * data-toggle='tab' tabindex='-1' href='#'
+					 * id='leftCampaign" + index + "-tab'
+					 * onclick='toggleLeft(3," + this.camId + ")'>" +
+					 * this.camName + "</a></li>"; }); var div1 =
+					 * document.querySelector('#leftCam'); div1.innerHTML =
+					 * html;
+					 */
 				},
 				error : function(e) {
 				}
 			});
 }
-*/
+/*
+ * function loadRightTab() { var data; var periodData = { "period" : "y" };
+ *  $ .ajax({ type : "GET", url : "/dashboardChart/type", cache : false,
+ * processData : true, data : data, async : true, success : function(data) {
+ * 
+ * var html = "<li role='presentation'><a class='dropdown-header'
+ * role='menuitem' data-toggle='tab' tabindex='-1' href='#'
+ * onclick='totalRight()'>전체보기</a></li><li role='presentation' class='divider'></li>"; $
+ * .each( data, function(index, value) { html += "<li role='presentation'><a
+ * role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='rightType" +
+ * index + "-tab' onclick='toggleRight(1," + this.totalBase + ")'>"; switch
+ * (this.totalBase) { case "1": html += "통신분야</a></li>"; break; case "2":
+ * html += "금융분야</a></li>"; break; case "3": html += "유통분야</a></li>";
+ * break; case "0": html += "기타분야</a></li>"; break; } });
+ * 
+ * var div1 = document.querySelector('#rightType'); div1.innerHTML = html; },
+ * error : function(e) { } });
+ *  $ .ajax({ type : "GET", url : "/dashboardChart/period", cache : false,
+ * processData : true, data : periodData, async : true, success : function(data) {
+ * var html = "<li role='presentation'><a class='dropdown-header'
+ * role='menuitem' tabindex='-1'>선택하세요</a></li><li role='presentation' class='divider'></li>"; $
+ * .each( data, function(index, value) { html += "<li role='presentation'><a
+ * role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='rightPeriod" +
+ * index + "-tab' onclick='toggleRight(2," + this.totalBase + ")'>" +
+ * this.totalBase + "년</a></li>"; }); var div1 =
+ * document.querySelector('#rightPeriod'); div1.innerHTML = html; }, error :
+ * function(e) { } });
+ *  $ .ajax({ type : "GET", url : "/dashboardChart/campaignTab", cache : false,
+ * processData : true, data : data, async : true, success : function(data) { var
+ * html = "<li role='presentation'><a class='dropdown-header' role='menuitem'
+ * tabindex='-1'>선택하세요</a></li><li role='presentation' class='divider'></li>"; $
+ * .each( data, function(index, value) {
+ * 
+ * html += "<li role='presentation'><a role='menuitem' data-toggle='tab'
+ * tabindex='-1' href='#' id='rightCampaign" + index + "-tab'
+ * onclick='toggleRight(3," + this.camId + ")'>" + this.camName + "</a></li>";
+ * }); var div1 = document.querySelector('#rightCam'); div1.innerHTML = html; },
+ * error : function(e) { } }); }
+ */
 function initBothChart() {
 	var ctxLeft = document.getElementById("chBarLeft").getContext('2d');
 
@@ -756,11 +719,10 @@ function initBothChart() {
 	var text = "산업군별 정확도 예측 결과";
 	$(title).text(text);
 
-	
 	var ctxRight = document.getElementById("chBarRight").getContext('2d');
-	
+
 	var etc = 3;
-	
+
 	$.ajax({
 		type : "GET",
 		url : "/dashboardChart/type",
@@ -779,7 +741,7 @@ function initBothChart() {
 					rightReal[etc] = this.totalReal;
 				}
 			});
-			
+
 			rightChart = new Chart(ctxRight, {
 				type : 'bar',
 				data : {
@@ -807,10 +769,10 @@ function initBothChart() {
 		error : function(e) {
 		}
 	});
-	
+
 	var title2 = document.getElementById('RChartTitle');
 	$(title).text(text);
-	
+
 }
 function initRightChart() {
 	var ctxRight = document.getElementById("chBarRight").getContext('2d');
@@ -875,15 +837,45 @@ function totalLeft() {
 
 	$.ajax({
 		type : "GET",
-		url : "/dashboardChart/total",
+		url : "/dashboardChart/type",
 		cache : false,
 		processData : true,
 		data : data,
 		async : true,
 		success : function(data) {
-			getLeftType(data);
-		},
-		error : function(e) {
+			var label;
+			$.each(data, function() {
+				switch (this.totalBase) {
+				case "1":
+					label = "통신분야";
+					break;
+				case "2":
+					label = "금융분야";
+					break;
+				case "3":
+					label = "유통분야";
+					break;
+				case "0":
+					label = "기타분야";
+					break;
+				}
+				leftOriginal = this.totalOriginal;
+				leftSo = this.totalSo;
+				leftReal = this.totalReal;
+
+				var some_new_data = {
+					labels : campaigns,
+					datasets : [ {
+						label : label,
+						data : [ leftOriginal, leftSo, leftReal ],
+						backgroundColor : chartBGColor,
+						borderWidth : 0
+					} ]
+				};
+
+				leftChart.config.data = some_new_data;
+				leftChart.update();
+			});
 		}
 	});
 
@@ -1203,10 +1195,7 @@ function toggleLeft(kind, cngTitle) {
 
 	switch (kind) {
 	case 1:
-		var data = {
-			"pers" : "y",
-			"type" : cngTitle
-		};
+		totalLeft();
 
 		switch (cngTitle) {
 		case 1:
@@ -1295,77 +1284,83 @@ function toggleRight(kind, cngTitle) {
 
 function loadLeftStat() {
 	var data = {
-			"pers" : "y"
-		};
+		"pers" : "y"
+	};
 
-		$.ajax({
-			type : "GET",
-			url : "/dashboardChart/total",
-			cache : false,
-			processData : true,
-			data : data,
-			async : true,
-			success : function(data) {
-				var stat = $('#leftStat');
+	$
+			.ajax({
+				type : "GET",
+				url : "/dashboardChart/total",
+				cache : false,
+				processData : true,
+				data : data,
+				async : true,
+				success : function(data) {
+					var stat = $('#leftStat');
 
-				var totalData = [ data.totalOriginal, data.totalSo, data.totalReal ];
+					var totalData = [ data.totalOriginal, data.totalSo,
+							data.totalReal ];
 
-				for (var i = 0; i < 3; i++) {
+					for (var i = 0; i < 3; i++) {
 
-					if (i % 3 == 1) {
-						for (var j = 0; j < 3; j++) {
-							stat.find("div span").eq(i + j * 3).text(totalData[j] + "%");
+						if (i % 3 == 1) {
+							for (var j = 0; j < 3; j++) {
+								stat.find("div span").eq(i + j * 3).text(
+										totalData[j] + "%");
+							}
+						}
+
+						if (i % 3 == 2) {
+							for (var j = 0; j < 3; j++) {
+								stat.find("div span").eq(i + j * 3).text(
+										"(" + data.totalCount + "건)");
+							}
 						}
 					}
-
-					if (i % 3 == 2) {
-						for (var j = 0; j < 3; j++) {
-							stat.find("div span").eq(i + j * 3).text(
-									"(" + data.totalCount + "건)");
-						}
-					}
+				},
+				error : function(e) {
 				}
-			},
-			error : function(e) {
-			}
-		});
-	
+			});
+
 }
 
 function loadRightStat() {
 	var data;
 
-	$.ajax({
-		type : "GET",
-		url : "/dashboardChart/total",
-		cache : false,
-		processData : true,
-		data : data,
-		async : false,
-		success : function(data) {
-			var stat = $('#rightStat');
+	$
+			.ajax({
+				type : "GET",
+				url : "/dashboardChart/total",
+				cache : false,
+				processData : true,
+				data : data,
+				async : false,
+				success : function(data) {
+					var stat = $('#rightStat');
 
-			var totalData = [ data.totalOriginal, data.totalSo, data.totalReal ];
+					var totalData = [ data.totalOriginal, data.totalSo,
+							data.totalReal ];
 
-			for (var i = 0; i < 3; i++) {
+					for (var i = 0; i < 3; i++) {
 
-				if (i % 3 == 1) {
-					for (var j = 0; j < 3; j++) {
-						stat.find("div span").eq(i + j * 3).text(totalData[j] + "%");
+						if (i % 3 == 1) {
+							for (var j = 0; j < 3; j++) {
+								stat.find("div span").eq(i + j * 3).text(
+										totalData[j] + "%");
+							}
+						}
+
+						if (i % 3 == 2) {
+							for (var j = 0; j < 3; j++) {
+								stat.find("div span").eq(i + j * 3).text(
+										"(" + data.totalCount + "건)");
+							}
+						}
+
 					}
+				},
+				error : function(e) {
 				}
+			});
 
-				if (i % 3 == 2) {
-					for (var j = 0; j < 3; j++) {
-						stat.find("div span").eq(i + j * 3).text(
-								"(" + data.totalCount + "건)");
-					}
-				}
-
-			}
-		},
-		error : function(e) {
-		}
-	});
-	
 }
