@@ -39,13 +39,21 @@ function newCampaignPage(){
 
 function createPagenationCam(totalPage, displayPage) {
 	$("#pagination_cam").twbsPagination("destroy");
-	$("#pagination_cam").twbsPagination({
-        totalPages: totalPage,
-        visiblePages: displayPage,
-        onPageClick: function (event, page) {
-        	newSearchCampaign(page);
-        }
-    });
+	
+	// 데이터 존재 시(페이지 수 0 아님)
+	if(totalPage != 0) {
+		$("#pagination_cam").twbsPagination({
+	        totalPages: totalPage,
+	        visiblePages: displayPage,
+	        onPageClick: function (event, page) {
+	        	newSearchCampaign(page);
+	        }
+	    });
+	} else {		// 데이터 미 존재 시
+		currentValue = 0;		// 캠페인 ID 초기화
+		
+		noDataCamId();
+	}
 }
 
 function newSearchCampaign(clickPage){
@@ -138,10 +146,7 @@ function createTableCampaign(arr){
 			});
 			
 			html += "</tr>";
-		});
-		
-	} else {
-		html += "<tr><td class='text-center' colspan='9'>조회된 데이터가 없습니다.</td></tr>";
+		});	
 	}
 	
 	html += "</tbody></table>";
@@ -230,7 +235,6 @@ function createTableModel(arr){
 			
 			html += "</tr>";
 		});
-		
 	} else {
 		html += "<tr><td class='text-center' colspan='8'>조회된 데이터가 없습니다.</td></tr>";
 	}
@@ -261,13 +265,20 @@ function predictCount() {
 }
 
 function createPagenationPredict(totalPage, displayPage) {
-	$("#pagination_predict").twbsPagination({
-        totalPages: totalPage,
-        visiblePages: displayPage,
-        onPageClick: function (event, page) {
-        	connectCampaignAjax(page);
-        }
-    });
+	$("#pagination_predict").twbsPagination("destroy");
+	
+	// 데이터 존재 시(페이지 수 0 아님)
+	if(totalPage != 0) {
+		$("#pagination_predict").twbsPagination({
+	        totalPages: totalPage,
+	        visiblePages: displayPage,
+	        onPageClick: function (event, page) {
+	        	connectCampaignAjax(page);
+	        }
+	    });
+	} else {		// 데이터 미 존재 시
+		noDataPredict();
+	}
 }
 
 // 캠페인과 연결되어 불러오는 ajax
@@ -310,13 +321,72 @@ function createPredictTable(arr) {
 			html += "<td>" + arr[i]["failProb"] + "</td>";
 			html += "<td>" + arr[i]["stC1"] + "</td></tr>";
 		}
-	} else {
-		html += "<tr><td class='text-center' colspan='7'>조회된 데이터가 없습니다.</td></tr>";
 	}
 	
 	html += "</tbody></table>";
 	  	
 	$("#div_predict").html(html);					// innerHtml jquery버전
+}
+
+// 캠페인 테이블에 데이터가 없을 경우 사용하는 함수
+function noDataCamId() {
+	var camHtml = "<table id='cpi_table' class='table table-bordered table-hover'>";
+	
+	camHtml += "<thead><tr><th class='text-center'>체크</th>";
+	camHtml += "<th class='text-center'>캠페인ID</th>";
+	camHtml += "<th class='text-center'>캠페인이름</th>";
+	camHtml += "<th class='text-center'>등록자</th>";
+	camHtml += "<th class='text-center'>캠페인목적</th>";
+	camHtml += "<th class='text-center'>캠페인상태</th>";
+	camHtml += "<th class='text-center'>캠페인 등록일자</th>";
+	camHtml += "<th class='text-center'>설명</th>";
+	camHtml += "<th class='text-center'>메시지</th></tr></thead><tbody>";
+	
+	camHtml += "<tr><td class='text-center' colspan='9'>조회된 데이터가 없습니다.</td></tr>";
+	
+	camHtml += "</tbody></table>";
+  	
+	$("#div_campaign").html(camHtml);					// 캠페인 html
+	
+	var modelHtml = "<table id='model_table' class='table table-bordered table-hover'>";
+	
+	modelHtml += "<thead><tr><th class='text-center'>캠페인ID</th>";
+	modelHtml += "<th class='text-center'>학습모델</th>";
+	modelHtml += "<th class='text-center'>기존정확도</th>";
+	modelHtml += "<th class='text-center'>AI정확도</th>";
+	modelHtml += "<th class='text-center'>학습시작시간</th>";
+	modelHtml += "<th class='text-center'>학습종료시간</th>";
+	modelHtml += "<th class='text-center'>선택Model</th>";
+	modelHtml += "<th class='text-center'>메시지</th></tr></thead><tbody>";
+	
+	modelHtml += "<tr><td class='text-center' colspan='8'>조회된 데이터가 없습니다.</td></tr>";
+	
+	modelHtml += "</tbody></table>";
+  	
+	$("#div_model").html(modelHtml);					// 모델 html
+	
+	$("#pagination_predict").twbsPagination("destroy");
+	
+	noDataPredict();
+}
+
+// 학습 예측 결과 데이터가 없을 경우 사용하는 함수
+function noDataPredict() {
+	var pHtml = "<table id='cam_table' class='table table-bordered table-hover'>";
+	
+	pHtml += "<thead><tr><th class='text-center'>스테이징 시퀀스</th>";
+	pHtml += "<th class='text-center'>캠페인ID</th>";
+	pHtml += "<th class='text-center'>학습모델</th>";
+	pHtml += "<th class='text-center'>예측성공여부</th>";
+	pHtml += "<th class='text-center'>성공예측률</th>";
+	pHtml += "<th class='text-center'>실패예측률</th>";
+	pHtml += "<th class='text-center'>스테이징 컬럼1</th></tr></thead><tbody>";
+	
+	pHtml += "<tr><td class='text-center' colspan='7'>조회된 데이터가 없습니다.</td></tr>";
+	
+	pHtml += "</tbody></table>";
+  	
+	$("#div_predict").html(pHtml);					// 예측결과 html
 }
 
 // csv 다운로드 함수

@@ -34,13 +34,21 @@ function newCampaignPage(){
 
 function createPagenationCam(totalPage, displayPage) {
 	$("#pagination_cam").twbsPagination("destroy");
-	$("#pagination_cam").twbsPagination({
-        totalPages: totalPage,
-        visiblePages: displayPage,
-        onPageClick: function (event, page) {
-        	newSearchCampaign(page);
-        }
-    });
+	
+	// 데이터 존재 시(페이지 수 0 아님)
+	if(totalPage != 0) {
+		$("#pagination_cam").twbsPagination({
+	        totalPages: totalPage,
+	        visiblePages: displayPage,
+	        onPageClick: function (event, page) {
+	        	newSearchCampaign(page);
+	        }
+	    });
+	} else {		// 데이터 미 존재 시
+		currentValue = 0;		// 캠페인 ID 초기화
+		
+		noDataCamId();
+	}
 }
 
 function newSearchCampaign(clickPage){
@@ -163,10 +171,7 @@ function createTableCampaign(arr){
 			});
 			
 			html += "</tr>";
-		});
-		
-	} else {
-		html += "<tr><td class='text-center' colspan='10'>조회된 데이터가 없습니다.</td></tr>";
+		});	
 	}
 	
 	html += "</tbody></table>";
@@ -220,7 +225,6 @@ function createTableLearningResult(arr){
 			
 			html += "</tr>";
 		});
-		
 	} else {
 		html += "<tr><td class='text-center' colspan='5'>조회된 데이터가 없습니다.</td></tr>";
 	}
@@ -248,7 +252,7 @@ function connectLearningWeight() {
 }
 
 function createTableLearningWeight(arr){
-	var html = "<table id='learning_result_table' class='table table-bordered table-hover'>";
+	var html = "<table id='learning_weight_table' class='table table-bordered table-hover'>";
 	
 	html += "<thead><tr><th class='text-center'>캠페인ID</th>";
 	html += "<th class='text-center'>학습방법</th>";
@@ -281,7 +285,6 @@ function createTableLearningWeight(arr){
 			
 			html += "</tr>";
 		});
-		
 	} else {
 		html += "<tr><td class='text-center' colspan='5'>조회된 데이터가 없습니다.</td></tr>";
 	}
@@ -289,4 +292,52 @@ function createTableLearningWeight(arr){
 	html += "</tbody></table>";
 	  	
 	$("#div_learning_weight").html(html);					// innerHtml jquery버전
+}
+
+// 캠페인 테이블 정보가 없어서 캠페인 아이디가 존재하지 않을 경우 사용하는 함수
+function noDataCamId() {
+	var camHtml = "<table id='cpi_ai_table' class='table table-bordered table-hover'>";
+	
+	camHtml += "<thead><tr><th class='text-center'>체크</th>";
+	camHtml += "<th class='text-center'>캠페인ID</th>";
+	camHtml += "<th class='text-center'>캠페인이름</th>";
+	camHtml += "<th class='text-center'>등록자</th>";
+	camHtml += "<th class='text-center'>캠페인목적</th>";
+	camHtml += "<th class='text-center'>캠페인상태</th>";
+	camHtml += "<th class='text-center'>AI진행상태</th>";
+	camHtml += "<th class='text-center'>캠페인 등록일자</th>";
+	camHtml += "<th class='text-center'>설명</th>";
+	camHtml += "<th class='text-center'>메시지</th></tr></thead><tbody>";
+	camHtml += "<tr><td class='text-center' colspan='10'>조회된 데이터가 없습니다.</td></tr>";
+	camHtml += "</tbody></table>";
+  	
+	$("#div_campaign").html(camHtml);							// 캠페인 html
+	
+	var modelHtml = "<table id='learning_result_table' class='table table-bordered table-hover'>";
+	
+	modelHtml += "<thead><tr><th class='text-center'>학습방법</th>";
+	modelHtml += "<th class='text-center'>정확도(ORIGINAL)(%)</th>";
+	modelHtml += "<th class='text-center'>정확도(SO엔진)(%)</th>";
+	modelHtml += "<th class='text-center'>모델경로</th>";
+	modelHtml += "<th class='text-center'>모델명</th></tr></thead><tbody>";
+	
+	modelHtml += "<tr><td class='text-center' colspan='5'>조회된 데이터가 없습니다.</td></tr>";
+	
+	modelHtml += "</tbody></table>";
+	  	
+	$("#div_learning_result").html(modelHtml);					// 학습모델 html
+	
+	var weightHtml = "<table id='learning_weight_table' class='table table-bordered table-hover'>";
+	
+	weightHtml += "<thead><tr><th class='text-center'>캠페인ID</th>";
+	weightHtml += "<th class='text-center'>학습방법</th>";
+	weightHtml += "<th class='text-center'>항목명</th>";
+	weightHtml += "<th class='text-center' colspan='2'>중요도(%)</th></tr></thead><tbody>";
+	
+	weightHtml += "<tr><td class='text-center' colspan='5'>조회된 데이터가 없습니다.</td></tr>";
+	
+	weightHtml += "</tbody></table>";
+  	
+	$("#div_learning_weight").html(weightHtml);					// 중요도 html
+	
 }

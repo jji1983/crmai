@@ -545,13 +545,38 @@ function newCampaignPage(){
 
 function createPagenationCam(totalPage, displayPage) {
 	$("#pagination_cam").twbsPagination("destroy");
-	$("#pagination_cam").twbsPagination({
-        totalPages: totalPage,
-        visiblePages: displayPage,
-        onPageClick: function (event, page) {
-        	newSearchCampaign(page);
-        }
-    });
+	
+	// 데이터 존재 시(페이지 수 0 아님)
+	if(totalPage != 0) {
+		$("#pagination_cam").twbsPagination({
+	        totalPages: totalPage,
+	        visiblePages: displayPage,
+	        onPageClick: function (event, page) {
+	        	newSearchCampaign(page);
+	        }
+	    });
+	} else {		// 데이터 미 존재 시
+		currentValue = 0;		// 캠페인 ID 초기화
+		
+		var html = "<table id='cpi_ai_table' class='table table-bordered table-hover'>";
+		
+		html += "<thead><tr><th class='text-center'>체크</th>";
+		html += "<th class='text-center'>캠페인ID</th>";
+		html += "<th class='text-center'>캠페인이름</th>";
+		html += "<th class='text-center'>등록자</th>";
+		html += "<th class='text-center'>캠페인목적</th>";
+		html += "<th class='text-center'>캠페인상태</th>";
+		html += "<th class='text-center'>AI진행상태</th>";
+		html += "<th class='text-center'>캠페인 등록일자</th>";
+		html += "<th class='text-center'>설명</th>";
+		html += "<th class='text-center'>메시지</th></tr></thead><tbody>";
+		
+		html += "<tr><td class='text-center' colspan='10'>조회된 데이터가 없습니다.</td></tr>";
+		
+		html += "</tbody></table>";
+	  	
+		$("#div_campaign").html(html);					// innerHtml jquery버전
+	}
 }
 
 function newSearchCampaign(clickPage){
@@ -674,10 +699,7 @@ function createTableCampaign(arr){
 			});
 			
 			html += "</tr>";
-		});
-		
-	} else {
-		html += "<tr><td class='text-center' colspan='10'>조회된 데이터가 없습니다.</td></tr>";
+		});	
 	}
 	
 	html += "</tbody></table>";

@@ -34,13 +34,21 @@ function newCampaignPage(){
 
 function createPagenationCam(totalPage, displayPage) {
 	$("#pagination_cam").twbsPagination("destroy");
-	$("#pagination_cam").twbsPagination({
-        totalPages: totalPage,
-        visiblePages: displayPage,
-        onPageClick: function (event, page) {
-        	newSearchCampaign(page);
-        }
-    });
+	
+	// 데이터 존재 시(페이지 수 0 아님)
+	if(totalPage != 0) {
+		$("#pagination_cam").twbsPagination({
+	        totalPages: totalPage,
+	        visiblePages: displayPage,
+	        onPageClick: function (event, page) {
+	        	newSearchCampaign(page);
+	        }
+	    });
+	} else {		// 데이터 미 존재 시
+		currentValue = 0;		// 캠페인 ID 초기화
+		
+		noDataCamId();
+	}
 }
 
 function newSearchCampaign(clickPage){
@@ -164,9 +172,6 @@ function createTableCampaign(arr){
 			
 			html += "</tr>";
 		});
-		
-	} else {
-		html += "<tr><td class='text-center' colspan='10'>조회된 데이터가 없습니다.</td></tr>";
 	}
 	
 	html += "</tbody></table>";
@@ -202,29 +207,37 @@ function choiceData(thisNo) {
 			break;
 	}
 	
-	var stagingData = {
-		statusFlag : thisNo,
-		cam_id : currentValue
-	};
-	
-	$.ajax({
-		url:"/staging/count",
-		data:stagingData,
-		success:function(pagingData) {
-			createPagenationPreprocess(pagingData["realEndPage"], pagingData["displayPageNum"], thisNo);
-		}
-	});
+	if(currentValue != 0) {
+		var stagingData = {
+			statusFlag : thisNo,
+			cam_id : currentValue
+		};
+			
+		$.ajax({
+			url:"/staging/count",
+			data:stagingData,
+			success:function(pagingData) {
+				createPagenationPreprocess(pagingData["realEndPage"], pagingData["displayPageNum"], thisNo);
+			}
+		});
+	}
 }
 
 function createPagenationPreprocess(totalPage, displayPage, thisNo) {
 	$("#pagination_preprocess").twbsPagination("destroy");
-	$("#pagination_preprocess").twbsPagination({
-        totalPages: totalPage,
-        visiblePages: displayPage,
-        onPageClick: function (event, page) {
-        	searchPreprocess(page, thisNo);
-        }
-    });
+	
+	// 데이터 존재 시(페이지 수 0 아님)
+	if(totalPage != 0) {
+		$("#pagination_preprocess").twbsPagination({
+	        totalPages: totalPage,
+	        visiblePages: displayPage,
+	        onPageClick: function (event, page) {
+	        	searchPreprocess(page, thisNo);
+	        }
+	    });
+	} else {		// 데이터 미 존재 시
+		noDataPreprocess();
+	}
 }
 
 function searchPreprocess(clickPage, thisNo) {
@@ -276,13 +289,61 @@ function createTablePreprocess(arr){
 			
 			html += "</tr>";
 		});
-		
-	} else {
-		html += "<tr><td class='text-center' colspan='13'>조회된 데이터가 없습니다.</td></tr>";
 	}
 	
 	html += "</tbody></table>";
 	  	
 	$("#div_preprocess").html(html);					// innerHtml jquery버전
+}
+
+//캠페인 테이블 정보가 없어서 캠페인 아이디가 존재하지 않을 경우 사용하는 함수
+function noDataCamId() {
+	var camHtml = "<table id='cpi_ai_table' class='table table-bordered table-hover'>";
 	
+	camHtml += "<thead><tr><th class='text-center'>체크</th>";
+	camHtml += "<th class='text-center'>캠페인ID</th>";
+	camHtml += "<th class='text-center'>캠페인이름</th>";
+	camHtml += "<th class='text-center'>등록자</th>";
+	camHtml += "<th class='text-center'>캠페인목적</th>";
+	camHtml += "<th class='text-center'>캠페인상태</th>";
+	camHtml += "<th class='text-center'>AI진행상태</th>";
+	camHtml += "<th class='text-center'>캠페인 등록일자</th>";
+	camHtml += "<th class='text-center'>설명</th>";
+	camHtml += "<th class='text-center'>메시지</th></tr></thead><tbody>";
+	
+	camHtml += "<tr><td class='text-center' colspan='10'>조회된 데이터가 없습니다.</td></tr>";
+	
+	camHtml += "</tbody></table>";
+  	
+	$("#div_campaign").html(camHtml);					// 캠페인 html
+	
+	$("#id_span_msg").text("(학습데이터 처리전)");
+	
+	noDataPreprocess();
+}
+
+function noDataPreprocess() {
+	$("#pagination_preprocess").twbsPagination("destroy");
+	
+	var prcsHtml = "<table id='preprcs_ai_table' class='table table-bordered table-hover'>";
+	
+	prcsHtml += "<thead><tr><th class='text-center'>SEQ</th>";
+	prcsHtml += "<th class='text-center'>캠페인ID</th>";
+	prcsHtml += "<th class='text-center'>컬럼1</th>";
+	prcsHtml += "<th class='text-center'>컬럼2</th>";
+	prcsHtml += "<th class='text-center'>컬럼3</th>";
+	prcsHtml += "<th class='text-center'>컬럼4</th>";
+	prcsHtml += "<th class='text-center'>컬럼5</th>";
+	prcsHtml += "<th class='text-center'>컬럼6</th>";
+	prcsHtml += "<th class='text-center'>컬럼7</th>";
+	prcsHtml += "<th class='text-center'>컬럼8</th>";
+	prcsHtml += "<th class='text-center'>컬럼9</th>";
+	prcsHtml += "<th class='text-center'>컬럼10</th>";
+	prcsHtml += "<th class='text-center'>컬럼200</th></tr></thead><tbody>";
+	
+	prcsHtml += "<tr><td class='text-center' colspan='13'>조회된 데이터가 없습니다.</td></tr>";
+	
+	prcsHtml += "</tbody></table>";
+  	
+	$("#div_preprocess").html(prcsHtml);					// innerHtml jquery버전
 }
