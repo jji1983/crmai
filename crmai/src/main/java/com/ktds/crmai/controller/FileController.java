@@ -308,7 +308,6 @@ public class FileController {
                 int rnum = Integer.parseInt(values[2]);
                 if(rnum != 0 )
                 	vo.setRnum(rnum);
-               
                 
                 logger.info("downloadPredict :: vo :: {}", vo );
                 List<AIPredict> lists = predictService.selectAllPredictList(vo);
