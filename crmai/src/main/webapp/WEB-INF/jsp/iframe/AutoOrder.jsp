@@ -539,6 +539,7 @@
 											                <!-- select -->
 											                <div class="form-group">
 											                  <select id="pr_succVal" class="form-control">
+											                    <option value='0'>0%</option>
 											                    <option value='10'>10%</option>
 											                    <option value='30'>30%</option>
 											                    <option value='50'>50%</option>

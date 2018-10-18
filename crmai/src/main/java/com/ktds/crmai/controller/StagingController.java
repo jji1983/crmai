@@ -106,8 +106,10 @@ public class StagingController {
     public ResponseEntity<Object> getPredict(@ModelAttribute("page") AI_PAGE page){
     	logger.info("Request List....getPredict.... - {}", page);
     	List<AI_STAGING> out_test = null;
-    	
     
+    	
+    	logger.info("######....getPredict.... - {}", page);
+    	
     	out_test = stagingService.selectTestPredict(page);
     	
     	Iterator<AI_STAGING> ite = out_test.iterator();

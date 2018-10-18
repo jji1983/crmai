@@ -34,11 +34,17 @@ function search_st4(){
 	
 	var cam_id = currentValue;
 	
+	var succVal = $('#pr_succVal').val();
+	var totalVal = $('#pr_totalVal').val();
+	
 	var page = new Object();
 	page.cam_id = cam_id;
 	page.page_st = s4_page_st;
 	page.page_end = s4_page_end;
 	page.page = page_no;
+	
+	page.succVal = succVal;
+	page.totalVal = totalVal;
 	
 	$.ajax({
         type    : 'GET', // method
@@ -117,8 +123,8 @@ function grid_tableStaging4(obj){
 
 
 function PrSearch(){
-	alert("call PrSearch ~!!");
-	
+	//alert("call PrSearch ~!!");
+	search_st4();
 }
 
 function PrDownload(){

@@ -23,6 +23,16 @@
 		  FROM AI_TEST_PREDICT P INNER JOIN AI_STAGING_TEST T
         		ON P.ST_SEQ = T.ST_SEQ
          WHERE P.CAM_ID = #{camId}
+         
+         	   <if test="predict != null and predict != '' ">
+					AND P.PREDICT >= (#{predict} * 0.01)
+			   </if>
+			   
+			   <if test="rnum != null and rnum != '' ">
+					AND <![CDATA[ ROWNUM  < #{rnum} ]]>
+			   </if>
+			   
+	     ORDER BY P.ST_SEQ ASC
 	</select>
 	
 	<!-- 파라메터 존재하는 예측 결과 갯수 쿼리 -->
@@ -49,6 +59,7 @@
 						  FROM AI_TEST_PREDICT P INNER JOIN AI_STAGING_TEST T
 				        			ON P.ST_SEQ = T.ST_SEQ
 				         WHERE P.CAM_ID = #{camId}
+				 				         
 				         ORDER BY ST_SEQ DESC
 				      ) A
 				WHERE <![CDATA[ ROWNUM <= #{listEnd} ]]>
