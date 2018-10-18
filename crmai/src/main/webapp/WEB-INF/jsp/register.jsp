@@ -104,7 +104,7 @@ function register_check(){
 	}
 	
 	if($('#ADM_PW').val() != $('#ADM_PW_R').val()){
-		alert("비밀번호가 일치 하지 안습니다.!");
+		alert("비밀번호가 일치 하지 않습니다.!");
 		return;
 	}
 	
