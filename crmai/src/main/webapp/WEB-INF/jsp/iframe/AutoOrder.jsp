@@ -614,23 +614,23 @@
 													<div class="row">
 														<div class="box-body">
 															<div class="row">
-																<div class="col-lg-5 text-left">
+																<div class="col-lg-10 text-left">
 																	<button type="button" class="btn btn-danger">성공확률</button>
 																	<!-- select -->
 																	<select id="pr_succVal" class="form-control" style="width:100px; display: inline-block;">
-																		<option value='0'>0%</option>
+																		<option value='0' selected="selected">0%</option>
 																		<option value='10'>10%</option>
 																		<option value='30'>30%</option>
 																		<option value='50'>50%</option>
 																		<option value='70'>70%</option>
-																		<option value='100' selected="selected">100%</option>
+																		<option value='100'>100%</option>
 																	</select>
 																</div>
 																<!-- /.col-lg-6 -->
 
-																<div class="col-lg-5 text-left">
+																<!-- <div class="col-lg-5 text-left">
 																	<button type="button" class="btn btn-danger">총건수</button>
-																	<!-- select -->
+																	select
 																	<select id="pr_totalVal" class="form-control" style="width:100px; display: inline-block;">
 																		<option value='1'>1만건</option>
 																		<option value='3'>3만건</option>
@@ -638,7 +638,7 @@
 																		<option value='10'>10만건</option>
 																		<option value='0' selected="selected">모두</option>
 																	</select>
-																</div>
+																</div> -->
 																<!-- /.col-lg-6 -->
 
 																<div class="col-lg-1 text-right">

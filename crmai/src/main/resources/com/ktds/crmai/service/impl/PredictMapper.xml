@@ -1,70 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ktds.crmai.service.impl.PredictMapper">
-	<resultMap type="com.ktds.crmai.model.AIPredict" id="aiPredictMap">
-		<result column="ST_SEQ" property="stSeq"/>
-		<result column="CAM_ID" property="camId"/>
-		<result column="TRAIN_METHOD" property="trainMethod"/>
-		<result column="PREDICT" property="predict"/>
-		<result column="SUCC_PROB" property="succProb"/>
-		<result column="FAIL_PROB" property="failProb"/>
-		<result column="ST_C1" property="stC1"/>
+	<resultMap type="com.ktds.crmai.model.AIPredict"
+		id="aiPredictMap">
+		<result column="ST_SEQ" property="stSeq" />
+		<result column="CAM_ID" property="camId" />
+		<result column="TRAIN_METHOD" property="trainMethod" />
+		<result column="PREDICT" property="predict" />
+		<result column="SUCC_PROB" property="succProb" />
+		<result column="FAIL_PROB" property="failProb" />
+		<result column="ST_C1" property="stC1" />
 	</resultMap>
-	
+
 	<!-- 모든 목록 -->
-	<select id="selectAllPredictList" resultMap="aiPredictMap" parameterType="com.ktds.crmai.model.AIPredict">
+	<select id="selectAllPredictList" resultMap="aiPredictMap"
+		parameterType="com.ktds.crmai.model.AIPredict">
 		SELECT P.ST_SEQ,
-			   P.CAM_ID,
-			   P.TRAIN_METHOD,
-			   P.PREDICT,
-			   ROUND(P.SUCC_PROB * 100, 2) as SUCC_PROB,
-			   ROUND(P.FAIL_PROB * 100, 2) as FAIL_PROB,
-			   T.ST_C1
-		  FROM AI_TEST_PREDICT P INNER JOIN AI_STAGING_TEST T
-        		ON P.ST_SEQ = T.ST_SEQ
-         WHERE P.CAM_ID = #{camId}
-         
-         	   <if test="predict != null and predict != '' ">
-					AND ROUND(P.SUCC_PROB * 100, 2) >= #{predict}
-			   </if>
-			   
-			   <if test="rnum != null and rnum != '' ">
-					AND <![CDATA[ ROWNUM  < #{rnum} ]]>
-			   </if>
-			   
-	     ORDER BY P.ST_SEQ ASC
-	</select>
-	
-	<!-- 파라메터 존재하는 예측 결과 갯수 쿼리 -->
-	<select id="selectPredictCnt" resultType="int" parameterType="int">
-		SELECT COUNT(*)
+		P.CAM_ID,
+		P.TRAIN_METHOD,
+		P.PREDICT,
+		ROUND(P.SUCC_PROB * 100, 2) as SUCC_PROB,
+		ROUND(P.FAIL_PROB * 100, 2) as FAIL_PROB,
+		T.ST_C1
 		FROM AI_TEST_PREDICT P INNER JOIN AI_STAGING_TEST T
-        		ON P.ST_SEQ = T.ST_SEQ
-        WHERE P.CAM_ID = #{camId}
+		ON P.ST_SEQ = T.ST_SEQ
+		WHERE P.CAM_ID = #{camId}
+
+		<if test="predict != null and predict != '' ">
+			AND ROUND(P.SUCC_PROB * 100, 2) >= #{predict}
+		</if>
+
+		<if test="rnum != null and rnum != '' ">
+			AND <![CDATA[ ROWNUM  < #{rnum} ]]>
+		</if>
+
+		ORDER BY P.ST_SEQ ASC
 	</select>
-	
+
+	<!-- 파라메터 존재하는 예측 결과 갯수 쿼리 -->
+	<select id="selectPredictCnt" resultType="int"
+		parameterType="int">
+		SELECT COUNT(*)
+		FROM AI_TEST_PREDICT P INNER JOIN
+		AI_STAGING_TEST T
+		ON P.ST_SEQ = T.ST_SEQ
+		WHERE P.CAM_ID = #{camId}
+	</select>
+
 	<!-- 페이징 처리 목록 -->
-	<select id="selectPredictList" resultMap="aiPredictMap" parameterType="hashmap">
-		SELECT * 
+	<select id="selectPredictList" resultMap="aiPredictMap"
+		parameterType="hashmap">
+		SELECT *
 		FROM (
-				SELECT ROWNUM as RNUM, A.*
-				FROM (
-				        SELECT P.ST_SEQ,
-							   P.CAM_ID,
-							   P.TRAIN_METHOD,
-							   P.PREDICT,
-							   ROUND(P.SUCC_PROB * 100, 2) as SUCC_PROB,
-							   ROUND(P.FAIL_PROB * 100, 2) as FAIL_PROB,
-							   ST_C1
-						  FROM AI_TEST_PREDICT P INNER JOIN AI_STAGING_TEST T
-				        			ON P.ST_SEQ = T.ST_SEQ
-				         WHERE P.CAM_ID = #{camId}
-				 				         
-				         ORDER BY ST_SEQ DESC
-				      ) A
-				WHERE <![CDATA[ ROWNUM <= #{listEnd} ]]>
-	    	 ) B
-	    WHERE <![CDATA[ B.RNUM >= #{listStart} ]]>
+		SELECT ROWNUM as RNUM, A.*
+		FROM (
+		SELECT P.ST_SEQ,
+		P.CAM_ID,
+		P.TRAIN_METHOD,
+		P.PREDICT,
+		ROUND(P.SUCC_PROB * 100, 2) as SUCC_PROB,
+		ROUND(P.FAIL_PROB * 100, 2) as FAIL_PROB,
+		ST_C1
+		FROM AI_TEST_PREDICT P INNER JOIN AI_STAGING_TEST T
+		ON P.ST_SEQ = T.ST_SEQ
+		WHERE P.CAM_ID = #{camId}
+
+		ORDER BY ST_SEQ DESC
+		) A
+		WHERE 
+		<![CDATA[ ROWNUM <= #{listEnd} ]]>
+		) B
+		WHERE <![CDATA[ B.RNUM >= #{listStart} ]]>
 	</select>
-	
+
 </mapper>
