@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ktds.crmai.service.impl.PredictMapper">
-	<resultMap type="com.ktds.crmai.model.AIPredict" id="aiPredictMap">
-		<result column="ST_SEQ" property="stSeq"/>
-		<result column="CAM_ID" property="camId"/>
-		<result column="TRAIN_METHOD" property="trainMethod"/>
-		<result column="PREDICT" property="predict"/>
-		<result column="SUCC_PROB" property="succProb"/>
-		<result column="FAIL_PROB" property="failProb"/>
-		<result column="ST_C1" property="stC1"/>
+	<resultMap type="com.ktds.crmai.model.AIPredict"
+		id="aiPredictMap">
+		<result column="ST_SEQ" property="stSeq" />
+		<result column="CAM_ID" property="camId" />
+		<result column="TRAIN_METHOD" property="trainMethod" />
+		<result column="PREDICT" property="predict" />
+		<result column="SUCC_PROB" property="succProb" />
+		<result column="FAIL_PROB" property="failProb" />
+		<result column="ST_C1" property="stC1" />
 	</resultMap>
 	
 	<sql id="inputParam">
@@ -50,11 +51,12 @@
         WHERE P.CAM_ID = #{camId}
         
         <include refid="inputParam"></include>
+
 	</select>
-	
+
 	<!-- 페이징 처리 목록 -->
 	<select id="selectPredictList" resultMap="aiPredictMap" parameterType="hashmap">
-		SELECT * 
+		SELECT *
 		FROM (
 				SELECT ROWNUM as RNUM, A.*
 				FROM (
@@ -77,5 +79,4 @@
 	    	 ) B
 	    WHERE <![CDATA[ B.RNUM >= #{listStart} ]]>
 	</select>
-	
 </mapper>
