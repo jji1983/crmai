@@ -266,9 +266,9 @@
 						v = v.substr(0, 20);
 					}
 
-					if (k == 'adm_pw') {
+				/* 	if (k == 'adm_pw') {
 						v = v.substr(0, 20);
-					}
+					} */
 
 					if (k == 'adm_email') {
 						//return;
@@ -283,14 +283,16 @@
 					if (v == 'null' || v == '') {
 						html += '<td></td>';
 
-					} else if (k == 'adm_name') {
+					/* } else if (k == 'adm_name') {
 						html += '<td style="text-align: left; padding-left: 10px;">'
-								+ v + '</td>';
+								+ v + '</td>'; */
 						//return;
 					} else {
+						if ( k != 'adm_pw'){
 						html += '<td>' + v
 								+ '</td>';
 						//return;
+						}
 					}
 			});
 			html += '</tr>';
@@ -480,6 +482,7 @@
 
 			$("#inputAdmName").attr("readonly", false);
 
+			$("#divPW").css("display","block");
 			$("#inputAdmPw").attr("readonly", false);
 
 			$("#inputAdmEmail").attr("readonly", false);
@@ -498,6 +501,7 @@
 			$("#inputAdmName").attr("readonly", true);
 			$("#inputAdmName").val(d.adm_name);
 
+			$("#divPW").css("display","none");
 			$("#inputAdmPw").attr("readonly", true);
 			$("#inputAdmPw").val(d.adm_pw);
 
@@ -552,7 +556,7 @@
 									<thead>
 										<tr>
 											<th style="width: 70px">계정</th>
-											<th style="width: 15%">패스워드</th>
+											<!-- <th style="width: 15%">패스워드</th> -->
 											<th style="width: 100px">이름</th>
 											<!--  <th style="width: 100px">e-mail</th> -->
 											<th style="width: 100px">날짜</th>
@@ -612,7 +616,7 @@
 
 														</div>
 													</div>
-													<div class="form-group">
+													<div class="form-group" id="divPW">
 														<label for="inputAdmPw" class="col-sm-2 control-label">비밀번호
 														</label>
 
