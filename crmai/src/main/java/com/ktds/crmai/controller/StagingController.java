@@ -111,7 +111,6 @@ public class StagingController {
     	logger.info("######....getPredict.... - {}", page);
     	
     	out_test = stagingService.selectTestPredict(page);
-    	
     	Iterator<AI_STAGING> ite = out_test.iterator();
     	
     	while(ite.hasNext()) {

@@ -24,7 +24,7 @@
 		        ) A
 		        where <![CDATA[ rownum <= #{page_end} ]]> 
 		    ) B
-		where b.rnum >= #{page_st}
+		where <![CDATA[ b.rnum >= #{page_st} ]]> 
     </select>
     
     <select id="selectStagingTrainList" resultType="staging">
@@ -42,7 +42,7 @@
 		        ) A
 		        where <![CDATA[ rownum <= #{listEnd} ]]> 
 		    ) B
-		where b.rnum >= #{listStart}
+		where <![CDATA[ b.rnum >= #{listStart} ]]> 
     </select>
     
     <select id="selectStagingTrainResultCnt" resultType="int">
@@ -66,7 +66,7 @@
 		        ) A
 		        where <![CDATA[ rownum <= #{page_end} ]]> 
 		    ) B
-		where b.rnum >= #{page_st}
+		where <![CDATA[ b.rnum >= #{page_st} ]]> 
     </select>
     
     <select id="selectStagingTrainResultList" resultType="staging">
@@ -84,7 +84,7 @@
 		        ) A
 		        where <![CDATA[ rownum <= #{listEnd} ]]> 
 		    ) B
-		where b.rnum >= #{listStart}
+		where <![CDATA[ b.rnum >= #{listStart} ]]> 
     </select>
     
     <select id="selectStagingTestCnt" resultType="int">
@@ -108,7 +108,7 @@
 		        ) A
 		        where <![CDATA[ rownum <= #{page_end} ]]> 
 		    ) B
-		where b.rnum >= #{page_st}
+		where <![CDATA[ b.rnum >= #{page_st} ]]> 
     </select>
     
     <select id="selectStagingTestList" resultType="staging">
@@ -126,7 +126,7 @@
 		        ) A
 		        where <![CDATA[ rownum <= #{listEnd} ]]> 
 		    ) B
-		where b.rnum >= #{listStart}
+		where <![CDATA[ b.rnum >= #{listStart} ]]> 
     </select>
     
     <select id="selectStagingTestResultCnt" resultType="int">
@@ -150,7 +150,7 @@
 		        ) A
 		        where <![CDATA[ rownum <= #{page_end} ]]> 
 		    ) B
-		where b.rnum >= #{page_st}
+		where <![CDATA[  b.rnum >= #{page_st}  ]]> 
     </select>
     
     <select id="selectStagingTestResultList" resultType="staging">
@@ -168,7 +168,7 @@
 		        ) A
 		        where <![CDATA[ rownum <= #{listEnd} ]]> 
 		    ) B
-		where b.rnum >= #{listStart}
+		where <![CDATA[ b.rnum >= #{listStart} ]]> 
     </select>
     
     <select id="selectTestPredict" resultType="staging">
@@ -180,7 +180,7 @@
 		       succ_prob,  
 		       fail_prob  
 		   from (		
-		        select  <![CDATA[ rownum as rnum ]]>, A.* 
+		        select rownum as rnum, A.* 
 		        from       
 		        (
 		        select 
@@ -195,12 +195,16 @@
 		            ai_test_predict pre, ai_staging_test test
 		        where  
 		            pre.st_seq = test.st_seq
-		            and pre.cam_id = #{cam_id} 
+		            and pre.cam_id = #{cam_id}
 		            order by pre.st_seq desc
 		        ) A
-		        where <![CDATA[ rownum <= #{page_end} ]]> 
+		        where 
+		        <if test="succVal != null and succVal != ''">
+		        	<![CDATA[ succ_prob >= #{succVal} and ]]>
+		        </if>
+		         <![CDATA[ rownum <= #{page_end} ]]> 
 		    ) B
-		where b.rnum >= #{page_st}
+		where <![CDATA[ b.rnum >= #{page_st}  ]]> 
     </select>
     
 

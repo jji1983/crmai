@@ -615,9 +615,9 @@
 														<div class="box-body">
 															<div class="row">
 																<div class="col-lg-10 text-left">
-																	<button type="button" class="btn btn-danger">성공확률</button>
+																	<label for="pr_succVal" class="control-label" style="margin-left: 12px;">성공확률</label>
 																	<!-- select -->
-																	<select id="pr_succVal" class="form-control" style="width:100px; display: inline-block;">
+																	<select id="pr_succVal" class="form-control" style="width:100px; display: inline-block; margin-left: 12px;">
 																		<option value='0' selected="selected">0%</option>
 																		<option value='10'>10%</option>
 																		<option value='30'>30%</option>
