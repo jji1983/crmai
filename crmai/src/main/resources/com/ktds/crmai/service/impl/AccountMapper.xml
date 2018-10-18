@@ -10,7 +10,8 @@
 			ADM_PW AS "adm_pw",
 			ADM_NAME AS "adm_name",
 			ADM_EMAIL AS "adm_email",
-			ADM_CDATE as "adm_cdate"
+			ADM_CDATE as "adm_cdate",
+			ADM_TYPE as "adm_type"
 
 		FROM  
 			AI_ADMINUSER
@@ -42,8 +43,16 @@
 			ADM_PW AS "adm_pw",
 			ADM_NAME AS "adm_name",
 			ADM_EMAIL as "adm_email",
-			ADM_CDATE as "adm_cdate"
+			ADM_CDATE as "adm_cdate",
+			ADM_TYPE as "adm_type"
 
+		FROM  
+			AI_ADMINUSER
+		WHERE
+			adm_id =  #{adm_id}
+    </select>
+    <select id="selectCheckPK" resultType="int">
+			SELECT count(*)
 		FROM  
 			AI_ADMINUSER
 		WHERE
@@ -52,11 +61,11 @@
     
     <insert id="insertAccount">
     	INSERT INTO AI_ADMINUSER (ADM_ID, ADM_PW, ADM_NAME, ADM_CDATE, ADM_UDATE, ADM_EMAIL, ADM_ROLE, ADM_TYPE, ADM_LOGIN)
-      	VALUES (#{adm_id}, #{adm_pw}, #{adm_name}, sysdate, sysdate, #{adm_email},1,1,0)
+      	VALUES (#{adm_id}, #{adm_pw}, #{adm_name}, sysdate, sysdate, #{adm_email},1,#{adm_type},0)
     </insert>
 	
 	<update id="updateAccount">
-	update AI_ADMINUSER set ADM_PW=#{adm_pw}, ADM_NAME=#{adm_name}, ADM_EMAIL=#{adm_email}, ADM_UDATE=sysdate where ADM_ID=#{adm_id}
+	update AI_ADMINUSER set ADM_PW=#{adm_pw}, ADM_NAME=#{adm_name}, ADM_EMAIL=#{adm_email}, ADM_UDATE=sysdate, ADM_TYPE=#{adm_type} where ADM_ID=#{adm_id}
 	</update>
 
     
@@ -71,7 +80,7 @@
 		select *
 		from (
 		select <![CDATA[ rownum as rnum ]]>
-		, A.ADM_ID, A.ADM_PW, A.ADM_NAME, A.ADM_EMAIL, A.ADM_CDATE
+		, A.ADM_ID, A.ADM_PW, A.ADM_NAME, A.ADM_EMAIL, A.ADM_CDATE, A.ADM_TYPE
 		from
 		(
 		select
@@ -79,7 +88,8 @@
 			ADM_PW,
 			ADM_NAME,
 			ADM_EMAIL,
-			ADM_CDATE
+			ADM_CDATE,
+			ADM_TYPE
 		from AI_ADMINUSER
 		order by ADM_CDATE desc
 		) A

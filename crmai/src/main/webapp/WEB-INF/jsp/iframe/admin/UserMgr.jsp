@@ -170,6 +170,7 @@
 			password.attr("readonly", false);
 			$("#inputAdmName").attr("readonly", false);
 			$("#inputAdmEmail").attr("readonly", false);
+			$("#inputAdmType").attr("readonly", false);
 		});
 
 		// 게시글 삭제
@@ -254,46 +255,64 @@
 		var div = document.querySelector('#ai_account');
 
 		var html = '<tbody>';
-		
-		$.each(obj, function (i, val) {
-			html += '<tr onClick="view_account(' + "'" 	+ val.adm_id + "'" + ')">';
-			$.each(val, function (k,v) {
-					if (k == 'adm_id') {
-						v = v.substr(0, 20);
-					}
 
-					if (k == 'adm_name') {
-						v = v.substr(0, 20);
-					}
+		$.each(obj, function(i, val) {
+			
+			html += '<tr onClick="view_account(' + "'" + val.adm_id + "'"
+					+ ')">';
+			$.each(val, function(k, v) {
+				if (k == 'adm_id') {
+					v = v.substr(0, 20);
+				}
+
+				if (k == 'adm_name') {
+					v = v.substr(0, 20);
+				}
 
 				/* 	if (k == 'adm_pw') {
 						v = v.substr(0, 20);
 					} */
 
-					if (k == 'adm_email') {
-						//return;
-						//html += '<td >' + v + '</td>';
-						//v = v.substr(0, 20);
-					}
+				if (k == 'adm_email') {
+					//return;
+					//html += '<td >' + v + '</td>';
+					//v = v.substr(0, 20);
+				}
 
-					if (k == 'adm_cdate') {
-						v = v.substr(0, 10);
+				if (k == 'adm_cdate') {
+					v = v.substr(0, 10);
+				}
+				
+				if (k == 'adm_type') {
+					switch (v) {
+					case "1":
+						v = "통신";
+						break;
+					case "2":
+						v = "금융";
+						break;
+					case "3":
+						v = "유통";
+						break;
+					case "0":
+						v = "기타";
+						break;
 					}
+				}
 
-					if (v == 'null' || v == '') {
-						html += '<td></td>';
+				if (v == 'null' || v == '') {
+					html += '<td></td>';
 
 					/* } else if (k == 'adm_name') {
 						html += '<td style="text-align: left; padding-left: 10px;">'
 								+ v + '</td>'; */
+					//return;
+				} else {
+					if (k != 'adm_pw') {
+						html += '<td>' + v + '</td>';
 						//return;
-					} else {
-						if ( k != 'adm_pw'){
-						html += '<td>' + v
-								+ '</td>';
-						//return;
-						}
 					}
+				}
 			});
 			html += '</tr>';
 		});
@@ -358,6 +377,7 @@
 			alert('계정을 입력하세요.');
 			return;
 		}
+		$("#admType").val($("#inputAdmType").val());
 
 		// Get form
 		var form = $('#newUploadForm')[0];
@@ -400,6 +420,7 @@
 			alert('계정을 입력하세요.');
 			return;
 		}
+		$("#admType").val($("#inputAdmType").val());
 
 		// Get form
 		var form = $('#newUploadForm')[0];
@@ -460,7 +481,7 @@
 					getPagination();
 
 					$('#accountNewModal').modal('hide');
-					
+
 					getPagination();
 
 				}
@@ -482,12 +503,11 @@
 
 			$("#inputAdmName").attr("readonly", false);
 
-			$("#divPW").css("display","block");
+			$("#divPW").css("display", "block");
 			$("#inputAdmPw").attr("readonly", false);
 
 			$("#inputAdmEmail").attr("readonly", false);
-
-			//		$("#inputAdmCdate").attr(sysdate, true);
+			$("#inputAdmType").attr("readonly", false);
 
 			$('.readBoard').hide();
 			$('.editBoard').show();
@@ -501,7 +521,7 @@
 			$("#inputAdmName").attr("readonly", true);
 			$("#inputAdmName").val(d.adm_name);
 
-			$("#divPW").css("display","none");
+			$("#divPW").css("display", "none");
 			$("#inputAdmPw").attr("readonly", true);
 			$("#inputAdmPw").val(d.adm_pw);
 
@@ -510,13 +530,10 @@
 
 			$("#inputAdmCdate").attr("readonly", true);
 			$("#inputAdmCdate").val(d.adm_cdate);
+			
+			$("#inputAdmType").attr("readonly", true);
+			$("#inputAdmType").val(d.adm_type);
 
-			/* 		$("#inputAdmId").attr("readonly", true);
-					$("#inputAdmId").val(d.adm_id); */
-
-			//		$("#inputAdmName").val(d.code);
-			//		$("#accountWriter").val(d.writer);
-			//		$("#accountDate").val(d.reg_datetime.substr(0, 19));
 			$('.readBoard').show();
 			$('.editBoard').hide();
 		}
@@ -561,6 +578,7 @@
 											<!--  <th style="width: 100px">e-mail</th> -->
 											<th style="width: 100px">날짜</th>
 											<th style="width: 100px">e-mail</th>
+											<th style="width: 100px">산업유형</th>
 											<!--<th>조회수</th>-->
 										</tr>
 									</thead>
@@ -647,6 +665,24 @@
 
 														</div>
 													</div>
+													<div class="form-group">
+														<label for="inputAdmType" class="col-sm-2 control-label">가입자
+															산업유형 </label>
+														<div class="col-sm-10">
+															<select id="inputAdmType" class="form-control select2"
+																style="width: 100%;">
+																<option value="1">통신</option>
+																<option value="2">금융</option>
+																<option value="3">유통</option>
+																<option value="0" selected="selected">기타</option>
+															</select>
+															
+															<input type="hidden" name="admType" value="0" id="admType">
+															
+															
+														</div>
+													</div>
+
 													<!-- 	
 												<div class="form-group readAccount">
 													<label for="inputAdmCdate" class="col-sm-2 control-label">등록일</label>
@@ -675,9 +711,10 @@
 														<button id="bthNew" type="submit"
 															class="btn btn-primary editBoard">등록</button>
 														<button id="bthDel" type="submit"
-															class="btn btn-danger readBoard" >삭제</button>
+															class="btn btn-danger readBoard">삭제</button>
 														<button id="bthMod" type="submit"
-															class="btn btn-warning readBoard" style="margin-left: 5px">수정</button>
+															class="btn btn-warning readBoard"
+															style="margin-left: 5px">수정</button>
 														<button id="bthClose" type="button"
 															class="btn btn-secondary" data-dismiss="modal"
 															style="margin-left: 5px">취소</button>
