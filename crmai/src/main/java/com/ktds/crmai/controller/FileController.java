@@ -304,6 +304,12 @@ public class FileController {
                 
                 AIPredict vo = new AIPredict();
                 vo.setCamId(Integer.parseInt(values[0]));
+                vo.setPredict(values[1]);
+                int rnum = Integer.parseInt(values[2]);
+                if(rnum != 0 )
+                	vo.setRnum(rnum);
+                
+                logger.info("downloadPredict :: vo :: {}", vo );
                 List<AIPredict> lists = predictService.selectAllPredictList(vo);
                 
                 StringBuilder sb = new StringBuilder();

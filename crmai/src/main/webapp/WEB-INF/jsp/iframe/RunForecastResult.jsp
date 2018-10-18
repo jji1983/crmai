@@ -252,11 +252,12 @@ $(function() {
 				          	</div>
 				          	<!-- /btn-group -->
 				          	<select id="succ_rate" class="form-control select2" style="width: 60%;">
-				                <option value="10">10%</option>
-				                <option value="30">30%</option>
-				                <option value="50">50%</option>
-				                <option value="70">70%</option>
-				                <option value="100" selected="selected">100%</option>
+				                <option value="0">0%</option>
+				                <option value="0.1">10%</option>
+				                <option value="0.3">30%</option>
+				                <option value="0.5">50%</option>
+				                <option value="0.7">70%</option>
+				                <option value="1" selected="selected">100%</option>
 				            </select>
 				        </div>
 				        <!-- /input-group -->
@@ -284,8 +285,8 @@ $(function() {
 		        </div>
 		        <div class="col-lg-6">
 		          <div class="input-group pull-right">
-		          	<button type="button" class="btn btn-info" style="margin-right: 10px;" onclick="">조회</button>
-		          	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default" style="margin-right: 10px;">다운로드</button>
+		          	<button type="button" class="btn btn-info" data-target="#modal_no_data" style="margin-right: 10px;" onclick="search();">조회</button>
+		          	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal_down" style="margin-right: 10px;">다운로드</button>
 		          </div>
 		        </div>
    	           </div>
@@ -301,7 +302,7 @@ $(function() {
 	   </div>
 	</div>
 	
-	<div class="modal fade" id="modal-default">
+	<div class="modal fade" id="modal_down">
        <div class="modal-dialog">
           <div class="modal-content">
               <div class="modal-body">
@@ -310,6 +311,22 @@ $(function() {
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
                 <button id="down" type="button" class="btn btn-primary" onclick="csvDown();">다운로드</button>
+              </div>
+          </div>
+          <!-- /.modal-content -->
+       </div>
+       <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    
+    <div class="modal fade" id="modal_no_data">
+       <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-body">
+                <p>조회된 데이터가 없습니다.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
               </div>
           </div>
           <!-- /.modal-content -->

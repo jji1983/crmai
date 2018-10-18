@@ -8,7 +8,7 @@ import com.ktds.crmai.model.AIPredict;
 public interface PredictMapper {
 	List<AIPredict> selectAllPredictList(AIPredict vo);
 	
-	Integer selectPredictCnt(Integer camId);
+	Integer selectPredictCnt(Map<String, Object> param);
 	
 	List<AIPredict> selectPredictList(Map<String, Object> param);
 }

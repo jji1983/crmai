@@ -3,6 +3,7 @@
  */
 
 var currentValue = 0;
+var predictCamId = 0;
 
 function handleClick(myRadio) {
     currentValue = myRadio.value;
@@ -158,13 +159,13 @@ function createTableCampaign(arr){
 
 // 캠페인 아이디로 모델 테이블 불러오기
 function connectLearningModel() {
-	var cam_id = currentValue;
+	var cam_id = Number(currentValue);
 	
 	if(cam_id != 0) {
 		$.ajax({
 			url:"/model/learn",
 			data:{
-				cam_id : cam_id
+				cam_id : currentValue
 			},
 			success:function(data) {
 				createTableModel(data);
@@ -249,11 +250,13 @@ function createTableModel(arr){
 function predictCount() {
 	// 숫자형으로 변형
 	currentCamId = Number(currentValue);
+	var succRate = Number($("#succ_rate").val());
 	
 	$.ajax({
 		url:"/predict/count",
 		data:{
-			camId : currentCamId
+			camId : currentCamId,
+			succProb : succRate
 		},
 		success:function(pagingData) {
 			createPagenationPredict(pagingData["realEndPage"], pagingData["displayPageNum"]);
@@ -277,6 +280,8 @@ function createPagenationPredict(totalPage, displayPage) {
 	        }
 	    });
 	} else {		// 데이터 미 존재 시
+		predictCamId = 0;
+		
 		noDataPredict();
 	}
 }
@@ -286,10 +291,15 @@ function connectCampaignAjax(clickPage) {
 	// 숫자형으로 변형
 	currentCamId = Number(currentCamId);
 	
+	predictCamId = currentCamId;
+	
+	var succRate = Number($("#succ_rate").val());
+	
 	$.ajax({
 		url:"/predict/paging",
 		data:{
 			camId : currentCamId,
+			succProb : succRate,
 			page : clickPage
 		},
 		success:function(data) {
@@ -389,6 +399,15 @@ function noDataPredict() {
 	$("#div_predict").html(pHtml);					// 예측결과 html
 }
 
+// 조회 버튼 클릭 시 나오는 예측 결과
+function search() {
+	if(predictCamId != 0) {
+		predictCount();
+	} else {
+		$("#modal_no_data").modal("show");
+	}
+}
+
 // csv 다운로드 함수
 function csvDown() {
 	var succVal = $("#succ_rate").val();
@@ -397,5 +416,5 @@ function csvDown() {
 	
 	window.open('/file/downPredict/'+cam_id+'');
 	
-	$("#modal-default").modal("hide");
+	$("#modal_down").modal("hide");
 }

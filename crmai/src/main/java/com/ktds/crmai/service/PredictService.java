@@ -21,8 +21,8 @@ public class PredictService implements PredictMapper {
 	}
 	
 	@Override
-	public Integer selectPredictCnt(Integer camId) {
-		return predictMapper.selectPredictCnt(camId);
+	public Integer selectPredictCnt(Map<String, Object> param) {
+		return predictMapper.selectPredictCnt(param);
 	}
 
 	@Override

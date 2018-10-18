@@ -36,13 +36,13 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+    <p class="login-box-msg">Log-In</p>
       <div class="form-group has-feedback">
-        <input id="ADM_ID" name="ADM_ID" type="text" class="form-control" placeholder="ID">
+        <input id="ADM_ID" name="ADM_ID" type="text" class="form-control" placeholder="아이디">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input id="ADM_PW" name="ADM_PW" type="password" class="form-control" placeholder="Password">
+        <input id="ADM_PW" name="ADM_PW" type="password" class="form-control" placeholder="비밀번호">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">

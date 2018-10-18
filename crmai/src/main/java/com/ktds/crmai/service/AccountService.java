@@ -57,8 +57,9 @@ public class AccountService implements AccountMapper{
 		return accountmapper.updateAccount(account);
 	}
 
-
-
-
+	@Override
+	public int selectCheckPK(String adm_id) {
+		return accountmapper.selectCheckPK(adm_id);
+	}
 	
 }

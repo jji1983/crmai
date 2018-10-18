@@ -195,7 +195,8 @@
 		            ai_test_predict pre, ai_staging_test test
 		        where  
 		            pre.st_seq = test.st_seq
-		            and pre.cam_id = #{cam_id} order by pre.st_seq desc
+		            and pre.cam_id = #{cam_id} 
+		            order by pre.st_seq desc
 		        ) A
 		        where <![CDATA[ rownum <= #{page_end} ]]> 
 		    ) B

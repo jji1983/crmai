@@ -30,6 +30,8 @@ public interface AccountMapper {
 	
 	int selectAccountPageNum();
 	
+	int selectCheckPK(String adm_id);
+	
 
 
 	

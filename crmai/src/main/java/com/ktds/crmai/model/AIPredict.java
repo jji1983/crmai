@@ -24,6 +24,10 @@ public class AIPredict extends PageCriteria {
 		this.camId = camId;
 	}
 	
+	public AIPredict(Integer camId, Double succProb) {
+		this.camId = camId;
+		this.succProb = succProb;
+	};
 	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -39,5 +43,5 @@ public class AIPredict extends PageCriteria {
 		
 		return sb.toString();
 		
-	};
+	}
 }
