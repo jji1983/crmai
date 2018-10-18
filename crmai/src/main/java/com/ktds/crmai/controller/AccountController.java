@@ -62,26 +62,37 @@ public class AccountController {
 			@RequestParam("inputAdmPw") String inputAdmPw,
 			@RequestParam("inputAdmName") String inputAdmName,
 			@RequestParam("inputAdmEmail") String inputAdmEmail,
-			
+			@RequestParam("admType") String admType,
 			HttpSession session){
 		
 		
 		logger.info("### insertNewAccount :: {} {} {} {} {}", user_id, inputAdmId, inputAdmPw, inputAdmName, inputAdmEmail);
+		//insert 전 동일 아이디 있는지 체크
+		
+		int chk = accountService.selectCheckPK(inputAdmId);
+		
 		AI_ACCOUNT account = new AI_ACCOUNT();
 		account.setAdm_id(inputAdmId);
 		account.setAdm_pw(inputAdmPw);
 		account.setAdm_name(inputAdmName);
 		account.setAdm_email(inputAdmEmail);
+		account.setAdm_type(admType);
 	//	account.setWriter(user_id);
 		
-		int result = accountService.insertAccount(account);
-		
 		ResponseEntity<Object> response = null;
-		if (result > 0) {
-			response = new ResponseEntity<Object>("OK::등록 성공", HttpStatus.OK);
-		} else {
-			response = new ResponseEntity<Object>("FAIL::등록 실패", HttpStatus.OK);
+		if (chk == 0) {
+			int result = accountService.insertAccount(account);
+
+			if (result > 0) {
+				response = new ResponseEntity<Object>("OK::등록 성공", HttpStatus.OK);
+			} else {
+				response = new ResponseEntity<Object>("FAIL::등록 실패", HttpStatus.OK);
+			}
 		}
+		else {
+			response = new ResponseEntity<Object>("PK::중복 등록", HttpStatus.OK);
+		}
+		
 		
 		return response;
 	}
@@ -94,6 +105,7 @@ public class AccountController {
 			@RequestParam("inputAdmPw") String inputAdmPw,
 			@RequestParam("inputAdmName") String inputAdmName,
 			@RequestParam("inputAdmEmail") String inputAdmEmail,
+			@RequestParam("admType") String admType,
 			HttpSession session){
 		
 		AI_ACCOUNT account = new AI_ACCOUNT();
@@ -101,6 +113,7 @@ public class AccountController {
 		account.setAdm_pw(inputAdmPw);
 		account.setAdm_name(inputAdmName);
 		account.setAdm_email(inputAdmEmail);
+		account.setAdm_type(admType);
 		
 		int result = accountService.updateAccount(account);
 		
