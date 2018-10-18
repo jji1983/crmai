@@ -180,7 +180,7 @@
 			originalAccArr[i] = arr[i]["originalAcc"];
 		}
 		
-		var areaChartData = {
+		var barChartData = {
 				labels : camNameArr,
 				datasets: [
 				    {
@@ -204,7 +204,6 @@
 		
 		var barChartCanvas                   = $('#bar_chart').get(0).getContext('2d');
 		var barChart                         = new Chart(barChartCanvas);
-		var barChartData                     = areaChartData;
 		        
 		var barChartOptions                  = {
 		      //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
@@ -232,13 +231,15 @@
 		};
 		
 		// 그래프 굵기 조정(데이터 갯수에 따라서...)
-		if((originalAccArr.length >= 1) && (originalAccArr.length <= 6)) {
+		if(originalAccArr.length == 1) {
+			barChartOptions["barValueSpacing"] = 250;
+		} else if((originalAccArr.length > 1) && (originalAccArr.length <= 6)) {
 			barChartOptions["barValueSpacing"] = 100;
 		} else {
 			barChartOptions["barValueSpacing"] = 5;
 		}
 		    
-		var areaChartOptions = {
+		var lineChartOptions = {
 		        //Boolean - If we should show the scale at all
 		    	showScale               : true,
 		    	//Boolean - Whether grid lines are shown across the chart
@@ -255,8 +256,6 @@
 		    	bezierCurve             : true,
 		    	//Number - Tension of the bezier curve between points
 		    	bezierCurveTension      : 0.3,
-		    	//Boolean - Whether to show a dot for each point
-		    	pointDot                : false,
 		    	//Number - Radius of each point dot in pixels
 		    	pointDotRadius          : 4,
 		    	//Number - Pixel width of point dot stroke
@@ -274,6 +273,13 @@
 		    	//Boolean - whether to make the chart responsive to window resizing
 		    	responsive              : true
 		}
+		
+		// 자료가 1개일 경우 그래프 선이 안 보이므로 점으로 표시 여부를 true로...
+		if(originalAccArr.length == 1) {
+			lineChartOptions["pointDot"] = true;
+		} else {
+			lineChartOptions["pointDot"] = false;
+		}
 
 		barChartOptions.datasetFill = false;
 		barChart.Bar(barChartData, barChartOptions);
@@ -286,10 +292,9 @@
 	    
 	    var lineChartCanvas          = $('#line_chart').get(0).getContext('2d');
 	    var lineChart                = new Chart(lineChartCanvas);
-	    var lineChartOptions         = areaChartOptions;
 	    
 	    lineChartOptions.datasetFill = false;
-	    lineChart.Line(areaChartData, lineChartOptions);
+	    lineChart.Line(barChartData, lineChartOptions);
 	}
   </script>
 
