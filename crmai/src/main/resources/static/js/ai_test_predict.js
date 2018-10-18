@@ -76,15 +76,15 @@ function grid_tableStaging4(obj){
     
     html = '<table width="100%" class="table table-bordered table-hover">';
     html += '<thead><tr>';
-    html += 	'<th>SEQ</th>';
-    html += 	'<th>캠페인ID</th>';
-    html += 	'<th>컬럼1</th>';
-    html += 	'<th>TRAIN_METHOD</th>';
-    html += 	'<th>PREDICT</th>';
-    html += 	'<th>SUCC_PROB</th>';
-    html += 	'<th>FAIL_PROB</th>';
+    html += 	'<th class="text-center">번호</th>';
+    html += 	'<th class="text-center">캠페인ID</th>';
+    html += 	'<th class="text-center">식별번호</th>';
+    html += 	'<th class="text-center">학습방법</th>';
+    html += 	'<th class="text-center">예측결과</th>';
+    html += 	'<th class="text-center">성공확률</th>';
+    html += 	'<th class="text-center">실패확률</th>';
     
-    html += 	'<tr></thead>';
+    html += 	'</tr></thead>';
     html += '<tbody>';
     
     var json = $.parseJSON(obj);
@@ -99,10 +99,21 @@ function grid_tableStaging4(obj){
  			
  			if( k == 'st_c1'
  			 || k == 'train_method' 
- 			 || k == 'predict'
  			
  			){
  				html += '<td>' + v + '</td>';
+ 			}
+ 			if( k == 'predict'
+ 						
+ 			){
+ 				switch(v) {
+ 				case "0":
+ 					html += '<td>실패</td>';
+ 					break;
+ 				case "1":
+ 					html += '<td>성공</td>';
+ 					break;
+ 				}
  			}
  			
  			if(k == 'succ_prob'
