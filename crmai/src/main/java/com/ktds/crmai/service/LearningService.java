@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ktds.crmai.model.AI_CAMPAIGN;
+import com.ktds.crmai.model.AI_TRAIN_MODEL;
 import com.ktds.crmai.model.Learning_Info;
 import com.ktds.crmai.model.Learning_Res;
 import com.ktds.crmai.model.AI_TRAIN_MODEL_FEATURE;
@@ -36,7 +37,7 @@ public class LearningService implements LearningMapper {
 	}
 
 	@Override
-	public List<Learning_Info> getLearningResultList(String cam_id) {
+	public List<AI_TRAIN_MODEL> getLearningResultList(String cam_id) {
 		return learningMapper.getLearningResultList(cam_id);
 	}
 

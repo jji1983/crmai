@@ -199,11 +199,14 @@ function connectLearningResult() {
 function createTableLearningResult(arr){
 	var html = "<table id='learning_result_table' class='table table-bordered table-hover'>";
 	
-	html += "<thead><tr><th class='text-center'>학습방법</th>";
-	html += "<th class='text-center'>정확도(ORIGINAL)(%)</th>";
-	html += "<th class='text-center'>정확도(SO엔진)(%)</th>";
-	html += "<th class='text-center'>모델경로</th>";
-	html += "<th class='text-center'>모델명</th></tr></thead><tbody>";
+	html += "<thead><tr><th class='text-center'>캠페인ID</th>";
+	html += "<th class='text-center'>학습모델</th>";
+	html += "<th class='text-center'>기존정확도</th>";
+	html += "<th class='text-center'>AI정확도</th>";
+	html += "<th class='text-center'>학습시작시간</th>";
+	html += "<th class='text-center'>학습종료시간</th>";
+	html += "<th class='text-center'>선택Model</th>";
+	html += "<th class='text-center'>메시지</th></tr></thead><tbody>";
 	
 	// 데이터 존재 미존재 여부에 따른 표 표시
 	if(arr.length != 0) {
@@ -211,22 +214,56 @@ function createTableLearningResult(arr){
 			html += "<tr>";
 			
 			Object.getOwnPropertyNames(arr[arrIdx]).forEach(function(val, idx, array) {
-				// 정확도나 SO통과 정확도가 키명일 경우는 퍼센트 계산
-				if(val == "original_acc" || val == "so_acc") {
-					arr[arrIdx][val] = Number(arr[arrIdx][val]) * 100;
-				} 
-				
-				if((arr[arrIdx][val] == null) || (arr[arrIdx][val] == "null") || (arr[arrIdx][val] == "")) {
-					html += "<td></td>";
-				} else {
-					html += "<td>" + arr[arrIdx][val] + "</td>";
+				switch (val) {
+					case "cam_id":
+						html += "<td>" + arr[arrIdx][val] + "</td>";
+						
+						break;
+					case "train_method":
+						html += "<td>" + arr[arrIdx][val] + "</td>";
+						
+						break;
+					case "original_acc":
+						html += "<td>" + arr[arrIdx][val] + "%</td>";
+						
+						break;
+					case "so_acc":
+						html += "<td>" + arr[arrIdx][val] + "%</td>";
+						
+						break;
+					case "train_start":
+						html += "<td>" + arr[arrIdx][val] + "</td>";
+						
+						break;
+					case "train_end":
+						html += "<td>" + arr[arrIdx][val] + "</td>";
+						
+						break;
+					case "model_flag":
+						if(arr[arrIdx][val] == "Y") {
+							html += "<td class='bg-yellow'>" + arr[arrIdx][val] + "</td>";
+						} else {
+							html += "<td>" + arr[arrIdx][val] + "</td>";
+						}
+						
+						break;
+					case "desc_text":
+						if((arr[arrIdx][val] == null) || (arr[arrIdx][val] == "null") || (arr[arrIdx][val] == "")) {
+							html += "<td></td>";
+						} else {
+							html += "<td>" + arr[arrIdx][val] + "</td>";
+						}
+						
+						break;
+					default:
+						break;
 				}
 			});
 			
 			html += "</tr>";
 		});
 	} else {
-		html += "<tr><td class='text-center' colspan='5'>조회된 데이터가 없습니다.</td></tr>";
+		html += "<tr><td class='text-center' colspan='8'>조회된 데이터가 없습니다.</td></tr>";
 	}
 	
 	html += "</tbody></table>";

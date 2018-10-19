@@ -57,8 +57,15 @@
 		    feat.camp_id = '1004'
     </select>
     
-    <select id="getLearningResultList" resultType="learning_info">
-    	select train_method, original_acc, so_acc, model_dir, model_name
+    <select id="getLearningResultList" resultType="model">
+    	select cam_id, 
+		       train_method,
+		       ROUND(original_acc * 100, 2) as original_acc, 
+		       ROUND(so_acc * 100, 2) as so_acc,             
+		       train_start, 
+		       train_end, 
+		       model_flag, 
+		       desc_text 
 		from ai_train_model
 		where cam_id = #{cam_id}
 		order by so_acc desc
