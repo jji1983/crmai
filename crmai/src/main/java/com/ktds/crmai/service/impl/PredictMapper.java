@@ -11,4 +11,6 @@ public interface PredictMapper {
 	Integer selectPredictCnt(Map<String, Object> param);
 	
 	List<AIPredict> selectPredictList(Map<String, Object> param);
+	
+	List<AIPredict> getPredictDown(Map<String, Object> param);
 }

@@ -29,4 +29,9 @@ public class PredictService implements PredictMapper {
 	public List<AIPredict> selectPredictList(Map<String, Object> param) {
 		return predictMapper.selectPredictList(param);
 	}
+
+	@Override
+	public List<AIPredict> getPredictDown(Map<String, Object> param) {
+		return predictMapper.getPredictDown(param);
+	}
 }

@@ -415,9 +415,8 @@ function search() {
 function csvDown() {
 	var succVal = $("#succ_rate").val();
 	var extractVal = $("#extract").val();
-	var cam_id = currentValue + "_" + succVal + "_" + extractVal;
 	
-	window.open('/file/downPredict/'+cam_id+'');
+	window.open("/file/down/predict/"+currentValue+"/"+succVal+"/"+extractVal);
 	
 	$("#modal_down").modal("hide");
 }

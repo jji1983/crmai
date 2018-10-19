@@ -50,7 +50,7 @@
         		ON P.ST_SEQ = T.ST_SEQ
         WHERE P.CAM_ID = #{camId}
         
-        <if test="(extractCnt != null) and (extractCnt != 0)">
+        <if test="(extractCnt != null) and (extractCnt != 0.0)">
         	AND <![CDATA[ ROWNUM <= #{extractCnt} ]]>
         </if>
         
@@ -82,5 +82,32 @@
 				WHERE <![CDATA[ ROWNUM <= #{listEnd} ]]>
 	    	 ) B
 	    WHERE <![CDATA[ B.RNUM >= #{listStart} ]]>
+	</select>
+	
+	<!-- 다운로드 시 사용하는 쿼리 -->
+	<select id="getPredictDown" resultMap="aiPredictMap" parameterType="hashmap">
+		SELECT ROWNUM as RNUM, A.*
+		  FROM (
+				       SELECT P.ST_SEQ,
+							  P.CAM_ID,
+							  P.TRAIN_METHOD,
+							  P.PREDICT,
+							  ROUND(P.SUCC_PROB * 100) as SUCC_PROB,
+							  ROUND(P.FAIL_PROB * 100) as FAIL_PROB,
+							  ST_C1
+						 FROM AI_TEST_PREDICT P INNER JOIN AI_STAGING_TEST T
+				        			ON P.ST_SEQ = T.ST_SEQ
+				        WHERE P.CAM_ID = #{camId} 
+				        
+				        <include refid="inputParam"></include>
+				        
+                        ORDER BY ST_SEQ DESC
+			   ) A
+			   
+		 <where>
+		 	<if test="(extractCnt != null) and (extractCnt != 0.0)">
+	        	<![CDATA[ ROWNUM <= #{extractCnt} ]]>
+	        </if>
+		 </where>
 	</select>
 </mapper>

@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -339,6 +341,86 @@ public class FileController {
 				
     }
 
+	// csv 다운로드(파라메터를 각각 나눔)
+	@ResponseBody
+	@RequestMapping(value = "/down/predict/{camId}/{succProb}/{extractCnt}", method = RequestMethod.GET, produces = "text/csv")  
+    public void downloadCsvPredict(
+    	@PathVariable String camId,
+    	@PathVariable String succProb,
+    	@PathVariable String extractCnt,
+    	HttpServletRequest request,
+    	HttpServletResponse response){
+		
+		try {
+			request.setCharacterEncoding("UTF-8");
+			
+			logger.info("download 예측 파라메터 :: cam_id :: " + camId + ", 성공률 :: " + succProb + ", 추출건수 :: " + extractCnt);
+			
+			//실제 내보낼 파일명 
+            String oriFileName = camId+"_예측 데이터.csv";
+            String client = "";
+            boolean skip = false;
+            
+            OutputStream os = null;
+			
+            client = request.getHeader("User-Agent");
+            
+            //파일 다운로드 헤더 지정 
+            response.reset();
+            response.setContentType("application/csv");
+            response.setHeader("Content-Description", "CSV Generated Data");
+            if (!skip) {
+                // IE
+                if (client.indexOf("MSIE") != -1) {
+                    response.setHeader("Content-Disposition", "attachment; filename=\""
+                            + java.net.URLEncoder.encode(oriFileName, "UTF-8").replaceAll("\\+", "\\ ") + "\"");
+                    // IE 11 이상.
+                } else if (client.indexOf("Trident") != -1) {
+                    response.setHeader("Content-Disposition", "attachment; filename=\""
+                            + java.net.URLEncoder.encode(oriFileName, "UTF-8").replaceAll("\\+", "\\ ") + "\"");
+                } else {
+                    // 한글 파일명 처리
+                    response.setHeader("Content-Disposition",
+                            "attachment; filename=\"" + new String(oriFileName.getBytes("UTF-8"), "ISO8859_1") + "\"");
+                    response.setHeader("Content-Type", "application/csv; charset=utf-8");
+                }
+                
+                Map<String, Object> paramMap = new HashMap<>();
+                
+                paramMap.put("camId", Integer.valueOf(camId));
+                paramMap.put("succProb", Double.valueOf(succProb));
+                paramMap.put("extractCnt", Integer.valueOf(extractCnt));
+                
+                logger.info("downloadPredict :: param :: {}", paramMap );
+                
+                List<AIPredict> lists = predictService.getPredictDown(paramMap);
+                
+                StringBuilder sb = new StringBuilder();
+                for(AIPredict list : lists) {
+                	sb.append(list.toString());
+                }
+                
+                response.setHeader("Content-Length", "" + sb.length());
+                os = response.getOutputStream();
+                os.write(sb.toString().getBytes());
+
+                /*
+                byte b[] = new byte[(int) sb.length()];
+                int leng = 0;
+                while ((leng = in.read(b)) > 0) {
+                    os.write(b, 0, leng);
+                }
+                */
+            } else {
+                response.setContentType("text/html;charset=UTF-8");
+                System.out.println("<script language='javascript'>alert('파일을 찾을 수 없습니다');history.back();</script>");
+            }
+            
+            os.close();
+        } catch (Exception e) {
+            System.out.println("ERROR : " + e.getMessage());
+        }			
+    }
 	
 	@RequestMapping(value = "/UploadReal") // method = RequestMethod.GET 
 	public ResponseEntity<Object> fileUpload_Real(
