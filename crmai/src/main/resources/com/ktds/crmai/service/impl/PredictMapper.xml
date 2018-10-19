@@ -77,7 +77,7 @@
 				         
 				         <include refid="inputParam"></include>
 				         
-				         ORDER BY ST_SEQ DESC
+				         ORDER BY ST_SEQ
 				      ) A
 				WHERE <![CDATA[ ROWNUM <= #{listEnd} ]]>
 	    	 ) B
@@ -101,7 +101,7 @@
 				        
 				        <include refid="inputParam"></include>
 				        
-                        ORDER BY ST_SEQ DESC
+                        ORDER BY ST_SEQ
 			   ) A
 			   
 		 <where>

@@ -252,12 +252,12 @@ $(function() {
 				          	</div>
 				          	<!-- /btn-group -->
 				          	<select id="succ_rate" class="form-control select2" style="width: 60%;">
-				                <option value="0">0%</option>
+				                <option value="0" selected="selected">0%</option>
 				                <option value="0.1">10%</option>
 				                <option value="0.3">30%</option>
 				                <option value="0.5">50%</option>
 				                <option value="0.7">70%</option>
-				                <option value="1" selected="selected">100%</option>
+				                <option value="1">100%</option>
 				            </select>
 				        </div>
 				        <!-- /input-group -->
