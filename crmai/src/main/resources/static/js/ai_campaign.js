@@ -645,7 +645,7 @@ function createTableCampaign(arr){
 						
 						break;
 					case "cam_status":
-						html += "<td>" + arr[arrIdx][val] + "</td>";
+						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
 					case "cam_itype":
@@ -678,7 +678,7 @@ function createTableCampaign(arr){
 						
 						break;
 					case "cam_cdate":
-						html += "<td>" + arr[arrIdx][val] + "</td>";
+						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
 					case "cam_desc":

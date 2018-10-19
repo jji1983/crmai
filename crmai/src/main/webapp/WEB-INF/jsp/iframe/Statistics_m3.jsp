@@ -162,17 +162,17 @@
 			for (var i = 0; i < arr.length; i++) {
 				html += "<tr><td>" + arr[i]["camName"] + "</td>";
 				html += "<td>" + arr[i]["camType"] + "</td>";
-				html += "<td>" + arr[i]["camStatus"] + "</td>";
+				html += "<td class='text-center'>" + arr[i]["camStatus"] + "</td>";
 				html += "<td>" + arr[i]["admName"] + "</td>";
-				html += "<td>" + arr[i]["camCdate"] + "</td>";
-				html += "<td>" + arr[i]["testCnt"] + "</td>";
-				html += "<td>" + arr[i]["originalAcc"] + "</td>";
+				html += "<td class='text-center'>" + arr[i]["camCdate"] + "</td>";
+				html += "<td class='text-right'>" + arr[i]["testCnt"] + "</td>";
+				html += "<td class='text-right'>" + arr[i]["originalAcc"] + "</td>";
 				html += "<td>" + arr[i]["trainMethod"] + "</td>";
-				html += "<td>" + arr[i]["soAcc"] + "</td>";
-				html += "<td>" + arr[i]["realAcc"] + "</td>";
-				html += "<td>" + arr[i]["admType"] + "</td>";
+				html += "<td class='text-right'>" + arr[i]["soAcc"] + "</td>";
+				html += "<td class='text-right'>" + arr[i]["realAcc"] + "</td>";
+				html += "<td class='text-center'>" + arr[i]["admType"] + "</td>";
 				html += "<td>" + arr[i]["admId"] + "</td>";
-				html += "<td>" + arr[i]["camId"] + "</td></tr>";
+				html += "<td class='text-center'>" + arr[i]["camId"] + "</td></tr>";
 			}
 		} else {
 			html += "<tr><td class='text-center' colspan='13'>조회된 데이터가 없습니다.</td></tr>";

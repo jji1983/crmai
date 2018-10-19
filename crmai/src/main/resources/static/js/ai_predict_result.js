@@ -122,11 +122,11 @@ function createTableCampaign(arr){
 						
 						break;
 					case "cam_status":
-						html += "<td>" + arr[arrIdx][val] + "</td>";
+						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
 					case "cam_cdate":
-						html += "<td>" + arr[arrIdx][val] + "</td>";
+						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
 					case "cam_desc":
@@ -194,7 +194,7 @@ function createTableModel(arr){
 			Object.getOwnPropertyNames(arr[arrIdx]).forEach(function(val, idx, array) {
 				switch (val) {
 					case "cam_id":
-						html += "<td>" + arr[arrIdx][val] + "</td>";
+						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
 					case "train_method":
@@ -202,23 +202,23 @@ function createTableModel(arr){
 						
 						break;
 					case "original_acc":
-						html += "<td>" + arr[arrIdx][val] + "%</td>";
+						html += "<td class='text-center'>" + arr[arrIdx][val] + "%</td>";
 						
 						break;
 					case "so_acc":
-						html += "<td>" + arr[arrIdx][val] + "%</td>";
+						html += "<td class='text-center'>" + arr[arrIdx][val] + "%</td>";
 						
 						break;
 					case "train_start":
-						html += "<td>" + arr[arrIdx][val] + "</td>";
+						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
 					case "train_end":
-						html += "<td>" + arr[arrIdx][val] + "</td>";
+						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
 					case "model_flag":
-						html += "<td>" + arr[arrIdx][val] + "</td>";
+						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
 					case "desc_text":
@@ -326,13 +326,13 @@ function createPredictTable(arr) {
 	// 데이터 존재 미존재 여부에 따른 표 표시
 	if(arr.length != 0) {
 		for (var i = 0; i < arr.length; i++) {
-			html += "<tr><td>" + arr[i]["stSeq"] + "</td>";
-			html += "<td>" + arr[i]["camId"] + "</td>";
+			html += "<tr><td class='text-center'>" + arr[i]["stSeq"] + "</td>";
+			html += "<td class='text-center'>" + arr[i]["camId"] + "</td>";
 			html += "<td>" + arr[i]["trainMethod"] + "</td>";
-			html += "<td>" + arr[i]["predict"] + "</td>";
-			html += "<td>" + arr[i]["succProb"] + "</td>";
-			html += "<td>" + arr[i]["failProb"] + "</td>";
-			html += "<td>" + arr[i]["stC1"] + "</td></tr>";
+			html += "<td class='text-right'>" + arr[i]["predict"] + "</td>";
+			html += "<td class='text-right'>" + arr[i]["succProb"] + "</td>";
+			html += "<td class='text-right'>" + arr[i]["failProb"] + "</td>";
+			html += "<td class='text-center'>" + arr[i]["stC1"] + "</td></tr>";
 		}
 	}
 	

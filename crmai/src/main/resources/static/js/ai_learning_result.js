@@ -117,7 +117,7 @@ function createTableCampaign(arr){
 						
 						break;
 					case "cam_status":
-						html += "<td>" + arr[arrIdx][val] + "</td>";
+						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
 					case "cam_itype":
@@ -150,7 +150,7 @@ function createTableCampaign(arr){
 						
 						break;
 					case "cam_cdate":
-						html += "<td>" + arr[arrIdx][val] + "</td>";
+						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
 					case "cam_desc":
@@ -216,7 +216,7 @@ function createTableLearningResult(arr){
 			Object.getOwnPropertyNames(arr[arrIdx]).forEach(function(val, idx, array) {
 				switch (val) {
 					case "cam_id":
-						html += "<td>" + arr[arrIdx][val] + "</td>";
+						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
 					case "train_method":
@@ -224,26 +224,26 @@ function createTableLearningResult(arr){
 						
 						break;
 					case "original_acc":
-						html += "<td>" + arr[arrIdx][val] + "%</td>";
+						html += "<td class='text-center'>" + arr[arrIdx][val] + "%</td>";
 						
 						break;
 					case "so_acc":
-						html += "<td>" + arr[arrIdx][val] + "%</td>";
+						html += "<td class='text-center'>" + arr[arrIdx][val] + "%</td>";
 						
 						break;
 					case "train_start":
-						html += "<td>" + arr[arrIdx][val] + "</td>";
+						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
 					case "train_end":
-						html += "<td>" + arr[arrIdx][val] + "</td>";
+						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
 					case "model_flag":
 						if(arr[arrIdx][val] == "Y") {
-							html += "<td class='bg-yellow'>" + arr[arrIdx][val] + "</td>";
+							html += "<td class='bg-yellow text-center'>" + arr[arrIdx][val] + "</td>";
 						} else {
-							html += "<td>" + arr[arrIdx][val] + "</td>";
+							html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						}
 						
 						break;

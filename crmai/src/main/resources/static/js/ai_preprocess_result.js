@@ -117,7 +117,7 @@ function createTableCampaign(arr){
 						
 						break;
 					case "cam_status":
-						html += "<td>" + arr[arrIdx][val] + "</td>";
+						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
 					case "cam_itype":
@@ -150,7 +150,7 @@ function createTableCampaign(arr){
 						
 						break;
 					case "cam_cdate":
-						html += "<td>" + arr[arrIdx][val] + "</td>";
+						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
 					case "cam_desc":
@@ -283,7 +283,7 @@ function createTablePreprocess(arr){
 					val == "st_c4" || val == "st_c5" || val == "st_c6" || val == "st_c7" || val == "st_c8" || 
 					val == "st_c9" || val == "st_c10" || val == "st_c200") {
 					
-					html += "<td>" + arr[arrIdx][val] + "</td>";
+					html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 				}
 			});
 			

@@ -156,11 +156,11 @@
 			for (var i = 0; i < arr.length; i++) {
 				html += "<tr><td>" + arr[i]["camName"] + "</td>";
 				html += "<td>" + arr[i]["camType"] + "</td>";
-				html += "<td>" + arr[i]["camStatus"] + "</td>";
+				html += "<td class='text-center'>" + arr[i]["camStatus"] + "</td>";
 				html += "<td>" + arr[i]["admName"] + "</td>";
-				html += "<td>" + arr[i]["camCdate"] + "</td>";
+				html += "<td class='text-center'>" + arr[i]["camCdate"] + "</td>";
 				html += "<td>" + arr[i]["trainMethod"] + "</td>";
-				html += "<td>" + arr[i]["soAcc"] + "</td></tr>";
+				html += "<td class='text-right'>" + arr[i]["soAcc"] + "</td></tr>";
 			}
 		} else {
 			html += "<tr><td class='text-center' colspan='7'>조회된 데이터가 없습니다.</td></tr>";
