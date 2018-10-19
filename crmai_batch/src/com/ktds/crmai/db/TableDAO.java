@@ -225,13 +225,13 @@ public class TableDAO {
 				query_h.append("insert into " + tableName +"(ST_SEQ, cam_id ," + type);
 				query_b.append("values(ST_SEQ_TEST.NEXTVAL, '" + campaign.getCam_id() + "', 4 ");
 				
-				for(int i = 1; i < campaign.getIcnum(); i++) {
+				for(int i = 1; i <= campaign.getIcnum(); i++) {
 					query_h.append(",ST_C" + i + " " );
 					query_b.append(",?");
 				}
 				
-				query_h.append(",ST_C200) ");
-				query_b.append(",?) ");
+				query_h.append(") ");
+				query_b.append(") ");
 			}
 			
 			query = query_h.toString() + query_b.toString();
@@ -250,14 +250,12 @@ public class TableDAO {
 				
 				Hashtable<String, String> column = temp.getColumn();
 				
-				for(int y = 1 ; y < campaign.getIcnum(); y++) {
+				for(int y = 1 ; y <= campaign.getIcnum(); y++) {
 					
-//					System.out.println(y + " :: " + column.size() + " :: " + column.get("ST_C" + y) );
+					//System.out.println(y + " :: " + column.size() + " :: " + column.get("ST_C" + y) );
 					pstmt.setString(y, column.get("ST_C" + y));
 				}
 //				System.out.println(campaign.getIcnum() + " :: " + campaign.getIcnum() + " :: ST_C200 :: " + column.get("ST_C" + campaign.getIcnum()) );
-				
-				pstmt.setString(campaign.getIcnum(), column.get("ST_C" + campaign.getIcnum()));
 				
                 // addBatch에 담기
                 pstmt.addBatch();
@@ -404,6 +402,54 @@ public class TableDAO {
 			}
                        
 			return msg;
+		}
+	}
+
+	public void updateLastCnum(CampaignData data, String tableName, String type1) {
+		Statement stmt = null;
+		Connection conn = null;
+		StringBuilder update_staging =  new StringBuilder();
+		
+		int rs = 1;
+		int flag = 0;
+		
+		try {
+			conn = getConn();
+			
+			// 드라이버 연결위한 준비  conn객체 생성.
+			stmt = conn.createStatement();
+
+			update_staging.append("update ( ");
+			update_staging.append("select cam_id, st_seq, st_c"+data.getIcnum()+", st_c200 ");			
+			update_staging.append("from "+tableName+" t ");	
+			update_staging.append("where t.cam_id in ("+data.getCam_id()+") ");
+			update_staging.append("and t.st_seq = t.st_seq ");
+			update_staging.append(")set ");
+			update_staging.append("st_c200 = st_c"+data.getIcnum());
+			
+			
+			System.out.println("update_staging :: " + update_staging.toString());
+			
+		    //sql문을 DB에 전송(실행)
+		    rs = stmt.executeUpdate(update_staging.toString()); // 결과 테이블 반환
+		    
+		    String delete_query = "update "+tableName+" set st_c" + data.getIcnum()+ " = '' where cam_id = " + data.getCam_id();
+		    
+		    rs = stmt.executeUpdate(delete_query); // 결과 테이블 반환
+		   
+			
+		}catch (ClassNotFoundException e) {
+			System.err.println("Oracle Driver not Found!");
+		} catch(SQLException e) {
+			System.err.println("insertData_Pretreatment SQL 오류 :: " + e.getMessage() );
+		}finally {
+			try {
+				
+				if(stmt != null) stmt.close();
+				if(conn != null) conn.close();
+			}catch(final SQLException e) {
+				
+			}
 		}
 	}
 

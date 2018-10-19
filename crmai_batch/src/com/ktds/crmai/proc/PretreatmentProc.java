@@ -66,6 +66,14 @@ public class PretreatmentProc {
 	            	//System.out.println(data.getCam_id() + " line :: " + line);
 	            	columns = line.split("\\" + cvsSplitBy);
 	            	
+	            	
+	            	if(columns.length > 199) {
+	            		
+	            		System.out.println("PretreatmentProc :: 컴럼값이 200이 넘음");
+	            		dao.updateCampaign(data, type, 0, "PretreatmentProc :: 컴럼값이 200이 넘음");
+	            		return;
+	            	}
+	            	
 	            	//3.1 스테이징DB(TRAIN) Insert
 	            	train.setCam_id(data.getCam_id());
 	            	train.setSt_itype(4);
@@ -102,8 +110,11 @@ public class PretreatmentProc {
 	            //3.2 캠페인 정보 업데이트 피쳐 갯수
 	        	System.out.println("feature len[" + feature + "]");
 	        	
+	        	//4. 마지막 컬럼을 C200 으로 UPDATE
+	        	dao.updateLastCnum(data, tableName, type1);
+	        	
 	        	if(cam_msg != null) {
-	        		dao.updateCampaign(data, type, 3, cam_msg);
+	        		dao.updateCampaign(data, type, 3, "PretreatmentProc :: " + cam_msg);
 	        	}else {
 	        		dao.updateCampaign(data, type, 7, cam_msg);
 	        	}
