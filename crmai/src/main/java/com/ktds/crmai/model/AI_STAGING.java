@@ -83,4 +83,20 @@ public class AI_STAGING extends PageCriteria {
 		this.result=result;
 		
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(st_seq + ",");
+		sb.append(cam_id + ",");
+		sb.append(st_c1 + ",");
+		sb.append(train_method + ",");
+		sb.append(predict + ",");
+		sb.append(succ_prob + ",");
+		sb.append(fail_prob + ",");
+		sb.append("" + ",\n");
+		
+		return sb.toString();
+	}
+	
 }

@@ -614,7 +614,7 @@
 													<div class="row">
 														<div class="box-body">
 															<div class="row">
-																<div class="col-lg-5 text-left">
+																<div class="col-lg-10 text-left">
 																	<label for="pr_succVal" class="control-label" style="margin-left: 12px;">성공확률</label>
 																	<!-- select -->
 																	<select id="pr_succVal" class="form-control" style="width:100px; display: inline-block; margin-left: 12px;">
@@ -625,13 +625,9 @@
 																		<option value='70'>70%</option>
 																		<option value='100'>100%</option>
 																	</select>
-																</div>
-																<!-- /.col-lg-6 -->
 
-																 <div class="col-lg-5 text-left" style="visibility: hidden;">
-																	<button type="button" class="btn btn-danger">총건수</button>
-																	select
-																	<select id="pr_totalVal" class="form-control" style="width:100px; display: inline-block;">
+																	<label for="pr_totalVal" class="control-label" style="margin-left: 12px;">총 건수</label>
+																	<select id="pr_totalVal" class="form-control" style="width:100px; display: inline-block; margin-left: 12px;">
 																		<option value='1'>1만건</option>
 																		<option value='3'>3만건</option>
 																		<option value='5'>5만건</option>

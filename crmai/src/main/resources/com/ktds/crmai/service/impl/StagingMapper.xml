@@ -196,7 +196,7 @@
 		        where  
 		            pre.st_seq = test.st_seq
 		            and pre.cam_id = #{cam_id}
-		            order by pre.st_seq desc
+		            order by pre.st_seq
 		        ) A
 		        where 
 		        <if test="succVal != null and succVal != ''">
@@ -204,6 +204,7 @@
 		        </if>
 		         <![CDATA[ rownum <= #{page_end} ]]> 
 		    ) B
+		    
 		where <![CDATA[ b.rnum >= #{page_st}  ]]> 
     </select>
     
