@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>선정대상에 대한 실질반응</title>
+<title>기존캠페인 성공률</title>
 
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -304,12 +304,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-       	 선정대상에 대한 실질반응1
+       	 기존캠페인 성공률
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">선정대상에 대한 실질반응1</li>
+        <li class="active">기존캠페인 성공률</li>
       </ol>
     </section>
     

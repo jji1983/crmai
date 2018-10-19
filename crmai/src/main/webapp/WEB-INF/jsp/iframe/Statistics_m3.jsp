@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>선정대상에 대한 실질반응</title>
+<title>AI캠페인 실질반응</title>
 
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -377,12 +377,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-       	 선정대상에 대한 실질반응3
+       	 AI캠페인 실질반응
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">선정대상에 대한 실질반응3</li>
+        <li class="active">AI캠페인 실질반응</li>
       </ol>
     </section>
     

@@ -264,144 +264,14 @@
 			</div>
 		</c:if>
 
-		<!-- 공지사항 -->
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="box">
-					<div class="box box-default">
-						<div class="box-header with-border">
-							<h3 class="box-title">공지사항</h3>
-						</div>
-						<!-- /.box-header -->
-						<div class="box-body">
-							<!-- board table -->
-							<!-- /.게시판 목록 -->
-							<form id="noticeForm" name="noticeForm" method="post">
-								<table
-									class="table table-bordered table-striped table-hover text-center">
-									<thead>
-										<tr>
-											<th style="width: 70px">번호</th>
-											<th style="width: 65%">제목</th>
-											<th style="width: 100px">작성자</th>
-											<th style="width: 100px">날짜</th>
-											<!--<th>조회수</th>-->
-										</tr>
-									</thead>
-									<tbody id="ai_notice">
-								</table>
-								<nav aria-label="Page navigation example"
-									style="text-align: center;">
-									<ul class="pagination-sm" id="pagination"></ul>
-								</nav>
-							</form>
-
-							<!-- Modal -->
-							<div class="modal fade" id="noticeNewModal" tabindex="-1"
-								role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<div class="row">
-												<div class="col-xs-10">
-													<h5 class="modal-title" id="newModalLabel">게시글 신규 등록</h5>
-												</div>
-												<div class="col-xs-2">
-													<button type="button" class="close" data-dismiss="modal"
-														aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
-											</div>
-										</div>
-										<div class="modal-body">
-											<!-- form start -->
-											<form class="form-horizontal" id="newUploadForm"
-												action="/notice/insert" method="post">
-												<div class="box-body">
-
-													<input type="hidden" id="user_id" name="user_id"
-														value=<%=session.getAttribute("sessionID")%>> <input
-														type="hidden" id="noticeCode" name="noticeCode">
-
-													<div class="form-group">
-														<label for="inputNoticeName"
-															class="col-sm-2 control-label">제목</label>
-
-														<div class="col-sm-10">
-															<input id="inputNoticeName" name="inputNoticeName"
-																type="text" class="form-control" placeholder="제목"
-																required>
-														</div>
-													</div>
-
-													<div class="form-group readNotice">
-														<label for="noticeDate" class="col-sm-2 control-label">등록일</label>
-
-														<div class="col-sm-10">
-															<input id="noticeDate" name="noticeDate" type="text"
-																class="form-control" readonly>
-														</div>
-													</div>
-
-													<div class="form-group readNotice">
-														<label for="noticeWriter" class="col-sm-2 control-label">작성자</label>
-
-														<div class="col-sm-10">
-															<input id="noticeWriter" name="noticeWriter" type="text"
-																class="form-control" readonly>
-														</div>
-													</div>
-
-													<div class="form-group">
-														<label for="inputNoticeDesc"
-															class="col-sm-2 control-label">내용</label>
-
-														<div class="col-sm-10">
-															<textarea id="inputNoticeDesc" name="inputNoticeDesc"
-																class="form-control" rows="10" placeholder="내용"
-																style="resize: none;"></textarea>
-														</div>
-													</div>
-
-													<!-- TODO: 첨부파일 등록 -->
-													<!--
-												<div class="form-group">
-													<label for="InputFile_csv" class="col-sm-2 control-label">파일 등록(CSV)</label>
-													<div class="col-sm-10">
-														<input id="InputFile_csv" type="file" name="file_board" accept=".csv">
-													</div>
-												</div>
-												-->
-												</div>
-												<!-- /.box-body -->
-												<div class="box-footer">
-													<div class='row pull-right' style='margin-right: 3px'>
-														<button id="bthClose" type="button"
-															class="btn btn-secondary" data-dismiss="modal"
-															style="margin-left: 5px">돌아가기</button>
-													</div>
-												</div>
-												<!-- /.box-footer -->
-											</form>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!--/. Modal -->
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		
 
 		<!-- 통계 -->
 		<div class="row">
 			<!-- Default box -->
 			<div class="box">
 				<div class="box-header with-border">
-					<h4 class="box-title">통계</h4>
+					<h4 class="box-title">현황</h4>
 
 					<div class="box-tools pull-right">
 						<button type="button" class="btn btn-box-tool"
@@ -614,8 +484,140 @@
 
 			<!-- /.box -->
 		</div>
-
 		<!-- /.row -->
+		<!-- 공지사항 -->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box box-default">
+						<div class="box-header with-border">
+							<h3 class="box-title">공지사항</h3>
+						</div>
+						<!-- /.box-header -->
+						<div class="box-body">
+							<!-- board table -->
+							<!-- /.게시판 목록 -->
+							<form id="noticeForm" name="noticeForm" method="post">
+								<table
+									class="table table-bordered table-striped table-hover text-center">
+									<thead>
+										<tr>
+											<th style="width: 70px">번호</th>
+											<th style="width: 65%">제목</th>
+											<th style="width: 100px">작성자</th>
+											<th style="width: 100px">날짜</th>
+											<!--<th>조회수</th>-->
+										</tr>
+									</thead>
+									<tbody id="ai_notice">
+								</table>
+								<nav aria-label="Page navigation example"
+									style="text-align: center;">
+									<ul class="pagination-sm" id="pagination"></ul>
+								</nav>
+							</form>
+
+							<!-- Modal -->
+							<div class="modal fade" id="noticeNewModal" tabindex="-1"
+								role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<div class="row">
+												<div class="col-xs-10">
+													<h5 class="modal-title" id="newModalLabel">게시글 신규 등록</h5>
+												</div>
+												<div class="col-xs-2">
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+											</div>
+										</div>
+										<div class="modal-body">
+											<!-- form start -->
+											<form class="form-horizontal" id="newUploadForm"
+												action="/notice/insert" method="post">
+												<div class="box-body">
+
+													<input type="hidden" id="user_id" name="user_id"
+														value=<%=session.getAttribute("sessionID")%>> <input
+														type="hidden" id="noticeCode" name="noticeCode">
+
+													<div class="form-group">
+														<label for="inputNoticeName"
+															class="col-sm-2 control-label">제목</label>
+
+														<div class="col-sm-10">
+															<input id="inputNoticeName" name="inputNoticeName"
+																type="text" class="form-control" placeholder="제목"
+																required>
+														</div>
+													</div>
+
+													<div class="form-group readNotice">
+														<label for="noticeDate" class="col-sm-2 control-label">등록일</label>
+
+														<div class="col-sm-10">
+															<input id="noticeDate" name="noticeDate" type="text"
+																class="form-control" readonly>
+														</div>
+													</div>
+
+													<div class="form-group readNotice">
+														<label for="noticeWriter" class="col-sm-2 control-label">작성자</label>
+
+														<div class="col-sm-10">
+															<input id="noticeWriter" name="noticeWriter" type="text"
+																class="form-control" readonly>
+														</div>
+													</div>
+
+													<div class="form-group">
+														<label for="inputNoticeDesc"
+															class="col-sm-2 control-label">내용</label>
+
+														<div class="col-sm-10">
+															<textarea id="inputNoticeDesc" name="inputNoticeDesc"
+																class="form-control" rows="10" placeholder="내용"
+																style="resize: none;"></textarea>
+														</div>
+													</div>
+
+													<!-- TODO: 첨부파일 등록 -->
+													<!--
+												<div class="form-group">
+													<label for="InputFile_csv" class="col-sm-2 control-label">파일 등록(CSV)</label>
+													<div class="col-sm-10">
+														<input id="InputFile_csv" type="file" name="file_board" accept=".csv">
+													</div>
+												</div>
+												-->
+												</div>
+												<!-- /.box-body -->
+												<div class="box-footer">
+													<div class='row pull-right' style='margin-right: 3px'>
+														<button id="bthClose" type="button"
+															class="btn btn-secondary" data-dismiss="modal"
+															style="margin-left: 5px">돌아가기</button>
+													</div>
+												</div>
+												<!-- /.box-footer -->
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--/. Modal -->
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
 	</section>
 	<!-- /.Main content -->
 
