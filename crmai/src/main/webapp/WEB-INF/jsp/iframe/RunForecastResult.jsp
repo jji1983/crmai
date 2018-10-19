@@ -273,10 +273,10 @@ $(function() {
 			          	</div>
 			          	<!-- /btn-group -->
 			          	<select id="extract" class="form-control select2" style="width: 60%;">
-			                <option value="1">1만건</option>
-			                <option value="3">3만건</option>
-			                <option value="5">5만건</option>
-			                <option value="10">10만건</option>
+			                <option value="10000">1만건</option>
+			                <option value="30000">3만건</option>
+			                <option value="50000">5만건</option>
+			                <option value="100000">10만건</option>
 			                <option value="0" selected="selected">모두</option>
 			            </select>
 			          </div>

@@ -250,12 +250,15 @@ function createTableModel(arr){
 function predictCount() {
 	// 숫자형으로 변형
 	currentCamId = Number(currentValue);
+	
 	var succRate = Number($("#succ_rate").val());
+	var extractCnt = Number($("#extract").val());
 	
 	$.ajax({
 		url:"/predict/count",
 		data:{
 			camId : currentCamId,
+			extractCnt : extractCnt,
 			succProb : succRate
 		},
 		success:function(pagingData) {

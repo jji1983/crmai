@@ -50,6 +50,10 @@
         		ON P.ST_SEQ = T.ST_SEQ
         WHERE P.CAM_ID = #{camId}
         
+        <if test="(extractCnt != null) and (extractCnt != 0)">
+        	AND <![CDATA[ ROWNUM <= #{extractCnt} ]]>
+        </if>
+        
         <include refid="inputParam"></include>
 
 	</select>

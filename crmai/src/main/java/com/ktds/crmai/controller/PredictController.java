@@ -47,12 +47,13 @@ public class PredictController {
 	@RequestMapping(value="/count")
 	public PageMaker selectPredictCnt(
 		@RequestParam Integer camId,
-		@RequestParam Integer succProb,
+		@RequestParam Double succProb,
+		@RequestParam Integer extractCnt,
 		@ModelAttribute("cri") PageCriteria cri) {
 		
 		PageMaker pageMaker = new PageMaker();
     	
-		LOGGER.info("##### 예상 페이지:" + cri.getPage() + ", 예상 페이지 당 수:" + cri.getPerPageNum() + ", 예상 페이지 시작:" + cri.getListStart() + ", 성공률:" + succProb);
+		LOGGER.info("##### 예상 페이지:" + cri.getPage() + ", 예상 페이지 당 수:" + cri.getPerPageNum() + ", 예상 페이지 시작:" + cri.getListStart() + ", 성공률:" + succProb + ", 건 수:" + extractCnt);
 		
     	pageMaker.setCri(cri);
     	
@@ -60,6 +61,7 @@ public class PredictController {
     	
     	paramMap.put("camId", camId);
 		paramMap.put("succProb", succProb);
+		paramMap.put("extractCnt", extractCnt);
 		
 		Integer predictCnt = predictService.selectPredictCnt(paramMap);
 		
@@ -75,7 +77,7 @@ public class PredictController {
 	@RequestMapping(value="/paging")
 	public List<AIPredict> selectPagingPredictList(
 		@RequestParam Integer camId,
-		@RequestParam Integer succProb,
+		@RequestParam Double succProb,
 		@RequestParam(required=false) Integer page) {
 		
 		LOGGER.info("$$$$$$클릭한 페이지:" + page + ", 예측률:" + succProb);
