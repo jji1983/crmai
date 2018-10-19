@@ -334,6 +334,22 @@ $(function() {
        <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+    
+    <div class="modal fade" id="modal_no_down">
+       <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-body">
+                <p>다운로드할 데이터가 없습니다.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
+              </div>
+          </div>
+          <!-- /.modal-content -->
+       </div>
+       <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
    
 </section>
 <!-- /.Main content -->

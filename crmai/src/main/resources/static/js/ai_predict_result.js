@@ -416,7 +416,11 @@ function csvDown() {
 	var succVal = $("#succ_rate").val();
 	var extractVal = $("#extract").val();
 	
-	window.open("/file/down/predict/"+currentValue+"/"+succVal+"/"+extractVal);
+	if((predictCamId != 0) && (predictCamId != null) && (predictCamId != "")) {
+		window.open("/file/down/predict/"+currentValue+"/"+succVal+"/"+extractVal);
+	} else {
+		$("#modal_no_down").modal("show");
+	}
 	
 	$("#modal_down").modal("hide");
 }
