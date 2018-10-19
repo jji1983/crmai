@@ -97,13 +97,13 @@ function createTableCampaign(arr){
 				switch (val) {
 					case "cam_id":
 						if(first == true) {
-							html += "<td><input name='cam_check' type='radio' value='" + arr[arrIdx][val] + "' onclick='handleClick(this);' checked='checked'></td>";
+							html += "<td class='text-center'><input name='cam_check' type='radio' value='" + arr[arrIdx][val] + "' onclick='handleClick(this);' checked='checked'></td>";
 							
 							radioInit(arr[arrIdx][val]);
 							
 							first = false;
 						} else {
-							html += "<td><input name='cam_check' type='radio' value='" + arr[arrIdx][val] + "' onclick='handleClick(this);'></td>";
+							html += "<td class='text-center'><input name='cam_check' type='radio' value='" + arr[arrIdx][val] + "' onclick='handleClick(this);'></td>";
 						}
 						
 						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
