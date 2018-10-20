@@ -65,7 +65,7 @@ function search_st4() {
 		// dataType : [응답 데이터 형식], // 명시하지 않을 경우 자동으로 추측
 		success : function(data) {
 			var obj = JSON.stringify(data, true, 2);
-			// alert("search_st result :: " + obj);
+			 alert("search_st result :: " + obj);
 
 			grid_tableStaging4(obj);
 
@@ -113,14 +113,15 @@ function grid_tableStaging4(obj) {
 			if (k == 'predict'
 
 			) {
-				switch (v) {
-				case "0":
+				
+				if(v == '0'){
 					html += '<td>실패</td>';
-					break;
-				case "1":
+				}else if( v == '1'){
 					html += '<td>성공</td>';
-					break;
+				}else{
+					html += '<td>'+v+''</td>';
 				}
+				
 			}
 
 			if (k == 'succ_prob' || k == 'fail_prob') {
