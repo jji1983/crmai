@@ -80,6 +80,8 @@ public class RealProc {
 	            }
 	            System.out.println(data.getCam_id() + " ing :: " + DateTool.getTimestamp());
 	            
+	            dao.deleteAI_STAGING_Real(data);
+	            
 	            //업데이트
 	            cam_msg = dao.insertAI_STAGING_Real(data, arrayList);
 	            

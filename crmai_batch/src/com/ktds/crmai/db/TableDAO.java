@@ -453,5 +453,41 @@ public class TableDAO {
 		}
 	}
 
+	public void deleteAI_STAGING_Real(CampaignData data) {
+		Statement stmt = null;
+		Connection conn = null;
+		StringBuilder delete_staging =  new StringBuilder();
+		
+		int rs = 1;
+		int flag = 0;
+		
+		try {
+			conn = getConn();
+			
+			// 드라이버 연결위한 준비  conn객체 생성.
+			stmt = conn.createStatement();
+
+			delete_staging.append("delete from ai_staging_real where cam_id = "+ data.getCam_id());
+			System.out.println("delete_staging :: " + delete_staging.toString());
+			
+		    //sql문을 DB에 전송(실행)
+		    rs = stmt.executeUpdate(delete_staging.toString()); // 결과 테이블 반환
+			
+		}catch (ClassNotFoundException e) {
+			System.err.println("Oracle Driver not Found!");
+		} catch(SQLException e) {
+			System.err.println("insertData_Pretreatment SQL 오류 :: " + e.getMessage() );
+		}finally {
+			try {
+				
+				if(stmt != null) stmt.close();
+				if(conn != null) conn.close();
+			}catch(final SQLException e) {
+				
+			}
+		}
+		
+	}
+
 
 }
