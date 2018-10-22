@@ -256,9 +256,13 @@
 				
 				// 그래프 굵기 조정(데이터 갯수에 따라서...)
 				if(soAccArr.length == 1) {
-					barChartOptions["barValueSpacing"] = 280;
-				} else if((soAccArr.length > 1) && (soAccArr.length <= 6)) {
-					barChartOptions["barValueSpacing"] = 100;
+					barChartOptions["barValueSpacing"] = 260;
+				} else if((soAccArr.length > 1) && (soAccArr.length <= 3)) {
+					barChartOptions["barValueSpacing"] = 120;
+				} else if((soAccArr.length > 3) && (soAccArr.length <= 5)) {
+					barChartOptions["barValueSpacing"] = 40;
+				} else if((soAccArr.length > 5) && (soAccArr.length <= 6)) {
+					barChartOptions["barValueSpacing"] = 25;
 				} else {
 					barChartOptions["barValueSpacing"] = 5;
 				}

@@ -343,8 +343,12 @@
 				// 그래프 굵기 조정(데이터 갯수에 따라서...)
 				if(originalAccArr.length == 1) {
 					barChartOptions["barValueSpacing"] = 250;
-				} else if((originalAccArr.length > 1) && (originalAccArr.length <= 6)) {
-					barChartOptions["barValueSpacing"] = 60;
+				} else if((originalAccArr.length > 1) && (originalAccArr.length <= 3)) {
+					barChartOptions["barValueSpacing"] = 100;
+				} else if((originalAccArr.length > 3) && (originalAccArr.length <= 5)) {
+					barChartOptions["barValueSpacing"] = 30;
+				} else if((originalAccArr.length > 5) && (originalAccArr.length <= 6)) {
+					barChartOptions["barValueSpacing"] = 25;
 				} else {
 					barChartOptions["barValueSpacing"] = 5;
 				}
