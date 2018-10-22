@@ -143,39 +143,35 @@
 	function createTable(arr) {
 		var html = "<table id='cam_table' class='table table-bordered table-hover'>";
 		
-		html += "<thead><tr><th class='text-center'>캠페인명</th>";
+		html += "<thead><tr><th class='text-center'>캠페인ID</th>";
+		html += "<th class='text-center'>캠페인명</th>";
 		html += "<th class='text-center'>캠페인 목적</th>";
 		html += "<th class='text-center'>캠페인 상태</th>";
 		html += "<th class='text-center'>생성자</th>";
 		html += "<th class='text-center'>생성일자</th>";
+		html += "<th class='text-center'>학습모델</th>";
 		html += "<th class='text-center'>대상건수</th>";
 		html += "<th class='text-center'>기존</th>";
-		html += "<th class='text-center'>학습모델</th>";
 		html += "<th class='text-center'>예측</th>";
-		html += "<th class='text-center'>결과</th>";
-		html += "<th class='text-center'>산업군</th>";
-		html += "<th class='text-center'>생성자ID</th>";
-		html += "<th class='text-center'>캠페인ID</th></tr></thead><tbody>";
+		html += "<th class='text-center'>결과</th></tr></thead><tbody>";
 		
 		// 데이터 존재 미존재 여부에 따른 표 표시
 		if(arr.length != 0) {
 			for (var i = 0; i < arr.length; i++) {
-				html += "<tr><td>" + arr[i]["camName"] + "</td>";
+				html += "<tr class='text-center'><td>" + arr[i]["camId"] + "</td>";
+				html += "<td>" + arr[i]["camName"] + "</td>";
 				html += "<td>" + arr[i]["camType"] + "</td>";
 				html += "<td class='text-center'>" + arr[i]["camStatus"] + "</td>";
 				html += "<td>" + arr[i]["admName"] + "</td>";
 				html += "<td class='text-center'>" + arr[i]["camCdate"] + "</td>";
+				html += "<td>" + arr[i]["trainMethod"] + "</td>";
 				html += "<td class='text-right'>" + arr[i]["testCnt"] + "</td>";
 				html += "<td class='text-right'>" + arr[i]["originalAcc"] + "</td>";
-				html += "<td>" + arr[i]["trainMethod"] + "</td>";
 				html += "<td class='text-right'>" + arr[i]["soAcc"] + "</td>";
-				html += "<td class='text-right'>" + arr[i]["realAcc"] + "</td>";
-				html += "<td class='text-center'>" + arr[i]["admType"] + "</td>";
-				html += "<td>" + arr[i]["admId"] + "</td>";
-				html += "<td class='text-center'>" + arr[i]["camId"] + "</td></tr>";
+				html += "<td class='text-right'>" + arr[i]["realAcc"] + "</td></tr>";
 			}
 		} else {
-			html += "<tr><td class='text-center' colspan='13'>조회된 데이터가 없습니다.</td></tr>";
+			html += "<tr><td class='text-center' colspan='11'>조회된 데이터가 없습니다.</td></tr>";
 		}
 		
   	  	html += "</tbody></table>";
