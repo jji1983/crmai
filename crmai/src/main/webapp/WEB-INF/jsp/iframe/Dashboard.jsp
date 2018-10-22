@@ -296,7 +296,7 @@
 						<div class="row" style="margin-bottom: 30px; margin-top: 10px;">
 							<div class="col-md-12">
 								<form>
-									<input type="button" class="btn btn-block btn-bg-mint btn-lg"
+									<input type="button" class="btn btn-block btn-bg-mint btn-lg disabled" 
 										id="myBtn" value="나의 현황">
 								</form>
 							</div>
@@ -680,6 +680,9 @@
 
 	<!-- MDB charts ADD -->
 	<script src="/resources/js/chart.js"></script>
+	<!-- MDB charts ADD -->
+	<script src="/resources/adminLTE/chart.js/plugin/chartjs-plugin-datalabels.js"></script>
+	<script src="/resources/adminLTE/chart.js/plugin/chartjs-plugin-datalabels.min.js"></script>
 
 	<!-- twbsPagination :: https://github.com/josecebe/twbs-pagination -->
 	<script src="/resources/js/jquery.twbsPagination.js"></script>

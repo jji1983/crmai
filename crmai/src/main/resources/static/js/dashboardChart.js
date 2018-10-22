@@ -334,8 +334,17 @@ var chartOptions = {
 	},
 	legend : {
 		position : 'bottom',
+	},
+	plugins: {
+		datalabels: {
+			display: function(context) {
+				return context.dataset.data[context.dataIndex] > 0;
+			},
+			formatter: Math.round
+		}
 	}
 };
+
 
 function initLeftChart() {
 	var ctxLeft = document.getElementById("chBarLeft").getContext('2d');
