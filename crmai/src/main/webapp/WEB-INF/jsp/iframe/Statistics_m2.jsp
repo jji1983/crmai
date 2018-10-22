@@ -49,8 +49,8 @@
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- ChartJS -->
-<script src="/resources/bower_components/chart.js/Chart.js"></script>
+<!-- ChartJS에서 퍼센트만 바꾼 clone ChartJS -->
+<script src="/resources/bower_components/chart.js/percent-chart.js"></script>
 <!-- Sparkline -->
 <script src="/resources/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
@@ -208,7 +208,7 @@
 						labels : camNameArr,
 						datasets: [
 						    {
-						       label               : '예측',
+						       label               : '예측(%)',
 						       fillColor           : 'rgba(147, 0, 156, 0.9)',
 						       strokeColor         : 'rgba(147, 0, 156, 0.8)',
 						       pointColor          : '#93009c',
@@ -271,7 +271,7 @@
 						labels : trainMethodArr,
 						datasets: [
 						    {
-						       label               : '예측',
+						       label               : '예측(%)',
 						       fillColor           : 'rgba(147, 0, 156, 0.9)',
 						       strokeColor         : 'rgba(147, 0, 156, 0.8)',
 						       pointColor          : '#93009c',

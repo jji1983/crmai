@@ -49,8 +49,8 @@
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- ChartJS -->
-<script src="/resources/bower_components/chart.js/Chart.js"></script>
+<!-- ChartJS에서 퍼센트만 바꾼 clone ChartJS -->
+<script src="/resources/bower_components/chart.js/percent-chart.js"></script>
 <!-- Sparkline -->
 <script src="/resources/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
@@ -184,7 +184,7 @@
 				labels : camNameArr,
 				datasets: [
 				    {
-				       label               : '정확도',
+				       label               : '정확도(%)',
 				       fillColor           : 'rgba(60,141,188,0.9)',
 				       strokeColor         : 'rgba(60,141,188,0.8)',
 				       pointColor          : '#3b8bba',

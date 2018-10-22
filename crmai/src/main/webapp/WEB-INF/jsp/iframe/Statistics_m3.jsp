@@ -49,8 +49,8 @@
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- ChartJS -->
-<script src="/resources/bower_components/chart.js/Chart.js"></script>
+<!-- ChartJS에서 퍼센트만 바꾼 clone ChartJS -->
+<script src="/resources/bower_components/chart.js/percent-chart.js"></script>
 <!-- Sparkline -->
 <script src="/resources/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
@@ -234,7 +234,7 @@
 						labels : camNameArr,
 						datasets: [
 						    {
-						       label               : '정확도',
+						       label               : '정확도(%)',
 						       fillColor           : 'rgba(205, 102, 0, 1)',
 						       strokeColor         : 'rgba(205, 102, 0, 1)',
 						       pointColor          : 'rgba(205, 102, 0, 1)',
@@ -244,7 +244,7 @@
 						       data                : originalAccArr
 						    },
 						    {
-						       label               : '예측',
+						       label               : '예측(%)',
 						       fillColor           : 'rgba(60,141,188,0.9)',
 						       strokeColor         : 'rgba(60,141,188,0.8)',
 						       pointColor          : '#3b8bba',
@@ -254,7 +254,7 @@
 						       data                : soAccArr
 						    },
 						    {
-							   label               : '결과',
+							   label               : '결과(%)',
 							   fillColor           : 'rgba(255,215,0,0.9)',
 							   strokeColor         : 'rgba(255,215,0,0.8)',
 							   pointColor          : '#ffd700',
@@ -270,7 +270,7 @@
 						labels : trainMethodArr,
 						datasets: [
 						    {
-						       label               : '정확도',
+						       label               : '정확도(%)',
 						       fillColor           : 'rgba(255, 87, 0, 0.9)',
 						       strokeColor         : 'rgba(255, 87, 0, 0.8)',
 						       pointColor          : 'rgba(255, 87, 0, 1)',
@@ -280,7 +280,7 @@
 						       data                : orgAccAvgArr
 						    },
 						    {
-						       label               : '예측',
+						       label               : '예측(%)',
 						       fillColor           : 'rgba(211, 255, 206, 0.9)',
 						       strokeColor         : 'rgba(211, 255, 206, 0.8)',
 						       pointColor          : '#d3ffce',
@@ -290,7 +290,7 @@
 						       data                : soAccAvgArr
 						    },
 						    {
-							   label               : '결과',
+							   label               : '결과(%)',
 							   fillColor           : 'rgba(238, 162, 173, 0.9)',
 							   strokeColor         : 'rgba(238, 162, 173, 0.8)',
 							   pointColor          : '#eea2ad',
