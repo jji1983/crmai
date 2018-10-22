@@ -26,7 +26,4 @@ public interface DashboardChartMapper {
 	//캠페인별 데이터 통계
 	List<DashboardChartData> selectCampaign(HashMap<String, Object> baseData);
 	
-	//캠페인별 탭
-	List<AIStatistics> selectCampaignTab(HashMap<String, Object> baseData);
-	
 }

@@ -71,7 +71,7 @@ public class DashboardChartController {
 			baseData.put("period", period);
 		}
 		if (periodBase != null) {
-			baseData.put("periodBase", periodBase + "");
+			baseData.put("periodBase", periodBase);
 		}
 		if (pers != null) {
 			baseData.put("sessionID", (String) session.getAttribute("sessionID"));
@@ -98,22 +98,6 @@ public class DashboardChartController {
 
 		List<DashboardChartData> response = new ArrayList<>();
 		response = dashboardChartService.selectCampaign(baseData);
-
-		return response;
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "campaignTab")
-	public List<AIStatistics> selectCampaignTab(@RequestParam(value = "pers", required = false) String pers,
-			HttpSession session) {
-
-		HashMap<String, Object> baseData = new HashMap<>();
-		if (pers != null) {
-			baseData.put("sessionID", (String) session.getAttribute("sessionID"));
-		}
-
-		List<AIStatistics> response = new ArrayList<>();
-		response = dashboardChartService.selectCampaignTab(baseData);
 
 		return response;
 	}

@@ -443,7 +443,7 @@ function loadLeftTab() {
 	$
 			.ajax({
 				type : "GET",
-				url : "/dashboardChart/campaignTab",
+				url : "/dashboardChart/campaign",
 				cache : false,
 				processData : true,
 				data : data,
@@ -460,10 +460,8 @@ function loadLeftTab() {
 												.push("<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='leftCampaign");
 										string.push(index);
 										string
-												.push("-tab' onclick='toggleLeft(3,");
-										string.push(this.camId);
-										string.push(")'>");
-										string.push(this.camName);
+												.push("-tab' onclick='toggleLeft(3,this)'>");
+										string.push(this.totalBase);
 										string.push("</a></li>");
 									});
 					var html = string.join('');
@@ -557,17 +555,7 @@ function loadRightTab() {
 					var html = string.join('');
 					var div1 = document.querySelector('#rightPeriod');
 					div1.innerHTML = html;
-					/*
-					 * var html = "<li role='presentation'><a
-					 * class='dropdown-header' role='menuitem'
-					 * tabindex='-1'>선택하세요</a></li><li role='presentation' class='divider'></li>"; $
-					 * .each( data, function(index, value) { html += "<li role='presentation'><a
-					 * role='menuitem' data-toggle='tab' tabindex='-1' href='#'
-					 * id='leftPeriod" + index + "-tab' onclick='toggleLeft(2," +
-					 * this.totalBase + ")'>" + this.totalBase + "년</a></li>";
-					 * }); var div1 = document.querySelector('#leftPeriod');
-					 * div1.innerHTML = html;
-					 */
+
 				},
 				error : function(e) {
 				}
@@ -576,7 +564,7 @@ function loadRightTab() {
 	$
 			.ajax({
 				type : "GET",
-				url : "/dashboardChart/campaignTab",
+				url : "/dashboardChart/campaign",
 				cache : false,
 				processData : true,
 				data : data,
@@ -590,77 +578,19 @@ function loadRightTab() {
 									data,
 									function(index, value) {
 										string
-												.push("<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='rightCampaign");
-										string.push(index);
-										string
-												.push("-tab' onclick='toggleRight(3,");
-										string.push(this.camId);
-										string.push(")'>");
-										string.push(this.camName);
+												.push("<li role='presentation'><a role='menuitem' data-toggle='tab' tabindex='-1' href='#' class='rightCampaign' onclick='toggleRight(3, this)'>");
+										string.push(this.totalBase);
 										string.push("</a></li>");
 									});
 					var html = string.join('');
 					var div1 = document.querySelector('#rightCam');
 					div1.innerHTML = html;
-
-					/*
-					 * var html = "<li role='presentation'><a
-					 * class='dropdown-header' role='menuitem'
-					 * tabindex='-1'>선택하세요</a></li><li role='presentation' class='divider'></li>"; $
-					 * .each( data, function(index, value) {
-					 * 
-					 * html += "<li role='presentation'><a role='menuitem'
-					 * data-toggle='tab' tabindex='-1' href='#'
-					 * id='leftCampaign" + index + "-tab'
-					 * onclick='toggleLeft(3," + this.camId + ")'>" +
-					 * this.camName + "</a></li>"; }); var div1 =
-					 * document.querySelector('#leftCam'); div1.innerHTML =
-					 * html;
-					 */
 				},
 				error : function(e) {
 				}
 			});
 }
-/*
- * function loadRightTab() { var data; var periodData = { "period" : "y" };
- *  $ .ajax({ type : "GET", url : "/dashboardChart/type", cache : false,
- * processData : true, data : data, async : true, success : function(data) {
- * 
- * var html = "<li role='presentation'><a class='dropdown-header'
- * role='menuitem' data-toggle='tab' tabindex='-1' href='#'
- * onclick='totalRight()'>전체보기</a></li><li role='presentation' class='divider'></li>"; $
- * .each( data, function(index, value) { html += "<li role='presentation'><a
- * role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='rightType" +
- * index + "-tab' onclick='toggleRight(1," + this.totalBase + ")'>"; switch
- * (this.totalBase) { case "1": html += "통신분야</a></li>"; break; case "2":
- * html += "금융분야</a></li>"; break; case "3": html += "유통분야</a></li>";
- * break; case "0": html += "기타분야</a></li>"; break; } });
- * 
- * var div1 = document.querySelector('#rightType'); div1.innerHTML = html; },
- * error : function(e) { } });
- *  $ .ajax({ type : "GET", url : "/dashboardChart/period", cache : false,
- * processData : true, data : periodData, async : true, success : function(data) {
- * var html = "<li role='presentation'><a class='dropdown-header'
- * role='menuitem' tabindex='-1'>선택하세요</a></li><li role='presentation' class='divider'></li>"; $
- * .each( data, function(index, value) { html += "<li role='presentation'><a
- * role='menuitem' data-toggle='tab' tabindex='-1' href='#' id='rightPeriod" +
- * index + "-tab' onclick='toggleRight(2," + this.totalBase + ")'>" +
- * this.totalBase + "년</a></li>"; }); var div1 =
- * document.querySelector('#rightPeriod'); div1.innerHTML = html; }, error :
- * function(e) { } });
- *  $ .ajax({ type : "GET", url : "/dashboardChart/campaignTab", cache : false,
- * processData : true, data : data, async : true, success : function(data) { var
- * html = "<li role='presentation'><a class='dropdown-header' role='menuitem'
- * tabindex='-1'>선택하세요</a></li><li role='presentation' class='divider'></li>"; $
- * .each( data, function(index, value) {
- * 
- * html += "<li role='presentation'><a role='menuitem' data-toggle='tab'
- * tabindex='-1' href='#' id='rightCampaign" + index + "-tab'
- * onclick='toggleRight(3," + this.camId + ")'>" + this.camName + "</a></li>";
- * }); var div1 = document.querySelector('#rightCam'); div1.innerHTML = html; },
- * error : function(e) { } }); }
- */
+
 function initBothChart() {
 	var ctxLeft = document.getElementById("chBarLeft").getContext('2d');
 
@@ -859,6 +789,7 @@ function totalLeft() {
 					label = "기타분야";
 					break;
 				}
+				$('#myBtn').val("나의 산업군별 - " + label + " 예측 결과");
 				leftOriginal = this.totalOriginal;
 				leftSo = this.totalSo;
 				leftReal = this.totalReal;
@@ -885,6 +816,7 @@ function totalLeft() {
 
 function totalRight() {
 	var data;
+	$('#totalBtn').val("전체 산업군별 - 예측 결과");
 
 	$.ajax({
 		type : "GET",
@@ -1190,8 +1122,11 @@ function getRightCampaign(data) {
 	});
 }
 
-function toggleLeft(kind, cngTitle) {
+function toggleLeft(kind, obj) {
 	var title = document.getElementById('LChartTitle');
+	var myBtn = $('#myBtn');
+	
+	var cngTitle = $(obj).text();
 
 	switch (kind) {
 	case 1:
@@ -1201,10 +1136,11 @@ function toggleLeft(kind, cngTitle) {
 	case 2:
 		var data = {
 			"pers" : "y",
-			"periodBase" : cngTitle
+			"periodBase" : obj
 		};
 
-		$(title).text("( " + cngTitle + "년 ) 월별 통계");
+		$(title).text(obj + "년 1월 ~ " + obj + "년 12월 통계");
+		myBtn.val("나의 기간별 - " + obj + "년 예측 결과");
 
 		getLeftPeriod(data);
 		break;
@@ -1214,32 +1150,40 @@ function toggleLeft(kind, cngTitle) {
 			"campaign" : cngTitle
 		};
 		$(title).text("캠페인별 정확도");
+		myBtn.val("나의 캠페인별 - " + cngTitle + " 예측 결과");
+		
 		getLeftCampaign(data);
 		break;
 	}
 }
 
-function toggleRight(kind, cngTitle) {
+function toggleRight(kind, obj) {
 	var title = document.getElementById('RChartTitle');
+	var totalBtn = $('#totalBtn');
+	var cngTitle = $(obj).text();
 
 	switch (kind) {
 	case 1:
 		var data = {
-			"type" : cngTitle
+			"type" : obj
 		};
 
-		switch (cngTitle) {
+		switch (obj) {
 		case 1:
 			$(title).text("통신분야 정확도 예측 결과");
+			totalBtn.val("전체 산업군별 - 통신분야 예측 결과");
 			break;
 		case 2:
 			$(title).text("금융분야 정확도 예측 결과");
+			totalBtn.val("전체 산업군별 - 금융분야 예측 결과");
 			break;
 		case 3:
 			$(title).text("유통분야 정확도 예측 결과");
+			totalBtn.val("전체 산업군별 - 유통분야 예측 결과");
 			break;
 		case 0:
 			$(title).text("기타분야 정확도 예측 결과");
+			totalBtn.val("전체 산업군별 - 기타분야 예측 결과");
 			break;
 		}
 
@@ -1248,10 +1192,11 @@ function toggleRight(kind, cngTitle) {
 		break;
 	case 2:
 		var data = {
-			"periodBase" : cngTitle
+			"periodBase" : obj
 		};
 
-		$(title).text("( " + cngTitle + "년 ) 월별 통계");
+		$(title).text(obj + "년 1월 ~ " + obj + "년 12월 통계");
+		totalBtn.val("전체 기간별 - " + obj + "년 예측 결과");
 
 		getRightPeriod(data);
 		break;
@@ -1260,6 +1205,7 @@ function toggleRight(kind, cngTitle) {
 			"campaign" : cngTitle
 		};
 		$(title).text("캠페인별 정확도");
+		totalBtn.val("전체 캠페인별 - " + cngTitle + " 예측 결과");
 		getRightCampaign(data);
 		break;
 	}

@@ -41,10 +41,4 @@ public class DashboardChartService implements DashboardChartMapper {
 	public List<DashboardChartData> selectCampaign(HashMap<String, Object> baseData) {
 		return dashboardChartMapper.selectCampaign(baseData);
 	}
-
-	//캠페인별 탭
-	@Override
-	public List<AIStatistics> selectCampaignTab(HashMap<String, Object> baseData) {
-		return dashboardChartMapper.selectCampaignTab(baseData);
-	}
 }

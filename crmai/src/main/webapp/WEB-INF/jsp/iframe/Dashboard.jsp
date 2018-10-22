@@ -69,6 +69,7 @@
 	background-color: #78C2AD;
 	border-color: #78C2AD;
 }
+
 .box-minty {
 	border-top-color: #78C2AD;
 }
@@ -98,21 +99,24 @@
 	background-color: #e2f3f7;
 	border-color: #d6eef3;
 }
+
 .text-pink {
 	color: #F3734F;
-
 }
+
 .text-blue {
 	color: #5198FF;
 }
+
 .text-green {
 	color: #00B4AF;
 }
+
 .chart-container {
-  position: relative;
-  margin: auto;
-  height: auto;
-  width: 100%;
+	position: relative;
+	margin: auto;
+	height: auto;
+	width: 100%;
 }
 </style>
 
@@ -264,7 +268,7 @@
 			</div>
 		</c:if>
 
-		
+
 
 		<!-- 통계 -->
 		<div class="row">
@@ -291,17 +295,18 @@
 						<!-- 나의 현황 -->
 						<div class="row" style="margin-bottom: 30px; margin-top: 10px;">
 							<div class="col-md-12">
-								<button type="button"
-									class="btn btn-block btn-bg-mint btn-lg disabled">나의
-									현황</button>
+								<form>
+									<input type="button" class="btn btn-block btn-bg-mint btn-lg"
+										id="myBtn" value="나의 현황">
+								</form>
 							</div>
 						</div>
 
 						<c:if test="${sessionCAMCNT > 0}">
 							<ul id="leftTab" class="nav nav-tabs" role="tablist">
-								<li class="nav-item active"><a class="nav-link active" data-toggle="tab"
-									role="tab" id="myTabDrop0" onclick="totalLeft()">나의전체</span>
-								</a></li>
+								<li class="nav-item active"><a class="nav-link active"
+									data-toggle="tab" role="tab" id="myTabDrop0"
+									onclick="totalLeft()">나의전체 </a></li>
 								<li role="presentation" class="dropdown"><a data-target="#"
 									id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown"
 									aria-controls="myTabDrop1-contents">기간별 <span class="caret"></span>
@@ -393,9 +398,11 @@
 						<!-- 전체 현황 -->
 						<div class="row" style="margin-bottom: 30px; margin-top: 10px;">
 							<div class="col-md-12">
-								<button type="button"
-									class="btn btn-block btn-primary btn-lg disabled">전체
-									현황</button>
+								<form>
+									<input type="button" id="totalBtn"
+										class="btn btn-block btn-primary btn-lg disabled"
+										value="전체 현황">
+								</form>
 							</div>
 						</div>
 
@@ -446,9 +453,9 @@
 						<div class="row" id="rightStat">
 							<div class="col-md-4 col-sm-6 col-xs-12">
 								<div class="info-box">
-									<span class="info-box-text text-center text-blue">학습</span>
-									<span class="info-box-number text-center text-blue">0%</span>
-									<span class="info-box-text text-center text-blue">(0건)</span>
+									<span class="info-box-text text-center text-blue">학습</span> <span
+										class="info-box-number text-center text-blue">0%</span> <span
+										class="info-box-text text-center text-blue">(0건)</span>
 								</div>
 								<!-- /.info-box -->
 							</div>
@@ -616,8 +623,8 @@
 				</div>
 			</div>
 		</div>
-		
-		
+
+
 	</section>
 	<!-- /.Main content -->
 
@@ -687,21 +694,21 @@
 		$(document).ready(function() {
 			// 게시판 조회
 			getPagination();
-			
+
 			//차트 초기화
 			var leftTab = document.getElementById("leftTab");
 			if (leftTab != null) {
 				initLeftChart();
 				loadLeftStat();
-			} 
+			}
 			initRightChart();
 			loadRightStat();
-			
+
 			if (leftTab != null) {
 				loadLeftTab();
 			}
 			loadRightTab();
-			
+
 			// 모달 처리
 			$('.modal').on('hidden.bs.modal', function(e) {
 				// console.log('modal close');
@@ -712,7 +719,6 @@
 				// console.log('modal open');
 			});
 
-			
 		});
 	</script>
 </body>
