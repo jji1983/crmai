@@ -84,19 +84,20 @@ public class AiStaging {
 		this.train_method = train_method;
 	}
 	public int getPredict() {
-		return Integer.parseInt(predict);
+	    return (int) Double.parseDouble(predict) + 1;  // 실수로 변환 후, 정수로 캐스팅, 그리고 1을 더하기
 	}
 	public void setPredict(String predict) {
 		this.predict = predict;
 	}
 	public int getSucc_prob() {
-		return Integer.parseInt(succ_prob);
+		//return Integer.parseInt(succ_prob);
+	    return (int) Double.parseDouble(succ_prob) + 1;  // 실수로 변환 후, 정수로 캐스팅, 그리고 1을 더하기
 	}
 	public void setSucc_prob(String succ_prob) {
 		this.succ_prob = succ_prob;
 	}
 	public int getFail_prob() {
-		return Integer.parseInt(fail_prob);
+		return (int) Double.parseDouble(fail_prob) + 1;  // 실수로 변환 후, 정수로 캐스팅, 그리고 1을 더하기
 	}
 	public void setFail_prob(String fail_prob) {
 		this.fail_prob = fail_prob;
