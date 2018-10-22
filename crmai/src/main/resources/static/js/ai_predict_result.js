@@ -411,6 +411,50 @@ function search() {
 	}
 }
 
+// csv 업로드 함수
+function submitUploadCSV() {
+	$("input[name='cam_id']").val(currentValue);
+	
+	// Get form
+	var form = $('#real_upload_form')[0];
+	var data = new FormData(form);
+	
+	$("#bth_register").prop("disabled", true);
+	$("#bth_close").prop("disabled", true);
+	
+	$.ajax({
+	    type: "POST",
+	    enctype: 'multipart/form-data',
+	    url: "/file/UploadReal",
+	    data: data,
+	    processData: false, //prevent jQuery from automatically transforming the data into a query string
+	    contentType: false,
+	    cache: false,
+	    timeout: 600000,
+	    success: function (data) {
+	    	alert( data );
+	    	
+	    	$("#bth_register").prop("disabled", false);
+	        
+	        var jbSplit = data.split('::');
+	        
+	        //alert("jbSplit :: " + jbSplit );
+	        
+	    	if(jbSplit[0] == "OK"){
+	            form.reset();
+	            $('#modal_up').modal('hide');
+	    	    
+	    	    newCampaignPage();
+	    	}
+	        
+	    },
+	    error: function (e) {
+	        alert("error :: " + e.responseText);
+	        console.log("ERROR : ", e);
+	    }
+	});
+}
+
 // csv 다운로드 함수
 function csvDown() {
 	var succVal = $("#succ_rate").val();

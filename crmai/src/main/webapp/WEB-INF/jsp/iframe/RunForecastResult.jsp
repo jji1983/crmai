@@ -286,6 +286,7 @@ $(function() {
 		        <div class="col-lg-6">
 		          <div class="input-group pull-right">
 		          	<button type="button" class="btn btn-info" data-target="#modal_no_data" style="margin-right: 10px;" onclick="search();">조회</button>
+		          	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal_up" style="margin-right: 10px;">등록</button>
 		          	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal_down" style="margin-right: 10px;">다운로드</button>
 		          </div>
 		        </div>
@@ -301,6 +302,39 @@ $(function() {
 	     </div>
 	   </div>
 	</div>
+	
+	<div class="modal fade" id="modal_up">
+       <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-body">
+                <!-- form start -->
+				<form class="form-horizontal" id="real_upload_form" action="real_upload_form" method="post"
+							enctype="multipart/form-data">
+					<div class="box-body">
+						<input type="hidden" id="cam_id" name="cam_id" value="">
+						<input type="hidden" id="user_id" name="user_id" value="${sessionID}">
+
+						<p>실측데이터 등록(실측데이터CSV)</p>
+						<div class="form-group">
+							<div class="col-sm-10">
+								<input id="input_file" type="file" name="file_real" accept=".csv">
+							</div>
+						</div>
+					</div>
+					<!-- /.box-body -->
+					<div class="box-footer text-right">
+						<button id="bth_register" type="submit" class="btn btn-primary" onclick="submitUploadCSV();">등록</button>
+						<button id="bth_close" type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+					</div>
+					<!-- /.box-footer -->
+				</form>
+			 </div>
+          </div>
+          <!-- /.modal-content -->
+       </div>
+       <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 	
 	<div class="modal fade" id="modal_down">
        <div class="modal-dialog">
@@ -350,7 +384,7 @@ $(function() {
        <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
-   
+    
 </section>
 <!-- /.Main content -->
 

@@ -67,6 +67,8 @@
 		WHERE MODEL_FLAG = 'Y'
 		
 		<include refid="inputParam"></include>
+		
+		ORDER BY CAM_ID DESC
 	</select>
 	
 	<!-- 의사결정나무평균 쿼리 -->

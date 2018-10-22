@@ -434,7 +434,7 @@ public class FileController {
 		
 		ResponseEntity<Object> response = new ResponseEntity<Object>("OK::등록 성공", HttpStatus.OK);
 		logger.info("fileUpload_Real :: cam_id ::{}, user_id :: {}, inputCamDesc :: {}",cam_id, user_id);
-		
+		logger.info("파일 업로드 === cam_id :: " + cam_id + ", user_id :: " + user_id);
 		
 		AI_CAMPAIGN campaign = new AI_CAMPAIGN();
 		campaign.setCam_id(cam_id);
@@ -459,9 +459,7 @@ public class FileController {
        }else{
     	   String uuid = UUID.randomUUID().toString(); // 중복될 일이 거의 없다.
     	   
-    	   String contentType_t1 = file_t1.getContentType();
-           String name_t1 = file_t1.getName();
-           String originalFilename_t1 = file_t1.getOriginalFilename();
+    	   String name_t1 = file_t1.getName();
            String saveFileName_t1 = fullPath + File.separator + uuid +"_"+campaign.getCam_seq() + "_" +name_t1; // 실제 저장되는 파일의 절대 경로
            
            campaign.setCam_rfilename(saveFileName_t1);
