@@ -142,6 +142,18 @@ function createTableCampaign(arr){
 								html += "<td><span class='label label-primary'>데이터 엑셀 처리 종료</span></td>";
 								
 								break;
+							case "7":
+								html += "<td><span class='label label-primary'>전처리완료</span></td>";
+								
+								break;
+							case "10":
+								html += "<td><span class='label label-primary'>모델생성완료</span></td>";
+								
+								break;
+							case "14":
+								html += "<td><span class='label label-primary'>대상자예측완료</span></td>";
+								
+								break;
 							default:
 								html += "<td><span class='label label-primary'>학습완료</span></td>";
 							
