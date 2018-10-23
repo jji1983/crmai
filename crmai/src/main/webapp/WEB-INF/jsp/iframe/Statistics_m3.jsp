@@ -342,7 +342,7 @@
 				
 				// 그래프 굵기 조정(데이터 갯수에 따라서...)
 				if(originalAccArr.length == 1) {
-					barChartOptions["barValueSpacing"] = 250;
+					barChartOptions["barValueSpacing"] = 220;
 				} else if((originalAccArr.length > 1) && (originalAccArr.length <= 3)) {
 					barChartOptions["barValueSpacing"] = 100;
 				} else if((originalAccArr.length > 3) && (originalAccArr.length <= 5)) {
