@@ -761,11 +761,23 @@
 		$(document).ready(function() {
 			campaignPage();
 
+			//AI전처리 초기화
+			$('#ResultDataModal').on('hidden.bs.modal', function(e) {
+				$('#ai_staging_result').html('');
+			});
+
 			//AI학습 초기화
 			$('#ModelDataModal').on('hidden.bs.modal', function(e) {
 				$('#ai_model_View').html('');
 				$('#top10Area').css('display','none');
 				$('#modelchart').html('');
+			});
+
+			//AI예측실행 초기화
+			$('#PredictDataModal').on('hidden.bs.modal', function(e) {
+				$('#ai_TestPredict').html('');
+				$('#pr_succVal').val("0");
+				$('#pr_totalVal').val("0");
 			});
 
 			//모달 처리(신규).
