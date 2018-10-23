@@ -20,7 +20,7 @@ public interface LearningMapper {
 	 */
 	List<Learning_Info> getLearning_info(AI_CAMPAIGN campaign);
 	
-	List<Learning_Res> getLearning_res(AI_CAMPAIGN campaign);
+	List<Learning_Res> getLearning_res(AI_TRAIN_MODEL in_trian_model);
 	
 	List<AI_TRAIN_MODEL_FEATURE> getLearning_feature(AI_CAMPAIGN campaign);
 	

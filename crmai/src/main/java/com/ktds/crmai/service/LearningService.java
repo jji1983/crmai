@@ -26,8 +26,8 @@ public class LearningService implements LearningMapper {
 	}
 
 	@Override
-	public List<Learning_Res> getLearning_res(AI_CAMPAIGN campaign) {
-		return learningMapper.getLearning_res(campaign);
+	public List<Learning_Res> getLearning_res(AI_TRAIN_MODEL in_trian_model) {
+		return learningMapper.getLearning_res(in_trian_model);
 	}
 	
 	

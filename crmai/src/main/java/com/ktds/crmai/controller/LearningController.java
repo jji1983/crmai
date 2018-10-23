@@ -67,16 +67,16 @@ public class LearningController {
 
 
 	@RequestMapping(value = "/res", method = RequestMethod.GET, consumes=MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getLearning_res(@ModelAttribute("campaign") AI_CAMPAIGN in_compaign){
-    	logger.info("Request List....getLearningres.... - {}", in_compaign);
-    	logger.info("Request List....getLearningres.... - {}", in_compaign.getCam_id());
+    public ResponseEntity<Object> getLearning_res(@ModelAttribute("campaign") AI_TRAIN_MODEL in_trian_model){
+    	logger.info("Request List....getLearningres.... - {}", in_trian_model);
+    	logger.info("Request List....getLearningres.... - {}", in_trian_model.getCam_id());
     	List<Learning_Res> out_learning = null;
     	
-    	alert("getCam_id22 :: " + in_compaign.getCam_id());
+    	alert("getCam_id22 :: " + in_trian_model.getCam_id());
     	
-    	if(in_compaign.getCam_id() != null) { 
+    	if(in_trian_model.getCam_id() != null) { 
     		logger.info("##################");
-    		out_learning = learningService.getLearning_res(in_compaign);
+    		out_learning = learningService.getLearning_res(in_trian_model);
     	}
     	    	
     	logger.info("Request List....getLearningres out .... - {}", out_learning);

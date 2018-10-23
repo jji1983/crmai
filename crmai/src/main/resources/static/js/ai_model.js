@@ -135,8 +135,9 @@ function setAiTrainModelChart(train_method){
         	
         	var obj = JSON.stringify(data, true, 2);
         	//alert("search_learning_res result :: " + obj);
-        	
+        	if (data != null) {
         	grid_table_learning_res(obj);
+        	}
         	
         	
         },
@@ -158,6 +159,7 @@ function grid_table_learning_res(obj){
 
   var json = $.parseJSON(obj);
 	  $(json).each(function(i,val){
+		  if (val.)
 		html += '<tr>';
 		$.each(val,function(k,v){
 			if(v == 'null' || v == ''){
