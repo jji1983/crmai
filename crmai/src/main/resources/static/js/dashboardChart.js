@@ -303,9 +303,10 @@ rightReal = [ 0, 0, 0, 0 ];
 
 var chartOptions = {
 	legend : {
-		labels : {
-			fontColor : '#666'
-		}
+		display: true,
+        labels: {
+            fontColor: 'rgb(255, 99, 132)'
+        }
 	},
 	scales : {
 		xAxes : [ {
@@ -335,16 +336,15 @@ var chartOptions = {
 	legend : {
 		position : 'bottom',
 	},
-	plugins: {
-		datalabels: {
-			display: function(context) {
+	plugins : {
+		datalabels : {
+			display : function(context) {
 				return context.dataset.data[context.dataIndex] > 0;
 			},
-			formatter: Math.round
+			formatter : Math.round
 		}
 	}
 };
-
 
 function initLeftChart() {
 	var ctxLeft = document.getElementById("chBarLeft").getContext('2d');
@@ -401,7 +401,7 @@ function initLeftChart() {
 	});
 
 	var title = document.getElementById('LChartTitle');
-	$(title).text("산업군별 정확도 예측 결과");
+	$(title).text("정확도 예측 결과");
 
 }
 
@@ -655,7 +655,7 @@ function initBothChart() {
 	});
 
 	var title = document.getElementById('LChartTitle');
-	var text = "산업군별 정확도 예측 결과";
+	var text = "정확도 예측 결과";
 	$(title).text(text);
 
 	var ctxRight = document.getElementById("chBarRight").getContext('2d');
@@ -820,7 +820,7 @@ function totalLeft() {
 	});
 
 	var title = document.getElementById('LChartTitle');
-	$(title).text("산업군별 정확도 예측 결과");
+	$(title).text("정확도 예측 결과");
 }
 
 function totalRight() {
@@ -1134,7 +1134,7 @@ function getRightCampaign(data) {
 function toggleLeft(kind, obj) {
 	var title = document.getElementById('LChartTitle');
 	var myBtn = $('#myBtn');
-	
+
 	var cngTitle = $(obj).text();
 
 	switch (kind) {
@@ -1158,9 +1158,9 @@ function toggleLeft(kind, obj) {
 			"pers" : "y",
 			"campaign" : cngTitle
 		};
-		$(title).text("캠페인별 정확도");
+		$(title).text("캠페인별 정확도 - " + cngTitle);
 		myBtn.val("나의 캠페인별 - " + cngTitle + " 예측 결과");
-		
+
 		getLeftCampaign(data);
 		break;
 	}
@@ -1213,7 +1213,7 @@ function toggleRight(kind, obj) {
 		var data = {
 			"campaign" : cngTitle
 		};
-		$(title).text("캠페인별 정확도");
+		$(title).text("캠페인별 정확도 - " + cngTitle);
 		totalBtn.val("전체 캠페인별 - " + cngTitle + " 예측 결과");
 		getRightCampaign(data);
 		break;
