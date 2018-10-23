@@ -64,7 +64,7 @@
 		FROM AI_STATISTICS
 		
 		<!-- 파라메터 조건 -->
-		WHERE MODEL_FLAG = 'Y'
+		WHERE MODEL_FLAG = 'Y' AND <![CDATA[ REAL_ACC <> 0 ]]> 
 		
 		<include refid="inputParam"></include>
 		
