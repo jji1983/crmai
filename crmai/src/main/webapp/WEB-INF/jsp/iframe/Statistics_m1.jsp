@@ -461,8 +461,10 @@
                 <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button> -->
               </div>
             </div>
-            <div id="line_parent" class="box-body">
-              <canvas id="line_chart" style="height:270px"></canvas>
+            <div class="box-body">
+	           <div id="line_parent" class="chart">
+	              <canvas id="line_chart" style="height:270px"></canvas>
+	           </div>
             </div>
             <!-- /.box-body -->
           </div>

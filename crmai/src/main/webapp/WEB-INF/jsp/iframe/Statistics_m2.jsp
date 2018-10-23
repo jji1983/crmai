@@ -460,8 +460,10 @@
                 <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button> -->
               </div>
             </div>
-            <div id="radar_parent" class="box-body">
-              <canvas id="radar_chart" style="height:270px"></canvas>
+            <div class="box-body">
+	            <div id="radar_parent" class="chart">
+	              <canvas id="radar_chart" style="height:270px"></canvas>
+	            </div>
             </div>
             <!-- /.box-body -->
           </div>
