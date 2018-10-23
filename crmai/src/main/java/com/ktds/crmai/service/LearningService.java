@@ -42,7 +42,7 @@ public class LearningService implements LearningMapper {
 	}
 
 	@Override
-	public List<Learning_Res> getLearningWeighting(String cam_id) {
-		return learningMapper.getLearningWeighting(cam_id);
+	public List<Learning_Res> getLearningWeighting(String cam_id, String train_method) {
+		return learningMapper.getLearningWeighting(cam_id, train_method);
 	}
 }

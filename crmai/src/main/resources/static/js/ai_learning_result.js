@@ -209,6 +209,11 @@ function connectLearningResult() {
 }
 
 function createTableLearningResult(arr){
+	// 임시 학습모델
+	var tempTrainMethod;
+	// 모델 플래그 'Y' 값인 학습모델
+	var yTrainMethod;
+	
 	var html = "<table id='learning_result_table' class='table table-bordered table-hover'>";
 	
 	html += "<thead><tr><th class='text-center'>캠페인ID</th>";
@@ -234,6 +239,8 @@ function createTableLearningResult(arr){
 					case "train_method":
 						html += "<td>" + arr[arrIdx][val] + "</td>";
 						
+						tempTrainMethod = arr[arrIdx][val];
+						
 						break;
 					case "original_acc":
 						html += "<td class='text-center'>" + arr[arrIdx][val] + "%</td>";
@@ -254,6 +261,8 @@ function createTableLearningResult(arr){
 					case "model_flag":
 						if(arr[arrIdx][val] == "Y") {
 							html += "<td class='bg-yellow text-center'>" + arr[arrIdx][val] + "</td>";
+							
+							yTrainMethod = tempTrainMethod;
 						} else {
 							html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						}
@@ -282,16 +291,17 @@ function createTableLearningResult(arr){
 	  	
 	$("#div_learning_result").html(html);					// innerHtml jquery버전
 	
-	connectLearningWeight();
+	connectLearningWeight(yTrainMethod);
 }
 
 //캠페인 아이디로 학습결과 중요도 불러오기
-function connectLearningWeight() {
-	if(currentValue != 0) {
+function connectLearningWeight(yTrainMethod) {
+	if((currentValue != 0) && (yTrainMethod != null) && (yTrainMethod != "")) {
 		$.ajax({
 			url:"/Learning/weight",
 			data:{
-				cam_id : currentValue
+				cam_id : currentValue,
+				train_method : yTrainMethod
 			},
 			success:function(data) {
 				createTableLearningWeight(data);

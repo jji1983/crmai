@@ -111,7 +111,10 @@ public class LearningController {
 	
 	@ResponseBody
 	@RequestMapping(value="/weight")
-	public List<Learning_Res> getLearningWeighting(@RequestParam String cam_id) {
-		return learningService.getLearningWeighting(cam_id);
+	public List<Learning_Res> getLearningWeighting(
+			@RequestParam String cam_id,
+			@RequestParam String train_method) {
+		
+		return learningService.getLearningWeighting(cam_id, train_method);
 	}
 }

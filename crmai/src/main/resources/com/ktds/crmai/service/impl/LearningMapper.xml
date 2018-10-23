@@ -74,7 +74,7 @@
     <select id="getLearningWeighting" resultType="learning_res">
     	select cam_id, train_method, feature_name, weight
 	    from ai_train_model_feature
-	    where <![CDATA[ rownum <= 10 ]]> and cam_id = #{cam_id}
+	    where <![CDATA[ rownum <= 10 ]]> and cam_id = #{cam_id} and train_method = #{train_method}
 	    order by weight desc
     </select>
 

@@ -29,5 +29,5 @@ public interface LearningMapper {
 	 */
 	List<AI_TRAIN_MODEL> getLearningResultList(String cam_id);
 	
-	List<Learning_Res> getLearningWeighting(String cam_id);
+	List<Learning_Res> getLearningWeighting(String cam_id, String train_method);
 }
