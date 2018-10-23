@@ -307,6 +307,19 @@ function connectLearningWeight(yTrainMethod) {
 				createTableLearningWeight(data);
 			}
 		});
+	} else {
+		var html = "<table id='learning_weight_table' class='table table-bordered table-hover'>";
+		
+		html += "<thead><tr><th class='text-center'>캠페인ID</th>";
+		html += "<th class='text-center'>학습방법</th>";
+		html += "<th class='text-center'>항목명</th>";
+		html += "<th class='text-center' colspan='2'>중요도(%)</th></tr></thead><tbody>";
+		
+		html += "<tr><td class='text-center' colspan='5'>조회된 데이터가 없습니다.</td></tr>";
+		
+		html += "</tbody></table>";
+	  	
+		$("#div_learning_weight").html(html);
 	}
 }
 
