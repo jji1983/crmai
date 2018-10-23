@@ -564,7 +564,8 @@
 													class="table table-bordered table-hover"></table>
 											</div>
 
-											<div class="col-sm-12 text-center" id="top10Area" style="display: none;">
+											<div class="col-sm-12 text-center" id="top10Area"
+												style="display: none;">
 												<!--  <canvas id="modelchart" style="height: 250px;"></canvas>-->
 												<div class="callout callout-warning">
 													<h4>중요도 TOP10</h4>
@@ -615,26 +616,28 @@
 														<div class="box-body">
 															<div class="row">
 																<div class="col-lg-10 text-left">
-																	<label for="pr_succVal" class="control-label" style="margin-left: 12px;">성공확률</label>
+																	<label for="pr_succVal" class="control-label"
+																		style="margin-left: 12px;">성공확률</label>
 																	<!-- select -->
-																	<select id="pr_succVal" class="form-control" style="width:100px; display: inline-block; margin-left: 12px;">
+																	<select id="pr_succVal" class="form-control"
+																		style="width: 100px; display: inline-block; margin-left: 12px;">
 																		<option value='0' selected="selected">0%</option>
 																		<option value='10'>10%</option>
 																		<option value='30'>30%</option>
 																		<option value='50'>50%</option>
 																		<option value='70'>70%</option>
 																		<option value='100'>100%</option>
-																	</select>
-
-																	<label for="pr_totalVal" class="control-label" style="margin-left: 12px;">총 건수</label>
-																	<select id="pr_totalVal" class="form-control" style="width:100px; display: inline-block; margin-left: 12px;">
+																	</select> <label for="pr_totalVal" class="control-label"
+																		style="margin-left: 12px;">총 건수</label> <select
+																		id="pr_totalVal" class="form-control"
+																		style="width: 100px; display: inline-block; margin-left: 12px;">
 																		<option value='1'>1만건</option>
 																		<option value='3'>3만건</option>
 																		<option value='5'>5만건</option>
 																		<option value='10'>10만건</option>
 																		<option value='0' selected="selected">모두</option>
 																	</select>
-																</div> 
+																</div>
 																<!-- /.col-lg-6 -->
 
 																<div class="col-lg-1 text-right">
@@ -757,6 +760,13 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			campaignPage();
+
+			//AI학습 초기화
+			$('#ModelDataModal').on('hidden.bs.modal', function(e) {
+				$('#ai_model_View').html('');
+				$('#top10Area').css('display','none');
+				$('#modelchart').html('');
+			});
 
 			//모달 처리(신규).
 			$("#bthNew").click(function(event) {
