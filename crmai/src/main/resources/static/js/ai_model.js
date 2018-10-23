@@ -38,9 +38,18 @@ function grid_tableModel(obj){
     html = '<table class="table table-bordered table-hover">';
     html += '<thead><tr><th>캠페인ID</th><th>학습모델</th><th>기존정확도</th><th>AI정확도</th><th>학습시작시간</th><th>학습종료시간</th><th>선택Model</th><th>메시지</th></tr></thead>';
     html += '<tbody>';
+    
+    var tmp = 0;
+    var train_method = '';
 
     var json = $.parseJSON(obj);
  	  $(json).each(function(i,val){
+ 		  if (val.model_flag == 'Y') {
+ 			 train_method = val.train_method;
+ 			 if (train_method == 'LogisticRegression' || train_method == 'svm') {
+ 				tmp = 1;
+ 			 }
+ 		  }
  		html += '<tr>';
  		$.each(val,function(k,v){
  			
@@ -95,14 +104,21 @@ function grid_tableModel(obj){
     html += '</table>';
     
     div.innerHTML = html;
+    
+    //조건 맞으면 실행 
+    if (tmp < 1)  {
+    	$('#top10Area').css('display','block');
+    	setAiTrainModelChart(train_method);
+    }
 }
 
-function setAiTrainModelChart(){
+function setAiTrainModelChart(train_method){
 	
 	var cam_id = currentValue;
 	
 	var campaign = new Object();
   	campaign.cam_id = cam_id;
+  	campaign.train_method = train_method;
 
   	//alert("setAiTrainModelChart :: " + cam_id);
   	

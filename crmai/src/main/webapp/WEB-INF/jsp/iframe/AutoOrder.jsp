@@ -564,7 +564,7 @@
 													class="table table-bordered table-hover"></table>
 											</div>
 
-											<div class="col-sm-12 text-center">
+											<div class="col-sm-12 text-center" id="top10Area" style="display: none;">
 												<!--  <canvas id="modelchart" style="height: 250px;"></canvas>-->
 												<div class="callout callout-warning">
 													<h4>중요도 TOP10</h4>
@@ -818,7 +818,7 @@
 				//alert("3.AI모델 보여준다. !!");
 				get_aiTrainModel();
 
-				setAiTrainModelChart();
+				//setAiTrainModelChart();
 
 			});
 

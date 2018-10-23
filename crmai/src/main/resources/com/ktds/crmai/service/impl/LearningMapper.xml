@@ -36,8 +36,10 @@
 		where
 		    CAMP.CAM_ID = MODEL.CAM_ID
 		   AND CAMP.CAM_ID = FEATURE.CAM_ID
-		   AND MODEL.TRAIN_METHOD = FEATURE.TRAIN_METHOD
-    	 <if test="cam_id != null">
+    	 <if test="train_method != null and train_method != ''">
+		   AND FEATURE.TRAIN_METHOD = #{train_method}
+		 </if>
+    	 <if test="cam_id != null and cam_id != ''">
 		 	AND  CAMP.CAM_ID = #{cam_id}
 		 </if>
 		   AND <![CDATA[ ROWNUM <= 10 ]]>
