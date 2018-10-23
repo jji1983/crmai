@@ -4,18 +4,18 @@
 	<resultMap type="com.ktds.crmai.model.AIStatistics" id="aiStatisticMap">
 		<result column="CAM_ID" property="camId"/>
 		<result column="CAM_NAME" property="camName"/>
+		<result column="CAM_TYPE" property="camType"/>
 		<result column="CAM_STATUS" property="camStatus"/>
 		<result column="ADM_ID" property="admId"/>
 		<result column="ADM_NAME" property="admName"/>
-		<result column="CAM_TYPE" property="camType"/>
-		<result column="CAM_CDATE" property="camCdate"/>
 		<result column="ADM_TYPE" property="admType"/>
+		<result column="CAM_CDATE" property="camCdate"/>
 		<result column="TRAIN_METHOD" property="trainMethod"/>
+		<result column="TEST_CNT" property="testCnt"/>
 		<result column="ORIGINAL_ACC" property="originalAcc"/>
 		<result column="SO_ACC" property="soAcc"/>
 		<result column="REAL_ACC" property="realAcc"/>
 		<result column="MODEL_FLAG" property="modelFlag"/>
-		<result column="TEST_CNT" property="testCnt"/>
 		
 		<result column="ORIGINAL_ACC_AVG" property="originalAccAvg"/>
 		<result column="SO_ACC_AVG" property="soAccAvg"/>
@@ -49,18 +49,15 @@
 	<select id="selectSttModelYList" resultMap="aiStatisticMap" parameterType="com.ktds.crmai.model.AIStatistics">
 		SELECT CAM_ID,
 			   CAM_NAME,
-			   CAM_STATUS,
-			   ADM_ID,
-			   ADM_NAME,
 			   CAM_TYPE,
+			   CAM_STATUS,
+			   ADM_NAME,
 			   CAM_CDATE,
-			   ADM_TYPE,
 			   TRAIN_METHOD,
+			   TEST_CNT,
 			   ORIGINAL_ACC,
 			   SO_ACC,
-			   REAL_ACC,
-			   MODEL_FLAG,
-			   TEST_CNT
+			   REAL_ACC
 		FROM AI_STATISTICS
 		
 		<!-- 파라메터 조건 -->

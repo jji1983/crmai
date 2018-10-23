@@ -141,6 +141,11 @@
 	}
 	
 	function createTable(arr) {
+		// 예측 - 정확도 값(초기화)초
+		var tempDiffSoAcc = 0;
+		// 결과 - 예측 값(초기화)
+		var tempDiffRealAcc = 0;
+		
 		var html = "<table id='cam_table' class='table table-bordered table-hover'>";
 		
 		html += "<thead><tr><th class='text-center'>캠페인ID</th>";
@@ -157,19 +162,53 @@
 		
 		// 데이터 존재 미존재 여부에 따른 표 표시
 		if(arr.length != 0) {
-			for (var i = 0; i < arr.length; i++) {
-				html += "<tr class='text-center'><td>" + arr[i]["camId"] + "</td>";
-				html += "<td>" + arr[i]["camName"] + "</td>";
-				html += "<td>" + arr[i]["camType"] + "</td>";
-				html += "<td class='text-center'>" + arr[i]["camStatus"] + "</td>";
-				html += "<td>" + arr[i]["admName"] + "</td>";
-				html += "<td class='text-center'>" + arr[i]["camCdate"] + "</td>";
-				html += "<td>" + arr[i]["trainMethod"] + "</td>";
-				html += "<td class='text-right'>" + arr[i]["testCnt"] + "</td>";
-				html += "<td class='text-right'>" + arr[i]["originalAcc"] + "</td>";
-				html += "<td class='text-right'>" + arr[i]["soAcc"] + "</td>";
-				html += "<td class='text-right'>" + arr[i]["realAcc"] + "</td></tr>";
-			}
+			arr.forEach(function(arrVal, arrIdx) {
+				html += "<tr>";
+				
+				Object.getOwnPropertyNames(arr[arrIdx]).forEach(function(val, idx, array) {
+					if((val == "camId") || (val == "camStatus") || (val == "camCdate")) {
+						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
+					} else if((val == "camName") || (val == "camType") || (val == "admName") || (val == "trainMethod")) {
+						html += "<td>" + arr[arrIdx][val] + "</td>";
+					} else if((val == "testCnt")) {
+						html += "<td class='text-right'>" + arr[arrIdx][val] + "</td>";
+					} else if(val == "originalAcc") {
+						tempDiffSoAcc = arr[arrIdx][val];
+						
+						html += "<td class='text-right'>" + arr[arrIdx][val] + "</td>";
+					} else if(val == "soAcc") {
+						tempDiffRealAcc = arr[arrIdx][val];
+						
+						// 예측 - 정확도 값 비교
+						tempDiffSoAcc = arr[arrIdx][val] - tempDiffSoAcc;
+						
+						if(tempDiffSoAcc >= 5) {
+							html += "<td><i class='fa fa-fw fa-arrow-up'></i>" + arr[arrIdx][val] + "</td>";
+						} else if (tempDiffSoAcc <= -5) {
+							html += "<td><i class='fa fa-fw fa-arrow-down'></i>" + arr[arrIdx][val] + "</td>";
+						} else {
+							html += "<td><i class='fa fa-fw fa-arrow-right'></i>" + arr[arrIdx][val] + "</td>";
+						}
+					} else if(val == "realAcc") {
+						// 결과 - 예측 값 비교
+						tempDiffRealAcc = arr[arrIdx][val] - tempDiffRealAcc;
+						
+						if(tempDiffRealAcc >= 5) {
+							html += "<td><i class='fa fa-fw fa-arrow-up'></i>" + arr[arrIdx][val] + "</td>";
+						} else if (tempDiffRealAcc <= -5) {
+							html += "<td><i class='fa fa-fw fa-arrow-down'></i>" + arr[arrIdx][val] + "</td>";
+						} else {
+							html += "<td><i class='fa fa-fw fa-arrow-right'></i>" + arr[arrIdx][val] + "</td>";
+						}
+					}
+				});
+				
+				html += "</tr>";
+				
+				// 행마다 다시 초기화
+				tempDiffSoAcc = 0;
+				tempDiffRealAcc = 0;
+			});
 		} else {
 			html += "<tr><td class='text-center' colspan='11'>조회된 데이터가 없습니다.</td></tr>";
 		}
