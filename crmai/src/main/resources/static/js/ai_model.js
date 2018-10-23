@@ -135,9 +135,7 @@ function setAiTrainModelChart(train_method){
         	
         	var obj = JSON.stringify(data, true, 2);
         	//alert("search_learning_res result :: " + obj);
-        	if (data != null) {
         	grid_table_learning_res(obj);
-        	}
         	
         	
         },
@@ -158,8 +156,8 @@ function grid_table_learning_res(obj){
   html += '<tbody>';
 
   var json = $.parseJSON(obj);
+  if (json.length != 0) {
 	  $(json).each(function(i,val){
-		  if (val.)
 		html += '<tr>';
 		$.each(val,function(k,v){
 			if(v == 'null' || v == ''){
@@ -177,6 +175,9 @@ function grid_table_learning_res(obj){
 		
 		html += '</tr>';
 	  });
+  } else {
+	  html += '<tr><td colspan="5">조회된 데이터가 없습니다</td></tr>';
+  }
 	  html += '</tbody>';
   html += '</table>';
   
