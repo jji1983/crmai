@@ -157,8 +157,8 @@
 		html += "<th class='text-center'>학습모델</th>";
 		html += "<th class='text-center'>대상건수</th>";
 		html += "<th class='text-center'>기존</th>";
-		html += "<th class='text-center'>예측</th>";
-		html += "<th class='text-center'>결과</th></tr></thead><tbody>";
+		html += "<th class='text-center' colspan='2'>예측</th>";
+		html += "<th class='text-center' colspan='2'>결과</th></tr></thead><tbody>";
 		
 		// 데이터 존재 미존재 여부에 따른 표 표시
 		if(arr.length != 0) {
@@ -183,22 +183,28 @@
 						tempDiffSoAcc = arr[arrIdx][val] - tempDiffSoAcc;
 						
 						if(tempDiffSoAcc >= 5) {
-							html += "<td><i class='fa fa-fw fa-arrow-up'></i>" + arr[arrIdx][val] + "</td>";
+							html += "<td class='text-left' style='border-right:hidden;'><i class='fa fa-fw fa-arrow-up text-green'></i></td>";
+							html += "<td class='text-right'>" + arr[arrIdx][val] + "</td>";
 						} else if (tempDiffSoAcc <= -5) {
-							html += "<td><i class='fa fa-fw fa-arrow-down'></i>" + arr[arrIdx][val] + "</td>";
+							html += "<td class='text-left' style='border-right:hidden;'><i class='fa fa-fw fa-arrow-down text-red'></i></td>";
+							html += "<td class='text-right'>" + arr[arrIdx][val] + "</td>";
 						} else {
-							html += "<td><i class='fa fa-fw fa-arrow-right'></i>" + arr[arrIdx][val] + "</td>";
+							html += "<td class='text-left' style='border-right:hidden;'><i class='fa fa-fw fa-arrow-right text-yellow'></i></td>" ;
+							html += "<td class='text-right'>" + arr[arrIdx][val] + "</td>";
 						}
 					} else if(val == "realAcc") {
 						// 결과 - 예측 값 비교
 						tempDiffRealAcc = arr[arrIdx][val] - tempDiffRealAcc;
 						
 						if(tempDiffRealAcc >= 5) {
-							html += "<td><i class='fa fa-fw fa-arrow-up'></i>" + arr[arrIdx][val] + "</td>";
+							html += "<td class='text-left' style='border-right:hidden;'><i class='fa fa-fw fa-arrow-up text-green'></i></td>";
+							html += "<td class='text-right'>" + arr[arrIdx][val] + "</td>";
 						} else if (tempDiffRealAcc <= -5) {
-							html += "<td><i class='fa fa-fw fa-arrow-down'></i>" + arr[arrIdx][val] + "</td>";
+							html += "<td class='text-left' style='border-right:hidden;'><i class='fa fa-fw fa-arrow-down text-red'></i></td>";
+							html += "<td class='text-right'>" + arr[arrIdx][val] + "</td>";
 						} else {
-							html += "<td><i class='fa fa-fw fa-arrow-right'></i>" + arr[arrIdx][val] + "</td>";
+							html += "<td class='text-left' style='border-right:hidden;'><i class='fa fa-fw fa-arrow-right text-yellow'></i></td>";
+							html += "<td class='text-right'>" + arr[arrIdx][val] + "</td>";
 						}
 					}
 				});
@@ -210,7 +216,7 @@
 				tempDiffRealAcc = 0;
 			});
 		} else {
-			html += "<tr><td class='text-center' colspan='11'>조회된 데이터가 없습니다.</td></tr>";
+			html += "<tr><td class='text-center' colspan='13'>조회된 데이터가 없습니다.</td></tr>";
 		}
 		
   	  	html += "</tbody></table>";
