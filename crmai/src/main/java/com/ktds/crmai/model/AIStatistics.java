@@ -33,13 +33,16 @@ public class AIStatistics {
 	@Getter @Setter private BigDecimal soAccAvg;			// 예측 평균
 	@Getter @Setter private BigDecimal realAccAvg;			// 결과 평균
 	
+	@Getter @Setter private Boolean realAccFlag = false;	// 통계 화면에서 실측 파라메터 추가할지 말지 여부(초기는 없는 걸로 함)
+	
 	public AIStatistics(String camName, String camStatus, String admId, String camType, String beforeDate,
-			String afterDate) {
+			String afterDate, Boolean realAccFlag) {
 		this.camName = camName;
 		this.camStatus = camStatus;
 		this.admId = admId;
 		this.camType = camType;
 		this.beforeDate = beforeDate;
 		this.afterDate = afterDate;
+		this.realAccFlag = realAccFlag;
 	}
 }

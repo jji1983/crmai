@@ -45,6 +45,12 @@
 		</if>
 	</sql>
 	
+	<sql id="realAccParam">
+		<if test="realAccFlag eq true">
+			AND <![CDATA[ REAL_ACC <> 0 ]]>
+		</if>
+	</sql>
+	
 	<!-- 선택된 모델 여부(MODEL_FLAG가 Y인 목록) -->
 	<select id="selectSttModelYList" resultMap="aiStatisticMap" parameterType="com.ktds.crmai.model.AIStatistics">
 		SELECT CAM_ID,
@@ -61,8 +67,9 @@
 		FROM AI_STATISTICS
 		
 		<!-- 파라메터 조건 -->
-		WHERE MODEL_FLAG = 'Y' AND <![CDATA[ REAL_ACC <> 0 ]]> 
+		WHERE MODEL_FLAG = 'Y'  
 		
+		<include refid="realAccParam"></include>
 		<include refid="inputParam"></include>
 		
 		ORDER BY CAM_ID DESC
@@ -78,6 +85,7 @@
 		<!-- 파라메터 조건 -->
 		WHERE TRAIN_METHOD = 'DecisionTree' 
 		
+		<include refid="realAccParam"></include>
 		<include refid="inputParam"></include>
 	</select>
 	
@@ -91,6 +99,7 @@
 		<!-- 파라메터 조건 -->
 		WHERE TRAIN_METHOD = 'RandomForest' 
 		
+		<include refid="realAccParam"></include>
 		<include refid="inputParam"></include>
 	</select>
 	
@@ -104,6 +113,7 @@
 		<!-- 파라메터 조건 -->
 		WHERE TRAIN_METHOD = 'svm' 
 		
+		<include refid="realAccParam"></include>
 		<include refid="inputParam"></include>
 	</select>
 	
@@ -117,6 +127,7 @@
 		<!-- 파라메터 조건 -->
 		WHERE TRAIN_METHOD = 'LogisticRegression' 
 		
+		<include refid="realAccParam"></include>
 		<include refid="inputParam"></include>
 	</select>
 </mapper>

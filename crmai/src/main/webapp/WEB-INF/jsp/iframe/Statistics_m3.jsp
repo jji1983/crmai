@@ -131,7 +131,8 @@
 				camType : $("#cam_type").val(),
 				camStatus : $("#cam_status").val(),
 				beforeDate : $("#before_date").val(),
-				afterDate : $("#after_date").val()
+				afterDate : $("#after_date").val(),
+				realAccFlag : true
 			},
 			success:function(data) {
 				createTable(data);
@@ -232,7 +233,8 @@
 				camType : $("#cam_type").val(),
 				camStatus : $("#cam_status").val(),
 				beforeDate : $("#before_date").val(),
-				afterDate : $("#after_date").val()
+				afterDate : $("#after_date").val(),
+				realAccFlag : true
 			},
 			success:function(avgMap) {
 				var camNameArr = new Array();			// 캠페인명 배열

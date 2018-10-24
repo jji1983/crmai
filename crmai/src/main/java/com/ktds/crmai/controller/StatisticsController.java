@@ -34,6 +34,7 @@ public class StatisticsController {
 			@RequestParam(required=false) String camStatus,
 			@RequestParam(required=false) String beforeDate,
 			@RequestParam(required=false) String afterDate,
+			@RequestParam(required=false) Boolean realAccFlag,
 			HttpSession session
 			) {
 			
@@ -49,7 +50,7 @@ public class StatisticsController {
 			
 		LOGGER.info("$$$$$$$$세션 아이디:" + admId);
 		
-		AIStatistics aiVO = new AIStatistics(camName, camStatus, admId, camType, beforeDate, afterDate);
+		AIStatistics aiVO = new AIStatistics(camName, camStatus, admId, camType, beforeDate, afterDate, realAccFlag);
 			
 		return statisticsService.selectSttModelYList(aiVO);
 	}
@@ -63,6 +64,7 @@ public class StatisticsController {
 			@RequestParam(required=false) String camStatus,
 			@RequestParam(required=false) String beforeDate,
 			@RequestParam(required=false) String afterDate,
+			@RequestParam(required=false) Boolean realAccFlag,
 			HttpSession session
 			) {
 		
@@ -78,7 +80,7 @@ public class StatisticsController {
 		
 		LOGGER.info("$$$파라메터 캠페인명:" + camName + ", 캠페인 타입:" + camType + ", 캠페인 상태:" + camStatus + ", 아이디:" + admId + ", 전 날짜:" + beforeDate + ", 후 날짜:" + afterDate);
 		
-		AIStatistics aiVO = new AIStatistics(camName, camStatus, admId, camType, beforeDate, afterDate);
+		AIStatistics aiVO = new AIStatistics(camName, camStatus, admId, camType, beforeDate, afterDate, realAccFlag);
 		
 		AIStatistics dTreeVO = statisticsService.selectDTreeAvg(aiVO);
 		AIStatistics rfVO = statisticsService.selectRFavg(aiVO);
