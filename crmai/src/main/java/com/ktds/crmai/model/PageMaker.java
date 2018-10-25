@@ -6,11 +6,8 @@ public class PageMaker {
 	private int endPage;
 	private boolean prev;
 	private boolean next;
-	
 	private int realEndPage;
-	
 	private int displayPageNum = 10;
-	
 	private PageCriteria cri;
 
 	public int getTotalCount() {
@@ -19,7 +16,6 @@ public class PageMaker {
 
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
-		
 		calcData();
 	}
 
@@ -87,19 +83,13 @@ public class PageMaker {
 	
 	private void calcData() {
 		endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
-		
 		startPage = (endPage - displayPageNum) + 1;
-		
 		int tempEndPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum()));
-		
 		realEndPage = tempEndPage;
-		
 		if (endPage > tempEndPage) {
 			endPage = tempEndPage;
 		}
-		
 		prev = startPage == 1 ? false : true;
-		
 		next = endPage * cri.getPerPageNum() >= totalCount ? false : true;
 	}
 }

@@ -2,10 +2,14 @@ package com.ktds.crmai.model;
 
 import org.apache.ibatis.type.Alias;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Alias("chartData")
+@NoArgsConstructor
+@AllArgsConstructor
 public class DashboardChartData {
 	private int dataType;
 	private String totalBase;
@@ -14,19 +18,4 @@ public class DashboardChartData {
 	private float totalOriginal;
 	private float totalSo;
 	private float totalReal;
-
-	public DashboardChartData(int dataType, String totalBase, String baseValue, int totalCount, float totalOriginal,
-			float totalSo, float totalReal) {
-		this.dataType = dataType;
-		this.totalBase = totalBase;
-		this.baseValue = baseValue;
-		this.totalCount = totalCount;
-		this.totalOriginal = totalOriginal;
-		this.totalSo = totalSo;
-		this.totalReal = totalReal;
-	}
-
-	public DashboardChartData() {
-	}
-
 }

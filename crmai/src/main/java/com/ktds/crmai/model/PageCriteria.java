@@ -18,7 +18,6 @@ public class PageCriteria {
 			this.page = 1;
 			return;
 		}
-		
 		this.page = page;
 	}
 
@@ -31,7 +30,6 @@ public class PageCriteria {
 			this.perPageNum = 5;
 			return;
 		}
-		
 		this.perPageNum = perPageNum;
 	}
 	
