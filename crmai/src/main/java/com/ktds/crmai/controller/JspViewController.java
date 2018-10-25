@@ -13,16 +13,6 @@ public class JspViewController {
 		return "index";
 	}
 	
-	@RequestMapping(value="/sample/index")
-	public String sample_index() {
-		return "/sample/index";
-	}
-	
-	@RequestMapping(value="/sample/fileTest")
-	public String sample_fileTest() {
-		return "/sample/fileTest";
-	}
-	
 	@RequestMapping(value="/login")
 	public String login() {
 		return "login";
