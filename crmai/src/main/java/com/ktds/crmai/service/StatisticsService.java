@@ -13,12 +13,12 @@ public class StatisticsService implements StatisticsMapper {
 
 	@Autowired
 	StatisticsMapper statisticsMapper;
-	
+
 	@Override
 	public List<AIStatistics> selectSttModelYList(AIStatistics vo) {
 		return statisticsMapper.selectSttModelYList(vo);
 	}
-	
+
 	@Override
 	public AIStatistics selectDTreeAvg(AIStatistics vo) {
 		return statisticsMapper.selectDTreeAvg(vo);

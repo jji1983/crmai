@@ -1,6 +1,7 @@
 package com.ktds.crmai.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +15,7 @@ public class CampaignService implements CampaignMapper {
 
 	@Autowired
 	CampaignMapper campaignMapper;
-	
+
 	@Override
 	public List<AI_CAMPAIGN> selectCampaignPage(AI_CAMPAIGN campaign) {
 		return campaignMapper.selectCampaignPage(campaign);
@@ -22,27 +23,22 @@ public class CampaignService implements CampaignMapper {
 
 	@Override
 	public int selectCamPageNum(AI_CAMPAIGN campaign) {
-		// TODO Auto-generated method stub
 		return campaignMapper.selectCamPageNum(campaign);
 	}
-	
+
 	@Override
 	public AI_CAMPAIGN selectCampaignSeq() {
-		// TODO Auto-generated method stub
 		return campaignMapper.selectCampaignSeq();
 	}
 
 	@Override
 	public AI_CAMPAIGN selectCampaignAiStatus(AI_CAMPAIGN campaign) {
-		// TODO Auto-generated method stub
 		return campaignMapper.selectCampaignAiStatus(campaign);
 	}
 
-	
 	@Override
 	public void insertCampaign(AI_CAMPAIGN campaign) {
 		campaignMapper.insertCampaign(campaign);
-		
 	}
 
 	@Override
@@ -54,18 +50,14 @@ public class CampaignService implements CampaignMapper {
 	public int selectCamCount(AI_CAMPAIGN campaign) {
 		return campaignMapper.selectCamCount(campaign);
 	}
-	
+
 	@Override
 	public void updateCampaignOtype(AI_CAMPAIGN campaign) {
-		// TODO Auto-generated method stub
 		campaignMapper.updateCampaignOtype(campaign);
 	}
 
 	@Override
 	public void updateCampaignRtype(AI_CAMPAIGN campaign) {
-		// TODO Auto-generated method stub
 		campaignMapper.updateCampaignRtype(campaign);
 	}
-
-	
 }

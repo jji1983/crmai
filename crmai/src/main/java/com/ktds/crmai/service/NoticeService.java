@@ -56,6 +56,4 @@ public class NoticeService implements NoticeMapper {
 	public int updateNotice(AI_NOTICE notice) {
 		return noticeBoardMapper.updateNotice(notice);
 	}
-
-
 }

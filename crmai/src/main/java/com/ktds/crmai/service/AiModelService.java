@@ -18,10 +18,6 @@ public class AiModelService implements AiModelMapper {
 
 	@Override
 	public List<AI_TRAIN_MODEL> selectAiTrainModel(String cam_id) {
-		// TODO Auto-generated method stub
 		return aiModelMapper.selectAiTrainModel(cam_id);
 	}
-	
-
-
 }

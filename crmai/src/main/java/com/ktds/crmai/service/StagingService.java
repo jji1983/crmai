@@ -16,7 +16,7 @@ public class StagingService implements StagingMapper {
 
 	@Autowired
 	StagingMapper stagingMapper;
-	
+
 	@Override
 	public Integer selectStagingTrainCnt(AI_STAGING staging) {
 		return stagingMapper.selectStagingTrainCnt(staging);
@@ -39,31 +39,26 @@ public class StagingService implements StagingMapper {
 
 	@Override
 	public List<AI_STAGING> selectStaginTrain(AI_PAGE page) {
-		// TODO Auto-generated method stub
 		return stagingMapper.selectStaginTrain(page);
 	}
 
 	@Override
 	public List<AI_STAGING> selectStaginTrainResult(AI_PAGE page) {
-		// TODO Auto-generated method stub
 		return stagingMapper.selectStaginTrainResult(page);
 	}
 
 	@Override
 	public List<AI_STAGING> selectStaginTest(AI_PAGE page) {
-		// TODO Auto-generated method stub
 		return stagingMapper.selectStaginTest(page);
 	}
 
 	@Override
 	public List<AI_STAGING> selectStaginTestResult(AI_PAGE page) {
-		// TODO Auto-generated method stub
 		return stagingMapper.selectStaginTestResult(page);
 	}
 
 	@Override
 	public List<AI_STAGING> selectTestPredict(AI_PAGE page) {
-		// TODO Auto-generated method stub
 		return stagingMapper.selectTestPredict(page);
 	}
 
