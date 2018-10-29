@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DS_RES_RULE{
-	private static final long serialVersionUID = 3947489072259877540L;
 	private String row_id;
 	private String created;
 	private String created_by;

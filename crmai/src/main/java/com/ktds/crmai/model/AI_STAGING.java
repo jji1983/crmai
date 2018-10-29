@@ -2,14 +2,14 @@ package com.ktds.crmai.model;
 
 import org.apache.ibatis.type.Alias;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter @Setter
 @Alias("staging")
 @NoArgsConstructor
 public class AI_STAGING extends PageCriteria {
-	private static final long serialVersionUID = 3947489072259877540L;
 	private String st_seq;
 	private String cam_id;
 	private String st_c1;

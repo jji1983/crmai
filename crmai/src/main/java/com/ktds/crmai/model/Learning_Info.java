@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Learning_Info{
-	private static final long serialVersionUID = 3947489072259877540L;
 	private String train_method;
 	private String original_acc;
 	private String so_acc;

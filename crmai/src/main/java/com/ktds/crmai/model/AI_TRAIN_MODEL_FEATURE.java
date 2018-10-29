@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AI_TRAIN_MODEL_FEATURE {
-	private static final long serialVersionUID = 3947489072259877540L;
 	private String cam_id;
 	private String train_method;
 	private String feature_name;

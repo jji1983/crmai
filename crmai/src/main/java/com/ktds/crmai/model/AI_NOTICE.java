@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AI_NOTICE {
-	private static final long serialVersionUID = 3947489072259877540L;
 	private String code;
 	private String title;
 	private String contents;

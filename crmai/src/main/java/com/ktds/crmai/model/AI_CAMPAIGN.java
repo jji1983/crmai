@@ -4,14 +4,15 @@ import org.apache.ibatis.type.Alias;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @Alias("campaign")
+@EqualsAndHashCode(callSuper=false)
 @NoArgsConstructor
 @AllArgsConstructor
 public class AI_CAMPAIGN extends PageCriteria {
-	private static final long serialVersionUID = 3947489072259877540L;
 	private int page_st;
 	private int page_end;
 	private String cam_seq;

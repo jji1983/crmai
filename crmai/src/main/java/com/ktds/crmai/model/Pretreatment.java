@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Pretreatment{
-	private static final long serialVersionUID = 3947489072259877540L;
 	private String cam_id;
 	private String name;
 	private String gender;
