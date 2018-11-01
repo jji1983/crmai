@@ -5,175 +5,107 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ktds.crmai.model.AI_ACCOUNT;
-import com.ktds.crmai.model.AI_BOARD;
 import com.ktds.crmai.model.AI_PAGE;
 import com.ktds.crmai.service.AccountService;
-import com.ktds.crmai.service.BoardService;
 
-@Controller
-@RequestMapping(value="/account")
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RestController
+@RequestMapping(value = "/account")
 public class AccountController {
-	private static Logger logger = LoggerFactory.getLogger(AccountController.class);
-	 
-	@Autowired 
-    AccountService accountService;
-	
-	@ResponseBody 
-	@RequestMapping(value="/list")
-//	public List<AI_BOARD> selectBoardList(@ModelAttribute("AI_BOARD") AI_BOARD aiBoard, Model model) {
+
+	@Autowired
+	AccountService accountService;
+
+	@GetMapping(value = "/list")
 	public List<AI_ACCOUNT> selectAllAccountList() {
-		List<AI_ACCOUNT> list = accountService.selectAllAccountList();
-//		model.addAttribute("list", list);
-		
-		return list;  
+		return accountService.selectAllAccountList();
 	}
-	
-	@ResponseBody 
-	@RequestMapping(value="/detail", method=RequestMethod.GET)
-	public List<AI_ACCOUNT> selectAccountDetail(
-			
-			@RequestParam("adm_id") String adm_id) {
-		List<AI_ACCOUNT> list = accountService.selectAccountDetail(adm_id);
-		
-		logger.info("### selectAccountDetail :: {} ", adm_id);
-		
-		return list;  
+
+	@GetMapping(value = "/detail")
+	public List<AI_ACCOUNT> selectAccountDetail(String adm_id) {
+		log.info("### selectAccountDetail :: {} ", adm_id);
+		return accountService.selectAccountDetail(adm_id);
 	}
-	
-	@ResponseBody
-	@RequestMapping(value="/insert", method=RequestMethod.POST)
-	public ResponseEntity<Object> insertNewAccount(
-			@RequestParam("user_id") String user_id,
-			@RequestParam("inputAdmId") String inputAdmId,
-			@RequestParam("inputAdmPw") String inputAdmPw,
-			@RequestParam("inputAdmName") String inputAdmName,
-			@RequestParam("inputAdmEmail") String inputAdmEmail,
-			@RequestParam("admType") String admType,
-			HttpSession session){
-		
-		
-		logger.info("### insertNewAccount :: {} {} {} {} {}", user_id, inputAdmId, inputAdmPw, inputAdmName, inputAdmEmail);
-		//insert 전 동일 아이디 있는지 체크
-		
+
+	@PostMapping(value = "/insert")
+	public ResponseEntity<String> insertNewAccount(String inputAdmId, String inputAdmPw, String inputAdmName,
+			String inputAdmEmail, String admType, HttpSession session) {
+		log.info("### insertNewAccount :: {} {} {} {}", inputAdmId, inputAdmPw, inputAdmName, inputAdmEmail);
 		int chk = accountService.selectCheckPK(inputAdmId);
-		
 		AI_ACCOUNT account = new AI_ACCOUNT();
 		account.setAdm_id(inputAdmId);
 		account.setAdm_pw(inputAdmPw);
 		account.setAdm_name(inputAdmName);
 		account.setAdm_email(inputAdmEmail);
 		account.setAdm_type(admType);
-	//	account.setWriter(user_id);
-		
-		ResponseEntity<Object> response = null;
 		if (chk == 0) {
 			int result = accountService.insertAccount(account);
-
 			if (result > 0) {
-				response = new ResponseEntity<Object>("OK::등록 성공", HttpStatus.OK);
+				return new ResponseEntity<>("OK::등록 성공", HttpStatus.OK);
 			} else {
-				response = new ResponseEntity<Object>("FAIL::등록 실패", HttpStatus.OK);
+				return new ResponseEntity<>("FAIL::등록 실패", HttpStatus.OK);
 			}
+		} else {
+			return new ResponseEntity<>("PK::중복 등록", HttpStatus.OK);
 		}
-		else {
-			response = new ResponseEntity<Object>("PK::중복 등록", HttpStatus.OK);
-		}
-		
-		
-		return response;
 	}
-	
-	
-	@ResponseBody
-	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public ResponseEntity<Object> updateAccount(
-			@RequestParam("inputAdmId") String inputAdmId,
-			@RequestParam("inputAdmPw") String inputAdmPw,
-			@RequestParam("inputAdmName") String inputAdmName,
-			@RequestParam("inputAdmEmail") String inputAdmEmail,
-			@RequestParam("admType") String admType,
-			HttpSession session){
-		
+
+	@PostMapping(value = "/update")
+	public ResponseEntity<Object> updateAccount(String inputAdmId, String inputAdmPw, String inputAdmName,
+			String inputAdmEmail, String admType, HttpSession session) {
 		AI_ACCOUNT account = new AI_ACCOUNT();
 		account.setAdm_id(inputAdmId);
 		account.setAdm_pw(inputAdmPw);
 		account.setAdm_name(inputAdmName);
 		account.setAdm_email(inputAdmEmail);
 		account.setAdm_type(admType);
-		
 		int result = accountService.updateAccount(account);
-		
 		ResponseEntity<Object> response = null;
 		if (result > 0) {
 			response = new ResponseEntity<Object>("OK::수정 성공", HttpStatus.OK);
 		} else {
 			response = new ResponseEntity<Object>("FAIL::수정 실패", HttpStatus.OK);
 		}
-		
 		return response;
 	}
-	
-	@ResponseBody
-	@RequestMapping(value="/delete", method=RequestMethod.POST)
-	public ResponseEntity<Object> deleteAccount(
-			@RequestParam("user_id") String user_id,
-			@RequestParam("inputAdmId") String adm_id,
-			HttpSession session){
-		
-		int result = accountService.deleteAccount(adm_id);
-		
+
+	@PostMapping(value = "/delete")
+	public ResponseEntity<Object> deleteAccount(String user_id, String inputAdmId, HttpSession session) {
+		int result = accountService.deleteAccount(inputAdmId);
 		ResponseEntity<Object> response = null;
-	
 		if (result > 0) {
 			response = new ResponseEntity<Object>("OK::삭제 성공", HttpStatus.OK);
 		} else {
 			response = new ResponseEntity<Object>("FAIL::삭제 실패", HttpStatus.OK);
 		}
-		
 		return response;
 	}
 
-	
-	@ResponseBody
-	@RequestMapping(value = "/listPage")
-	public List<AI_ACCOUNT> getAccountListPage(@ModelAttribute("account") AI_PAGE in_account, HttpSession session) {
-
-		// 응답과 함깨 HttpStatus를 지정할 수 있습니다.
-		List<AI_ACCOUNT> response = accountService.selectAccountPage(in_account);
-		
-		System.out.println(response);
-
-		return response;
+	@GetMapping(value = "/listPage")
+	public List<AI_ACCOUNT> getAccountListPage(AI_PAGE account, HttpSession session) {
+		return accountService.selectAccountPage(account);
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "/totalPage")
+	@GetMapping(value = "/totalPage")
 	public List<String> getTotalAccount(HttpSession session) {
 		List<String> response = new ArrayList<>();
-		
 		int maxRowNum = accountService.selectAccountPageNum();
-		
-		if(maxRowNum == 0) {
+		if (maxRowNum == 0) {
 			response.add("0");
-		}else {
+		} else {
 			response.add(maxRowNum + "");
 		}
-
 		return response;
 	}
-	
 }

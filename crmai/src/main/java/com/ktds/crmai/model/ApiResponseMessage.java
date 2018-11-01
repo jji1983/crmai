@@ -1,12 +1,16 @@
 package com.ktds.crmai.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Setter
 @Getter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class ApiResponseMessage {
 	// HttpStatus
     private String status;
@@ -16,14 +20,4 @@ public class ApiResponseMessage {
     private String errorMessage;
     // Error Code
     private String errorCode;
- 
-    public ApiResponseMessage() {}
- 
-    public ApiResponseMessage(String status, String message, String errorCode, String errorMessage) {
-        this.status = status;
-        this.message = message;
-        this.errorCode = errorCode;
-        this.errorMessage = errorMessage;
-    }
-
 }

@@ -14,12 +14,12 @@ public class PredictService implements PredictMapper {
 
 	@Autowired
 	PredictMapper predictMapper;
-	
+
 	@Override
 	public List<AIPredict> selectAllPredictList(AIPredict vo) {
 		return predictMapper.selectAllPredictList(vo);
 	}
-	
+
 	@Override
 	public Integer selectPredictCnt(Map<String, Object> param) {
 		return predictMapper.selectPredictCnt(param);

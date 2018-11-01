@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ktds.crmai.model.AI_ACCOUNT;
-import com.ktds.crmai.model.AI_BOARD;
 import com.ktds.crmai.model.AI_PAGE;
 import com.ktds.crmai.service.impl.AccountMapper;
-
 
 @Service("AccountService")
 public class AccountService implements AccountMapper{
@@ -61,5 +59,4 @@ public class AccountService implements AccountMapper{
 	public int selectCheckPK(String adm_id) {
 		return accountmapper.selectCheckPK(adm_id);
 	}
-	
 }

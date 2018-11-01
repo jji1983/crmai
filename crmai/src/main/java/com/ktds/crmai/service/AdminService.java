@@ -29,13 +29,10 @@ public class AdminService implements AdminMapper {
 	@Override
 	public void insertAdmin(AI_ADMINUSER admin) {
 		adminMapper.insertAdmin(admin);
-
 	}
 
 	@Override
 	public void updateAdminById(String ADMIN_ID) {
 		adminMapper.updateAdminById(ADMIN_ID);
-		
 	}
-
 }
