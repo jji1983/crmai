@@ -232,11 +232,9 @@
 
 		function getPagination() {
 
-			$.ajax({
-				type : 'GET',
+			$.get({
 				url : '/notice/totalPage',
 				async : 'true',
-				processData : true,
 				cache : false,
 				success : function(data) {
 
@@ -279,13 +277,11 @@
 			notice.page_st = page_st;
 			notice.page_end = page_end;
 
-			$.ajax({
+			$.get({
 				type : 'GET', // method
 				url : '/notice/listPage',
-				async : 'true', // true
 				cache : false,
 				data : notice,
-				processData : true,
 				success : function(data) {
 
 					grid_table_notice(data);
@@ -361,8 +357,7 @@
 		function view_notice(code) {
 			//console.log('-- view_board -- ', code);
 
-			$.ajax({
-				type : "GET",
+			$.get({
 				url : "/notice/detail?code=" + code,
 				contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
 				cache : false,
@@ -394,7 +389,7 @@
 			$("#bthNew").prop("disabled", true);
 			// $("#bthClose").prop("disabled", true);
 
-			$.ajax({
+			$.post({
 				type : "POST",
 				url : "/notice/insert",
 				data : data,
@@ -435,8 +430,7 @@
 			$("#bthMod").prop("disabled", true);
 			// $("#bthClose").prop("disabled", true);
 
-			$.ajax({
-				type : "POST",
+			$.post({
 				url : "/notice/update",
 				data : data,
 				processData : false, //prevent jQuery from automatically transforming the data into a query string
@@ -469,8 +463,7 @@
 			var data = new FormData(form);
 			$("#bthDel").prop("disabled", true);
 
-			$.ajax({
-				type : "POST",
+			$.post({
 				url : "/notice/delete",
 				data : data,
 				processData : false, //prevent jQuery from automatically transforming the data into a query string

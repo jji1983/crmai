@@ -292,11 +292,9 @@
 
 		function getPagination() {
 
-			$.ajax({
-				type : 'GET',
+			$.get({
 				url : '/account/totalPage',
 				async : 'true',
-				processData : true,
 				cache : false,
 				success : function(data) {
 					if (data[0] != "0") {
@@ -335,13 +333,10 @@
 			account.page_st = page_st;
 			account.page_end = page_end;
 
-			$.ajax({
-				type : 'GET', // method
+			$.get({
 				url : '/account/listPage',
-				async : 'true', // true
 				cache : false,
 				data : account,
-				processData : true,
 				success : function(data) {
 
 					grid_table_account(data);
@@ -451,10 +446,8 @@
 			//alert("-- view_account -- :: " + adm_id);
 			//alert("1111 :: " + e.responseText);
 
-			$.ajax({
-				type : "GET",
+			$.get({
 				url : "/account/detail?adm_id=" + adm_id,
-				contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
 				cache : false,
 				timeout : 600000,
 				success : function(data) {
@@ -487,8 +480,7 @@
 			$("#bthNew").prop("disabled", true);
 			// $("#bthClose").prop("disabled", true);
 
-			$.ajax({
-				type : "POST",
+			$.post({
 				url : "/account/insert",
 				data : data,
 				processData : false, //prevent jQuery from automatically transforming the data into a query string
@@ -530,8 +522,7 @@
 			$("#bthMod").prop("disabled", true);
 			// $("#bthClose").prop("disabled", true);
 
-			$.ajax({
-				type : "POST",
+			$.post({
 				url : "/account/update",
 				data : data,
 				processData : false, //prevent jQuery from automatically transforming the data into a query string
@@ -565,8 +556,7 @@
 			var data = new FormData(form);
 			$("#bthDel").prop("disabled", true);
 
-			$.ajax({
-				type : "POST",
+			$.post({
 				url : "/account/delete",
 				data : data,
 				processData : false, //prevent jQuery from automatically transforming the data into a query string

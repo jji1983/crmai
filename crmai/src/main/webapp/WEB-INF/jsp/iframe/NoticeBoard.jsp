@@ -241,10 +241,8 @@
 		//게시글 조회
 		function view_board(code) {
 			//console.log('-- view_board -- ', code);
-			$.ajax({
-				type : "GET",
+			$.get({
 				url : "/board/detail?code=" + code,
-				contentType : 'application/json', // List 컨트롤러는 application/json 형식으로만 처리하기 때문에 컨텐트 타입을 지정해야 합니다.
 				cache : false,
 				timeout : 600000,
 				success : function(data) {
@@ -270,7 +268,7 @@
 			var data = new FormData(form);
 			$("#bthNew").prop("disabled", true);
 			// $("#bthClose").prop("disabled", true);
-			$.ajax({
+			$.post({
 				type : "POST",
 				url : "/board/insert",
 				data : data,
@@ -308,8 +306,7 @@
 			var data = new FormData(form);
 			$("#bthMod").prop("disabled", true);
 			// $("#bthClose").prop("disabled", true);
-			$.ajax({
-				type : "POST",
+			$.post({
 				url : "/board/update",
 				data : data,
 				processData : false, //prevent jQuery from automatically transforming the data into a query string
@@ -339,8 +336,7 @@
 			var form = $('#newUploadForm')[0];
 			var data = new FormData(form);
 			$("#bthDel").prop("disabled", true);
-			$.ajax({
-				type : "POST",
+			$.post({
 				url : "/board/delete",
 				data : data,
 				processData : false, //prevent jQuery from automatically transforming the data into a query string

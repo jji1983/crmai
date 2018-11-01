@@ -214,7 +214,6 @@
 	<script type="text/javascript">
 		$(function() {
 			$("#adm_name").val("${sessionID}");
-
 			newCampaignPage();
 		});
 	</script>
