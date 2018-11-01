@@ -8,20 +8,46 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Properties;
 
 import com.ktds.crmai.util.DateTool;
 import com.ktds.crmai.vo.AiStaging;
 import com.ktds.crmai.vo.CampaignData;
 
-public class TableDAO {
-	private Connection getConn() throws SQLException, ClassNotFoundException {
-		String jdbc_driver = "oracle.jdbc.OracleDriver";
-		String db_url = "jdbc:oracle:thin:@crmai.iptime.org:1521:xe";
-		String db_id = "aiadm";
-		String db_pw = "aiadm";
+import oracle.jdbc.OracleConnection;
+import sun.net.www.content.text.plain;
 
-		Class.forName(jdbc_driver);
-		Connection conn = DriverManager.getConnection(db_url, db_id, db_pw);
+public class TableDAO {
+	
+	String jdbc_driver = "oracle.jdbc.OracleDriver";
+	String db_url = "jdbc:oracle:thin:@127.0.0.1:1521:xe";
+	String db_id = "aiadm";
+	String db_pw = "aiadm";
+	Properties props = new Properties();
+	
+	Connection conn = null;
+	
+	public TableDAO() {
+		try {
+			Class.forName(jdbc_driver);
+			props.setProperty("user", db_id);
+			props.setProperty("password", db_pw);
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private Connection getConn() throws SQLException, ClassNotFoundException {
+		Connection conn = DriverManager.getConnection(db_url, props);
+				
+		if (conn != null  && conn.isValid(1)) {
+		     return conn;
+		}else {
+			System.out.println("### 접속 실패 컨넥션을 다시 가져 온다.");
+			conn = DriverManager.getConnection(db_url, props);
+		}
 		return conn;
 	} 
 

@@ -24,7 +24,7 @@ function handleClick(myRadio) {
 	        clearInterval(timerId);
 	  }
 	  
-	  timerId = setInterval("getAIStatus()", 30000);
+	  timerId = setInterval("getAIStatus()", 15000);
 }
   
 function radioInit(myRadio) {
@@ -41,7 +41,7 @@ function radioInit(myRadio) {
 	  if(timerId != null) {
 	        clearInterval(timerId);
 	  }
-	  timerId = setInterval("getAIStatus()", 30000);
+	  timerId = setInterval("getAIStatus()", 15000);
 }
 	  
 function campaignPage(){
