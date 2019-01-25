@@ -4,8 +4,8 @@
 <header class="main-header">
 	<!-- Logo -->
 	<a href="/main" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
-		<span class="logo-mini"><b>CRM</b>운영팀</span> <!-- logo for regular state and mobile devices -->
-		<span class="logo-lg"><b>AI Assistant</b>플랫폼</span>
+		<span class="logo-mini"><b>CRM</b>사업팀</span> <!-- logo for regular state and mobile devices -->
+		<span class="logo-lg"><b>TARGET AI</b></span>
 	</a>
 	<!-- Header Navbar: style can be found in header.less -->
 	<nav class="navbar navbar-static-top">
