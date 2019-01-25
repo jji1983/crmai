@@ -13,7 +13,7 @@
 	}
 %>
 <meta charset="UTF-8">
-<title>AI 캠페인 Assistant 플랫폼</title>
+<title>TARGET AI</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -30,7 +30,7 @@
 		<div class="content-wrapper" style="height: '80%';">
 			<!-- Main content -->
 			<section class="content">
-				Main
+				
 			</section>
 			<!-- /.Main content -->
 			<!-- /.content -->

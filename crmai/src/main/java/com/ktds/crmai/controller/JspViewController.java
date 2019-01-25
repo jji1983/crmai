@@ -31,7 +31,8 @@ public class JspViewController {
 	}
 
 	@RequestMapping(value = "/main")
-	public void main() {
+	public String main() {
+		return "/iframe/Dashboard";
 	}
 
 	@RequestMapping(value = "/iframe/AutoOrder")
