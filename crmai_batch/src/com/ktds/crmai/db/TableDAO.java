@@ -22,7 +22,7 @@ public class TableDAO {
 	String jdbc_driver = "oracle.jdbc.OracleDriver";
 	String db_url = "jdbc:oracle:thin:@127.0.0.1:1521:xe";
 	String db_id = "aiadm";
-	String db_pw = "aiadm";
+	String db_pw = "aiadm1";
 	Properties props = new Properties();
 	
 	Connection conn = null;
