@@ -20,8 +20,7 @@
 <body class="hold-transition login-page">
 	<div class="login-box">
 		<div class="login-logo">
-			<a>
-			<b>TARGET AI</b><br>AI Campaign Assistant<br>플랫폼 </a>
+			<a><b>TARGET AI</b><br>AI Campaign Assistant<br>플랫폼 </a>
 			
 		</div>
 		<!-- /.login-logo -->
