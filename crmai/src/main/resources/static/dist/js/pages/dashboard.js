@@ -126,7 +126,7 @@ $(function () {
 
   /* Morris.js Charts */
   // Sales chart
-  var area = new Morris.Area({
+ /* var area = new Morris.Area({
     element   : 'revenue-chart',
     resize    : true,
     data      : [
@@ -175,10 +175,10 @@ $(function () {
     gridLineColor    : '#efefef',
     gridTextFamily   : 'Open Sans',
     gridTextSize     : 10
-  });
+  });*/
 
   // Donut Chart
-  var donut = new Morris.Donut({
+  /*var donut = new Morris.Donut({
     element  : 'sales-chart',
     resize   : true,
     colors   : ['#3c8dbc', '#f56954', '#00a65a'],
@@ -198,13 +198,13 @@ $(function () {
   });
 
   /* The todo list plugin */
-  $('.todo-list').todoList({
+  /*$('.todo-list').todoList({
     onCheck  : function () {
       window.console.log($(this), 'The element has been checked');
     },
     onUnCheck: function () {
       window.console.log($(this), 'The element has been unchecked');
     }
-  });
+  });*/
 
 });

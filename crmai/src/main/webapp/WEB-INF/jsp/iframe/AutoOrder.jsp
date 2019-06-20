@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>AI 캠페인 자동 처리</title>
+<title>캠페인 AI 분석</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -26,12 +26,12 @@
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					AI자동수행 <small>Control panel</small>
+					캠페인 AI 분석 <small>Campaign Analysis</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="/iframe/Dashboard"><i class="fa fa-dashboard"></i>
 							Home</a></li>
-					<li class="active">AI 자동수행</li>
+					<li class="active">캠페인 AI 분석</li>
 				</ol>
 			</section>
 			<!-- Main content -->
@@ -40,7 +40,7 @@
 				<div class="box">
 					<div class="box-header with-border">
 						<h3 class="box-title">
-							AI 캠페인 진행현황 <span id='id_span_msg' class="label label-success"></span>
+							AI 분석 진행현황 <span id='id_span_msg' class="label label-success"></span>
 						</h3>
 						<div class="box-tools pull-right">
 							<button type="button" class="btn btn-box-tool"

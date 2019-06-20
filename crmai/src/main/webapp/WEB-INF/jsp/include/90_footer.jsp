@@ -4,7 +4,7 @@
 	<div class="pull-right hidden-xs">
 		<b>Version</b> 0.0.1
 	</div>
-	<strong>Copyright &copy; 2019 <a href="http://www.ktds.com">CRM사업팀 AI학습체</a>.
+	<strong>Copyright &copy; 2019 <a href="http://www.ktds.com">KTDS</a>.
 	</strong> All rights reserved.
 </footer>
 <!-- Add the sidebar's background. This div must be placed

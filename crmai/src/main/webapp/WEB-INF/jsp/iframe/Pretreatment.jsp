@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>전처리수행</title>
+<title>AI 분석 캠페인 목록</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -24,12 +24,12 @@
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					대상자 로딩 <small>Control panel</small>
+					AI 분석 캠페인 목록 <small>Campaign List</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="/iframe/Dashboard"><i class="fa fa-dashboard"></i>
 							Home</a></li>
-					<li class="active">AI 학습/대상자 로딩</li>
+					<li class="active">AI 분석 캠페인 목록</li>
 				</ol>
 			</section>
 			<!-- Main content -->
@@ -133,18 +133,18 @@
 							</div>
 							<!-- Button trigger modal -->
 							<div class="box-footer">
-								<button id='newBtn' type="button"
+								<button id='addBtn' type="button"
 									class="btn btn-info pull-right" data-toggle="modal"
-									data-target="#newModal">캠페인 신규등록</button>
+									data-target="#addModal">대상자 추가등록</button>
 								&nbsp;
 							</div>
 							<!-- Modal -->
-							<div class="modal fade" id="newModal" tabindex="-1" role="dialog"
-								aria-labelledby="newModalLabel" aria-hidden="true">
+							<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+								aria-labelledby="addModalLabel" aria-hidden="true">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h5 class="modal-title" id="newModalLabel">캠페인 신규 생성</h5>
+											<h5 class="modal-title" id="addModalLabel">대상자 추가등록</h5>
 											<button type="button" class="close" data-dismiss="modal"
 												aria-label="Close">
 												<span aria-hidden="true">&times;</span>
@@ -152,49 +152,15 @@
 										</div>
 										<div class="modal-body">
 											<!-- form start -->
-											<form class="form-horizontal" id="newUploadForm"
+											<form class="form-horizontal" id="addUploadForm"
 												action="fileUpload" method="post"
 												enctype="multipart/form-data">
 												<div class="box-body">
 													<input type="hidden" id="user_id" name="user_id"
-														value=<%=session.getAttribute("sessionID")%>>
-													<div class="form-group">
-														<label for="inputCamName" class="col-sm-2 control-label">캠페인명</label>
-														<div class="col-sm-10">
-															<input id="inputCamName" name="inputCamName" type="text"
-																class="form-control" placeholder="캠페인명">
-														</div>
-													</div>
-													<div class="form-group">
-														<label for="inputCamDesc" class="col-sm-2 control-label">설명</label>
-														<div class="col-sm-10">
-															<input id="inputCamDesc" name="inputCamDesc" type="text"
-																class="form-control" placeholder="설명">
-														</div>
-													</div>
-													<div class="form-group">
-														<label for="cam_type" class="col-sm-2 control-label"
-															data-toggle="tooltip" title="캠페인 목적">목적</label>
-														<div class="col-sm-10">
-															<select id="cam_type" name="cam_type"
-																class="form-control select2" style="width: 100%;">
-																<option selected="selected">Acquisition</option>
-																<option>Retention</option>
-																<option>Cultivation</option>
-																<option>KeepCare</option>
-															</select>
-														</div>
-													</div>
-													<input type="hidden" id="cam_autoyn" name="cam_autoyn"
-														value="Y">
-													<div class="form-group">
-														<label for="InputFile_train"
-															class="col-sm-2 control-label">파일 등록(학습CSV)</label>
-														<div class="col-sm-10">
-															<input id="InputFile_train" type="file" name="file_train"
-																accept=".csv">
-														</div>
-													</div>
+														value=<%=session.getAttribute("sessionID")%>> <input
+														type="hidden" id="inputCamId" name="inputCamId"
+														class="form-control" value=""> <input
+														type="hidden" id="cam_autoyn" name="cam_autoyn" value="N">
 													<div class="form-group">
 														<label for="InputFile_test" class="col-sm-2 control-label">파일
 															등록(대상CSV)</label>
@@ -206,14 +172,14 @@
 												</div>
 												<!-- /.box-body -->
 												<div class="box-footer">
-													<button id="bthNew" type="submit" class="btn btn-primary">등록</button>
+													<button id="bthAdd" type="submit" class="btn btn-primary">등록</button>
 													<button id="bthClose" type="button"
 														class="btn btn-secondary" data-dismiss="modal">Close</button>
 												</div>
 												<!-- /.box-footer -->
 											</form>
 										</div>
-										<div class="modal-footer">캠페인등록화면</div>
+										<div class="modal-footer">대상자 추가 등록화면</div>
 									</div>
 								</div>
 							</div>
@@ -236,6 +202,7 @@
 		src="/resources/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 	<!-- AI_CAMPAIGN JS -->
 	<script src="/resources/js/ai_campaign.js"></script>
+	<script src="/resources/js/ai_stageing_test.js"></script>
 	<!-- twbsPagination :: https://github.com/josecebe/twbs-pagination -->
 	<script src="/resources/js/jquery.twbsPagination.min.js"></script>
 	<script type="text/javascript">
@@ -244,11 +211,16 @@
 			//campaignPage();
 			newCampaignPage();
 			//모달 처리(신규).
-			$("#bthNew").click(function(event) {
+			$("#bthAdd").click(function(event) {
 				//stop submit the form, we will post it manually.
 				event.preventDefault();
 				//alert('클릭 신규~!!');
-				modifiedSubmitNewCampagin();
+				submit_addStagingTest();
+			});
+			$('#addModal').on('show.bs.modal', function(event) {
+				//alert("currentValue :: " + currentValue);
+				$('#inputCamId').val(currentValue);
+				//alert("RealDataModal call!!");	 
 			});
 		});
 	</script>

@@ -225,10 +225,10 @@
 			$("#const").val("${sessionID}");
 			search_statistics(); // 처음에 불러오기
 		});
-		function Content_Learning() {
+		/* function Content_Learning() {
 			//alert("call Content_Learning!!");
 			document.getElementById("main_frame").src = "/Learning/data";
-		}
+		} */
 		function search_statistics() {
 			$.ajax({
 				url : "/statistics/list",

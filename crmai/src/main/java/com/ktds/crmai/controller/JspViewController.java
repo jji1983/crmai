@@ -25,6 +25,15 @@ public class JspViewController {
 
 		return "login";
 	}
+	
+	@RequestMapping(value = "/guide")
+	public void guide() {
+	}
+	
+	@RequestMapping(value = "/movie")
+	public void movie() {
+	}
+
 
 	@RequestMapping(value = "/register")
 	public void register() {

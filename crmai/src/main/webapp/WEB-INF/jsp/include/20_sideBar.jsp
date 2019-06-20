@@ -30,35 +30,39 @@
 		<!-- sidebar menu: : style can be found in sidebar.less -->
 		<ul class="sidebar-menu" data-widget="tree">
 			<li class="header">MAIN</li>
-			<li><a href="/iframe/Dashboard"><i
+			<li><a href="/main"><i
 					class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-			<li class="header">자동 수행</li>
+			<li class="header">캠페인 수행</li>
 			<li><a href="/iframe/AutoOrder"><i
-					class="fa fa-circle-o text-aqua"></i> <span>AI 자동수행</span></a></li>
-			<li class="header">수동 수행</li>
-			<li class="treeview"><a href="#"> <i class="fa fa-laptop"></i>
-					<span>AI 학습 등록</span> <span class="pull-right-container"> <i
+					class="fa fa-circle-o text-aqua"></i> <span>캠페인 AI 분석</span></a></li>
+			<li class="header">캠페인 조회</li>
+			<!-- <li class="treeview"><a href="#"> <i class="fa fa-laptop"></i>
+					<span>캠페인 목록</span> <span class="pull-right-container"> <i
 						class="fa fa-angle-left pull-right"></i>
 				</span>
 			</a>
 				<ul class="treeview-menu">
 					<li class="active"><a
 						href="/iframe/Pretreatment"><i
-							class="fa fa-circle-o"></i>학습데이터 로딩</a></li>
-				</ul></li>
+							class="fa fa-circle-o"></i></a></li>
+				</ul></li> -->
+			<li><a href="/iframe/Pretreatment"><i
+					class="fa fa-circle-o text-aqua"></i> <span>AI 분석 캠페인 목록</span></a></li>
 			<li class="treeview"><a href="#"> <i class="fa fa-laptop"></i>
-					<span>AI 학습 결과 확인</span> <span class="pull-right-container">
+					<span>AI 분석 결과 조회</span> <span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>
 				</span>
 			</a>
 				<ul class="treeview-menu">
 					<li class="active"><a
 						href="/iframe/PretreatmentResult"><i
-							class="fa fa-circle-o"></i>전처리 결과</a></li>
+							class="fa fa-circle-o"></i>AI 전처리 결과</a></li>
 					<li class="active"><a href="/iframe/Learning"><i
-							class="fa fa-circle-o"></i>AI학습 결과</a></li>
+							class="fa fa-circle-o"></i>캠페인 AI 학습 결과</a></li>
+					<li class="active"><a href="/iframe/RunForecastResult"><i
+							class="fa fa-circle-o"></i>캠페인 AI 예측 결과</a></li>
 				</ul></li>
-			<li class="treeview"><a href="#"> <i class="fa fa-laptop"></i>
+			<!-- <li class="treeview"><a href="#"> <i class="fa fa-laptop"></i>
 					<span>AI 캠페인 대상자 선정</span> <span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>
 				</span>
@@ -66,12 +70,10 @@
 				<ul class="treeview-menu">
 					<li class="active"><a href="/iframe/RunForecast"><i
 							class="fa fa-circle-o"></i>AI 대상자 로딩</a></li>
-				</ul></li>
+				</ul></li> -->
 			<li class="header">부가 기능</li>
-			<li><a href="/iframe/RunForecastResult"><i
-					class="fa fa-circle-o text-aqua"></i> <span>AI 선정결과</span></a></li>
-			<li class="treeview"><a href="#"> <i class="fa fa-pie-chart"></i>
-					<span>통계</span> <span class="pull-right-container"> <i
+				<li class="treeview"><a href="#"> <i class="fa fa-pie-chart"></i>
+					<span>통계기능</span> <span class="pull-right-container"> <i
 						class="fa fa-angle-left pull-right"></i>
 				</span>
 			</a>
