@@ -30,10 +30,10 @@
 		<!-- sidebar menu: : style can be found in sidebar.less -->
 		<ul class="sidebar-menu" data-widget="tree">
 			<li class="header">MAIN</li>
-			<li><a href="/main"><i
+			<li><a href="javascript:Content_Dashboard();"><i
 					class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 			<li class="header">캠페인 수행</li>
-			<li><a href="/iframe/AutoOrder"><i
+			<li><a href="javascript:Content_AutoOrder();"><i
 					class="fa fa-circle-o text-aqua"></i> <span>캠페인 AI 분석</span></a></li>
 			<li class="header">캠페인 조회</li>
 			<!-- <li class="treeview"><a href="#"> <i class="fa fa-laptop"></i>
@@ -46,7 +46,7 @@
 						href="/iframe/Pretreatment"><i
 							class="fa fa-circle-o"></i></a></li>
 				</ul></li> -->
-			<li><a href="/iframe/Pretreatment"><i
+			<li><a href="javascript:Content_Pretreatment();"><i
 					class="fa fa-circle-o text-aqua"></i> <span>AI 분석 캠페인 목록</span></a></li>
 			<li class="treeview"><a href="#"> <i class="fa fa-laptop"></i>
 					<span>AI 분석 결과 조회</span> <span class="pull-right-container">
@@ -55,11 +55,11 @@
 			</a>
 				<ul class="treeview-menu">
 					<li class="active"><a
-						href="/iframe/PretreatmentResult"><i
+						href="javascript:Content_PretreatmentResult();"><i
 							class="fa fa-circle-o"></i>AI 전처리 결과</a></li>
-					<li class="active"><a href="/iframe/Learning"><i
+					<li class="active"><a href="javascript:Content_Learning();"><i
 							class="fa fa-circle-o"></i>캠페인 AI 학습 결과</a></li>
-					<li class="active"><a href="/iframe/RunForecastResult"><i
+					<li class="active"><a href="javascript:Content_RunForecastResult();"><i
 							class="fa fa-circle-o"></i>캠페인 AI 예측 결과</a></li>
 				</ul></li>
 			<!-- <li class="treeview"><a href="#"> <i class="fa fa-laptop"></i>
@@ -79,16 +79,16 @@
 			</a>
 				<ul class="treeview-menu">
 					<li class="active"><a
-						href="/iframe/Statistics_m1"><i
+						href="javascript:Content_Statistics_m1();"><i
 							class="fa fa-circle-o"></i>기존캠페인 성공률</a></li>
 					<li class="active"><a
-						href="/iframe/Statistics_m2"><i
+						href="javascript:Content_Statistics_m2();"><i
 							class="fa fa-circle-o"></i>AI캠페인 예측률</a></li>
 					<li class="active"><a
-						href="/iframe/Statistics_m3"><i
+						href="javascript:Content_Statistics_m3();"><i
 							class="fa fa-circle-o"></i>AI캠페인 실질반응</a></li>
 				</ul></li>
-			<li><a href="/iframe/NoticeBoard"><i
+			<li><a href="javascript:Content_NoticeBoard();"><i
 					class="fa fa-book"></i> <span>게시판(Q&amp;A)</span></a></li>
 			<%
 				if (session.getAttribute("sessionROLE").equals("0")) {
@@ -99,9 +99,9 @@
 				</span>
 			</a>
 				<ul class="treeview-menu">
-					<li class="active"><a href="/iframe/admin/NoticeMgr"><i
+					<li class="active"><a href="javascript:Content_NoticeMgr();"><i
 							class="fa fa-circle-o"></i>공지사항 관리</a></li>
-					<li class="active"><a href="/iframe/admin/UserMgr"><i
+					<li class="active"><a href="javascript:Content_UserMgr();"><i
 							class="fa fa-circle-o"></i>계정 관리</a></li>
 				</ul> <%
  	}

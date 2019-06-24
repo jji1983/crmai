@@ -27,10 +27,10 @@
 		<!-- Side Bar -->
 		<jsp:include page="./include/20_sideBar.jsp"/>
 		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper" style="height: '80%';">
+		<div class="content-wrapper">
 			<!-- Main content -->
 			<section class="content">
-				
+				<iframe  id="main_frame" src="/iframe/Dashboard" width="100%" height="80%"></iframe>
 			</section>
 			<!-- /.Main content -->
 			<!-- /.content -->
@@ -42,5 +42,80 @@
 	<!-- 세션에서 로그인 사용자를 생성자 텍스트에 입력하려면 이 것을 사용해야 함 -->
 	<input name="session_name" type="hidden">
 	<jsp:include page="./include/commonJs.jsp" />
+	
+<script type="text/javascript">
+	var sessionName;
+  
+  	function Content_Dashboard() {
+		//alert("call Content_Dashboard!!");
+		document.getElementById("main_frame").src = "/iframe/Dashboard";
+	}
+	
+	function Content_AutoOrder() {
+		//alert("call Content_AutoOrder!!");
+		document.getElementById("main_frame").src = "/iframe/AutoOrder";
+	}
+	
+	function Content_Pretreatment() {
+		//alert("call Content_Pretreatment!!");
+		document.getElementById("main_frame").src = "/iframe/Pretreatment";
+	}
+	
+	function Content_PretreatmentResult() {
+		//alert("call Content_PretreatmentResult!!");
+		document.getElementById("main_frame").src = "/iframe/PretreatmentResult";
+		//$("input[name='session_name']").val("Hansam");
+	}
+	function Content_Learning() {
+		//alert("call Content_Learning!!");
+		document.getElementById("main_frame").src = "/iframe/Learning";
+		//$("input[name='session_name']").val("Hansam");
+	}
+  
+	function Content_RunForecast() {
+		//alert("call Content_Learning!!");
+		document.getElementById("main_frame").src = "/iframe/RunForecast";
+	}
+	
+	function Content_RunForecastResult() {
+		//alert("call Content_RunForecastResult!!");
+		document.getElementById("main_frame").src = "/iframe/RunForecastResult";
+		//$("input[name='session_name']").val("Hansam");
+	}
+	
+	function Content_Statistics_m1() {
+		//alert("call Content_Statistics!!");
+		document.getElementById("main_frame").src = "/iframe/Statistics_m1";
+		//$("input[name='session_name']").val("Hansam");
+	}
+	
+	function Content_Statistics_m2() {
+		//alert("call Content_Statistics!!");
+		document.getElementById("main_frame").src = "/iframe/Statistics_m2";
+		//$("input[name='session_name']").val("Hansam");
+	}
+	
+	function Content_Statistics_m3() {
+		//alert("call Content_Statistics!!");
+		document.getElementById("main_frame").src = "/iframe/Statistics_m3";
+		//$("input[name='session_name']").val("Hansam");
+	}
+	
+	function Content_NoticeBoard() {
+		//alert("call Content_NoticeBoard!!");
+		document.getElementById("main_frame").src = "/iframe/NoticeBoard";
+	}
+	
+	function Content_NoticeMgr() {
+		//alert("call Content_NoticeBoard!!");
+		document.getElementById("main_frame").src = "/iframe/admin/NoticeMgr";
+	}
+	
+	function Content_UserMgr() {
+		//alert("call Content_NoticeBoard!!");
+		document.getElementById("main_frame").src = "/iframe/admin/UserMgr";
+	}
+	
+  </script>
 </body>
 </html>

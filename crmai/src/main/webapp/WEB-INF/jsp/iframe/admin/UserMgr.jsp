@@ -35,12 +35,6 @@
 </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-	<div class="wrapper">
-		<!-- Top bar -->
-		<jsp:include page="../../include/00_topBar.jsp" />
-		<!-- Side Bar -->
-		<jsp:include page="../../include/20_sideBar.jsp" />
-		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
@@ -214,10 +208,6 @@
 					</div>
 				</div>
 			</section>
-		</div>
-		<!-- Footer -->
-		<jsp:include page="../../include/90_footer.jsp" />
-	</div>
 	<jsp:include page="../../include/commonJs.jsp" />
 	<!-- Select2 -->
 	<script

@@ -17,7 +17,7 @@
 		<div class="navbar-custom-menu">
 			<ul class="nav navbar-nav">
 				<!-- Tasks: style can be found in dropdown.less -->
-				<li class="dropdown tasks-menu"><a onclick="playGuideMovie();"
+				<li class="dropdown tasks-menu"><a onclick="getMoviePage();"
 					class="dropdown-toggle" data-toggle="dropdown"> <i
 						class="fa fa-file-movie-o"></i> <span class="label label-danger"></span>
 						<label>소개영상</label>
@@ -40,19 +40,19 @@
 		//window.location = "/file/downloadGuide";
 		pageContext.forward("test.html")
 	}*/
-	function playGuideMovie()
-	{
-		var nHeight	= 600;
-		var nWidth 	= 1000;
-		var nLeft	= window.screenLeft+465;
-		var nTop 	= window.screenTop+235;
-		
-		window.open('https://youtu.be/JrLIqJVMYek','movie','resizable=yes, width='+nWidth+', height='+nHeight+', left='+nLeft+', top='+nTop+', scrollbars= 0, toolbar=0, menubar=no')
-		
-	}
 	function getGuidePage()
 	{
 		window.open('/guide','newWindow')
+	}
+	function getMoviePage()
+	{
+		var nHeight	= 545;
+		var nWidth 	= 915;
+		var nLeft	= window.screenLeft+665;
+		var nTop 	= window.screenTop+335;
+		
+		window.open('/movie','movie','resizable=yes, width='+nWidth+', height='+nHeight+', left='+nLeft+', top='+nTop+', scrollbars= 0, toolbar=0, menubar=no')
+		
 	}
 	function Logout() {
 		var result = confirm("Logout 진행 하시겠습니까? ");
