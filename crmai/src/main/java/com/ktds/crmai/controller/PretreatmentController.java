@@ -23,7 +23,7 @@ public class PretreatmentController {
 	@Autowired
 	PretreatmentService pretreatmentService;
 
-	@GetMapping(value = "/list")
+	@RequestMapping(value = "/list")
 	public ResponseEntity<List<AI_CAMPAIGN>> getCampaignList(AI_CAMPAIGN campaign) {
 		log.info("Request List....getCampaignList.... - {}", campaign);
 		List<AI_CAMPAIGN> out_campaign = null;
@@ -39,7 +39,7 @@ public class PretreatmentController {
 		return new ResponseEntity<>(out_campaign, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/detail")
+	@RequestMapping(value = "/detail")
 	public ResponseEntity<List<AI_STAGING>> getCampaignTrg(AI_CAMPAIGN campaign) {
 		log.info("Request List....getCampaignTrg.... - {}", campaign.getCam_id());
 		List<AI_STAGING> trainData = null;
@@ -58,7 +58,7 @@ public class PretreatmentController {
 		return new ResponseEntity<>(trainData, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/detailResult")
+	@RequestMapping(value = "/detailResult")
 	public ResponseEntity<List<AI_STAGING>> getCampaignTrgResult(AI_CAMPAIGN campaign) {
 		log.info("Request List....getCampaignTrgResult.... - {}", campaign.getCam_id());
 		List<AI_STAGING> trainData = null;

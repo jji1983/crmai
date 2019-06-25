@@ -23,7 +23,7 @@ public class AdminController {
 	@Autowired
 	AdminService admService;
 
-	@GetMapping(value = "/login_proc")
+	@RequestMapping(value = "/login_proc")
 	public List<String> list(AI_ADMINUSER user, HttpSession session) {
 		log.info("Request List....");
 		log.info("ADM_ID : " + user.getADM_ID() + "  ADM_PW : " + user.getADM_PW());
@@ -48,7 +48,7 @@ public class AdminController {
 		return response;
 	}
 
-	@GetMapping(value = "/register_check")
+	@RequestMapping(value = "/register_check")
 	public List<String> register_check(AI_ADMINUSER admin) {
 		log.info("Request register_check....{}", admin);
 		List<String> response = new ArrayList<String>();

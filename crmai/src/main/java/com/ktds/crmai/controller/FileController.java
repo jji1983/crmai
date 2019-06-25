@@ -52,7 +52,7 @@ public class FileController {
 	@Autowired
 	StagingService stagingService;
 
-	@GetMapping(value = "/Upload_Pretreatment")
+	@RequestMapping(value = "/Upload_Pretreatment")
 	public ResponseEntity<Object> fileUpload_Pretreatment(String user_id, //
 			String inputCamName, String inputCamDesc, String cam_type, String cam_autoyn, MultipartFile[] file_train,
 			MultipartFile[] file_test) {
@@ -91,7 +91,7 @@ public class FileController {
 		}
 	}
 
-	@GetMapping(value = "/Upload_StagingTest")
+	@RequestMapping(value = "/Upload_StagingTest")
 	public ResponseEntity<Object> fileUpload_StagingTest(String user_id, //
 			String inputCamId, String cam_autoyn, MultipartFile[] file_test) {
 		AI_CAMPAIGN inCampaign = new AI_CAMPAIGN();
@@ -117,7 +117,7 @@ public class FileController {
 		}
 	}
 
-	@GetMapping(value = "/downloadGuide")
+	@RequestMapping(value = "/downloadGuide")
 	public ResponseEntity<byte[]> downloadGuideFile() throws Exception {
 		String GuideFile = "/home/jji5636/AIGuide/AI_CRMMarketingPlatform.pdf";
 		Path path = Paths.get(GuideFile);
@@ -132,7 +132,7 @@ public class FileController {
 		return response;
 	}
 
-	@GetMapping(value = "/downPredict/{cam_id}", produces = "text/csv")
+	@RequestMapping(value = "/downPredict/{cam_id}", produces = "text/csv")
 	public void downloadPredict(@PathVariable String cam_id, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			request.setCharacterEncoding("UTF-8");
@@ -188,7 +188,7 @@ public class FileController {
 		}
 	}
 
-	@GetMapping(value = "/down/predict/{camId}/{succProb}/{extractCnt}", produces = "text/csv")
+	@RequestMapping(value = "/down/predict/{camId}/{succProb}/{extractCnt}", produces = "text/csv")
 	public void downloadCsvPredict(@PathVariable String camId, @PathVariable String succProb,
 			@PathVariable String extractCnt, HttpServletRequest request, HttpServletResponse response) {
 		try {
@@ -237,7 +237,7 @@ public class FileController {
 		}
 	}
 
-	@GetMapping(value = "/UploadReal")
+	@RequestMapping(value = "/UploadReal")
 	public ResponseEntity<Object> fileUpload_Real(String cam_id, String user_id, //
 			MultipartFile[] file_real, HttpSession session) {
 		AI_CAMPAIGN campaign = new AI_CAMPAIGN();

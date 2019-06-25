@@ -26,7 +26,7 @@ public class StatisticsController {
 	StatisticsService statisticsService;
 
 	// 모델 여부가 'Y'인 통계 조회
-	@GetMapping(value = "/list")
+	@RequestMapping(value = "/list")
 	public List<AIStatistics> selectSttModelYList(@RequestParam(required = false) String camName,
 			@RequestParam(required = false) String camType, @RequestParam(required = false) String camStatus,
 			@RequestParam(required = false) String beforeDate, @RequestParam(required = false) String afterDate,
@@ -44,7 +44,7 @@ public class StatisticsController {
 	}
 
 	// 통계 평균 조회
-	@GetMapping(value = "/average")
+	@RequestMapping(value = "/average")
 	public Map<String, AIStatistics> selectStatisticsAvgList(@RequestParam(required = false) String camName,
 			@RequestParam(required = false) String camType, @RequestParam(required = false) String camStatus,
 			@RequestParam(required = false) String beforeDate, @RequestParam(required = false) String afterDate,

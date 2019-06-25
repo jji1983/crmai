@@ -25,7 +25,7 @@ public class StagingController {
 	@Autowired
 	StagingService stagingService;
 
-	@GetMapping(value = "/train")
+	@RequestMapping(value = "/train")
 	public ResponseEntity<List<AI_STAGING>> getTrain(AI_PAGE page) {
 		log.info("Request List....getTrain.... - {}", page);
 		List<AI_STAGING> out_train = stagingService.selectStaginTrain(page);
@@ -36,7 +36,7 @@ public class StagingController {
 		return new ResponseEntity<>(out_train, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/test")
+	@RequestMapping(value = "/test")
 	public ResponseEntity<List<AI_STAGING>> getTest(AI_PAGE page) {
 		log.info("Request List....getTest.... - {}", page);
 		List<AI_STAGING> out_test = stagingService.selectStaginTest(page);
@@ -46,7 +46,7 @@ public class StagingController {
 		return new ResponseEntity<>(out_test, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/result")
+	@RequestMapping(value = "/result")
 	public ResponseEntity<List<AI_STAGING>> getResult(AI_PAGE page) {
 		log.info("Request List....getResult.... - {}", page);
 		List<AI_STAGING> out_test = null;
@@ -65,7 +65,7 @@ public class StagingController {
 		return new ResponseEntity<>(out_test, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/predict")
+	@RequestMapping(value = "/predict")
 	public ResponseEntity<List<AI_STAGING>> getPredict(AI_PAGE page) {
 		log.info("Request List....getPredict.... - {}", page);
 		List<AI_STAGING> out_test = stagingService.selectTestPredict(page);
@@ -77,7 +77,7 @@ public class StagingController {
 	}
 
 	// 값에 따른 선택에 의한 전처리 목록 총 갯수 가져오기
-	@GetMapping(value = "/count")
+	@RequestMapping(value = "/count")
 	public PageMaker getPreprocessCount(AI_STAGING staging, PageCriteria cri) {
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
@@ -109,7 +109,7 @@ public class StagingController {
 	}
 
 	// 전처리 목록 가져오기(다른 방식, 수동에 사용)
-	@GetMapping(value = "/list")
+	@RequestMapping(value = "/list")
 	public List<AI_STAGING> getPreprocessList(AI_STAGING stagingParam, PageCriteria cri) {
 		stagingParam.setPage(cri.getPage());
 		stagingParam.setPerPageNum(cri.getPerPageNum());

@@ -26,7 +26,7 @@ public class LearningController {
 	@Autowired
 	LearningService learningService;
 
-	@GetMapping(value = "/info")
+	@RequestMapping(value = "/info")
 	public ResponseEntity<List<Learning_Info>> getLearning_info(AI_CAMPAIGN campaign) {
 		log.info("Request List....getLearning.... - {}", campaign);
 		log.info("Request List....getLearning.... - {}", campaign.getCam_id());
@@ -47,7 +47,7 @@ public class LearningController {
 		log.info(string);
 	}
 
-	@GetMapping(value = "/res")
+	@RequestMapping(value = "/res")
 	public ResponseEntity<Object> getLearning_res(AI_TRAIN_MODEL campaign) {
 		log.info("Request List....getLearningres.... - {}", campaign);
 		log.info("Request List....getLearningres.... - {}", campaign.getCam_id());
@@ -64,17 +64,17 @@ public class LearningController {
 		return new ResponseEntity<Object>(out_learning, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/feature/list")
+	@RequestMapping(value = "/feature/list")
 	public List<AI_TRAIN_MODEL_FEATURE> getLearning_feature(AI_CAMPAIGN campaign) {
 		return learningService.getLearning_feature(campaign);
 	}
 
-	@GetMapping(value = "/result")
+	@RequestMapping(value = "/result")
 	public List<AI_TRAIN_MODEL> getLearningResultList(String cam_id) {
 		return learningService.getLearningResultList(cam_id);
 	}
 
-	@GetMapping(value = "/weight")
+	@RequestMapping(value = "/weight")
 	public List<Learning_Res> getLearningWeighting(String cam_id, String train_method) {
 		return learningService.getLearningWeighting(cam_id, train_method);
 	}

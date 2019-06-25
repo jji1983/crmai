@@ -21,7 +21,7 @@ public class DashboardChartController {
 	@Autowired
 	private DashboardChartService dashboardChartService;
 
-	@GetMapping(value = "total")
+	@RequestMapping(value = "total")
 	public DashboardChartData selectTotal(@RequestParam(required = false) String pers, HttpSession session) {
 		HashMap<String, Object> baseData = new HashMap<>();
 		if (pers != null) {
@@ -30,7 +30,7 @@ public class DashboardChartController {
 		return dashboardChartService.selectTotal(baseData);
 	}
 
-	@GetMapping(value = "type")
+	@RequestMapping(value = "type")
 	public List<DashboardChartData> selectType(@RequestParam(required = false) String pers,
 			@RequestParam(required = false) String type, HttpSession session) {
 		HashMap<String, Object> baseData = new HashMap<>();
@@ -43,7 +43,7 @@ public class DashboardChartController {
 		return dashboardChartService.selectType(baseData);
 	}
 
-	@GetMapping(value = "period")
+	@RequestMapping(value = "period")
 	public List<DashboardChartData> selectPeriod(@RequestParam(required = false) String pers,
 			@RequestParam(required = false) String period, @RequestParam(required = false) String periodBase,
 			HttpSession session) {
@@ -60,7 +60,7 @@ public class DashboardChartController {
 		return dashboardChartService.selectPeriod(baseData);
 	}
 
-	@GetMapping(value = "campaign")
+	@RequestMapping(value = "campaign")
 	public List<DashboardChartData> selectCampaign(@RequestParam(required = false) String pers,
 			@RequestParam(required = false) String campaign, HttpSession session) {
 		HashMap<String, Object> baseData = new HashMap<>();

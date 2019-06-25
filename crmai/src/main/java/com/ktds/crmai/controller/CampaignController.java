@@ -27,7 +27,7 @@ public class CampaignController {
 	@Autowired
 	CampaignService campaignService;
 
-	@GetMapping(value = "/totalPage")
+	@RequestMapping(value = "/totalPage")
 	public List<String> getTotalCampaign(HttpSession session) {
 		log.info("Request TotalCampaign....");
 		List<String> response = new ArrayList<>();
@@ -44,7 +44,7 @@ public class CampaignController {
 		return response;
 	}
 
-	@GetMapping(value = "/listPage")
+	@RequestMapping(value = "/listPage")
 	public ResponseEntity<List<AI_CAMPAIGN>> getCampaignListPage(AI_CAMPAIGN campaign, HttpSession session) {
 		log.info("Request List....getCampaignListPage.... - {}", campaign);
 		String admid = (String) session.getAttribute("sessionID");
@@ -57,7 +57,7 @@ public class CampaignController {
 		return new ResponseEntity<>(out_campaign, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/aistatus")
+	@RequestMapping(value = "/aistatus")
 	public ResponseEntity<AI_CAMPAIGN> getCampaignAiStatus(AI_CAMPAIGN campaign, HttpSession session) {
 		log.info("Request List....getCampaignListPage.... - {}", campaign);
 		String admid = (String) session.getAttribute("sessionID");
@@ -66,7 +66,7 @@ public class CampaignController {
 		return new ResponseEntity<>(out_campaign, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/count")
+	@RequestMapping(value = "/count")
 	public PageMaker getCamTotalCount(AI_CAMPAIGN campaignParam, PageCriteria cri, HttpSession session) {
 		log.info("##### 캠페인 매개변수:" + campaignParam.getCam_name());
 		String admId = (String) session.getAttribute("sessionID");
@@ -80,7 +80,7 @@ public class CampaignController {
 		return pageMaker;
 	}
 
-	@GetMapping(value = "/list")
+	@RequestMapping(value = "/list")
 	public List<AI_CAMPAIGN> getNewCampaignListPage(AI_CAMPAIGN campaignParam, PageCriteria cri, HttpSession session) {
 		log.info("Request List....getNewCampaignListPage.... - {}", campaignParam.getCam_name());
 		String admId = (String) session.getAttribute("sessionID");

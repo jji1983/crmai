@@ -23,7 +23,7 @@ public class AiModelController {
 	@Autowired
 	AiModelService aiModelService;
 
-	@GetMapping(value = "/list")
+	@RequestMapping(value = "/list")
 	public ResponseEntity<List<AI_TRAIN_MODEL>> getModel(AI_PAGE page) {
 		log.info("Request List....getModel.... - {}", page);
 		List<AI_TRAIN_MODEL> out_model = aiModelService.selectAiTrainModel(page.getCam_id());
@@ -33,7 +33,7 @@ public class AiModelController {
 		return new ResponseEntity<>(out_model, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/learn")
+	@RequestMapping(value = "/learn")
 	public List<AI_TRAIN_MODEL> getNewModelList(String cam_id) {
 		log.info("$$$$$ 캠페인 아이디:" + cam_id);
 		return aiModelService.selectAiTrainModel(cam_id);

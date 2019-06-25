@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<jsp:include page="./include/commonJs.jsp" />
 <title>소개영상</title>
 <style type="text/css">
 body {

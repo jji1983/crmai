@@ -27,12 +27,12 @@ public class AccountController {
 	@Autowired
 	AccountService accountService;
 
-	@GetMapping(value = "/list")
+	@RequestMapping(value = "/list")
 	public List<AI_ACCOUNT> selectAllAccountList() {
 		return accountService.selectAllAccountList();
 	}
 
-	@GetMapping(value = "/detail")
+	@RequestMapping(value = "/detail")
 	public List<AI_ACCOUNT> selectAccountDetail(String adm_id) {
 		log.info("### selectAccountDetail :: {} ", adm_id);
 		return accountService.selectAccountDetail(adm_id);
@@ -92,12 +92,12 @@ public class AccountController {
 		return response;
 	}
 
-	@GetMapping(value = "/listPage")
+	@RequestMapping(value = "/listPage")
 	public List<AI_ACCOUNT> getAccountListPage(AI_PAGE account, HttpSession session) {
 		return accountService.selectAccountPage(account);
 	}
 
-	@GetMapping(value = "/totalPage")
+	@RequestMapping(value = "/totalPage")
 	public List<String> getTotalAccount(HttpSession session) {
 		List<String> response = new ArrayList<>();
 		int maxRowNum = accountService.selectAccountPageNum();

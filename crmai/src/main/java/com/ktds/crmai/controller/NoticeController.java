@@ -24,12 +24,12 @@ public class NoticeController {
 	@Autowired
 	NoticeService noticeService;
 
-	@GetMapping(value = "/list")
+	@RequestMapping(value = "/list")
 	public List<AI_NOTICE> selectAllNoticeList() {
 		return noticeService.selectAllNoticeList();
 	}
 
-	@GetMapping(value = "/detail")
+	@RequestMapping(value = "/detail")
 	public List<AI_NOTICE> selectNoticeDetail(int code) {
 		return noticeService.selectNoticeDetail(code);
 	}
@@ -76,12 +76,12 @@ public class NoticeController {
 		}
 	}
 
-	@GetMapping(value = "/listPage")
+	@RequestMapping(value = "/listPage")
 	public List<AI_NOTICE> getNoticeListPage(AI_PAGE notice, HttpSession session) {
 		return noticeService.selectNoticePage(notice);
 	}
 
-	@GetMapping(value = "/totalPage")
+	@RequestMapping(value = "/totalPage")
 	public List<String> getTotalNotice(HttpSession session) {
 		List<String> response = new ArrayList<>();
 		int maxRowNum = noticeService.selectNoticePageNum();

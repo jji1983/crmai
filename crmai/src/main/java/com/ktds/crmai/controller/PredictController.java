@@ -26,7 +26,7 @@ public class PredictController {
 	PredictService predictService;
 
 	// 예측 결과 목록 조회
-	@GetMapping(value = "/list")
+	@RequestMapping(value = "/list")
 	public List<AIPredict> selectAllPredictList(Integer camId) {
 		log.info("$$$$$캠페인 아이디:" + camId);
 		AIPredict vo = new AIPredict(camId);
@@ -36,7 +36,7 @@ public class PredictController {
 	}
 
 	// 파라메터 입력한 예측 결과의 총 목록 수
-	@GetMapping(value = "/count")
+	@RequestMapping(value = "/count")
 	public PageMaker selectPredictCnt(Integer camId, Double succProb, Integer extractCnt, PageCriteria cri) {
 		PageMaker pageMaker = new PageMaker();
 		log.info("##### 예상 페이지:" + cri.getPage() + ", 예상 페이지 당 수:" + cri.getPerPageNum() + ", 예상 페이지 시작:"
@@ -54,7 +54,7 @@ public class PredictController {
 	}
 
 	// 페이징 처리된 예측 결과 목록 조회
-	@GetMapping(value = "/paging")
+	@RequestMapping(value = "/paging")
 	public List<AIPredict> selectPagingPredictList(Integer camId, Double succProb,
 			@RequestParam(required = false) Integer page) {
 		log.info("$$$$$$클릭한 페이지:" + page + ", 예측률:" + succProb);

@@ -24,13 +24,13 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 
-	@GetMapping(value = "/list")
+	@RequestMapping(value = "/list")
 	public List<AI_BOARD> selectAllBoardList() {
 		List<AI_BOARD> list = boardService.selectAllBoardList();
 		return list;
 	}
 
-	@GetMapping(value = "/detail")
+	@RequestMapping(value = "/detail")
 	public List<AI_BOARD> selectBoardDetail(int code) {
 		return boardService.selectBoardDetail(code);
 	}
@@ -75,12 +75,12 @@ public class BoardController {
 		}
 	}
 
-	@GetMapping(value = "/listPage")
+	@RequestMapping(value = "/listPage")
 	public List<AI_BOARD> getBoardListPage(AI_PAGE board, HttpSession session) {
 		return boardService.selectBoardPage(board);
 	}
 
-	@GetMapping(value = "/totalPage")
+	@RequestMapping(value = "/totalPage")
 	public List<String> getTotalBoard(HttpSession session) {
 		List<String> response = new ArrayList<>();
 		int maxRowNum = boardService.selectBoardPageNum();
