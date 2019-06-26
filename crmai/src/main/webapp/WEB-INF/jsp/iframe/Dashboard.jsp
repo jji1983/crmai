@@ -79,6 +79,59 @@
 	height: auto;
 	width: 100%;
 }
+.img-arrow{
+	max-width: 100%;
+	min-width: 70%;
+  	height: auto;
+}
+
+.img-arrow2{
+	max-hight: 70%;
+	min-hight: 50%;
+  	wight: auto;
+  	margin-bottom: 20px;
+}
+.col-arrow{
+ width:1%; 
+ padding-top:8px;
+ float:left;
+ display: none;
+ 
+}
+
+.col-sm-2-1{
+
+  position: relative;
+
+  min-height: 1px;
+
+  padding-left: 1%;
+
+  padding-right: 1%;
+
+}
+.col-arrow2{
+		display: inline;
+	}
+
+@media (min-width: 768px){
+
+	.col-sm-2-1{
+
+	    width: 15.824%;
+
+	    float:left;
+
+	}
+	.col-arrow{
+		display: inline;
+	}
+	.img-arrow2{
+		display: none;
+	}
+
+}
+
 </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -234,7 +287,7 @@
 							</div>
 							<div class="box-body">
 								<div id="ai_status" class="row">
-									<div id='id_loading1' class="col-md-2.5 col-sm-2 text-center">
+									<div class="col-sm-2-1 text-center">
 										<div class="box box-default box-solid">
 											<div class="box-header with-border">
 												<h3 class="box-title">1.1 학습데이터 등록</h3>
@@ -246,9 +299,13 @@
 											</div> -->
 											<!-- /.box-body -->
 										</div>
+										<img class="img-arrow2" src="/resources/dist/img/arrow2.png">
+									</div>
+									<div class="col-arrow">
+										<img class="img-arrow" src="/resources/dist/img/arrow1.png">
 									</div>
 									<!-- /.col -->
-									<div class="col-md-2.5 col-sm-2 text-center">
+									<div class="col-sm-2-1 text-center">
 										<div class="box box-default box-solid">
 											<div class="box-header with-border">
 												<h3 class="box-title">1.2 예측 데이터 등록</h3>
@@ -260,9 +317,13 @@
 											</div> -->
 											<!-- /.box-body -->
 										</div>
+										<img class="img-arrow2" src="/resources/dist/img/arrow2.png">
+									</div>
+									<div class="col-arrow">
+										<img class="img-arrow" src="/resources/dist/img/arrow1.png">
 									</div>
 									<!-- /.col -->
-									<div class="col-md-2.5 col-sm-2 text-center">
+									<div class="col-sm-2-1 text-center">
 										<div class="box box-default box-solid">
 											<div class="box-header with-border">
 												<h3 class="box-title">2. AI 전처리 수행</h3>
@@ -274,9 +335,13 @@
 											</div> -->
 											<!-- /.box-body -->
 										</div>
+										<img class="img-arrow2" src="/resources/dist/img/arrow2.png">
+									</div>
+									<div class="col-arrow">
+										<img class="img-arrow" src="/resources/dist/img/arrow1.png">
 									</div>
 									<!-- /.col -->
-									<div class="col-md-2.5 col-sm-2 text-center">
+									<div class="col-sm-2-1 text-center">
 										<div class="box box-default box-solid">
 											<div class="box-header with-border">
 												<h3 class="box-title">3. AI학습 수행</h3>
@@ -288,9 +353,13 @@
 											</div> -->
 											<!-- /.box-body -->
 										</div>
+										<img class="img-arrow2" src="/resources/dist/img/arrow2.png">
+									</div>
+									<div class="col-arrow">
+										<img class="img-arrow" src="/resources/dist/img/arrow1.png">
 									</div>
 									<!-- /.col -->
-									<div class="col-md-2.5 col-sm-2 text-center">
+									<div class="col-sm-2-1 text-center">
 										<div class="box box-default box-solid">
 											<div class="box-header with-border">
 												<h3 class="box-title">4. AI 예측실행</h3>
@@ -301,10 +370,15 @@
 													disabled="disabled">데이터 없음</button>
 											</div> -->
 											<!-- /.box-body -->
+											
 										</div>
+										<img class="img-arrow2" src="/resources/dist/img/arrow2.png">
+									</div>
+									<div class="col-arrow">
+										<img class="img-arrow" src="/resources/dist/img/arrow1.png">
 									</div>
 									<!-- /.col -->
-									<div class="col-md-2.5 col-sm-2 text-center">
+									<div class="col-sm-2-1 text-center">
 										<div class="box box-default box-solid">
 											<div class="box-header with-border">
 												<h3 class="box-title">5. AI 결과</h3>
