@@ -311,10 +311,7 @@
 												<h3 class="box-title">1.2 예측 데이터 등록</h3>
 											</div>
 											<!-- /.box-header -->
-											<!-- <div class="box-body">
-												<button id='id_loading2_msg' type="button" class="btn btn-default"
-													disabled="disabled">데이터 없음</button>
-											</div> -->
+
 											<!-- /.box-body -->
 										</div>
 										<img class="img-arrow2" src="/resources/dist/img/arrow2.png">
