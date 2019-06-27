@@ -110,7 +110,7 @@
 			AND ADM_ID = #{sessionID}
 		</if>
 		<if test="periodBase != null and periodBase != ''">
-				AND <![CDATA[CAM_CDATE < ROUND (to_date(to_char(TO_DATE(#{periodBase},'yyyy'),'yyyy-mm-dd'),'yyyy-mm-dd'),'year')]]>
+				AND <![CDATA[CAM_CDATE < ROUND (to_date(to_char(TO_DATE(#{periodBase}+1,'yyyy'),'yyyy-mm-dd'),'yyyy-mm-dd'),'year')]]>
 				AND <![CDATA[CAM_CDATE >= TRUNC (to_date(to_char(TO_DATE(#{periodBase},'yyyy'),'yyyy-mm-dd'),'yyyy-mm-dd'),'year')]]>
 		</if>
 		ORDER BY
