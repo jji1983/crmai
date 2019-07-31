@@ -15,7 +15,7 @@
 	        ,ADM_UDATE as "ADM_UDATE"
 	        ,ADM_LOGIN as "ADM_LOGIN"
 	        ,(select count(*) from AI_CAMPAIGN camp where camp.ADM_ID = usr.ADM_ID) as "CAM_CNT"
-          FROM ai_account usr
+          FROM AI_ACCOUNT usr
          WHERE usr.ADM_ID = #{ADM_ID}
     </select>
 
@@ -30,17 +30,17 @@
 	        ,ADM_UDATE as "ADM_UDATE"
 	        ,ADM_LOGIN as "ADM_LOGIN"
 	        ,(select count(*) from AI_CAMPAIGN camp where camp.ADM_ID = usr.ADM_ID) as "CAM_CNT"
-          FROM ai_account usr
+          FROM AI_ACCOUNT usr
     </select>
     
     <update id="updateAdminById">
-        UPDATE ai_account SET (ADM_LOGIN) = ( SELECT (ADM_LOGIN + 1) as "ADM_LOGIN" FROM AI_ADMINUSER WHERE ADM_ID = #{ADM_ID} ), ADM_UDATE = sysdate WHERE ADM_ID = #{ADM_ID}
+        UPDATE ai_account SET (ADM_LOGIN) = ( SELECT (ADM_LOGIN + 1) as "ADM_LOGIN" FROM AI_ACCOUNT WHERE ADM_ID = #{ADM_ID} ), ADM_UDATE = now() WHERE ADM_ID = #{ADM_ID}
     </update>
     
 
     <insert id="insertAdmin">
-      INSERT INTO ai_account (ADM_ID, ADM_PW, ADM_TYPE, ADM_ROLE, ADM_NAME, ADM_EMAIL, ADM_CDATE, ADM_UDATE, ADM_LOGIN)
-      VALUES (#{ADM_ID}, #{ADM_PW}, #{ADM_TYPE}, 1, #{ADM_NAME},#{ADM_EMAIL}, sysdate, sysdate, 0)
+      INSERT INTO AI_ACCOUNT (ADM_ID, ADM_PW, ADM_TYPE, ADM_ROLE, ADM_NAME, ADM_EMAIL, ADM_CDATE, ADM_UDATE, ADM_LOGIN)
+      VALUES (#{ADM_ID}, #{ADM_PW}, #{ADM_TYPE}, 1, #{ADM_NAME},#{ADM_EMAIL}, now(), now(), 0)
     </insert>
 
 </mapper>
