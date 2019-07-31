@@ -58,7 +58,7 @@
     
     <insert id="insertBoard">
     	INSERT INTO AI_BOARD (CODE, TITLE, CONTENTS, WRITER, REG_DATETIME)
-      	VALUES ((SELECT MAX(code + 1) FROM AI_BOARD), #{title}, #{contents}, #{writer}, sysdate)
+      	VALUES ((SELECT MAX(code + 1) FROM AI_BOARD), #{title}, #{contents}, #{writer}, now())
     </insert>
     
     	

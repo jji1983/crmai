@@ -52,7 +52,7 @@
     
     <insert id="insertCampaign">
 	    insert into ai_campaign(cam_id, adm_id, cam_name, cam_desc, cam_type, cam_ifilename, cam_itype, cam_autoyn,  cam_otype, cam_ofilename, cam_cdate, cam_status) 
-		values ( #{cam_seq}, #{adm_id}, #{cam_name}, #{cam_desc}, #{cam_type}, #{cam_ifilename}, #{cam_itype}, #{cam_autoyn}, #{cam_otype}, #{cam_ofilename}, sysdate,'시작')
+		values ( #{cam_seq}, #{adm_id}, #{cam_name}, #{cam_desc}, #{cam_type}, #{cam_ifilename}, #{cam_itype}, #{cam_autoyn}, #{cam_otype}, #{cam_ofilename}, now(),'시작')
 	</insert>
     
 	<!-- 파라메터 존재하는 캠페인 쿼리 -->
