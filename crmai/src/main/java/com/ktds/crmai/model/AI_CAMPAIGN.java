@@ -7,10 +7,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Data
 @Alias("campaign")
 @EqualsAndHashCode(callSuper=false)
-@NoArgsConstructor
 @AllArgsConstructor
 public class AI_CAMPAIGN extends PageCriteria {
 	private int page_st;
