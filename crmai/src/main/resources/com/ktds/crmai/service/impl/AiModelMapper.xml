@@ -6,18 +6,18 @@
 
     <select id="selectAiTrainModel" resultType="model">
 	    select 
-	       cam_id, 
+	       src_id, 
 	       train_method,
-	       round(ORIGINAL_ACC * 100, 1) as original_acc,  --정확도
-	       round(SO_ACC * 100, 1) as so_acc,              --예측
+	       round(cast(ORIGINAL_ACC * 100 as numeric), 1) as original_acc,  --정확도
+	       round(cast(SO_ACC * 100 as numeric), 1) as so_acc,              --예측
 	       train_start, 
 	       train_end, 
-	       model_flag, 
-	       desc_text 
+	       model_flg, 
+	       desc_text  
 		from 
-		    ai_train_model 
+		    t_train_model 
 		where 
-		    cam_id = #{cam_id}
+		    src_id = #{cam_id}
     </select>
 
 

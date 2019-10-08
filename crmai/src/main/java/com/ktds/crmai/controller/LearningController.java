@@ -29,10 +29,10 @@ public class LearningController {
 	@RequestMapping(value = "/info")
 	public ResponseEntity<List<Learning_Info>> getLearning_info(AI_CAMPAIGN campaign) {
 		log.info("Request List....getLearning.... - {}", campaign);
-		log.info("Request List....getLearning.... - {}", campaign.getCam_id());
+		log.info("Request List....getLearning.... - {}", campaign.getSrc_id());
 		List<Learning_Info> out_learning = null;
-		alert("getCam_id :: " + campaign.getCam_id());
-		if (campaign.getCam_id() != null) {
+		alert("getCam_id :: " + campaign.getSrc_id());
+		if (campaign.getSrc_id() != null) {
 			log.info("##################");
 			out_learning = learningService.getLearning_info(campaign);
 		}

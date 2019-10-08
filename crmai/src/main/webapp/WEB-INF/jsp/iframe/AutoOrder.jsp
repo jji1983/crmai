@@ -53,9 +53,7 @@
 									</div>
 									<!-- /.box-header -->
 									<div class="box-body">
-										<button id='id_loading1_msg' type="button"
-											class="btn btn-default" data-toggle="modal"
-											data-target="#trainDataModal" data-title="cam_id"></button>
+										<h5 id='id_loading1_msg' class="box-title"></h5>
 									</div>
 									<!-- /.box-body -->
 									<!-- Loading (remove the following to stop the loading)-->
@@ -73,9 +71,7 @@
 									</div>
 									<!-- /.box-header -->
 									<div class="box-body">
-										<button id='id_loading2_msg' type="button"
-											class="btn btn-default" data-toggle="modal"
-											data-target="#testDataModal"></button>
+										<h5 id='id_loading2_msg' class="box-title"></h5>
 									</div>
 									<!-- /.box-body -->
 									<!-- Loading (remove the following to stop the loading)-->
@@ -94,9 +90,7 @@
 									</div>
 									<!-- /.box-header -->
 									<div class="box-body">
-										<button id='id_pre_msg' type="button"
-											class="btn btn-info pull-center" data-toggle="modal"
-											data-target="#ResultDataModal"></button>
+										<h5 id='id_pre_msg' class="box-title"></h5>
 									</div>
 									<!-- /.box-body -->
 									<!-- Loading (remove the following to stop the loading)-->
@@ -115,9 +109,7 @@
 									</div>
 									<!-- /.box-header -->
 									<div class="box-body">
-										<button id='id_runf_msg' type="button"
-											class="btn btn-info pull-center" data-toggle="modal"
-											data-target="#ModelDataModal"></button>
+										<h5 id='id_runf_msg' class="box-title"></h5>
 									</div>
 									<!-- /.box-body -->
 									<!-- Loading (remove the following to stop the loading)-->
@@ -135,9 +127,7 @@
 										<h3 class="box-title">4. AI예측실행</h3>
 									</div>
 									<div class="box-body">
-										<button id='id_predict_msg' type="button"
-											class="btn btn-info pull-center" data-toggle="modal"
-											data-target="#PredictDataModal"></button>
+										<h5 id='id_predict_msg' class="box-title"></h5>
 									</div>
 									<!-- /.box-body -->
 									<!-- Loading (remove the following to stop the loading)-->
@@ -155,9 +145,7 @@
 										<h3 class="box-title">5. AI결과</h3>
 									</div>
 									<div class="box-body">
-										<button id='id_real_msg' type="button"
-											class="btn btn-info pull-center" data-toggle="modal"
-											data-target="#RealDataModal"></button>
+										<h5 id='id_real_msg' class="box-title"></h5>
 									</div>
 									<!-- /.box-body -->
 									<!-- Loading (remove the following to stop the loading)-->

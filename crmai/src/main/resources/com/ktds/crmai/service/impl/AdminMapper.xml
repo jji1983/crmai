@@ -11,11 +11,11 @@
 	        ,ADM_ROLE as "ADM_ROLE"
 	        ,ADM_NAME as "ADM_NAME"
 	        ,ADM_EMAIL as "ADM_EMAIL"
-	        ,ADM_CDATE as "ADM_CDATE"
-	        ,ADM_UDATE as "ADM_UDATE"
+	        ,created as "ADM_CDATE"
+	        ,last_upd as "ADM_UDATE"
 	        ,ADM_LOGIN as "ADM_LOGIN"
-	        ,(select count(*) from AI_CAMPAIGN camp where camp.ADM_ID = usr.ADM_ID) as "CAM_CNT"
-          FROM AI_ACCOUNT usr
+	        ,(select count(*) from t_src camp where camp.ADM_ID = usr.ADM_ID) as "CAM_CNT"
+          FROM t_ACCOUNT usr
          WHERE usr.ADM_ID = #{ADM_ID}
     </select>
 
@@ -26,20 +26,20 @@
 	        ,ADM_ROLE as "ADM_ROLE"
 	        ,ADM_NAME as "ADM_NAME"
 	        ,ADM_EMAIL as "ADM_EMAIL"
-	        ,ADM_CDATE as "ADM_CDATE"
-	        ,ADM_UDATE as "ADM_UDATE"
+	        ,created as "ADM_CDATE"
+	        ,last_upd as "ADM_UDATE"
 	        ,ADM_LOGIN as "ADM_LOGIN"
-	        ,(select count(*) from AI_CAMPAIGN camp where camp.ADM_ID = usr.ADM_ID) as "CAM_CNT"
-          FROM AI_ACCOUNT usr
+	        ,(select count(*) from t_src camp where camp.ADM_ID = usr.ADM_ID) as "CAM_CNT"
+          FROM t_ACCOUNT usr
     </select>
     
     <update id="updateAdminById">
-        UPDATE ai_account SET (ADM_LOGIN) = ( SELECT (ADM_LOGIN + 1) as "ADM_LOGIN" FROM AI_ACCOUNT WHERE ADM_ID = #{ADM_ID} ), ADM_UDATE = now() WHERE ADM_ID = #{ADM_ID}
+        UPDATE t_account SET (ADM_LOGIN) = ( SELECT (ADM_LOGIN + 1) as "ADM_LOGIN" FROM t_ACCOUNT WHERE ADM_ID = #{ADM_ID} ), last_upd = now() WHERE ADM_ID = #{ADM_ID}
     </update>
     
 
     <insert id="insertAdmin">
-      INSERT INTO AI_ACCOUNT (ADM_ID, ADM_PW, ADM_TYPE, ADM_ROLE, ADM_NAME, ADM_EMAIL, ADM_CDATE, ADM_UDATE, ADM_LOGIN)
+      INSERT INTO t_ACCOUNT (ADM_ID, ADM_PW, ADM_TYPE, ADM_ROLE, ADM_NAME, ADM_EMAIL, created, last_upd, ADM_LOGIN)
       VALUES (#{ADM_ID}, #{ADM_PW}, #{ADM_TYPE}, 1, #{ADM_NAME},#{ADM_EMAIL}, now(), now(), 0)
     </insert>
 

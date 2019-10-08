@@ -27,8 +27,8 @@ public class PretreatmentController {
 	public ResponseEntity<List<AI_CAMPAIGN>> getCampaignList(AI_CAMPAIGN campaign) {
 		log.info("Request List....getCampaignList.... - {}", campaign);
 		List<AI_CAMPAIGN> out_campaign = null;
-		if (campaign.getCam_name() != null || campaign.getAdm_id() != null || campaign.getCam_type() != null
-				|| campaign.getCam_status() != null) {
+		if (campaign.getSrc_name() != null || campaign.getAdm_id() != null || campaign.getSrc_type() != null
+				|| campaign.getStatus_cd() != null) {
 			out_campaign = pretreatmentService.selectCampaign(campaign);
 		} else {
 			out_campaign = pretreatmentService.selectAllcampaign();
@@ -41,9 +41,9 @@ public class PretreatmentController {
 
 	@RequestMapping(value = "/detail")
 	public ResponseEntity<List<AI_STAGING>> getCampaignTrg(AI_CAMPAIGN campaign) {
-		log.info("Request List....getCampaignTrg.... - {}", campaign.getCam_id());
+		log.info("Request List....getCampaignTrg.... - {}", campaign.getSrc_id());
 		List<AI_STAGING> trainData = null;
-		if (campaign.getCam_id() != null) {
+		if (campaign.getSrc_id() != null) {
 			trainData = pretreatmentService.selectStaginTrain(campaign);
 		}
 		if (trainData == null) {
@@ -60,9 +60,9 @@ public class PretreatmentController {
 
 	@RequestMapping(value = "/detailResult")
 	public ResponseEntity<List<AI_STAGING>> getCampaignTrgResult(AI_CAMPAIGN campaign) {
-		log.info("Request List....getCampaignTrgResult.... - {}", campaign.getCam_id());
+		log.info("Request List....getCampaignTrgResult.... - {}", campaign.getSrc_id());
 		List<AI_STAGING> trainData = null;
-		if (campaign.getCam_id() != null) {
+		if (campaign.getSrc_id() != null) {
 			trainData = pretreatmentService.selectStaginTrainResult(campaign);
 		}
 		if (trainData == null) {

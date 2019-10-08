@@ -12,12 +12,12 @@
 		    MODEL.MODEL_DIR as "model_dir",
 		    MODEL.MODEL_NAME  as "model_name"
 		from 
-		    AI_CAMPAIGN CAMP,
-		    AI_TRAIN_MODEL MODEL
+		    t_src CAMP,
+		    t_TRAIN_MODEL MODEL
 		where
-		    CAMP.CAM_ID = MODEL.CAM_ID
+		    CAMP.src_ID = MODEL.src_ID
     	 <if test="cam_id != null">
-		 	AND  MODEL.CAM_ID = #{cam_id}
+		 	AND  MODEL.src_ID = #{cam_id}
 		 </if>
 		 ORDER BY MODEL.SO_ACC DESC
     </select>
@@ -25,26 +25,26 @@
     
     <select id="getLearning_res" resultType="learning_res">
 		select  
-		    CAMP.CAM_ID as "cam_id",
+		    CAMP.src_ID as "cam_id",
 		    FEATURE.TRAIN_METHOD as "train_method",
 		    FEATURE.FEATURE_NAME as "feature_name",
 		    FEATURE.WEIGHT as "weight"
 		from 
-		    AI_CAMPAIGN CAMP,
-		    AI_TRAIN_MODEL MODEL,
-		    AI_TRAIN_MODEL_FEATURE FEATURE
+		    t_src CAMP,
+		    t_TRAIN_MODEL MODEL,
+		    t_MODEL_FEATURE FEATURE
 		where
-		    CAMP.CAM_ID = MODEL.CAM_ID
-		   AND CAMP.CAM_ID = FEATURE.CAM_ID
+		    CAMP.src_ID = MODEL.src_ID
+		   AND CAMP.src_ID = FEATURE.src_ID
     	 <if test="train_method != null and train_method != ''">
 		   AND FEATURE.TRAIN_METHOD = #{train_method}
 		 </if>
     	 <if test="cam_id != null and cam_id != ''">
-		 	AND  CAMP.CAM_ID = #{cam_id}
+		 	AND  CAMP.src_ID = #{cam_id}
 		 </if>
-		   AND <![CDATA[ ROWNUM <= 10 ]]>
 		 order by 
 		 	FEATURE.WEIGHT desc
+		 LIMIT 10
     </select>
     
     
@@ -60,24 +60,25 @@
     </select>
     
     <select id="getLearningResultList" resultType="model">
-    	select cam_id, 
+    	select src_id, 
 		       train_method,
-		       ROUND(original_acc * 100, 2) as original_acc, 
-		       ROUND(so_acc * 100, 2) as so_acc,             
+		       ROUND(cast(original_acc as numeric) * 100, 2) as original_acc, 
+		       ROUND(cast(so_acc as numeric) * 100), 2) as so_acc,             
 		       train_start, 
 		       train_end, 
-		       model_flag, 
+		       model_flg, 
 		       desc_text 
 		from ai_train_model
-		where cam_id = #{cam_id}
+		where src_id = #{cam_id}
 		order by so_acc desc
     </select>
     
     <select id="getLearningWeighting" resultType="learning_res">
-    	select cam_id, train_method, feature_name, weight
-	    from ai_train_model_feature
-	    where <![CDATA[ rownum <= 10 ]]> and cam_id = #{cam_id} and train_method = #{train_method}
+    	select src_id, train_method, feature_name, weight
+	    from t_model_feature
+	    where src_id = #{cam_id} and train_method = #{train_method}
 	    order by weight desc
+	   	limit 10
     </select>
 
 </mapper>

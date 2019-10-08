@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AI_TRAIN_MODEL {
 	private String cam_id;
+	private String src_id;
 	private String train_method;
 	private String original_acc;
 	private String so_acc;
@@ -19,6 +20,6 @@ public class AI_TRAIN_MODEL {
 	private String model_name;
 	private String train_start;
 	private String train_end;
-	private String model_flag;
+	private String model_flg;
 	private String desc_text;
 }

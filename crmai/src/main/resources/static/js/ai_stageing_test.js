@@ -144,23 +144,16 @@ $.ajax({
     cache: false,
     timeout: 600000,
     success: function (data) {
-    	alert( data );
-    	
+    	   	
     	//console.log("SUCCESS : ", data);
         $("#bthadd").prop("disabled", false);
         
         var jbSplit = data.split('::');
-        
+        alert( jbSplit[0] );
         //alert("jbSplit :: " + jbSplit );
         
     	if(jbSplit[0] == "OK"){
-            //alert('모달 종료.');
-            form.reset();
-            $('#addModal').modal('hide');
-    	    
-    	    // alert('캠페인 리프리시');
-    	    //campaignPage();
-            newCampaignPage();
+    		call_Preprocessor(jbSplit[2]);
     	}
         
     },
@@ -170,5 +163,54 @@ $.ajax({
         $("#bthNew").prop("disabled", false);
         }
     });
-  }
+}
 
+function call_Preprocessor(data)
+{
+	var form = $('#addUploadForm')[0];
+	$("#bthNew").prop("disabled", true);
+	$("#bthClose").prop("disabled", true);
+	var campaign = new Object();
+  	campaign.src_id = data;
+  	var jsonData = JSON.stringify(campaign);
+	$.ajax({
+	    type: "POST",
+	    dataType: 'JSON',
+	    url: "http://localhost:5000/preprocess",
+	    processData: false, //prevent jQuery from automatically transforming the data into a query string
+	    contentType: 'application/json; charset=utf-8',
+	    cache: false,
+	    async   : 'true', // true
+	    timeout: 600000,
+	    data:jsonData,
+	    //http://api.jquery.com/jQuery.ajax/
+	    //https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
+	    
+	    success: function (data) {
+	    	
+	    	var obj = JSON.stringify(data, true, 2);
+        	
+        	var json = $.parseJSON(obj);
+        	//console.log("SUCCESS : ", data);
+            $("#bthadd").prop("disabled", false);
+            $("#bthClose").prop("disabled", false);
+        	if(json["result_cd"] == "0000"){
+        		//alert('모달 종료.');
+                form.reset();
+                $('#addModal').modal('hide');
+        	    
+        	    // alert('캠페인 리프리시');
+        	    //campaignPage();
+                newCampaignPage();
+	    	}
+
+
+	    },
+	    error: function (e) {
+	        alert("error :: " + e.responseText);
+	        console.log("ERROR : ", e);
+	        $("#bthNew").prop("disabled", false);
+	        }
+	    });
+
+}

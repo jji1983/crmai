@@ -14,7 +14,7 @@
 	
 	<sql id="inputParam">
 		<if test='(succProb != null) and !(succProb eq "".toString())'>
-			AND SUCC_PROB BETWEEN #{succProb} AND 1
+			AND SUCCESS_PROB BETWEEN CAST(#{succProb} AS numeric) AND 1
 		</if>
 	</sql>
 	
@@ -22,36 +22,35 @@
 	<select id="selectAllPredictList" resultMap="aiPredictMap"
 		parameterType="com.ktds.crmai.model.AIPredict">
 		SELECT P.ST_SEQ,
-		P.CAM_ID,
+		P.src_ID,
 		P.TRAIN_METHOD,
-		P.PREDICT,
-		ROUND(P.SUCC_PROB * 100, 2) as SUCC_PROB,
-		ROUND(P.FAIL_PROB * 100, 2) as FAIL_PROB,
+		P.PREDICT_val,
+		ROUND(cast(P.SUCCESS_PROB * 100 as numeric), 2) as SUCC_PROB,
+		ROUND(cast(P.FAIL_PROB * 100 as numeric), 2) as FAIL_PROB,
 		T.ST_C1
-		FROM AI_TEST_PREDICT P INNER JOIN AI_STAGING_TEST T
+		FROM T_SRC_PREDICT P INNER JOIN AI_STAGING_TEST T
 		ON P.ST_SEQ = T.ST_SEQ
-		WHERE P.CAM_ID = #{camId}
+		WHERE P.SRC_ID = #{camId}
 
 		<if test="predict != null and predict != '' ">
-			AND ROUND(P.SUCC_PROB * 100, 2) >= #{predict}
-		</if>
-
-		<if test="rnum != null and rnum != '' ">
-			AND <![CDATA[ ROWNUM  < #{rnum} ]]>
+			AND ROUND(CAST(P.SUCC_PROB * 100 AS NUMERIC), 2) >= #{predict}
 		</if>
 
 		ORDER BY P.ST_SEQ ASC
+		<if test="rnum != null and rnum != '' ">
+		LIMIT <![CDATA[CAST(#{rnum} as numeric)]]>
+		</if>
 	</select>
 	
 	<!-- 파라메터 존재하는 예측 결과 갯수 쿼리 -->
 	<select id="selectPredictCnt" resultType="int" parameterType="hashmap">
 		SELECT COUNT(*)
-		FROM AI_TEST_PREDICT P INNER JOIN AI_STAGING_TEST T
+		FROM T_SRC_PREDICT P INNER JOIN AI_STAGING_TEST T
         		ON P.ST_SEQ = T.ST_SEQ
-        WHERE P.CAM_ID = #{camId}
+        WHERE P.SRC_ID = #{camId}
         
         <if test="(extractCnt != null) and (extractCnt != 0.0)">
-        	AND <![CDATA[ ROWNUM <= #{extractCnt} ]]>
+        	LIMIT <![CDATA[ CAST(#{extractCnt} as numeric) ]]>
         </if>
         
         <include refid="inputParam"></include>
@@ -62,42 +61,42 @@
 	<select id="selectPredictList" resultMap="aiPredictMap" parameterType="hashmap">
 		SELECT *
 		FROM (
-				SELECT ROWNUM as RNUM, A.*
+				SELECT (ROW_NUMBER() OVER()) as RNUM, A.*
 				FROM (
 				        SELECT P.ST_SEQ,
-							   P.CAM_ID,
+							   P.SRC_ID,
 							   P.TRAIN_METHOD,
-							   P.PREDICT,
-							   ROUND(P.SUCC_PROB * 100) as SUCC_PROB,
-							   ROUND(P.FAIL_PROB * 100) as FAIL_PROB,
+							   P.PREDICT_VAL,
+							   ROUND(CAST(P.SUCCESS_PROB * 100) AS NUMERIC) as SUCC_PROB,
+							   ROUND(CAST(P.FAIL_PROB * 100) AS NUMERIC) as FAIL_PROB,
 							   ST_C1
-						  FROM AI_TEST_PREDICT P INNER JOIN AI_STAGING_TEST T
+						  FROM T_SRC_PREDICT P INNER JOIN AI_STAGING_TEST T
 				        			ON P.ST_SEQ = T.ST_SEQ
-				         WHERE P.CAM_ID = #{camId}
+				         WHERE P.SRC_ID = #{camId}
 				         
 				         <include refid="inputParam"></include>
 				         
 				         ORDER BY ST_SEQ
 				      ) A
-				WHERE <![CDATA[ ROWNUM <= #{listEnd} ]]>
+				LIMIT <![CDATA[ CAST(#{listEnd} AS NUMERIC)]]>
 	    	 ) B
-	    WHERE <![CDATA[ B.RNUM >= #{listStart} ]]>
+	    LIMIT <![CDATA[ CAST(#{listStart} AS NUMERIC)]]>
 	</select>
 	
 	<!-- 다운로드 시 사용하는 쿼리 -->
 	<select id="getPredictDown" resultMap="aiPredictMap" parameterType="hashmap">
-		SELECT ROWNUM as RNUM, A.*
+		SELECT (ROW_NUMBER() OVER()) as RNUM, A.*
 		  FROM (
 				       SELECT P.ST_SEQ,
-							  P.CAM_ID,
+							  P.SRC_ID,
 							  P.TRAIN_METHOD,
-							  P.PREDICT,
-							  ROUND(P.SUCC_PROB * 100) as SUCC_PROB,
-							  ROUND(P.FAIL_PROB * 100) as FAIL_PROB,
+							  P.PREDICT_VAL,
+							  ROUND(CAST(P.SUCCESS_PROB * 100) AS NUMERIC) as SUCC_PROB,
+							  ROUND(CAST(P.FAIL_PROB * 100) AS NUMERIC) as FAIL_PROB,
 							  ST_C1
-						 FROM AI_TEST_PREDICT P INNER JOIN AI_STAGING_TEST T
+						 FROM T_SRC_PREDICT P INNER JOIN AI_STAGING_TEST T
 				        			ON P.ST_SEQ = T.ST_SEQ
-				        WHERE P.CAM_ID = #{camId} 
+				        WHERE P.SRC_ID = #{camId} 
 				        
 				        <include refid="inputParam"></include>
 				        
@@ -106,7 +105,7 @@
 			   
 		 <where>
 		 	<if test="(extractCnt != null) and (extractCnt != 0.0)">
-	        	<![CDATA[ ROWNUM <= #{extractCnt} ]]>
+	        	LIMIT <![CDATA[ CAST (#{extractCnt} AS NUMERIC) ]]>
 	        </if>
 		 </where>
 	</select>

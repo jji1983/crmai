@@ -52,12 +52,31 @@ public class CampaignService implements CampaignMapper {
 	}
 
 	@Override
-	public void updateCampaignOtype(AI_CAMPAIGN campaign) {
-		campaignMapper.updateCampaignOtype(campaign);
+	public void updateCampaignTType(AI_CAMPAIGN campaign) {
+		campaignMapper.updateCampaignTType(campaign);
+	}
+
+	@Override
+	public void updateCampaignPType(AI_CAMPAIGN campaign) {
+		campaignMapper.updateCampaignPType(campaign);
+	}
+	@Override
+	public void updateCampaignAllType(AI_CAMPAIGN campaign) {
+		campaignMapper.updateCampaignAllType(campaign);
+	}
+	public void insertCampaignFile(AI_CAMPAIGN campaign) {
+		campaignMapper.insertCampaignFile(campaign);
+		
 	}
 
 	@Override
 	public void updateCampaignRtype(AI_CAMPAIGN campaign) {
+		// TODO Auto-generated method stub
 		campaignMapper.updateCampaignRtype(campaign);
+	}
+
+	@Override
+	public String selectLastOne(AI_CAMPAIGN campaign) {
+		return campaignMapper.selectLastOne(campaign);
 	}
 }

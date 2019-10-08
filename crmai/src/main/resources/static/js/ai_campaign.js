@@ -122,7 +122,6 @@ function search_campaign(now_page, page_st, page_end){
 	        success : function(data){
 	        	var obj = JSON.stringify(data, true, 2);
 	        	//alert("search_campaign result :: " + obj);
-	        	
 	        	grid_table_campaign(obj);
 	        	
 	        },
@@ -143,11 +142,10 @@ function grid_table_campaign(obj){
     html += 	'<th>캠페인이름</th>';
     html += 	'<th>등록자</th>';
     html += 	'<th>캠페인목적</th>';
-    /*html += 	'<th>캠페인상태</th>'; */
-    html += 	'<th>AI진행상태</th>';
+    html += 	'<th>캠페인상태</th>';
+    /*html += 	'<th>AI진행상태</th>';*/
     html += 	'<th>캠페인 등록일자</th>';
     html += 	'<th>설명</th>';
-    html += 	'<th>메시지</th>';
     html += 	'<tr></thead>';
     html += '<tbody>';
     
@@ -157,29 +155,29 @@ function grid_table_campaign(obj){
  		
  		$.each(val,function(k,v){
  			
- 			if(k == 'cam_id'){
+ 			if(k == 'src_id'){
  				if(first == 0){
  					html += '<td><input type="radio" name="camCheck" checked="checked" onclick="handleClick(this);" value="'+v+'" /></td>';
  					radioInit(v);
- 					getAIStatus();
+ 					getAIStatus();//캠페인 재조회 하는 부분 추가해아함 변경 필요
  					first = 1;
  				}else{
  					html += '<td><input type="radio" name="camCheck" onclick="handleClick(this);" value="'+v+'" /></td>';
  				}
  				html += '<td><center>' + v + '</center></td>';	
  			}
- 			if(k == 'cam_name'){
+ 			if(k == 'src_name'){
  				html += '<td>' + v + '</td>';	
  			}
  			if(k == 'adm_id'){
  				html += '<td>' + v + '</td>';	
  			}
  			
- 			if(k == 'cam_type'){
+ 			if(k == 'src_type'){
  				html += '<td>' + v + '</td>';	
  			}
  			
- 			if(k == 'cam_status'){
+ 			if(k == 'status_cd'){
  				html += '<td>' + v + '</td>';	
  			}
  			 /*
@@ -201,21 +199,13 @@ function grid_table_campaign(obj){
  				}
  			}
  			 */
- 			if(k == 'cam_cdate'){
+ 			if(k == 'created'){
  				html += '<td>' + v + '</td>';	
  			}
- 			if(k == 'cam_desc'){
+ 			if(k == 'desc_text'){
  				html += '<td>' + v + '</td>';	
  			}
  			
- 			if(k == 'cam_msg'){
- 				
- 				if(v == '' || v == null || v == 'null' ){
- 					html += '<td></td>';
- 				}else{
- 					html += '<td>' + v + '</td>';
- 				}
- 			}
  		});
  		html += '</tr>';
 	  });
@@ -259,12 +249,9 @@ $.ajax({
         //alert("jbSplit :: " + jbSplit );
         
     	if(jbSplit[0] == "OK"){
+    		selectLastOne();
+    		//call_Preprocessor();
             //alert('모달 종료.');
-            form.reset();
-            $('#newModal').modal('hide');
-    	    
-    	    // alert('캠페인 리프리시');
-    	    campaignPage();
     	}
         
     },
@@ -275,6 +262,83 @@ $.ajax({
         }
     });
   }
+
+function selectLastOne()
+{
+	$.ajax({
+	    type: "GET",
+	    enctype: 'multipart/form-data',
+	    url: "/campaign/lastOne",
+	    //data: data,
+	    //http://api.jquery.com/jQuery.ajax/
+	    //https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
+	    processData: false, //prevent jQuery from automatically transforming the data into a query string
+	    contentType: false,
+	    cache: false,
+	    timeout: 600000,
+	    success: function (data) {
+	    	//alert( "여기: "+data );
+	    	
+	        //alert('모달 종료.');
+	    	call_Preprocessor(data);
+	        
+	    },
+	    error: function (e) {
+	        alert("error :: " + e.responseText);
+	        console.log("ERROR : ", e);
+	        $("#bthNew").prop("disabled", false);
+	        }
+	    });
+}
+function call_Preprocessor(data)
+{
+	var form = $('#newUploadForm')[0];
+	$("#bthNew").prop("disabled", true);
+	$("#bthClose").prop("disabled", true);
+	var campaign = new Object();
+  	campaign.src_id = data;
+  	var jsonData = JSON.stringify(campaign);
+	$.ajax({
+	    type: "POST",
+	    dataType: 'JSON',
+	    url: "http://localhost:5000/preprocess",
+	    processData: false, //prevent jQuery from automatically transforming the data into a query string
+	    contentType: 'application/json; charset=utf-8',
+	    cache: false,
+	    async   : 'true', // true
+	    timeout: 600000,
+	    data:jsonData,
+	    //http://api.jquery.com/jQuery.ajax/
+	    //https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
+	    
+	    success: function (data) {
+	    	
+	    	var obj = JSON.stringify(data, true, 2);
+        	
+        	var json = $.parseJSON(obj);
+        	
+        	if(json["result_cd"] == "0000"){
+        		$("#bthNew").prop("disabled", false);
+        		$("#bthClose").prop("disabled", false);
+	            
+        		form.reset();
+	            //alert('모달 종료2');
+	            $('#newModal').modal('hide');
+	    	    
+	    	    // alert('캠페인 리프리시');
+	    	    campaignPage();
+	    	}
+
+
+	    },
+	    error: function (e) {
+	        alert("error :: " + e.responseText);
+	        console.log("ERROR : ", e);
+	        $("#bthNew").prop("disabled", false);
+	        }
+	    });
+
+}
   
 // 페이징 처리하는 캠페인 함수 불러오는 것만 다름(AI수동용)
 function modifiedSubmitNewCampagin(){
@@ -299,7 +363,7 @@ function modifiedSubmitNewCampagin(){
 	    cache: false,
 	    timeout: 600000,
 	    success: function (data) {
-	    	alert( data );
+	    	//alert( "여기: "+data );
 	    	
 	    	//console.log("SUCCESS : ", data);
 	        $("#bthNew").prop("disabled", false);
@@ -326,11 +390,11 @@ function modifiedSubmitNewCampagin(){
 	    });
 	  }
   
-  function getAIStatus(){
+ function getAIStatus(){
 		//alert('-- getAIStatus -- ['+currentValue+']');
 	
 	var campaign = new Object();
-  	campaign.cam_id = currentValue;
+  	campaign.src_id = currentValue;
   	
     $.ajax({
         type    : 'GET', // method
@@ -351,11 +415,11 @@ function modifiedSubmitNewCampagin(){
         	
         	//alert("get Value :: " + json["cam_id"] + " :: " + json["cam_itype"] + " :: " + json["cam_otype"]);
         	
-        	var cam_id = json["cam_id"];
-        	var cam_itype = json["cam_itype"];
-        	var cam_otype = json["cam_otype"];
+        	var src_id = json["src_id"];
+        	var src_cd = json["status_cd"];
+        	//var cam_otype = json["cam_otype"];
         	
-        	setAiStatus(cam_id, cam_itype, cam_otype);
+        	setAiStatus(src_id, src_cd);
         	
         },
         error : function(request,status,error){
@@ -364,20 +428,16 @@ function modifiedSubmitNewCampagin(){
 		});
   }
   
-  function setAiStatus(cam_id, cam_itype, cam_otype) {
+  function setAiStatus(src_id, src_cd) {
 	  //alert("call setAiStatus :: " + cam_id + " :: " + cam_itype + " :: " + cam_otype);
   $("#ai_status").show(); //현황창 보이기
- 
   var button_data1 = "<button type=\"button\">캠페인 신규등록</button>";
  
-  var train_text = ["학습데이터 입력전", "학습데이터 입력후", "학습데이터 처리중", "학습데이터 처리 오류", "데이터 미리보기", "전처리 전", "전처리중", "데이터 미리보기"];
-  var test_text = ["대상자데이터 입력전", "대상자데이터 입력후", "대상자데이터 처리중", "대상자데이터 처리 오류", "데이터 미리보기", "전처리 전", "전처리중", "데이터 미리보기"];
+  var train_text = ["학습데이터 입력전", "학습데이터 입력후", "학습데이터 처리중", "학습데이터 처리 오류", "데이터 미리보기", "전처리 전", "전처리중", "전처리완료"];
+  var test_text = ["대상자데이터 입력전", "대상자데이터 입력후", "대상자데이터 처리중", "대상자데이터 처리 오류", "데이터 미리보기", "전처리 전", "전처리중", "전처리완료"];
   var runf_text = ["모델생성 시작전", "모델생성중", "모델 보기"];
   var predict_text = ["예측전", "예측중", "예측오류", "예측데이터 보기"];
   var real_text = ["실측결과 입력"];
-
-  $("#id_loading1_msg").text(train_text[0]);
-  $("#id_loading2_msg").text(test_text[0]);
   
   $("#id_pre_msg").text(train_text[5]);
   $("#id_runf_msg").text(runf_text[0]);
@@ -385,11 +445,10 @@ function modifiedSubmitNewCampagin(){
   $("#id_real_msg").text(real_text[0]);
   
   //학습 데이터 처리 / 테스트 데이터 처리
-  if(cam_itype <= 4 || cam_otype <= 4){
-	  //alert("학습 데이터 처리 :: " + cam_itype + " 대상자 데이터 처리 :: " + cam_otype);
-	  $("#id_loading1_msg").text(train_text[cam_itype]);
-	  $("#id_loading2_msg").text(test_text[cam_otype]);
-	  
+  if(src_cd == 'File Upload'){
+	  //alert("학습 데이터 처리 :: " + cam_itype + " 대상자 데이터 처리 :: " + cam_otype)
+	  $("#id_loading1_msg").text(train_text[2]);
+	  $("#id_loading2_msg").text(test_text[2]);
 	  //실행중
 	  $("#id_loading1_overlay").show(); //전처리 단계 실행중
 	  $("#id_loading2_overlay").show(); //전처리 단계 실행중
@@ -398,12 +457,12 @@ function modifiedSubmitNewCampagin(){
 	  $("#id_predict_overlay").show();  //AI 예측 단계 실행중
 	  $("#id_real_overlay").show();  //AI 예측 단계 실행중
 	  
-  }else if(cam_itype >= 5 && cam_itype <= 7  && cam_otype >= 5 && cam_otype <= 7){ //전처리 단계
+  }else if(src_cd=='Preprocessing'){ //전처리 단계
 	  //alert("전처리 단계 :: " + cam_itype + " :: " + cam_otype);
 	
-	  $("#id_loading1_msg").text(train_text[4]);
-	  $("#id_loading2_msg").text(test_text[4]);
-	  $("#id_pre_msg").text(train_text[cam_itype]);
+	  $("#id_loading1_msg").text(train_text[6]);
+	  $("#id_loading2_msg").text(test_text[6]);
+	  $("#id_pre_msg").text(train_text[6]);
   
 	  //실행 완료
 	  $("#id_loading1_overlay").hide(); //전처리 단계 실행
@@ -416,25 +475,26 @@ function modifiedSubmitNewCampagin(){
 	  $("#id_real_overlay").show();  //AI 예측 단계 실행중
 	
 	   
-  }else if(cam_itype >= 8 && cam_itype <= 10){ //모델 생성
-	  //alert("모델 생성 :: " + cam_itype );
+  }else if(src_cd=='Learning Complete'){ //모델 생성
+	  //alert("모델 생성 :: " + src_cd );
   
-	  $("#id_loading1_msg").text(train_text[4]);
-	  $("#id_loading2_msg").text(test_text[4]);
+	  $("#id_loading1_msg").text(train_text[7]);
+	  $("#id_loading2_msg").text(test_text[7]);
 	  $("#id_pre_msg").text(train_text[7]);
-	  $("#id_runf_msg").text(runf_text[(cam_itype - 8)]);
-
+	  $("#id_runf_msg").text(runf_text[0]);
+	  //alert("모델 생성1 :: " + src_cd );
 	  //실행 완료
 	  $("#id_loading1_overlay").hide(); //전처리 단계 실행
 	  $("#id_loading2_overlay").hide(); //전처리 단계 실행
 	  $("#id_pre_overlay").hide();      //AI 전처리 단계 실행중
-	  
+	  //alert("모델 생성 2:: " + src_cd );
 	  //실행중
 	  $("#id_runf_overlay").show();     //AI 모델 생성 단계 실행중
 	  $("#id_predict_overlay").show();  //AI 예측 단계 실행중
 	  $("#id_real_overlay").show();  //AI 예측 단계 실행중
+	  //alert("모델 생성 3:: " + src_cd );
 	  
-  }else if(cam_itype >= 11 && cam_itype <= 14){//대상자 처리
+  }else if(src_cd =='Deep Learning'||src_cd =='Machine Learning'){//대상자 처리
 	  //alert("대상자 처리 :: " + cam_itype );
 	  $("#id_loading1_msg").text(train_text[4]);
 	  $("#id_loading2_msg").text(test_text[4]);
@@ -458,7 +518,7 @@ function modifiedSubmitNewCampagin(){
 		$("#id_real_overlay").show();  //AI 예측 단계 실행중
 	  }
   }else{
-	  alert("미 처리 :: " + cam_itype + " :: " + cam_otype);
+	  alert("미 처리 :: " + src_cd );
   }
 }
 
@@ -485,7 +545,7 @@ function submitUploadRealData(){
 	    cache: false,
 	    timeout: 600000,
 	    success: function (data) {
-	    	alert( data );
+	    	alert( "여긴가? "+data );
 	    	
 	    	//console.log("SUCCESS : ", data);
 	        $("#bthReal").prop("disabled", false);
@@ -513,15 +573,13 @@ function submitUploadRealData(){
 }
 
 function manualHandleClick(myRadio) {
-    currentValue = myRadio.value;
-    
+	currentValue = myRadio.value;
     $("#id_span_msg").text("캠페인ID :: " + currentValue);
 }
   
 function manualRadioInit(myRadio) {  
 	if(myRadio != 0){
 		$("#id_span_msg").text("캠페인ID :: " + myRadio);
-		
 		currentValue = myRadio;
 	}
 }
@@ -529,9 +587,9 @@ function manualRadioInit(myRadio) {
 // 파라메터 존재하는 캠페인 찾기 메서드 사용하려면 밑의 new 접두어가 들어간 메서드 사용할 것!!!
 function newCampaignPage(){
 	var campaignData = { 
-		cam_name : $("#cam_name").val(), 
-		cam_type : $("#cam_type").val(),
-		cam_status : $("#cam_status").val()
+		src_name : $("#cam_name").val(), 
+		src_type : $("#cam_type").val(),
+		status_cd : $("#cam_status").val()
 	};
 			
 	$.ajax({
@@ -566,10 +624,10 @@ function createPagenationCam(totalPage, displayPage) {
 		html += "<th class='text-center'>등록자</th>";
 		html += "<th class='text-center'>캠페인목적</th>";
 		html += "<th class='text-center'>캠페인상태</th>";
-		html += "<th class='text-center'>AI진행상태</th>";
+		/*html += "<th class='text-center'>AI진행상태</th>";*/
 		html += "<th class='text-center'>캠페인 등록일자</th>";
 		html += "<th class='text-center'>설명</th>";
-		html += "<th class='text-center'>메시지</th></tr></thead><tbody>";
+		html += "</tr></thead><tbody>";
 		
 		html += "<tr><td class='text-center' colspan='10'>조회된 데이터가 없습니다.</td></tr>";
 		
@@ -581,9 +639,9 @@ function createPagenationCam(totalPage, displayPage) {
 
 function newSearchCampaign(clickPage){
 	var campaignData = { 
-		cam_name : $("#cam_name").val(), 
-		cam_type : $("#cam_type").val(),
-		cam_status : $("#cam_status").val(),
+		src_name : $("#cam_name").val(), 
+		src_type : $("#cam_type").val(),
+		status_cd : $("#cam_status").val(),
 		page : clickPage
 	};
 		
@@ -606,10 +664,10 @@ function createTableCampaign(arr){
 	html += "<th class='text-center'>등록자</th>";
 	html += "<th class='text-center'>캠페인목적</th>";
 	html += "<th class='text-center'>캠페인상태</th>";
-	html += "<th class='text-center'>AI진행상태</th>";
+	/*html += "<th class='text-center'>AI진행상태</th>";*/
 	html += "<th class='text-center'>캠페인 등록일자</th>";
 	html += "<th class='text-center'>설명</th>";
-	html += "<th class='text-center'>메시지</th></tr></thead><tbody>";
+	html += "</tr></thead><tbody>";
 	
 	// 데이터 존재 미존재 여부에 따른 표 표시
 	if(arr.length != 0) {
@@ -618,7 +676,7 @@ function createTableCampaign(arr){
 			
 			Object.getOwnPropertyNames(arr[arrIdx]).forEach(function(val, idx, array) {
 				switch (val) {
-					case "cam_id":
+					case "src_id":
 						if(first == true) {
 							html += "<td class='text-center'><input name='cam_check' type='radio' value='" + arr[arrIdx][val] + "' onclick='manualHandleClick(this);' checked='checked'></td>";
 							
@@ -632,7 +690,7 @@ function createTableCampaign(arr){
 						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
-					case "cam_name":
+					case "src_name":
 						html += "<td>" + arr[arrIdx][val] + "</td>";
 						
 						break;
@@ -640,15 +698,15 @@ function createTableCampaign(arr){
 						html += "<td>" + arr[arrIdx][val] + "</td>";
 						
 						break;
-					case "cam_type":
+					case "src_type":
 						html += "<td>" + arr[arrIdx][val] + "</td>";
 						
 						break;
-					case "cam_status":
+					case "status_cd":
 						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
-					case "cam_itype":
+					/*case "cam_itype":
 						switch (arr[arrIdx][val]) {
 							case "0":
 								html += "<td><span class='label label-info'>데이터 로딩 필요</span></td>";
@@ -688,23 +746,16 @@ function createTableCampaign(arr){
 								break;
 						}
 						
-						break;
-					case "cam_cdate":
+						break;*/
+					case "created":
 						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
-					case "cam_desc":
+					case "desc_text":
 						html += "<td>" + arr[arrIdx][val] + "</td>";
 						
 						break;
-					case "cam_msg":
-						if((arr[arrIdx][val] == null) || (arr[arrIdx][val] == "null") || (arr[arrIdx][val] == "")) {
-							html += "<td></td>";
-						} else {
-							html += "<td>" + arr[arrIdx][val] + "</td>";
-						}
-						
-						break;
+					
 					default:
 						break;
 				}

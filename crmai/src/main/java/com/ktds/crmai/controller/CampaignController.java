@@ -68,7 +68,7 @@ public class CampaignController {
 
 	@RequestMapping(value = "/count")
 	public PageMaker getCamTotalCount(AI_CAMPAIGN campaignParam, PageCriteria cri, HttpSession session) {
-		log.info("##### 캠페인 매개변수:" + campaignParam.getCam_name());
+		log.info("##### 캠페인 매개변수:" + campaignParam.getSrc_name());
 		String admId = (String) session.getAttribute("sessionID");
 		campaignParam.setAdm_id(admId);
 		PageMaker pageMaker = new PageMaker();
@@ -80,10 +80,31 @@ public class CampaignController {
 		return pageMaker;
 	}
 
+	@RequestMapping(value = "/lastOne")
+	public String getCamLastOne(AI_CAMPAIGN campaignParam, HttpSession session) {
+		log.info("##### 캠페인 매개변수:" + campaignParam.getSrc_name());
+		String admId = (String) session.getAttribute("sessionID");
+		campaignParam.setAdm_id(admId);
+
+		String srcId = campaignService.selectLastOne(campaignParam);
+		
+		log.info("$$$$$ 최근 등록된 id:" + srcId);
+		return srcId;
+	}
+	
 	@RequestMapping(value = "/list")
 	public List<AI_CAMPAIGN> getNewCampaignListPage(AI_CAMPAIGN campaignParam, PageCriteria cri, HttpSession session) {
-		log.info("Request List....getNewCampaignListPage.... - {}", campaignParam.getCam_name());
+		log.info("Request List....getNewCampaignListPage.... - {}", campaignParam.getSrc_name());
+		
 		String admId = (String) session.getAttribute("sessionID");
+		log.info("Request List....admId.... - {}", admId);
+		log.info("Request List....Page.... - {}", cri.getPage());
+		log.info("Request List....pageNum.... - {}", cri.getPerPageNum());
+		
+		if(campaignParam.getSrc_name() != null && campaignParam.getSrc_name().length()!=0) {
+			log.info("Request List....srcName... - {}", campaignParam.getSrc_name());
+			campaignParam.setSrc_name('%'+campaignParam.getSrc_name()+'%');
+		}
 		campaignParam.setAdm_id(admId);
 		campaignParam.setPage(cri.getPage());
 		log.info("$$$$$$perPageNum:" + cri.getPerPageNum());

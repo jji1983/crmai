@@ -56,14 +56,15 @@ public class FileController {
 	public ResponseEntity<Object> fileUpload_Pretreatment(String user_id, //
 			String inputCamName, String inputCamDesc, String cam_type, String cam_autoyn, MultipartFile[] file_train,
 			MultipartFile[] file_test) {
-		AI_CAMPAIGN campaign = campaignService.selectCampaignSeq();
+		AI_CAMPAIGN campaign = new AI_CAMPAIGN();
+		//AI_CAMPAIGN campaign = campaignService.selectCampaignSeq();
 		campaign.setAdm_id(user_id);
-		campaign.setCam_name(inputCamName);
-		campaign.setCam_desc(inputCamDesc);
-		campaign.setCam_type(cam_type);
+		campaign.setSrc_name(inputCamName);
+		campaign.setDesc_text(inputCamDesc);
+		campaign.setSrc_type(cam_type);
 		campaign.setCam_autoyn(cam_autoyn);
 
-		MultipartFile file_t1 = file_train[0];
+			MultipartFile file_t1 = file_train[0];
 		long size_t1 = file_t1.getSize();
 		MultipartFile file_t2 = file_test[0];
 		long size_t2 = file_t2.getSize();
@@ -73,19 +74,24 @@ public class FileController {
 		} else {
 			String uuid = UUID.randomUUID().toString(); // 중복될 일이 거의 없다.
 			String fullPath = checkAndMakeBaseDir(user_id);
-
-			String saveFileName_t1 = fullPath + File.separator + uuid + "_" + campaign.getCam_seq() + "_"
-					+ file_t1.getName();
-			campaign.setCam_ifilename(saveFileName_t1);
-			campaign.setCam_itype("1");
+			String fileName1 = uuid + "_" + campaign.getAdm_id() + "_"+ file_t1.getName();
+			String saveFileName_t1 = fullPath + File.separator + fileName1;
+			
 			saveFile(file_t1, saveFileName_t1);
 
-			String saveFileName_t2 = fullPath + File.separator + uuid + "_" + campaign.getCam_seq() + "_"
+			String fileName2 = uuid + "_" + campaign.getAdm_id() + "_"
 					+ file_t2.getName();
+			String saveFileName_t2 = fullPath + File.separator +fileName2; 
 			campaign.setCam_ofilename(saveFileName_t2);
 			campaign.setCam_otype("1");
 			saveFile(file_t2, saveFileName_t2);
 
+			campaign.setFile_t_type("TRAIN");
+			
+			campaign.setFile_t_name(fileName1);
+			campaign.setFile_dir(fullPath);
+			campaign.setFile_p_type("PREDICT");
+			campaign.setFile_p_name(fileName2);
 			campaignService.insertCampaign(campaign);
 			return new ResponseEntity<Object>("OK::등록 성공", HttpStatus.OK);
 		}
@@ -93,27 +99,70 @@ public class FileController {
 
 	@RequestMapping(value = "/Upload_StagingTest")
 	public ResponseEntity<Object> fileUpload_StagingTest(String user_id, //
-			String inputCamId, String cam_autoyn, MultipartFile[] file_test) {
+			String inputCamId, String cam_autoyn,MultipartFile[] file_train, MultipartFile[] file_test) {
 		AI_CAMPAIGN inCampaign = new AI_CAMPAIGN();
-		inCampaign.setCam_id(inputCamId);
-		inCampaign.setCam_seq(inputCamId);
+		inCampaign.setSrc_id(inputCamId);
+		//inCampaign.setCam_seq(inputCamId);
 		AI_CAMPAIGN campaign = campaignService.selectCampaignAiStatus(inCampaign);
-
+		
+		MultipartFile file_t1 = file_train[0];
+		long size_t1 = file_t1.getSize();
+		
 		MultipartFile file_t2 = file_test[0];
 		long size_t2 = file_t2.getSize();
 
-		if (size_t2 == 0) {
+		if (size_t1== 0 && size_t2 == 0) {
 			return new ResponseEntity<Object>("FAIL::학습파일/대상자 파일은 필수 입니다.", HttpStatus.OK);
 		} else {
-			String uuid = UUID.randomUUID().toString();
-			String fullPath = checkAndMakeBaseDir(user_id);
-			String saveFileName_t2 = fullPath + File.separator + uuid + "_" + campaign.getCam_seq() + "_"
-					+ file_t2.getName();
-			campaign.setCam_ofilename(saveFileName_t2);
-			campaign.setCam_otype("1");
-			saveFile(file_t2, saveFileName_t2);
-			campaignService.updateCampaignOtype(campaign);
-			return new ResponseEntity<Object>("OK::등록 성공", HttpStatus.OK);
+			if(size_t1 == 0) 
+			{
+			
+				String uuid = UUID.randomUUID().toString();
+				String fullPath = checkAndMakeBaseDir(user_id);
+				String fileName2 = uuid + "_" + campaign.getAdm_id() + "_"+ file_t2.getName();
+				String saveFileName_t2 = fullPath + File.separator + fileName2;
+				campaign.setCam_ofilename(saveFileName_t2);
+				campaign.setFile_p_type("PREDICT");
+				saveFile(file_t2, saveFileName_t2);
+				campaign.setFile_p_name(fileName2);
+				campaignService.updateCampaignPType(campaign);
+			}else if(size_t2 ==0)
+			{
+				String uuid = UUID.randomUUID().toString();
+				String fullPath = checkAndMakeBaseDir(user_id);
+				String fileName1 = uuid + "_" + campaign.getAdm_id() + "_"+ file_t1.getName();
+				String saveFileName_t1 = fullPath + File.separator + fileName1;
+				
+				campaign.setCam_ofilename(saveFileName_t1);
+				campaign.setFile_t_type("TRAIN");
+				saveFile(file_t1, saveFileName_t1);
+				campaign.setFile_t_name(fileName1);
+				campaignService.updateCampaignTType(campaign);
+			}
+			else {
+				String uuid = UUID.randomUUID().toString(); // 중복될 일이 거의 없다.
+				String fullPath = checkAndMakeBaseDir(user_id);
+				String fileName1 = uuid + "_" + campaign.getAdm_id() + "_"+ file_t1.getName();
+				String saveFileName_t1 = fullPath + File.separator + fileName1;
+				
+				saveFile(file_t1, saveFileName_t1);
+
+				String fileName2 = uuid + "_" + campaign.getAdm_id() + "_"
+						+ file_t2.getName();
+				String saveFileName_t2 = fullPath + File.separator +fileName2; 
+				campaign.setCam_ofilename(saveFileName_t2);
+				campaign.setCam_otype("1");
+				saveFile(file_t2, saveFileName_t2);
+
+				campaign.setFile_t_type("TRAIN");
+				
+				campaign.setFile_t_name(fileName1);
+				campaign.setFile_dir(fullPath);
+				campaign.setFile_p_type("PREDICT");
+				campaign.setFile_p_name(fileName2);
+				campaignService.updateCampaignAllType(campaign);
+			}
+			return new ResponseEntity<Object>("OK::등록 성공::"+campaign.getSrc_id(), HttpStatus.OK);
 		}
 	}
 
@@ -241,7 +290,7 @@ public class FileController {
 	public ResponseEntity<Object> fileUpload_Real(String cam_id, String user_id, //
 			MultipartFile[] file_real, HttpSession session) {
 		AI_CAMPAIGN campaign = new AI_CAMPAIGN();
-		campaign.setCam_id(cam_id);
+		campaign.setSrc_id(cam_id);
 		campaign.setCam_seq(cam_id);
 
 		MultipartFile file_t1 = file_real[0];

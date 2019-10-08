@@ -54,9 +54,9 @@
 				</span>
 			</a>
 				<ul class="treeview-menu">
-					<li class="active"><a
+					<!-- <li class="active"><a
 						href="javascript:Content_PretreatmentResult();"><i
-							class="fa fa-circle-o"></i>AI 전처리 결과</a></li>
+							class="fa fa-circle-o"></i>AI 전처리 결과</a></li> -->
 					<li class="active"><a href="javascript:Content_Learning();"><i
 							class="fa fa-circle-o"></i>캠페인 AI 학습 결과</a></li>
 					<li class="active"><a href="javascript:Content_RunForecastResult();"><i

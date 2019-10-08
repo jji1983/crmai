@@ -78,10 +78,9 @@ function createTableCampaign(arr){
 	html += "<th class='text-center'>등록자</th>";
 	html += "<th class='text-center'>캠페인목적</th>";
 	html += "<th class='text-center'>캠페인상태</th>";
-	html += "<th class='text-center'>AI진행상태</th>";
 	html += "<th class='text-center'>캠페인 등록일자</th>";
 	html += "<th class='text-center'>설명</th>";
-	html += "<th class='text-center'>메시지</th></tr></thead><tbody>";
+	html += "</tr></thead><tbody>";
 	
 	// 데이터 존재 미존재 여부에 따른 표 표시
 	if(arr.length != 0) {
@@ -90,7 +89,7 @@ function createTableCampaign(arr){
 			
 			Object.getOwnPropertyNames(arr[arrIdx]).forEach(function(val, idx, array) {
 				switch (val) {
-					case "cam_id":
+					case "src_id":
 						if(first == true) {
 							html += "<td class='text-center'><input name='cam_check' type='radio' value='" + arr[arrIdx][val] + "' onclick='handleClick(this);' checked='checked'></td>";
 							
@@ -104,7 +103,7 @@ function createTableCampaign(arr){
 						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
-					case "cam_name":
+					case "src_name":
 						html += "<td>" + arr[arrIdx][val] + "</td>";
 						
 						break;
@@ -112,15 +111,15 @@ function createTableCampaign(arr){
 						html += "<td>" + arr[arrIdx][val] + "</td>";
 						
 						break;
-					case "cam_type":
+					case "src_type":
 						html += "<td>" + arr[arrIdx][val] + "</td>";
 						
 						break;
-					case "cam_status":
+					case "status_cd":
 						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
-					case "cam_itype":
+					/*case "cam_itype":
 						switch (arr[arrIdx][val]) {
 							case "0":
 								html += "<td><span class='label label-info'>데이터 로딩 필요</span></td>";
@@ -160,21 +159,13 @@ function createTableCampaign(arr){
 								break;
 						}
 						
-						break;
-					case "cam_cdate":
+						break;*/
+					case "created":
 						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
-					case "cam_desc":
+					case "desc_text":
 						html += "<td>" + arr[arrIdx][val] + "</td>";
-						
-						break;
-					case "cam_msg":
-						if((arr[arrIdx][val] == null) || (arr[arrIdx][val] == "null") || (arr[arrIdx][val] == "")) {
-							html += "<td></td>";
-						} else {
-							html += "<td>" + arr[arrIdx][val] + "</td>";
-						}
 						
 						break;
 					default:
@@ -318,7 +309,7 @@ function noDataCamId() {
 	camHtml += "<th class='text-center'>등록자</th>";
 	camHtml += "<th class='text-center'>캠페인목적</th>";
 	camHtml += "<th class='text-center'>캠페인상태</th>";
-	camHtml += "<th class='text-center'>AI진행상태</th>";
+	/*camHtml += "<th class='text-center'>AI진행상태</th>";*/
 	camHtml += "<th class='text-center'>캠페인 등록일자</th>";
 	camHtml += "<th class='text-center'>설명</th>";
 	camHtml += "<th class='text-center'>메시지</th></tr></thead><tbody>";

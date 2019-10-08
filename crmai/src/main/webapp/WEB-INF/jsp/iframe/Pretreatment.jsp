@@ -129,7 +129,7 @@
 							<div class="box-footer">
 								<button id='addBtn' type="button"
 									class="btn btn-info pull-right" data-toggle="modal"
-									data-target="#addModal">대상자 추가등록</button>
+									data-target="#addModal">대상자 등록</button>
 								&nbsp;
 							</div>
 							<!-- Modal -->
@@ -138,7 +138,7 @@
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h5 class="modal-title" id="addModalLabel">대상자 추가등록</h5>
+											<h5 class="modal-title" id="addModalLabel">대상자 등록</h5>
 											<button type="button" class="close" data-dismiss="modal"
 												aria-label="Close">
 												<span aria-hidden="true">&times;</span>
@@ -155,6 +155,14 @@
 														type="hidden" id="inputCamId" name="inputCamId"
 														class="form-control" value=""> <input
 														type="hidden" id="cam_autoyn" name="cam_autoyn" value="N">
+														<div class="form-group">
+															<label for="InputFile_train" class="col-sm-2 control-label">파일
+																등록(학습CSV)</label>
+															<div class="col-sm-10">
+																<input id="InputFile_train" type="file" name="file_train"
+																	accept=".csv">
+															</div>
+														</div>
 													<div class="form-group">
 														<label for="InputFile_test" class="col-sm-2 control-label">파일
 															등록(대상CSV)</label>

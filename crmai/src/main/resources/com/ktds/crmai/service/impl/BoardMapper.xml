@@ -12,7 +12,7 @@
 			WRITER AS "writer",
 			REG_DATETIME AS "reg_datetime"
 		FROM  
-			AI_BOARD
+			t_BOARD
 		ORDER BY 
 			reg_datetime DESC
 	</select>
@@ -25,7 +25,7 @@
 			WRITER AS "writer",
 			REG_DATETIME AS "reg_datetime"
 		FROM 
-		    AI_BOARD
+		    t_BOARD
 		<where>
 			<if test="title != null and title != '' ">
 				title like '%' || #{title} || '%'
@@ -51,23 +51,23 @@
 			WRITER AS "writer",
 			REG_DATETIME AS "reg_datetime"
 		FROM 
-		    AI_BOARD
+		    t_BOARD
 		WHERE
 			code =  #{code}
     </select>
     
     <insert id="insertBoard">
-    	INSERT INTO AI_BOARD (CODE, TITLE, CONTENTS, WRITER, REG_DATETIME)
-      	VALUES ((SELECT MAX(code + 1) FROM AI_BOARD), #{title}, #{contents}, #{writer}, now())
+    	INSERT INTO t_BOARD (CODE, TITLE, CONTENTS, WRITER, REG_DATETIME)
+      	VALUES ((SELECT COALESCE(MAX(code + 1),1) FROM t_BOARD), #{title}, #{contents}, #{writer}, now())
     </insert>
     
     	
 	<update id="updateBoard">
-		update AI_BOARD set title=#{title}, contents=#{contents} where code=#{code}
+		update t_BOARD set title=#{title}, contents=#{contents} where code=#{code}
 	</update>
     
     <delete id="deleteBoard">
-    	DELETE FROM AI_BOARD 
+    	DELETE FROM t_BOARD 
     	WHERE 
     		code =  #{code}
     </delete>
@@ -75,7 +75,7 @@
     <select id="selectBoardPage" resultType="notice">
 		select *
 		from (
-		select <![CDATA[ rownum as rnum ]]>
+		select <![CDATA[ (ROW_NUMBER() OVER()) as rnum ]]>
 		, A.CODE, A.TITLE, A.CONTENTS, A.WRITER, A.REG_DATETIME
 		from
 		(
@@ -85,17 +85,17 @@
 			CONTENTS,
 			WRITER,
 			REG_DATETIME
-		from AI_BOARD
+		from t_BOARD
 		order by REG_DATETIME desc
 		) A
-		where <![CDATA[ rownum <= #{page_end} ]]>
+		LIMIT cast(#{page_end}  as numeric)
 		) B
-		where b.rnum >= #{page_st}
+		where b.rnum >= cast(#{page_st} as numeric)
 	</select>
 
 	<select id="selectBoardPageNum" resultType="int">
 		select count(*) as
-		totalCount from AI_BOARD
+		totalCount from t_BOARD
 	</select>
 	
 </mapper>	
