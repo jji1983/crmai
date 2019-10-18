@@ -104,7 +104,7 @@ public class FileController {
 		inCampaign.setSrc_id(inputCamId);
 		//inCampaign.setCam_seq(inputCamId);
 		AI_CAMPAIGN campaign = campaignService.selectCampaignAiStatus(inCampaign);
-		
+		int targetFlag = 0;	//등록된 파일에 따라 호출 api 변경 처리(학습파일등록:1, 예측파일등록:2)
 		MultipartFile file_t1 = file_train[0];
 		long size_t1 = file_t1.getSize();
 		
@@ -114,6 +114,7 @@ public class FileController {
 		if (size_t1== 0 && size_t2 == 0) {
 			return new ResponseEntity<Object>("FAIL::학습파일/대상자 파일은 필수 입니다.", HttpStatus.OK);
 		} else {
+			//예측 파일만 등록한 경우
 			if(size_t1 == 0) 
 			{
 			
@@ -126,7 +127,10 @@ public class FileController {
 				saveFile(file_t2, saveFileName_t2);
 				campaign.setFile_p_name(fileName2);
 				campaignService.updateCampaignPType(campaign);
-			}else if(size_t2 ==0)
+				targetFlag = 2;
+			}
+			//학습 파일만 등록한 경경우
+			else if(size_t2 ==0)
 			{
 				String uuid = UUID.randomUUID().toString();
 				String fullPath = checkAndMakeBaseDir(user_id);
@@ -138,7 +142,9 @@ public class FileController {
 				saveFile(file_t1, saveFileName_t1);
 				campaign.setFile_t_name(fileName1);
 				campaignService.updateCampaignTType(campaign);
+				targetFlag = 1;
 			}
+			//학습파일 예측파일 둘다 등록될 경우 flag는 1로 세팅된다.
 			else {
 				String uuid = UUID.randomUUID().toString(); // 중복될 일이 거의 없다.
 				String fullPath = checkAndMakeBaseDir(user_id);
@@ -161,8 +167,9 @@ public class FileController {
 				campaign.setFile_p_type("PREDICT");
 				campaign.setFile_p_name(fileName2);
 				campaignService.updateCampaignAllType(campaign);
+				targetFlag = 1;
 			}
-			return new ResponseEntity<Object>("OK::등록 성공::"+campaign.getSrc_id(), HttpStatus.OK);
+			return new ResponseEntity<Object>("OK::등록 성공::"+campaign.getSrc_id()+"::"+targetFlag, HttpStatus.OK);
 		}
 	}
 

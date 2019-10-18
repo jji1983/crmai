@@ -5,6 +5,8 @@ import pickle
 import sys
 from sklearn import preprocessing
 
+import subprocess
+
 # target ai
 import dbcontrol as db
 import util as ut
@@ -125,3 +127,5 @@ with open(foldername+'category_object.pickle','wb') as f:
 
 # 전처리 종료 합니다.
 ut.log("전처리 정상 종료 합니다.")
+
+subprocess.call(['python', 'deeplearning.py', src_id])

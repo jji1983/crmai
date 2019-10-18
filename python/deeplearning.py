@@ -6,6 +6,7 @@ import pickle
 import tensorflow as tf 
 import sys
 from sklearn import preprocessing
+import subprocess
 
 # target ai
 import dbcontrol as db
@@ -219,3 +220,5 @@ db.trainModelSave(src_id, 'Deep Learning', train_df)
 
 # Deep Learning 학습 종료
 ut.log("Deep Learning 종료 합니다.")
+
+subprocess.call(['python', 'machinelearning.py', src_id])

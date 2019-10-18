@@ -4,6 +4,9 @@ from flask import Flask, render_template, request
 from flask_restful import Resource, Api, reqparse
 from flask_httpauth import HTTPBasicAuth
 from flask_cors import CORS, cross_origin
+from aiohttp import web
+from aiohttp_wsgi import WSGIHandler
+import util as ut
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
@@ -27,7 +30,7 @@ def preprocess():
 
 			# 캠페인 Id
 			src_id = args['src_id']
-
+			ut.log(src_id)
 			# 전처리 py 호출
 			subprocess.call(['python', 'preprocess.py', src_id])
 
@@ -72,7 +75,7 @@ def machinelearning():
 			# 캠페인 Id
 			src_id = args['src_id']
 
-			# 딥러닝 호출
+			# 머신러닝 호출
 			subprocess.call(['python', 'machinelearning.py', src_id])
 			return {'result_cd': '0000',
 			        'result_msg': 'Ok.'}

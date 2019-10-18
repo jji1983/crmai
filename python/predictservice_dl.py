@@ -6,10 +6,13 @@ import pickle
 import tensorflow as tf 
 import sys
 
+import subprocess
+
 # target ai
 import dbcontrol as db
 import util as ut
 import selfoptimize as so 
+import copy
 
 # input argv(src id)
 if len(sys.argv) == 1:
@@ -52,6 +55,9 @@ with open(foldername+'category_object.pickle','rb') as f:
 # 데이터 로딩 합니다.
 ut.log("데이터 로딩합니다.")
 dataset = pd.read_csv(file_dir +'/'+ file_name, low_memory=False)
+
+#CSV 파일 저장을 위한 임시 저장
+csv_save = copy.deepcopy(dataset);
 
 # 삭제 정보를 이용하여 컬럼 삭제 합니다.
 for col in delete_columns:
@@ -175,6 +181,14 @@ def predFunc(row):
 		return 1
 	else:
 		return 0
+
+#파일 저장 시 값 변환 함수
+def valueChangeFunc(row):
+	if row['predict_val'] == 1:
+		return 'Y'
+	else:
+		return 'N'
+
 # 성공/실패 적용
 predictData['predict_val'] = predictData.apply(predFunc, axis=1)
 
@@ -187,6 +201,10 @@ predictData['train_method'] = model_name
 
 # DB 저장
 db.predictSave(src_id,'Deep Learning', model_name, predictData)
+
+#csv 파일 저장을 위한 값 추가
+csv_save['predict_val']= predictData.apply(valueChangeFunc, axis=1)
+csv_save.to_csv(file_dir +'/'+ file_name+"predict.csv",mode='w',header=True)
 
 # Machine Learning 예측 종료 합니다.
 ut.log("딥러닝 예측 종료 합니다.")

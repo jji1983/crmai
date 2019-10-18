@@ -31,48 +31,51 @@
 	<!-- Total -->
 	<select id="selectTotal" resultMap="chartData">
 		SELECT
-		count(*) as TOTAL_COUNT, ROUND(AVG(ORIGINAL_ACC),2) AS TOTAL_ORIGINAL, ROUND(AVG(SO_ACC),2) AS
-		TOTAL_SO, ROUND(AVG(REAL_ACC),2) as TOTAL_REAL
-		FROM AI_STATISTICS
-		WHERE
-		MODEL_FLAG = 'Y' 
+		count(*) as TOTAL_COUNT, ROUND(cast(AVG(ttm.ORIGINAL_ACC) as numeric),2) AS TOTAL_ORIGINAL, ROUND(cast(AVG(ttm.SO_ACC) as numeric),2) AS
+		TOTAL_SO<!--,  ROUND(AVG(REAL_ACC),2) as TOTAL_REAL -->
+		FROM t_train_model as ttm
+			,t_src as ts
+		where ts.src_id = ttm.src_id
+		and 	ttm.MODEL_FLG = 'Y' 
 		<if test="sessionID != null and sessionID != ''">
-			AND ADM_ID = #{sessionID}
+			AND ts.ADM_ID = #{sessionID}
 		</if>
 	</select>
 
 	<!-- Type -->
 	<select id="selectType" resultMap="chartData">
-		SELECT ADM_TYPE AS TOTAL_BASE, count(*) as TOTAL_COUNT,
-		ROUND(AVG(ORIGINAL_ACC),2) AS TOTAL_ORIGINAL, ROUND(AVG(SO_ACC),2) AS TOTAL_SO,
-		ROUND(AVG(REAL_ACC),2) as TOTAL_REAL
+		SELECT A.ADM_TYPE AS TOTAL_BASE, count(*) as TOTAL_COUNT,
+		ROUND(cast(AVG(A.ORIGINAL_ACC) as numeric),2) AS TOTAL_ORIGINAL, ROUND(cast(AVG(A.SO_ACC) as numeric),2) AS TOTAL_SO
+		<!-- ROUND(cast (AVG(REAL_ACC)as numeric),2) as TOTAL_REAL -->
 		FROM
 		(SELECT
-		CAM_ID,
-		CAM_NAME,
-		CAM_STATUS,
-		ADM_ID,
-		ADM_NAME,
-		CAM_TYPE,
-		CAM_CDATE,
-		ADM_TYPE,
-		TRAIN_METHOD,
-		ORIGINAL_ACC,
-		SO_ACC,
-		REAL_ACC,
-		MODEL_FLAG,
-		TEST_CNT
-		FROM AI_STATISTICS
-		WHERE
-		MODEL_FLAG = 'Y'
+		ts.src_ID,
+		ts.src_name,
+		ts.status_cd,
+		ts.adm_id,
+		ta.ADM_NAME,
+		ts.src_type,
+		ts.created,
+		ta.adm_type,
+		ttm.train_method,
+		ttm.ORIGINAL_ACC,
+		ttm.SO_ACC,
+		--ttm.REAL_ACC,
+		ttm.MODEL_FLG
+		FROM t_train_model as ttm,
+		     t_src as ts,
+		     t_account as ta
+		where ts.adm_id = ta.adm_id
+			and ts.src_id = ttm.src_id
+			and ttm.MODEL_FLG = 'Y'
 		<if test="sessionID != null and sessionID != ''">
-			AND ADM_ID = #{sessionID}
+			AND ts.ADM_ID = #{sessionID}
 		</if>
 		<if test="type != null and type != ''">
-			and ADM_TYPE = #{type}
+			and ta.ADM_TYPE = #{type}
 		</if>
-		ORDER BY ADM_TYPE) A
-		GROUP BY ADM_TYPE
+		ORDER BY ta.ADM_TYPE) A
+		GROUP BY A.ADM_TYPE
 	</select>
 
 	<!-- Period -->
@@ -84,34 +87,37 @@
 		<if test="periodBase != null and periodBase != ''">
 			TO_CHAR(TO_DATE(periodBase,'YYYY-MM'),'MM')  AS TOTAL_BASE
 		</if>
-		, ROUND(AVG(ORIGINAL_ACC),2) AS TOTAL_ORIGINAL, ROUND(AVG(SO_ACC),2) AS TOTAL_SO,
-		ROUND(AVG(REAL_ACC),2) as TOTAL_REAL
+		, ROUND(cast(AVG(ORIGINAL_ACC) as numeric),2) AS TOTAL_ORIGINAL, ROUND(cast(AVG(SO_ACC) as numeric),2) AS TOTAL_SO
+		<!-- ,ROUND(AVG(REAL_ACC),2) as TOTAL_REAL -->
 		FROM
 		(SELECT
-		CAM_ID,
-		CAM_NAME,
-		CAM_STATUS,
-		ADM_ID,
-		ADM_NAME,
-		CAM_TYPE,
-		TO_CHAR(CAM_CDATE,'YYYY') AS
+		ts.src_ID,
+		ts.src_NAME,
+		ts.STATUS_cd,
+		ta.ADM_ID,
+		ta.ADM_NAME,
+		ts.src_TYPE,
+		TO_CHAR(ts.created,'YYYY') AS
 		period,
-		TO_CHAR(CAM_CDATE,'YYYY-MM') AS periodBase,
+		TO_CHAR(ts.created,'YYYY-MM') AS periodBase,
 		ADM_TYPE,
-		TRAIN_METHOD,
-		ORIGINAL_ACC,
-		SO_ACC,
-		REAL_ACC,
-		MODEL_FLAG,
-		TEST_CNT
-		FROM AI_STATISTICS
-		WHERE MODEL_FLAG = 'Y'
+		ttm.TRAIN_METHOD,
+		ttm.ORIGINAL_ACC,
+		ttm.SO_ACC,
+		<!-- REAL_ACC, -->
+		ttm.MODEL_FLG
+		FROM t_train_model as ttm,
+		t_src as ts,
+		t_account as ta
+		WHERE ta.adm_id = ts.adm_id
+		and ts.src_id= ttm.src_id
+		and ttm.MODEL_FLG = 'Y'
 		<if test="sessionID != null and sessionID != ''">
-			AND ADM_ID = #{sessionID}
+			AND ts.ADM_ID = #{sessionID}
 		</if>
 		<if test="periodBase != null and periodBase != ''">
-				AND <![CDATA[CAM_CDATE < ROUND (to_date(to_char(TO_DATE(#{periodBase}+1,'yyyy'),'yyyy-mm-dd'),'yyyy-mm-dd'),'year')]]>
-				AND <![CDATA[CAM_CDATE >= TRUNC (to_date(to_char(TO_DATE(#{periodBase},'yyyy'),'yyyy-mm-dd'),'yyyy-mm-dd'),'year')]]>
+				AND <![CDATA[ts.created < TO_DATE(cast(cast(#{periodBase} as numeric)+1 as text),'yyyy')]]>
+				AND <![CDATA[ts.created >= TO_DATE(#{periodBase},'yyyy')]]>
 		</if>
 		ORDER BY
 		<if test="period != null and period != ''">
@@ -132,35 +138,37 @@
 
 	<!-- Campaign -->
 	<select id="selectCampaign" resultMap="chartData">
-		SELECT CAM_TYPE AS TOTAL_BASE, ROUND(AVG(ORIGINAL_ACC),2) AS TOTAL_ORIGINAL, ROUND(AVG(SO_ACC),2) AS TOTAL_SO,
-		ROUND(AVG(REAL_ACC),2) as TOTAL_REAL
+				SELECT src_TYPE AS TOTAL_BASE, ROUND(cast(AVG(ORIGINAL_ACC) as numeric),2) AS TOTAL_ORIGINAL, ROUND(cast(AVG(SO_ACC) as numeric),2) AS TOTAL_SO
+<!-- 	,ROUND(AVG(REAL_ACC),2) as TOTAL_REAL -->
 		FROM (
 		SELECT
-		CAM_ID,
-		CAM_NAME,
-		CAM_STATUS,
-		ADM_ID,
-		ADM_NAME,
-		CAM_TYPE,
-		TO_CHAR(CAM_CDATE,'YYYY-MM') AS
-		period,
-		ADM_TYPE,
-		TRAIN_METHOD,
-		ORIGINAL_ACC,
-		SO_ACC,
-		REAL_ACC,
-		MODEL_FLAG,
-		TEST_CNT
-		FROM AI_STATISTICS
-		WHERE MODEL_FLAG = 'Y' 
+		ts.src_ID,
+		ts.src_NAME,
+		ts.STATUS_cd,
+		ta.ADM_ID,
+		ta.ADM_NAME,
+		ts.src_TYPE,
+		TO_CHAR(ts.created,'YYYY-MM') as period,
+		ta.ADM_TYPE,
+		ttm.TRAIN_METHOD,
+		ttm.ORIGINAL_ACC,
+		ttm.SO_ACC,
+<!--	REAL_ACC, -->
+		ttm.MODEL_FLG
+		FROM t_train_model as ttm
+		,t_src as ts
+		,t_account as ta
+		WHERE ta.adm_id = ts.adm_id
+		and ts.src_id=ttm.src_id
+		and ttm.MODEL_FLG = 'Y' 
 		<if test="sessionID != null and sessionID != ''">
-			AND ADM_ID = #{sessionID}
+			AND ta.ADM_ID = #{sessionID}
 		</if>
 		<if test="campaign != null and campaign != ''">
-			AND CAM_TYPE = #{campaign}
+			AND ts.src_TYPE = #{campaign}
 		</if>
-		ORDER BY CAM_TYPE) A
-		GROUP BY CAM_TYPE
+		ORDER BY ts.src_TYPE) A
+		GROUP BY src_TYPE
 		
 	</select>
 </mapper>

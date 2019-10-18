@@ -63,12 +63,12 @@
     	select src_id, 
 		       train_method,
 		       ROUND(cast(original_acc as numeric) * 100, 2) as original_acc, 
-		       ROUND(cast(so_acc as numeric) * 100), 2) as so_acc,             
+		       ROUND(cast(so_acc as numeric) * 100, 2) as so_acc,             
 		       train_start, 
 		       train_end, 
 		       model_flg, 
 		       desc_text 
-		from ai_train_model
+		from t_train_model
 		where src_id = #{cam_id}
 		order by so_acc desc
     </select>

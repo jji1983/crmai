@@ -373,9 +373,9 @@ function initLeftChart() {
 					label = "기타분야";
 					break;
 				}
-				leftOriginal = this.totalOriginal;
-				leftSo = this.totalSo;
-				leftReal = this.totalReal;
+				leftOriginal = this.totalOriginal*100;
+				leftSo = this.totalSo*100;
+				leftReal = this.totalReal*100;
 			});
 
 			leftChart = new Chart(ctxLeft, {
@@ -627,9 +627,9 @@ function initBothChart() {
 					label = "기타분야";
 					break;
 				}
-				leftOriginal = this.totalOriginal;
-				leftSo = this.totalSo;
-				leftReal = this.totalReal;
+				leftOriginal = this.totalOriginal*100;
+				leftSo = this.totalSo*100;
+				leftReal = this.totalReal*100;
 			});
 
 			leftChart = new Chart(ctxLeft, {
@@ -667,13 +667,13 @@ function initBothChart() {
 		success : function(data) {
 			$.each(data, function() {
 				if (this.totalBase != 0) {
-					rightOriginal[this.totalBase - 1] = this.totalOriginal;
-					rightSo[this.totalBase - 1] = this.totalSo;
-					rightReal[this.totalBase - 1] = this.totalReal;
+					rightOriginal[this.totalBase - 1] = this.totalOriginal*100;
+					rightSo[this.totalBase - 1] = this.totalSo*100;
+					rightReal[this.totalBase - 1] = this.totalReal*100;
 				} else if (this.totalBase == 0) {
-					rightOriginal[etc] = this.totalOriginal;
-					rightSo[etc] = this.totalSo;
-					rightReal[etc] = this.totalReal;
+					rightOriginal[etc] = this.totalOriginal*100;
+					rightSo[etc] = this.totalSo*100;
+					rightReal[etc] = this.totalReal*100;
 				}
 			});
 
@@ -723,13 +723,13 @@ function initRightChart() {
 		success : function(data) {
 			$.each(data, function() {
 				if (this.totalBase != 0) {
-					rightOriginal[this.totalBase - 1] = this.totalOriginal;
-					rightSo[this.totalBase - 1] = this.totalSo;
-					rightReal[this.totalBase - 1] = this.totalReal;
+					rightOriginal[this.totalBase - 1] = this.totalOriginal*100;
+					rightSo[this.totalBase - 1] = this.totalSo*100;
+					rightReal[this.totalBase - 1] = this.totalReal*100;
 				} else if (this.totalBase == 0) {
-					rightOriginal[etc] = this.totalOriginal;
-					rightSo[etc] = this.totalSo;
-					rightReal[etc] = this.totalReal;
+					rightOriginal[etc] = this.totalOriginal*100;
+					rightSo[etc] = this.totalSo*100;
+					rightReal[etc] = this.totalReal*!00;
 				}
 			});
 
@@ -795,9 +795,9 @@ function totalLeft() {
 					break;
 				}
 				$('#myBtn').val("나의 산업군별 - " + label + " 예측 결과");
-				leftOriginal = this.totalOriginal;
-				leftSo = this.totalSo;
-				leftReal = this.totalReal;
+				leftOriginal = this.totalOriginal*100;
+				leftSo = this.totalSo*100;
+				leftReal = this.totalReal*100;
 
 				var some_new_data = {
 					labels : campaigns,
@@ -869,9 +869,9 @@ function getLeftType(data) {
 					label = "기타분야";
 					break;
 				}
-				leftOriginal = this.totalOriginal;
-				leftSo = this.totalSo;
-				leftReal = this.totalReal;
+				leftOriginal = this.totalOriginal*100;
+				leftSo = this.totalSo*100;
+				leftReal = this.totalReal*100;
 			});
 			var some_new_data = {
 				labels : campaigns,
@@ -909,13 +909,13 @@ function getRightType(data) {
 			$.each(data, function() {
 
 				if (this.totalBase != 0) {
-					rightOriginal[this.totalBase - 1] = this.totalOriginal;
-					rightSo[this.totalBase - 1] = this.totalSo;
-					rightReal[this.totalBase - 1] = this.totalReal;
+					rightOriginal[this.totalBase - 1] = this.totalOriginal*100;
+					rightSo[this.totalBase - 1] = this.totalSo*100;
+					rightReal[this.totalBase - 1] = this.totalReal*100;
 				} else if (this.totalBase == 0) {
-					rightOriginal[etc] = this.totalOriginal;
-					rightSo[etc] = this.totalSo;
-					rightReal[etc] = this.totalReal;
+					rightOriginal[etc] = this.totalOriginal*100;
+					rightSo[etc] = this.totalSo*100;
+					rightReal[etc] = this.totalReal*100;
 				}
 			});
 			var some_new_data = {
@@ -962,13 +962,13 @@ function getLeftPeriod(data) {
 
 			$.each(data, function() {
 				if (this.totalBase != 0) {
-					leftOriginal[this.totalBase - 1] = this.totalOriginal;
-					leftSo[this.totalBase - 1] = this.totalSo;
-					leftReal[this.totalBase - 1] = this.totalReal;
+					leftOriginal[this.totalBase - 1] = this.totalOriginal*100;
+					leftSo[this.totalBase - 1] = this.totalSo*100;
+					leftReal[this.totalBase - 1] = this.totalReal*100;
 				} else {
-					leftOriginal[this.totalBase] = this.totalOriginal;
-					leftSo[this.totalBase] = this.totalSo;
-					leftReal[this.totalBase] = this.totalReal;
+					leftOriginal[this.totalBase] = this.totalOriginal*100;
+					leftSo[this.totalBase] = this.totalSo*100;
+					leftReal[this.totalBase] = this.totalReal*100;
 				}
 			});
 			var some_new_data = {
@@ -1014,13 +1014,13 @@ function getRightPeriod(data) {
 
 			$.each(data, function() {
 				if (this.totalBase != 0) {
-					rightOriginal[this.totalBase - 1] = this.totalOriginal;
-					rightSo[this.totalBase - 1] = this.totalSo;
-					rightReal[this.totalBase - 1] = this.totalReal;
+					rightOriginal[this.totalBase - 1] = this.totalOriginal*100;
+					rightSo[this.totalBase - 1] = this.totalSo*100;
+					rightReal[this.totalBase - 1] = this.totalReal*100;
 				} else {
-					rightOriginal[this.totalBase] = this.totalOriginal;
-					rightSo[this.totalBase] = this.totalSo;
-					rightReal[this.totalBase] = this.totalReal;
+					rightOriginal[this.totalBase] = this.totalOriginal*100;
+					rightSo[this.totalBase] = this.totalSo*100;
+					rightReal[this.totalBase] = this.totalReal*100;
 				}
 			});
 			var some_new_data = {
@@ -1067,9 +1067,9 @@ function getLeftCampaign(data) {
 			var label;
 			$.each(data, function() {
 				label = this.totalBase;
-				leftOriginal = this.totalOriginal;
-				leftSo = this.totalSo;
-				leftReal = this.totalReal;
+				leftOriginal = this.totalOriginal*100;
+				leftSo = this.totalSo*100;
+				leftReal = this.totalReal*100;
 			});
 			var some_new_data = {
 				labels : campaigns,
@@ -1104,9 +1104,9 @@ function getRightCampaign(data) {
 			var label;
 			$.each(data, function() {
 				label = this.totalBase;
-				rightOriginal = this.totalOriginal;
-				rightSo = this.totalSo;
-				rightReal = this.totalReal;
+				rightOriginal = this.totalOriginal*100;
+				rightSo = this.totalSo*100;
+				rightReal = this.totalReal*100;
 			});
 			var some_new_data = {
 				labels : campaigns,
@@ -1240,7 +1240,7 @@ function loadLeftStat() {
 						if (i % 3 == 1) {
 							for (var j = 0; j < 3; j++) {
 								stat.find("div span").eq(i + j * 3).text(
-										totalData[j] + "%");
+										totalData[j]*100 + "%");
 							}
 						}
 
@@ -1280,7 +1280,7 @@ function loadRightStat() {
 						if (i % 3 == 1) {
 							for (var j = 0; j < 3; j++) {
 								stat.find("div span").eq(i + j * 3).text(
-										totalData[j] + "%");
+										totalData[j]*100 + "%");
 							}
 						}
 

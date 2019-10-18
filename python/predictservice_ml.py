@@ -4,6 +4,7 @@ import numpy as np
 import datetime as dt
 import pickle
 import sys
+import subprocess
 
 # target ai
 import dbcontrol as db
@@ -19,13 +20,17 @@ else:
 # 머신예측
 # 캠페인 정보 가져오기
 cam_info = db.camStatusQuery(src_id)        # [0] src id, [1] name, [2] status
-if cam_info[2] == 'Learning Complete':
-	ut.log('캠페인 정상 조회 되었습니다.')
+if cam_info != None:
+	if cam_info[2] == 'Learning Complete':
+		ut.log('캠페인 정상 조회 되었습니다.')
+	else:
+	    ut.errorStop('캠페인 상태를 확인 하세요.')
 else:
-    ut.errorStop('캠페인 상태를 확인 하세요.')
-
+	ut.errorStop('캠페인이 존재하지 않습니다.')	
 # 파일 정보 가져오기
 cam_file = db.camPredictFileFind(src_id)
+if cam_file == None:
+	ut.errorStop('예측 파일이 존재하지 않습니다.')
 
 # Train 파일 정보 가져오기
 file_name = cam_file[0]
@@ -117,3 +122,4 @@ db.predictSave(src_id,'Machine Learning', model_name, predictData)
 
 # Machine Learning 예측 종료 합니다.
 ut.log("머신러닝 예측 종료 합니다.")
+subprocess.call(['python', 'predictservice_dl.py', src_id])

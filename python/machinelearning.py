@@ -12,6 +12,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
 
+import subprocess
 
 # target ai
 import dbcontrol as db
@@ -185,3 +186,4 @@ db.camStatusUpdate(src_id, 'Learning Complete')
 
 # Deep Learning 학습 종료
 ut.log("Machine Learning 종료 합니다.")
+subprocess.call(['python', 'predictservice_ml.py', src_id])

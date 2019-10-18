@@ -224,7 +224,7 @@ function createTableLearningResult(arr){
 			
 			Object.getOwnPropertyNames(arr[arrIdx]).forEach(function(val, idx, array) {
 				switch (val) {
-					case "cam_id":
+					case "src_id":
 						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
@@ -250,7 +250,7 @@ function createTableLearningResult(arr){
 						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
-					case "model_flag":
+					case "model_flg":
 						if(arr[arrIdx][val] == "Y") {
 							html += "<td class='bg-yellow text-center'>" + arr[arrIdx][val] + "</td>";
 							

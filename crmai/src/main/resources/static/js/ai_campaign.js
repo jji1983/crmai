@@ -301,7 +301,8 @@ function call_Preprocessor(data)
 	$.ajax({
 	    type: "POST",
 	    dataType: 'JSON',
-	    url: "http://localhost:5000/preprocess",
+	    //url: "http://targetai.iptime.org:5000/preprocess",
+	    url:"http://localhost:5000/preprocess",
 	    processData: false, //prevent jQuery from automatically transforming the data into a query string
 	    contentType: 'application/json; charset=utf-8',
 	    cache: false,
