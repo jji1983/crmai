@@ -139,11 +139,11 @@ function PrSearch() {
 
 function PrDownload() {
 	// alert("call PrDownload ~!!");
-	var succVal = $('#pr_succVal').val();
+	/*var succVal = $('#pr_succVal').val();
 	var totalVal = $('#pr_totalVal').val();
 	if (totalVal != "0") totalVal = totalVal+"0000";
 	
-	var cam_id = currentValue + "_" + succVal + "_1_" + totalVal;
+	var cam_id = currentValue + "_" + succVal + "_1_" + totalVal;*/
 	
 	// alert("PrDownload :: pr_succVal[" + pr_succVal + "], pr_totalVal[" +
 	// pr_totalVal + "]");

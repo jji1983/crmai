@@ -247,6 +247,40 @@ def featureSave(src_id,feature_df):
         conn.commit()
     conn.close()
 
+# Predict ML CSV File Save.
+def predictMlCsvSave(src_id, file_name, file_path):
+    conn = psycopg2.connect(getConn())
+    # 상태 확인
+    with conn.cursor() as c:
+        # Select
+        select_string = "update t_src_file  \
+                            set pred_ml_file_path = %s  \
+                          where src_id   = %s \
+                            and active_flg = 'Y' \
+                            and file_name = %s "
+        c.execute(select_string, (file_path,src_id,file_name,))
+        conn.commit()
+       # result = c.fetchone()
+    conn.close()
+    # result
+    #return result 
+# Predict DL CSV File Save.
+def predictDlCsvSave(src_id, file_name, file_path):
+    conn = psycopg2.connect(getConn())
+    # 상태 확인
+    with conn.cursor() as c:
+        # Select
+        select_string = "update t_src_file  \
+                            set pred_dl_file_path = %s  \
+                          where src_id   = %s \
+                            and active_flg = 'Y' \
+                            and file_name = %s "
+        c.execute(select_string, (file_path,src_id,file_name,))
+        conn.commit()
+       # result = c.fetchone()
+    conn.close()
+    # result
+    #return result 
 # Postgresql 접속 정보를 저장합니다.
 def getConn():
     user = 'postgres'

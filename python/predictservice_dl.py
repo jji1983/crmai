@@ -90,7 +90,7 @@ data_cat = list(cat_df.columns.values)
 x_data = ut.oheChange(data_cat, category_object, dataset, data)
 
 # Machine Learning 시작 합니다.
-ut.log("머신러닝 예측 시작 합니다.")
+ut.log("딥러닝 예측 시작 합니다.")
 
 # 딥러닝 최적 모델 선택 합니다
 model_file = db.modelFileFind(src_id, 'Deep Learning')
@@ -203,8 +203,11 @@ predictData['train_method'] = model_name
 db.predictSave(src_id,'Deep Learning', model_name, predictData)
 
 #csv 파일 저장을 위한 값 추가
+predict_csv_name = file_dir +'/'+ file_name+"predictdl.csv"
 csv_save['predict_val']= predictData.apply(valueChangeFunc, axis=1)
-csv_save.to_csv(file_dir +'/'+ file_name+"predict.csv",mode='w',header=True)
+csv_save.to_csv(predict_csv_name,mode='w',header=True)
+
+db.predictDlCsvSave(src_id, file_name, predict_csv_name)
 
 # Machine Learning 예측 종료 합니다.
 ut.log("딥러닝 예측 종료 합니다.")
