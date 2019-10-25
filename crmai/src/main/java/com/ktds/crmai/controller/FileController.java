@@ -17,11 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -244,7 +244,7 @@ public class FileController {
 		}
 	}
 
-	@RequestMapping(value = "/down/predict/{camId}/{succProb}/{extractCnt}", produces = "text/csv")
+	@RequestMapping(value = "/down/predict/{camId}/{succProb}", produces = "text/csv")
 	public void downloadCsvPredict(@PathVariable String camId, @PathVariable String succProb,
 			@PathVariable String extractCnt, HttpServletRequest request, HttpServletResponse response) {
 		try {
@@ -319,7 +319,18 @@ public class FileController {
 			return new ResponseEntity<Object>("OK::등록 성공", HttpStatus.OK);
 		}
 	}
+	@RequestMapping(value= "/fileDown")
+	public FileSystemResource download(String path, 
+			HttpServletRequest request, HttpServletResponse response){
+		
+		String filePath = path;
+		File downloadFile = null;
+		downloadFile = new File(filePath);
+		response.setHeader( "Set-Cookie", "fileDownload=true; path=/" );
+		response.setHeader("Content-Disposition", "attachment; filename=" + downloadFile.getName());
 
+	     return new FileSystemResource(downloadFile);
+	}
 	private String checkAndMakeBaseDir(String user_id) {
 		String fullPath = baseDir + user_id;
 		File f = new File(fullPath);

@@ -86,6 +86,8 @@ function createTableCampaign(arr){
 	html += "<th class='text-center'>캠페인상태</th>";
 	html += "<th class='text-center'>캠페인 등록일자</th>";
 	html += "<th class='text-center'>설명</th>";
+	html += "<th class='text-center'>ml경로</th>";
+	html += "<th class='text-center'>dl경로</th>";
 	
 	// 데이터 존재 미존재 여부에 따른 표 표시
 	if(arr.length != 0) {
@@ -132,6 +134,12 @@ function createTableCampaign(arr){
 						html += "<td>" + arr[arrIdx][val] + "</td>";
 						
 						break;
+					case "pred_dl_file_path":
+						html += "<td>" + arr[arrIdx][val] + "</td>";
+						break;
+					case "pred_ml_file_path":
+						html += "<td>" + arr[arrIdx][val] + "</td>";
+						break;
 					default:
 						break;
 				}
@@ -167,6 +175,10 @@ function connectLearningModel() {
 
 function createTableModel(arr){
 	var html = "<table id='model_table' class='table table-bordered table-hover'>";
+	// 임시 학습모델
+	var tempTrainMethod;
+	// 모델 플래그 'Y' 값인 학습모델
+	var yTrainMethod;
 	
 	html += "<thead><tr><th class='text-center'>캠페인ID</th>";
 	html += "<th class='text-center'>학습모델</th>";
@@ -185,12 +197,13 @@ function createTableModel(arr){
 			Object.getOwnPropertyNames(arr[arrIdx]).forEach(function(val, idx, array) {
 				switch (val) {
 					case "src_id":
+								
 						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
 						
 						break;
 					case "train_method":
 						html += "<td>" + arr[arrIdx][val] + "</td>";
-						
+						tempTrainMethod = arr[arrIdx][val];
 						break;
 					case "original_acc":
 						html += "<td class='text-center'>" + arr[arrIdx][val] + "%</td>";
@@ -209,8 +222,13 @@ function createTableModel(arr){
 						
 						break;
 					case "model_flg":
-						html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
-						
+						if(arr[arrIdx][val] == "Y") {
+							html += "<td class='bg-yellow text-center'>" + arr[arrIdx][val] + "</td>";
+							
+							yTrainMethod = tempTrainMethod;
+						} else {
+							html += "<td class='text-center'>" + arr[arrIdx][val] + "</td>";
+						}
 						break;
 					case "desc_text":
 						if((arr[arrIdx][val] == null) || (arr[arrIdx][val] == "null") || (arr[arrIdx][val] == "")) {
@@ -451,11 +469,31 @@ function csvDown() {
 	var succVal = $("#succ_rate").val();
 	var extractVal = $("#extract").val();
 	
-	if((predictCamId != 0) && (predictCamId != null) && (predictCamId != "")) {
-		window.open("/file/down/predict/"+currentValue+"/"+succVal+"/"+extractVal);
-	} else {
-		$("#modal_no_down").modal("show");
-	}
+	var obj = {path:$('#path').val()};
+	//var obj = {path:"C:\\home\\jji5636\\CSV_DATA\\admin\\6a7adbf5-42d9-40e0-8979-ca6e6fdc77c0_admin_file_testpredictdl.csv"};
+	$.fileDownload('/file/fileDown', {
+		httpMethod:"POST",
+		data:obj
+	})
+	.done(function(url){
+		alert("성공");
+		$("#modal_down").modal("hide");
+	})
+	.fail(function(responseHtml, url){
+		alert("실패");
+		$("#modal_down").modal("hide");
+	});
+	e.preventDefault();
+
+	//alert(predictCamId);
+	//if((predictCamId != 0) && (predictCamId != null) && (predictCamId != "")) {
+		//window.open("/file/down/predict/"+currentValue+"/"+succVal+"/"+extractVal);
+	//	alert("A");
+	//	window.open("/home/jji5636/CSV_DATA/admin/6a7adbf5-42d9-40e0-8979-ca6e6fdc77c0_admin_file_testpredictdl.csv");
+//	} else {
+	//	$("#modal_no_down").modal("show");
+	//}
 	
-	$("#modal_down").modal("hide");
+	
+	return false;
 }

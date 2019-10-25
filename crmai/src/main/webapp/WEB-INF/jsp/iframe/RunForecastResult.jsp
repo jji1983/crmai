@@ -14,6 +14,12 @@
 <!-- Select2 -->
 <link rel="stylesheet"
 	href="/resources/bower_components/select2/dist/css/select2.min.css">
+<style type="text/css">
+	th:nth-of-type(7){display:none;}
+	td:nth-of-type(7){display:none;}
+	th:nth-of-type(8){display:none;}
+	td:nth-of-type(8){display:none;}
+</style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 			<!-- Content Header (Page header) -->
@@ -155,13 +161,13 @@
 							</div>
 							<div class="box-body">
 								<div class="row">
-									<div class="col-lg-3">
+									<!-- <div class="col-lg-3">
 										<div class="form-group">
 											<div class="input-group">
 												<div class="input-group-btn">
 													<button type="button" class="btn btn-info">성공률</button>
 												</div>
-												<!-- /btn-group -->
+												/btn-group
 												<select id="succ_rate" class="form-control select2"
 													style="width: 60%;">
 													<option value="0" selected="selected">0%</option>
@@ -172,9 +178,9 @@
 													<option value="1">100%</option>
 												</select>
 											</div>
-											<!-- /input-group -->
+											/input-group
 										</div>
-										<!-- /form-group -->
+										/form-group
 									</div>
 									<div class="col-lg-3">
 										<div class="form-group">
@@ -182,7 +188,7 @@
 												<div class="input-group-btn">
 													<button type="button" class="btn btn-info">추출건수</button>
 												</div>
-												<!-- /btn-group -->
+												/btn-group
 												<select id="extract" class="form-control select2"
 													style="width: 60%;">
 													<option value="10000">1만건</option>
@@ -192,20 +198,21 @@
 													<option value="0" selected="selected">모두</option>
 												</select>
 											</div>
-											<!-- /input-group -->
+											/input-group
 										</div>
-									</div>
+									</div> -->
 									<div class="col-lg-6">
 										<div class="input-group pull-right">
 											<button type="button" class="btn btn-info"
-												data-target="#modal_no_data" style="margin-right: 10px;"
-												onclick="search();">조회</button>
-											<button type="button" class="btn btn-info"
-												data-toggle="modal" data-target="#modal_up"
-												style="margin-right: 10px;">등록</button>
+												data-toggle="modal" data-target="#modal_down"
+												style="margin-right: 10px;">ML 다운로드</button>
 											<button type="button" class="btn btn-info"
 												data-toggle="modal" data-target="#modal_down"
-												style="margin-right: 10px;">다운로드</button>
+												style="margin-right: 10px;">DL 다운로드</button>
+											<button type="button" class="btn btn-info"
+												data-toggle="modal" data-target="#modal_up"
+												style="margin-right: 10px;">캠페인 결과 등록</button>
+											<input type="hidden" id="path" name="path" value="">
 										</div>
 									</div>
 								</div>
@@ -316,6 +323,7 @@
 		src="/resources/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 	<!-- twbsPagination :: https://github.com/josecebe/twbs-pagination -->
 	<script src="/resources/js/jquery.twbsPagination.min.js"></script>
+	<script src="/resources/js/jquery.fileDownload.js"></script>
 	<!-- AI MAKE JS -->
 	<script src="/resources/js/ai_predict_result.js"></script>
 	<script type="text/javascript">
