@@ -86,8 +86,6 @@ function createTableCampaign(arr){
 	html += "<th class='text-center'>캠페인상태</th>";
 	html += "<th class='text-center'>캠페인 등록일자</th>";
 	html += "<th class='text-center'>설명</th>";
-	html += "<th class='text-center'>ml경로</th>";
-	html += "<th class='text-center'>dl경로</th>";
 	
 	// 데이터 존재 미존재 여부에 따른 표 표시
 	if(arr.length != 0) {
@@ -133,12 +131,6 @@ function createTableCampaign(arr){
 					case "desc_text":
 						html += "<td>" + arr[arrIdx][val] + "</td>";
 						
-						break;
-					case "pred_dl_file_path":
-						html += "<td>" + arr[arrIdx][val] + "</td>";
-						break;
-					case "pred_ml_file_path":
-						html += "<td>" + arr[arrIdx][val] + "</td>";
 						break;
 					default:
 						break;
@@ -466,10 +458,32 @@ function submitUploadCSV() {
 
 // csv 다운로드 함수
 function csvDown() {
-	var succVal = $("#succ_rate").val();
-	var extractVal = $("#extract").val();
-	
-	var obj = {path:$('#path').val()};
+	var val = $("input[name='path']").val();
+	$.ajax({
+	    type: "POST",
+	    url: "/file/searchPath",
+	    data:{
+			camid : currentValue
+		},
+	    success: function (data) {
+	    	
+	    	if(val == 'ml'){
+	    		sPath = data['pred_ml_file_path'];
+	    	}else{
+	    		sPath = data['pred_dl_file_path'];
+	    	}
+
+	    	csvDownCallback(sPath);
+	        
+	    },
+	    error: function (e) {
+	        alert("error :: " + e.responseText);
+	        console.log("ERROR : ", e);
+	    }
+	});
+}	
+function csvDownCallback(sPath){
+	var obj = {path:sPath};
 	//var obj = {path:"C:\\home\\jji5636\\CSV_DATA\\admin\\6a7adbf5-42d9-40e0-8979-ca6e6fdc77c0_admin_file_testpredictdl.csv"};
 	$.fileDownload('/file/fileDown', {
 		httpMethod:"POST",
@@ -496,4 +510,7 @@ function csvDown() {
 	
 	
 	return false;
+}
+function setPath(id){
+	$("input[name='path']").val(id);
 }

@@ -38,6 +38,8 @@ public class AI_CAMPAIGN extends PageCriteria {
 	private String file_dir;
 	private String file_p_name;
 	private String file_p_type;
+	private String pred_dl_file_path;
+	private String pred_ml_file_path;
 
 	public AI_CAMPAIGN(String src_name, String adm_id, String src_type, String status_cd) {
 		this.src_name = src_name;

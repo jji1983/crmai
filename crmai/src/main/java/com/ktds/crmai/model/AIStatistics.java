@@ -25,7 +25,14 @@ public class AIStatistics {
 	private Integer originalAcc;		// 정확도
 	private Integer soAcc;				// 예측
 	private Integer realAcc;			// 실측, 결과
-	private String modelFlag;			// 선택된 모델 여부
+	private String src_id;
+	private String src_name;
+	private String src_type;
+	private String status_cd;
+	private String adm_id;
+	private String adm_type;
+	private String created;
+	private String modelFlg;			// 선택된 모델 여부
 	
 	// 파라메터 방식으로만 사용
 	private String beforeDate;			// 기간(이전)

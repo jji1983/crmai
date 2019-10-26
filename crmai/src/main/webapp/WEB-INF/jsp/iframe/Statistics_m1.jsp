@@ -242,20 +242,20 @@
 			html += "<th class='text-center'>캠페인 상태</th>";
 			html += "<th class='text-center'>생성자</th>";
 			html += "<th class='text-center'>생성일자</th>";
-			html += "<th class='text-center'>대상건수</th>";
+			/* html += "<th class='text-center'>대상건수</th>"; */
 			html += "<th class='text-center'>기존</th></tr></thead><tbody>";
 			// 데이터 존재 미존재 여부에 따른 표 표시
 			if (arr.length != 0) {
 				for (var i = 0; i < arr.length; i++) {
-					html += "<tr><td>" + arr[i]["camName"] + "</td>";
-					html += "<td>" + arr[i]["camType"] + "</td>";
-					html += "<td class='text-center'>" + arr[i]["camStatus"]
+					html += "<tr><td>" + arr[i]["src_name"] + "</td>";
+					html += "<td>" + arr[i]["src_type"] + "</td>";
+					html += "<td class='text-center'>" + arr[i]["status_cd"]
 							+ "</td>";
-					html += "<td>" + arr[i]["admName"] + "</td>";
-					html += "<td class='text-center'>" + arr[i]["camCdate"]
+					html += "<td>" + arr[i]["adm_id"] + "</td>";
+					html += "<td class='text-center'>" + arr[i]["created"]
 							+ "</td>";
-					html += "<td class='text-right'>" + arr[i]["testCnt"]
-							+ "</td>";
+					/* html += "<td class='text-right'>" + arr[i]["testCnt"]
+							+ "</td>"; */
 					html += "<td class='text-right'>" + arr[i]["originalAcc"]
 							+ "</td></tr>";
 				}
@@ -269,7 +269,7 @@
 			var camNameArr = new Array(); // 캠페인명 배열
 			var originalAccArr = new Array(); // 정확도 배열
 			for (var i = 0; i < arr.length; i++) {
-				camNameArr[i] = arr[i]["camName"];
+				camNameArr[i] = arr[i]["src_name"];
 				originalAccArr[i] = arr[i]["originalAcc"];
 			}
 			var barChartData = {

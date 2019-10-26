@@ -14,13 +14,7 @@
 <!-- Select2 -->
 <link rel="stylesheet"
 	href="/resources/bower_components/select2/dist/css/select2.min.css">
-<style type="text/css">
-	th:nth-of-type(7){display:none;}
-	td:nth-of-type(7){display:none;}
-	th:nth-of-type(8){display:none;}
-	td:nth-of-type(8){display:none;}
-</style>
-</head>
+ </head>
 <body class="hold-transition skin-blue sidebar-mini">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
@@ -203,16 +197,16 @@
 									</div> -->
 									<div class="col-lg-6">
 										<div class="input-group pull-right">
-											<button type="button" class="btn btn-info"
+											<button id="ml" type="button" class="btn btn-info"
 												data-toggle="modal" data-target="#modal_down"
-												style="margin-right: 10px;">ML 다운로드</button>
-											<button type="button" class="btn btn-info"
+												style="margin-right: 10px;" onclick="setPath(this.id)">ML 다운로드</button>
+											<button id="dl" type="button" class="btn btn-info"
 												data-toggle="modal" data-target="#modal_down"
-												style="margin-right: 10px;">DL 다운로드</button>
+												style="margin-right: 10px;" onclick="setPath(this.id)">DL 다운로드</button>
 											<button type="button" class="btn btn-info"
 												data-toggle="modal" data-target="#modal_up"
 												style="margin-right: 10px;">캠페인 결과 등록</button>
-											<input type="hidden" id="path" name="path" value="">
+											<input type="hidden" id="path" name="path" />
 										</div>
 									</div>
 								</div>

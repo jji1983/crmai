@@ -59,6 +59,11 @@ public interface CampaignMapper {
 	 * Name : 캠페인파일 정보 Insert
 	 */
 	void insertCampaignFile(AI_CAMPAIGN campaign);
+	
+	/*
+	 * Name : 캠페인 예측 경로 가져오기
+	 */
+	AI_CAMPAIGN selectPredictPath(AI_CAMPAIGN campaign);
 
 	
 }

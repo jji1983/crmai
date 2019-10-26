@@ -153,4 +153,11 @@
 				order by created desc 
 				limit 1 
     </update>
+    <!-- 캠페인 예측 경로 가져오기 -->
+	<select id="selectPredictPath" resultType="campaign">
+		select pred_dl_file_path, pred_ml_file_path
+		from t_src_file
+		where src_id = #{src_id}
+		  and file_type = 'PREDICT'
+    </select>
 </mapper>

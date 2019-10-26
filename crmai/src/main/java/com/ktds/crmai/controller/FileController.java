@@ -319,6 +319,15 @@ public class FileController {
 			return new ResponseEntity<Object>("OK::등록 성공", HttpStatus.OK);
 		}
 	}
+	@RequestMapping(value = "/searchPath")
+	public AI_CAMPAIGN getPredictPath(String camid, HttpSession session) {
+		log.info("Request List........ - {}", camid);
+		AI_CAMPAIGN campaign = new AI_CAMPAIGN();
+		
+		campaign.setSrc_id(camid);
+		AI_CAMPAIGN out_campaign = campaignService.selectPredictPath(campaign);
+		return out_campaign;
+	}
 	@RequestMapping(value= "/fileDown")
 	public FileSystemResource download(String path, 
 			HttpServletRequest request, HttpServletResponse response){

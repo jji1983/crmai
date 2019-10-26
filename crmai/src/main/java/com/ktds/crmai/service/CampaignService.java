@@ -79,4 +79,11 @@ public class CampaignService implements CampaignMapper {
 	public String selectLastOne(AI_CAMPAIGN campaign) {
 		return campaignMapper.selectLastOne(campaign);
 	}
+
+	@Override
+	public AI_CAMPAIGN selectPredictPath(AI_CAMPAIGN campaign) {
+		
+		return campaignMapper.selectPredictPath(campaign);
+	}
+	
 }
