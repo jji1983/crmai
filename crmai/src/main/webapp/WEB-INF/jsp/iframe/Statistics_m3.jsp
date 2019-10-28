@@ -249,7 +249,6 @@
 			html += "<th class='text-center'>생성자</th>";
 			html += "<th class='text-center'>생성일자</th>";
 			html += "<th class='text-center'>학습모델</th>";
-			html += "<th class='text-center'>대상건수</th>";
 			html += "<th class='text-center'>기존</th>";
 			html += "<th class='text-center' colspan='2'>예측</th>";
 			html += "<th class='text-center' colspan='2'>결과</th></tr></thead><tbody>";
@@ -262,21 +261,17 @@
 									.getOwnPropertyNames(arr[arrIdx])
 									.forEach(
 											function(val, idx, array) {
-												if ((val == "camId")
-														|| (val == "camStatus")
-														|| (val == "camCdate")) {
+												if ((val == "src_id")
+														|| (val == "status_cd")
+														|| (val == "created")) {
 													html += "<td class='text-center'>"
 															+ arr[arrIdx][val]
 															+ "</td>";
-												} else if ((val == "camName")
-														|| (val == "camType")
-														|| (val == "admName")
+												} else if ((val == "src_name")
+														|| (val == "src_type")
+														|| (val == "adm_id")
 														|| (val == "trainMethod")) {
 													html += "<td>"
-															+ arr[arrIdx][val]
-															+ "</td>";
-												} else if ((val == "testCnt")) {
-													html += "<td class='text-right'>"
 															+ arr[arrIdx][val]
 															+ "</td>";
 												} else if (val == "originalAcc") {

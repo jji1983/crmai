@@ -250,12 +250,12 @@
 			// 데이터 존재 미존재 여부에 따른 표 표시
 			if (arr.length != 0) {
 				for (var i = 0; i < arr.length; i++) {
-					html += "<tr><td>" + arr[i]["camName"] + "</td>";
-					html += "<td>" + arr[i]["camType"] + "</td>";
-					html += "<td class='text-center'>" + arr[i]["camStatus"]
+					html += "<tr><td>" + arr[i]["src_name"] + "</td>";
+					html += "<td>" + arr[i]["src_type"] + "</td>";
+					html += "<td class='text-center'>" + arr[i]["status_cd"]
 							+ "</td>";
-					html += "<td>" + arr[i]["admName"] + "</td>";
-					html += "<td class='text-center'>" + arr[i]["camCdate"]
+					html += "<td>" + arr[i]["adm_id"] + "</td>";
+					html += "<td class='text-center'>" + arr[i]["created"]
 							+ "</td>";
 					html += "<td>" + arr[i]["trainMethod"] + "</td>";
 					html += "<td class='text-right'>" + arr[i]["soAcc"]
@@ -286,7 +286,7 @@
 							var soAccAvgArr = new Array(); // 방사형 그래프용 예측 평균 배열
 
 							for (var i = 0; i < arr.length; i++) {
-								camNameArr[i] = arr[i]["camName"];
+								camNameArr[i] = arr[i]["src_name"];
 								soAccArr[i] = arr[i]["soAcc"];
 							}
 							// 학습모델 대입

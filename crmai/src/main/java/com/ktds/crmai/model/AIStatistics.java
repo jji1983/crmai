@@ -12,6 +12,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AIStatistics {
+	private String src_id;
+	private String src_name;
+	private String src_type;
+	private String status_cd;
+	private String adm_id;
+	private String adm_type;
+	private String created;
+	private String modelFlg;		
 	private Integer camId;				// 캠페인 ID
 	private String camName;				// 캠페인명
 	private String camType;				// 캠페인 목적
@@ -22,17 +30,10 @@ public class AIStatistics {
 	private String camCdate;			// 캠페인 생성일자
 	private String trainMethod;			// 학습모델
 	private Integer testCnt;			// 대상자 건수
-	private Integer originalAcc;		// 정확도
-	private Integer soAcc;				// 예측
-	private Integer realAcc;			// 실측, 결과
-	private String src_id;
-	private String src_name;
-	private String src_type;
-	private String status_cd;
-	private String adm_id;
-	private String adm_type;
-	private String created;
-	private String modelFlg;			// 선택된 모델 여부
+	private String originalAcc;		// 정확도
+	private String soAcc;				// 예측
+	private String realAcc;			// 실측, 결과
+		// 선택된 모델 여부
 	
 	// 파라메터 방식으로만 사용
 	private String beforeDate;			// 기간(이전)

@@ -47,7 +47,7 @@
 	
 	<sql id="realAccParam">
 		<if test="realAccFlag eq true">
-			AND <![CDATA[ ttm.REAL_ACC <> 0 ]]>
+			<!-- AND <![CDATA[ ttm.REAL_ACC <> 0 ]]> -->
 		</if>
 	</sql>
 	
@@ -77,13 +77,15 @@
 	
 	<!-- 의사결정나무평균 쿼리 -->
 	<select id="selectDTreeAvg" resultMap="aiStatisticMap" parameterType="com.ktds.crmai.model.AIStatistics">
-		SELECT NVL(ROUND(AVG(ORIGINAL_ACC), 2), 0) as ORIGINAL_ACC_AVG, 
-			   NVL(ROUND(AVG(SO_ACC), 2), 0) as SO_ACC_AVG, 
-			   NVL(ROUND(AVG(REAL_ACC), 2), 0) as REAL_ACC_AVG
-		FROM AI_STATISTICS
+		SELECT COALESCE(ROUND(cast (AVG(ttm.ORIGINAL_ACC) as numeric), 2), 0) as ORIGINAL_ACC_AVG, 
+			   COALESCE(ROUND(cast (AVG(ttm.SO_ACC) as numeric), 2), 0) as SO_ACC_AVG  
+			   <!-- ,NVL(ROUND(AVG(REAL_ACC), 2), 0) as REAL_ACC_AVG -->
+		FROM t_src as ts,
+		     t_train_model as ttm
 		
 		<!-- 파라메터 조건 -->
-		WHERE TRAIN_METHOD = 'DecisionTree' 
+		WHERE ts.src_id = ttm.src_id
+		  and ttm.TRAIN_METHOD = 'DecisionTree' 
 		
 		<include refid="realAccParam"></include>
 		<include refid="inputParam"></include>
@@ -91,13 +93,13 @@
 	
 	<!-- 랜덤포레스트 평균 쿼리 -->
 	<select id="selectRFavg" resultMap="aiStatisticMap" parameterType="com.ktds.crmai.model.AIStatistics">
-		SELECT NVL(ROUND(AVG(ORIGINAL_ACC), 2), 0) as ORIGINAL_ACC_AVG, 
-			   NVL(ROUND(AVG(SO_ACC), 2), 0) as SO_ACC_AVG, 
-			   NVL(ROUND(AVG(REAL_ACC), 2), 0) as REAL_ACC_AVG
-		FROM AI_STATISTICS
-		
+		SELECT COALESCE(ROUND(cast (AVG(ttm.ORIGINAL_ACC) as numeric), 2), 0) as ORIGINAL_ACC_AVG, 
+			   COALESCE(ROUND(cast (AVG(ttm.SO_ACC) as numeric), 2), 0) as SO_ACC_AVG  
+			   <!-- ,NVL(ROUND(AVG(REAL_ACC), 2), 0) as REAL_ACC_AVG -->
+		FROM t_src as ts,
+		     t_train_model as ttm
 		<!-- 파라메터 조건 -->
-		WHERE TRAIN_METHOD = 'RandomForest' 
+		WHERE ttm.TRAIN_METHOD = 'RandomForest' 
 		
 		<include refid="realAccParam"></include>
 		<include refid="inputParam"></include>
@@ -105,13 +107,13 @@
 	
 	<!-- SVM 평균 쿼리 -->
 	<select id="selectSVMavg" resultMap="aiStatisticMap" parameterType="com.ktds.crmai.model.AIStatistics">
-		SELECT NVL(ROUND(AVG(ORIGINAL_ACC), 2), 0) as ORIGINAL_ACC_AVG, 
-			   NVL(ROUND(AVG(SO_ACC), 2), 0) as SO_ACC_AVG, 
-			   NVL(ROUND(AVG(REAL_ACC), 2), 0) as REAL_ACC_AVG
-		FROM AI_STATISTICS
-		
+		SELECT COALESCE(ROUND(cast (AVG(ttm.ORIGINAL_ACC) as numeric), 2), 0) as ORIGINAL_ACC_AVG, 
+			   COALESCE(ROUND(cast (AVG(ttm.SO_ACC) as numeric), 2), 0) as SO_ACC_AVG  
+			   <!-- ,NVL(ROUND(AVG(REAL_ACC), 2), 0) as REAL_ACC_AVG -->
+		FROM t_src as ts,
+		     t_train_model as ttm
 		<!-- 파라메터 조건 -->
-		WHERE TRAIN_METHOD = 'svm' 
+		WHERE ttm.TRAIN_METHOD = 'svm' 
 		
 		<include refid="realAccParam"></include>
 		<include refid="inputParam"></include>
@@ -119,13 +121,14 @@
 	
 	<!-- 선형회기 평균 쿼리 -->
 	<select id="selectLRavg" resultMap="aiStatisticMap" parameterType="com.ktds.crmai.model.AIStatistics">
-		SELECT NVL(ROUND(AVG(ORIGINAL_ACC), 2), 0) as ORIGINAL_ACC_AVG, 
-			   NVL(ROUND(AVG(SO_ACC), 2), 0) as SO_ACC_AVG, 
-			   NVL(ROUND(AVG(REAL_ACC), 2), 0) as REAL_ACC_AVG
-		FROM AI_STATISTICS
+		SELECT COALESCE(ROUND(cast (AVG(ttm.ORIGINAL_ACC) as numeric), 2), 0) as ORIGINAL_ACC_AVG, 
+			   COALESCE(ROUND(cast (AVG(ttm.SO_ACC) as numeric), 2), 0) as SO_ACC_AVG  
+			   <!-- ,NVL(ROUND(AVG(REAL_ACC), 2), 0) as REAL_ACC_AVG -->
+		FROM t_src as ts,
+		     t_train_model as ttm
 		
 		<!-- 파라메터 조건 -->
-		WHERE TRAIN_METHOD = 'LogisticRegression' 
+		WHERE ttm.TRAIN_METHOD = 'LogisticRegression' 
 		
 		<include refid="realAccParam"></include>
 		<include refid="inputParam"></include>
