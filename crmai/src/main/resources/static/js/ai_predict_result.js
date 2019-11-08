@@ -197,7 +197,7 @@ function createTableModel(arr){
 						html += "<td>" + arr[arrIdx][val] + "</td>";
 						tempTrainMethod = arr[arrIdx][val];
 						break;
-					case "original_acc":
+					case "ai_acc":
 						html += "<td class='text-center'>" + arr[arrIdx][val] + "%</td>";
 						
 						break;

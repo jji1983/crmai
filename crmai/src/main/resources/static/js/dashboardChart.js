@@ -283,8 +283,8 @@ function grid_table_notice(obj) {
 types = [ "통신", "금융", "유통", "기타" ];
 periods = [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월",
 		"12월" ];
-campaigns = [ "정확도(%)", "예측(%)", "결과(%)" ];
-chartBGColor = [ 'rgba(81, 152, 255, 0.6)', 'rgba(243, 115, 79, 0.6)',
+campaigns = [ "학습전(%)", "AI예측(%)", "SO예측(%)", "결과(%)" ];
+chartBGColor = [ 'rgba(81, 152, 255, 0.6)', 'rgba(243, 115, 79, 0.6)', 'rgba(243, 156, 18, 0.6)',
 		'rgba(0, 180, 175, 0.6)' ];
 
 // elements
@@ -292,10 +292,12 @@ chartBGColor = [ 'rgba(81, 152, 255, 0.6)', 'rgba(243, 115, 79, 0.6)',
 leftOriginal = 0;
 leftSo = 0;
 leftReal = 0;
+leftAi = 0;
 
 rightOriginal = [ 0, 0, 0, 0 ];
 rightSo = [ 0, 0, 0, 0 ];
 rightReal = [ 0, 0, 0, 0 ];
+rightAi = [ 0, 0, 0, 0 ];
 
 var chartOptions = {
 	legend : {
@@ -373,6 +375,7 @@ function initLeftChart() {
 					label = "기타분야";
 					break;
 				}
+				leftAi = this.totalAi*100;
 				leftOriginal = this.totalOriginal*100;
 				leftSo = this.totalSo*100;
 				leftReal = this.totalReal*100;
@@ -384,7 +387,7 @@ function initLeftChart() {
 					labels : campaigns,
 					datasets : [ {
 						label : label,
-						data : [ leftOriginal, leftSo, leftReal ],
+						data : [ leftOriginal, leftAi, leftSo, leftReal ],
 						backgroundColor : chartBGColor,
 						borderWidth : 0
 					} ]
@@ -627,6 +630,7 @@ function initBothChart() {
 					label = "기타분야";
 					break;
 				}
+				leftAi = this.totalAi*100;
 				leftOriginal = this.totalOriginal*100;
 				leftSo = this.totalSo*100;
 				leftReal = this.totalReal*100;
@@ -638,7 +642,7 @@ function initBothChart() {
 					labels : campaigns,
 					datasets : [ {
 						label : label,
-						data : [ leftOriginal, leftSo, leftReal ],
+						data : [ leftOriginal, leftAi, leftSo, leftReal ],
 						backgroundColor : chartBGColor,
 						borderWidth : 0
 					} ]
@@ -667,10 +671,12 @@ function initBothChart() {
 		success : function(data) {
 			$.each(data, function() {
 				if (this.totalBase != 0) {
+					rightAi[this.totalBase-1] = this.totalAi*100;
 					rightOriginal[this.totalBase - 1] = this.totalOriginal*100;
 					rightSo[this.totalBase - 1] = this.totalSo*100;
 					rightReal[this.totalBase - 1] = this.totalReal*100;
 				} else if (this.totalBase == 0) {
+					rightAi[etc] = this.totalAi*100;
 					rightOriginal[etc] = this.totalOriginal*100;
 					rightSo[etc] = this.totalSo*100;
 					rightReal[etc] = this.totalReal*100;
@@ -682,16 +688,23 @@ function initBothChart() {
 				data : {
 					labels : types,
 					datasets : [ {
-						label : '정확도(%)',
+						label : '학습전(%)',
 						data : rightOriginal,
 						backgroundColor : 'rgba(81, 152, 255, 0.6)',
 						borderWidth : 0,
 					}, {
-						label : '예측(%)',
-						data : rightSo,
+						label : 'AI예측(%)',
+						data : rightAi,
 						backgroundColor : 'rgba(243, 115, 79, 0.6)',
 						borderWidth : 0,
-					}, {
+					}, 
+					{
+						label : 'SO예측(%)',
+						data : rightSo,
+						backgroundColor : 'rgba(243, 156, 18, 0.6)',
+						borderWidth : 0,
+					},
+					{
 						label : '결과(%)',
 						data : rightReal,
 						backgroundColor : 'rgba(0, 180, 175, 0.6)',
@@ -723,13 +736,15 @@ function initRightChart() {
 		success : function(data) {
 			$.each(data, function() {
 				if (this.totalBase != 0) {
+					rightAi[this.totalBase - 1] = this.totalAi*100;
 					rightOriginal[this.totalBase - 1] = this.totalOriginal*100;
 					rightSo[this.totalBase - 1] = this.totalSo*100;
 					rightReal[this.totalBase - 1] = this.totalReal*100;
 				} else if (this.totalBase == 0) {
 					rightOriginal[etc] = this.totalOriginal*100;
+					rightAi[etc] = this.totalAi*100;
 					rightSo[etc] = this.totalSo*100;
-					rightReal[etc] = this.totalReal*!00;
+					rightReal[etc] = this.totalReal*100;
 				}
 			});
 
@@ -738,14 +753,20 @@ function initRightChart() {
 				data : {
 					labels : types,
 					datasets : [ {
-						label : '정확도(%)',
+						label : '학습전(%)',
 						data : rightOriginal,
 						backgroundColor : 'rgba(81, 152, 255, 0.6)',
 						borderWidth : 0,
-					}, {
-						label : '예측(%)',
-						data : rightSo,
+					},{
+						label : 'AI예측(%)',
+						data : rightAi,
 						backgroundColor : 'rgba(243, 115, 79, 0.6)',
+						borderWidth : 0,
+					}, 
+					{
+						label : 'SO예측(%)',
+						data : rightSo,
+						backgroundColor : 'rgba(243, 156, 18, 0.6)',
 						borderWidth : 0,
 					}, {
 						label : '결과(%)',
@@ -795,6 +816,7 @@ function totalLeft() {
 					break;
 				}
 				$('#myBtn').val("나의 산업군별 - " + label + " 예측 결과");
+				leftAi = this.totalAi*100;
 				leftOriginal = this.totalOriginal*100;
 				leftSo = this.totalSo*100;
 				leftReal = this.totalReal*100;
@@ -803,7 +825,7 @@ function totalLeft() {
 					labels : campaigns,
 					datasets : [ {
 						label : label,
-						data : [ leftOriginal, leftSo, leftReal ],
+						data : [ leftOriginal, leftAi, leftSo, leftReal ],
 						backgroundColor : chartBGColor,
 						borderWidth : 0
 					} ]
@@ -850,6 +872,7 @@ function getLeftType(data) {
 		data : data,
 		async : true,
 		success : function(data) {
+			leftAi = 0;
 			leftOriginal = 0;
 			leftSo = 0;
 			leftReal = 0;
@@ -869,6 +892,7 @@ function getLeftType(data) {
 					label = "기타분야";
 					break;
 				}
+				leftAi = this.totalAi*100;
 				leftOriginal = this.totalOriginal*100;
 				leftSo = this.totalSo*100;
 				leftReal = this.totalReal*100;
@@ -877,7 +901,7 @@ function getLeftType(data) {
 				labels : campaigns,
 				datasets : [ {
 					label : label,
-					data : [ leftOriginal, leftSo, leftReal ],
+					data : [ leftOriginal, leftAi, leftSo, leftReal ],
 					backgroundColor : chartBGColor,
 					borderWidth : 0
 				} ]
@@ -905,6 +929,7 @@ function getRightType(data) {
 			rightOriginal = [ 0, 0, 0, 0 ];
 			rightSo = [ 0, 0, 0, 0 ];
 			rightReal = [ 0, 0, 0, 0 ];
+			rightAi = [ 0, 0, 0, 0 ];
 
 			$.each(data, function() {
 
@@ -912,23 +937,30 @@ function getRightType(data) {
 					rightOriginal[this.totalBase - 1] = this.totalOriginal*100;
 					rightSo[this.totalBase - 1] = this.totalSo*100;
 					rightReal[this.totalBase - 1] = this.totalReal*100;
+					rightAi[this.totalBase - 1] = this.totalAi*100;
 				} else if (this.totalBase == 0) {
 					rightOriginal[etc] = this.totalOriginal*100;
 					rightSo[etc] = this.totalSo*100;
 					rightReal[etc] = this.totalReal*100;
+					rightAi[etc] = this.totalAi*100;
 				}
 			});
 			var some_new_data = {
 				labels : types,
 				datasets : [ {
-					label : '정확도(%)',
+					label : '학습전(%)',
 					data : rightOriginal,
 					backgroundColor : 'rgba(81, 152, 255, 0.6)',
 					borderWidth : 0,
 				}, {
-					label : '예측(%)',
-					data : rightSo,
+					label : 'AI예측(%)',
+					data : rightAi,
 					backgroundColor : 'rgba(243, 115, 79, 0.6)',
+					borderWidth : 0,
+				}, {
+					label : 'SO예측(%)',
+					data : rightSo,
+					backgroundColor : 'rgba(243, 156, 18, 0.6)',
 					borderWidth : 0,
 				}, {
 					label : '결과(%)',
@@ -959,29 +991,37 @@ function getLeftPeriod(data) {
 			leftOriginal = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
 			leftSo = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
 			leftReal = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
+			leftAi = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
 
 			$.each(data, function() {
 				if (this.totalBase != 0) {
 					leftOriginal[this.totalBase - 1] = this.totalOriginal*100;
 					leftSo[this.totalBase - 1] = this.totalSo*100;
 					leftReal[this.totalBase - 1] = this.totalReal*100;
+					leftAi[this.totalBase - 1] = this.totalAi*100;
 				} else {
 					leftOriginal[this.totalBase] = this.totalOriginal*100;
 					leftSo[this.totalBase] = this.totalSo*100;
 					leftReal[this.totalBase] = this.totalReal*100;
+					leftAi[this.totalBase] = this.totalAi*100;
 				}
 			});
 			var some_new_data = {
 				labels : periods,
 				datasets : [ {
-					label : '정확도(%)',
+					label : '학습전(%)',
 					data : leftOriginal,
 					backgroundColor : 'rgba(81, 152, 255, 0.6)',
 					borderWidth : 0,
 				}, {
-					label : '예측(%)',
-					data : leftSo,
+					label : 'AI예측(%)',
+					data : rightAi,
 					backgroundColor : 'rgba(243, 115, 79, 0.6)',
+					borderWidth : 0,
+				}, {
+					label : 'SO예측(%)',
+					data : leftSo,
+					backgroundColor : 'rgba(243, 156, 18, 0.6)',
 					borderWidth : 0,
 				}, {
 					label : '결과(%)',
@@ -1011,29 +1051,37 @@ function getRightPeriod(data) {
 			rightOriginal = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
 			rightSo = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
 			rightReal = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
+			rightAi = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
 
 			$.each(data, function() {
 				if (this.totalBase != 0) {
 					rightOriginal[this.totalBase - 1] = this.totalOriginal*100;
 					rightSo[this.totalBase - 1] = this.totalSo*100;
 					rightReal[this.totalBase - 1] = this.totalReal*100;
+					rightAi[this.totalBase - 1] = this.totalAi*100;
 				} else {
 					rightOriginal[this.totalBase] = this.totalOriginal*100;
 					rightSo[this.totalBase] = this.totalSo*100;
 					rightReal[this.totalBase] = this.totalReal*100;
+					rightAi[this.totalBase] = this.totalAi*100;
 				}
 			});
 			var some_new_data = {
 				labels : periods,
 				datasets : [ {
-					label : '정확도(%)',
+					label : '학습전(%)',
 					data : rightOriginal,
 					backgroundColor : 'rgba(81, 152, 255, 0.6)',
 					borderWidth : 0,
-				}, {
-					label : '예측(%)',
-					data : rightSo,
+				},{
+					label : 'AI예측(%)',
+					data : rightAi,
 					backgroundColor : 'rgba(243, 115, 79, 0.6)',
+					borderWidth : 0,
+				},  {
+					label : 'SO예측(%)',
+					data : rightSo,
+					backgroundColor : 'rgba(243, 156, 18, 0.6)',
 					borderWidth : 0,
 				}, {
 					label : '결과(%)',
@@ -1064,10 +1112,12 @@ function getLeftCampaign(data) {
 			leftOriginal = 0;
 			leftSo = 0;
 			leftReal = 0;
+			leftAi = 0;
 			var label;
 			$.each(data, function() {
 				label = this.totalBase;
 				leftOriginal = this.totalOriginal*100;
+				leftAi = this.totalAi*100;
 				leftSo = this.totalSo*100;
 				leftReal = this.totalReal*100;
 			});
@@ -1075,7 +1125,7 @@ function getLeftCampaign(data) {
 				labels : campaigns,
 				datasets : [ {
 					label : label,
-					data : [ leftOriginal, leftSo, leftReal ],
+					data : [ leftOriginal, leftAi, leftSo, leftReal ],
 					backgroundColor : chartBGColor,
 					borderWidth : 0
 				} ]
@@ -1101,18 +1151,20 @@ function getRightCampaign(data) {
 			rightOriginal = 0;
 			rightSo = 0;
 			rightReal = 0;
+			rightAi = 0;
 			var label;
 			$.each(data, function() {
 				label = this.totalBase;
 				rightOriginal = this.totalOriginal*100;
 				rightSo = this.totalSo*100;
 				rightReal = this.totalReal*100;
+				rigthAi = this.totalAi*100;
 			});
 			var some_new_data = {
 				labels : campaigns,
 				datasets : [ {
 					label : label,
-					data : [ rightOriginal, rightSo, rightReal ],
+					data : [ rightOriginal, rightAi, rightSo, rightReal ],
 					backgroundColor : chartBGColor,
 					borderWidth : 0
 				} ]
@@ -1232,20 +1284,20 @@ function loadLeftStat() {
 				success : function(data) {
 					var stat = $('#leftStat');
 
-					var totalData = [ data.totalOriginal, data.totalSo,
+					var totalData = [ data.totalOriginal, data.totalAi, data.totalSo,
 							data.totalReal ];
 
 					for (var i = 0; i < 3; i++) {
 
 						if (i % 3 == 1) {
-							for (var j = 0; j < 3; j++) {
+							for (var j = 0; j < 4; j++) {
 								stat.find("div span").eq(i + j * 3).text(
 										totalData[j]*100 + "%");
 							}
 						}
 
 						if (i % 3 == 2) {
-							for (var j = 0; j < 3; j++) {
+							for (var j = 0; j < 4; j++) {
 								stat.find("div span").eq(i + j * 3).text(
 										"(" + data.totalCount + "건)");
 							}
@@ -1272,20 +1324,20 @@ function loadRightStat() {
 				success : function(data) {
 					var stat = $('#rightStat');
 
-					var totalData = [ data.totalOriginal, data.totalSo,
+					var totalData = [ data.totalOriginal, data.totalAi, data.totalSo,
 							data.totalReal ];
 
 					for (var i = 0; i < 3; i++) {
 
 						if (i % 3 == 1) {
-							for (var j = 0; j < 3; j++) {
+							for (var j = 0; j < 4; j++) {
 								stat.find("div span").eq(i + j * 3).text(
 										totalData[j]*100 + "%");
 							}
 						}
 
 						if (i % 3 == 2) {
-							for (var j = 0; j < 3; j++) {
+							for (var j = 0; j < 4; j++) {
 								stat.find("div span").eq(i + j * 3).text(
 										"(" + data.totalCount + "건)");
 							}

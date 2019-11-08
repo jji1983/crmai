@@ -8,7 +8,7 @@
 	    select 
 	       src_id, 
 	       train_method,
-	       round(cast(ORIGINAL_ACC * 100 as numeric), 1) as original_acc,  --정확도
+	       round(cast(AI_ACC * 100 as numeric), 1) as ai_acc,  --정확도
 	       round(cast(SO_ACC * 100 as numeric), 1) as so_acc,              --예측
 	       train_start, 
 	       train_end, 

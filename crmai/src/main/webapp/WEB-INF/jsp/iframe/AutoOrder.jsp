@@ -145,7 +145,9 @@
 										<h3 class="box-title">5. AI결과</h3>
 									</div>
 									<div class="box-body">
-										<h5 id='id_real_msg' class="box-title"></h5>
+										<button id='id_real_msg' type="button"
+											class="btn btn-info pull-center" data-toggle="modal"
+											data-target="#RealDataModal"></button>
 									</div>
 									<!-- /.box-body -->
 									<!-- Loading (remove the following to stop the loading)-->

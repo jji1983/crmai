@@ -14,12 +14,14 @@
 		<result column="TEST_CNT" property="testCnt"/>
 		<result column="ORIGINAL_ACC" property="originalAcc"/>
 		<result column="SO_ACC" property="soAcc"/>
+		<result column="AI_ACC" property="aiAcc"/>
 		<result column="REAL_ACC" property="realAcc"/>
 		<result column="MODEL_FLAG" property="modelFlag"/>
 		
 		<result column="ORIGINAL_ACC_AVG" property="originalAccAvg"/>
 		<result column="SO_ACC_AVG" property="soAccAvg"/>
 		<result column="REAL_ACC_AVG" property="realAccAvg"/>
+		<result column="AI_ACC_AVG" property="aiAccAvg"/>
 	</resultMap>
 	
 	<sql id="inputParam">
@@ -51,6 +53,27 @@
 		</if>
 	</sql>
 	
+	<!-- 캠페인 조회 -->
+	<select id="selectCamList" resultMap="aiStatisticMap" parameterType="com.ktds.crmai.model.AIStatistics">
+		SELECT ts.src_id,
+			   ts.src_name,
+			   ts.src_type,
+			   ts.status_cd,
+			   ts.adm_id,
+			   ts.created,
+			   COALESCE(ROUND(cast (ts.ORIGINAL_ACC as numeric), 2), 0) as ORIGINAL_ACC
+			   <!-- ,ttm.REAL_ACC -->
+		FROM t_src as ts
+		<!-- 파라메터 조건 -->
+		WHERE 1= 1
+		  	
+		<!-- <include refid="realAccParam"></include> -->
+		<include refid="inputParam"></include>
+		
+		ORDER BY ts.created DESC
+		LIMIT 6
+	</select>
+	
 	<!-- 선택된 모델 여부(MODEL_FLAG가 Y인 목록) -->
 	<select id="selectSttModelYList" resultMap="aiStatisticMap" parameterType="com.ktds.crmai.model.AIStatistics">
 		SELECT ts.src_id,
@@ -60,8 +83,10 @@
 			   ts.adm_id,
 			   ts.created,
 			   ttm.train_method,
-			   ttm.ORIGINAL_ACC,
-			   ttm.SO_ACC
+			   COALESCE(ROUND(cast (ts.ORIGINAL_ACC as numeric), 2), 0) as ORIGINAL_ACC,
+			   COALESCE(ROUND(cast (ttm.AI_ACC as numeric), 2), 0) as AI_ACC, 
+			   COALESCE(ROUND(cast (ttm.SO_ACC as numeric), 2), 0) as SO_ACC,
+			   COALESCE(ROUND(cast (ts.REAL_ACC as numeric), 2), 0) as REAL_ACC  
 			   <!-- ,ttm.REAL_ACC -->
 		FROM t_src as ts,
 		     t_train_model as ttm
@@ -73,13 +98,15 @@
 		<include refid="inputParam"></include>
 		
 		ORDER BY ts.created DESC
+		LIMIT 6
 	</select>
 	
 	<!-- 의사결정나무평균 쿼리 -->
 	<select id="selectDTreeAvg" resultMap="aiStatisticMap" parameterType="com.ktds.crmai.model.AIStatistics">
-		SELECT COALESCE(ROUND(cast (AVG(ttm.ORIGINAL_ACC) as numeric), 2), 0) as ORIGINAL_ACC_AVG, 
-			   COALESCE(ROUND(cast (AVG(ttm.SO_ACC) as numeric), 2), 0) as SO_ACC_AVG  
-			   <!-- ,NVL(ROUND(AVG(REAL_ACC), 2), 0) as REAL_ACC_AVG -->
+		SELECT COALESCE(ROUND(AVG(cast (ts.ORIGINAL_ACC as numeric)), 2), 0) as ORIGINAL_ACC_AVG, 
+			   COALESCE(ROUND(cast (AVG(ttm.AI_ACC) as numeric), 2), 0) as AI_ACC_AVG,
+			   COALESCE(ROUND(cast (AVG(ttm.SO_ACC) as numeric), 2), 0) as SO_ACC_AVG,  
+			   COALESCE(ROUND(AVG(cast (ts.REAL_ACC as numeric)), 2), 0) as REAL_ACC_AVG
 		FROM t_src as ts,
 		     t_train_model as ttm
 		
@@ -93,8 +120,10 @@
 	
 	<!-- 랜덤포레스트 평균 쿼리 -->
 	<select id="selectRFavg" resultMap="aiStatisticMap" parameterType="com.ktds.crmai.model.AIStatistics">
-		SELECT COALESCE(ROUND(cast (AVG(ttm.ORIGINAL_ACC) as numeric), 2), 0) as ORIGINAL_ACC_AVG, 
-			   COALESCE(ROUND(cast (AVG(ttm.SO_ACC) as numeric), 2), 0) as SO_ACC_AVG  
+		SELECT COALESCE(ROUND(AVG(cast (ts.ORIGINAL_ACC as numeric)), 2), 0) as ORIGINAL_ACC_AVG, 
+			   COALESCE(ROUND(cast (AVG(ttm.AI_ACC) as numeric), 2), 0) as AI_ACC_AVG,
+			   COALESCE(ROUND(cast (AVG(ttm.SO_ACC) as numeric), 2), 0) as SO_ACC_AVG,  
+			   COALESCE(ROUND(AVG(cast (ts.REAL_ACC as numeric)), 2), 0) as REAL_ACC_AVG
 			   <!-- ,NVL(ROUND(AVG(REAL_ACC), 2), 0) as REAL_ACC_AVG -->
 		FROM t_src as ts,
 		     t_train_model as ttm
@@ -107,8 +136,10 @@
 	
 	<!-- SVM 평균 쿼리 -->
 	<select id="selectSVMavg" resultMap="aiStatisticMap" parameterType="com.ktds.crmai.model.AIStatistics">
-		SELECT COALESCE(ROUND(cast (AVG(ttm.ORIGINAL_ACC) as numeric), 2), 0) as ORIGINAL_ACC_AVG, 
-			   COALESCE(ROUND(cast (AVG(ttm.SO_ACC) as numeric), 2), 0) as SO_ACC_AVG  
+		SELECT COALESCE(ROUND(AVG(cast (ts.ORIGINAL_ACC as numeric)), 2), 0) as ORIGINAL_ACC_AVG, 
+			   COALESCE(ROUND(cast (AVG(ttm.AI_ACC) as numeric), 2), 0) as AI_ACC_AVG,
+			   COALESCE(ROUND(cast (AVG(ttm.SO_ACC) as numeric), 2), 0) as SO_ACC_AVG,  
+			   COALESCE(ROUND(AVG(cast (ts.REAL_ACC as numeric)), 2), 0) as REAL_ACC_AVG 
 			   <!-- ,NVL(ROUND(AVG(REAL_ACC), 2), 0) as REAL_ACC_AVG -->
 		FROM t_src as ts,
 		     t_train_model as ttm
@@ -118,11 +149,29 @@
 		<include refid="realAccParam"></include>
 		<include refid="inputParam"></include>
 	</select>
+	<!-- SVM 평균 쿼리 -->
+	<select id="selectDNNavg" resultMap="aiStatisticMap" parameterType="com.ktds.crmai.model.AIStatistics">
+		SELECT COALESCE(ROUND(AVG(cast (ts.ORIGINAL_ACC as numeric)), 2), 0) as ORIGINAL_ACC_AVG, 
+			   COALESCE(ROUND(cast (AVG(ttm.AI_ACC) as numeric), 2), 0) as AI_ACC_AVG,
+			   COALESCE(ROUND(cast (AVG(ttm.SO_ACC) as numeric), 2), 0) as SO_ACC_AVG,  
+			   COALESCE(ROUND(AVG(cast (ts.REAL_ACC as numeric)), 2), 0) as REAL_ACC_AVG
+			   <!-- ,NVL(ROUND(AVG(REAL_ACC), 2), 0) as REAL_ACC_AVG -->
+		FROM t_src as ts,
+		     t_train_model as ttm
+		<!-- 파라메터 조건 -->
+		WHERE ttm.TRAIN_METHOD = 'Deep Neural Network' 
+		
+		<include refid="realAccParam"></include>
+		<include refid="inputParam"></include>
+	</select>
+	
 	
 	<!-- 선형회기 평균 쿼리 -->
 	<select id="selectLRavg" resultMap="aiStatisticMap" parameterType="com.ktds.crmai.model.AIStatistics">
-		SELECT COALESCE(ROUND(cast (AVG(ttm.ORIGINAL_ACC) as numeric), 2), 0) as ORIGINAL_ACC_AVG, 
-			   COALESCE(ROUND(cast (AVG(ttm.SO_ACC) as numeric), 2), 0) as SO_ACC_AVG  
+		SELECT COALESCE(ROUND(AVG(cast (ts.ORIGINAL_ACC as numeric)), 2), 0) as ORIGINAL_ACC_AVG, 
+			   COALESCE(ROUND(cast (AVG(ttm.AI_ACC) as numeric), 2), 0) as AI_ACC_AVG,
+			   COALESCE(ROUND(cast (AVG(ttm.SO_ACC) as numeric), 2), 0) as SO_ACC_AVG,  
+			   COALESCE(ROUND(AVG(cast (ts.REAL_ACC as numeric)), 2), 0) as REAL_ACC_AVG  
 			   <!-- ,NVL(ROUND(AVG(REAL_ACC), 2), 0) as REAL_ACC_AVG -->
 		FROM t_src as ts,
 		     t_train_model as ttm

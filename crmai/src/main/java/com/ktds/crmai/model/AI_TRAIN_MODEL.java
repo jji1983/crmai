@@ -15,6 +15,7 @@ public class AI_TRAIN_MODEL {
 	private String src_id;
 	private String train_method;
 	private String original_acc;
+	private String ai_acc;
 	private String so_acc;
 	private String model_dir;
 	private String model_name;

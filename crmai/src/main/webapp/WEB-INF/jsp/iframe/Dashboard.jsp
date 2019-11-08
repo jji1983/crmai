@@ -476,27 +476,36 @@
 									</div>
 									<!-- Tabs -->
 									<div class="row" id="leftStat">
-										<div class="col-md-4 col-sm-6 col-xs-12">
+										<div class="col-md-3 col-sm-6 col-xs-12">
 											<div class="info-box">
-												<span class="info-box-text text-center text-light-blue">학습</span>
+												<span class="info-box-text text-center text-light-blue">학습전</span>
 												<span class="info-box-number text-center text-light-blue">0%</span>
 												<span class="info-box-text text-center text-light-blue">(0건)</span>
 											</div>
 											<!-- /.info-box -->
 										</div>
 										<!-- /.col -->
-										<div class="col-md-4 col-sm-6 col-xs-12">
+										<div class="col-md-3 col-sm-6 col-xs-12">
 											<div class="info-box">
-												<span class="info-box-text text-center text-pink">예측</span>
+												<span class="info-box-text text-center text-pink">AI예측</span>
 												<span class="info-box-number text-center text-pink">0%</span>
 												<span class="info-box-text text-center text-pink">(0건)</span>
 											</div>
 											<!-- /.info-box -->
 										</div>
 										<!-- /.col -->
+									<div class="col-md-3 col-sm-6 col-xs-12">
+										<div class="info-box">
+											<span class="info-box-text text-center text-yellow">SO예측</span> <span
+												class="info-box-number text-center text-yellow">0%</span> <span
+												class="info-box-text text-center text-yellow">(0건)</span>
+										</div>
+										<!-- /.info-box -->
+									</div>
+										<!-- /.col -->
 										<!-- fix for small devices only -->
 										<div class="clearfix visible-sm-block"></div>
-										<div class="col-md-4 col-sm-6 col-xs-12">
+										<div class="col-md-3 col-sm-6 col-xs-12">
 											<div class="info-box">
 												<span class="info-box-text text-center text-green">결과</span>
 												<span class="info-box-number text-center text-green">0%</span>
@@ -576,27 +585,36 @@
 								</div>
 								<!-- Tabs -->
 								<div class="row" id="rightStat">
-									<div class="col-md-4 col-sm-6 col-xs-12">
+									<div class="col-md-3 col-sm-6 col-xs-12">
 										<div class="info-box">
-											<span class="info-box-text text-center text-blue">학습</span> <span
+											<span class="info-box-text text-center text-blue">학습전</span> <span
 												class="info-box-number text-center text-blue">0%</span> <span
 												class="info-box-text text-center text-blue">(0건)</span>
 										</div>
 										<!-- /.info-box -->
 									</div>
 									<!-- /.col -->
-									<div class="col-md-4 col-sm-6 col-xs-12">
+									<div class="col-md-3 col-sm-6 col-xs-12">
 										<div class="info-box">
-											<span class="info-box-text text-center text-pink">예측</span> <span
+											<span class="info-box-text text-center text-pink">AI예측</span> <span
 												class="info-box-number text-center text-pink">0%</span> <span
 												class="info-box-text text-center text-pink">(0건)</span>
 										</div>
 										<!-- /.info-box -->
 									</div>
 									<!-- /.col -->
+									<div class="col-md-3 col-sm-6 col-xs-12">
+										<div class="info-box">
+											<span class="info-box-text text-center text-yellow">SO예측</span> <span
+												class="info-box-number text-center text-yellow">0%</span> <span
+												class="info-box-text text-center text-yellow">(0건)</span>
+										</div>
+										<!-- /.info-box -->
+									</div>
+									<!-- /.col -->
 									<!-- fix for small devices only -->
 									<div class="clearfix visible-sm-block"></div>
-									<div class="col-md-4 col-sm-6 col-xs-12">
+									<div class="col-md-3 col-sm-6 col-xs-12">
 										<div class="info-box">
 											<span class="info-box-text text-center text-green">결과</span>
 											<span class="info-box-number text-center text-green">0%</span>

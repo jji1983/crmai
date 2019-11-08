@@ -57,7 +57,7 @@ ut.log("데이터 로딩합니다.")
 dataset = pd.read_csv(file_dir +'/'+ file_name, low_memory=False)
 
 #CSV 파일 저장을 위한 임시 저장
-csv_save = copy.deepcopy(dataset);
+csv_save = copy.deepcopy(dataset)
 
 # 삭제 정보를 이용하여 컬럼 삭제 합니다.
 for col in delete_columns:

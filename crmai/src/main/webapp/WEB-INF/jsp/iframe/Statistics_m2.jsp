@@ -246,7 +246,8 @@
 			html += "<th class='text-center'>생성자</th>";
 			html += "<th class='text-center'>생성일자</th>";
 			html += "<th class='text-center'>학습모델</th>";
-			html += "<th class='text-center'>예측율</th></tr></thead><tbody>";
+			html += "<th class='text-center'>AI예측율</th>";
+			html += "<th class='text-center'>SO예측율</th></tr></thead><tbody>";
 			// 데이터 존재 미존재 여부에 따른 표 표시
 			if (arr.length != 0) {
 				for (var i = 0; i < arr.length; i++) {
@@ -258,8 +259,10 @@
 					html += "<td class='text-center'>" + arr[i]["created"]
 							+ "</td>";
 					html += "<td>" + arr[i]["trainMethod"] + "</td>";
-					html += "<td class='text-right'>" + arr[i]["soAcc"]
-							+ "</td></tr>";
+					html += "<td class='text-right'>" + arr[i]["aiAcc"]*100
+							+ "%</td>";
+					html += "<td class='text-right'>" + arr[i]["soAcc"]*100
+							+ "%</td></tr>";
 				}
 			} else {
 				html += "<tr><td class='text-center' colspan='7'>조회된 데이터가 없습니다.</td></tr>";
@@ -281,24 +284,28 @@
 						},
 						success : function(avgMap) {
 							var camNameArr = new Array(); // 캠페인명 배열
+							var aiAccArr = new Array(); // 예측 배열
 							var soAccArr = new Array(); // 예측 배열
 							var trainMethodArr = new Array(); // 학습모델 배열
 							var soAccAvgArr = new Array(); // 방사형 그래프용 예측 평균 배열
+							var aiAccAvgArr = new Array();
 
 							for (var i = 0; i < arr.length; i++) {
 								camNameArr[i] = arr[i]["src_name"];
-								soAccArr[i] = arr[i]["soAcc"];
+								aiAccArr[i] = arr[i]["aiAcc"]*100;
+								soAccArr[i] = arr[i]["soAcc"]*100;
 							}
 							// 학습모델 대입
 							trainMethodArr.push("DecisionTree");
 							trainMethodArr.push("RandomForest");
-							trainMethodArr.push("svm");
+							/* trainMethodArr.push("svm"); */
+							trainMethodArr.push("Deep Neural Network");
 							trainMethodArr.push("LogisticRegression");
 							// 예측 배열 대입
-							soAccAvgArr.push(avgMap["dTreeVO"]["soAccAvg"]);
-							soAccAvgArr.push(avgMap["rfVO"]["soAccAvg"]);
-							soAccAvgArr.push(avgMap["svmVO"]["soAccAvg"]);
-							soAccAvgArr.push(avgMap["lRVO"]["soAccAvg"]);
+							soAccAvgArr.push(avgMap["dTreeVO"]["aiAccAvg"]*100);
+							soAccAvgArr.push(avgMap["rfVO"]["aiAccAvg"]*100);
+							soAccAvgArr.push(avgMap["dnnVO"]["aiAccAvg"]*100);
+							soAccAvgArr.push(avgMap["lRVO"]["aiAccAvg"]*100);
 							var barChartData = {
 								labels : camNameArr,
 								datasets : [ {
@@ -309,7 +316,7 @@
 									pointStrokeColor : 'rgba(147, 0, 156, 1)',
 									pointHighlightFill : '#fff',
 									pointHighlightStroke : 'rgba(147, 0, 156, 1)',
-									data : soAccArr
+									data : aiAccArr
 								} ]
 							};
 							//-------------
@@ -347,16 +354,16 @@
 								maintainAspectRatio : true
 							};
 							// 그래프 굵기 조정(데이터 갯수에 따라서...)
-							if (soAccArr.length == 1) {
+							if (aiAccArr.length == 1) {
 								barChartOptions["barValueSpacing"] = 240;
-							} else if ((soAccArr.length > 1)
-									&& (soAccArr.length <= 3)) {
+							} else if ((aiAccArr.length > 1)
+									&& (aiAccArr.length <= 3)) {
 								barChartOptions["barValueSpacing"] = 120;
-							} else if ((soAccArr.length > 3)
-									&& (soAccArr.length <= 5)) {
+							} else if ((aiAccArr.length > 3)
+									&& (aiAccArr.length <= 5)) {
 								barChartOptions["barValueSpacing"] = 40;
-							} else if ((soAccArr.length > 5)
-									&& (soAccArr.length <= 6)) {
+							} else if ((aiAccArr.length > 5)
+									&& (aiAccArr.length <= 6)) {
 								barChartOptions["barValueSpacing"] = 25;
 							} else {
 								barChartOptions["barValueSpacing"] = 5;

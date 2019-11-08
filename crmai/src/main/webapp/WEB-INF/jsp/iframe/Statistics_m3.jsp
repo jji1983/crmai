@@ -249,8 +249,8 @@
 			html += "<th class='text-center'>생성자</th>";
 			html += "<th class='text-center'>생성일자</th>";
 			html += "<th class='text-center'>학습모델</th>";
-			html += "<th class='text-center'>기존</th>";
-			html += "<th class='text-center' colspan='2'>예측</th>";
+			html += "<th class='text-center'>예측</th>";
+			/* html += "<th class='text-center' colspan='2'>예측</th>"; */
 			html += "<th class='text-center' colspan='2'>결과</th></tr></thead><tbody>";
 			// 데이터 존재 미존재 여부에 따른 표 표시
 			if (arr.length != 0) {
@@ -279,7 +279,7 @@
 													html += "<td class='text-right'>"
 															+ arr[arrIdx][val]
 															+ "</td>";
-												} else if (val == "soAcc") {
+												}/*  else if (val == "soAcc") {
 													tempDiffRealAcc = arr[arrIdx][val];
 													// 예측 - 정확도 값 비교
 													tempDiffSoAcc = arr[arrIdx][val]
@@ -300,7 +300,7 @@
 																+ arr[arrIdx][val]
 																+ "</td>";
 													}
-												} else if (val == "realAcc") {
+												} */ else if (val == "realAcc") {
 													// 결과 - 예측 값 비교
 													tempDiffRealAcc = arr[arrIdx][val]
 															- tempDiffRealAcc;
@@ -356,7 +356,7 @@
 							var soAccAvgArr = new Array(); // 방사형 그래프용 예측 평균 배열
 							var realAccAvgArr = new Array(); // 방사형 그래프용 결과 평균 배열
 							for (var i = 0; i < arr.length; i++) {
-								camNameArr[i] = arr[i]["camName"];
+								camNameArr[i] = arr[i]["src_name"];
 								originalAccArr[i] = arr[i]["originalAcc"];
 								soAccArr[i] = arr[i]["soAcc"];
 								realAccArr[i] = arr[i]["realAcc"];
@@ -364,25 +364,26 @@
 							// 학습모델 대입
 							trainMethodArr.push("DecisionTree");
 							trainMethodArr.push("RandomForest");
-							trainMethodArr.push("svm");
+							/* trainMethodArr.push("svm"); */
+							trainMethodArr.push("Deep Neural Network");
 							trainMethodArr.push("LogisticRegression");
 							// 정확도 배열 대입
 							orgAccAvgArr
 									.push(avgMap["dTreeVO"]["originalAccAvg"]);
 							orgAccAvgArr.push(avgMap["rfVO"]["originalAccAvg"]);
 							orgAccAvgArr
-									.push(avgMap["svmVO"]["originalAccAvg"]);
+									.push(avgMap["dnnVO"]["originalAccAvg"]);
 							orgAccAvgArr.push(avgMap["lRVO"]["originalAccAvg"]);
 							// 예측 배열 대입
 							soAccAvgArr.push(avgMap["dTreeVO"]["soAccAvg"]);
 							soAccAvgArr.push(avgMap["rfVO"]["soAccAvg"]);
-							soAccAvgArr.push(avgMap["svmVO"]["soAccAvg"]);
+							soAccAvgArr.push(avgMap["dnnVO"]["soAccAvg"]);
 							soAccAvgArr.push(avgMap["lRVO"]["soAccAvg"]);
 							// 결과 배열 대입
-							realAccAvgArr.push(avgMap["dTreeVO"]["realAccAvg"]);
+							/* realAccAvgArr.push(avgMap["dTreeVO"]["realAccAvg"]);
 							realAccAvgArr.push(avgMap["rfVO"]["realAccAvg"]);
-							realAccAvgArr.push(avgMap["svmVO"]["realAccAvg"]);
-							realAccAvgArr.push(avgMap["lRVO"]["realAccAvg"]);
+							realAccAvgArr.push(avgMap["dnnVO"]["realAccAvg"]);
+							realAccAvgArr.push(avgMap["lRVO"]["realAccAvg"]); */
 							var barChartData = {
 								labels : camNameArr,
 								datasets : [
@@ -396,7 +397,7 @@
 											pointHighlightStroke : 'rgba(205, 102, 0, 1)',
 											data : originalAccArr
 										},
-										{
+										/* {
 											label : '예측(%)',
 											fillColor : 'rgba(60,141,188,0.9)',
 											strokeColor : 'rgba(60,141,188,0.8)',
@@ -405,7 +406,7 @@
 											pointHighlightFill : '#fff',
 											pointHighlightStroke : 'rgba(60,141,188,1)',
 											data : soAccArr
-										},
+										}, */
 										{
 											label : '결과(%)',
 											fillColor : 'rgba(255,215,0,0.9)',
@@ -430,7 +431,7 @@
 											pointHighlightStroke : 'rgba(255, 87, 0, 1)',
 											data : orgAccAvgArr
 										},
-										{
+										/* {
 											label : '예측(%)',
 											fillColor : 'rgba(211, 255, 206, 0.9)',
 											strokeColor : 'rgba(211, 255, 206, 0.8)',
@@ -439,7 +440,7 @@
 											pointHighlightFill : '#fff',
 											pointHighlightStroke : 'rgba(211, 255, 206, 1)',
 											data : soAccAvgArr
-										},
+										}, */
 										{
 											label : '결과(%)',
 											fillColor : 'rgba(238, 162, 173, 0.9)',

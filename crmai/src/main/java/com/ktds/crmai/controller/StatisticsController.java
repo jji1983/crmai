@@ -25,6 +25,24 @@ public class StatisticsController {
 	@Autowired
 	StatisticsService statisticsService;
 
+	// 캠페인 조회
+		@RequestMapping(value = "/camlist")
+		public List<AIStatistics> selectCamList(@RequestParam(required = false) String camName,
+				@RequestParam(required = false) String camType, @RequestParam(required = false) String camStatus,
+				@RequestParam(required = false) String beforeDate, @RequestParam(required = false) String afterDate,
+				@RequestParam(required = false) Boolean realAccFlag, HttpSession session) {
+			if ("ALL".equals(camType)) {
+				camType = "";
+			}
+			if ("ALL".equals(camStatus)) {
+				camStatus = "";
+			}
+			String admId = (String) session.getAttribute("sessionID");
+			log.info("$$$$$$$$세션 아이디:" + admId);
+			AIStatistics aiVO = new AIStatistics(camName, camStatus, admId, camType, beforeDate, afterDate, realAccFlag);
+			return statisticsService.selectCamList(aiVO);
+		}
+	
 	// 모델 여부가 'Y'인 통계 조회
 	@RequestMapping(value = "/list")
 	public List<AIStatistics> selectSttModelYList(@RequestParam(required = false) String camName,
@@ -62,6 +80,7 @@ public class StatisticsController {
 		AIStatistics dTreeVO = statisticsService.selectDTreeAvg(aiVO);
 		AIStatistics rfVO = statisticsService.selectRFavg(aiVO);
 		AIStatistics svmVO = statisticsService.selectSVMavg(aiVO);
+		AIStatistics dnnVO = statisticsService.selectDNNavg(aiVO);
 		AIStatistics lRVO = statisticsService.selectLRavg(aiVO);
 		log.info("###정확도:" + dTreeVO.getOriginalAccAvg() + ", 예측:" + dTreeVO.getSoAccAvg() + ", 실측:"
 				+ dTreeVO.getRealAccAvg());
@@ -69,6 +88,7 @@ public class StatisticsController {
 		trainMethodMap.put("dTreeVO", dTreeVO);
 		trainMethodMap.put("rfVO", rfVO);
 		trainMethodMap.put("svmVO", svmVO);
+		trainMethodMap.put("dnnVO", dnnVO);
 		trainMethodMap.put("lRVO", lRVO);
 		return trainMethodMap;
 	}

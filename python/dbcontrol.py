@@ -86,11 +86,11 @@ def mlChoiceModel(src_id):
         c.execute(init_update_string, (src_id,))
         conn.commit()
         # Select
-        select_string = "select train_method, original_acc  \
+        select_string = "select train_method, so_acc  \
                            from public.t_train_model  \
                           where src_id   = %s \
                             and train_type = 'Machine Learning' \
-                          order by original_acc desc"
+                          order by so_acc desc"
         c.execute(select_string, (src_id,))
         result = c.fetchone()
         # Update
@@ -292,3 +292,18 @@ def getConn():
     conn_string = "dbname={dbname} user={user} host={host} password={password} port={port}"\
                     .format(dbname=dbname, user=user, host=host_product, password=password, port=port)                    
     return conn_string
+
+#기존 캠페인 정확도 저장
+def originalAcc(val,src_id):
+    conn = psycopg2.connect(getConn())
+    # 상태 확인
+    with conn.cursor() as c:
+        # Select
+        select_string = "update t_src  \
+                            set original_acc = %s  \
+                          where src_id   = %s "
+                          
+        c.execute(select_string, (val,src_id,))
+        conn.commit()
+       # result = c.fetchone()
+    conn.close()

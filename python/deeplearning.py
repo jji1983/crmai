@@ -11,6 +11,7 @@ import subprocess
 # target ai
 import dbcontrol as db
 import util as ut
+import copy
 
 # GPU 사용을 위한 Tensorflow 설정
 config = tf.ConfigProto()
@@ -82,6 +83,19 @@ else:
 labeldataset = pd.DataFrame()
 labeldataset[target_column] = dataset[target_column]
 del dataset[target_column]
+
+# 기존 캠페인 성공률 체크를 위한 문자형 -> 숫자형 변환
+def changeValue(data):
+    if data[target_column].upper() == 'Y':
+        return 1
+    else:
+        return 0
+#기존 캠페인 성공률 체크를 위한 임시 저장
+success_data = copy.deepcopy(labeldataset)
+success_data['success_val'] = success_data.apply(changeValue, axis=1)
+success_val=success_data['success_val'].mean()
+db.originalAcc(success_val, src_id)
+
 
 # 연속형 범주형 분리 합니다.
 num_df = dataset.select_dtypes(include=['int64','float64'])
@@ -208,7 +222,7 @@ train_end_time = now.strftime('%Y-%m-%d %H:%M:%S')
 train_df = pd.DataFrame({"src_id":[src_id]})		# src_id
 train_df['train_type'] = 'Deep Learning'			# 학습 유형
 train_df['train_method'] = 'Deep Neural Network'	# deeplearning 모델
-train_df['original_acc'] = train_accuracy			# 학습 정확도
+train_df['ai_acc'] = train_accuracy			# 학습 정확도
 train_df['model_dir'] = foldername					# 모델 저장 경로
 train_df['model_name'] = 'deeplearning_model.ckpt' 	# 모델 명
 train_df['train_start'] = train_start_time			# 학습 시작 시간

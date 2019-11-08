@@ -38,4 +38,15 @@ public class StatisticsService implements StatisticsMapper {
 	public AIStatistics selectLRavg(AIStatistics vo) {
 		return statisticsMapper.selectLRavg(vo);
 	}
+	
+	@Override
+	public AIStatistics selectDNNavg(AIStatistics vo) {
+		return statisticsMapper.selectDNNavg(vo);
+	}
+
+	@Override
+	public List<AIStatistics> selectCamList(AIStatistics vo) {
+		return statisticsMapper.selectCamList(vo);
+	}
+	
 }

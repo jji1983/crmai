@@ -33,6 +33,7 @@ public class AIStatistics {
 	private String originalAcc;		// 정확도
 	private String soAcc;				// 예측
 	private String realAcc;			// 실측, 결과
+	private String aiAcc;			// 예측
 		// 선택된 모델 여부
 	
 	// 파라메터 방식으로만 사용
@@ -41,6 +42,7 @@ public class AIStatistics {
 	private BigDecimal originalAccAvg;		// 정확도 평균
 	private BigDecimal soAccAvg;			// 예측 평균
 	private BigDecimal realAccAvg;			// 결과 평균
+	private BigDecimal aiAccAvg;			// 예측 평균
 	private Boolean realAccFlag = false;	// 통계 화면에서 실측 파라메터 추가할지 말지 여부(초기는 없는 걸로 함)
 	
 	public AIStatistics(String camName, String camStatus, String admId, String camType, String beforeDate,

@@ -188,6 +188,79 @@ public class FileController {
 		return response;
 	}
 
+	
+
+	@RequestMapping(value = "/UploadReal")
+	public ResponseEntity<Object> fileUpload_Real(String cam_id, String user_id, //
+			MultipartFile[] file_real, HttpSession session) {
+		AI_CAMPAIGN campaign = new AI_CAMPAIGN();
+		campaign.setSrc_id(cam_id);
+		campaign.setCam_seq(cam_id);
+
+		MultipartFile file_t1 = file_real[0];
+		long size_t1 = file_t1.getSize();
+
+		if (size_t1 == 0) {
+			return new ResponseEntity<Object>("FAIL::Real Data 파일은 필수 입니다.", HttpStatus.OK);
+		} else {
+			String uuid = UUID.randomUUID().toString();
+			String fullPath = checkAndMakeBaseDir(user_id);
+			String fileName1 = uuid + "_" + campaign.getAdm_id() + "_"+ file_t1.getName();
+			String saveFileName_t1 = fullPath + File.separator + fileName1;
+			
+			campaign.setCam_ofilename(saveFileName_t1);
+			campaign.setFile_r_type("REAL");
+			saveFile(file_t1, saveFileName_t1);
+			campaign.setFile_r_name(fileName1);
+			campaign.setFile_dir(fullPath);
+			log.info("Request List........ - {}", campaign);
+			campaignService.insertCampaignRtype(campaign);
+			//targetFlag = 1;
+
+			return new ResponseEntity<Object>("OK::등록 성공", HttpStatus.OK);
+		}
+	}
+	@RequestMapping(value = "/searchPath")
+	public AI_CAMPAIGN getPredictPath(String camid, HttpSession session) {
+		log.info("Request List........ - {}", camid);
+		AI_CAMPAIGN campaign = new AI_CAMPAIGN();
+		
+		campaign.setSrc_id(camid);
+		AI_CAMPAIGN out_campaign = campaignService.selectPredictPath(campaign);
+		return out_campaign;
+	}
+	@RequestMapping(value= "/fileDown")
+	public FileSystemResource download(String path, 
+			HttpServletRequest request, HttpServletResponse response){
+		
+		String filePath = path;
+		File downloadFile = null;
+		downloadFile = new File(filePath);
+		response.setHeader( "Set-Cookie", "fileDownload=true; path=/" );
+		response.setHeader("Content-Disposition", "attachment; filename=" + downloadFile.getName());
+
+	     return new FileSystemResource(downloadFile);
+	}
+	private String checkAndMakeBaseDir(String user_id) {
+		String fullPath = baseDir + user_id;
+		File f = new File(fullPath);
+		if (!f.exists()) {
+			f.mkdirs();
+		}
+		return fullPath;
+	}
+
+	private void saveFile(MultipartFile file_t1, String saveFileName_t1) {
+		try (InputStream in = file_t1.getInputStream(); FileOutputStream fos = new FileOutputStream(saveFileName_t1)) {
+			int readCount = 0;
+			byte[] buffer = new byte[512];
+			while ((readCount = in.read(buffer)) != -1) {
+				fos.write(buffer, 0, readCount);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
 	@RequestMapping(value = "/downPredict/{cam_id}", produces = "text/csv")
 	public void downloadPredict(@PathVariable String cam_id, HttpServletRequest request, HttpServletResponse response) {
 		try {
@@ -292,75 +365,6 @@ public class FileController {
 			System.out.println("ERROR : " + e.getMessage());
 		}
 	}
-
-	@RequestMapping(value = "/UploadReal")
-	public ResponseEntity<Object> fileUpload_Real(String cam_id, String user_id, //
-			MultipartFile[] file_real, HttpSession session) {
-		AI_CAMPAIGN campaign = new AI_CAMPAIGN();
-		campaign.setSrc_id(cam_id);
-		campaign.setCam_seq(cam_id);
-
-		MultipartFile file_t1 = file_real[0];
-		long size_t1 = file_t1.getSize();
-
-		if (size_t1 == 0) {
-			return new ResponseEntity<Object>("FAIL::Real Data 파일은 필수 입니다.", HttpStatus.OK);
-		} else {
-			String uuid = UUID.randomUUID().toString();
-			String fullPath = checkAndMakeBaseDir(user_id);
-
-			String saveFileName_t1 = fullPath + File.separator + uuid + "_" + campaign.getCam_seq() + "_"
-					+ file_t1.getName();
-			campaign.setCam_rfilename(saveFileName_t1);
-			campaign.setCam_rtype("1");
-			saveFile(file_t1, saveFileName_t1);
-
-			campaignService.updateCampaignRtype(campaign);
-			return new ResponseEntity<Object>("OK::등록 성공", HttpStatus.OK);
-		}
-	}
-	@RequestMapping(value = "/searchPath")
-	public AI_CAMPAIGN getPredictPath(String camid, HttpSession session) {
-		log.info("Request List........ - {}", camid);
-		AI_CAMPAIGN campaign = new AI_CAMPAIGN();
-		
-		campaign.setSrc_id(camid);
-		AI_CAMPAIGN out_campaign = campaignService.selectPredictPath(campaign);
-		return out_campaign;
-	}
-	@RequestMapping(value= "/fileDown")
-	public FileSystemResource download(String path, 
-			HttpServletRequest request, HttpServletResponse response){
-		
-		String filePath = path;
-		File downloadFile = null;
-		downloadFile = new File(filePath);
-		response.setHeader( "Set-Cookie", "fileDownload=true; path=/" );
-		response.setHeader("Content-Disposition", "attachment; filename=" + downloadFile.getName());
-
-	     return new FileSystemResource(downloadFile);
-	}
-	private String checkAndMakeBaseDir(String user_id) {
-		String fullPath = baseDir + user_id;
-		File f = new File(fullPath);
-		if (!f.exists()) {
-			f.mkdirs();
-		}
-		return fullPath;
-	}
-
-	private void saveFile(MultipartFile file_t1, String saveFileName_t1) {
-		try (InputStream in = file_t1.getInputStream(); FileOutputStream fos = new FileOutputStream(saveFileName_t1)) {
-			int readCount = 0;
-			byte[] buffer = new byte[512];
-			while ((readCount = in.read(buffer)) != -1) {
-				fos.write(buffer, 0, readCount);
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-
 	public static String getUuid() {
 		return UUID.randomUUID().toString().replaceAll("-", "");
 	}

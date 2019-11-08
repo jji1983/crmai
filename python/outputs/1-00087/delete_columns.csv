@@ -1,0 +1,12 @@
+0
+svc_cont_id
+out_ltas_vlte_icmplt_call_sec
+out_ltas_psvt_icmplt_call_sec
+in_ltas_vlte_icmplt_call_sec
+in_ltas_psvt_icmplt_call_sec
+in_lms_try_cacnt
+in_mms_try_cacnt
+g3d_cmplt_cacnt
+g3d_ctng_cacnt
+ld_cmplt_cacnt
+ld_ctng_cacnt

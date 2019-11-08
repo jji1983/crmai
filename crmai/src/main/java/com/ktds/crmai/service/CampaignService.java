@@ -70,9 +70,9 @@ public class CampaignService implements CampaignMapper {
 	}
 
 	@Override
-	public void updateCampaignRtype(AI_CAMPAIGN campaign) {
+	public void insertCampaignRtype(AI_CAMPAIGN campaign) {
 		// TODO Auto-generated method stub
-		campaignMapper.updateCampaignRtype(campaign);
+		campaignMapper.insertCampaignRtype(campaign);
 	}
 
 	@Override

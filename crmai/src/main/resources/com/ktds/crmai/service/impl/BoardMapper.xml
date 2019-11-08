@@ -63,7 +63,7 @@
     
     	
 	<update id="updateBoard">
-		update t_BOARD set title=#{title}, contents=#{contents} where code=#{code}
+		update t_BOARD set title=#{title}, contents=#{contents} where code=cast(#{code} as numeric)
 	</update>
     
     <delete id="deleteBoard">

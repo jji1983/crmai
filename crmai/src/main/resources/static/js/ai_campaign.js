@@ -434,10 +434,10 @@ function modifiedSubmitNewCampagin(){
   $("#ai_status").show(); //현황창 보이기
   var button_data1 = "<button type=\"button\">캠페인 신규등록</button>";
  
-  var train_text = ["학습데이터 입력전", "학습데이터 입력후", "학습데이터 처리중", "학습데이터 처리 오류", "데이터 미리보기", "전처리 전", "전처리중", "전처리완료"];
-  var test_text = ["대상자데이터 입력전", "대상자데이터 입력후", "대상자데이터 처리중", "대상자데이터 처리 오류", "데이터 미리보기", "전처리 전", "전처리중", "전처리완료"];
-  var runf_text = ["모델생성 시작전", "모델생성중", "모델 보기"];
-  var predict_text = ["예측전", "예측중", "예측오류", "예측데이터 보기"];
+  var train_text = ["학습데이터 입력전", "학습데이터 입력후", "학습데이터 처리중", "학습데이터 처리 오류", "데이터 처리 완료", "전처리 전", "전처리중", "전처리완료"];
+  var test_text = ["대상자데이터 입력전", "대상자데이터 입력후", "대상자데이터 처리중", "대상자데이터 처리 오류", "데이터 처리 완료", "전처리 전", "전처리중", "전처리완료"];
+  var runf_text = ["모델생성 시작전", "모델생성중", "모델 생성 완료"];
+  var predict_text = ["예측전", "예측중", "예측오류", "예측데이터 생성 완료"];
   var real_text = ["실측결과 입력"];
   
   $("#id_pre_msg").text(train_text[5]);
@@ -479,10 +479,11 @@ function modifiedSubmitNewCampagin(){
   }else if(src_cd=='Learning Complete'){ //모델 생성
 	  //alert("모델 생성 :: " + src_cd );
   
-	  $("#id_loading1_msg").text(train_text[7]);
-	  $("#id_loading2_msg").text(test_text[7]);
+	  $("#id_loading1_msg").text(train_text[4]);
+	  $("#id_loading2_msg").text(test_text[4]);
 	  $("#id_pre_msg").text(train_text[7]);
-	  $("#id_runf_msg").text(runf_text[0]);
+	  $("#id_runf_msg").text(runf_text[2]);
+	  $("#id_predict_msg").text(predict_text[3]);
 	  //alert("모델 생성1 :: " + src_cd );
 	  //실행 완료
 	  $("#id_loading1_overlay").hide(); //전처리 단계 실행
@@ -490,9 +491,9 @@ function modifiedSubmitNewCampagin(){
 	  $("#id_pre_overlay").hide();      //AI 전처리 단계 실행중
 	  //alert("모델 생성 2:: " + src_cd );
 	  //실행중
-	  $("#id_runf_overlay").show();     //AI 모델 생성 단계 실행중
-	  $("#id_predict_overlay").show();  //AI 예측 단계 실행중
-	  $("#id_real_overlay").show();  //AI 예측 단계 실행중
+	  $("#id_runf_overlay").hide();     //AI 모델 생성 단계 실행중
+	  $("#id_predict_overlay").hide();  //AI 예측 단계 실행중
+	  $("#id_real_overlay").hide();  //AI 예측 단계 실행중
 	  //alert("모델 생성 3:: " + src_cd );
 	  
   }else if(src_cd =='Deep Learning'||src_cd =='Machine Learning'){//대상자 처리
@@ -501,15 +502,19 @@ function modifiedSubmitNewCampagin(){
 	  $("#id_loading2_msg").text(test_text[4]);
 	  $("#id_pre_msg").text(train_text[7]);
 	  $("#id_runf_msg").text(runf_text[2]);
-	  $("#id_predict_msg").text(predict_text[(cam_itype - 11)]);
+	  $("#id_predict_msg").text(predict_text[1]);
+	  /*$("#id_predict_msg").text(predict_text[(cam_itype - 11)]);*/
 	  
 	  //실행 완료
 	  $("#id_loading1_overlay").hide(); //전처리 단계 실행
 	  $("#id_loading2_overlay").hide(); //전처리 단계 실행
 	  $("#id_pre_overlay").hide();      //AI 전처리 단계 실행중
 	  $("#id_runf_overlay").hide();     //AI 모델 생성 단계 실행중
+	  
+	  $("#id_predict_overlay").show();  //AI 예측 단계 실행중
+	  $("#id_real_overlay").show();  //AI 예측 단계 실행중
 
-	  if(cam_itype == 14){
+	/*  if(cam_itype == 14){
   	    //alert("예측 처리 :: " + cam_itype );
 		$("#id_predict_overlay").hide();  //AI 예측 단계 실행중
 		$("#id_real_overlay").hide();  //AI 예측 단계 실행중
@@ -517,7 +522,7 @@ function modifiedSubmitNewCampagin(){
 		//실행중
 		$("#id_predict_overlay").show();  //AI 예측 단계 실행중
 		$("#id_real_overlay").show();  //AI 예측 단계 실행중
-	  }
+	  }*/
   }else{
 	  alert("미 처리 :: " + src_cd );
   }
@@ -546,7 +551,6 @@ function submitUploadRealData(){
 	    cache: false,
 	    timeout: 600000,
 	    success: function (data) {
-	    	alert( "여긴가? "+data );
 	    	
 	    	//console.log("SUCCESS : ", data);
 	        $("#bthReal").prop("disabled", false);

@@ -170,7 +170,7 @@ for trainmethod in trainMethodList:
 	train_df = pd.DataFrame({"src_id":[src_id]})		# src_id
 	train_df['train_type'] = 'Machine Learning'			# 학습 유형
 	train_df['train_method'] = trainmethod				# deeplearning 모델
-	train_df['original_acc'] = round(ac_score,3)		# 학습 정확도
+	train_df['ai_acc'] = round(ac_score,3)		# 학습 정확도
 	train_df['so_acc'] = so_score						# SO 정확도
 	train_df['model_dir'] = foldername					# 모델 저장 경로
 	train_df['model_name'] =  trainmethod+'.pkl'		# 모델 명

@@ -155,7 +155,7 @@
 					<div class="col-md-6">
 						<div class="box box-info">
 							<div class="box-header with-border">
-								<h3 class="box-title">대상건수</h3>
+								<h3 class="box-title">정확도</h3>
 								<div class="box-tools pull-right">
 									<button type="button" class="btn btn-box-tool"
 										data-widget="collapse">
@@ -221,7 +221,7 @@
 		} */
 		function search_statistics() {
 			$.ajax({
-				url : "/statistics/list",
+				url : "/statistics/camlist",
 				data : {
 					camName : $("#cam_name").val(),
 					camType : $("#cam_type").val(),
@@ -256,7 +256,7 @@
 							+ "</td>";
 					/* html += "<td class='text-right'>" + arr[i]["testCnt"]
 							+ "</td>"; */
-					html += "<td class='text-right'>" + arr[i]["originalAcc"]
+					html += "<td class='text-right'>" + arr[i]["originalAcc"]*100+"%"
 							+ "</td></tr>";
 				}
 			} else {
@@ -270,7 +270,7 @@
 			var originalAccArr = new Array(); // 정확도 배열
 			for (var i = 0; i < arr.length; i++) {
 				camNameArr[i] = arr[i]["src_name"];
-				originalAccArr[i] = arr[i]["originalAcc"];
+				originalAccArr[i] = arr[i]["originalAcc"]*100;
 			}
 			var barChartData = {
 				labels : camNameArr,

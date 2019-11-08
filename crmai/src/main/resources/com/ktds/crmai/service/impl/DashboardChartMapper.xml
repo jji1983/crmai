@@ -15,6 +15,7 @@
 		<result column="TRAIN_METHOD" property="trainMethod" />
 		<result column="ORIGINAL_ACC" property="originalAcc" />
 		<result column="SO_ACC" property="soAcc" />
+		<result column="AI_ACC" property="aiAcc" />
 		<result column="REAL_ACC" property="realAcc" />
 		<result column="MODEL_FLAG" property="modelFlag" />
 		<result column="TEST_CNT" property="testCnt" />
@@ -26,13 +27,14 @@
 		<result column="TOTAL_ORIGINAL" property="totalOriginal" />
 		<result column="TOTAL_SO" property="totalSo" />
 		<result column="TOTAL_REAL" property="totalReal" />
+		<result column="TOTAL_AI" property="totalAi" />
 	</resultMap>
 
 	<!-- Total -->
 	<select id="selectTotal" resultMap="chartData">
 		SELECT
-		count(*) as TOTAL_COUNT, ROUND(cast(AVG(ttm.ORIGINAL_ACC) as numeric),2) AS TOTAL_ORIGINAL, ROUND(cast(AVG(ttm.SO_ACC) as numeric),2) AS
-		TOTAL_SO<!--,  ROUND(AVG(REAL_ACC),2) as TOTAL_REAL -->
+		count(*) as TOTAL_COUNT,ROUND(AVG(cast(ts.ORIGINAL_ACC as numeric)),2) AS TOTAL_ORIGINAL, ROUND(cast(AVG(ttm.AI_ACC) as numeric),2) AS TOTAL_AI, ROUND(cast(AVG(ttm.SO_ACC) as numeric),2) AS
+		TOTAL_SO,  ROUND(AVG(cast(ts.REAL_ACC as numeric)),2) as TOTAL_REAL
 		FROM t_train_model as ttm
 			,t_src as ts
 		where ts.src_id = ttm.src_id
@@ -45,8 +47,10 @@
 	<!-- Type -->
 	<select id="selectType" resultMap="chartData">
 		SELECT A.ADM_TYPE AS TOTAL_BASE, count(*) as TOTAL_COUNT,
-		ROUND(cast(AVG(A.ORIGINAL_ACC) as numeric),2) AS TOTAL_ORIGINAL, ROUND(cast(AVG(A.SO_ACC) as numeric),2) AS TOTAL_SO
-		<!-- ROUND(cast (AVG(REAL_ACC)as numeric),2) as TOTAL_REAL -->
+		ROUND(AVG(cast(A.ORIGINAL_ACC as numeric)),2) AS TOTAL_ORIGINAL,
+		ROUND(cast(AVG(A.AI_ACC) as numeric),2) AS TOTAL_AI, 
+		ROUND(cast(AVG(A.SO_ACC) as numeric),2) AS TOTAL_SO,
+		ROUND(AVG(cast(A.REAL_ACC as numeric)),2) as TOTAL_REAL
 		FROM
 		(SELECT
 		ts.src_ID,
@@ -58,9 +62,10 @@
 		ts.created,
 		ta.adm_type,
 		ttm.train_method,
-		ttm.ORIGINAL_ACC,
+		ts.ORIGINAL_ACC,
+		ttm.AI_ACC,
 		ttm.SO_ACC,
-		--ttm.REAL_ACC,
+		ts.REAL_ACC,
 		ttm.MODEL_FLG
 		FROM t_train_model as ttm,
 		     t_src as ts,
@@ -87,8 +92,10 @@
 		<if test="periodBase != null and periodBase != ''">
 			TO_CHAR(TO_DATE(periodBase,'YYYY-MM'),'MM')  AS TOTAL_BASE
 		</if>
-		, ROUND(cast(AVG(ORIGINAL_ACC) as numeric),2) AS TOTAL_ORIGINAL, ROUND(cast(AVG(SO_ACC) as numeric),2) AS TOTAL_SO
-		<!-- ,ROUND(AVG(REAL_ACC),2) as TOTAL_REAL -->
+		,ROUND(AVG(cast(ORIGINAL_ACC as numeric)),2) AS TOTAL_ORIGINAL
+		,ROUND(cast(AVG(AI_ACC) as numeric),2) AS TOTAL_AI
+		,ROUND(cast(AVG(SO_ACC) as numeric),2) AS TOTAL_SO
+		,ROUND(AVG(cast(REAL_ACC as numeric)),2) as TOTAL_REAL
 		FROM
 		(SELECT
 		ts.src_ID,
@@ -102,9 +109,10 @@
 		TO_CHAR(ts.created,'YYYY-MM') AS periodBase,
 		ADM_TYPE,
 		ttm.TRAIN_METHOD,
-		ttm.ORIGINAL_ACC,
+		ts.ORIGINAL_ACC as ORIGINAL_ACC,
+		ttm.AI_ACC as AI_ACC,
 		ttm.SO_ACC,
-		<!-- REAL_ACC, -->
+		ts.REAL_ACC,
 		ttm.MODEL_FLG
 		FROM t_train_model as ttm,
 		t_src as ts,
@@ -138,8 +146,11 @@
 
 	<!-- Campaign -->
 	<select id="selectCampaign" resultMap="chartData">
-				SELECT src_TYPE AS TOTAL_BASE, ROUND(cast(AVG(ORIGINAL_ACC) as numeric),2) AS TOTAL_ORIGINAL, ROUND(cast(AVG(SO_ACC) as numeric),2) AS TOTAL_SO
-<!-- 	,ROUND(AVG(REAL_ACC),2) as TOTAL_REAL -->
+				SELECT A.src_TYPE AS TOTAL_BASE, 
+				ROUND(AVG(cast(A.ORIGINAL_ACC as numeric)),2) AS TOTAL_ORIGINAL, 
+				ROUND(cast(AVG(A.AI_ACC) as numeric),2) as TOTAL_AI, 
+				ROUND(cast(AVG(A.SO_ACC) as numeric),2) AS TOTAL_SO, 
+				ROUND(AVG(cast(A.REAL_ACC as numeric)),2) as TOTAL_REAL
 		FROM (
 		SELECT
 		ts.src_ID,
@@ -151,9 +162,10 @@
 		TO_CHAR(ts.created,'YYYY-MM') as period,
 		ta.ADM_TYPE,
 		ttm.TRAIN_METHOD,
-		ttm.ORIGINAL_ACC,
+		ts.ORIGINAL_ACC,
+		ttm.AI_ACC,
 		ttm.SO_ACC,
-<!--	REAL_ACC, -->
+		ts.REAL_ACC,
 		ttm.MODEL_FLG
 		FROM t_train_model as ttm
 		,t_src as ts

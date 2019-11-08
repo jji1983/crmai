@@ -53,7 +53,7 @@ public interface CampaignMapper {
 	/*
 	 * Name : 캠페인 Update
 	 */
-	void updateCampaignRtype(AI_CAMPAIGN campaign);
+	void insertCampaignRtype(AI_CAMPAIGN campaign);
 	
 	/*
 	 * Name : 캠페인파일 정보 Insert

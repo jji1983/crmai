@@ -18,4 +18,5 @@ public class DashboardChartData {
 	private float totalOriginal;
 	private float totalSo;
 	private float totalReal;
+	private float totalAi;
 }

@@ -102,6 +102,20 @@
 		limit 1
     </select>
     
+     <insert id="insertCampaignRtype">
+   	   WITH updSrc AS (
+	    	update t_src_file
+    	       set active_flg= 'N'
+    	     where src_id = #{src_id}
+    	       and active_flg = 'Y'
+    	       and file_type = 'REAL'
+			RETURNING *
+		)insert into t_src_file(src_id, #{file_r_type}, #{file_r_name}, #{file_dir}, 'Y', '', wave_num+1) 
+		
+		
+		
+    </insert>
+    
     <update id="updateCampaignTType">
     	WITH updSrc AS (
 	    	update t_src
